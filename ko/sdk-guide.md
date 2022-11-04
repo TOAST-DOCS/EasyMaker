@@ -166,15 +166,38 @@ endpoint_id = endpoint.create(
 )
 ```
 
+### 엔드포인트 인퍼런스
+
+기본 스테이지에 인퍼런스
+
+```
+input_data = [6.8, 2.8, 4.8, 1.4]
+endpoint.predict(json={'instances': [input_data]})
+```
+
+특정 스테이지 지정하여 인퍼런스
+
+```
+# 스테이지 정보 조회
+endpoint_stage_info_list = endpoint.get_endpoint_stage_info_list()
+for endpoint_stage_info in endpoint_stage_info_list:
+    print(f'endpoint_stage_info : {endpoint_stage_info}')
+    
+# 스테이지를 지정하여 인퍼런스 요청
+input_data = [6.8, 2.8, 4.8, 1.4]
+target_stage = endpoint_stage_info_list[0]
+endpoint.predict(json={'instances': [input_data]},
+                 endpoint_stage_info=target_stage)
+```
 
 ### NHN Cloud - Log & Crash 로그 전송 기능
 ```
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product
 easymaker_logger.send(log_message='log meassage',
-log_level='INFO',  # default: INFO
-projectVersion='1.0.0',  # default: 1.0.0
-parameters={'serviceType': 'Translation'})  # Add custom parameters
+                      log_level='ERROR',  # default: INFO
+                      projectVersion='2.0.0',  # default: 1.0.0 
+                      parameters={'serviceType': 'EasyMakerSample'})  # Add custom parameters
 ```
 
 ### NHN Cloud - Object Storage 파일 전송 기능
@@ -197,6 +220,9 @@ password='nhn_object_storage_api_password'
 
 ## CLI Command
 콘솔에 접근하지 않고도 앱키, 시크릿키, 리전 정보가 있다면, Python CLI를 통해 여러 정보를 확인할 수 있습니다. 
-- instance list : `python -m easymaker --instance --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY`
-- training image list : `python -m easymaker --image --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY`
-- experiment list : `python -m easymaker --experiment --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY`
+- instance type list : `python -m easymaker -instance --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY`
+- image list : `python -m easymaker -image --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY`
+- experiment list : `python -m easymaker -experiment --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY`
+- training list : `python -m easymaker -training --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY`
+- model list : `python -m easymaker -model --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY`
+- endpoint list : `python -m easymaker -endpoint --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY`
