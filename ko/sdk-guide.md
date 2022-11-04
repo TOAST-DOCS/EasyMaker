@@ -138,8 +138,6 @@ model_id = easymaker.Model().create(
 
 ### 엔드포인트 생성
 
-엔드포인트 생성을 위해선 엔드포인트 
-
 [Parameter]
 
 | 이름 | 필수 여부 | 기본값 | 설명 |
@@ -164,6 +162,12 @@ endpoint_id = endpoint.create(
     apigw_resource_uri='/predict',
     # wait=False
 )
+```
+
+생성해둔 엔드포인트 사용
+
+```
+endpoint = easymaker.Endpoint()
 ```
 
 ### 엔드포인트 인퍼런스
