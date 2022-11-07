@@ -62,7 +62,7 @@ experiment_id = easymaker.Experiment().create(
 | timeout_hours | 선택 | 72 | 최대 학습 시간 (최소값 1, 최대값 720) |
 | hyperparameter_list | 선택 |  | 하이퍼파라미터 정보(hyperparameterKey/hyperparameterValue로 구성), 최대 100개 |
 | dataset_list | 선택 |  | 학습에 사용될 데이터 세트 정보(datasetName/dataUri로 구성), 최대 10개 |
-| tag_list | 선택 |  | 태그 정보(tagKey/tagValue로 구성), 최대10개 |
+| tag_list | 선택 |  | 태그 정보(tagKey/tagValue로 구성), 최대 10개 |
 | use_log | 선택 | False | Log & Crash 상품에 학습 로그를 남길지 여부 |
 | wait | 선택 | True | True: 학습 생성이 완료된 이후 학습 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환 |
 
@@ -138,6 +138,8 @@ model_id = easymaker.Model().create(
 
 ### 엔드포인트 생성
 
+엔드포인트 생성시 기본 스테이지가 생성됩니다.
+
 [Parameter]
 
 | 이름 | 필수 여부 | 기본값 | 설명 |
@@ -146,10 +148,18 @@ model_id = easymaker.Model().create(
 | endpoint_name | 필수 | | 엔드포인트 이름 |
 | endpoint_description | 선택 | | 엔드포인트에 대한 설명 |
 | endpoint_instance_name | 필수 | | 엔드포인트에 사용될 인스턴스 타입 이름 |
-| endpoint_instance_count | 선택 | 1 | 엔드포인트에 사용될 인스턴스 수 |
+| endpoint_instance_count | 선택 | 1 | 엔드포인트에 사용될 인스턴스 수 (최소 1, 최대 10) |
 | apigw_resource_uri | 필수 | | API Gateway 리소스 경로 |
 | tag_list | 선택 |  | 태그 정보(tagKey/tagValue로 구성), 최대10개 |
+| use_log | 선택 | False | Log & Crash 상품에 엔드포인트 인퍼런스 요청/응답 로그를 남길지 여부 |
 | wait | 선택 | True | True: 엔드포인트 생성이 완료된 이후 엔드포인트 ID를 반환, False: 생성 요청 후 즉시 엔드포인트 ID를 반환 |
+| autoscaler_enable | 선택 | False | 오토 스케일러 사용 여부 |
+| autoscaler_min_node_count | 선택 | 1 | 최소 노드 수 (endpoint_instance_count 보다 작거나 같아야 함, 최소 1) |
+| autoscaler_max_node_count | 선택 | 10 | 최대 노드 수 (endpoint_instance_count 보다 작거나 같아야 함, 최대 10) |
+| autoscaler_scale_down_enable | 선택 | False | 감축 여부 |
+| autoscaler_scale_down_util_thresh | 선택 | 50 | 리소스 사용량 임계치(%), 1~100 사이 정수값 |
+| autoscaler_scale_down_unneeded_time | 선택 | 10 | 임계 영역 유지 시간(분), 1~1440 사이 정수값 |
+| autoscaler_scale_down_delay_after_add | 선택 | 10 | 증설 후 감축 지연 시간(분), 1~1440 사이 정수값 |
 
 ```
 endpoint = easymaker.Endpoint()
@@ -160,7 +170,15 @@ endpoint_id = endpoint.create(
     endpoint_instance_name='c2.c16m16',
     endpoint_instance_count=1
     apigw_resource_uri='/predict',
+    use_log=True,
     # wait=False
+    # autoscaler_enable=True,  # default False
+    # autoscaler_min_node_count=1,
+    # autoscaler_max_node_count=10,
+    # autoscaler_scale_down_enable=True,
+    # autoscaler_scale_down_util_thresh=50,
+    # autoscaler_scale_down_unneeded_time=10,
+    # autoscaler_scale_down_delay_after_add=10,
 )
 ```
 
@@ -168,6 +186,46 @@ endpoint_id = endpoint.create(
 
 ```
 endpoint = easymaker.Endpoint()
+```
+
+### 스테이지 추가
+
+기존 엔드포인트에 신규 스테이지를 추가할 수 있습니다.
+
+[Parameter]
+
+| 이름 | 필수 여부 | 기본값 | 설명 |
+| --- |---| --- | --- |
+| model_id | 필수 |  | 엔드포인트로 생성할 모델 ID |
+| stage_name | 필수 | | 스테이지 이름 |
+| stage_description | 선택 | | 스테이지에 대한 설명 |
+| endpoint_instance_name | 필수 | | 엔드포인트에 사용될 인스턴스 타입 이름 |
+| endpoint_instance_count | 선택 | 1 | 엔드포인트에 사용될 인스턴스 수 (최소 1, 최대 10) |
+| tag_list | 선택 |  | 태그 정보(tagKey/tagValue로 구성), 최대10개 |
+| wait | 선택 | True | True: 엔드포인트 생성이 완료된 이후 엔드포인트 ID를 반환, False: 생성 요청 후 즉시 엔드포인트 ID를 반환 |
+| autoscaler_enable | 선택 | False | 오토 스케일러 사용 여부 |
+| autoscaler_min_node_count | 선택 | 1 | 최소 노드 수 (endpoint_instance_count 보다 작거나 같아야 함, 최소 1) |
+| autoscaler_max_node_count | 선택 | 10 | 최대 노드 수 (endpoint_instance_count 보다 작거나 같아야 함, 최대 10) |
+| autoscaler_scale_down_enable | 선택 | False | 감축 여부 |
+| autoscaler_scale_down_util_thresh | 선택 | 50 | 리소스 사용량 임계치(%), 1~100 사이 정수값 |
+| autoscaler_scale_down_unneeded_time | 선택 | 10 | 임계 영역 유지 시간(분), 1~1440 사이 정수값 |
+| autoscaler_scale_down_delay_after_add | 선택 | 10 | 증설 후 감축 지연 시간(분), 1~1440 사이 정수값 |
+
+```
+stage_id = endpoint.create_stage(
+    model_id=model_id,
+    stage_name='stage01',  # 30자 이내 소문자/숫자
+    stage_description='test endpoint',
+    endpoint_instance_name='c2.c16m16',
+    endpoint_instance_count=1,
+    # autoscaler_enable=True,  # default False
+    # autoscaler_min_node_count=1,
+    # autoscaler_max_node_count=10,
+    # autoscaler_scale_down_enable=True,
+    # autoscaler_scale_down_util_thresh=50,
+    # autoscaler_scale_down_unneeded_time=10,
+    # autoscaler_scale_down_delay_after_add=10,
+)
 ```
 
 ### 엔드포인트 인퍼런스
