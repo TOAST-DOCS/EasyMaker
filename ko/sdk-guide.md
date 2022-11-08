@@ -246,10 +246,11 @@ for endpoint_stage_info in endpoint_stage_info_list:
     print(f'endpoint_stage_info : {endpoint_stage_info}')
     
 # 스테이지를 지정하여 인퍼런스 요청
-input_data = [6.8, 2.8, 4.8, 1.4]
-target_stage = endpoint_stage_info_list[0]
-endpoint.predict(json={'instances': [input_data]},
-                 endpoint_stage_info=target_stage)
+input_data = [6.0, 3.4, 4.5, 1.6]
+for endpoint_stage_info in endpoint_stage_info_list:
+    if endpoint_stage_info['stage_name'] == 'stage01':
+        endpoint.predict(json={'instances': [input_data]},
+                         endpoint_stage_info=endpoint_stage_info)
 ```
 
 ### NHN Cloud - Log & Crash 로그 전송 기능
