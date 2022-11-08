@@ -202,7 +202,7 @@ endpoint = easymaker.Endpoint()
 | endpoint_instance_name | 필수 | | 엔드포인트에 사용될 인스턴스 타입 이름 |
 | endpoint_instance_count | 선택 | 1 | 엔드포인트에 사용될 인스턴스 수 (최소 1, 최대 10) |
 | tag_list | 선택 |  | 태그 정보(tagKey/tagValue로 구성), 최대10개 |
-| wait | 선택 | True | True: 엔드포인트 생성이 완료된 이후 엔드포인트 ID를 반환, False: 생성 요청 후 즉시 엔드포인트 ID를 반환 |
+| wait | 선택 | True | True: 스테이지 생성이 완료된 이후 스테이지 ID를 반환, False: 생성 요청 후 즉시 빈 문자열을 반환(stage id가 생성되기 전 상태) |
 | autoscaler_enable | 선택 | False | 오토 스케일러 사용 여부 |
 | autoscaler_min_node_count | 선택 | 1 | 최소 노드 수 (endpoint_instance_count 보다 작거나 같아야 함, 최소 1) |
 | autoscaler_max_node_count | 선택 | 10 | 최대 노드 수 (endpoint_instance_count 보다 작거나 같아야 함, 최대 10) |
