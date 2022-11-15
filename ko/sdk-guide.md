@@ -267,17 +267,17 @@ easymaker_logger.send(log_message='log meassage',
 Object Storage 상품으로 파일을 업로드하고 다운로드하는 기능을 제공합니다.
 ```
 easymaker.upload(
-easymaker_obs_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
-src_dir_path='./local_dir',
-username='userId@nhn.com',
-password='nhn_object_storage_api_password'
+    easymaker_obs_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
+    src_dir_path='./local_dir',
+    username='userId@nhn.com',
+    password='nhn_object_storage_api_password'
 )
 
 easymaker.download(
-easymaker_obs_uri='obs://api-storage.cloud.toast.com/v1/AUTH_00000000000000000000000000000000/SDK/sample/source_dir',
-download_dir_path='./download_dir',
-username='userId@nhn.com',
-password='nhn_object_storage_api_password'
+    easymaker_obs_uri='obs://api-storage.cloud.toast.com/v1/AUTH_00000000000000000000000000000000/SDK/sample/source_dir',
+    download_dir_path='./download_dir',
+    username='userId@nhn.com',
+    password='nhn_object_storage_api_password'
 )
 ```
 
