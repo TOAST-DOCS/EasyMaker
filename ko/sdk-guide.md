@@ -259,7 +259,7 @@ easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key'
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product
 easymaker_logger.send(log_message='log meassage',
                       log_level='ERROR',  # default: INFO
-                      projectVersion='2.0.0',  # default: 1.0.0 
+                      project_version='2.0.0',  # default: 1.0.0 
                       parameters={'serviceType': 'EasyMakerSample'})  # Add custom parameters
 ```
 
