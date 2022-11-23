@@ -201,6 +201,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 
 - **기본 정보**: 모델의 기본 정보를 입력합니다.
     - **이름**: 모델 이름을 입력합니다.
+        - 모델 이름은 중복될 수 없습니다.
         - [주의] 모델의 프레임워크 종류가 Pytorch인 경우, PyTorch 모델 이름과 동일한 모델 이름을 입력해야 합니다.
     - **설명**: 모델 설명을 입력합니다.
 - **프레임워크 정보**: 모델의 프레임워크 정보를 입력합니다.
@@ -208,29 +209,41 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
     - **프레임워크 버전**: 모델 프레임워크의 버전을 입력합니다.
 - **모델 정보**: 모델의 아티팩트가 저장된 저장소를 입력합니다.
     - **NHN Cloud Object Storage**: 모델 아티팩트가 저장된 Object Storage 경로를 입력합니다.
-    <br>obs://{Object Storage API 엔드포인트}/{containerName}/{path} 형식으로 디렉터리 경로를 입력합니다.
-        - NHN Cloud Object Storage를 이용하는 경우 [부록 > 1. NHN Cloud Object Storage에 AI EasyMaker 시스템 계정 권한 추가](./console-guide//TODO:Link)을 참고하여 반드시 권한을 설정해주세요.
-    - **NHN Cloud NAS**: 모델 아티팩트가 저장된 NAS 경로를 입력합니다. <br>nas://{nas ip}:/{path} 형식으로 디렉터리 경로를 입력합니다.
-- **추가 설정 > 태그**: 태그를 추가하려면 **+ 버튼**을 클릭하여 Key-Value 형식으로 태그를 입력합니다. 태그는 최대 10개까지 입력할 수 있습니다.
+    <br>`obs://{Object Storage API 엔드포인트}/{containerName}/{path}` 형식으로 디렉터리 경로를 입력합니다.
+        - NHN Cloud Object Storage를 이용하는 경우 [부록 > 1. NHN Cloud Object Storage에 AI EasyMaker 시스템 계정 권한 추가](./console-guide//TODO:Link)를 참고하여 반드시 권한을 설정해주세요.
+    - **NHN Cloud NAS**: 모델 아티팩트가 저장된 NAS 경로를 입력합니다. <br>`nas://{Nas Id}:/{path}` 형식으로 디렉터리 경로를 입력합니다.
+- **추가 설정**: 모델의 추가 정보를 입력합니다.
+    - **태그**: 태그를 추가하려면 **+ 버튼**을 클릭하여 Key-Value 형식으로 태그를 입력합니다. 태그는 최대 10개까지 입력할 수 있습니다.
 
 > **[주의] 프레임워크가 Pytorch인 경우, 모델 이름 설정**
-> 모델의 프레임워크 종류가 Pytorch인 경우, 모델 생성 시 반드시 PyTorch 모델 이름과 동일한 모델 이름을 입력해야 합니다.
+> 모델의 프레임워크 종류가 Pytorch인 경우, 모델 생성 시 반드시 PyTorch 모델 아티팩트에 포함된 config.properties에 설정한 모델 이름으로 입력해야 합니다.
 
 
 ### 모델 목록 
-생성된 모델 목록이 표시됩니다. 목록의 모델을 클릭하면 상세 정보를 확인할 수 있습니다.
+생성된 모델 목록이 표시됩니다. 모델 목록의 모델을 클릭하면 상세 정보를 확인하고, 모델 이름, 설명과 태그를 변경을 할 수 있습니다.
 
-- **이름**: 모델 이름이 표시됩니다.
-- **생성일**: 모델의 생성일시가 표시됩니다.
-- **수정일**: 모델의 수정일시가 표시됩니다.
+* 모델 목록
+    - **이름**: 모델 이름이 표시됩니다.
+    - **생성일**: 모델의 생성일시가 표시됩니다.
+    - **수정일**: 모델의 수정일시가 표시됩니다.
+* 모델 상세 정보
+    - **이름**: 모델 이름과 설명이 표시됩니다. 모델 이름과 설명은 **변경**을 클릭하여 변경할 수 있습니다.
+    - **모델 아이디**: 모델의 아이디가 표시됩니다.
+    - **생성일**: 모델의 생성일시가 표시됩니다.
+    - **수정일**: 모델의 수정일시가 표시됩니다.
+    - **태그**: 모델의 태그가 표시됩니다. 태그는 **변경**을 클릭하여 변경할 수 있습니다.
+    - **모델 아티팩트 경로**: 모델의 아티팩트가 저장된 저장소가 표시됩니다.
+    - **학습 이름**: 학습에서 생성된 모델의 경우, 기반이 되는 학습의 이름이 표시됩니다.
+    - **학습 ID**: 학습에서 생성된 모델의 경우, 기반이 되는 학습의 아이디가 표시됩니다.
+    - **프레임워크**: 모델의 프레임워크 정보가 표시됩니다.
+
 
 ### 모델에서 엔드포인트 생성하기
 등록된 모델을 서빙할 수 있도록 엔드포인트를 생성할 수 있습니다.
 
 1. 엔드포인트로 생성하려는 모델을 목록에서 선택합니다.
 2. **엔드포인트 생성**을 클릭합니다.
-3. 학습 인스턴스 타입을 제외한 설정이 기존 학습과 동일한 설정으로 학습 생성화면이 표시됩니다.
-4. 변경하려는 설정 정보가 있다면 변경 한 후 **학습 생성**을 클릭하여 학습을 생성합니다.
+3. [엔드포인트] 생성 페이지로 이동됩니다. 내용을 확인 후 **엔드포인트 생성**을 클릭하여 모델을 생성합니다.
 
 
 ### 모델 삭제 
@@ -406,10 +419,10 @@ AI EasyMaker 서비스가 사용자의 NHN Cloud Object Stoage에 파일을 읽�
 1. **[학습]** 또는 **[모델]** 탭 > **AI EasyMaker 시스템 계정 정보**을 클릭합니다. 
 2. EasyMaker 시스템 계정 정보인 **AI EasyMaker 테넌트 ID**와 **AI EasyMaker API 사용자 ID** 를 보관합니다. 
 3. NHN Cloud Object Storage 콘솔로 이동합니다. 
-4. [특정 프로젝트 또는 특정 사용자에게 읽기/쓰기 허용](https://docs.toast.com/ko/Storage/Object%20Storage/ko/acl-guide/#references) 문서를 참고하여 EasyMaker 시스템 계정의 읽기/쓰기 허용 권한을 추가합니다.
+4. [특정 프로젝트 또는 특정 사용자에게 읽기/쓰기 허용](https://docs.toast.com/ko/Storage/Object%20Storage/ko/acl-guide/#_4) 문서를 참고하여 EasyMaker 시스템 계정의 읽기/쓰기 허용 권한을 추가합니다.
 
 ### 2. NHN Cloud Log & Crash Search 서비스 이용 안내 및 로그 조회 방법
-EasyMaker서비스에서 발생하는 로그, 이벤트를 NHN Cloud Log & Crash Search 서비스에 저장할 수 있습니다.
+EasyMaker 서비스에서 발생하는 로그, 이벤트를 NHN Cloud Log & Crash Search 서비스에 저장할 수 있습니다.
 Log & Crash Search 서비스에 로그를 저장하려면, Log & Crash 서비스를 활성화해야 하며 별도 이용 요금이 부과됩니다.
 
 - Log & Crash Search 서비스 이용 및 요금 안내 
@@ -418,12 +431,39 @@ Log & Crash Search 서비스에 로그를 저장하려면, Log & Crash 서비스
         - [Log & Crash Search 이용 요금](https://www.toast.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
 
-- 저장되는 로그 
-    - TODO:// 저장되는 로그 정보 정리 (테이블 형태)
+- 공통 로그 필드 
+    | 이름 | 설명 | 유효 범위 |
+    | --- | --- | --- | 
+    | easymakerAppKey | AI EasyMaker 앱키(AppKey) | - |
+    | easymakerGroupType | AI EasyMaker 그룹 종류 | training, endpointModel |
+    | category | 로그 카테고리 | easymaker.training, easymaker.inference |
+    | logLevel | 로그 레벨 | INFO, WARNING, ERROR | 
+    | body | 로그 내용 | - | 
+    | logType | 로그 제공 서비스 이름 | NHNCloud-AIEasyMaker | 
+    | time | 로그 발생 시간(UTC 시각) | - | 
 
+
+- 학습 로그 필드 
+    | 이름 | 설명 |
+    | --- | --- | 
+    | easymakerGroupId | AI EasyMaker 학습 Id |
+
+- 엔드포인트 로그 필드 
+    | 이름 | 설명 |
+    | --- | --- | 
+    | easymakerGroupId | AI EasyMaker 엔드포인트 모델 Id |
+    | endpointStageId | 엔드포인트 스테이지 Id | 
+    | action | 로그 발생 행동 | 
+    | inferenceServiceName | 추론 서비스 이름 | 
+    | modelName | 추론 대상 모델 이름 | 
 
 - 로그 조회 
     1. Log & Crash Search 서비스 콘솔 페이지로 이동합니다.
-    2. Log & Crash Search 서비스에서 logType 필드가 "NNH Cloud-AI EasyMaker"인 로그를 조회합니다.
-        * 조회 질의: logType: "NHN Cloud-AI EasyMaker"
+    2. Log & Crash Search 서비스에서 검색 조건을 입력하여 로그들을 조회합니다.
+        * AI EasyMaker 학습 로그 질의: category 필드가 "easymaker.training"인 로그를 조회합니다.
+            * 질의문: category:"easymaker.training"
+        * AI EasyMaker 엔드포인트 로그 질의: category 필드가 "easymaker.inference"인 로그를 조회합니다.
+            * 질의문: category:"easymaker.inference"
+        * AI EasyMaker 로그 전체 조회 질의: logType 필드가 "NNHCloud-AIEasyMaker"인 로그를 조회합니다. 
+            * 질의문: logType:"NHNCloud\-AIEasyMaker"
     3. Log & Crash Search 서비스의 자세한 이용 방법은 [Log & Crash Search 서비스의 콘솔 가이드](https://docs.toast.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/console-guide/)를 참고해주세요.
