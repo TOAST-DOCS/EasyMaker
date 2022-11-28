@@ -520,8 +520,8 @@ Log & Crash Search 서비스에 로그를 저장하려면, Log & Crash 서비스
     | --- | --- | 
     | easymakerGroupId | AI EasyMaker 엔드포인트 모델 Id |
     | endpointStageId | 엔드포인트 스테이지 Id | 
+    | inferenceId | 추론 Id | 
     | action | 로그 발생 행동 | 
-    | inferenceServiceName | 추론 서비스 이름 | 
     | modelName | 추론 대상 모델 이름 | 
 
 - 로그 조회 
