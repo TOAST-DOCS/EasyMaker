@@ -538,7 +538,7 @@ Log & Crash Search 서비스에 로그를 저장하려면, Log & Crash 서비스
     | 이름 | 설명 | 유효 범위 |
     | --- | --- | --- | 
     | easymakerAppKey | AI EasyMaker 앱키(AppKey) | - |
-    | easymakerGroupType | AI EasyMaker 그룹 종류 | training, endpointModel |
+    | easymakerGroupType | AI EasyMaker 그룹 종류 | training, endpoint |
     | category | 로그 카테고리 | easymaker.training, easymaker.inference |
     | logLevel | 로그 레벨 | INFO, WARNING, ERROR | 
     | body | 로그 내용 | - | 
@@ -554,7 +554,7 @@ Log & Crash Search 서비스에 로그를 저장하려면, Log & Crash 서비스
 - 엔드포인트 로그 필드 
     | 이름 | 설명 |
     | --- | --- | 
-    | easymakerGroupId | AI EasyMaker 엔드포인트 모델 Id |
+    | easymakerGroupId | AI EasyMaker 엔드포인트 Id |
     | endpointStageId | 엔드포인트 스테이지 Id | 
     | inferenceId | 추론 Id | 
     | action | 로그 발생 행동 | 
