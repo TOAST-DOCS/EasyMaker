@@ -156,7 +156,7 @@ model_id = easymaker.Model().create(
 | autoscaler_enable | 선택 | False | 오토 스케일러 사용 여부 |
 | autoscaler_min_node_count | 선택 | 1 | 최소 노드 수 (endpoint_instance_count 보다 작거나 같아야 함, 최소 1) |
 | autoscaler_max_node_count | 선택 | 10 | 최대 노드 수 (endpoint_instance_count 보다 작거나 같아야 함, 최대 10) |
-| autoscaler_scale_down_enable | 선택 | False | 감축 여부 |
+| autoscaler_scale_down_enable | 선택 | True | 감축 여부 |
 | autoscaler_scale_down_util_threshold | 선택 | 50 | 리소스 사용량 임계치(%), 1~100 사이 정수값 |
 | autoscaler_scale_down_unneeded_time | 선택 | 10 | 임계 영역 유지 시간(분), 1~1440 사이 정수값 |
 | autoscaler_scale_down_delay_after_add | 선택 | 10 | 증설 후 감축 지연 시간(분), 1~1440 사이 정수값 |
@@ -206,7 +206,7 @@ endpoint = easymaker.Endpoint()
 | autoscaler_enable | 선택 | False | 오토 스케일러 사용 여부 |
 | autoscaler_min_node_count | 선택 | 1 | 최소 노드 수 (endpoint_instance_count 보다 작거나 같아야 함, 최소 1) |
 | autoscaler_max_node_count | 선택 | 10 | 최대 노드 수 (endpoint_instance_count 보다 작거나 같아야 함, 최대 10) |
-| autoscaler_scale_down_enable | 선택 | False | 감축 여부 |
+| autoscaler_scale_down_enable | 선택 | True | 감축 여부 |
 | autoscaler_scale_down_util_threshold | 선택 | 50 | 리소스 사용량 임계치(%), 1~100 사이 정수값 |
 | autoscaler_scale_down_unneeded_time | 선택 | 10 | 임계 영역 유지 시간(분), 1~1440 사이 정수값 |
 | autoscaler_scale_down_delay_after_add | 선택 | 10 | 증설 후 감축 지연 시간(분), 1~1440 사이 정수값 |
