@@ -142,7 +142,7 @@ model_id = easymaker.Model().create(
 
 | 이름 | 필수 여부 | 기본값 | 설명                                |
 | --- |---| --- |-----------------------------------|
-| framework_code | 필수 |  | 모델로 생성할 학습 ID                     |
+| framework_code | 필수 |  | TENSORFLOW or PYTORCH                     |
 | model_uri | 필수 |  | 모델 파일이 저장되어 있는 경로(NHN Cloud Object Storage or NHN Cloud NAS) |
 | model_name | 필수 | | 모델 이름                             |
 | model_description | 선택 | | 모델에 대한 설명                         |
