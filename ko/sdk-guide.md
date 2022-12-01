@@ -59,7 +59,7 @@ experiment_id = easymaker.Experiment().create(
 | model_upload_uri | 필수 |  | 학습 완료된 모델이 업로드 될 경로(NHN Cloud Object Storage or NHN Cloud NAS)  |
 | check_point_upload_uri | 선택 |  | 체크포인트 파일이 업로드 될 경로(NHN Cloud Object Storage or NHN Cloud NAS)  |
 | entry_point | 필수 |  | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보 |
-| timeout_hours | 선택 | 72 | 최대 학습 시간 (최소값 1, 최대값 720) |
+| timeout_hours | 선택 | 720 | 최대 학습 시간 (최소값 1, 최대값 720) |
 | hyperparameter_list | 선택 |  | 하이퍼파라미터 정보(hyperparameterKey/hyperparameterValue로 구성), 최대 100개 |
 | dataset_list | 선택 |  | 학습에 사용될 데이터 세트 정보(datasetName/dataUri로 구성), 최대 10개 |
 | tag_list | 선택 |  | 태그 정보(tagKey/tagValue로 구성), 최대 10개 |
