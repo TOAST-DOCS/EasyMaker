@@ -162,7 +162,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
         - NHN Cloud Object Storage를 사용하는 경우에만 사용됩니다. 학습에 필요한 데이터가 모두 저장될 수 있도록 충분한 크기를 지정하시기 바랍니다.
     - **최대 학습 시간**: 학습이 완료될때까지 최대 대기 시간을 지정합니다. 최대 대기 시간이 초과한 학습은 종료 처리됩니다.
     - **로그 관리**: 학습 진행 중 발생하는 로그를 NHN Cloud Log & Crash 서비스에 저장할 수 있습니다. 
-        - 자세한 내용은 부록의 [2. NHN Cloud Log & Crash Search 서비스 이용 안내 및 로그 확인](./console-guide//TODO:link)을 참고해주세요.
+        - 자세한 내용은 [부록 > 2. NHN Cloud Log & Crash Search 서비스 이용 안내 및 로그 확인](./console-guide//TODO:link)을 참고해주세요.
     - **태그**: 태그를 추가하려면 **+ 버튼**을 클릭하여 Key-Value 형식으로 태그를 입력합니다. 태그는 최대 10개까지 입력할 수 있습니다.
 
 > **[주의] NHN Cloud NAS를 사용하는 경우**
