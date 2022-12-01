@@ -28,17 +28,17 @@ easymaker.init(
 
 [Parameter]
 
-| 이름 | 필수 여부 | 기본값 | 설명 |
-| --- |---| --- | --- |
-| experiment_name | 필수 |  | 실험 이름 |
-| experiment_description | 선택 | | 실험에 대한 설명 |
-| wait | 선택 | True | True: 실험 생성이 완료된 이후 실험 ID를 반환, False: 생성 요청 후 즉시 실험 ID를 반환 |
+| 이름                     | 타입      | 필수 여부 | 기본값  | 유효 범위       | 설명                                                         |
+|------------------------|---------|-------|------|-------------|------------------------------------------------------------|
+| experiment_name        | String  | 필수    | 없음   | 최대 50자      | 실험 이름                                                      |
+| experiment_description | String  | 선택    | 없음   | 최대 255자     | 실험에 대한 설명                                                  |
+| wait                   | Boolean | 선택    | True | True, False | True: 실험 생성이 완료된 이후 실험 ID를 반환, False: 생성 요청 후 즉시 실험 ID를 반환 |
 
 ```
 experiment_id = easymaker.Experiment().create(
     experiment_name='experiment_name',
     experiment_description='experiment_description',
-    # wait=False
+    # wait=False,
 )
 ```
 
@@ -46,25 +46,31 @@ experiment_id = easymaker.Experiment().create(
 
 [Parameter]
 
-| 이름 | 필수 여부 | 기본값 | 설명 |
-| --- |---| --- | --- |
-| experiment_name | 필수 |  | 실험 ID |
-| training_name | 필수 |  | 학습 이름 |
-| training_description | 선택 | | 학습에 대한 설명 |
-| train_image_name | 필수 |  | 학습에 사용될 이미지 이름(CLI로 조회 가능) |
-| train_instance_name | 필수 |  | 인스턴스 타입 이름(CLI로 조회 가능) |
-| train_instance_count | 필수 |  | 학습에 사용될 인스턴스 수 |
-| data_storage_size | ObejctStorage 사용시 필수 |  | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위 GB, 최소값 300, 최대값 10000), NAS 사용시 불필요 |
-| source_dir_uri | 필수 |  | 학습에 필요한 파일들이 들어있는 경로(NHN Cloud Object Storage or NHN Cloud NAS)  |
-| model_upload_uri | 필수 |  | 학습 완료된 모델이 업로드 될 경로(NHN Cloud Object Storage or NHN Cloud NAS)  |
-| check_point_upload_uri | 선택 |  | 체크포인트 파일이 업로드 될 경로(NHN Cloud Object Storage or NHN Cloud NAS)  |
-| entry_point | 필수 |  | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보 |
-| timeout_hours | 선택 | 720 | 최대 학습 시간 (최소값 1, 최대값 720) |
-| hyperparameter_list | 선택 |  | 하이퍼파라미터 정보(hyperparameterKey/hyperparameterValue로 구성), 최대 100개 |
-| dataset_list | 선택 |  | 학습에 사용될 데이터 세트 정보(datasetName/dataUri로 구성), 최대 10개 |
-| tag_list | 선택 |  | 태그 정보(tagKey/tagValue로 구성), 최대 10개 |
-| use_log | 선택 | False | Log & Crash 상품에 학습 로그를 남길지 여부 |
-| wait | 선택 | True | True: 학습 생성이 완료된 이후 학습 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환 |
+| 이름                                         | 타입      | 필수 여부                 | 기본값   | 유효 범위       | 설명                                                              |
+|--------------------------------------------|---------|-----------------------|-------|-------------|-----------------------------------------------------------------|
+| experiment_id                              | String  | 필수                    | 없음    | 없음          | 실험 ID                                                           |
+| training_name                              | String  | 필수                    | 없음    | 최대 50자      | 학습 이름                                                           |
+| training_description                       | String  | 선택                    | 없음    | 최대 255자     | 학습에 대한 설명                                                       |
+| train_image_name                           | String  | 필수                    | 없음    | 없음          | 학습에 사용될 이미지 이름(CLI로 조회 가능)                                      |
+| train_instance_name                        | String  | 필수                    | 없음    | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
+| train_instance_count                       | Integer | 필수                    | 없음    | 1~10        | 학습에 사용될 인스턴스 수                                                  |
+| data_storage_size                          | Integer | Obejct Storage 사용시 필수 | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용시 불필요                |
+| source_dir_uri                             | String  | 필수                    | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어있는 경로(NHN Cloud Object Storage or NHN Cloud NAS) |
+| model_upload_uri                           | String  | 필수                    | 없음    | 최대 255자     | 학습 완료된 모델이 업로드 될 경로(NHN Cloud Object Storage or NHN Cloud NAS)  |
+| check_point_upload_uri                     | String  | 선택                    | 없음    | 최대 255자     | 체크포인트 파일이 업로드 될 경로(NHN Cloud Object Storage or NHN Cloud NAS)   |
+| entry_point                                | String  | 필수                    | 없음    | 최대 255자     | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                             |
+| timeout_hours                              | Integer | 선택                    | 720   | 1~720       | 최대 학습 시간(단위: 시간)                                                |
+| hyperparameter_list                        | Array   | 선택                    | 없음    | 최대 100개     | 하이퍼파라미터 정보(hyperparameterKey/hyperparameterValue로 구성)           |
+| hyperparameter_list[0].hyperparameterKey   | String  | 선택                    | 없음    | 최대 255자     | 하이퍼파라미터 키                                                       |
+| hyperparameter_list[0].hyperparameterValue | String  | 선택                    | 없음    | 최대 1000자    | 하이퍼파라미터 값                                                       |
+| dataset_list                               | Array   | 선택                    | 없음    | 최대 10개      | 학습에 사용될 데이터 세트 정보(datasetName/dataUri로 구성)                      |
+| dataset_list[0].datasetName                | String  | 선택                    | 없음    | 최대 36자      | 데이터 이름                                                          |
+| dataset_list[0].datasetUri                 | String  | 선택                    | 없음    | 최대 255자     | 데이터 경로                                                          |
+| tag_list                                   | Array   | 선택                    | 없음    | 최대 10개      | 태그 정보                                                           |
+| tag_list[0].tagKey                         | String  | 선택                    | 없음    | 최대 64자      | 태그 키                                                            |
+| tag_list[0].tagValue                       | String  | 선택                    | 없음    | 최대 255자     | 태그 값                                                            |
+| use_log                                    | Boolean | 선택                    | False | True, False | Log & Crash 상품에 로그를 남길지 여부                                      |
+| wait                                       | Boolean | 선택                    | True  | True, False | True: 학습 생성이 완료된 이후 학습 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환      |
 
 ```
 training_id = easymaker.Training().run(
@@ -111,7 +117,7 @@ training_id = easymaker.Training().run(
         }
     ],
     use_log=True,
-    # wait=False
+    # wait=False,
 )
 ```
 
@@ -121,12 +127,15 @@ training_id = easymaker.Training().run(
 
 [Parameter]
 
-| 이름 | 필수 여부 | 기본값 | 설명 |
-| --- |---| --- | --- |
-| training_id | 필수 |  | 모델로 생성할 학습 ID |
-| model_name | 필수 | | 모델 이름 |
-| model_description | 선택 | | 모델에 대한 설명 |
-| tag_list | 선택 |  | 태그 정보(tagKey/tagValue로 구성), 최대10개 |
+| 이름                   | 타입     | 필수 여부 | 기본값 | 유효 범위   | 설명            |
+|----------------------|--------|-------|-----|---------|---------------|
+| training_id          | String | 필수    | 없음  | 없음      | 모델로 생성할 학습 ID |
+| model_name           | String | 필수    | 없음  | 최대 50자  | 모델 이름         |
+| model_description    | String | 선택    | 없음  | 최대 255자 | 모델에 대한 설명     |
+| tag_list             | Array  | 선택    | 없음  | 최대 10개  | 태그 정보         |
+| tag_list[0].tagKey   | String | 선택    | 없음  | 최대 64자  | 태그 키          |
+| tag_list[0].tagValue | String | 선택    | 없음  | 최대 255자 | 태그 값          |
+
 
 ```
 model_id = easymaker.Model().create(
@@ -140,13 +149,16 @@ model_id = easymaker.Model().create(
 
 [Parameter]
 
-| 이름 | 필수 여부 | 기본값 | 설명                                |
-| --- |---| --- |-----------------------------------|
-| framework_code | 필수 |  | TENSORFLOW or PYTORCH                     |
-| model_uri | 필수 |  | 모델 파일이 저장되어 있는 경로(NHN Cloud Object Storage or NHN Cloud NAS) |
-| model_name | 필수 | | 모델 이름                             |
-| model_description | 선택 | | 모델에 대한 설명                         |
-| tag_list | 선택 |  | 태그 정보(tagKey/tagValue로 구성), 최대10개 |
+| 이름                   | 타입     | 필수 여부 | 기본값 | 유효 범위                                   | 설명                                                  |
+|----------------------|--------|-------|-----|-----------------------------------------|-----------------------------------------------------|
+| framework_code       | Enum   | 필수    | 없음  | easymaker.TENSORFLOW, easymaker.PYTORCH | 학습에 사용된 프레임워크 정보                                    |
+| model_uri            | String | 필수    | 없음  | 최대 255자                                 | 모델 파일 경로(NHN Cloud Object Storage or NHN Cloud NAS) |
+| model_name           | String | 필수    | 없음  | 최대 50자                                  | 모델 이름                                               |
+| model_description    | String | 선택    | 없음  | 최대 255자                                 | 모델에 대한 설명                                           |
+| tag_list             | Array  | 선택    | 없음  | 최대 10개                                  | 태그 정보                                               |
+| tag_list[0].tagKey   | String | 선택    | 없음  | 최대 64자                                  | 태그 키                                                |
+| tag_list[0].tagValue | String | 선택    | 없음  | 최대 255자                                 | 태그 값                                                |
+
 
 ```
 model_id = easymaker.Model().create_by_model_uri(
@@ -163,24 +175,26 @@ model_id = easymaker.Model().create_by_model_uri(
 
 [Parameter]
 
-| 이름 | 필수 여부 | 기본값 | 설명 |
-| --- |---| --- | --- |
-| model_id | 필수 |  | 엔드포인트로 생성할 모델 ID |
-| endpoint_name | 필수 | | 엔드포인트 이름 |
-| endpoint_description | 선택 | | 엔드포인트에 대한 설명 |
-| endpoint_instance_name | 필수 | | 엔드포인트에 사용될 인스턴스 타입 이름 |
-| endpoint_instance_count | 선택 | 1 | 엔드포인트에 사용될 인스턴스 수 (최소 1, 최대 10) |
-| apigw_resource_uri | 필수 | | API Gateway 리소스 경로 |
-| tag_list | 선택 |  | 태그 정보(tagKey/tagValue로 구성), 최대10개 |
-| use_log | 선택 | False | Log & Crash 상품에 엔드포인트 인퍼런스 요청/응답 로그를 남길지 여부 |
-| wait | 선택 | True | True: 엔드포인트 생성이 완료된 이후 엔드포인트 ID를 반환, False: 생성 요청 후 즉시 엔드포인트 ID를 반환 |
-| autoscaler_enable | 선택 | False | 오토 스케일러 사용 여부 |
-| autoscaler_min_node_count | 선택 | 1 | 최소 노드 수 (endpoint_instance_count 보다 작거나 같아야 함, 최소 1) |
-| autoscaler_max_node_count | 선택 | 10 | 최대 노드 수 (endpoint_instance_count 보다 작거나 같아야 함, 최대 10) |
-| autoscaler_scale_down_enable | 선택 | True | 감축 여부 |
-| autoscaler_scale_down_util_threshold | 선택 | 50 | 리소스 사용량 임계치(%), 1~100 사이 정수값 |
-| autoscaler_scale_down_unneeded_time | 선택 | 10 | 임계 영역 유지 시간(분), 1~1440 사이 정수값 |
-| autoscaler_scale_down_delay_after_add | 선택 | 10 | 증설 후 감축 지연 시간(분), 1~1440 사이 정수값 |
+| 이름                                    | 타입      | 필수 여부 | 기본값   | 유효 범위                      | 설명                                                                     |
+|---------------------------------------|---------|-------|-------|----------------------------|------------------------------------------------------------------------|
+| model_id                              | String  | 필수    | 없음    | 없음                         | 엔드포인트로 생성할 모델 ID                                                       |
+| endpoint_name                         | String  | 필수    | 없음    | 최대 50자                     | 엔드포인트 이름                                                               |
+| endpoint_description                  | String  | 선택    | 없음    | 최대 255자                    | 엔드포인트에 대한 설명                                                           |
+| endpoint_instance_name                | String  | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                                  |
+| endpoint_instance_count               | Integer | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                      |
+| apigw_resource_uri                    | String  | 필수    | 없음    | 최대 255자                    | /로 시작하는 API Gateway 리소스 경로                                             |
+| tag_list                              | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                                  |
+| tag_list[0].tagKey                    | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                                   |
+| tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                                   |
+| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                             |        
+| wait                                  | Boolean | 선택    | True  | True, False                | True: 엔드포인트 생성이 완료된 이후 엔드포인트 ID를 반환, False: 엔드포인트 요청 후 즉시 엔드포인트 ID를 반환 |
+| autoscaler_enable                     | Boolean | 선택    | False | True, False                | 오토 스케일러 사용 여부                                                          |
+| autoscaler_min_node_count             | Integer | 선택    | 1     | 1~endpoint_instance_count  | 최소 노드 수                                                                |
+| autoscaler_max_node_count             | Integer | 선택    | 10    | endpoint_instance_count~10 | 최대 노드 수                                                                |
+| autoscaler_scale_down_enable          | Boolean | 선택    | True  | True, False                | 감축 여부                                                                  |
+| autoscaler_scale_down_util_threshold  | Integer | 선택    | 50    | 1~100                      | 리소스 사용량 임계치(%)                                                         |
+| autoscaler_scale_down_unneeded_time   | Integer | 선택    | 10    | 1~1440                     | 임계 영역 유지 시간(분)                                                         |
+| autoscaler_scale_down_delay_after_add | Integer | 선택    | 10    | 1~1440                     | 증설 후 감축 지연 시간(분)                                                       |
 
 ```
 endpoint = easymaker.Endpoint()
@@ -192,7 +206,7 @@ endpoint_id = endpoint.create(
     endpoint_instance_count=1
     apigw_resource_uri='/predict',
     use_log=True,
-    # wait=False
+    # wait=False,
     # autoscaler_enable=True,  # default False
     # autoscaler_min_node_count=1,
     # autoscaler_max_node_count=10,
@@ -215,22 +229,25 @@ endpoint = easymaker.Endpoint()
 
 [Parameter]
 
-| 이름 | 필수 여부 | 기본값 | 설명 |
-| --- |---| --- | --- |
-| model_id | 필수 |  | 엔드포인트로 생성할 모델 ID |
-| stage_name | 필수 | | 스테이지 이름 |
-| stage_description | 선택 | | 스테이지에 대한 설명 |
-| endpoint_instance_name | 필수 | | 엔드포인트에 사용될 인스턴스 타입 이름 |
-| endpoint_instance_count | 선택 | 1 | 엔드포인트에 사용될 인스턴스 수 (최소 1, 최대 10) |
-| tag_list | 선택 |  | 태그 정보(tagKey/tagValue로 구성), 최대10개 |
-| wait | 선택 | True | True: 스테이지 생성이 완료된 이후 스테이지 ID를 반환, False: 생성 요청 후 즉시 빈 문자열을 반환(stage id가 생성되기 전 상태) |
-| autoscaler_enable | 선택 | False | 오토 스케일러 사용 여부 |
-| autoscaler_min_node_count | 선택 | 1 | 최소 노드 수 (endpoint_instance_count 보다 작거나 같아야 함, 최소 1) |
-| autoscaler_max_node_count | 선택 | 10 | 최대 노드 수 (endpoint_instance_count 보다 작거나 같아야 함, 최대 10) |
-| autoscaler_scale_down_enable | 선택 | True | 감축 여부 |
-| autoscaler_scale_down_util_threshold | 선택 | 50 | 리소스 사용량 임계치(%), 1~100 사이 정수값 |
-| autoscaler_scale_down_unneeded_time | 선택 | 10 | 임계 영역 유지 시간(분), 1~1440 사이 정수값 |
-| autoscaler_scale_down_delay_after_add | 선택 | 10 | 증설 후 감축 지연 시간(분), 1~1440 사이 정수값 |
+| 이름                                    | 타입      | 필수 여부 | 기본값   | 유효 범위                      | 설명                                                                 |
+|---------------------------------------|---------|-------|-------|----------------------------|--------------------------------------------------------------------|
+| model_id                              | String  | 필수    | 없음    | 없음                         | 엔드포인트로 생성할 모델 ID                                                   |
+| stage_name                            | String  | 필수    | 없음    | 최대 50자                     | 스테이지 이름                                                            |
+| stage_description                     | String  | 선택    | 없음    | 최대 255자                    | 스테이지에 대한 설명                                                        |
+| endpoint_instance_name                | String  | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                              |
+| endpoint_instance_count               | Integer | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                  |
+| tag_list                              | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                              |
+| tag_list[0].tagKey                    | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                               |
+| tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                               |
+| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                         |        
+| wait                                  | Boolean | 선택    | True  | True, False                | True: 스테이지 생성이 완료된 이후 스테이지 ID를 반환, False: 스테이지 요청 후 즉시 스테이지 ID를 반환 |
+| autoscaler_enable                     | Boolean | 선택    | False | True, False                | 오토 스케일러 사용 여부                                                      |
+| autoscaler_min_node_count             | Integer | 선택    | 1     | 1~endpoint_instance_count  | 최소 노드 수                                                            |
+| autoscaler_max_node_count             | Integer | 선택    | 10    | endpoint_instance_count~10 | 최대 노드 수                                                            |
+| autoscaler_scale_down_enable          | Boolean | 선택    | True  | True, False                | 감축 여부                                                              |
+| autoscaler_scale_down_util_threshold  | Integer | 선택    | 50    | 1~100                      | 리소스 사용량 임계치(%)                                                     |
+| autoscaler_scale_down_unneeded_time   | Integer | 선택    | 10    | 1~1440                     | 임계 영역 유지 시간(분)                                                     |
+| autoscaler_scale_down_delay_after_add | Integer | 선택    | 10    | 1~1440                     | 증설 후 감축 지연 시간(분)                                                   |
 
 ```
 stage_id = endpoint.create_stage(
@@ -239,6 +256,8 @@ stage_id = endpoint.create_stage(
     stage_description='test endpoint',
     endpoint_instance_name='c2.c16m16',
     endpoint_instance_count=1,
+    use_log=True,
+    # wait=False,
     # autoscaler_enable=True,  # default False
     # autoscaler_min_node_count=1,
     # autoscaler_max_node_count=10,
@@ -303,10 +322,13 @@ easymaker.download(
 ```
 
 ## CLI Command
-콘솔에 접근하지 않고도 앱키, 시크릿키, 리전 정보가 있다면, Python CLI를 통해 여러 정보를 확인할 수 있습니다. 
-- instance type list : `python -m easymaker -instance --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY`
-- image list : `python -m easymaker -image --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY`
-- experiment list : `python -m easymaker -experiment --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY`
-- training list : `python -m easymaker -training --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY`
-- model list : `python -m easymaker -model --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY`
-- endpoint list : `python -m easymaker -endpoint --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY`
+콘솔에 접근하지 않고도 앱키, 시크릿키, 리전 정보가 있다면, Python CLI를 통해 여러 정보를 확인할 수 있습니다.
+
+| 기능                  | 명령어                                                                                        |
+|---------------------|--------------------------------------------------------------------------------------------|
+| instance type 목록 조회 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -instance   |
+| image 목록 조회         | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -image      |
+| experiment 목록 조회    | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -experiment |
+| training 목록 조회      | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -training   |
+| model 목록 조회         | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -model      |
+| endpoint 목록 조회      | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -endpoint   |
