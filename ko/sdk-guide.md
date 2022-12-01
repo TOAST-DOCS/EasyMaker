@@ -1,4 +1,4 @@
-# NHN Cloud > SDK 사용 가이드 > AI EasyMaker
+## NHN Cloud > SDK 사용 가이드 > AI EasyMaker
 
 ## 개발 가이드
 
