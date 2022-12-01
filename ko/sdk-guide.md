@@ -136,6 +136,27 @@ model_id = easymaker.Model().create(
 )
 ```
 
+학습 ID가 없더라도, 모델이 저장된 경로 정보와 프레임워크 종류를 입력하여 모델을 생성 할 수 있습니다.
+
+[Parameter]
+
+| 이름 | 필수 여부 | 기본값 | 설명                                |
+| --- |---| --- |-----------------------------------|
+| framework_code | 필수 |  | 모델로 생성할 학습 ID                     |
+| model_uri | 필수 |  | 모델 파일이 저장되어 있는 경로(NHN Cloud Object Storage or NHN Cloud NAS) |
+| model_name | 필수 | | 모델 이름                             |
+| model_description | 선택 | | 모델에 대한 설명                         |
+| tag_list | 선택 |  | 태그 정보(tagKey/tagValue로 구성), 최대10개 |
+
+```
+model_id = easymaker.Model().create_by_model_uri(
+    framework_code=easymaker.TENSORFLOW,
+    model_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    model_name='model_name',
+    model_description='model_description',
+)
+```
+
 ### 엔드포인트 생성
 
 엔드포인트 생성시 기본 스테이지가 생성됩니다.
