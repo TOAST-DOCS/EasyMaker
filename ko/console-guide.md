@@ -539,8 +539,18 @@ Log & Crash Search 서비스에 로그를 저장하려면, Log & Crash 서비스
         - [Log & Crash Search 이용 요금](https://www.toast.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
 #### 로그 조회
+
+1. Log & Crash Search 서비스 콘솔 페이지로 이동합니다.
+2. Log & Crash Search 서비스에서 검색 조건을 입력하여 로그들을 조회합니다.
+    * AI EasyMaker 학습 로그 질의: category 필드가 "easymaker.training"인 로그를 조회합니다.
+        * 질의문: category:"easymaker.training"
+    * AI EasyMaker 엔드포인트 로그 질의: category 필드가 "easymaker.inference"인 로그를 조회합니다.
+        * 질의문: category:"easymaker.inference"
+    * AI EasyMaker 로그 전체 조회 질의: logType 필드가 "NNHCloud-AIEasyMaker"인 로그를 조회합니다. 
+        * 질의문: logType:"NHNCloud\-AIEasyMaker"
+3. Log & Crash Search 서비스의 자세한 이용 방법은 [Log & Crash Search 서비스의 콘솔 가이드](https://docs.toast.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/console-guide/)를 참고해주세요.
+
 AI EasyMaker 서비스는 Log & Crash Search 서비스에 다음과 같이 정의된 필드로 로그를 전송합니다.
-다음의 필드를 참고하여 Log & Crash Search 서비스 에서 루씬 쿼리를 통해 로그를 조회를 할 수 있습니다.
 
 - **공통 로그 필드** 
 
@@ -569,18 +579,6 @@ AI EasyMaker 서비스는 Log & Crash Search 서비스에 다음과 같이 정�
     | inferenceId | 추론 요청 고유 ID | 
     | action | Action 구분 (요청: Inference.Request, 응답:Inference.Response) | 
     | modelName | 추론 대상 모델 이름 | 
-
-- **로그 조회**
-    1. Log & Crash Search 서비스 콘솔 페이지로 이동합니다.
-    2. Log & Crash Search 서비스에서 검색 조건을 입력하여 로그들을 조회합니다.
-        * AI EasyMaker 학습 로그 질의: category 필드가 "easymaker.training"인 로그를 조회합니다.
-            * 질의문: category:"easymaker.training"
-        * AI EasyMaker 엔드포인트 로그 질의: category 필드가 "easymaker.inference"인 로그를 조회합니다.
-            * 질의문: category:"easymaker.inference"
-        * AI EasyMaker 로그 전체 조회 질의: logType 필드가 "NNHCloud-AIEasyMaker"인 로그를 조회합니다.
-            * 질의문: logType:"NHNCloud\-AIEasyMaker"
-    3. Log & Crash Search 서비스의 자세한 이용 방법은 [Log & Crash Search 서비스의 콘솔 가이드](https://docs.toast.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/console-guide/)를 참고해주세요.
-
 
 ### 3. 학습 알고리즘 작성 가이드
 학습에 사용 될 알고리즘 스크립트 작성과 결과 지표 확인을 위해 필요한 방법을 설명합니다.
@@ -613,18 +611,18 @@ AI EasyMaker 서비스는 Log & Crash Search 서비스에 다음과 같이 정�
 * **주요 환경 변수**
 
     | 환경 변수 명 | 설명 |
-    | --- | ---------- |
-    | `EM_SOURCE_DIR` | 학습 생성 시 입력한 알고리즘 스크립트가 다운로드 되어있는 폴더의 절대경로 |
-    | `EM_ENTRY_POINT` | 학습 생성 시 입력한 알고리즘 엔트리포인트 이름 |
-    | `EM_DATASET_${데이터 세트 이름}` | 학습 생성 시 입력한 각각의 데이터 세트가 다운로드되어 있는 폴더의 절대경로 |
-    | `EM_DATASETS` | 전체 데이터 세트 목록(json 형식) |
-    | `EM_MODEL_DIR` | 모델 저장 경로 |
-    | `EM_CHECKPOINT_DIR` | 체크포인트 저장 경로 |
-    | `EM_HP_${하이퍼파라미터 키}` | 하이퍼파라미터 키에 대응하는 하이퍼파라미터 값 |
-    | `EM_HPS` | 전체 하이퍼파라미터 목록(json 형식) |
-    | `EM_TENSORBOARD_LOG_DIR` | 학습 결과 확인을 위한 텐서보드 로그 경로 |
-    | `EM_REGION` | 현재 리전 정보 |
-    | `EM_APPKEY` | 현재 사용중인 AI EasyMaker 서비스의 Appkey |
+    | --- | --- |
+    | EM_SOURCE_DIR | 학습 생성 시 입력한 알고리즘 스크립트가 다운로드 되어있는 폴더의 절대경로 |
+    | EM_ENTRY_POINT | 학습 생성 시 입력한 알고리즘 엔트리포인트 이름 |
+    | EM_DATASET_${데이터 세트 이름} | 학습 생성 시 입력한 각각의 데이터 세트가 다운로드되어 있는 폴더의 절대경로 |
+    | EM_DATASETS | 전체 데이터 세트 목록(json 형식) |
+    | EM_MODEL_DIR | 모델 저장 경로 |
+    | EM_CHECKPOINT_DIR | 체크포인트 저장 경로 |
+    | EM_HP_${하이퍼파라미터 키} | 하이퍼파라미터 키에 대응하는 하이퍼파라미터 값 |
+    | EM_HPS | 전체 하이퍼파라미터 목록(json 형식) |
+    | EM_TENSORBOARD_LOG_DIR | 학습 결과 확인을 위한 텐서보드 로그 경로 |
+    | EM_REGION | 현재 리전 정보 |
+    | EM_APPKEY | 현재 사용중인 AI EasyMaker 서비스의 Appkey |
 
 * **환경 변수 활용 예시 코드**
 
