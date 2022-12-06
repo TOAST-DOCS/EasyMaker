@@ -188,13 +188,6 @@ model_id = easymaker.Model().create_by_model_uri(
 | tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                                   |
 | use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                             |        
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 엔드포인트 생성이 완료된 이후 엔드포인트 ID를 반환, False: 엔드포인트 요청 후 즉시 엔드포인트 ID를 반환 |
-| autoscaler_enable                     | Boolean | 선택    | False | True, False                | 오토 스케일러 사용 여부                                                          |
-| autoscaler_min_node_count             | Integer | 선택    | 1     | 1~endpoint_instance_count  | 최소 노드 수                                                                |
-| autoscaler_max_node_count             | Integer | 선택    | 10    | endpoint_instance_count~10 | 최대 노드 수                                                                |
-| autoscaler_scale_down_enable          | Boolean | 선택    | True  | True, False                | 감축 여부                                                                  |
-| autoscaler_scale_down_util_threshold  | Integer | 선택    | 50    | 1~100                      | 리소스 사용량 임계치(%)                                                         |
-| autoscaler_scale_down_unneeded_time   | Integer | 선택    | 10    | 1~1440                     | 임계 영역 유지 시간(분)                                                         |
-| autoscaler_scale_down_delay_after_add | Integer | 선택    | 10    | 1~1440                     | 증설 후 감축 지연 시간(분)                                                       |
 
 ```
 endpoint = easymaker.Endpoint()
@@ -207,13 +200,6 @@ endpoint_id = endpoint.create(
     apigw_resource_uri='/predict',
     use_log=True,
     # wait=False,
-    # autoscaler_enable=True,  # default False
-    # autoscaler_min_node_count=1,
-    # autoscaler_max_node_count=10,
-    # autoscaler_scale_down_enable=True,
-    # autoscaler_scale_down_util_threshold=50,
-    # autoscaler_scale_down_unneeded_time=10,
-    # autoscaler_scale_down_delay_after_add=10,
 )
 ```
 
@@ -241,14 +227,6 @@ endpoint = easymaker.Endpoint()
 | tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                               |
 | use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                         |        
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 스테이지 생성이 완료된 이후 스테이지 ID를 반환, False: 스테이지 요청 후 즉시 스테이지 ID를 반환 |
-| autoscaler_enable                     | Boolean | 선택    | False | True, False                | 오토 스케일러 사용 여부                                                      |
-| autoscaler_min_node_count             | Integer | 선택    | 1     | 1~endpoint_instance_count  | 최소 노드 수                                                            |
-| autoscaler_max_node_count             | Integer | 선택    | 10    | endpoint_instance_count~10 | 최대 노드 수                                                            |
-| autoscaler_scale_down_enable          | Boolean | 선택    | True  | True, False                | 감축 여부                                                              |
-| autoscaler_scale_down_util_threshold  | Integer | 선택    | 50    | 1~100                      | 리소스 사용량 임계치(%)                                                     |
-| autoscaler_scale_down_unneeded_time   | Integer | 선택    | 10    | 1~1440                     | 임계 영역 유지 시간(분)                                                     |
-| autoscaler_scale_down_delay_after_add | Integer | 선택    | 10    | 1~1440                     | 증설 후 감축 지연 시간(분)                                                   |
-
 ```
 stage_id = endpoint.create_stage(
     model_id=model_id,
@@ -258,13 +236,6 @@ stage_id = endpoint.create_stage(
     endpoint_instance_count=1,
     use_log=True,
     # wait=False,
-    # autoscaler_enable=True,  # default False
-    # autoscaler_min_node_count=1,
-    # autoscaler_max_node_count=10,
-    # autoscaler_scale_down_enable=True,
-    # autoscaler_scale_down_util_threshold=50,
-    # autoscaler_scale_down_unneeded_time=10,
-    # autoscaler_scale_down_delay_after_add=10,
 )
 ```
 
