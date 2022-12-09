@@ -591,7 +591,6 @@ AI EasyMaker 서비스는 Log & Crash Search 서비스에 다음과 같이 정�
     | 이름 | 설명 | 유효 범위 |
     | --- | --- | --- | 
     | easymakerAppKey | AI EasyMaker 앱키(AppKey) | - |
-    | easymakerGroupType | AI EasyMaker 그룹 종류 | training, endpoint |
     | category | 로그 카테고리 | easymaker.training, easymaker.inference |
     | logLevel | 로그 레벨 | INFO, WARNING, ERROR |
     | body | 로그 내용 | - |
@@ -602,13 +601,13 @@ AI EasyMaker 서비스는 Log & Crash Search 서비스에 다음과 같이 정�
 
     | 이름 | 설명 |
     | --- | --- |
-    | easymakerGroupId | AI EasyMaker 학습 ID |
+    | trainingId | AI EasyMaker 학습 ID |
 
 - **엔드포인트 로그 필드**
 
     | 이름 | 설명 |
     | --- | --- | 
-    | easymakerGroupId | AI EasyMaker 엔드포인트 ID |
+    | endpointId | AI EasyMaker 엔드포인트 ID |
     | endpointStageId | 엔드포인트 스테이지 ID | 
     | inferenceId | 추론 요청 고유 ID | 
     | action | Action 구분 (요청: Inference.Request, 응답:Inference.Response) | 
