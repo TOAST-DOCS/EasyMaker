@@ -2,7 +2,7 @@
 
 ## 개발 가이드
 
-### AI EasyMaker Python SDK 설치
+### AI EasyMaker 파이썬 SDK 설치
 
 python -m pip install easymaker
 
@@ -10,9 +10,9 @@ python -m pip install easymaker
 
 
 ### AI EasyMaker SDK 초기화
-앱 키(Appkey)와 시크릿키(SecretKey)는 콘솔 오른쪽 위의 **URL & Appkey** 메뉴에서 확인할 수 있습니다.
-활성화한 AI EasyMaker 상품의 앱키, 시크릿키, 리전 정보를 입력합니다.
-AI EasyMaker SDK를 사용하기 위해선 초기화 코드가 필요합니다.
+앱키(Appkey)와 비밀 키(Secret key)는 콘솔 오른쪽 상단의 **URL & Appkey** 메뉴에서 확인할 수 있습니다.
+활성화한 AI EasyMaker 상품의 앱키, 비밀 키, 리전 정보를 입력합니다.
+AI EasyMaker SDK를 사용하기 위해서는 초기화 코드가 필요합니다.
 ```
 import easymaker
 
@@ -54,10 +54,10 @@ experiment_id = easymaker.Experiment().create(
 | train_image_name                           | String  | 필수                    | 없음    | 없음          | 학습에 사용될 이미지 이름(CLI로 조회 가능)                                      |
 | train_instance_name                        | String  | 필수                    | 없음    | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
 | train_instance_count                       | Integer | 필수                    | 없음    | 1~10        | 학습에 사용될 인스턴스 수                                                  |
-| data_storage_size                          | Integer | Obejct Storage 사용시 필수 | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용시 불필요                |
-| source_dir_uri                             | String  | 필수                    | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어있는 경로(NHN Cloud Object Storage or NHN Cloud NAS) |
-| model_upload_uri                           | String  | 필수                    | 없음    | 최대 255자     | 학습 완료된 모델이 업로드 될 경로(NHN Cloud Object Storage or NHN Cloud NAS)  |
-| check_point_upload_uri                     | String  | 선택                    | 없음    | 최대 255자     | 체크포인트 파일이 업로드 될 경로(NHN Cloud Object Storage or NHN Cloud NAS)   |
+| data_storage_size                          | Integer | Obejct Storage 사용 시 필수 | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                |
+| source_dir_uri                             | String  | 필수                    | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어있는 경로(NHN Cloud Object Storage또는NHN Cloud NAS) |
+| model_upload_uri                           | String  | 필수                    | 없음    | 최대 255자     | 학습 완료된 모델이 업로드될 경로(NHN Cloud Object Storage또는NHN Cloud NAS)  |
+| check_point_upload_uri                     | String  | 선택                    | 없음    | 최대 255자     | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage또는NHN Cloud NAS)   |
 | entry_point                                | String  | 필수                    | 없음    | 최대 255자     | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                             |
 | timeout_hours                              | Integer | 선택                    | 720   | 1~720       | 최대 학습 시간(단위: 시간)                                                |
 | hyperparameter_list                        | Array   | 선택                    | 없음    | 최대 100개     | 하이퍼파라미터 정보(hyperparameterKey/hyperparameterValue로 구성)           |
@@ -122,8 +122,8 @@ training_id = easymaker.Training().run(
 ```
 
 ### 모델 생성
-학습 ID값으로 모델 생성을 요청할 수 있습니다.
-모델은 엔드포인트 생성시 사용됩니다.
+학습 ID 값으로 모델 생성을 요청할 수 있습니다.
+모델은 엔드포인트 생성 시 사용됩니다.
 
 [Parameter]
 
@@ -145,14 +145,14 @@ model_id = easymaker.Model().create(
 )
 ```
 
-학습 ID가 없더라도, 모델이 저장된 경로 정보와 프레임워크 종류를 입력하여 모델을 생성 할 수 있습니다.
+학습 ID가 없더라도, 모델이 저장된 경로 정보와 프레임워크 종류를 입력하여 모델을 생성할 수 있습니다.
 
 [Parameter]
 
 | 이름                   | 타입     | 필수 여부 | 기본값 | 유효 범위                                   | 설명                                                  |
 |----------------------|--------|-------|-----|-----------------------------------------|-----------------------------------------------------|
 | framework_code       | Enum   | 필수    | 없음  | easymaker.TENSORFLOW, easymaker.PYTORCH | 학습에 사용된 프레임워크 정보                                    |
-| model_uri            | String | 필수    | 없음  | 최대 255자                                 | 모델 파일 경로(NHN Cloud Object Storage or NHN Cloud NAS) |
+| model_uri            | String | 필수    | 없음  | 최대 255자                                 | 모델 파일 경로(NHN Cloud Object Storage또는NHN Cloud NAS) |
 | model_name           | String | 필수    | 없음  | 최대 50자                                  | 모델 이름                                               |
 | model_description    | String | 선택    | 없음  | 최대 255자                                 | 모델에 대한 설명                                           |
 | tag_list             | Array  | 선택    | 없음  | 최대 10개                                  | 태그 정보                                               |
@@ -171,7 +171,7 @@ model_id = easymaker.Model().create_by_model_uri(
 
 ### 엔드포인트 생성
 
-엔드포인트 생성시 기본 스테이지가 생성됩니다.
+엔드포인트 생성 시 기본 스테이지가 생성됩니다.
 
 [Parameter]
 
@@ -293,7 +293,7 @@ easymaker.download(
 ```
 
 ## CLI Command
-콘솔에 접근하지 않고도 앱키, 시크릿키, 리전 정보가 있다면, Python CLI를 통해 여러 정보를 확인할 수 있습니다.
+앱키, 비밀 키, 리전 정보를 알고 있다면, 콘솔에 접근하지 않고도 파이썬 CLI를 통해 여러 정보를 확인할 수 있습니다.
 
 | 기능                  | 명령어                                                                                        |
 |---------------------|--------------------------------------------------------------------------------------------|
