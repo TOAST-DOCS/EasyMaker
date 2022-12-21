@@ -84,12 +84,12 @@ Please refer to the following guide to configure your virtual environment.
 4. Created virtual environment can be checked with `conda env list` command. 
 
         (base) root@nb-xxxxxx-0:~# conda env list 
- # conda environments: 
- # 
-                         /opt/intel/oneapi/intelpython/latest 
-                         /opt/intel/oneapi/intelpython/latest/envs/2022.2.1 
- base                *   /opt/miniconda3 
- easymaker_env           /root/easymaker/custom-conda-envs/easymaker_env
+        # conda environments: 
+        # 
+                                /opt/intel/oneapi/intelpython/latest 
+                                /opt/intel/oneapi/intelpython/latest/envs/2022.2.1 
+        base                *   /opt/miniconda3 
+        easymaker_env           /root/easymaker/custom-conda-envs/easymaker_env
            
 ### Stop Notebook
 Stop the running notebook or start the stopped notebook.   
@@ -100,7 +100,7 @@ Stop the running notebook or start the stopped notebook.
 
 > **[Caution] How to retain your virtual environment and external libraries when starting the notebook after stopping it** 
 > When stopping and starting the notebook, the virtual environment and external libraries that the user create can be initialized. 
-> In order to retain, configure your virtual environment by referring to [User Virtual Execution Environment Configuration](./console-guide/??#_4).
+> In order to retain, configure your virtual environment by referring to [User Virtual Execution Environment Configuration](./console-guide/#configure-user-virtual-execution-environment).
 
 
 > **[Note] Time to start and stop notebooks** 
@@ -144,7 +144,7 @@ Select the instance and OS image of training to be performed to set the environm
     - **Algorithm Path**
         - **NHN Cloud Object Storage**: Enter the path to NHN Cloud Object Storage where the algorithm is stored.<br>
             - Enter the directory path in the format of obs://{Object Storage API endpoints}/{containerName}/{path}.
-            - If using NHN Cloud Object Storage, please set permissions by referring to [Appendix>1. Add AI EasyMaker system account permissions to NHN Cloud Object Storage](./console-guide/??#1-nhn-cloud-object-storage-ai-easymaker). If you do not set the required permissions, model creation will fail.
+            - If using NHN Cloud Object Storage, please set permissions by referring to [Appendix>1. Add AI EasyMaker system account permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage). If you do not set the required permissions, model creation will fail.
         - **NHN Cloud NAS**: Enter the NHN Cloud NAS path where the algorithm is stored. <br>
             Enter the directory path in the format nas://{NASID}:/{path}.
             
@@ -154,7 +154,7 @@ Select the instance and OS image of training to be performed to set the environm
         - Creating **requirements.txt** on the same path installs the Python package that script requires.
     - **Hyperparameter**
         - To add parameter for training, click the **the + button** to enter the parameter in Key-Value format. You can enter maximum 100 parameters.
-        - Entered hyperparameters are entered as execution factors when entry point is executed. For more information on how to use it, refer to the [Appendix>3. Training Algorithm Creation Guide](./console-guide/??#3).
+        - Entered hyperparameters are entered as execution factors when entry point is executed. For more information on how to use it, refer to the [Appendix>3. Training Algorithm Creation Guide](./console-guide/#3-training-algorithm-creation-guide).
 
 - **Image**: Select the image of instance for the environment in which you need to run the training.
 
@@ -177,7 +177,7 @@ Select the instance and OS image of training to be performed to set the environm
         - Used only if you are using NHN Cloud Object Storage. Please specify sufficient size to ensure that all the data needed for training is stored.
     - **Maximum Training Time**: Specifies the maximum wait time for training to complete. Training that has exceeded the maximum wait time will be processed as an end.
     - **Log Management**: Logs that occur during training can be stored in the NHN Cloud Log & Crash service. 
-        - For more details, refer to [Appendix>2. NHN Cloud Log & Crash Search Service User Guide and Check Logs](./console-guide/??#2-nhn-cloud-log-crash-search).
+        - For more details, refer to [Appendix>2. NHN Cloud Log & Crash Search Service User Guide and Check Logs](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
     - **Tag**: To add tag, click the **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
 > **[Caution] When using NHN Cloud NAS** 
@@ -210,7 +210,7 @@ Training list is displayed. Select Train in the list to view details and change 
 
 - **Action**
     - **Go to TensorBoard **: TensorBoard opens in a new browser window where you can check training statistics.<br/>
-    For information on how to leave TensorBoard logs, refer to [ Appendix>3. Training Algorithm Creation Guide](./console-guide/??#3). Only users who are logged into the console can access TensorBoard.
+    For information on how to leave TensorBoard logs, refer to [ Appendix>3. Training Algorithm Creation Guide](./console-guide/#3-training-algorithm-creation-guide). Only users who are logged into the console can access TensorBoard.
     - **Training Stop **: You can stop training in progress.
 
 - **Hyperparameters**: You can check the hyper parameter values you set for training on the **Hyperparameters** tab of the detailed screen that displays when you select Training.
@@ -229,7 +229,7 @@ Create model with Training in completed state.
 1. Select the Training you want to create as model.
 2. Click **Create Model**. Only training in the COMPLETE state can be created as model.
 3. Get moved to Model Creation page. After checking the contents, click **Create Model** to create a model. 
-For more information on creating models, refer to [Model](./console-guide/??#_19) documentation.
+For more information on creating models, refer to [Model](./console-guide/#model) documentation.
 
 
 ### Delete Training  
@@ -301,7 +301,7 @@ Can manage models of AI EasyMaker's training outcomes or external models as arti
 - **Model Information**: Enter the storage where model's artifacts are stored.
     - **NHN Cloud Object Storage**: Enter Object Storage path where model artifact was stored.
         - Enter a directory path in form of `obs://{Object Storage API endpoint}/{containerName}/{path}`. 
-        - If using NHN Cloud Object Storage, please set permissions by referring to [Appendix>1. Add AI EasyMaker system account permissions to NHN Cloud Object Storage](./console-guide/??#1-nhn-cloud-object-storage-ai-easymaker). If do not set the required permissions, model creation will fail as unable to access to model artifact.
+        - If using NHN Cloud Object Storage, please set permissions by referring to [Appendix>1. Add AI EasyMaker system account permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage). If do not set the required permissions, model creation will fail as unable to access to model artifact.
     - **NHN Cloud NAS**: Enter NHN Cloud NAS path where model artifact is stored. 
         - Enter directory path in form of `nas://{NAS ID}:/{path}`
 - **Additional Settings**: Enter the additional information of model.
@@ -357,8 +357,8 @@ Create and manage endpoints that can serve the model.
 - **Enable API Gateway Service**
     - AI EasyMaker endpoints create API endpoints and manage APIs through NHN Cloud API Gateway service. API Gateway service must be enabled to take advantage of endpoint feature.
     - For more information on API Gateway services and fees, please refer to the following documents:
-        - [API Gateway Service Guide](https://docs.toast.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/Overview/)
-        - [API Gateway Usage Fee](https://www.toast.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
+        - [API Gateway Service Guide](https://docs.toast.com/en/Application%20Service/API%20Gateway/en/overview/)
+        - [API Gateway Usage Fee](https://www.toast.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
 - **Endpoint**: Select whether to add stage to new or existing endpoint.
     - **Create as New Endpoint**: Create new endpoint. Endpoint is created in API Gateway with new service and default stage.
     - **Add New Stage at Default Endpoint**: Endpoint is created as new stage in the service of API Gateway of existing endpoint. Select existing endpoint to add a stage.
@@ -380,7 +380,7 @@ Create and manage endpoints that can serve the model.
 > **[Note] Restrictions on API Gateway service resource provision when creating endpoints** 
 > When you create a new endpoint, create a new API Gateway service. 
 > Adding new stage on existing endpoint creates new stage in API Gateway service. 
-> If you exceed the resource provision policy in [API Gateway Service Resource Provision Policy](https://docs.toast.com/ko/TOAST/ko/resource-policy/#api-gateway), you might not be able to create endpoints in AI EasyMaker. In this case, adjust API Gateway service resource quota.
+> If you exceed the resource provision policy in [API Gateway Service Resource Provision Policy](https://docs.toast.com/en/TOAST/en/resource-policy/#resource-provision-policy-for-api-gateway-service), you might not be able to create endpoints in AI EasyMaker. In this case, adjust API Gateway service resource quota.
 
 ### Endpoint List
 Endpoints list is displayed. Select an endpoint in the list to check details and make changes to the information.
@@ -453,7 +453,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 > 2. Avoid deleting resources in API Gateway resource path that was entered when creating endpoints. Deletion may cause the endpoint's inference API call to fail.
 > 3. In the stage settings of API Gateway, do not disable 'Redefine Backend Endpoint URL' or change the URL set in API Gateway resource path. If changes made, endpoint's inference API call might fail.
 > Other than above precautions, other settings are available with features provided by API Gateway as necessary. 
-> For more information about how to use API Gateway, refer to [API Gateway Console Guide](https://docs.toast.com/ko/Application%20Service/API%20Gateway/ko/console-guide/).
+> For more information about how to use API Gateway, refer to [API Gateway Console Guide](https://docs.toast.com/en/Application%20Service/API%20Gateway/en/console-guide/).
 
 > **[Note] Recovery method when the stage's API Gateway is in 'Deployment Failed' status**
 > If stage settings of AI EasyMaker endpoint are not deployed to the API Gateway stage due to a temporary issue, deployment status is displayed as failed.
@@ -468,30 +468,30 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
     - Request and response specifications of the inference API differ depending on the algorithm user created.
 
         // Inference API example: Request 
-curl --location --request POST '{Stage Endpoint URL}' \
-        --header 'Content-Type: application/json' \
-        --data-raw '{
-"instances": [
-[6.8,  2.8,  4.8,  1.4],
-[6.0,  3.4,  4.5,  1.6]
-]
-}'
-        
-        // Inference API Example: Response 
-{ 
-"predictions" : [ 
-[ 
-                    0.337502569, 
-                    0.332836747, 
-                    0.329660654 
-                ], 
-[ 
-                    0.337530434, 
-                    0.332806051, 
-                    0.329663515 
-                ] 
-] 
-}
+        curl --location --request POST '{Stage Endpoint URL}' \
+                --header 'Content-Type: application/json' \
+                --data-raw '{
+            "instances": [
+                [6.8,  2.8,  4.8,  1.4],
+                [6.0,  3.4,  4.5,  1.6]
+                ]
+        }'
+                
+                // Inference API Example: Response 
+        { 
+        "predictions" : [ 
+            [ 
+                                0.337502569, 
+                                0.332836747, 
+                                0.329660654 
+                            ], 
+            [ 
+                                0.337530434, 
+                                0.332806051, 
+                                0.329663515 
+                            ] 
+            ] 
+        }
 
 
 ### Change Endpoint Default Stage
@@ -558,7 +558,7 @@ To add read/write permissions to AI EasyMaker system account in Object Storage, 
 1. Click **[Training]** or **[Model]** Tab>**AI EasyMaker System Account Information**. 
 2. Archive the AI EasyMaker system account information, **AI EasyMaker Tenant ID** and **AI EasyMaker API User ID**. 
 3. Go to the NHN Cloud Object Storage console.
-4. [Allow specific projects or users to read/write](https://docs.toast.com/ko/Storage/Object%20Storage/ko/acl-guide/#_4) Refer to documents to add required read and write permissions to AI EasyMaker system account in NHN Cloud Object Storage console.
+4. [Allow specific projects or users to read/write](https://docs.toast.com/en/Storage/Object%20Storage/en/acl-guide/#allow-readwrite-to-specific-projects-or-specific-users) Refer to documents to add required read and write permissions to AI EasyMaker system account in NHN Cloud Object Storage console.
 
 
 ### 2. NHN Cloud Log & Crash Search Service Usage Guide and Log Inquiry Guide
@@ -569,7 +569,7 @@ To store logs in the Log & Crash Search service, you have to enable Log & Crash 
 
 - **Information on Log & Crash Search service use and fee** 
     - For more information and fees on the Log & Crash Search service, please refer to the following documents 
-        - [Log & Crash Search Service Guide](https://docs.toast.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/Overview/)
+        - [Log & Crash Search Service Guide](https://docs.toast.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/Overview/)
         - [Log & Crash Search Fee](https://www.toast.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
 #### Log Query
@@ -582,7 +582,7 @@ To store logs in the Log & Crash Search service, you have to enable Log & Crash 
         * Question: category:"easymaker.inference"
     * AI EasyMaker Log Full Query: Query logs with logType field "NNHCloud-AIEasyMaker" 
         * Question: logType:"NHNCloud-AIEasyMaker"
-3. For more information on how to use Log & Crash Search service, refer to [Log & Crash Search Service Console Guide](https://docs.toast.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/console-guide/).
+3. For more information on how to use Log & Crash Search service, refer to [Log & Crash Search Service Console Guide](https://docs.toast.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/console-guide/).
 
 AI EasyMaker service sends logs to Log & Crash Search service in the following defined fields:
 
@@ -626,7 +626,7 @@ As shown in the example below, you can use hyperparameter values entered during 
 
         import argparse 
  
-    def parse_hyperparameters(): 
+        def parse_hyperparameters(): 
         parser = argparse.ArgumentParser() 
  
         # Parsing the entered hyperparameters        parser.add_argument("--epochs", type=int, default=500) 
@@ -660,13 +660,13 @@ As shown in the example below, you can use hyperparameter values entered during 
 
         import os 
  
-  dataset_dir = os.environ.get("EM_DATASET_TRAIN") 
-  train_data = read_data(dataset_dir, "train.csv") 
- 
-  model = ... # Implement the model using input data
- 
-  model_dir = os.environ.get("EM_MODEL_DIR") 
-  model.save(model_dir)
+        dataset_dir = os.environ.get("EM_DATASET_TRAIN") 
+        train_data = read_data(dataset_dir, "train.csv") 
+        
+        model = ... # Implement the model using input data
+        
+        model_dir = os.environ.get("EM_MODEL_DIR") 
+        model.save(model_dir)
 
 #### Store Indicator Logs for TensorBoard Usage
 
@@ -676,12 +676,12 @@ As shown in the example below, you can use hyperparameter values entered during 
 
         import tensorflow as tf 
  
-  # Specify the TensorBoard log path 
-  tb_log = tf.keras.callbacks.TensorBoard(log_dir=os.environ.get("EM_TENSORBOARD_LOG_DIR")) 
- 
-  model = ... # model implementation
- 
-  model.fit(x_train, y_train, validation_data=(x_test, y_test), 
-          epochs=100, batch_size=20, callbacks=[tb_log])
+        # Specify the TensorBoard log path 
+        tb_log = tf.keras.callbacks.TensorBoard(log_dir=os.environ.get("EM_TENSORBOARD_LOG_DIR")) 
+        
+        model = ... # model implementation
+        
+        model.fit(x_train, y_train, validation_data=(x_test, y_test), 
+                epochs=100, batch_size=20, callbacks=[tb_log])
 
 ![Check TensorBoard Log](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_tensorboard.png)

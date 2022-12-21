@@ -357,8 +357,8 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 - **API Gateway 서비스 활성화**
     - AI EasyMaker 엔드포인트는 NHN Cloud API Gateway 서비스를 통해 API 엔드포인트를 생성하고 API를 관리합니다. 엔드포인트 기능을 이용하려면 API Gateway 서비스를 반드시 활성화해야 합니다.
     - API Gateway 서비스에 대한 자세한 내용과 요금은 다음의 문서를 확인하시기 바랍니다.
-        - [API Gateway 서비스 안내](https://docs.toast.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/Overview/)
-        - [API Gateway 이용 요금](https://www.toast.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
+        - [API Gateway 서비스 안내](https://docs.toast.com/ko/Application%20Service/API%20Gateway/ko/overview/)
+        - [API Gateway 이용 요금](https://www.toast.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
 - **엔드포인트**: 신규 또는 기존 엔드포인트에 스테이지를 추가할지 선택합니다.
     - **신규 엔드포인트로 생성**: 신규 엔드포인트를 생성합니다. API Gateway에 신규 서비스와 기본 스테이지로 엔드포인트가 생성됩니다.
     - **기존 엔드포인트에서 신규 스테이지 추가**: 기존 엔드포인트의 API Gateway의 서비스에 신규 스테이지로 엔드포인트가 생성됩니다. 스테이지를 추가할 기존 엔드포인트를 선택합니다.
