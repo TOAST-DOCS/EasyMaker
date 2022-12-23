@@ -477,7 +477,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
                 ]
         }'
                 
-                // Inference API Example: Response 
+        // Inference API Example: Response 
         { 
         "predictions" : [ 
             [ 
