@@ -390,8 +390,8 @@ Endpoints list is displayed. Select an endpoint in the list to check details and
     | CREATE REQUESTED |  Endpoint create is requested.  |
     | CREATE IN PROGRESS | Endpoint creation is in progress.  |
     | UPDATE IN PROGRESS | Some of endpoint stages have tasks in progress.<br/>Can check status of activity by each stage in stage list of endpoints. |
-    | ACTIVE | Endpoint is in normal operation. |
     | DELETE IN PROGRESS | Endpoint delete in progress. |
+    | ACTIVE | Endpoint is in normal operation. |
     | CREATE FAILED | Endpoint creation has failed. <br/>Endpoint must be deleted and recreated. If creation failure is repeated, please contact Customer service center |
     | UPDATE FAILED | Part of stage on endpoint is not being serviced properly. You must delete and recreate the stage with issue. |
 
