@@ -49,17 +49,17 @@ A list of notebooks are displayed. Select a notebook in the list to check detail
     | Status | Description |
     | --- | --- |
     | CREATE REQUESTED | Notebook creation is requested.  |
-    | CREATE RESOURCE IN PROGRESS | Notebook instance is in the process of creation. |
+    | CREATE IN PROGRESS | Notebook instance is in the process of creation. |
     | ACTIVE (HEALTHY) | Notebook application is in normal operation.  |
     | ACTIVE (UNHEALTHY) | Notebook application is not operating properly. If this condition persists after restarting the notebook, please contact customer service center. |
     | STOP IN PROGRESS | Notebook stop in progress.  |
     | STOPPED | Notebook stopped.  |
     | START IN PROGRESS | Notebook start in progress |
     | DELETE IN PROGRESS | Notebook delete in progress.  |
-    | FAILED TO CREATE RESOURCES | Failed to crate notebook. If keep fails to create, please contact Customer service center.   |
-    | FAILED TO STOP | Failed to stop notebook. Please try to stop again.  |
-    | FAILED TO START | Failed to start notebook. Please try to start again.  |
-    | FAILED TO DELETE | Failed to delete notebook. Please try to delete again.  |
+    | CREATE FAILED | Failed to crate notebook. If keep fails to create, please contact Customer service center.   |
+    | STOP FAILED | Failed to stop notebook. Please try to stop again.  |
+    | START FAILED | Failed to start notebook. Please try to start again.  |
+    | DELETE FAILED | Failed to delete notebook. Please try to delete again.  |
 
 - **Action > Open Jupyter Notebook**: Click **Open Jupyter Notebook** button to open the notebook in a new browser window. The notebook is only accessible to users who are logged in to the console.
 - **Tag**: Tag for notebook is displayed. You can change the tag by clicking **Change**.
@@ -196,18 +196,17 @@ Training list is displayed. Select Train in the list to view details and change 
     | Status | Description |
     | --- | --- |
     | CREATE REQUESTED | Training creation is requested.  |
-    | CREATE RESOURCE IN PROGRESS | Resources need for training is being created.  |
+    | CREATE IN PROGRESS | Resources need for training is being created.  |
     | RUNNING | Training is running.  |
     | STOPPED | Training is stopped by users’ request.  |
     | COMPLETE | Training is properly completed.  |
     | STOP IN PROGRESS | Training stop in progress |
     | DELETE IN PROGRESS | Training delete in progress |
-    | FAILED TO TRAIN | Failed state while training is in progress. Detailed failure information can be found in Log & Crash Search log when log management is enabled. |
-    | FAILED TO CREATE RESOURCES | Training creation has failed. If creation keeps failing, please contact Customer service center. |
-    | FAILED TO CLEAR RESOURCES | Resources used for training has failed to clear. Please try to delete again.  |
-    | FAILED TO STOP | Training stop failed to stop. Please try to stop again.  |
-    | FAILED TO DELETE | Training deletion failed to delete. Please try to delete again.  |
-
+    | FAIL TRAIN | Failed state while training is in progress. Detailed failure information can be found in Log & Crash Search log when log management is enabled. |
+    | CREATE FAILED | Training creation has failed. If creation keeps failing, please contact Customer service center. |
+    | FAIL TRAIN IN PROGRESS, COMPLETE IN PROGRESS | Resources used for training resource clear is in progress.  |
+    | STOP FAILED | Training stop failed to stop. Please try to stop again.  |
+    
 - **Action**
     - **Go to TensorBoard **: TensorBoard opens in a new browser window where you can check training statistics.<br/>
     For information on how to leave TensorBoard logs, refer to [ Appendix>3. Training Algorithm Creation Guide](./console-guide/#3-training-algorithm-creation-guide). Only users who are logged into the console can access TensorBoard.
@@ -395,7 +394,7 @@ Endpoints list is displayed. Select an endpoint in the list to check details and
     | CREATE RESOURCE IN PROGRESS | Endpoint resource creation is in progress.  |
     | PART OF STAGE IN PROGRESS | Some of endpoint stages have tasks in progress.<br/>Can check status of activity by each stage in stage list of endpoints. |
     | ACTIVE | Endpoint is in normal operation. |
-    | CLEAR IN PROGRESS | Endpoint resource clear is in progress |
+    | CLEAR IN PROGRESS | Endpoint resource clear is in progress. |
     | FAILED TO CREATE APIGW RESOURCES | Endpoint’s API Gateway resource creation has failed. You have to delete endpoint and create again.  |
     | FAILED TO CREATE RESOURCES | Endpoint creation has failed. <br/>Endpoint must be deleted and recreated. If creation failure is repeated, please contact Customer service center |
     | FAILED TO CLEAR RESOURCES | Endpoint resource cleanup has failed. Please try to delete it again. |
