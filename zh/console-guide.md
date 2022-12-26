@@ -201,11 +201,9 @@ Training list is displayed. Select Train in the list to view details and change 
     | STOPPED | Training is stopped by users’ request.  |
     | COMPLETE | Training is properly completed.  |
     | STOP IN PROGRESS | Training stop in progress |
-    | DELETE IN PROGRESS | Training delete in progress |
     | FAIL TRAIN | Failed state while training is in progress. Detailed failure information can be found in Log & Crash Search log when log management is enabled. |
     | CREATE FAILED | Training creation has failed. If creation keeps failing, please contact Customer service center. |
     | FAIL TRAIN IN PROGRESS, COMPLETE IN PROGRESS | Resources used for training resource clear is in progress.  |
-    | STOP FAILED | Training stop failed to stop. Please try to stop again.  |
     
 - **Action**
     - **Go to TensorBoard **: TensorBoard opens in a new browser window where you can check training statistics.<br/>

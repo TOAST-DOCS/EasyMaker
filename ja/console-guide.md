@@ -201,11 +201,9 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
     | STOPPED | 学習がユーザーのリクエストで停止した状態です。 |
     | COMPLETE | 学習が正常に完了した状態です。 |
     | STOP IN PROGRESS | 学習が停止中の状態です。 |
-    | DELETE IN PROGRESS | 学習が削除中の状態です。 |
     | FAIL TRAIN | 学習の進行中に失敗した状態です。詳細な失敗情報はログ管理が有効になっている場合は、Log & Crash Searchログで確認できます。|
     | CREATE FAILED | 学習の作成に失敗した状態です。作成が継続的に失敗する場合はサポートにお問い合わせください。|
     | FAIL TRAIN IN PROGRESS, COMPLETE IN PROGRESS | 学習に使用されたリソースを整理中の状態です。 |
-    | STOP FAILED | 学習の停止に失敗した状態です。もう一度お試しください。 |
     
 - **作業**
     - **Tensorboard**：学習の統計情報を確認できるTensorboardがブラウザの新しいウィンドウで開きます。<br/>
