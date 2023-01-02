@@ -388,15 +388,12 @@ Endpoints list is displayed. Select an endpoint in the list to check details and
     | Status | Description |
     | --- | --- |
     | CREATE REQUESTED |  Endpoint create is requested.  |
-    | CREATE APIGW RESOURCE IN PROGRESS | Endpoint’s API Gateway Resource creation is in progress.  |
-    | CREATE RESOURCE IN PROGRESS | Endpoint resource creation is in progress.  |
-    | PART OF STAGE IN PROGRESS | Some of endpoint stages have tasks in progress.<br/>Can check status of activity by each stage in stage list of endpoints. |
+    | CREATE IN PROGRESS | Endpoint creation is in progress.  |
+    | UPDATE IN PROGRESS | Some of endpoint stages have tasks in progress.<br/>Can check status of activity by each stage in stage list of endpoints. |
+    | DELETE IN PROGRESS | Endpoint delete in progress. |
     | ACTIVE | Endpoint is in normal operation. |
-    | CLEAR IN PROGRESS | Endpoint resource clear is in progress. |
-    | FAILED TO CREATE APIGW RESOURCES | Endpoint’s API Gateway resource creation has failed. You have to delete endpoint and create again.  |
-    | FAILED TO CREATE RESOURCES | Endpoint creation has failed. <br/>Endpoint must be deleted and recreated. If creation failure is repeated, please contact Customer service center |
-    | FAILED TO CLEAR RESOURCES | Endpoint resource cleanup has failed. Please try to delete it again. |
-    | PART OF STAGE FAILED | Part of stage on endpoint is not being serviced properly. You must delete and recreate the stage with issue. |
+    | CREATE FAILED | Endpoint creation has failed. <br/>Endpoint must be deleted and recreated. If creation failure is repeated, please contact Customer service center |
+    | UPDATE FAILED | Part of stage on endpoint is not being serviced properly. You must delete and recreate the stage with issue. |
 
 - **API Gateway Status**: Displays API Gateway status information for default stage of endpoint. Please refer to the table below for main status.
     
@@ -426,12 +423,12 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
     | Status | Description |
     | --- | --- |
     | CREATE REQUESTED |  Endpoint stage creation requested.  |
-    | CREATE RESOURCE IN PROGRESS |  Endpoint stage resource creation in progress.  |
-    | MODEL DEPLOY IN PROGRESS |  Endpoint stage to model deploy in progress.  |
+    | CREATE IN PROGRESS |  Endpoint stage creation in progress.  |
+    | DEPLOY IN PROGRESS |  Endpoint stage to model deploy in progress.  |
+    | DELETE IN PROGRESS |  Endpoint stage delete in progress.  |
     | ACTIVE |  Endpoint stage is normal operation. |
-    | FAILED TO CREATE RESOURCES |  Endpoint stage creation has failed. Please try to create again.   |
-    | FAILED TO CLEAR RESOURCES |  Endpoint stage failed to delete stage. Please try to create again.   |
-    | FAILED TO MODEL DEPLOY |  Endpoint stage failed to deploy stage. Please try to create again.   |
+    | CREATE FAILED |  Endpoint stage creation has failed. Please try to create again.   |
+    | DEPLOY FAILED |  Endpoint stage failed to deploy stage. Please try to create again.   |
 
 - **API Gateway Status**: Displays stage status of API Gateway from where endpoint stage is deployed.
 - **Default Stage Check**: Displays whether it is a default stage or not.
