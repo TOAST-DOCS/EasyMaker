@@ -393,7 +393,7 @@ Endpoints list is displayed. Select an endpoint in the list to check details and
     | DELETE IN PROGRESS | Endpoint deletion is in progress. |
     | ACTIVE | Endpoint is in normal operation. |
     | CREATE FAILED | Endpoint creation has failed. <br/>You must delete and recreate the endpoint. If the creation fails repeatedly, please contact the Customer Center. |
-    | UPDATE FAILED | Some of endpoint stages are serviced properly. You must delete and recreate the stage with issue. |
+    | UPDATE FAILED | Some of endpoint stages are not serviced properly. You must delete and recreate the stage with issue. |
 
 - **API Gateway Status**: Displays API Gateway status information for default stage of endpoint. Please refer to the table below for main status.
     
