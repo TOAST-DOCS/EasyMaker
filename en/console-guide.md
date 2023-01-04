@@ -387,13 +387,13 @@ Endpoints list is displayed. Select an endpoint in the list to check details and
 
     | Status | Description |
     | --- | --- |
-    | CREATE REQUESTED |  Endpoint create is requested.  |
+    | CREATE REQUESTED |  Endpoint creation is requested.  |
     | CREATE IN PROGRESS | Endpoint creation is in progress.  |
-    | UPDATE IN PROGRESS | Some of endpoint stages have tasks in progress.<br/>Can check status of activity by each stage in stage list of endpoints. |
-    | DELETE IN PROGRESS | Endpoint delete in progress. |
+    | UPDATE IN PROGRESS | Some of endpoint stages have tasks in progress.<br/>You can check the status of task for each stage in the endpoint stage list. |
+    | DELETE IN PROGRESS | Endpoint deletion is in progress. |
     | ACTIVE | Endpoint is in normal operation. |
-    | CREATE FAILED | Endpoint creation has failed. <br/>Endpoint must be deleted and recreated. If creation failure is repeated, please contact Customer service center |
-    | UPDATE FAILED | Part of stage on endpoint is not being serviced properly. You must delete and recreate the stage with issue. |
+    | CREATE FAILED | Endpoint creation has failed. <br/>You must delete and recreate the endpoint. If the creation fails repeatedly, please contact the Customer Center. |
+    | UPDATE FAILED | Some of endpoint stages are serviced properly. You must delete and recreate the stage with issue. |
 
 - **API Gateway Status**: Displays API Gateway status information for default stage of endpoint. Please refer to the table below for main status.
     
@@ -423,12 +423,12 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
     | Status | Description |
     | --- | --- |
     | CREATE REQUESTED |  Endpoint stage creation requested.  |
-    | CREATE IN PROGRESS |  Endpoint stage creation in progress.  |
-    | DEPLOY IN PROGRESS |  Endpoint stage to model deploy in progress.  |
-    | DELETE IN PROGRESS |  Endpoint stage delete in progress.  |
+    | CREATE IN PROGRESS |  Endpoint stage creation is in progress.  |
+    | DEPLOY IN PROGRESS |  Model deployment to the endpoint stage is in progress.|
+    | DELETE IN PROGRESS |  Endpoint stage deletion is in progress.  |
     | ACTIVE |  Endpoint stage is normal operation. |
-    | CREATE FAILED |  Endpoint stage creation has failed. Please try to create again.   |
-    | DEPLOY FAILED |  Endpoint stage failed to deploy stage. Please try to create again.   |
+    | CREATE FAILED |  Endpoint stage creation has failed. Please try again.   |
+    | DEPLOY FAILED |  Deployment to the endpoint stage has failed. Please try again.   |
 
 - **API Gateway Status**: Displays stage status of API Gateway from where endpoint stage is deployed.
 - **Default Stage Check**: Displays whether it is a default stage or not.
