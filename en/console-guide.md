@@ -616,7 +616,7 @@ Describes how to write algorithm scripts to be used for training and how to chec
 * When entry point is executed, it is passed to the execution factor.
 
 As shown in the example below, you can use hyperparameter values entered during training creation.<br>
-![HyperParameter Input Screen](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_ko.png)
+![HyperParameter Input Screen](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_en.png)
 
         import argparse 
  
