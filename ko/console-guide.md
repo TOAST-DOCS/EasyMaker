@@ -593,77 +593,83 @@ AI EasyMaker 서비스는 Log & Crash Search 서비스에 다음과 같이 정�
 
 - **학습 로그 필드**
 
-    | 이름 | 설명 |
-    | --- | --- |
-    | trainingId | AI EasyMaker 학습 ID |
+    | 이름 | 설명                  |
+    |---------------------| --- |
+    | trainingId | AI EasyMaker 학습 ID  |
 
 - **엔드포인트 로그 필드**
 
-    | 이름 | 설명 |
-    | --- | --- | 
-    | endpointId | AI EasyMaker 엔드포인트 ID |
-    | endpointStageId | 엔드포인트 스테이지 ID | 
-    | inferenceId | 추론 요청 고유 ID | 
+    | 이름 | 설명                                                      |
+    |---------------------------------------------------------| --- | 
+    | endpointId | AI EasyMaker 엔드포인트 ID                                   |
+    | endpointStageId | 엔드포인트 스테이지 ID                                           | 
+    | inferenceId | 추론 요청 고유 ID                                             | 
     | action | Action 구분(요청: Inference.Request, 응답:Inference.Response) | 
-    | modelName | 추론 대상 모델 이름 | 
+    | modelName | 추론 대상 모델 이름                                             | 
 
-### 3. 학습 알고리즘 작성 가이드
-학습에 사용될 알고리즘 스크립트 작성과 결과 지표 확인을 위해 필요한 방법을 설명합니다.
-
-#### 하이퍼파라미터
+### 3. 하이퍼파라미터
 
 * 콘솔을 통해 입력받은 Key-Value 형식의 값입니다.
-* 엔트리 포인트 실행 시, 실행 인자로 전달됩니다.
+* 엔트리 포인트 실행 시, 실행 인자(--{Key})로 전달됩니다.
+* 환경 변수 값(EM_HP_{대문자로 변환된 Key})으로도 저장되어, 환경 변수 값으로도 활용할 수 있습니다.
 
 아래 예시처럼, 학습 생성 시 입력한 하이퍼파라미터 값을 활용할 수 있습니다.<br>
 ![하이퍼파리미터 입력 화면](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_ko.png)
 
         import argparse
-
+    
+        model_version = os.environ.get("EM_HP_MODEL_VERSION")
+    
         def parse_hyperparameters():
             parser = argparse.ArgumentParser()
-
+    
             # 입력한 하이퍼파라미터 파싱
             parser.add_argument("--epochs", type=int, default=500)
             parser.add_argument("--batch_size", type=int, default=32)
-            parser.add_argument("--model_version", type=str, default="1.0.0")
             ...
-
+    
             return parser.parse_known_args()
 
-#### 환경 변수
+### 4. 환경 변수
 
 * 학습에 필요한 정보들은 **환경 변수**로 학습 컨테이너에 전달되며, **학습 스크립트**에서 전달된 환경 변수들을 활용할 수 있습니다.
 * 사용자 입력으로 만들어지는 환경 변수 명은 대문자로 변환됩니다.
-* **주요 환경 변수**
+* 코드 상에서 학습이 완료된 모델은 반드시 EM_MODEL_DIR 경로에 저장해야 합니다.
+ **주요 환경 변수**
 
-    | 환경 변수 명 | 설명 |
-    | --- | --- |
-    | EM_SOURCE_DIR | 학습 생성 시 입력한 알고리즘 스크립트가 다운로드 되어있는 폴더의 절대 경로 |
-    | EM_ENTRY_POINT | 학습 생성 시 입력한 알고리즘 엔트리 포인트 이름 |
+    | 환경 변수 명                 | 설명 |
+    | --------------------------| --- | 
+    | EM_SOURCE_DIR           | 학습 생성 시 입력한 알고리즘 스크립트가 다운로드 되어있는 폴더의 절대 경로 |
+    | EM_ENTRY_POINT          | 학습 생성 시 입력한 알고리즘 엔트리 포인트 이름 |
     | EM_DATASET_${데이터 세트 이름} | 학습 생성 시 입력한 각각의 데이터 세트가 다운로드되어 있는 폴더의 절대 경로 |
-    | EM_DATASETS | 전체 데이터 세트 목록(json 형식) |
-    | EM_MODEL_DIR | 모델 저장 경로 |
-    | EM_CHECKPOINT_DIR | 체크 포인트 저장 경로 |
-    | EM_HP_${하이퍼파라미터 키} | 하이퍼파라미터 키에 대응하는 하이퍼파라미터 값 |
-    | EM_HPS | 전체 하이퍼파라미터 목록(json 형식) |
-    | EM_TENSORBOARD_LOG_DIR | 학습 결과 확인을 위한 텐서보드 로그 경로 |
-    | EM_REGION | 현재 리전 정보 |
-    | EM_APPKEY | 현재 사용 중인 AI EasyMaker 서비스의 앱키 |
+    | EM_DATASETS             | 전체 데이터 세트 목록(json 형식) |
+    | EM_MODEL_DIR            | 모델 저장 경로 |
+    | EM_CHECKPOINT_DIR       | 체크 포인트 저장 경로 |
+    | EM_HP_${대문자로 변환된 하이퍼파라미터 키}     | 하이퍼파라미터 키에 대응하는 하이퍼파라미터 값 |
+    | EM_HPS                  | 전체 하이퍼파라미터 목록(json 형식) |
+    | EM_TENSORBOARD_LOG_DIR  | 학습 결과 확인을 위한 텐서보드 로그 경로 |
+    | EM_REGION               | 현재 리전 정보 |
+    | EM_APPKEY               | 현재 사용 중인 AI EasyMaker 서비스의 앱키 |
 
 * **환경 변수 활용 예시 코드**
 
         import os
+        import tensorflow
 
         dataset_dir = os.environ.get("EM_DATASET_TRAIN")
         train_data = read_data(dataset_dir, "train.csv")
 
         model = ... # 입력한 데이터를 이용해 모델 구현
+        callbacks = [
+            tensorflow.keras.callbacks.ModelCheckpoint(filepath=f'{os.environ.get("EM_CHECKPOINT_DIR")}/cp-{{epoch:04d}}.ckpt', save_freq='epoch', period=50),
+            tensorflow.keras.callbacks.TensorBoard(log_dir=f'{os.environ.get("EM_TENSORBOARD_LOG_DIR")}'),
+        ]
+        model.fit(..., callbacks)
 
         model_dir = os.environ.get("EM_MODEL_DIR")
         model.save(model_dir)
 
-#### 텐서보드 활용을 위한 지표 로그 저장
+### 5. 텐서보드 활용을 위한 지표 로그 저장
 
 * 학습 후 텐서보드 화면에서 결과 지표를 확인하기 위해, 학습 스크립트 작성 시 텐서보드 로그 저장 공간을 지정된 위치(`EM_TENSORBOARD_LOG_DIR`)로 설정해 주어야 합니다.
 
