@@ -607,62 +607,69 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
     | action | Action classification (Request: Inference.Request, Response:Inference.Response) | 
     | modelName | Model name to be inferred | 
 
-### 3. Training Algorithm Creation Guide
-Describes how to write algorithm scripts to be used for training and how to check the result indicators.
-
-#### Hyperparameters
+### 3. Hyperparameters
 
 * Value in Key-Value format entered through the console.
-* When entry point is executed, it is passed to the execution factor.
+* 엔트리 포인트 실행 시, 실행 인자(--{Key})로 전달됩니다.
+* 환경 변수 값(EM_HP_{대문자로 변환된 Key})으로도 저장되어, 환경 변수 값으로도 활용할 수 있습니다.
 
 As shown in the example below, you can use hyperparameter values entered during training creation.<br>
 ![HyperParameter Input Screen](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_ko.png)
 
-        import argparse 
- 
-        def parse_hyperparameters(): 
-        parser = argparse.ArgumentParser() 
- 
-        # Parsing the entered hyperparameters        parser.add_argument("--epochs", type=int, default=500) 
-        parser.add_argument("--batch_size", type=int, default=32) 
-        parser.add_argument("--model_version", type=str, default="1.0.0") 
-        ... 
- 
-        return parser.parse_known_args()
+        import argparse
+    
+        model_version = os.environ.get("EM_HP_MODEL_VERSION")
+    
+        def parse_hyperparameters():
+            parser = argparse.ArgumentParser()
+    
+            # 입력한 하이퍼파라미터 파싱
+            parser.add_argument("--epochs", type=int, default=500)
+            parser.add_argument("--batch_size", type=int, default=32)
+            ...
+    
+            return parser.parse_known_args()
 
-#### Environment Variables
+### 4. Environment Variables
 
 * Information required for training is passed to training container with **Environment Variable** and the environment variables passed in **Training Script** can be utilized.
 * Environment variable names created by user input are to be capitalized.
+* 코드 상에서 학습이 완료된 모델은 반드시 EM_MODEL_DIR 경로에 저장해야 합니다.
 * **Key Environment Variables**
 
-    | Environment variable name | Description |
-    | --- | --- |
-    | EM_SOURCE_DIR | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded |
-    | EM_ENTRY_POINT | Algorithm entry point name entered at training creation |
-    | EM_DATASET_${Data set name} | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
-    | EM_DATASETS | Full data set list ( json format) |
-    | EM_MODEL_DIR | Model storage path |
-    | EM_CHECKPOINT_DIR | Checkpoint Storage Path |
-    | EM_HP_${ Hyperparameter key } | Hyperparameter value corresponding to the hyperparameter key |
-    | EM_HPS | Full Hyperparameter List (in json format) |
-    | EM_TENSORBOARD_LOG_DIR | TensorBoard log path for checking training results |
-    | EM_REGION | Current Region Information |
-    | EM_APPKEY | Appkey of AI EasyMaker service currently in use |
+    | Environment variable name              | Description |
+----------------------------------------| --- | --- |
+    | EM_SOURCE_DIR                          | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded |
+    | EM_ENTRY_POINT                         | Algorithm entry point name entered at training creation |
+    | EM_DATASET_${Data set name}            | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
+    | EM_DATASETS                            | Full data set list ( json format) |
+    | EM_MODEL_DIR                           | Model storage path |
+    | EM_CHECKPOINT_DIR                      | Checkpoint Storage Path |
+    | EM_HP_${ 대문자로 변환된 Hyperparameter key } | Hyperparameter value corresponding to the hyperparameter key |
+    | EM_HPS                                 | Full Hyperparameter List (in json format) |
+    | EM_TENSORBOARD_LOG_DIR                 | TensorBoard log path for checking training results |
+    | EM_REGION                              | Current Region Information |
+    | EM_APPKEY                              | Appkey of AI EasyMaker service currently in use |
 
 * **Example code for utilizing environment variables**
 
-        import os 
- 
-        dataset_dir = os.environ.get("EM_DATASET_TRAIN") 
-        train_data = read_data(dataset_dir, "train.csv") 
-        
-        model = ... # Implement the model using input data
-        
-        model_dir = os.environ.get("EM_MODEL_DIR") 
+        import os
+        import tensorflow
+
+        dataset_dir = os.environ.get("EM_DATASET_TRAIN")
+        train_data = read_data(dataset_dir, "train.csv")
+
+        model = ... # 입력한 데이터를 이용해 모델 구현
+        callbacks = [
+            tensorflow.keras.callbacks.ModelCheckpoint(filepath=f'{os.environ.get("EM_CHECKPOINT_DIR")}/cp-{{epoch:04d}}.ckpt', save_freq='epoch', period=50),
+            tensorflow.keras.callbacks.TensorBoard(log_dir=f'{os.environ.get("EM_TENSORBOARD_LOG_DIR")}'),
+        ]
+        model.fit(..., callbacks)
+
+        model_dir = os.environ.get("EM_MODEL_DIR")
         model.save(model_dir)
 
-#### Store Indicator Logs for TensorBoard Usage
+### 5. Store Indicator Logs for TensorBoard Usage
 
 * In order to check result indicators on the TensorBoard screen after training, the TensorBoard log storage space must be set to the specified location (`EM_TENSORBOARD_LOG_DIR`) when writing the training script.
 
