@@ -601,7 +601,7 @@ AI EasyMaker 서비스는 Log & Crash Search 서비스에 다음과 같이 정�
     | endpointId | AI EasyMaker 엔드포인트 ID |
     | endpointStageId | 엔드포인트 스테이지 ID | 
     | inferenceId | 추론 요청 고유 ID | 
-    | action | Action 구분(요청: Inference.Request, 응답:Inference.Response) | 
+    | action | Action 구분(Endpoint.Model) | 
     | modelName | 추론 대상 모델 이름 | 
 
 ### 3. 학습 알고리즘 작성 가이드

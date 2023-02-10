@@ -604,7 +604,7 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
     | endpointId | AI EasyMaker Endpoint ID |
     | endpointStageId | Endpoint stage ID | 
     | inferenceId | Inference request own ID | 
-    | action | Action classification (Request: Inference.Request, Response:Inference.Response) | 
+    | action | Action classification (Endpoint.Model) | 
     | modelName | Model name to be inferred | 
 
 ### 3. Training Algorithm Creation Guide

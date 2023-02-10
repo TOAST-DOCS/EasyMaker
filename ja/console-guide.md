@@ -601,7 +601,7 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
     | endpointId | AI EasyMakerエンドポイントID |
     | endpointStageId | エンドポイントステージID | 
     | inferenceId | 推論リクエスト固有ID | 
-    | action | Action区分(リクエスト： Inference.Request、レスポンス：Inference.Response) | 
+    | action | Action区分(Endpoint.Model) | 
     | modelName | 推論対象モデル名 | 
 
 ### 3. 学習アルゴリズム作成ガイド
