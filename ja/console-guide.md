@@ -611,7 +611,7 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
 
 * コンソールから入力されたKey-Value形式の値です。
 * 엔트리 포인트 실행 시, 실행 인자(--{Key})로 전달됩니다.
-* 환경 변수 값(EM_HP_{대문자로 변환된 Key})으로도 저장되어, 환경 변수 값으로도 활용할 수 있습니다.
+* 환경 변수 값(EM_HP_{대문자로 변환된 Key})으로도 저장되어 활용할 수 있습니다.
 
 以下の例のように、学習作成時に入力したハイパーパラメータの値を活用できます。<br>
 ![ハイパーパラメータの入力画面](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_ko.png)
