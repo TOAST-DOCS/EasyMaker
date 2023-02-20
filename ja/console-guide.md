@@ -304,10 +304,6 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 - **追加設定**：モデルの追加情報を入力します。
     - **タグ**：タグを追加するには**+ボタン**をクリックしてKey-Value形式でタグを入力します。タグは最大10個まで入力できます。
 
-> **[注意]フレームワークがPyTorchの場合、モデル名設定**
-> モデルのフレームワークの種類がPyTorchの場合、モデル作成時に必ずPyTorchモデルアーティファクトに含まれるconfig.propertiesに設定したモデル名で入力する必要があります。
-> config.propertiesに設定したモデル名と異なる場合、該当モデルのエンドポイント作成が失敗します。
-
 > **[注意] NHN Cloud NASを使用する場合**
 > AI EasyMakerと同じプロジェクトで作成されたNHN Cloud NASのみ使用できます。
 
@@ -444,8 +440,9 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 > AI EasyMakerはエンドポイント作成またはエンドポイントステージ作成を行うと、エンドポイントに対するAPI Gatewayのサービスとステージを作成します。
 > AI EasyMakerによって作成されたAPI GatewayサービスとステージをAPI Gatewayサービスコンソールで直接変更作業を行う場合、次の注意事項を必ず参照してください。
 > 1. AI EasyMakerが作成したAPI Gatewayサービスとステージを削除しないようにします。削除すると、エンドポイントにAPI Gateway情報が正常に表示されず、エンドポイントの変更事項がAPI Gatewayに適用されない場合があります。
-> 2. エンドポイント作成時に入力したAPI Gatewayリソースパスのリソースを削除しないようにします。削除すると、エンドポイントの推論APIの呼び出しに失敗する場合があります。
-> 3. API Gatewayのステージ設定でAPI Gatewayリソースパスに設定された「バックエンドエンドポイントURL再定義」を無効にするか、URLを変更しないようにします。変更すると、エンドポイントの推論API呼び出しに失敗する可能性があります。
+> 2. エンドポイント作成時に入力したAPI Gatewayリソースパスのリソースを変更または削除しないようにします。削除すると、エンドポイントの推論APIの呼び出しに失敗する場合があります。
+> 3. エンドポイント作成時に入力したAPI Gatewayリソースパス下位にリソースを追加しないようにします。追加したリソースはエンドポイントステージ追加/変更作業時に削除される場合があります。
+> 4. API Gatewayのステージ設定でAPI Gatewayリソースパスに設定された**バックエンドエンドポイントURL再定義**を無効にするか、URLを変更しないようにします。変更すると、エンドポイントの推論API呼び出しに失敗する可能性があります。
 > 上記の注意事項以外の設定は、必要に応じてAPI Gatewayで提供する機能を利用できます。
 > API Gatewayの詳細については[API Gatewayコンソールガイド](https://docs.toast.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ja/console-guide/)を参照してください。
 
@@ -460,6 +457,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 2. 詳細画面のステージエンドポイントURLを確認します。
 3. HTTP POST MethodでステージエンドポイントURLを呼び出すと、推論APIが呼び出されます。
     - ユーザーが作成したアルゴリズムによって推論APIのリクエスト、レスポンス仕様は異なります。
+
 
         // 推論API例：リクエスト 
         curl --location --request POST '{ステージエンドポイントURL}' \
@@ -604,66 +602,72 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
     | endpointId | AI EasyMakerエンドポイントID |
     | endpointStageId | エンドポイントステージID | 
     | inferenceId | 推論リクエスト固有ID | 
-    | action | Action区分(リクエスト： Inference.Request、レスポンス：Inference.Response) | 
+    | action | Action区分(Endpoint.Model) | 
     | modelName | 推論対象モデル名 | 
 
-### 3. 学習アルゴリズム作成ガイド
-学習に使用されるアルゴリズムスクリプトの作成と結果指標を確認するために必要な方法を説明します。
-
-#### ハイパーパラメータ
+### 3. ハイパーパラメータ
 
 * コンソールから入力されたKey-Value形式の値です。
-* エントリーポイント実行時、実行引数として渡されます。
+* エントリーポイント実行時、実行引数(--{Key}に渡されます。
+* 環境変数値(EM_HP_{大文字に変換されたKey})としても保存され活用できます。
 
 以下の例のように、学習作成時に入力したハイパーパラメータの値を活用できます。<br>
-![ハイパーパラメータの入力画面](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_ko.png)
+![ハイパーパラメータの入力画面](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_ja.png)
 
         import argparse
-
+    
+        model_version = os.environ.get("EM_HP_MODEL_VERSION")
+    
         def parse_hyperparameters():
             parser = argparse.ArgumentParser()
-
+    
             # 入力したハイパーパラメータ解析
             parser.add_argument("--epochs", type=int, default=500)
             parser.add_argument("--batch_size", type=int, default=32)
-            parser.add_argument("--model_version", type=str, default="1.0.0")
             ...
-
+    
             return parser.parse_known_args()
 
-#### 環境変数
+### 4. 環境変数
 
 * 学習に必要な情報は、**環境変数**として学習コンテナに渡され、**学習スクリプト**で渡された環境変数を活用できます。
 * ユーザー入力で作成される環境変数名は大文字に変換されます。
+* コード上で学習が完了したモデルは、必ずEM_MODEL_DIRパスに保存する必要があります。
 * **主な環境変数**
 
-    | 環境変数名 | 説明 |
+    | 環境変数名                         | 説明 |
     | --- | --- |
-    | EM_SOURCE_DIR | 学習作成時に入力したアルゴリズムスクリプトがダウンロードされているフォルダの絶対パス |
-    | EM_ENTRY_POINT | 学習作成時に入力したアルゴリズムエントリーポイント名 |
-    | EM_DATASET_${データセット名} | 学習作成時に入力したそれぞれのデータセットがダウンロードされているフォルダの絶対パス |
-    | EM_DATASETS | 全体データセットリスト(json形式) |
-    | EM_MODEL_DIR | モデル保存パス |
-    | EM_CHECKPOINT_DIR | チェックポイント保存パス |
-    | EM_HP_${ハイパーパラメータキー} | ハイパーパラメータキーに対応するハイパーパラメータ値 |
-    | EM_HPS | 全体ハイパーパラメータリスト(json形式) |
-    | EM_TENSORBOARD_LOG_DIR | 学習結果を確認するためのTensorboardログパス |
-    | EM_REGION | 現在のリージョン情報 |
-    | EM_APPKEY | 現在使用中のAI EasyMakerサービスのアプリケーションキー |
+    | EM_SOURCE_DIR                 | 学習作成時に入力したアルゴリズムスクリプトがダウンロードされているフォルダの絶対パス |
+    | EM_ENTRY_POINT                | 学習作成時に入力したアルゴリズムエントリーポイント名 |
+    | EM_DATASET_${データセット名}         | 学習作成時に入力したそれぞれのデータセットがダウンロードされているフォルダの絶対パス |
+    | EM_DATASETS                   | 全体データセットリスト(json形式) |
+    | EM_MODEL_DIR                  | モデル保存パス |
+    | EM_CHECKPOINT_DIR             | チェックポイント保存パス |
+    | EM_HP_${大文字に変換されたハイパーパラメータキー} | ハイパーパラメータキーに対応するハイパーパラメータ値 |
+    | EM_HPS                        | 全体ハイパーパラメータリスト(json形式) |
+    | EM_TENSORBOARD_LOG_DIR        | 学習結果を確認するためのTensorboardログパス |
+    | EM_REGION                     | 現在のリージョン情報 |
+    | EM_APPKEY                     | 現在使用中のAI EasyMakerサービスのアプリケーションキー |
 
 * **環境変数活用サンプルコード**
 
         import os
+        import tensorflow
 
         dataset_dir = os.environ.get("EM_DATASET_TRAIN")
         train_data = read_data(dataset_dir, "train.csv")
 
         model = ... # 入力したデータを利用してモデル実装
+        callbacks = [
+            tensorflow.keras.callbacks.ModelCheckpoint(filepath=f'{os.environ.get("EM_CHECKPOINT_DIR")}/cp-{{epoch:04d}}.ckpt', save_freq='epoch', period=50),
+            tensorflow.keras.callbacks.TensorBoard(log_dir=f'{os.environ.get("EM_TENSORBOARD_LOG_DIR")}'),
+        ]
+        model.fit(..., callbacks)
 
         model_dir = os.environ.get("EM_MODEL_DIR")
         model.save(model_dir)
 
-#### Tensorboardを活用するための指標ログを保存
+### 5. Tensorboardを活用するための指標ログを保存
 
 * 学習後、Tensorboard画面で結果指標を確認するために、学習スクリプト作成時にTensorboardログ記憶領域を指定された位置(`EM_TENSORBOARD_LOG_DIR`)に設定する必要があります。
 

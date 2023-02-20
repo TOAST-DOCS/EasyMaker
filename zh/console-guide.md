@@ -461,6 +461,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 3. When the stage endpoint URL is called the HTTP POST Method, inference API is called.
     - Request and response specifications of the inference API differ depending on the algorithm user created.
 
+
         // Inference API example: Request 
         curl --location --request POST '{Stage Endpoint URL}' \
                 --header 'Content-Type: application/json' \
@@ -604,7 +605,7 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
     | endpointId | AI EasyMaker Endpoint ID |
     | endpointStageId | Endpoint stage ID | 
     | inferenceId | Inference request own ID | 
-    | action | Action classification (Request: Inference.Request, Response:Inference.Response) | 
+    | action | Action classification (Endpoint.Model) | 
     | modelName | Model name to be inferred | 
 
 ### 3. Training Algorithm Creation Guide
@@ -616,7 +617,7 @@ Describes how to write algorithm scripts to be used for training and how to chec
 * When entry point is executed, it is passed to the execution factor.
 
 As shown in the example below, you can use hyperparameter values entered during training creation.<br>
-![HyperParameter Input Screen](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_ko.png)
+![HyperParameter Input Screen](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_en.png)
 
         import argparse 
  
