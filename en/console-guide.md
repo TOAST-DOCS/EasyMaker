@@ -458,7 +458,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 3. When the stage endpoint URL is called the HTTP POST Method, inference API is called.
     - Request and response specifications of the inference API differ depending on the algorithm user created.
 
-
+        ```
         // Inference API example: Request 
         curl --location --request POST '{Stage Endpoint URL}' \
                 --header 'Content-Type: application/json' \
@@ -471,20 +471,20 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
                 
         // Inference API Example: Response 
         { 
-        "predictions" : [ 
-            [ 
-                                0.337502569, 
-                                0.332836747, 
-                                0.329660654 
-                            ], 
-            [ 
-                                0.337530434, 
-                                0.332806051, 
-                                0.329663515 
-                            ] 
+            "predictions" : [ 
+                [ 
+                    0.337502569, 
+                    0.332836747, 
+                    0.329660654 
+                ], 
+                [ 
+                    0.337530434, 
+                    0.332806051, 
+                    0.329663515 
+                ] 
             ] 
         }
-
+        ```
 
 ### Change Endpoint Default Stage
 
@@ -671,7 +671,7 @@ As shown in the example below, you can use hyperparameter values entered during 
 
 * In order to check result indicators on the TensorBoard screen after training, the TensorBoard log storage space must be set to the specified location (`EM_TENSORBOARD_LOG_DIR`) when writing the training script.
 
-* ** Example code for Tesnsorboard log storage (TensorFlow)**
+* **Example code for Tesnsorboard log storage (TensorFlow)**
 
         import tensorflow as tf 
  
