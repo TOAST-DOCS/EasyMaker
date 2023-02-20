@@ -607,8 +607,8 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
 ### 3. ハイパーパラメータ
 
 * コンソールから入力されたKey-Value形式の値です。
-* 엔트리 포인트 실행 시, 실행 인자(--{Key})로 전달됩니다.
-* 환경 변수 값(EM_HP_{대문자로 변환된 Key})으로도 저장되어 활용할 수 있습니다.
+* エントリーポイント実行時、実行引数(--{Key}に渡されます。
+* 環境変数値(EM_HP_{大文字に変換されたKey})としても保存され活用できます。
 
 以下の例のように、学習作成時に入力したハイパーパラメータの値を活用できます。<br>
 ![ハイパーパラメータの入力画面](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_ja.png)
@@ -620,7 +620,7 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
         def parse_hyperparameters():
             parser = argparse.ArgumentParser()
     
-            # 입력한 하이퍼파라미터 파싱
+            # 入力したハイパーパラメータ解析
             parser.add_argument("--epochs", type=int, default=500)
             parser.add_argument("--batch_size", type=int, default=32)
             ...
@@ -631,7 +631,7 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
 
 * 学習に必要な情報は、**環境変数**として学習コンテナに渡され、**学習スクリプト**で渡された環境変数を活用できます。
 * ユーザー入力で作成される環境変数名は大文字に変換されます。
-* 코드 상에서 학습이 완료된 모델은 반드시 EM_MODEL_DIR 경로에 저장해야 합니다.
+* コード上で学習が完了したモデルは、必ずEM_MODEL_DIRパスに保存する必要があります。
 * **主な環境変数**
 
     | 環境変数名                         | 説明 |
@@ -642,7 +642,7 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
     | EM_DATASETS                   | 全体データセットリスト(json形式) |
     | EM_MODEL_DIR                  | モデル保存パス |
     | EM_CHECKPOINT_DIR             | チェックポイント保存パス |
-    | EM_HP_${대문자로 변환된 ハイパーパラメータキー} | ハイパーパラメータキーに対応するハイパーパラメータ値 |
+    | EM_HP_${大文字に変換されたハイパーパラメータキー} | ハイパーパラメータキーに対応するハイパーパラメータ値 |
     | EM_HPS                        | 全体ハイパーパラメータリスト(json形式) |
     | EM_TENSORBOARD_LOG_DIR        | 学習結果を確認するためのTensorboardログパス |
     | EM_REGION                     | 現在のリージョン情報 |
@@ -656,7 +656,7 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
         dataset_dir = os.environ.get("EM_DATASET_TRAIN")
         train_data = read_data(dataset_dir, "train.csv")
 
-        model = ... # 입력한 데이터를 이용해 모델 구현
+        model = ... # 入力したデータを利用してモデル実装
         callbacks = [
             tensorflow.keras.callbacks.ModelCheckpoint(filepath=f'{os.environ.get("EM_CHECKPOINT_DIR")}/cp-{{epoch:04d}}.ckpt', save_freq='epoch', period=50),
             tensorflow.keras.callbacks.TensorBoard(log_dir=f'{os.environ.get("EM_TENSORBOARD_LOG_DIR")}'),
