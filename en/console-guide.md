@@ -458,6 +458,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 3. When the stage endpoint URL is called the HTTP POST Method, inference API is called.
     - Request and response specifications of the inference API differ depending on the algorithm user created.
 
+
         // Inference API example: Request 
         curl --location --request POST '{Stage Endpoint URL}' \
                 --header 'Content-Type: application/json' \
@@ -634,8 +635,8 @@ As shown in the example below, you can use hyperparameter values entered during 
 * Models that have been trained in the code must be saved in the EM_MODEL_DIR path.
 * **Key Environment Variables**
 
-     | Environment variable name              | Description |
-----------------------------------------| --- | --- |
+    | Environment variable name              | Description |
+    | --- | --- |
     | EM_SOURCE_DIR                          | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded |
     | EM_ENTRY_POINT                         | Algorithm entry point name entered at training creation |
     | EM_DATASET_${Data set name}            | Absolute path to the folder where each data set entered at the time of training creation is downloaded |

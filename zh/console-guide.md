@@ -461,6 +461,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 3. When the stage endpoint URL is called the HTTP POST Method, inference API is called.
     - Request and response specifications of the inference API differ depending on the algorithm user created.
 
+
         // Inference API example: Request 
         curl --location --request POST '{Stage Endpoint URL}' \
                 --header 'Content-Type: application/json' \

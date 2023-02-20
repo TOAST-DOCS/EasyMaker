@@ -458,6 +458,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 3. HTTP POST MethodでステージエンドポイントURLを呼び出すと、推論APIが呼び出されます。
     - ユーザーが作成したアルゴリズムによって推論APIのリクエスト、レスポンス仕様は異なります。
 
+
         // 推論API例：リクエスト 
         curl --location --request POST '{ステージエンドポイントURL}' \
         --header 'Content-Type: application/json' \
