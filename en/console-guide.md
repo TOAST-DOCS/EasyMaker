@@ -605,7 +605,7 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
     | action | Action classification (Endpoint.Model) | 
     | modelName | Model name to be inferred | 
 
-#### 3. Hyperparameters
+### 3. Hyperparameters
 
 * Value in Key-Value format entered through the console.
 * When entry point is executed, it is passed to the execution factor (---{Key}).
@@ -628,7 +628,7 @@ As shown in the example below, you can use hyperparameter values entered during 
 
             return parser.parse_known_args()
 
-#### 4. Environment Variables
+### 4. Environment Variables
 
 * Information required for training is passed to training container with **Environment Variable** and the environment variables passed in **Training Script** can be utilized.
 * Environment variable names created by user input are to be capitalized.
