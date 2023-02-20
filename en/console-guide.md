@@ -591,8 +591,8 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
 - **Training Log field**
 
     | Name | Description |
-    | --- | --- |
-    | trainingId | AI EasyMaker training ID |
+    |---------------------| --- |
+    | trainingId | AI EasyMaker training ID  |
 
 - **Endpoint Log Field**
 
