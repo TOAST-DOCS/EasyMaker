@@ -614,19 +614,19 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
 As shown in the example below, you can use hyperparameter values entered during training creation.<br>
 ![HyperParameter Input Screen](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_en.png)
 
-       import argparse
+    import argparse
 
-        model_version = os.environ.get("EM_HP_MODEL_VERSION")
+    model_version = os.environ.get("EM_HP_MODEL_VERSION")
 
-        def parse_hyperparameters():
-            parser = argparse.ArgumentParser()
+    def parse_hyperparameters():
+        parser = argparse.ArgumentParser()
 
-            # Parsing the entered hyper parameter
-            parser.add_argument("--epochs", type=int, default=500)
-            parser.add_argument("--batch_size", type=int, default=32)
-            ...
+        # Parsing the entered hyper parameter
+        parser.add_argument("--epochs", type=int, default=500)
+        parser.add_argument("--batch_size", type=int, default=32)
+        ...
 
-            return parser.parse_known_args()
+        return parser.parse_known_args()
 
 ### 4. Environment Variables
 
