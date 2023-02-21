@@ -9,7 +9,7 @@ AI EasyMaker provides an AI platform to manage learning, models, and endpoints a
     - You can choose a TensorFlow or Pytorch framework notebook.
     - Notebooks are provided with an SDK for using the features of AI EasyMaker.
 
-2. AI-based Learning and Advancement
+2. Training
     - Provides an environment to learn machine learning algorithms developed from the notebook.
     - You can create training by selecting an image of the TensorFlow or Pytorch framework environment suitable for the algorithm and specifying the desired GPU/CPU instance type and storage size.
     - Enables distributed training through up to 10 nodes.
