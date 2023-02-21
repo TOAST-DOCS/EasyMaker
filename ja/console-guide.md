@@ -613,19 +613,19 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
 以下の例のように、学習作成時に入力したハイパーパラメータの値を活用できます。<br>
 ![ハイパーパラメータの入力画面](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_ja.png)
 
-    import argparse
-    
-    model_version = os.environ.get("EM_HP_MODEL_VERSION")
-    
-    def parse_hyperparameters():
-        parser = argparse.ArgumentParser()
-    
-        # 入力したハイパーパラメータ解析
-        parser.add_argument("--epochs", type=int, default=500)
-        parser.add_argument("--batch_size", type=int, default=32)
-        ...
-    
-        return parser.parse_known_args()
+        import argparse
+        
+        model_version = os.environ.get("EM_HP_MODEL_VERSION")
+        
+        def parse_hyperparameters():
+            parser = argparse.ArgumentParser()
+        
+            # 入力したハイパーパラメータ解析
+            parser.add_argument("--epochs", type=int, default=500)
+            parser.add_argument("--batch_size", type=int, default=32)
+            ...
+        
+            return parser.parse_known_args()
 
 ### 4. 環境変数
 

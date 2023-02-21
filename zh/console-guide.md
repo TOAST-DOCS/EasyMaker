@@ -458,33 +458,32 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 3. When the stage endpoint URL is called the HTTP POST Method, inference API is called.
     - Request and response specifications of the inference API differ depending on the algorithm user created.
 
-        ```
-        // Inference API example: Request 
-        curl --location --request POST '{Stage Endpoint URL}' \
-                --header 'Content-Type: application/json' \
-                --data-raw '{
-            "instances": [
-                [6.8,  2.8,  4.8,  1.4],
-                [6.0,  3.4,  4.5,  1.6]
-                ]
-        }'
-                
-        // Inference API Example: Response 
-        { 
-            "predictions" : [ 
-                [ 
-                    0.337502569, 
-                    0.332836747, 
-                    0.329660654 
-                ], 
-                [ 
-                    0.337530434, 
-                    0.332806051, 
-                    0.329663515 
+            // Inference API example: Request 
+            curl --location --request POST '{Stage Endpoint URL}' \
+                    --header 'Content-Type: application/json' \
+                    --data-raw '{
+                "instances": [
+                    [6.8,  2.8,  4.8,  1.4],
+                    [6.0,  3.4,  4.5,  1.6]
+                    ]
+            }'
+                        
+            // Inference API Example: Response 
+            { 
+                "predictions" : [ 
+                    [ 
+                        0.337502569, 
+                        0.332836747, 
+                        0.329660654 
+                    ], 
+                    [ 
+                        0.337530434, 
+                        0.332806051, 
+                        0.329663515 
+                    ] 
                 ] 
-            ] 
-        }
-        ```
+            }
+
 
 ### Change Endpoint Default Stage
 
@@ -614,18 +613,18 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
 As shown in the example below, you can use hyperparameter values entered during training creation.<br>
 ![HyperParameter Input Screen](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_en.png)
 
-       import argparse
-
+        import argparse
+    
         model_version = os.environ.get("EM_HP_MODEL_VERSION")
-
+    
         def parse_hyperparameters():
             parser = argparse.ArgumentParser()
-
+    
             # Parsing the entered hyper parameter
             parser.add_argument("--epochs", type=int, default=500)
             parser.add_argument("--batch_size", type=int, default=32)
             ...
-
+    
             return parser.parse_known_args()
 
 ### 4. Environment Variables
