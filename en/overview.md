@@ -1,7 +1,6 @@
 ## Machine Learning > AI EasyMaker > Overview
 
-## AI EasyMaker Overview
-AI EasyMaker is an AI platform for environment, training and advancement, and endpoint services for machine learning development.
+AI EasyMaker provides an AI platform to manage learning, models, and endpoints and offer development environment for AI-based learning and advancement. You can easily train and compare ML models and deploy them via endpoints.
 
 ## Main Features
 
@@ -20,8 +19,8 @@ AI EasyMaker is an AI platform for environment, training and advancement, and en
 3. Model Management
     - You can manage model artifacts that completed training.
 
-4. AI Service Endpoint
+4. Endpoint(Serving)
     - Provides an endpoint for model service.
-    - You can configure endpoints for redundancy through multiple instances.
+    - Endpoints offer redundancy configuration.
     - You can use various features of API Gateway because endpoints are associated with the API Gateway service.
     - In order to deploy a new model with high accuracy to the endpoint in service, you can add the endpoint to the new test stage until the test ends and immediately apply it to the default domain through a feature to change the stage.
