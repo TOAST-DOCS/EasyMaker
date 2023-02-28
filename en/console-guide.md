@@ -304,10 +304,6 @@ Can manage models of AI EasyMaker's training outcomes or external models as arti
 - **Additional Settings**: Enter the additional information of model.
     - **Tag**: To add tag, click the **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
-> **[Caution] When the framework is PyTorch, model name setup** 
-> If model's framework type is PyTorch, you must enter the model name you set in the config.properties included in the PyTorch model artifact when creating the model.
-> If model name is different from the model name set in config.properties, the model’s endpoint creation fails.
-
 > **[Caution] When using NHN Cloud NAS** 
 Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
 
@@ -444,8 +440,9 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 > When creating an endpoint or an endpoint stage, AI EasyMaker creates API Gateway services and stages for the endpoint.
 > Please note the following precautions when changing API Gateway services and stages created by AI EasyMaker directly from API Gateway service console.
 > 1. Avoid deleting API Gateway services and stages created by AI EasyMaker. Deletion may prevent the endpoint from displaying API Gateway information correctly, and changes made to endpoint may not be applied to API Gateway.
-> 2. Avoid deleting resources in API Gateway resource path that was entered when creating endpoints. Deletion may cause the endpoint's inference API call to fail.
-> 3. In the stage settings of API Gateway, do not disable 'Redefine Backend Endpoint URL' or change the URL set in API Gateway resource path. If changes made, endpoint's inference API call might fail.
+> 2. Avoid changing or deleting resources in API Gateway resource path that was entered when creating endpoints. Deletion may cause the endpoint's inference API call to fail
+> 3. Avoid adding resources in API Gateway resource path that was entered when creating endpoints. The added resources may be deleted when adding or changing endpoint stages. 
+> 4. In the stage settings of API Gateway, do not disable **Backend Endpoint Url Redifinition** or change the URL set in API Gateway resource path. If you change the url, endpoint's inference API call might fail.
 > Other than above precautions, other settings are available with features provided by API Gateway as necessary. 
 > For more information about how to use API Gateway, refer to [API Gateway Console Guide](https://docs.toast.com/en/Application%20Service/API%20Gateway/en/console-guide/).
 
@@ -461,31 +458,31 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 3. When the stage endpoint URL is called the HTTP POST Method, inference API is called.
     - Request and response specifications of the inference API differ depending on the algorithm user created.
 
-        // Inference API example: Request 
-        curl --location --request POST '{Stage Endpoint URL}' \
-                --header 'Content-Type: application/json' \
-                --data-raw '{
-            "instances": [
-                [6.8,  2.8,  4.8,  1.4],
-                [6.0,  3.4,  4.5,  1.6]
-                ]
-        }'
-                
-        // Inference API Example: Response 
-        { 
-        "predictions" : [ 
-            [ 
-                                0.337502569, 
-                                0.332836747, 
-                                0.329660654 
-                            ], 
-            [ 
-                                0.337530434, 
-                                0.332806051, 
-                                0.329663515 
-                            ] 
-            ] 
-        }
+            // Inference API example: Request 
+            curl --location --request POST '{Stage Endpoint URL}' \
+                    --header 'Content-Type: application/json' \
+                    --data-raw '{
+                "instances": [
+                    [6.8,  2.8,  4.8,  1.4],
+                    [6.0,  3.4,  4.5,  1.6]
+                    ]
+            }'
+                        
+            // Inference API Example: Response 
+            { 
+                "predictions" : [ 
+                    [ 
+                        0.337502569, 
+                        0.332836747, 
+                        0.329660654 
+                    ], 
+                    [ 
+                        0.337530434, 
+                        0.332806051, 
+                        0.329663515 
+                    ] 
+                ] 
+            }
 
 
 ### Change Endpoint Default Stage
@@ -594,8 +591,8 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
 - **Training Log field**
 
     | Name | Description |
-    | --- | --- |
-    | trainingId | AI EasyMaker training ID |
+    |---------------------| --- |
+    | trainingId | AI EasyMaker training ID  |
 
 - **Endpoint Log Field**
 
@@ -604,69 +601,76 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
     | endpointId | AI EasyMaker Endpoint ID |
     | endpointStageId | Endpoint stage ID | 
     | inferenceId | Inference request own ID | 
-    | action | Action classification (Request: Inference.Request, Response:Inference.Response) | 
+    | action | Action classification (Endpoint.Model) | 
     | modelName | Model name to be inferred | 
 
-### 3. Training Algorithm Creation Guide
-Describes how to write algorithm scripts to be used for training and how to check the result indicators.
-
-#### Hyperparameters
+### 3. Hyperparameters
 
 * Value in Key-Value format entered through the console.
-* When entry point is executed, it is passed to the execution factor.
+* When entry point is executed, it is passed to the execution factor (---{Key}).
+* It can be stored and used as an environment variable (EM_HP_{Key converted to uppercase letter}).
 
 As shown in the example below, you can use hyperparameter values entered during training creation.<br>
-![HyperParameter Input Screen](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_ko.png)
+![HyperParameter Input Screen](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_en.png)
 
-        import argparse 
- 
-        def parse_hyperparameters(): 
-        parser = argparse.ArgumentParser() 
- 
-        # Parsing the entered hyperparameters        parser.add_argument("--epochs", type=int, default=500) 
-        parser.add_argument("--batch_size", type=int, default=32) 
-        parser.add_argument("--model_version", type=str, default="1.0.0") 
-        ... 
- 
-        return parser.parse_known_args()
+        import argparse
+    
+        model_version = os.environ.get("EM_HP_MODEL_VERSION")
+    
+        def parse_hyperparameters():
+            parser = argparse.ArgumentParser()
+    
+            # Parsing the entered hyper parameter
+            parser.add_argument("--epochs", type=int, default=500)
+            parser.add_argument("--batch_size", type=int, default=32)
+            ...
+    
+            return parser.parse_known_args()
 
-#### Environment Variables
+### 4. Environment Variables
 
 * Information required for training is passed to training container with **Environment Variable** and the environment variables passed in **Training Script** can be utilized.
 * Environment variable names created by user input are to be capitalized.
+* Models that have been trained in the code must be saved in the EM_MODEL_DIR path.
 * **Key Environment Variables**
 
-    | Environment variable name | Description |
+    | Environment variable name              | Description |
     | --- | --- |
-    | EM_SOURCE_DIR | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded |
-    | EM_ENTRY_POINT | Algorithm entry point name entered at training creation |
-    | EM_DATASET_${Data set name} | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
-    | EM_DATASETS | Full data set list ( json format) |
-    | EM_MODEL_DIR | Model storage path |
-    | EM_CHECKPOINT_DIR | Checkpoint Storage Path |
-    | EM_HP_${ Hyperparameter key } | Hyperparameter value corresponding to the hyperparameter key |
-    | EM_HPS | Full Hyperparameter List (in json format) |
-    | EM_TENSORBOARD_LOG_DIR | TensorBoard log path for checking training results |
-    | EM_REGION | Current Region Information |
-    | EM_APPKEY | Appkey of AI EasyMaker service currently in use |
+    | EM_SOURCE_DIR                          | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded |
+    | EM_ENTRY_POINT                         | Algorithm entry point name entered at training creation |
+    | EM_DATASET_${Data set name}            | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
+    | EM_DATASETS                            | Full data set list ( json format) |
+    | EM_MODEL_DIR                           | Model storage path |
+    | EM_CHECKPOINT_DIR                      | Checkpoint Storage Path |
+    | EM_HP_${ Upper case converted Hyperparameter key } | Hyperparameter value corresponding to the hyperparameter key |
+    | EM_HPS                                 | Full Hyperparameter List (in json format) |
+    | EM_TENSORBOARD_LOG_DIR                 | TensorBoard log path for checking training results |
+    | EM_REGION                              | Current Region Information |
+    | EM_APPKEY                              | Appkey of AI EasyMaker service currently in use |
 
 * **Example code for utilizing environment variables**
 
-        import os 
- 
-        dataset_dir = os.environ.get("EM_DATASET_TRAIN") 
-        train_data = read_data(dataset_dir, "train.csv") 
-        
+        import os
+        import tensorflow
+
+        dataset_dir = os.environ.get("EM_DATASET_TRAIN")
+        train_data = read_data(dataset_dir, "train.csv")
+
         model = ... # Implement the model using input data
-        
-        model_dir = os.environ.get("EM_MODEL_DIR") 
+        callbacks = [
+            tensorflow.keras.callbacks.ModelCheckpoint(filepath=f'{os.environ.get("EM_CHECKPOINT_DIR")}/cp-{{epoch:04d}}.ckpt', save_freq='epoch', period=50),
+            tensorflow.keras.callbacks.TensorBoard(log_dir=f'{os.environ.get("EM_TENSORBOARD_LOG_DIR")}'),
+        ]
+        model.fit(..., callbacks)
+
+        model_dir = os.environ.get("EM_MODEL_DIR")
         model.save(model_dir)
 
-#### Store Indicator Logs for TensorBoard Usage
+### 5. Store Indicator Logs for TensorBoard Usage
 
 * In order to check result indicators on the TensorBoard screen after training, the TensorBoard log storage space must be set to the specified location (`EM_TENSORBOARD_LOG_DIR`) when writing the training script.
 
-* ** Example code for Tesnsorboard log storage (TensorFlow)**
+* **Example code for Tesnsorboard log storage (TensorFlow)**
 
         import tensorflow as tf 
  
