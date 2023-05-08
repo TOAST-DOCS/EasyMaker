@@ -154,7 +154,7 @@ Select the instance and OS image of training to be performed to set the environm
         - Creating **requirements.txt** on the same path installs the Python package that script requires.
     - **Hyperparameter**
         - To add parameter for training, click the **the + button** to enter the parameter in Key-Value format. You can enter maximum 100 parameters.
-        - Entered hyperparameters are entered as execution factors when entry point is executed. For more information on how to use it, refer to the [Appendix>3. Training Algorithm Creation Guide](./console-guide/#3-training-algorithm-creation-guide).
+        - Entered hyperparameters are entered as execution factors when entry point is executed. For more information on how to use it, refer to the [Appendix>3. Hyperparameters](./console-guide/#3-hyperparameters).
 
 - **Image**: Select the image of instance for the environment in which you need to run the training.
 
@@ -207,7 +207,7 @@ Training list is displayed. Select Train in the list to view details and change 
     
 - **Action**
     - **Go to TensorBoard **: TensorBoard opens in a new browser window where you can check training statistics.<br/>
-    For information on how to leave TensorBoard logs, refer to [ Appendix>3. Training Algorithm Creation Guide](./console-guide/#3-training-algorithm-creation-guide). Only users who are logged into the console can access TensorBoard.
+    For information on how to leave TensorBoard logs, refer to [ Appendix>5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). Only users who are logged into the console can access TensorBoard.
     - **Training Stop **: You can stop training in progress.
 
 - **Hyperparameters**: You can check the hyper parameter values you set for training on the **Hyperparameters** tab of the detailed screen that displays when you select Training.
