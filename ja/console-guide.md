@@ -144,7 +144,7 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
     - **アルゴリズムパス**
         - **NHN Cloud Object Storage**：アルゴリズムが保存されているNHN Cloud Object Storageのパスを入力します。<br>
             - obs://{Object Storage APIエンドポイント}/{containerName}/{path}形式でディレクトリパスを入力します。
-            - NHN Cloud Object Storageを利用する場合[付録 > 1. NHN Cloud Object StorageにAI EasyMakerシステムアカウント権限追加](./console-guide/??#1-nhn-cloud-object-storageai-easymaker)を参照して権限を設定してください。必要な権限を設定しない場合はモデルの作成に失敗します。
+            - NHN Cloud Object Storageを利用する場合[付録 > 1. NHN Cloud Object StorageにAI EasyMakerシステムアカウント権限追加](./console-guide/#1-nhn-cloud-object-storageai-easymaker)を参照して権限を設定してください。必要な権限を設定しない場合はモデルの作成に失敗します。
         - **NHN Cloud NAS**：アルゴリズムが保存されたNHN Cloud NASパスを入力します。<br>
             nas://{NAS ID}:/{path}形式でディレクトリパスを入力します。
             
@@ -154,7 +154,7 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
         - 同じパスに**requirements.txt**を作成すると、スクリプトで必要なPythonパッケージがインストールされます。
     - **ハイパーパラメータ**
         - 学習用のパラメータを追加するには**+ボタン**をクリックしてKey-Value形式でパラメータを入力します。パラメータは最大100個まで入力できます。
-        - 入力されたハイパーパラメータはエントリーポイントが実行される時に実行引数として入力されます。詳しい活用方法は[付録 > 3. 学習アルゴリズム作成ガイド](./console-guide/??#3)を参照してください。
+        - 入力されたハイパーパラメータはエントリーポイントが実行される時に実行引数として入力されます。詳しい活用方法は[付録 > 3. ハイパーパラメータ](./console-guide/#3)を参照してください。
 
 - **イメージ**：学習を実行しなければならない環境に合わせてインスタンスのイメージを選択します。
 
@@ -177,7 +177,7 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
         - NHN Cloud Object Storageを使用する場合にのみ使用されます。学習に必要なデータがすべて保存できるように十分なサイズを指定してください。
     - **最大学習時間**：学習が完了するまでの最大待機時間を指定します。最大待機時間を超えた学習は終了処理されます。
     - **ログ管理**：学習進行中に発生するログをNHN Cloud Log & Crashサービスに保存できます。 
-        - 詳細は[付録 > 2. NHN Cloud Log & Crash Searchサービス利用案内およびログ確認](./console-guide/??#2-nhn-cloud-log-crash-search)を参照してください。
+        - 詳細は[付録 > 2. NHN Cloud Log & Crash Searchサービス利用案内およびログ確認](./console-guide/#2-nhn-cloud-log-crash-search)を参照してください。
     - **タグ**：タグを追加するには**+ボタン**をクリックしてKey-Value形式でタグを入力します。タグは最大10個まで入力できます。
 
 > **[注意] NHN Cloud NASを使用する場合**
@@ -207,7 +207,7 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
     
 - **作業**
     - **Tensorboard**：学習の統計情報を確認できるTensorboardがブラウザの新しいウィンドウで開きます。<br/>
-    Tensorboardログを残す方法は[付録 > 3. 学習アルゴリズム作成ガイド](./console-guide/??#3)を参照してください。Tensorboardはコンソールにログインしたユーザーのみ接続できます。
+    Tensorboardログを残す方法は[付録 > 5. Tensorboardを活用するための指標ログを保存](./console-guide/#5-tensorboard)を参照してください。Tensorboardはコンソールにログインしたユーザーのみ接続できます。
     - **学習の停止**：進行中の学習を停止できます。
 
 - **ハイパーパラメータ**：学習を選択すると、表示される詳細画面の**ハイパーパラメータ**タブで学習に設定したハイパーパラメータ値を確認できます。
@@ -298,7 +298,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 - **モデル情報**：モデルのアーティファクトが保存されているリポジトリを入力します。
     - **NHN Cloud Object Storage**：モデルアーティファクトが保存されているObject Storageパスを入力します。
         - `obs://{Object Storage APIエンドポイント}/{containerName}/{path}`形式でディレクトリパスを入力します。
-        - NHN Cloud Object Storageを利用する場合、[付録 > 1. NHN Cloud Object StorageにAI EasyMakerシステムアカウント権限を追加](./console-guide/??#1-nhn-cloud-object-storageai-easymaker)を参考にして権限を設定してください。権限を設定していない場合、モデルのアーティファクトにアクセスができず、モデルの作成に失敗します。
+        - NHN Cloud Object Storageを利用する場合、[付録 > 1. NHN Cloud Object StorageにAI EasyMakerシステムアカウント権限を追加](./console-guide/#1-nhn-cloud-object-storageai-easymakereasymaker)を参考にして権限を設定してください。権限を設定していない場合、モデルのアーティファクトにアクセスができず、モデルの作成に失敗します。
     - **NHN Cloud NAS**：モデルアーティファクトが保存されているNHN Cloud NASパスを入力します。
         - `nas://{NAS ID}:/{path}`形式でディレクトリパスを入力します。
 - **追加設定**：モデルの追加情報を入力します。
