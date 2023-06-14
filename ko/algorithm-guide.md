@@ -20,7 +20,7 @@ ResNet-50 모델로 이미지의 종류를 분류하는 알고리즘입니다.
 ### 데이터 세트
 train, validation 데이터 세트를 준비합니다.
 
-#### train 
+#### train (필수)
 훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 다음과 같이 정의된 디렉토리 구조로 준비해야합니다.  
 ```
 folder/train/{lable}/image_file.png
@@ -36,7 +36,7 @@ folder/train/cat/bengal.png
 ...
 ```
 
-#### validation 
+#### validation (선택)
 검증을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 다음과 같이 정의된 디렉토리 구조로 준비해야합니다.  
 
 
@@ -48,7 +48,22 @@ folder/validation/{lable}/image_file.png
 [예시] Cat-Dog 분류 validation 데이터 세트 
 ```
 folder/validation/dog/german_shepherd.png
-folder/validation/cat/birman.png
+...
+```
+
+
+#### test (선택)
+테스트를 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 다음과 같이 정의된 디렉토리 구조로 준비해야합니다.  
+
+
+```
+folder/test/{lable}/image_file.png
+```
+이미지 종류의 레이블({lable}) 디렉토리를 생성하고, 하위 디렉토리에 이미지 파일을 저장합니다.
+
+[예시] Cat-Dog 분류 test 데이터 세트 
+```
+folder/test/dog/german_shepherd.png
 ...
 ```
 
@@ -104,7 +119,7 @@ Image Claasification 알고리즘은 다음의 지표를 생성합니다.
 ### 데이터 세트
 train, test, validation, resources 데이터 세트를 준비합니다.
 
-#### train 
+#### train (필수)
 훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉토리 구조로 준비해야합니다.  
 ```
 
@@ -145,7 +160,7 @@ folder/train/annotations/0003.png
 * image: 이미지 파일 경로를 작성합니다.
 * seg_map: segmentation map 파일 경로를 작성합니다. 
 
-#### validation
+#### validation (필수)
 검증을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉토리 구조로 준비해야합니다.  
 
 ```
@@ -187,7 +202,7 @@ folder/validation/annotations/0003.png
 * seg_map: segmentation map 파일 경로를 작성합니다. 
 
 
-#### test 
+#### test (선택)
 테스트를 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉토리 구조로 준비해야합니다.  
 
 ```
@@ -229,7 +244,7 @@ image와 segmentation map의 매핑 파일을 작성합니다.
 * image: 이미지 파일 경로를 작성합니다.
 * seg_map: segmentation map 파일 경로를 작성합니다. 
 
-#### resources
+#### resources (필수)
 모델을 설정할 때 필요한 레이블 클래스에 레이블 ID를 매핑하기 위한 Key-Value 형식의 Dictionary를 작성합니다.
 
 ```
@@ -266,7 +281,7 @@ Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 학습된 모델로 엔드포인트를 생성하고 추론을 요청하려면 [엔드포인트 생성과 추론 요청](./algorithm-guide/??) 문서를 참고해주세요.
 
 #### 응답 형식
-각 이미지 
+요청 이미지를 512 X 512 크기로 조정한 후, 각 이미지의 픽셀마다 label값이 배열 형태로 응답됩니다.
 
 ```
 {
@@ -296,14 +311,14 @@ Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 | per\_device\_train\_batch\_size | False | int | 4 | [0 \~ ∞) | GPU/TPU core/CPU 당 training 배치 크기  |
 | per\_device\_eval\_batch\_size | False | int | 4 | [0 \~ ∞) | GPU/TPU core/CPU 당  evaluation 배치 크기 |
 | num\_train\_epochs | False | float | 3.0 | [0.0 \~ ∞) | 전체 training을 수행하는 총 횟수 |
-| threshold | False | float | 0.5 | [0.0 \~ 1.0] |  | 
+| threshold | False | float | 0.5 | [0.0 \~ 1.0] | 추론 Threshold | 
 | save_steps  | False | int | 500 | [1 \~ ∞) | 체크포인트를 저장 step 주기 |
 
 
 ### 데이터 세트
 train, test, validation 데이터 세트를 준비합니다.
 
-#### train 
+#### train (필수)
 훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉토리 구조로 준비해야합니다.  
 
 ```
@@ -464,22 +479,22 @@ detection된 object의 bbox(xmin, ymin, xmax, ymax) 목록을 반환합니다.
 
 ``` json
 {
-   predictions: [
+   "predictions": [
       [
          {
-            balloon: {
-               xmin: 293,
-               ymin: 325,
-               xmax: 361,
-               ymax: 375
+            "balloon": {
+               "xmin": 293,
+               "ymin": 325,
+               "xmax": 361,
+               "ymax": 375
             }
          },
          {
-            balloon: {
-               xmin: 322,
-               ymin: 157,
-               xmax: 404,
-               ymax: 273
+            "balloon": {
+               "xmin": 322,
+               "ymin": 157,
+               "xmax": 404,
+               "ymax": 273
             }
          }
       ]
@@ -489,6 +504,7 @@ detection된 object의 bbox(xmin, ymin, xmax, ymax) 목록을 반환합니다.
 
 ## 엔드포인트 생성과 추론 요청
 
+학습이 완료된 모델로 엔드포인트를 생성하고 추론을 하려면 다음의 가이드를 참고해주세요.
 1. 완료된 학습을 선택합니다.
 2. [모델 생성] 버튼을 클릭 한 후, 모델 이름을 작성하고 모델 생성 버튼을 클릭하여 모델을 생성합니다.
 3. (2) 에서 생성한 모델로 [엔드포인트 생성] 을 클릭합니다. 엔드포인트 설정 정보를 입력 한 후 엔드포인트를 생성합니다.
@@ -500,19 +516,19 @@ detection된 object의 bbox(xmin, ymin, xmax, ymax) 목록을 반환합니다.
 * Request URI: POST https://kr1-{apigwSeviceId}.api.nhncloudservice.com/inference
 * Request Body
 
-``` json
-{
-    "instances": [
-        {
-          "data": "image_to_bytes_array"
-        }
-    ]
-}
-```
-* image_to_bytes_array 값은 이미지를 Base64 Byte Array 변환한 값입니다. 이미지 바이트 배열 변환 파이썬 코드 내용을 참고해주세요.
+    ``` json
+    {
+        "instances": [
+            {
+            "data": "image_to_bytes_array"
+            }
+        ]
+    }
+    ```
+* image_to_bytes_array 값은 이미지를 Base64 Byte Array 변환한 값입니다. [참고] 이미지 바이트 배열 변환 파이썬 코드 내용을 참고해주세요.
 
 
-### 이미지 바이트 배열 변환 파이썬 코드
+### [참고] 이미지 바이트 배열 변환 파이썬 코드
 
 ``` python
 import base64
