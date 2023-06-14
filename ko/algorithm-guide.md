@@ -1,4 +1,4 @@
-## Machine Learning > AI EasyMaker > 알고리즘 가이드
+## Machine Learning > AI EasyMaker > NHN Cloud 제공 알고리즘 가이드
 NHN Cloud AI EasyMaker에서 제공하는 알고리즘을 소개합니다.
 기본 알고리즘을 활용하면 데이터 세트만 준비하면 별도로 학습 코드를 작성하지 않아도 머신 러닝 모델을 생성할 수 있습니다.
 
@@ -14,20 +14,20 @@ ResNet-50 모델로 이미지의 종류를 분류하는 알고리즘입니다.
 | per\_device\_train\_batch\_size | False | int | 16 | [2 \~ ∞) | GPU/TPU core/CPU 당 training 배치 크기  |
 | per\_device\_eval\_batch\_size | False | int | 16 | [1 \~ ∞) |GPU/TPU core/CPU 당  evaluation 배치 크기 |
 | num\_train\_epochs | False | int | 3 | [1 \~ ∞) | 전체 training을 수행하는 총 횟수  |
-| save_steps  | False | int | 500 | [1 \~ ∞) | 체크포인트를 저장 step 주기 |
+| save_steps  | False | int | 500 | [1 \~ ∞) | 체크포인트를 저장하는 step 주기 |
 
 
 ### 데이터 세트
-train, validation 데이터 세트를 준비합니다.
+train, validation, test 데이터 세트를 준비합니다.
 
 #### train (필수)
-훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 다음과 같이 정의된 디렉토리 구조로 준비해야합니다.  
+훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같이 정의된 디렉토리 구조로 준비해야합니다.  
 ```
 folder/train/{lable}/image_file.png
 ```
 이미지 종류의 레이블({lable}) 디렉토리를 생성하고, 하위 디렉토리에 이미지 파일을 저장합니다.
 
-[예시] Cat-Dog 분류 traing 데이터 세트 
+[예시] Cat-Dog 분류 train 데이터 세트 
 ```
 folder/train/dog/golden_retriever.png
 folder/train/dog/chihuahua.png
@@ -37,33 +37,40 @@ folder/train/cat/bengal.png
 ```
 
 #### validation (선택)
-검증을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 다음과 같이 정의된 디렉토리 구조로 준비해야합니다.  
-
+검증을 위한 데이터 세트입니다. 데이터 세트는 다음과 같이 정의된 디렉토리 구조로 준비해야합니다.  
 
 ```
 folder/validation/{lable}/image_file.png
 ```
+
 이미지 종류의 레이블({lable}) 디렉토리를 생성하고, 하위 디렉토리에 이미지 파일을 저장합니다.
 
 [예시] Cat-Dog 분류 validation 데이터 세트 
 ```
-folder/validation/dog/german_shepherd.png
+folder/validation/dog/calupoh.png
+folder/validation/dog/billy.png
+folder/validation/cat/abyssinian.png
+folder/validation/cat/aegean.png
+
 ...
 ```
 
 
 #### test (선택)
-테스트를 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 다음과 같이 정의된 디렉토리 구조로 준비해야합니다.  
-
+테스트를 위한 데이터 세트입니다. 데이터 세트는 다음과 같이 정의된 디렉토리 구조로 준비해야합니다.  
 
 ```
 folder/test/{lable}/image_file.png
 ```
+
 이미지 종류의 레이블({lable}) 디렉토리를 생성하고, 하위 디렉토리에 이미지 파일을 저장합니다.
 
 [예시] Cat-Dog 분류 test 데이터 세트 
 ```
-folder/test/dog/german_shepherd.png
+folder/test/dog/cretan_hound.png
+folder/test/dog/boerboel.png
+folder/test/cat/arabian_mau.png
+folder/test/cat/american_curl.png
 ...
 ```
 
@@ -104,7 +111,7 @@ Image Claasification 알고리즘은 다음의 지표를 생성합니다.
 
 
 ## Semantic Segmentation
-이미지내의 모든 픽셀영역의 레이블을 예측하는 모델(SegFormer-B3) 입니다.
+이미지내의 모든 픽셀영역의 레이블을 예측하는 알고리즘(SegFormer-B3) 입니다.
 
 ### 하이퍼파라미터 
 
@@ -113,11 +120,11 @@ Image Claasification 알고리즘은 다음의 지표를 생성합니다.
 | learning\_rate | False | float | 2e-4 | [0.0 \~ ∞) | AdamW 옵티마이저의 초기 learning rate 값 |
 | per\_device\_train\_batch\_size | False | int | 4 | [0 \~ ∞) |GPU/TPU core/CPU 당 training 배치 크기  |
 | num\_train\_epochs | False | float | 3.0 | [0.0 \~ ∞) | 전체 training을 수행하는 총 횟수  |
-| save_steps  | False | int | 500 | [1 \~ ∞) | 체크포인트를 저장 step 주기 |
+| save_steps  | False | int | 500 | [1 \~ ∞) | 체크포인트를 저장하는 step 주기 |
 
 
 ### 데이터 세트
-train, test, validation, resources 데이터 세트를 준비합니다.
+train, validation, resources, test 데이터 세트를 준비합니다.
 
 #### train (필수)
 훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉토리 구조로 준비해야합니다.  
@@ -202,6 +209,25 @@ folder/validation/annotations/0003.png
 * seg_map: segmentation map 파일 경로를 작성합니다. 
 
 
+#### resources (필수)
+모델을 설정할 때 필요한 레이블 클래스에 레이블 ID를 매핑하기 위한 Key-Value 형식의 Dictionary를 작성합니다.
+
+```
+folder/resources/id2lable.json
+```
+
+* id2lable.json
+
+```json
+{
+    "0": "unlabeled",
+    "1": "flat-road",
+    "2": "flat-sidewalk",
+    "3": "flat-crosswalk",
+    "...": "..."
+}
+```
+
 #### test (선택)
 테스트를 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉토리 구조로 준비해야합니다.  
 
@@ -244,25 +270,6 @@ image와 segmentation map의 매핑 파일을 작성합니다.
 * image: 이미지 파일 경로를 작성합니다.
 * seg_map: segmentation map 파일 경로를 작성합니다. 
 
-#### resources (필수)
-모델을 설정할 때 필요한 레이블 클래스에 레이블 ID를 매핑하기 위한 Key-Value 형식의 Dictionary를 작성합니다.
-
-```
-folder/resources/id2lable.json
-```
-
-* id2lable.json
-
-```json
-{
-    "0": "unlabeled",
-    "1": "flat-road",
-    "2": "flat-sidewalk",
-    "3": "flat-crosswalk",
-    "...": "..."
-}
-```
-
 ### 지표 
 
 Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.  
@@ -299,9 +306,9 @@ Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 }
 ```
 
-## Object Detection 
+## Object Detection
 
-이미지 내 존재하는 모든 객체의 위치(bbox) 및 종류(class)를 예측하는 모델(detr-resnet-50)입니다.
+이미지 내 존재하는 모든 객체의 위치(bbox) 및 종류(class)를 예측하는 알고리즘(detr-resnet-50)입니다.
 
 ### 하이퍼파라미터 
 
@@ -312,11 +319,11 @@ Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 | per\_device\_eval\_batch\_size | False | int | 4 | [0 \~ ∞) | GPU/TPU core/CPU 당  evaluation 배치 크기 |
 | num\_train\_epochs | False | float | 3.0 | [0.0 \~ ∞) | 전체 training을 수행하는 총 횟수 |
 | threshold | False | float | 0.5 | [0.0 \~ 1.0] | 추론 Threshold | 
-| save_steps  | False | int | 500 | [1 \~ ∞) | 체크포인트를 저장 step 주기 |
+| save_steps  | False | int | 500 | [1 \~ ∞) | 체크포인트를 저장하는 step 주기 |
 
 
 ### 데이터 세트
-train, test, validation 데이터 세트를 준비합니다.
+train, test 데이터 세트를 준비합니다.
 
 #### train (필수)
 훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉토리 구조로 준비해야합니다.  
@@ -437,24 +444,7 @@ COCO Dataset의 형식으로 작성을 합니다.
 }
 ```
 
-
-#### validation
-검증을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉토리 구조로 준비해야합니다.  
-
-
-```
-folder/validation/_annotations.coco.json
-
-folder/validation/0001.png
-folder/validation/0002.png
-folder/validation/0003.png
-...
-```
-* _annotations.coco.json 파일  
-COCO Dataset의 형식으로 작성을 합니다. 
-자세한 형식은 [COCO Dataset의 format-data](https://cocodataset.org/#format-data) 문서의 Data format와 Object Detection 내용을 참고합니다.
-
-#### test 
+#### test (필수)
 test를 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉토리 구조로 준비해야합니다.  
 
 ```
