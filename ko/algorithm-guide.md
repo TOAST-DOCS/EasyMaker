@@ -3,17 +3,17 @@ NHN Cloud AI EasyMaker에서 제공하는 알고리즘을 소개합니다.
 기본 알고리즘을 활용하면 데이터 세트만 준비하면 별도로 학습 코드를 작성하지 않아도 머신 러닝 모델을 생성할 수 있습니다.
 
 ## Image Classification 
-ResNet-50 모델로 이미지의 종류를 분류하는 알고리즘입니다.
+이미지의 종류를 분류하는 알고리즘(ResNet-50)입니다.
 
 ### 하이퍼파라미터 
 
 | 하이퍼파라미터 이름 | 필수 여부 | Value Type | Default Value |  범위  | 설명 |
 | --- | --- | --- | --- | --- | --- |
-| input\_size | False | int | 28 | [1 \~ ∞)  | 출력 이미지의 해상도  |
-| learning\_rate | False | float | 0.1 | [0.0 \~ ∞) | AdamW 옵티마이저의 초기 learning rate 값 |
-| per\_device\_train\_batch\_size | False | int | 16 | [2 \~ ∞) | GPU/TPU core/CPU 당 training 배치 크기  |
-| per\_device\_eval\_batch\_size | False | int | 16 | [1 \~ ∞) |GPU/TPU core/CPU 당  evaluation 배치 크기 |
-| num\_train\_epochs | False | int | 3 | [1 \~ ∞) | 전체 training을 수행하는 총 횟수  |
+| input_size | False | int | 28 | [1 \~ ∞)  | 출력 이미지의 해상도  |
+| learning_rate | False | float | 0.1 | [0.0 \~ ∞) | AdamW 옵티마이저의 초기 learning rate 값 |
+| per_device_train_batch_size | False | int | 16 | [2 \~ ∞) | GPU/TPU core/CPU 당 training 배치 크기  |
+| per_device_eval_batch_size | False | int | 16 | [1 \~ ∞) |GPU/TPU core/CPU 당  evaluation 배치 크기 |
+| num_train_epochs | False | int | 3 | [1 \~ ∞) | 전체 training을 수행하는 총 횟수  |
 | save_steps  | False | int | 500 | [1 \~ ∞) | 체크포인트를 저장하는 step 주기 |
 
 
@@ -29,10 +29,10 @@ folder/train/{lable}/image_file.png
 
 [예시] Cat-Dog 분류 train 데이터 세트 
 ```
-folder/train/dog/golden_retriever.png
-folder/train/dog/chihuahua.png
-folder/train/cat/main_coon.png
 folder/train/cat/bengal.png
+folder/train/cat/main_coon.png
+folder/train/dog/chihuahua.png
+folder/train/dog/golden_retriever.png
 ...
 ```
 
@@ -47,11 +47,10 @@ folder/validation/{lable}/image_file.png
 
 [예시] Cat-Dog 분류 validation 데이터 세트 
 ```
-folder/validation/dog/calupoh.png
-folder/validation/dog/billy.png
 folder/validation/cat/abyssinian.png
 folder/validation/cat/aegean.png
-
+folder/validation/dog/billy.png
+folder/validation/dog/calupoh.png
 ...
 ```
 
@@ -67,10 +66,10 @@ folder/test/{lable}/image_file.png
 
 [예시] Cat-Dog 분류 test 데이터 세트 
 ```
-folder/test/dog/cretan_hound.png
-folder/test/dog/boerboel.png
 folder/test/cat/arabian_mau.png
 folder/test/cat/american_curl.png
+folder/test/dog/boerboel.png
+folder/test/dog/cretan_hound.png
 ...
 ```
 
@@ -117,9 +116,9 @@ Image Claasification 알고리즘은 다음의 지표를 생성합니다.
 
 | 하이퍼파라미터 이름 | 필수 여부 | Value Type | Default Value | 유효 범위 | 설명 | 
 | --- | --- | --- | --- | --- | --- |
-| learning\_rate | False | float | 2e-4 | [0.0 \~ ∞) | AdamW 옵티마이저의 초기 learning rate 값 |
-| per\_device\_train\_batch\_size | False | int | 4 | [0 \~ ∞) |GPU/TPU core/CPU 당 training 배치 크기  |
-| num\_train\_epochs | False | float | 3.0 | [0.0 \~ ∞) | 전체 training을 수행하는 총 횟수  |
+| learning_rate | False | float | 2e-4 | [0.0 \~ ∞) | AdamW 옵티마이저의 초기 learning rate 값 |
+| per_device_train_batch_size | False | int | 4 | [0 \~ ∞) |GPU/TPU core/CPU 당 training 배치 크기  |
+| num_train_epochs | False | float | 3.0 | [0.0 \~ ∞) | 전체 training을 수행하는 총 횟수  |
 | save_steps  | False | int | 500 | [1 \~ ∞) | 체크포인트를 저장하는 step 주기 |
 
 
@@ -314,10 +313,10 @@ Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 
 | 하이퍼파라미터 이름 | 필수 여부 | Value Type | Default Value | 유효 범위 | 설명 | 
 | --- | --- | --- | --- | --- | --- |
-| learning\_rate | False | float | 2e-4 | [0.0 \~ ∞) | AdamW 옵티마이저의 초기 learning rate 값 |
-| per\_device\_train\_batch\_size | False | int | 4 | [0 \~ ∞) | GPU/TPU core/CPU 당 training 배치 크기  |
-| per\_device\_eval\_batch\_size | False | int | 4 | [0 \~ ∞) | GPU/TPU core/CPU 당  evaluation 배치 크기 |
-| num\_train\_epochs | False | float | 3.0 | [0.0 \~ ∞) | 전체 training을 수행하는 총 횟수 |
+| learning_rate | False | float | 2e-4 | [0.0 \~ ∞) | AdamW 옵티마이저의 초기 learning rate 값 |
+| per_device_train_batch_size | False | int | 4 | [0 \~ ∞) | GPU/TPU core/CPU 당 training 배치 크기  |
+| per_device_eval_batch_size | False | int | 4 | [0 \~ ∞) | GPU/TPU core/CPU 당  evaluation 배치 크기 |
+| num_train_epochs | False | float | 3.0 | [0.0 \~ ∞) | 전체 training을 수행하는 총 횟수 |
 | threshold | False | float | 0.5 | [0.0 \~ 1.0] | 추론 Threshold | 
 | save_steps  | False | int | 500 | [1 \~ ∞) | 체크포인트를 저장하는 step 주기 |
 
@@ -341,7 +340,7 @@ folder/train/0003.png
 COCO Dataset의 형식으로 작성을 합니다. 
 자세한 형식은 [COCO Dataset의 format-data](https://cocodataset.org/#format-data) 문서의 Data format와 Object Detection 내용을 참고합니다.
 
-[예시] Bolloon Object Detection 예시
+[예시] Balloon Object Detection 예시
 ``` json
 {
     "info": {
@@ -510,7 +509,7 @@ detection된 object의 bbox(xmin, ymin, xmax, ymax) 목록을 반환합니다.
     {
         "instances": [
             {
-            "data": "image_to_bytes_array"
+                "data": "image_to_bytes_array"
             }
         ]
     }
