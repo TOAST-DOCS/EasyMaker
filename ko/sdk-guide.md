@@ -209,7 +209,7 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
             "dataUri": "obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_download_path}"
         }
     ],
-    metric_list=["val_loss", "loss", "accuracy"}],
+    metric_list=["val_loss", "loss", "accuracy"],
     metric_regex='([\w|-]+)\s*:\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?)',
     objective_metric_name="val_loss",
     objective_type_code=easymaker.OBJECTIVE_TYPE_CODE.MINIMIZE,
