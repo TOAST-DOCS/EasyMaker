@@ -56,9 +56,9 @@ experiment_id = easymaker.Experiment().create(
 | train_instance_name                        | String  | 필수                    | 없음    | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
 | train_instance_count                       | Integer | 필수                    | 없음    | 1~10        | 학습에 사용될 인스턴스 수                                                  |
 | data_storage_size                          | Integer | Obejct Storage 사용 시 필수 | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                |
-| algorithm_name                             | String  | 조건부 필수               | 없음    | 최대          | 알고리즘 이름(CLI로 조회 가능) |
-| source_dir_uri                             | String  | 조건부 필수               | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
-| entry_point                                | String  | 조건부 필수               | 없음    | 최대 255자     | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                             |
+| algorithm_name                             | String  | NHN Cloud 제공 알고리즘 사용 시 필수 | 없음    | 최대          | 알고리즘 이름(CLI로 조회 가능) |
+| source_dir_uri                             | String  | 자체 알고리즘 사용 시 필수               | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
+| entry_point                                | String  | 자체 알고리즘 사용 시 필수               | 없음    | 최대 255자     | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                             |
 | model_upload_uri                           | String  | 필수                    | 없음    | 최대 255자     | 학습 완료된 모델이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)  |
 | check_point_upload_uri                     | String  | 선택                    | 없음    | 최대 255자     | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)   |
 | timeout_hours                              | Integer | 선택                    | 720   | 1~720       | 최대 학습 시간(단위: 시간)                                                |

@@ -7,12 +7,12 @@
 
 * 하이퍼파라미터 튜닝 기능 추가
     * 하이퍼파라미터 튜닝은 머신러닝 모델의 예측 정확도와 성능을 높이기 위해 최적화된 하이퍼파라미터를 찾아 낼 수 있도록 반복 실험을 자동화하는 기능입니다.
-    * 자세한 내용은 [하이퍼파라미터 튜닝 가이드](./console-guide.md/hyperparameter_tuning) 문서를 참고해주세요.
+    * 자세한 내용은 [하이퍼파라미터 튜닝 가이드](./console-guide/#hyperparameter_tuning) 문서를 참고해주세요.
 * NHN Cloud AI EasyMaker에서 제공하는 기본 알고리즘 3종 추가
     * 자세한 내용은 각 알고리즘의 가이드 문서를 참고해주세요.
-    * [Image Classification 가이드](./algorithm-guide.md/image_classification)
-    * [Object Detection 가이드](./algorithm-guide.md/object_detection)
-    * [Semantic Segmentation 가이드](./algorithm-guide.md/semantic_segmentation)
+    * [Image Classification 가이드](./algorithm-guide/#image_classification)
+    * [Object Detection 가이드](./algorithm-guide/#object_detection)
+    * [Semantic Segmentation 가이드](./algorithm-guide/#semantic_segmentation)
 
 
 ### 2022. 12. 27.
