@@ -186,14 +186,12 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
             "hyperparameterTypeCode": easymaker.HYPERPARAMETER_TYPE_CODE.DOUBLE,
             "hyperparameterMinValue": "0.01",
             "hyperparameterMaxValue": "0.05",
-            "hyperparameterStep": "0.005",
         },
          {
             "hyperparameterName": "epochs",
             "hyperparameterTypeCode": easymaker.HYPERPARAMETER_TYPE_CODE.INT,
             "hyperparameterMinValue": "100",
             "hyperparameterMaxValue": "1000",
-            "hyperparameterStep": "50",
         }
     ],
     timeout_hours=10,
