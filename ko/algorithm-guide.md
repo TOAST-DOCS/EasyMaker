@@ -9,23 +9,23 @@ NHN Cloud AI EasyMaker에서 제공하는 알고리즘을 소개합니다.
 
 | 하이퍼파라미터 이름 | 필수 여부 | Value Type | Default Value |  범위  | 설명 |
 | --- | --- | --- | --- | --- | --- |
-| input_size | False | int | 28 | [1 \~ ∞)  | 출력 이미지의 해상도  |
-| learning_rate | False | float | 0.1 | [0.0 \~ ∞) | AdamW 옵티마이저의 초기 learning rate 값 |
-| per_device_train_batch_size | False | int | 16 | [2 \~ ∞) | GPU/TPU core/CPU 당 training 배치 크기  |
-| per_device_eval_batch_size | False | int | 16 | [1 \~ ∞) |GPU/TPU core/CPU 당  evaluation 배치 크기 |
-| num_train_epochs | False | int | 3 | [1 \~ ∞) | 전체 training을 수행하는 총 횟수  |
-| save_steps  | False | int | 500 | [1 \~ ∞) | 체크포인트를 저장하는 step 주기 |
+| input_size | False | int | 28 | [1\~∞)  | 출력 이미지의 해상도  |
+| learning_rate | False | float | 0.1 | [0.0\~∞) | AdamW 옵티마이저의 초기 learning rate 값 |
+| per_device_train_batch_size | False | int | 16 | [2\~∞) | GPU/TPU core/CPU 당 training 배치 크기  |
+| per_device_eval_batch_size | False | int | 16 | [1\~∞) |GPU/TPU core/CPU 당  evaluation 배치 크기 |
+| num_train_epochs | False | int | 3 | [1\~∞) | 전체 training을 수행하는 총횟수  |
+| save_steps  | False | int | 500 | [1\~∞) | 체크포인트를 저장하는 step 주기 |
 
 
 ### 데이터 세트
 train, validation, test 데이터 세트를 준비합니다.
 
-#### train (필수)
-훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같이 정의된 디렉토리 구조로 준비해야합니다.  
+#### train(필수)
+훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같이 정의된 디렉터리 구조로 준비해야 합니다. 
 ```
 folder/train/{lable}/image_file.png
 ```
-이미지 종류의 레이블({lable}) 디렉토리를 생성하고, 하위 디렉토리에 이미지 파일을 저장합니다.
+이미지 종류의 레이블({lable}) 디렉터리를 생성하고, 하위 디렉터리에 이미지 파일을 저장합니다.
 
 [예시] Cat-Dog 분류 train 데이터 세트 
 ```
@@ -36,14 +36,14 @@ folder/train/dog/golden_retriever.png
 ...
 ```
 
-#### validation (선택)
-검증을 위한 데이터 세트입니다. 데이터 세트는 다음과 같이 정의된 디렉토리 구조로 준비해야합니다.  
+#### validation(선택)
+검증을 위한 데이터 세트입니다. 데이터 세트는 다음과 같이 정의된 디렉터리 구조로 준비해야 합니다. 
 
 ```
 folder/validation/{lable}/image_file.png
 ```
 
-이미지 종류의 레이블({lable}) 디렉토리를 생성하고, 하위 디렉토리에 이미지 파일을 저장합니다.
+이미지 종류의 레이블({lable}) 디렉터리를 생성하고, 하위 디렉터리에 이미지 파일을 저장합니다.
 
 [예시] Cat-Dog 분류 validation 데이터 세트 
 ```
@@ -55,14 +55,14 @@ folder/validation/dog/calupoh.png
 ```
 
 
-#### test (선택)
-테스트를 위한 데이터 세트입니다. 데이터 세트는 다음과 같이 정의된 디렉토리 구조로 준비해야합니다.  
+#### test(선택)
+테스트를 위한 데이터 세트입니다. 데이터 세트는 다음과 같이 정의된 디렉터리 구조로 준비해야 합니다. 
 
 ```
 folder/test/{lable}/image_file.png
 ```
 
-이미지 종류의 레이블({lable}) 디렉토리를 생성하고, 하위 디렉토리에 이미지 파일을 저장합니다.
+이미지 종류의 레이블({lable}) 디렉터리를 생성하고, 하위 디렉터리에 이미지 파일을 저장합니다.
 
 [예시] Cat-Dog 분류 test 데이터 세트 
 ```
@@ -75,20 +75,20 @@ folder/test/dog/cretan_hound.png
 
 ### 지표 
 
-Image Claasification 알고리즘은 다음의 지표를 생성합니다.
-학습 중 생성된 지표는 학습 > 텐서보드 바로가기를 통해 확인할 수 있습니다.  
+Image Classification 알고리즘은 다음의 지표를 생성합니다.
+학습 중 생성된 지표는 **학습 > 텐서보드 바로가기**를 통해 확인할 수 있습니다.  
 
 
 | 지표 이름 | 설명 |
 | --- | --- |
-| Accuracy | 모델이 올바르게 예측한 데이터 수 / 실제 데이터 수 |
-| Precision | 각 클래스 별 (모델이 올바르게 예측한 데이터 수 / 실제 해당 클래스의 데이터 수)의 평균 |
-| Recall | 각 클래스 별 (모델이 올바르게 예측한 데이터 수 / 모델이 해당 클래스로 예측한 데이터 수)의 평균 |
+| Accuracy | 모델이 올바르게 예측한 데이터 수/실제 데이터 수 |
+| Precision | 각 클래스 별(모델이 올바르게 예측한 데이터 수/실제 해당 클래스의 데이터 수)의 평균 |
+| Recall | 각 클래스 별(모델이 올바르게 예측한 데이터 수/모델이 해당 클래스로 예측한 데이터 수)의 평균 |
 | F1-Score | Precision과 Recall의 조화 평균 |
 
 
 ### 추론  
-학습된 모델로 엔드포인트를 생성하고 추론을 요청하려면 [엔드포인트 생성과 추론 요청](./algorithm-guide/??) 문서를 참고해주세요.
+학습된 모델로 엔드포인트를 생성하고 추론을 요청하려면 [엔드포인트 생성과 추론 요청](./algorithm-guide/??) 문서를 참고해 주세요.
 
 ### 응답 형식 
 이미지 종류(label)별 score 값이 응답됩니다.
@@ -110,23 +110,23 @@ Image Claasification 알고리즘은 다음의 지표를 생성합니다.
 
 
 ## Semantic Segmentation
-이미지내의 모든 픽셀영역의 레이블을 예측하는 알고리즘(SegFormer-B3) 입니다.
+이미지 내의 모든 픽셀 영역의 레이블을 예측하는 알고리즘(SegFormer-B3)입니다.
 
 ### 하이퍼파라미터 
 
 | 하이퍼파라미터 이름 | 필수 여부 | Value Type | Default Value | 유효 범위 | 설명 | 
 | --- | --- | --- | --- | --- | --- |
-| learning_rate | False | float | 2e-4 | [0.0 \~ ∞) | AdamW 옵티마이저의 초기 learning rate 값 |
-| per_device_train_batch_size | False | int | 4 | [0 \~ ∞) |GPU/TPU core/CPU 당 training 배치 크기  |
-| num_train_epochs | False | float | 3.0 | [0.0 \~ ∞) | 전체 training을 수행하는 총 횟수  |
-| save_steps  | False | int | 500 | [1 \~ ∞) | 체크포인트를 저장하는 step 주기 |
+| learning_rate | False | float | 2e-4 | [0.0\~∞) | AdamW 옵티마이저의 초기 learning rate 값 |
+| per_device_train_batch_size | False | int | 4 | [0\~∞) |GPU/TPU core/CPU 당 training 배치 크기  |
+| num_train_epochs | False | float | 3.0 | [0.0\~∞) | 전체 training을 수행하는 총횟수  |
+| save_steps  | False | int | 500 | [1\~∞) | 체크포인트를 저장하는 step 주기 |
 
 
 ### 데이터 세트
 train, validation, resources, test 데이터 세트를 준비합니다.
 
-#### train (필수)
-훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉토리 구조로 준비해야합니다.  
+#### train(필수)
+훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉터리 구조로 준비해야 합니다. 
 ```
 
 folder/train/train.json
@@ -166,8 +166,8 @@ folder/train/annotations/0003.png
 * image: 이미지 파일 경로를 작성합니다.
 * seg_map: segmentation map 파일 경로를 작성합니다. 
 
-#### validation (필수)
-검증을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉토리 구조로 준비해야합니다.  
+#### validation(필수)
+검증을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉터리 구조로 준비해야 합니다. 
 
 ```
 folder/validation/validation.json
@@ -208,7 +208,7 @@ folder/validation/annotations/0003.png
 * seg_map: segmentation map 파일 경로를 작성합니다. 
 
 
-#### resources (필수)
+#### resources(필수)
 모델을 설정할 때 필요한 레이블 클래스에 레이블 ID를 매핑하기 위한 Key-Value 형식의 Dictionary를 작성합니다.
 
 ```
@@ -227,8 +227,8 @@ folder/resources/id2lable.json
 }
 ```
 
-#### test (선택)
-테스트를 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉토리 구조로 준비해야합니다.  
+#### test(선택)
+테스트를 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉터리 구조로 준비해야 합니다. 
 
 ```
 folder/test/train.json
@@ -272,7 +272,7 @@ image와 segmentation map의 매핑 파일을 작성합니다.
 ### 지표 
 
 Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.  
-학습 중 생성된 지표는 학습 > 텐서보드 바로가기를 통해 확인할 수 있습니다.  
+학습 중 생성된 지표는 **학습 > 텐서보드 바로가기**를 통해 확인할 수 있습니다.  
 
 | 지표 이름 | 설명 |
 |--|--|
@@ -284,10 +284,10 @@ Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 
 
 ### 추론  
-학습된 모델로 엔드포인트를 생성하고 추론을 요청하려면 [엔드포인트 생성과 추론 요청](./algorithm-guide/??) 문서를 참고해주세요.
+학습된 모델로 엔드포인트를 생성하고 추론을 요청하려면 [엔드포인트 생성과 추론 요청](./algorithm-guide/??) 문서를 참고해 주세요.
 
 #### 응답 형식
-요청 이미지를 512 X 512 크기로 조정한 후, 각 이미지의 픽셀마다 label값이 배열 형태로 응답됩니다.
+요청 이미지를 512 X 512 크기로 조정한 후, 각 이미지의 픽셀마다 label 값이 배열 형태로 응답됩니다.
 
 ```
 {
@@ -313,19 +313,19 @@ Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 
 | 하이퍼파라미터 이름 | 필수 여부 | Value Type | Default Value | 유효 범위 | 설명 | 
 | --- | --- | --- | --- | --- | --- |
-| learning_rate | False | float | 2e-4 | [0.0 \~ ∞) | AdamW 옵티마이저의 초기 learning rate 값 |
-| per_device_train_batch_size | False | int | 4 | [0 \~ ∞) | GPU/TPU core/CPU 당 training 배치 크기  |
-| per_device_eval_batch_size | False | int | 4 | [0 \~ ∞) | GPU/TPU core/CPU 당  evaluation 배치 크기 |
-| num_train_epochs | False | float | 3.0 | [0.0 \~ ∞) | 전체 training을 수행하는 총 횟수 |
-| threshold | False | float | 0.5 | [0.0 \~ 1.0] | 추론 Threshold | 
-| save_steps  | False | int | 500 | [1 \~ ∞) | 체크포인트를 저장하는 step 주기 |
+| learning_rate | False | float | 2e-4 | [0.0\~∞) | AdamW 옵티마이저의 초기 learning rate 값 |
+| per_device_train_batch_size | False | int | 4 | [0\~∞) | GPU/TPU core/CPU 당 training 배치 크기  |
+| per_device_eval_batch_size | False | int | 4 | [0\~∞) | GPU/TPU core/CPU 당  evaluation 배치 크기 |
+| num_train_epochs | False | float | 3.0 | [0.0\~∞) | 전체 training을 수행하는 총횟수 |
+| threshold | False | float | 0.5 | [0.0\~1.0] | 추론 Threshold | 
+| save_steps  | False | int | 500 | [1\~∞) | 체크포인트를 저장하는 step 주기 |
 
 
 ### 데이터 세트
 train, test 데이터 세트를 준비합니다.
 
-#### train (필수)
-훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉토리 구조로 준비해야합니다.  
+#### train(필수)
+훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉터리 구조로 준비해야 합니다. 
 
 ```
 folder/train/_annotations.coco.json
@@ -337,7 +337,7 @@ folder/train/0003.png
 ```
 
 * _annotations.coco.json 파일  
-COCO Dataset의 형식으로 작성을 합니다. 
+COCO Dataset의 형식으로 작성합니다. 
 자세한 형식은 [COCO Dataset의 format-data](https://cocodataset.org/#format-data) 문서의 Data format와 Object Detection 내용을 참고합니다.
 
 [예시] Balloon Object Detection 예시
@@ -443,8 +443,8 @@ COCO Dataset의 형식으로 작성을 합니다.
 }
 ```
 
-#### test (필수)
-test를 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉토리 구조로 준비해야합니다.  
+#### test(필수)
+test를 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉터리 구조로 준비해야 합니다. 
 
 ```
 folder/test/_annotations.coco.json
@@ -456,12 +456,12 @@ folder/test/0003.png
 ```
 
 * _annotations.coco.json 파일  
-COCO Dataset의 형식으로 작성을 합니다. 
+COCO Dataset의 형식으로 작성합니다. 
 자세한 형식은 [COCO Dataset의 format-data](https://cocodataset.org/#format-data) 문서의 Data format와 Object Detection 내용을 참고합니다.
 
 
 ### 추론  
-학습된 모델로 엔드포인트를 생성하고 추론을 요청하려면 [엔드포인트 생성과 추론 요청](./algorithm-guide/??) 문서를 참고해주세요.
+학습된 모델로 엔드포인트를 생성하고 추론을 요청하려면 [엔드포인트 생성과 추론 요청](./algorithm-guide/??) 문서를 참고해 주세요.
 
 #### 응답 형식
 detection된 object의 bbox(xmin, ymin, xmax, ymax) 목록을 반환합니다.
@@ -493,10 +493,10 @@ detection된 object의 bbox(xmin, ymin, xmax, ymax) 목록을 반환합니다.
 
 ## 엔드포인트 생성과 추론 요청
 
-학습이 완료된 모델로 엔드포인트를 생성하고 추론을 하려면 다음의 가이드를 참고해주세요.
+학습이 완료된 모델로 엔드포인트를 생성하고 추론을 하려면 다음의 가이드를 참고해 주세요.
 1. 완료된 학습을 선택합니다.
-2. [모델 생성] 버튼을 클릭 한 후, 모델 이름을 작성하고 모델 생성 버튼을 클릭하여 모델을 생성합니다.
-3. (2) 에서 생성한 모델로 [엔드포인트 생성] 을 클릭합니다. 엔드포인트 설정 정보를 입력 한 후 엔드포인트를 생성합니다.
+2. **모델 생성**버튼을 클릭한 후, 모델 이름을 작성하고 모델 생성 버튼을 클릭하여 모델을 생성합니다.
+3. (2) 에서 생성한 모델로 **엔드포인트 생성** 을 클릭합니다. 엔드포인트 설정 정보를 입력한 후 엔드포인트를 생성합니다.
 4. 생성 완료된 엔드포인트 이름을 클릭하고, 스테이지를 선택합니다.
 5. 스테이지 엔드포인트 URL을 통해 실시간 추론 API를 요청할 수 있습니다.
 
@@ -514,7 +514,7 @@ detection된 object의 bbox(xmin, ymin, xmax, ymax) 목록을 반환합니다.
         ]
     }
     ```
-* image_to_bytes_array 값은 이미지를 Base64 Byte Array 변환한 값입니다. [참고] 이미지 바이트 배열 변환 파이썬 코드 내용을 참고해주세요.
+* image_to_bytes_array 값은 이미지를 Base64 Byte Array 변환한 값입니다. [참고] 이미지 바이트 배열 변환 파이썬 코드 내용을 참고해 주세요.
 
 
 ### [참고] 이미지 바이트 배열 변환 파이썬 코드
