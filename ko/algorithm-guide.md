@@ -9,12 +9,12 @@ NHN Cloud AI EasyMaker에서 제공하는 알고리즘을 소개합니다.
 
 | 하이퍼파라미터 이름 | 필수 여부 | Value Type | Default Value |  범위  | 설명 |
 | --- | --- | --- | --- | --- | --- |
-| input_size | False | int | 28 | [1\~∞)  | 출력 이미지의 해상도  |
-| learning_rate | False | float | 0.1 | [0.0\~∞) | AdamW 옵티마이저의 초기 learning rate 값 |
-| per_device_train_batch_size | False | int | 16 | [2\~∞) | GPU/TPU core/CPU 당 training 배치 크기  |
-| per_device_eval_batch_size | False | int | 16 | [1\~∞) |GPU/TPU core/CPU 당  evaluation 배치 크기 |
-| num_train_epochs | False | int | 3 | [1\~∞) | 전체 training을 수행하는 총횟수  |
-| save_steps  | False | int | 500 | [1\~∞) | 체크포인트를 저장하는 step 주기 |
+| input_size | False | int | 28 | [1~∞)  | 출력 이미지의 해상도  |
+| learning_rate | False | float | 0.1 | [0.0~∞) | AdamW 옵티마이저의 초기 learning rate 값 |
+| per_device_train_batch_size | False | int | 16 | [2~∞) | GPU/TPU core/CPU 당 training 배치 크기  |
+| per_device_eval_batch_size | False | int | 16 | [1~∞) |GPU/TPU core/CPU 당  evaluation 배치 크기 |
+| num_train_epochs | False | int | 3 | [1~∞) | 전체 training을 수행하는 총횟수  |
+| save_steps  | False | int | 500 | [1~∞) | 체크포인트를 저장하는 step 주기 |
 
 
 ### 데이터 세트
@@ -88,7 +88,7 @@ Image Classification 알고리즘은 다음의 지표를 생성합니다.
 
 
 ### 추론  
-학습된 모델로 엔드포인트를 생성하고 추론을 요청하려면 [엔드포인트 생성과 추론 요청](./algorithm-guide/??) 문서를 참고해 주세요.
+학습된 모델로 엔드포인트를 생성하고 추론을 요청하려면 [엔드포인트 생성과 추론 요청](./algorithm-guide/#_15) 문서를 참고해 주세요.
 
 ### 응답 형식 
 이미지 종류(label)별 score 값이 응답됩니다.
@@ -116,10 +116,10 @@ Image Classification 알고리즘은 다음의 지표를 생성합니다.
 
 | 하이퍼파라미터 이름 | 필수 여부 | Value Type | Default Value | 유효 범위 | 설명 | 
 | --- | --- | --- | --- | --- | --- |
-| learning_rate | False | float | 2e-4 | [0.0\~∞) | AdamW 옵티마이저의 초기 learning rate 값 |
-| per_device_train_batch_size | False | int | 4 | [0\~∞) |GPU/TPU core/CPU 당 training 배치 크기  |
-| num_train_epochs | False | float | 3.0 | [0.0\~∞) | 전체 training을 수행하는 총횟수  |
-| save_steps  | False | int | 500 | [1\~∞) | 체크포인트를 저장하는 step 주기 |
+| learning_rate | False | float | 2e-4 | [0.0~∞) | AdamW 옵티마이저의 초기 learning rate 값 |
+| per_device_train_batch_size | False | int | 4 | [0~∞) |GPU/TPU core/CPU 당 training 배치 크기  |
+| num_train_epochs | False | float | 3.0 | [0.0~∞) | 전체 training을 수행하는 총횟수  |
+| save_steps  | False | int | 500 | [1~∞) | 체크포인트를 저장하는 step 주기 |
 
 
 ### 데이터 세트
@@ -284,7 +284,7 @@ Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 
 
 ### 추론  
-학습된 모델로 엔드포인트를 생성하고 추론을 요청하려면 [엔드포인트 생성과 추론 요청](./algorithm-guide/??) 문서를 참고해 주세요.
+학습된 모델로 엔드포인트를 생성하고 추론을 요청하려면 [엔드포인트 생성과 추론 요청](./algorithm-guide/#_15) 문서를 참고해 주세요.
 
 #### 응답 형식
 요청 이미지를 512 X 512 크기로 조정한 후, 각 이미지의 픽셀마다 label 값이 배열 형태로 응답됩니다.
@@ -313,12 +313,12 @@ Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 
 | 하이퍼파라미터 이름 | 필수 여부 | Value Type | Default Value | 유효 범위 | 설명 | 
 | --- | --- | --- | --- | --- | --- |
-| learning_rate | False | float | 2e-4 | [0.0\~∞) | AdamW 옵티마이저의 초기 learning rate 값 |
-| per_device_train_batch_size | False | int | 4 | [0\~∞) | GPU/TPU core/CPU 당 training 배치 크기  |
-| per_device_eval_batch_size | False | int | 4 | [0\~∞) | GPU/TPU core/CPU 당  evaluation 배치 크기 |
-| num_train_epochs | False | float | 3.0 | [0.0\~∞) | 전체 training을 수행하는 총횟수 |
-| threshold | False | float | 0.5 | [0.0\~1.0] | 추론 Threshold | 
-| save_steps  | False | int | 500 | [1\~∞) | 체크포인트를 저장하는 step 주기 |
+| learning_rate | False | float | 2e-4 | [0.0~∞) | AdamW 옵티마이저의 초기 learning rate 값 |
+| per_device_train_batch_size | False | int | 4 | [0~∞) | GPU/TPU core/CPU 당 training 배치 크기  |
+| per_device_eval_batch_size | False | int | 4 | [0~∞) | GPU/TPU core/CPU 당  evaluation 배치 크기 |
+| num_train_epochs | False | float | 3.0 | [0.0~∞) | 전체 training을 수행하는 총횟수 |
+| threshold | False | float | 0.5 | [0.0~1.0] | 추론 Threshold | 
+| save_steps  | False | int | 500 | [1~∞) | 체크포인트를 저장하는 step 주기 |
 
 
 ### 데이터 세트
@@ -505,15 +505,16 @@ detection된 object의 bbox(xmin, ymin, xmax, ymax) 목록을 반환합니다.
 * Request URI: POST https://kr1-{apigwSeviceId}.api.nhncloudservice.com/inference
 * Request Body
 
-    ``` json
-    {
-        "instances": [
-            {
-                "data": "image_to_bytes_array"
-            }
-        ]
-    }
-    ```
+```json
+{
+    "instances": [
+        {
+            "data": "image_to_bytes_array"
+        }
+    ]
+}
+```
+
 * image_to_bytes_array 값은 이미지를 Base64 Byte Array 변환한 값입니다. [참고] 이미지 바이트 배열 변환 파이썬 코드 내용을 참고해 주세요.
 
 
