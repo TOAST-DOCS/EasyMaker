@@ -13,7 +13,7 @@ python -m pip install easymaker
 アプリケーションキー(Appkey)と秘密鍵(Secret key)はコンソール右上の**URL & Appkey**メニューで確認できます。
 有効にしたAI EasyMaker商品のアプリケーションキー、秘密鍵、リージョン情報を入力します。
 AI EasyMaker SDKを使用するには初期化コードが必要です。
-```
+```python
 import easymaker
 
 easymaker.init(
@@ -34,7 +34,7 @@ easymaker.init(
 | experiment_description | String  | 任意 | なし | 最大255文字 | 実験の説明                                              |
 | wait                   | Boolean | 任意 | True | True, False | True：実験の作成が完了した後に実験IDを返す。False：作成リクエスト後、すぐに実験IDを返す |
 
-```
+```python
 experiment_id = easymaker.Experiment().create(
     experiment_name='experiment_name',
     experiment_description='experiment_description',
@@ -72,7 +72,7 @@ experiment_id = easymaker.Experiment().create(
 | use_log                                    | Boolean | 任意                | False | True, False | Log & Crash商品にログを残すかどうか                                     |
 | wait                                       | Boolean | 選択                | True  | True、False | True：学習作成が完了した後に学習IDを返す。False：作成リクエスト後すぐに学習IDを返す     |
 
-```
+```python
 training_id = easymaker.Training().run(
     experiment_id=experiment_id,
     training_name='training_name',
@@ -137,7 +137,7 @@ training_id = easymaker.Training().run(
 | tag_list[0].tagValue | String | 任意 | なし | 最大255文字 | タグ値      |
 
 
-```
+```python
 model_id = easymaker.Model().create(
     training_id=training_id,
     model_name='model_name',
@@ -160,7 +160,7 @@ model_id = easymaker.Model().create(
 | tag_list[0].tagValue | String | 任意 | なし | 最大255文字                             | タグ値                                            |
 
 
-```
+```python
 model_id = easymaker.Model().create_by_model_uri(
     framework_code=easymaker.TENSORFLOW,
     model_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
@@ -189,7 +189,7 @@ model_id = easymaker.Model().create_by_model_uri(
 | use_log                               | Boolean | 任意 | False | True, False                | Log & Crash商品にログを残すかどうか                                            |        
 | wait                                  | Boolean | 任意 | True  | True, False                | True：エンドポイントの作成が完了した後にエンドポイントIDを返す。False：エンドポイントリクエスト後、すぐにエンドポイントIDを返す |
 
-```
+```python
 endpoint = easymaker.Endpoint()
 endpoint_id = endpoint.create(
     model_id=model_id,
@@ -205,7 +205,7 @@ endpoint_id = endpoint.create(
 
 作成しておいたエンドポイントの使用
 
-```
+```python
 endpoint = easymaker.Endpoint()
 ```
 
@@ -227,7 +227,7 @@ endpoint = easymaker.Endpoint()
 | tag_list[0].tagValue                  | String  | 任意 | なし  | 最大255文字                | タグ値                                                           |
 | use_log                               | Boolean | 任意 | False | True, False                | Log & Crash商品にログを残すかどうか                                        |        
 | wait                                  | Boolean | 任意 | True  | True, False                | True：ステージの作成が完了した後にステージIDを返す。False：ステージリクエスト後、すぐにステージIDを返す |
-```
+```python
 stage_id = endpoint.create_stage(
     model_id=model_id,
     stage_name='stage01',  # 30文字以内小文字/数字
@@ -243,14 +243,14 @@ stage_id = endpoint.create_stage(
 
 基本ステージにインファレンス
 
-```
+```python
 input_data = [6.8, 2.8, 4.8, 1.4]
 endpoint.predict(json={'instances'：[input_data]})
 ```
 
 特定ステージを指定してインファレンス
 
-```
+```python
 # ステージ情報照会
 endpoint_stage_info_list = endpoint.get_endpoint_stage_info_list()
 for endpoint_stage_info in endpoint_stage_info_list:
@@ -265,7 +265,7 @@ for endpoint_stage_info in endpoint_stage_info_list:
 ```
 
 ### NHN Cloud - Log & Crashログ転送機能
-```
+```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product
 easymaker_logger.send(log_message='log meassage',
@@ -276,7 +276,7 @@ easymaker_logger.send(log_message='log meassage',
 
 ### NHN Cloud - Object Storageファイル転送機能
 Object Storage商品にファイルをアップロードし、ダウンロードする機能を提供します。
-```
+```python
 easymaker.upload(
     easymaker_obs_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
     src_dir_path='./local_dir',

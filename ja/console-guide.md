@@ -458,32 +458,33 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 3. HTTP POST MethodでステージエンドポイントURLを呼び出すと、推論APIが呼び出されます。
     - ユーザーが作成したアルゴリズムによって推論APIのリクエスト、レスポンス仕様は異なります。
 
-            // 推論API例：リクエスト 
-            curl --location --request POST '{ステージエンドポイントURL}' \
-            --header 'Content-Type: application/json' \
-            --data-raw '{
-                "instances": [
-                    [6.8,  2.8,  4.8,  1.4],
-                    [6.0,  3.4,  4.5,  1.6]
-                ]
-            }'
-            
-            // 推論API例：レスポンス 
-            {
-                "predictions" : [
-                    [
-                        0.337502569,
-                        0.332836747,
-                        0.329660654
-                    ],
-                    [
-                        0.337530434,
-                        0.332806051,
-                        0.329663515
-                    ]
-                ]
-            }
-
+       ```bash
+       // 推論API例：リクエスト 
+       curl --location --request POST '{ステージエンドポイントURL}' \
+       --header 'Content-Type: application/json' \
+       --data-raw '{
+           "instances": [
+               [6.8,  2.8,  4.8,  1.4],
+               [6.0,  3.4,  4.5,  1.6]
+           ]
+       }'
+    
+       // 推論API例：レスポンス 
+       {
+           "predictions" : [
+               [
+                   0.337502569,
+                   0.332836747,
+                   0.329660654
+               ],
+               [
+                   0.337530434,
+                   0.332806051,
+                   0.329663515
+               ]
+           ]
+       }
+       ```
 
 ### エンドポイントの基本ステージ変更
 
@@ -613,19 +614,21 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
 以下の例のように、学習作成時に入力したハイパーパラメータの値を活用できます。<br>
 ![ハイパーパラメータの入力画面](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_ja.png)
 
-        import argparse
-        
-        model_version = os.environ.get("EM_HP_MODEL_VERSION")
-        
-        def parse_hyperparameters():
-            parser = argparse.ArgumentParser()
-        
-            # 入力したハイパーパラメータ解析
-            parser.add_argument("--epochs", type=int, default=500)
-            parser.add_argument("--batch_size", type=int, default=32)
-            ...
-        
-            return parser.parse_known_args()
+```python
+import argparse
+
+model_version = os.environ.get("EM_HP_MODEL_VERSION")
+
+def parse_hyperparameters():
+    parser = argparse.ArgumentParser()
+
+    # 入力したハイパーパラメータ解析
+    parser.add_argument("--epochs", type=int, default=500)
+    parser.add_argument("--batch_size", type=int, default=32)
+    ...
+
+    return parser.parse_known_args()
+```
 
 ### 4. 環境変数
 
@@ -650,21 +653,23 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
 
 * **環境変数活用サンプルコード**
 
-        import os
-        import tensorflow
-
-        dataset_dir = os.environ.get("EM_DATASET_TRAIN")
-        train_data = read_data(dataset_dir, "train.csv")
-
-        model = ... # 入力したデータを利用してモデル実装
-        callbacks = [
-            tensorflow.keras.callbacks.ModelCheckpoint(filepath=f'{os.environ.get("EM_CHECKPOINT_DIR")}/cp-{{epoch:04d}}.ckpt', save_freq='epoch', period=50),
-            tensorflow.keras.callbacks.TensorBoard(log_dir=f'{os.environ.get("EM_TENSORBOARD_LOG_DIR")}'),
-        ]
-        model.fit(..., callbacks)
-
-        model_dir = os.environ.get("EM_MODEL_DIR")
-        model.save(model_dir)
+    ```python
+    import os
+    import tensorflow
+    
+    dataset_dir = os.environ.get("EM_DATASET_TRAIN")
+    train_data = read_data(dataset_dir, "train.csv")
+    
+    model = ... # 入力したデータを利用してモデル実装
+    callbacks = [
+        tensorflow.keras.callbacks.ModelCheckpoint(filepath=f'{os.environ.get("EM_CHECKPOINT_DIR")}/cp-{{epoch:04d}}.ckpt', save_freq='epoch', period=50),
+        tensorflow.keras.callbacks.TensorBoard(log_dir=f'{os.environ.get("EM_TENSORBOARD_LOG_DIR")}'),
+    ]
+    model.fit(..., callbacks)
+    
+    model_dir = os.environ.get("EM_MODEL_DIR")
+    model.save(model_dir)
+    ```
 
 ### 5. Tensorboardを活用するための指標ログを保存
 
@@ -672,14 +677,16 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
 
 * **Tensorboardログ保存のサンプルコード(TensorFlow)**
 
-        import tensorflow as tf
-
-        # Tensorboardログパスの指定
-        tb_log = tf.keras.callbacks.TensorBoard(log_dir=os.environ.get("EM_TENSORBOARD_LOG_DIR"))
-
-        model = ... # モデル実装
-
-        model.fit(x_train, y_train, validation_data=(x_test, y_test),
-                epochs=100, batch_size=20, callbacks=[tb_log])
-
-![Tensorboardログ確認](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_tensorboard.png)
+    ```python
+    import tensorflow as tf
+    
+    # Tensorboardログパスの指定
+    tb_log = tf.keras.callbacks.TensorBoard(log_dir=os.environ.get("EM_TENSORBOARD_LOG_DIR"))
+    
+    model = ... # モデル実装
+    
+    model.fit(x_train, y_train, validation_data=(x_test, y_test),
+            epochs=100, batch_size=20, callbacks=[tb_log])
+    ```
+    
+    ![Tensorboardログ確認](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_tensorboard.png)

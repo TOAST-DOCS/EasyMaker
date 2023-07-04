@@ -249,7 +249,7 @@ folder/test/annotations/0003.png
 * test.json 
 image와 segmentation map의 매핑 파일을 작성합니다. 
 
-```
+```json
 [
     {
         "image": "images/0001.png",
@@ -289,7 +289,7 @@ Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 #### 응답 형식
 요청 이미지를 512 X 512 크기로 조정한 후, 각 이미지의 픽셀마다 label 값이 배열 형태로 응답됩니다.
 
-```
+```json
 {
     "predictions": [
         [

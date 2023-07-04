@@ -13,7 +13,7 @@ python -m pip install easymaker
 You can find AppKey and SecretKey in the **URL & Appkey** menu at the right top on the console.
 Enter the AppKey, SecretKey, and region information of enabled AI EasyMaker.
 Intialization code is required to use the AI EasyMaker SDK.
-```
+```python
 import easymaker
 
 easymaker.init(
@@ -34,7 +34,7 @@ Before creating a training, you must create an experiment to sort trainings.
 | experiment_description | String  | Optional    | None   | Up to 255 characters     | Description for experiment                                                  |
 | wait                   | Boolean | Optional    | True | True, False | True: Return the experiment ID after creating the experiment, False: Return the experiment ID immediately after request to create |
 
-```
+```python
 experiment_id = easymaker.Experiment().create(
     experiment_name='experiment_name',
     experiment_description='experiment_description',
@@ -72,7 +72,7 @@ experiment_id = easymaker.Experiment().create(
 | use_log                                    | Boolean | Optional                    | False | True, False | Whether to leave logs in Log & Crash product                                      |
 | wait                                       | Boolean | Optional                    | True  | True, False | True: Return the training ID after creating training, False: Return the training ID immediately after requesting to create      |
 
-```
+```python
 training_id = easymaker.Training().run(
     experiment_id=experiment_id,
     training_name='training_name',
@@ -137,7 +137,7 @@ The model is used when creating endpoints.
 | tag_list[0].tagValue | String | Optional    | None  | Up to 255 characters | Tag value          |
 
 
-```
+```python
 model_id = easymaker.Model().create(
     training_id=training_id,
     model_name='model_name',
@@ -160,7 +160,7 @@ Even if there is no training ID, you can create a model by entering the path inf
 | tag_list[0].tagValue | String | Optional    | None  | Up to 255 characters                                 | Tag value                                                |
 
 
-```
+```python
 model_id = easymaker.Model().create_by_model_uri(
     framework_code=easymaker.TENSORFLOW,
     model_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
@@ -189,7 +189,7 @@ When creating an endpoint, the default stage is created.
 | use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in Log & Crash product                                             |        
 | wait                                  | Boolean | Optional    | True  | True, False                | True: Return the endpoint ID after creating endpoint, False: Return the endpoint ID immediately after requesting endpoint |
 
-```
+```python
 endpoint = easymaker.Endpoint()
 endpoint_id = endpoint.create(
     model_id=model_id,
@@ -205,7 +205,7 @@ endpoint_id = endpoint.create(
 
 Use the created endpoint
 
-```
+```python
 endpoint = easymaker.Endpoint()
 ```
 
@@ -227,7 +227,7 @@ You can add a new stage to existing endpoints.
 | tag_list[0].tagValue                  | String  | Optional    | None    | Up to 255 characters                    | Tag value                                                               |
 | use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in Log & Crash product                                         |        
 | wait                                  | Boolean | Optional    | True  | True, False                | True: Return the stage ID after creating stage, False: Return the stage ID immediately after requesting stage |
-```
+```python
 stage_id = endpoint.create_stage(
     model_id=model_id,
     stage_name='stage01',  # Lowercase letters within 30 characters and numbers
@@ -243,14 +243,14 @@ stage_id = endpoint.create_stage(
 
 Inference to the default stage
 
-```
+```python
 input_data = [6.8, 2.8, 4.8, 1.4]
 endpoint.predict(json={'instances': [input_data]})
 ```
 
 Inference by specifying a specific stage
 
-```
+```python
 # Query stage information
 endpoint_stage_info_list = endpoint.get_endpoint_stage_info_list()
 for endpoint_stage_info in endpoint_stage_info_list:
@@ -276,7 +276,7 @@ easymaker_logger.send(log_message='log meassage',
 
 ### NHN Cloud - Object Storage File Sending Feature
 Provide a feature to upload and download files with Object Storage.
-```
+```python
 easymaker.upload(
     easymaker_obs_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
     src_dir_path='./local_dir',

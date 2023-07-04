@@ -315,7 +315,7 @@ endpoint_id = endpoint.create(
 
 생성해둔 엔드포인트 사용
 
-```
+```python
 endpoint = easymaker.Endpoint()
 ```
 
