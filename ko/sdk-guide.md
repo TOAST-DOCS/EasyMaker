@@ -13,7 +13,7 @@ python -m pip install easymaker
 앱키(Appkey)와 비밀 키(Secret key)는 콘솔 오른쪽 상단의 **URL & Appkey** 메뉴에서 확인할 수 있습니다.
 활성화한 AI EasyMaker 상품의 앱키, 비밀 키, 리전 정보를 입력합니다.
 AI EasyMaker SDK를 사용하기 위해서는 초기화 코드가 필요합니다.
-```
+```python
 import easymaker
 
 easymaker.init(
@@ -34,7 +34,7 @@ easymaker.init(
 | experiment_description | String  | 선택    | 없음   | 최대 255자     | 실험에 대한 설명                                                  |
 | wait                   | Boolean | 선택    | True | True, False | True: 실험 생성이 완료된 이후 실험 ID를 반환, False: 생성 요청 후 즉시 실험 ID를 반환 |
 
-```
+```python
 experiment_id = easymaker.Experiment().create(
     experiment_name='experiment_name',
     experiment_description='experiment_description',
@@ -74,7 +74,7 @@ experiment_id = easymaker.Experiment().create(
 | use_log                                    | Boolean | 선택                    | False | True, False | Log & Crash 상품에 로그를 남길지 여부                                      |
 | wait                                       | Boolean | 선택                    | True  | True, False | True: 학습 생성이 완료된 이후 학습 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환      |
 
-```
+```python
 training_id = easymaker.Training().run(
     experiment_id=experiment_id,
     training_name='training_name',
@@ -169,7 +169,7 @@ training_id = easymaker.Training().run(
 | use_log                                                   | Boolean        | 선택                                                    | False | True, False                                 | Log & Crash 상품에 로그를 남길지 여부                                                 |
 | wait                                                      | Boolean        | 선택                                                    | True  | True, False                                 | True: 하이퍼파라미터 튜닝 생성이 완료된 이후 하이퍼파라미터 튜닝 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환 |
 
-```
+```python
 hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
     experiment_id=experiment_id,
     hyperparameter_tuning_name='hyperparameter_tuning_name',
@@ -247,7 +247,7 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
 | tag_list[0].tagValue     | String | 선택                                 | 없음  | 최대 255자 | 태그 값                                |
 
 
-```
+```python
 model_id = easymaker.Model().create(
     training_id=training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning_id,
     model_name='model_name',
@@ -270,7 +270,7 @@ model_id = easymaker.Model().create(
 | tag_list[0].tagValue | String | 선택    | 없음  | 최대 255자                                 | 태그 값                                                |
 
 
-```
+```python
 model_id = easymaker.Model().create_by_model_uri(
     framework_code=easymaker.TENSORFLOW,
     model_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
@@ -299,7 +299,7 @@ model_id = easymaker.Model().create_by_model_uri(
 | use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                             |        
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 엔드포인트 생성이 완료된 이후 엔드포인트 ID를 반환, False: 엔드포인트 요청 후 즉시 엔드포인트 ID를 반환 |
 
-```
+```python
 endpoint = easymaker.Endpoint()
 endpoint_id = endpoint.create(
     model_id=model_id,
@@ -337,7 +337,7 @@ endpoint = easymaker.Endpoint()
 | tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                               |
 | use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                         |        
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 스테이지 생성이 완료된 이후 스테이지 ID를 반환, False: 스테이지 요청 후 즉시 스테이지 ID를 반환 |
-```
+```python
 stage_id = endpoint.create_stage(
     model_id=model_id,
     stage_name='stage01',  # 30자 이내 소문자/숫자
@@ -353,14 +353,14 @@ stage_id = endpoint.create_stage(
 
 기본 스테이지에 인퍼런스
 
-```
+```python
 input_data = [6.8, 2.8, 4.8, 1.4]
 endpoint.predict(json={'instances': [input_data]})
 ```
 
 특정 스테이지 지정하여 인퍼런스
 
-```
+```python
 # 스테이지 정보 조회
 endpoint_stage_info_list = endpoint.get_endpoint_stage_info_list()
 for endpoint_stage_info in endpoint_stage_info_list:
@@ -375,7 +375,7 @@ for endpoint_stage_info in endpoint_stage_info_list:
 ```
 
 ### NHN Cloud - Log & Crash 로그 전송 기능
-```
+```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product
 easymaker_logger.send(log_message='log meassage',
@@ -386,7 +386,7 @@ easymaker_logger.send(log_message='log meassage',
 
 ### NHN Cloud - Object Storage 파일 전송 기능
 Object Storage 상품으로 파일을 업로드하고 다운로드하는 기능을 제공합니다.
-```
+```python
 easymaker.upload(
     easymaker_obs_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
     src_dir_path='./local_dir',
