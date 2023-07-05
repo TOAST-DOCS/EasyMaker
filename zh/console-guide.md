@@ -458,33 +458,32 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 3. When the stage endpoint URL is called the HTTP POST Method, inference API is called.
     - Request and response specifications of the inference API differ depending on the algorithm user created.
 
-        ```bash
-        // Inference API example: Request 
-        curl --location --request POST '{Stage Endpoint URL}' \
-                --header 'Content-Type: application/json' \
-                --data-raw '{
-            "instances": [
-                [6.8,  2.8,  4.8,  1.4],
-                [6.0,  3.4,  4.5,  1.6]
-                ]
-        }'
-                 
-        // Inference API Example: Response 
-        { 
-            "predictions" : [ 
-                [ 
-                    0.337502569, 
-                    0.332836747, 
-                    0.329660654 
-                ], 
-                [ 
-                    0.337530434, 
-                    0.332806051, 
-                    0.329663515 
+            // Inference API example: Request 
+            curl --location --request POST '{Stage Endpoint URL}' \
+                    --header 'Content-Type: application/json' \
+                    --data-raw '{
+                "instances": [
+                    [6.8,  2.8,  4.8,  1.4],
+                    [6.0,  3.4,  4.5,  1.6]
+                    ]
+            }'
+                        
+            // Inference API Example: Response 
+            { 
+                "predictions" : [ 
+                    [ 
+                        0.337502569, 
+                        0.332836747, 
+                        0.329660654 
+                    ], 
+                    [ 
+                        0.337530434, 
+                        0.332806051, 
+                        0.329663515 
+                    ] 
                 ] 
-            ] 
-        }
-        ```python
+            }
+
 
 ### Change Endpoint Default Stage
 
@@ -614,21 +613,19 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
 As shown in the example below, you can use hyperparameter values entered during training creation.<br>
 ![HyperParameter Input Screen](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_en.png)
 
-```python
-import argparse
-
-model_version = os.environ.get("EM_HP_MODEL_VERSION")
-
-def parse_hyperparameters():
-    parser = argparse.ArgumentParser()
-
-    # Parsing the entered hyper parameter
-    parser.add_argument("--epochs", type=int, default=500)
-    parser.add_argument("--batch_size", type=int, default=32)
-    ...
-
-    return parser.parse_known_args()
-```
+        import argparse
+    
+        model_version = os.environ.get("EM_HP_MODEL_VERSION")
+    
+        def parse_hyperparameters():
+            parser = argparse.ArgumentParser()
+    
+            # Parsing the entered hyper parameter
+            parser.add_argument("--epochs", type=int, default=500)
+            parser.add_argument("--batch_size", type=int, default=32)
+            ...
+    
+            return parser.parse_known_args()
 
 ### 4. Environment Variables
 
@@ -653,23 +650,21 @@ def parse_hyperparameters():
 
 * **Example code for utilizing environment variables**
 
-    ```python
-    import os
-    import tensorflow
-    
-    dataset_dir = os.environ.get("EM_DATASET_TRAIN")
-    train_data = read_data(dataset_dir, "train.csv")
-    
-    model = ... # Implement the model using input data
-    callbacks = [
-        tensorflow.keras.callbacks.ModelCheckpoint(filepath=f'{os.environ.get("EM_CHECKPOINT_DIR")}/cp-{{epoch:04d}}.ckpt', save_freq='epoch', period=50),
-        tensorflow.keras.callbacks.TensorBoard(log_dir=f'{os.environ.get("EM_TENSORBOARD_LOG_DIR")}'),
-    ]
-    model.fit(..., callbacks)
-    
-    model_dir = os.environ.get("EM_MODEL_DIR")
-    model.save(model_dir)
-    ```
+        import os
+        import tensorflow
+
+        dataset_dir = os.environ.get("EM_DATASET_TRAIN")
+        train_data = read_data(dataset_dir, "train.csv")
+
+        model = ... # Implement the model using input data
+        callbacks = [
+            tensorflow.keras.callbacks.ModelCheckpoint(filepath=f'{os.environ.get("EM_CHECKPOINT_DIR")}/cp-{{epoch:04d}}.ckpt', save_freq='epoch', period=50),
+            tensorflow.keras.callbacks.TensorBoard(log_dir=f'{os.environ.get("EM_TENSORBOARD_LOG_DIR")}'),
+        ]
+        model.fit(..., callbacks)
+
+        model_dir = os.environ.get("EM_MODEL_DIR")
+        model.save(model_dir)
 
 ### 5. Store Indicator Logs for TensorBoard Usage
 
@@ -677,16 +672,14 @@ def parse_hyperparameters():
 
 * **Example code for Tesnsorboard log storage (TensorFlow)**
 
-    ```python
-    import tensorflow as tf 
-    
-    # Specify the TensorBoard log path 
-    tb_log = tf.keras.callbacks.TensorBoard(log_dir=os.environ.get("EM_TENSORBOARD_LOG_DIR")) 
-    
-    model = ... # model implementation
-    
-    model.fit(x_train, y_train, validation_data=(x_test, y_test), 
-            epochs=100, batch_size=20, callbacks=[tb_log])
-    ```
+        import tensorflow as tf 
 
-  ![Check TensorBoard Log](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_tensorboard.png)
+        # Specify the TensorBoard log path 
+        tb_log = tf.keras.callbacks.TensorBoard(log_dir=os.environ.get("EM_TENSORBOARD_LOG_DIR")) 
+        
+        model = ... # model implementation
+        
+        model.fit(x_train, y_train, validation_data=(x_test, y_test), 
+                epochs=100, batch_size=20, callbacks=[tb_log])
+
+![Check TensorBoard Log](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_tensorboard.png)
