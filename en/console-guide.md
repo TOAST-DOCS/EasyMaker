@@ -167,7 +167,10 @@ Delete an experiment.
 2. Click **Delete Experiment**.
 3. Requested deletion cannot be undone. Click **OK** to proceed.
 
-> **[Note] Unable to delete experiment if associated training exists.** Experiment cannot be deleted if there is a training associated with the experiment. Please delete the associated training first, then delete the experiment. For related training, you can check the list by clicking the **[Training]** tab in the detail screen at the bottom that is displayed when you click the experiment you want to delete.
+> **[Note] Unable to delete experiment if associated training exists.** 
+> Experiment cannot be deleted if there is a training associated with the experiment. 
+> Please delete the associated training first, then delete the experiment. 
+> For related training, you can check the list by clicking the **[Training]** tab in the detail screen at the bottom that is displayed when you click the experiment you want to delete.
 
 
 ## Training
@@ -227,9 +230,11 @@ Set the training environment by selecting the instance and OS image to be traine
         - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search).
     - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
-> **[Caution] When using NHN Cloud NAS,** only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
+> **[Caution] When using NHN Cloud NAS,** 
+> Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
 
-> **[Caution] training failure when deleting training input data** training may fail if the input data is deleted before training is completed.
+> **[Caution] training failure when deleting training input data** 
+> Training may fail if the input data is deleted before training is completed.
 
 ### Training List
 A list of studies is displayed. If you select a training from the list, you can check detailed information and change the information.
@@ -284,11 +289,11 @@ Deletes a training.
 Training cannot be deleted if a model created by the training to be deleted exists. Please delete the model first and then the training.
 
 
-## Hyperparameter tuning
+## Hyperparameter Tuning
 
 Hyperparameter tuning is the process of optimizing hyperparameter values to maximize a model's predictive accuracy. If you don't use this feature, you'll have to manually tune the hyperparameters to find the optimal values while running many training jobs yourself.
 
-### Generate hyperparameter tuning
+### Create Hyperparameter Tuning
 
 How to configure a hyperparameter tuning job.
 
@@ -360,7 +365,7 @@ How to configure a hyperparameter tuning job.
 > **[Caution] When using NHN Cloud NAS** 
 > Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
 
-> **[Caution] training failure when deleting training input data** 
+> **[Caution] Training failure when deleting training input data** 
 > Training may fail if the input data is deleted before training is completed.
 
 ### Hyperparameter Tuning List
@@ -436,7 +441,7 @@ Delete a hyperparameter tuning.
 > **[Note] Hyperparameter tuning cannot be deleted if the associated model exists.** 
 > Hyperparameter tuning cannot be deleted if the model created by the hyperparameter tuning you want to delete exists. Please delete the model first, then the hyperparameter tuning.
 
-## Training template
+## Training Template
 
 By creating a training template in advance, you can import the values entered into the template when creating training or hyperparameter tuning.
 
