@@ -15,11 +15,15 @@ AI EasyMaker provides an AI platform to manage learning, models, and endpoints a
     - Enables distributed training through up to 10 nodes.
     - You can analyze training result indicators using the TanserBoard.
     - You can train one algorithm several times to increase accuracy, grouping it into experimental units for comparative analysis.
+    - Once you've prepared your dataset, you can create a machine learning model with the algorithms provided by AI EasyMaker without writing any training code.
 
-3. Model Management
+3. Hyperparameter Tuning
+    - Automate repetitive experiments to find the optimal hyperparameters to increase the predictive accuracy and performance of your machine learning model.
+
+4. Model Management
     - You can manage model artifacts that completed training.
 
-4. Endpoint(Serving)
+5. Endpoint(Serving)
     - Provides an endpoint for model service.
     - Endpoints offer redundancy configuration.
     - You can use various features of API Gateway because endpoints are associated with the API Gateway service.
