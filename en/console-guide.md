@@ -194,7 +194,7 @@ Set the training environment by selecting the instance and OS image to be traine
             - **algorithm path**
                 - **NHN Cloud Object Storage** : Enter the path of NHN Cloud Object Storage where algorithms are stored.<br>
                     - obs://{Object Enter the directory path in the format Storage API endpoint}/{containerName}/{path}.
-                    - When using NHN Cloud Object Storage, refer to [Appendix > 1. Adding AI EasyMaker System Account Permissions to NHN Cloud Object Storage](./console-guide/#1-nhn-cloud-object-storage-ai-easymaker) to set permissions. Model creation will fail if you do not set the necessary permissions.
+                    - When using NHN Cloud Object Storage, refer to [Appendix > 1. Adding AI EasyMaker System Account Permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage) to set permissions. Model creation will fail if you do not set the necessary permissions.
                 - **NHN Cloud NAS** : Enter the NHN Cloud NAS path where the algorithm is stored. <br>
                     nas://{NAS Enter the directory path in the format ID}:/{path}.
                     
@@ -204,7 +204,7 @@ Set the training environment by selecting the instance and OS image to be traine
                 - Creating **requirements.txt** in the same path will install the required python packages from the script.
             - **hyperparameter**
                 - To add parameters for training, click **the + button** to enter parameters in Key-Value format. Up to 100 parameters can be entered.
-                - The entered hyperparameters are entered as execution arguments when the entry point is executed. For detailed usage, please refer to [Appendix > 3. Hyperparameters](./console-guide/#3).
+                - The entered hyperparameters are entered as execution arguments when the entry point is executed. For detailed usage, please refer to [Appendix > 3. Hyperparameters](./console-guide/#3-hyperparameters).
 
 - **Image** : Choose an image for your instance that matches the environment in which you need to run your training.
 
@@ -227,7 +227,7 @@ Set the training environment by selecting the instance and OS image to be traine
         - Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for training.
     - **Maximum training time** : Specifies the maximum waiting time until training is complete. training that exceeds the maximum waiting time will be terminated.
     - **Log Management** : Logs generated during training can be stored in the NHN Cloud Log & Crash service. 
-        - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search).
+        - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
     - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
 > **[Caution] When using NHN Cloud NAS,** 
@@ -308,7 +308,7 @@ How to configure a hyperparameter tuning job.
     - **algorithm path**
         - **NHN Cloud Object Storage** : Enter the path of NHN Cloud Object Storage where algorithms are stored.<br>
             - obs://{Object Enter the directory path in the format Storage API endpoint}/{containerName}/{path}.
-            - When using NHN Cloud Object Storage, refer to [Appendix > 1. Adding AI EasyMaker System Account Permissions to NHN Cloud Object Storage](./console-guide/#1-nhn-cloud-object-storage-ai-easymaker) to set permissions. Model creation will fail if you do not set the necessary permissions.
+            - When using NHN Cloud Object Storage, refer to [Appendix > 1. Adding AI EasyMaker System Account Permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage) to set permissions. Model creation will fail if you do not set the necessary permissions.
         - **NHN Cloud NAS** : Enter the NHN Cloud NAS path where the algorithm is stored. <br>
             nas://{NAS Enter the directory path in the format ID}:/{path}.
     - **entry point**
@@ -359,7 +359,7 @@ How to configure a hyperparameter tuning job.
         - Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for training.
     - **Maximum Progress Time**: Specifies the maximum progress time until training is completed. training that exceeds the maximum progress time will be terminated.
     - **Log Management** : Logs generated during training can be stored in the NHN Cloud Log & Crash service.
-        - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search).
+        - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
     - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
 > **[Caution] When using NHN Cloud NAS** 
@@ -393,7 +393,7 @@ A list of hyperparameter tunings is displayed. Select a hyperparameter tuning fr
 
 - **Operation**
     - **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
-    For instructions on how to leave TensorBoard logs, please refer to [Appendix > 3. training Algorithm Writing Guide](./console-guide/#3). TensorBoard can only be accessed by users logged into the console.
+    For instructions on how to leave TensorBoard logs, please refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
     - **Stop Hyperparameter Tuning** : You can stop hyperparameter tuning in progress.
 
 ### List of Trainings for Hyperparameter Tuning
@@ -447,7 +447,7 @@ By creating a training template in advance, you can import the values entered in
 
 ### Create Training Template
 
-For information on what you can set in your training template, see [Creating a training](./console-guide/#_13).
+For information on what you can set in your training template, see [Creating a training](./console-guide/#create-training).
 
 ### List of Training Templates
 

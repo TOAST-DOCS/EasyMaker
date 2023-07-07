@@ -88,9 +88,9 @@ Indicators generated during training can be checked through **Training > Go to T
 
 
 ### Inference  
-To create an endpoint with a trained model and request inference, see [](./algorithm-guide/#_15)Create Endpoint and Request Inference](./algorithm-guide/#_15).
+To create an endpoint with a trained model and request inference, see [Create Endpoint and Request Inference](./algorithm-guide//#create-endpoint-and-request-inference).
 
-### Response Format 
+#### Response Format 
 The score value for each image type (label) is answered.
 
 [Example] Inference API response body of Cat-Dog classification 
@@ -284,7 +284,7 @@ Indicators generated during training can be checked through **Training > Go to T
 
 
 ### Inference  
-To create an endpoint with a trained model and request inference, see [](./algorithm-guide/#_15)Create Endpoint and Request Inference](./algorithm-guide/#_15).
+To create an endpoint with a trained model and request inference, see [Create Endpoint and Request Inference](./algorithm-guide//#create-endpoint-and-request-inference).
 
 #### Response Format
 After resizing the requested image to 512 X 512, the label value for each pixel of each image is returned in the form of an array.
@@ -338,7 +338,7 @@ folder/train/0003.png
 
 * \_annotations.coco.json file  
 It is written in the format of COCO Dataset.
-For detailed format, refer to Data format and Object Detection in the [](https://cocodataset.org/#format-data)format-data document of COCO Dataset[](https://cocodataset.org/#format-data).
+For detailed format, refer to Data format and Object Detection in the [format-data document of COCO Dataset](https://cocodataset.org/#format-data).
 
 [Example] Example of Balloon Object Detection
 ``` json
@@ -457,11 +457,11 @@ folder/test/0003.png
 
 * \_annotations.coco.json file  
 It is written in the format of COCO Dataset.
-For detailed format, refer to Data format and Object Detection in the [](https://cocodataset.org/#format-data)format-data document of COCO Dataset[](https://cocodataset.org/#format-data).
+For detailed format, refer to Data format and Object Detection in the [format-data document of COCO Dataset](https://cocodataset.org/#format-data).
 
 
 ### Inference  
-To create an endpoint with a trained model and request inference, see [](./algorithm-guide/#_15)Create Endpoint and Request Inference](./algorithm-guide/#_15).
+To create an endpoint with a trained model and request inference, see [Create Endpoint and Request Inference](./algorithm-guide//#create-endpoint-and-request-inference).
 
 #### Response Format
 Returns a list of bboxes (xmin, ymin, xmax, ymax) of detected objects.
