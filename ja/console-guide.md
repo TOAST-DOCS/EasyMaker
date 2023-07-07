@@ -185,18 +185,17 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
     - **実験**：学習が含まれる実験を選択します。実験は関連する学習をグループ化します。作成された実験がない場合は**追加**をクリックして実験を作成します。
 - **アルゴリズム情報**：学習するアルゴリズムの情報を入力します。
     - **アルゴリズムタイプ**：アルゴリズムタイプを選択します。
-        - **NHN Cloud提供アルゴリズム**：AI EasyMakerが提供するアルゴリズムを使用します。提供するアルゴリズムの詳細については、[NHN Cloud提供アルゴリズムガイド](./algorithm-guid)文書を参照してください。
+        - **NHN Cloud提供アルゴリズム**：AI EasyMakerが提供するアルゴリズムを使用します。提供するアルゴリズムの詳細については、[NHN Cloud提供アルゴリズムガイド](./algorithm-guide/#)文書を参照してください。
             - **アルゴリズム**：アルゴリズムを選択します。
-            - **ハイパーパラメータ**：学習に必要なハイパーパラメータ値を入力します。アルゴリズム別ハイパーパラメータの詳細については、[NHN Cloud提供アルゴリズムガイド](./algorithm-guid)文書を参照してください。
+            - **ハイパーパラメータ**：学習に必要なハイパーパラメータ値を入力します。アルゴリズム別ハイパーパラメータの詳細については、[NHN Cloud提供アルゴリズムガイド](./algorithm-guide/#)文書を参照してください。
             - **アルゴリズム指標**：アルゴリズムで作成される指標に関する情報が表示されます。
         - **独自アルゴリズム**：ユーザーが作成したアルゴリズムを使用します。
             - **アルゴリズムパス**
                 - **NHN Cloud Object Storage**：アルゴリズムが保存されているNHN Cloud Object Storageのパスを入力します。<br>
                     - obs://{Object Storage APIエンドポイント}/{containerName}/{path}形式でディレクトリパスを入力します。
-                    - NHN Cloud Object Storageを利用する場合[付録 > 1. NHN Cloud Object StorageにAI EasyMakerシステムアカウント権限追加](./console-guide/#1-nhn-cloud-object-storage-ai-easymaker)を参照して権限を設定してください。必要な権限を設定しない場合はモデルの作成に失敗します。
+                    - NHN Cloud Object Storageを利用する場合[付録 > 1. NHN Cloud Object StorageにAI EasyMakerシステムアカウント権限追加](./console-guide/#1-nhn-cloud-object-storageai-easymaker)を参照して権限を設定してください。必要な権限を設定しない場合はモデルの作成に失敗します。
                 - **NHN Cloud NAS**：アルゴリズムが保存されたNHN Cloud NASパスを入力します。<br>
                     nas://{NAS ID}:/{path}形式でディレクトリパスを入力します。
-
             - **エントリーポイント**
                 - エントリーポイントは学習が始まるアルゴリズム実行の入口点です。エントリーポイントファイル名を作成します。
                 - エントリーポイントファイルはアルゴリズムパスに存在する必要があります。
@@ -275,7 +274,7 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
 1. モデルとして作成する学習を選択します。
 2. **モデルの作成**をクリックします。完了(COMPLETE)状態の学習のみモデルとして作成できます。
 3. モデル作成ページに移動します。内容を確認し、**モデルの作成**をクリックしてモデルを作成します。
-モデル作成の詳細については[モデル](./console-guide/??#_30)文書を参照してください。
+モデル作成の詳細については[モデル](./console-guide/#_30)文書を参照してください。
 
 
 ### 学習の削除
@@ -307,7 +306,7 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
     - **アルゴリズムパス**
         - **NHN Cloud Object Storage**：アルゴリズムが保存されているNHN Cloud Object Storageのパスを入力します。<br>
             - obs://{Object Storage APIエンドポイント}/{containerName}/{path}形式でディレクトリパスを入力します。
-            - NHN Cloud Object Storageを利用する場合[付録 > 1. NHN Cloud Object StorageにAI EasyMakerシステムアカウント権限追加](./console-guide/??#1-nhn-cloud-object-storage-ai-easymaker)を参照して権限を設定してください。必要な権限を設定しない場合はモデルの作成に失敗します。
+            - NHN Cloud Object Storageを利用する場合[付録 > 1. NHN Cloud Object StorageにAI EasyMakerシステムアカウント権限追加](./console-guide/#1-nhn-cloud-object-storageai-easymaker)を参照して権限を設定してください。必要な権限を設定しない場合はモデルの作成に失敗します。
         - **NHN Cloud NAS**：アルゴリズムが保存されているNHN Cloud NASパスを入力します。<br>
             nas://{NAS ID}:/{path}形式でディレクトリパスを入力します。
     - **エントリーポイント**
@@ -358,7 +357,7 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
         - NHN Cloud Object Storageを使用する場合にのみ使用されます。学習に必要なデータがすべて保存されるように十分なサイズを指定してください。
     - **最大進行時間**：学習が完了するまでの最大進行時間を指定します。最大進行時間を超過した学習は終了処理されます。
     - **ログ管理**：学習の進行中に発生するログをNHN Cloud Log & Crashサービスに保存できます。
-        - 詳しい内容は[付録 > 2. NHN Cloud Log & Crash Searchサービス利用案内及び、ログ確認](./console-guide/??#2-nhn-cloud-log-crash-search)を参照してください。
+        - 詳しい内容は[付録 > 2. NHN Cloud Log & Crash Searchサービス利用案内及び、ログ確認](./console-guide/#2-nhn-cloud-log-crash-search)を参照してください。
     - **タグ**：タグを追加するには**+ ボタン**をクリックしてKey-Value形式でタグを入力します。タグは最大10個まで入力できます。
 
 > **[注意]NHN Cloud NASを使用する場合**
@@ -392,7 +391,7 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
 
 - **作業**
     - **Tensorboardショートカット**：学習の統計情報を確認できるTensorboardがブラウザの新しいウィンドウで開きます。<br/>
-    Tensorboardログを残す方法は[付録 > 3. 学習アルゴリズム作成ガイド](./console-guide/??#3)を参照してください。Tensorboardはコンソールにログインしたユーザーのみ接続できます。
+    Tensorboardログを残す方法は[付録 > 5. Tensorboardを活用するための指標ログを保存](./console-guide/#5-tensorboard)を参照してください。Tensorboardはコンソールにログインしたユーザーのみ接続できます。
     - **ハイパーパラメータチューニングの停止**：進行中のハイパーパラメータチューニングを停止できます。
 
 ### ハイパーパラメータチューニングの学習リスト
@@ -428,7 +427,7 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
 1. モデルとして作成するハイパーパラメータチューニングを選択します。
 2. **モデル作成**をクリックします。完了(COMPLETE)状態のハイパーパラメータチューニングのみモデルとして作成できます。
 3. モデル作成ページに移動します。内容を確認後、**モデル作成**をクリックしてモデルを作成します。
-モデルの作成に関する詳細は[モデル](./console-guide/??#_30)文書を参照してください。
+モデルの作成に関する詳細は[モデル](./console-guide/#_30)文書を参照してください。
 
 ### ハイパーパラメータチューニングの削除
 
@@ -448,7 +447,7 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
 
 ### 学習テンプレートの作成
 
-学習テンプレートに設定できる情報は[学習の作成](./console-guide/??#_13)を参照してください。
+学習テンプレートに設定できる情報は[学習の作成](./console-guide/#_13)を参照してください。
 
 ### 学習テンプレートリスト
 
@@ -491,7 +490,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 - **モデル情報**：モデルのアーティファクトが保存されているリポジトリを入力します。
     - **NHN Cloud Object Storage**：モデルアーティファクトが保存されているObject Storageパスを入力します。
         - `obs://{Object Storage APIエンドポイント}/{containerName}/{path}`形式でディレクトリパスを入力します。
-        - NHN Cloud Object Storageを利用する場合、[付録 > 1. NHN Cloud Object StorageにAI EasyMakerシステムアカウント権限を追加](./console-guide/#1-nhn-cloud-object-storageai-easymakereasymaker)を参考にして権限を設定してください。権限を設定していない場合、モデルのアーティファクトにアクセスができず、モデルの作成に失敗します。
+        - NHN Cloud Object Storageを利用する場合、[付録 > 1. NHN Cloud Object StorageにAI EasyMakerシステムアカウント権限を追加](./console-guide/#1-nhn-cloud-object-storageai-easymaker)を参考にして権限を設定してください。権限を設定していない場合、モデルのアーティファクトにアクセスができず、モデルの作成に失敗します。
     - **NHN Cloud NAS**：モデルアーティファクトが保存されているNHN Cloud NASパスを入力します。
         - `nas://{NAS ID}:/{path}`形式でディレクトリパスを入力します。
 - **追加設定**：モデルの追加情報を入力します。
@@ -520,7 +519,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 1. エンドポイントとして作成するモデルをリストから選択します。
 2. **エンドポイントの作成**をクリックします。
 3. **エンドポイントの作成**ページに移動します。内容を確認し、**エンドポイントの作成**をクリックしてモデルを作成します。
-エンドポイントの作成の詳細については[エンドポイント](./console-guide/??#_35)文書を参照してください。
+エンドポイントの作成の詳細については[エンドポイント](./console-guide/#_35)文書を参照してください。
 
 
 ### モデルの削除 
@@ -543,8 +542,8 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 - **API Gatewayサービスの有効化**
     - AI EasyMakerエンドポイントはNHN Cloud API Gatewayサービスを介してAPIエンドポイントを作成し、APIを管理します。エンドポイント機能を利用するにはAPI Gatewayサービスを必ず有効にする必要があります。
     - API Gatewayサービスの詳細と料金については、次の文書を確認してください。
-        - [API Gatewayサービス案内](https://docs.toast.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/Overview/)
-        - [API Gateway利用料金](https://www.toast.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
+        - [API Gatewayサービス案内](https://docs.nhnhcloud.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/Overview/)
+        - [API Gateway利用料金](https://www.nhnhcloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 - **エンドポイント**：新規または既存エンドポイントにステージを追加するかどうかを選択します。
     - **新規エンドポイントとして作成**：新規エンドポイントを作成します。API Gatewayに新規サービスと基本ステージでエンドポイントが作成されます。
     - **既存エンドポイントから新規ステージ追加**：既存エンドポイントのAPI Gatewayのサービスに新規ステージとしてエンドポイントが作成されます。ステージを追加する既存エンドポイントを選択します。
@@ -566,7 +565,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 > **[参考]エンドポイント作成時のAPI Gatewayサービスリソース提供制約**
 > 新規エンドポイントを作成すると、API Gatewayサービスを新規作成します。
 > 既存エンドポイントから新規ステージを追加すると、API Gatewayサービスに新規ステージを作成します。
-> [API Gatewayサービスリソース提供ポリシー](https://docs.toast.com/ko/TOAST/ko/resource-policy/#api-gateway)のリソース提供ポリシーを超えた場合、AI EasyMakerでのエンドポイント作成ができません。この場合はAPI Gatewayサービスリソースクォーターを調整してください。
+> [API Gatewayサービスリソース提供ポリシー](https://docs.nhnhcloud.com/ko/TOAST/ko/resource-policy/#api-gateway)のリソース提供ポリシーを超えた場合、AI EasyMakerでのエンドポイント作成ができません。この場合はAPI Gatewayサービスリソースクォーターを調整してください。
 
 ### エンドポイントリスト
 エンドポイントリストが表示されます。リストのエンドポイントを選択すると、詳細情報を確認して情報を変更できます。
@@ -637,7 +636,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 > 3. エンドポイント作成時に入力したAPI Gatewayリソースパス下位にリソースを追加しないようにします。追加したリソースはエンドポイントステージ追加/変更作業時に削除される場合があります。
 > 4. API Gatewayのステージ設定でAPI Gatewayリソースパスに設定された**バックエンドエンドポイントURL再定義**を無効にするか、URLを変更しないようにします。変更すると、エンドポイントの推論API呼び出しに失敗する可能性があります。
 > 上記の注意事項以外の設定は、必要に応じてAPI Gatewayで提供する機能を利用できます。
-> API Gatewayの詳細については[API Gatewayコンソールガイド](https://docs.toast.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ja/console-guide/)を参照してください。
+> API Gatewayの詳細については[API Gatewayコンソールガイド](https://docs.nhncloud.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ja/console-guide/)を参照してください。
 
 > **[参考]ステージのAPI Gateway 「配布失敗」状態の場合の復旧方法**
 > 一時的な問題でAI EasyMakerエンドポイントのステージ設定がAPI Gatewayステージに配布されていない場合、配布失敗状態と表示されます。
@@ -667,16 +666,15 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
                     [
                         0.337502569,
                         0.332836747,
-0.329660654
+                        0.329660654
                     ],
                     [
                         0.337530434,
                         0.332806051,
-0.329663515
+                        0.329663515
                     ]
                 ]
             }
-
 
 ### エンドポイントの基本ステージ変更
 
@@ -742,7 +740,7 @@ NHN Cloud Object StorageにAI EasyMakerシステムアカウントの読み取�
 1. **[学習]**または**[モデル]**タブ > **AI EasyMakerシステムアカウント情報**をクリックします。 
 2. AI EasyMakerシステムアカウント情報の**AI EasyMakerテナントID**と**AI EasyMaker APIユーザーID**をアーカイブします。 
 3. NHN Cloud Object Storageコンソールに移動します。
-4. [特定プロジェクトまたは特定ユーザーに読み取り/書き込み許可](https://docs.toast.com/ja/Storage/Object%20Storage/ja/acl-guide/#_4)文書を参照してNHN Cloud Object StorageコンソールでAI EasyMakerシステムアカウントに必要な読み取りおよび書き込み許可権限を追加します。
+4. [特定プロジェクトまたは特定ユーザーに読み取り/書き込み許可](https://docs.nhncloud.com/ja/Storage/Object%20Storage/ja/acl-guide/#_4)文書を参照してNHN Cloud Object StorageコンソールでAI EasyMakerシステムアカウントに必要な読み取りおよび書き込み許可権限を追加します。
 
 
 ### 2. NHN Cloud Log & Crash Searchサービス利用案内およびログ照会方法
@@ -753,8 +751,8 @@ Log & Crash Searchサービスにログを保存するには、Log & Crashサー
 
 - **Log & Crash Searchサービス利用および料金案内** 
     - Log & Crash Searchサービスの詳細内容と料金は、次の文書を確認してください。 
-        - [Log & Crash Searchサービス案内](https://docs.toast.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ja/Overview/)
-        - [Log & Crash Search利用料金](https://www.toast.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
+        - [Log & Crash Searchサービス案内](https://docs.nhncloud.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ja/Overview/)
+        - [Log & Crash Search利用料金](https://www.nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
 #### ログ照会
 
@@ -766,7 +764,7 @@ Log & Crash Searchサービスにログを保存するには、Log & Crashサー
         * クエリ： category:"easymaker.inference"
     * AI EasyMakerログ全体照会クエリ： logTypeフィールドが"NNHCloud-AIEasyMaker"のログを照会します。
         * クエリ：logType:"NHNCloud\-AIEasyMaker"
-3. Log & Crash Searchサービスの詳細な利用方法は[Log & Crash Searchサービスのコンソールガイド](https://docs.toast.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ja/console-guide/)を参照してください。
+3. Log & Crash Searchサービスの詳細な利用方法は[Log & Crash Searchサービスのコンソールガイド](https://docs.nhncloud.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ja/console-guide/)を参照してください。
 
 AI EasyMakerサービスは、Log & Crash Searchサービスに次のように定義されたフィールドにログを転送します。
 

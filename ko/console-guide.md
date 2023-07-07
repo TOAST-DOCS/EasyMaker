@@ -544,8 +544,8 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 - **API Gateway 서비스 활성화**
     - AI EasyMaker 엔드포인트는 NHN Cloud API Gateway 서비스를 통해 API 엔드포인트를 생성하고 API를 관리합니다. 엔드포인트 기능을 이용하려면 API Gateway 서비스를 반드시 활성화해야 합니다.
     - API Gateway 서비스에 대한 자세한 내용과 요금은 다음의 문서를 확인하시기 바랍니다.
-        - [API Gateway 서비스 안내](https://docs.toast.com/ko/Application%20Service/API%20Gateway/ko/overview/)
-        - [API Gateway 이용 요금](https://www.toast.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
+        - [API Gateway 서비스 안내](https://docs.nhncloud.com/ko/Application%20Service/API%20Gateway/ko/overview/)
+        - [API Gateway 이용 요금](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
 - **엔드포인트**: 신규 또는 기존 엔드포인트에 스테이지를 추가할지 선택합니다.
     - **신규 엔드포인트로 생성**: 신규 엔드포인트를 생성합니다. API Gateway에 신규 서비스와 기본 스테이지로 엔드포인트가 생성됩니다.
     - **기존 엔드포인트에서 신규 스테이지 추가**: 기존 엔드포인트의 API Gateway의 서비스에 신규 스테이지로 엔드포인트가 생성됩니다. 스테이지를 추가할 기존 엔드포인트를 선택합니다.
@@ -567,7 +567,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 > **[참고] 엔드포인트 생성 시 API Gateway 서비스 리소스 제공 제약**
 > 신규 엔드포인트 생성을 하면 API Gateway 서비스를 신규 생성합니다.
 > 기존 엔드포인트에서 신규 스테이지 추가를 하면 API Gateway 서비스에 신규 스테이지를 생성합니다.
-> [API Gateway 서비스 리소스 제공 정책](https://docs.toast.com/ko/TOAST/ko/resource-policy/#api-gateway)의 리소스 제공 정책을 초과한 경우, AI EasyMaker에서의 엔드포인트 생성이 불가할 수 있습니다. 이 경우 API Gateway 서비스 리소스 쿼터를 조정하시기 바랍니다.
+> [API Gateway 서비스 리소스 제공 정책](https://docs.nhncloud.com/ko/TOAST/ko/resource-policy/#api-gateway)의 리소스 제공 정책을 초과한 경우, AI EasyMaker에서의 엔드포인트 생성이 불가할 수 있습니다. 이 경우 API Gateway 서비스 리소스 쿼터를 조정하시기 바랍니다.
 
 ### 엔드포인트 목록
 엔드포인트 목록이 표시됩니다. 목록의 엔드포인트를 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
@@ -638,7 +638,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 > 3. 엔드포인트 생성 시 입력한 API Gateway 리소스 경로 하위에 리소스를 추가하지 않도록 합니다. 추가한 리소스는 엔드포인트 스테이지 추가/변경 작업 시 삭제될 수 있습니다.
 > 4. API Gateway의 스테이지 설정에서 API Gateway 리소스 경로에 설정된 **백엔드 엔드포인트 URL 재정의**를 비활성화하거나 URL을 변경하지 않도록 합니다. 변경하면 엔드포인트의 추론 API 호출에 실패할 수 있습니다.
 > 위의 주의 사항 외 다른 설정은 필요에 따라 API Gateway에서 제공하는 기능을 이용할 수 있습니다.
-> 자세한 API Gateway 사용에 대한 내용은 [API Gateway 콘솔 가이드](https://docs.toast.com/ko/Application%20Service/API%20Gateway/ko/console-guide/)를 참고해 주세요.
+> 자세한 API Gateway 사용에 대한 내용은 [API Gateway 콘솔 가이드](https://docs.nhncloud.com/ko/Application%20Service/API%20Gateway/ko/console-guide/)를 참고해 주세요.
 
 > **[참고] 스테이지의 API Gateway '배포 실패' 상태인 경우 복구 방법**
 > 일시적인 문제로 AI EasyMaker 엔드포인트의 스테이지 설정이 API Gateway 스테이지에 배포되지 않은 경우, 배포 실패 상태로 표시됩니다.
@@ -742,7 +742,7 @@ NHN Cloud Object Storage에 AI EasyMaker 시스템 계정의 읽기/쓰기 권�
 1. **[학습]** 또는 **[모델]** 탭 > **AI EasyMaker 시스템 계정 정보**을 클릭합니다. 
 2. AI EasyMaker 시스템 계정 정보인 **AI EasyMaker 테넌트 ID**와 **AI EasyMaker API 사용자 ID** 를 보관합니다. 
 3. NHN Cloud Object Storage 콘솔로 이동합니다.
-4. [특정 프로젝트 또는 특정 사용자에게 읽기/쓰기 허용](https://docs.toast.com/ko/Storage/Object%20Storage/ko/acl-guide/#_4) 문서를 참고하여 NHN Cloud Object Storage 콘솔에서 AI EasyMaker 시스템 계정에 필요한 읽기 및 쓰기 허용 권한을 추가합니다.
+4. [특정 프로젝트 또는 특정 사용자에게 읽기/쓰기 허용](https://docs.nhncloud.com/ko/Storage/Object%20Storage/ko/acl-guide/#_4) 문서를 참고하여 NHN Cloud Object Storage 콘솔에서 AI EasyMaker 시스템 계정에 필요한 읽기 및 쓰기 허용 권한을 추가합니다.
 
 
 ### 2. NHN Cloud Log & Crash Search 서비스 이용 안내 및 로그 조회 방법
@@ -753,8 +753,8 @@ Log & Crash Search 서비스에 로그를 저장하려면, Log & Crash 서비스
 
 - **Log & Crash Search 서비스 이용 및 요금 안내** 
     - Log & Crash Search 서비스에 대한 자세한 내용과 요금은 다음의 문서를 확인하시기 바랍니다. 
-        - [Log & Crash Search 서비스 안내](https://docs.toast.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/Overview/)
-        - [Log & Crash Search 이용 요금](https://www.toast.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
+        - [Log & Crash Search 서비스 안내](https://docs.nhncloud.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/Overview/)
+        - [Log & Crash Search 이용 요금](https://www.nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
 #### 로그 조회
 
@@ -766,7 +766,7 @@ Log & Crash Search 서비스에 로그를 저장하려면, Log & Crash 서비스
         * 질의문: category:"easymaker.inference"
     * AI EasyMaker 로그 전체 조회 질의: logType 필드가 "NNHCloud-AIEasyMaker"인 로그를 조회합니다. 
         * 질의문: logType:"NHNCloud\-AIEasyMaker"
-3. Log & Crash Search 서비스의 자세한 이용 방법은 [Log & Crash Search 서비스의 콘솔 가이드](https://docs.toast.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/console-guide/)를 참고해 주세요.
+3. Log & Crash Search 서비스의 자세한 이용 방법은 [Log & Crash Search 서비스의 콘솔 가이드](https://docs.nhncloud.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/console-guide/)를 참고해 주세요.
 
 AI EasyMaker 서비스는 Log & Crash Search 서비스에 다음과 같이 정의된 필드로 로그를 전송합니다.
 

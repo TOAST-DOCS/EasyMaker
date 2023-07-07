@@ -541,8 +541,8 @@ Create and manage endpoints that can serve the model.
 - **Enable API Gateway Service**
     - AI EasyMaker endpoints create API endpoints and manage APIs through NHN Cloud API Gateway service. API Gateway service must be enabled to take advantage of endpoint feature.
     - For more information on API Gateway services and fees, please refer to the following documents:
-        - [API Gateway Service Guide](https://docs.toast.com/en/Application%20Service/API%20Gateway/en/overview/)
-        - [API Gateway Usage Fee](https://www.toast.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
+        - [API Gateway Service Guide](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/overview/)
+        - [API Gateway Usage Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
 - **Endpoint**: Select whether to add stage to new or existing endpoint.
     - **Create as New Endpoint**: Create new endpoint. Endpoint is created in API Gateway with new service and default stage.
     - **Add New Stage at Default Endpoint**: Endpoint is created as new stage in the service of API Gateway of existing endpoint. Select existing endpoint to add a stage.
@@ -564,7 +564,7 @@ Create and manage endpoints that can serve the model.
 > **[Note] Restrictions on API Gateway service resource provision when creating endpoints** 
 > When you create a new endpoint, create a new API Gateway service. 
 > Adding new stage on existing endpoint creates new stage in API Gateway service. 
-> If you exceed the resource provision policy in [API Gateway Service Resource Provision Policy](https://docs.toast.com/en/TOAST/en/resource-policy/#resource-provision-policy-for-api-gateway-service), you might not be able to create endpoints in AI EasyMaker. In this case, adjust API Gateway service resource quota.
+> If you exceed the resource provision policy in [API Gateway Service Resource Provision Policy](https://docs.nhncloud.com/en/TOAST/en/resource-policy/#resource-provision-policy-for-api-gateway-service), you might not be able to create endpoints in AI EasyMaker. In this case, adjust API Gateway service resource quota.
 
 ### Endpoint List
 Endpoints list is displayed. Select an endpoint in the list to check details and make changes to the information.
@@ -635,7 +635,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 > 3. Avoid adding resources in API Gateway resource path that was entered when creating endpoints. The added resources may be deleted when adding or changing endpoint stages. 
 > 4. In the stage settings of API Gateway, do not disable **Backend Endpoint Url Redifinition** or change the URL set in API Gateway resource path. If you change the url, endpoint's inference API call might fail.
 > Other than above precautions, other settings are available with features provided by API Gateway as necessary. 
-> For more information about how to use API Gateway, refer to [API Gateway Console Guide](https://docs.toast.com/en/Application%20Service/API%20Gateway/en/console-guide/).
+> For more information about how to use API Gateway, refer to [API Gateway Console Guide](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/console-guide/).
 
 > **[Note] Recovery method when the stage's API Gateway is in 'Deployment Failed' status**
 > If stage settings of AI EasyMaker endpoint are not deployed to the API Gateway stage due to a temporary issue, deployment status is displayed as failed.
@@ -740,7 +740,7 @@ To add read/write permissions to AI EasyMaker system account in Object Storage, 
 1. Click **[Training]** or **[Model]** Tab>**AI EasyMaker System Account Information**. 
 2. Archive the AI EasyMaker system account information, **AI EasyMaker Tenant ID** and **AI EasyMaker API User ID**. 
 3. Go to the NHN Cloud Object Storage console.
-4. [Allow specific projects or users to read/write](https://docs.toast.com/en/Storage/Object%20Storage/en/acl-guide/#allow-readwrite-to-specific-projects-or-specific-users) Refer to documents to add required read and write permissions to AI EasyMaker system account in NHN Cloud Object Storage console.
+4. [Allow specific projects or users to read/write](https://docs.nhncloud.com/en/Storage/Object%20Storage/en/acl-guide/#allow-readwrite-to-specific-projects-or-specific-users) Refer to documents to add required read and write permissions to AI EasyMaker system account in NHN Cloud Object Storage console.
 
 
 ### 2. NHN Cloud Log & Crash Search Service Usage Guide and Log Inquiry Guide
@@ -751,8 +751,8 @@ To store logs in the Log & Crash Search service, you have to enable Log & Crash 
 
 - **Information on Log & Crash Search service use and fee** 
     - For more information and fees on the Log & Crash Search service, please refer to the following documents 
-        - [Log & Crash Search Service Guide](https://docs.toast.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/Overview/)
-        - [Log & Crash Search Fee](https://www.toast.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
+        - [Log & Crash Search Service Guide](https://docs.nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/Overview/)
+        - [Log & Crash Search Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
 #### Log Query
 
@@ -764,7 +764,7 @@ To store logs in the Log & Crash Search service, you have to enable Log & Crash 
         * Question: category:"easymaker.inference"
     * AI EasyMaker Log Full Query: Query logs with logType field "NNHCloud-AIEasyMaker" 
         * Question: logType:"NHNCloud-AIEasyMaker"
-3. For more information on how to use Log & Crash Search service, refer to [Log & Crash Search Service Console Guide](https://docs.toast.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/console-guide/).
+3. For more information on how to use Log & Crash Search service, refer to [Log & Crash Search Service Console Guide](https://docs.nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/console-guide/).
 
 AI EasyMaker service sends logs to Log & Crash Search service in the following defined fields:
 

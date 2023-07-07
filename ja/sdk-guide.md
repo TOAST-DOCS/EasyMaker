@@ -83,7 +83,7 @@ training_id = easymaker.Training().run(
     train_instance_name='m2.c4m8',
     train_instance_count=1,
     data_storage_size=300,  # minimum size ：300GB
-    source_dir_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
+    source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
     entry_point='training_start.py',
     hyperparameter_list=[
         {
@@ -96,16 +96,16 @@ training_id = easymaker.Training().run(
         }
     ],
     timeout_hours=100,
-    model_upload_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
-    check_point_upload_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
+    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    check_point_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
     dataset_list=[
         {
             "datasetName"："train",
-            "dataUri"："obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_download_path}"
+            "dataUri"："obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_download_path}"
         },
         {
             "datasetName"："test",
-            "dataUri"："obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_download_path}"
+            "dataUri"："obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_download_path}"
         }
     ],
     tag_list=[
@@ -142,12 +142,12 @@ training_id = easymaker.Training().run(
 | check_point_upload_uri                                    | String         | 任意                                                   | なし    | 最大255文字                                    | チェックポイントファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)              |
 | timeout_hours                                             | Integer        | 任意                                                   | 720   | 1～720                                       | 最大ハイパーパラメータチューニング時間(単位：時間)                                                   |
 | hyperparameter_spec_list                                  | Array          | 任意                                                   | なし    | 最大100個                                    | ハイパーパラメータのスペック情報                                                             |
-| hyperparameter_spec_list[0].hyperparameterName            | String         | 任意                                                   | なし    | 最大255文字                                    | ハイパーパラメータ名                                                                |
-| hyperparameter_spec_list[0].hyperparameterTypeCode        | String         | 任意                                                   | なし    | INT、DOUBLE、DISCRETE、CATEGORICAL          | ハイパーパラメータタイプ                                                                |
-| hyperparameter_spec_list[0].hyperparameterMinValue        | Integer/Double | hyperparameterTypeCodeがINT、DOUBLEの場合は必須           | なし    | なし                                         | ハイパーパラメータ最小値                                                               |
-| hyperparameter_spec_list[0].hyperparameterMaxValue        | Integer/Double | hyperparameterTypeCodeがINT、DOUBLEの場合は必須           | なし    | なし                                          | ハイパーパラメータ最大値                                                               |
-| hyperparameter_spec_list[0].hyperparameterStep            | Integer/Double | hyperparameterTypeCodeがINT、DOUBLEでRID戦略の場合は必須 | なし   | なし                                         | "Grid"チューニング戦略を使用する際のハイパーパラメータ値の変化サイズ                                                           |
-| hyperparameter_spec_list[0].hyperparameterSpecifiedValues | String         | hyperparameterTypeCodeがDISCRETE、CATEGORICALの場合は必須 | なし   | 最大3千字                                     | 決められたハイパーパラメータリスト(`,`で区切られた文字列や数字)                                         |
+| hyperparameter_spec_list[0].<br>hyperparameterName            | String         | 任意                                                   | なし    | 最大255文字                                    | ハイパーパラメータ名                                                                |
+| hyperparameter_spec_list[0].<br>hyperparameterTypeCode        | String         | 任意                                                   | なし    | INT、DOUBLE、DISCRETE、CATEGORICAL          | ハイパーパラメータタイプ                                                                |
+| hyperparameter_spec_list[0].<br>hyperparameterMinValue        | Integer/Double | hyperparameterTypeCodeがINT、DOUBLEの場合は必須           | なし    | なし                                         | ハイパーパラメータ最小値                                                               |
+| hyperparameter_spec_list[0].<br>hyperparameterMaxValue        | Integer/Double | hyperparameterTypeCodeがINT、DOUBLEの場合は必須           | なし    | なし                                          | ハイパーパラメータ最大値                                                               |
+| hyperparameter_spec_list[0].<br>hyperparameterStep            | Integer/Double | hyperparameterTypeCodeがINT、DOUBLEでRID戦略の場合は必須 | なし   | なし                                         | "Grid"チューニング戦略を使用する際のハイパーパラメータ値の変化サイズ                                                           |
+| hyperparameter_spec_list[0].<br>hyperparameterSpecifiedValues | String         | hyperparameterTypeCodeがDISCRETE、CATEGORICALの場合は必須 | なし   | 最大3千字                                     | 決められたハイパーパラメータリスト(`,`で区切られた文字列や数字)                                         |
 | dataset_list                                              | Array          | 任意                                                   | なし    | 最大10個                                     | ハイパーパラメータチューニングに使用されるデータセット情報(datasetName/dataUriで構成)                         |
 | dataset_list[0].datasetName                               | String         | 任意                                                   | なし    | 最大36文字                                     | データ名                                                                    |
 | dataset_list[0].datasetUri                                | String         | 任意                                                   | なし    | 最大255文字                                    | データパス                                                                    |
@@ -178,7 +178,7 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
     instance_name='m2.c8m16',
     instance_count=1,
     data_storage_size=300,
-    source_dir_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
+    source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
     entry_point='training_start.py',
     hyperparameter_spec_list=[
         {
@@ -195,16 +195,16 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
         }
     ],
     timeout_hours=10,
-    model_upload_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
-    check_point_upload_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
+    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    check_point_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
     dataset_list=[
         {
             "datasetName": "train",
-            "dataUri": "obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_download_path}"
+            "dataUri": "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_download_path}"
         },
         {
             "datasetName": "test",
-            "dataUri": "obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_download_path}"
+            "dataUri": "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_download_path}"
         }
     ],
     metric_list=["val_loss", "loss", "accuracy"],
@@ -272,7 +272,7 @@ model_id = easymaker.Model().create(
 ```
 model_id = easymaker.Model().create_by_model_uri(
     framework_code=easymaker.TENSORFLOW,
-    model_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    model_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
     model_description='model_description',
 )
@@ -387,14 +387,14 @@ easymaker_logger.send(log_message='log meassage',
 Object Storage商品にファイルをアップロードし、ダウンロードする機能を提供します。
 ```
 easymaker.upload(
-    easymaker_obs_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
+    easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
     src_dir_path='./local_dir',
     username='userId@nhn.com',
     password='nhn_object_storage_api_password'
 )
 
 easymaker.download(
-    easymaker_obs_uri='obs://api-storage.cloud.toast.com/v1/AUTH_00000000000000000000000000000000/SDK/sample/source_dir',
+    easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_00000000000000000000000000000000/SDK/sample/source_dir',
     download_dir_path='./download_dir',
     username='userId@nhn.com',
     password='nhn_object_storage_api_password'
