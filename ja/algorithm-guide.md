@@ -88,9 +88,9 @@ Image Classificationアルゴリズムは、次の指標を作成します。
 
 
 ### 推論 
-学習されたモデルでエンドポイントを作成し、推論をリクエストするには、[エンドポイント作成と推論リクエスト](./algorithm-guide/??)文書を参照してください。
+学習されたモデルでエンドポイントを作成し、推論をリクエストするには、[エンドポイント作成と推論リクエスト](./algorithm-guide/#_15)文書を参照してください。
 
-### レスポンス形式 
+#### レスポンス形式 
 画像種類(label)別のscore値がレスポンスされます。
 
 [例] Cat-Dog分類の推論APIレスポンス本文 
@@ -284,7 +284,7 @@ Semantic Segmentationアルゴリズムは、次の指標を作成します。
 
 
 ### 推論 
-学習されたモデルでエンドポイントを作成し、推論をリクエストするには、[エンドポイント作成と推論リクエスト](./algorithm-guide/??)文書を参照してください。
+学習されたモデルでエンドポイントを作成し、推論をリクエストするには、[エンドポイント作成と推論リクエスト](./algorithm-guide/#_15)文書を参照してください。
 
 #### レスポンス形式
 リクエスト画像を512 X 512サイズに調整後、各画像のピクセルごとにlabel値が配列形式でレスポンスされます。
@@ -405,7 +405,7 @@ COCO Datasetの形式で作成します。
                 201,
                 166,
                 93.5,
-144.5
+                144.5
             ],
             "area": 13510.75,
             "segmentation": [],
@@ -419,7 +419,7 @@ COCO Datasetの形式で作成します。
                 17,
                 20,
                 217.5,
-329
+                329
             ],
             "area": 71557.5,
             "segmentation": [],
@@ -433,7 +433,7 @@ COCO Datasetの形式で作成します。
                 26,
                 248,
                 162.5,
-117
+                117
             ],
             "area": 19012.5,
             "segmentation": [],
@@ -461,7 +461,7 @@ COCO Datasetの形式で作成します。
 
 
 ### 推論 
-学習されたモデルでエンドポイントを作成し、推論をリクエストするには、[エンドポイント作成と推論リクエスト](./algorithm-guide/??)文書を参照してください。
+学習されたモデルでエンドポイントを作成し、推論をリクエストするには、[エンドポイント作成と推論リクエスト](./algorithm-guide/#_15)文書を参照してください。
 
 #### レスポンス形式
 detectionされたobjectのbbox(xmin、ymin、xmax、ymax)リストを返します。
@@ -505,15 +505,16 @@ detectionされたobjectのbbox(xmin、ymin、xmax、ymax)リストを返しま�
 * Request URI: POST https://kr1-{apigwSeviceId}.api.nhncloudservice.com/inference
 * Request Body
 
-    ``` json
-    {
-        "instances": [
-            {
-                "data": "image_to_bytes_array"
-            }
-        ]
-    }
-    ```
+``` json
+{
+    "instances": [
+        {
+            "data": "image_to_bytes_array"
+        }
+    ]
+}
+```
+
 * image_to_bytes_array値は画像をBase64 Byte Array変換した値です。[参照]画像のバイト配列変換Pythonコード内容を参照してください。
 
 
