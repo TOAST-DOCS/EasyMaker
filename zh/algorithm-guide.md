@@ -88,7 +88,7 @@ Indicators generated during training can be checked through **Training > Go to T
 
 
 ### Inference  
-To create an endpoint with a trained model and request inference, see [Create Endpoint and Request Inference](./algorithm-guide//#create-endpoint-and-request-inference).
+To create an endpoint with a trained model and request inference, see [Create Endpoint and Request Inference](./algorithm-guide/#create-endpoint-and-request-inference).
 
 #### Response Format 
 The score value for each image type (label) is answered.
@@ -284,7 +284,7 @@ Indicators generated during training can be checked through **Training > Go to T
 
 
 ### Inference  
-To create an endpoint with a trained model and request inference, see [Create Endpoint and Request Inference](./algorithm-guide//#create-endpoint-and-request-inference).
+To create an endpoint with a trained model and request inference, see [Create Endpoint and Request Inference](./algorithm-guide/#create-endpoint-and-request-inference).
 
 #### Response Format
 After resizing the requested image to 512 X 512, the label value for each pixel of each image is returned in the form of an array.
@@ -461,7 +461,7 @@ For detailed format, refer to Data format and Object Detection in the [format-da
 
 
 ### Inference  
-To create an endpoint with a trained model and request inference, see [Create Endpoint and Request Inference](./algorithm-guide//#create-endpoint-and-request-inference).
+To create an endpoint with a trained model and request inference, see [Create Endpoint and Request Inference](./algorithm-guide/#create-endpoint-and-request-inference).
 
 #### Response Format
 Returns a list of bboxes (xmin, ymin, xmax, ymax) of detected objects.

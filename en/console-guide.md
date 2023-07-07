@@ -257,7 +257,7 @@ A list of studies is displayed. If you select a training from the list, you can 
 
 - **Operation**
     - **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
-    For how to leave a TensorBoard log, refer to [Appendix > 5. Saving Indicator Logs for TensorBoard Utilization](./console-guide/#5). TensorBoard can only be accessed by users logged into the console.
+    For how to leave a TensorBoard log, refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
     - **Stop training** : You can stop training in progress.
 
 - **Hyperparameters** : You can check the hyperparameter values set for training on **the hyperparameter** tab of the detailed screen displayed when selecting training.
@@ -275,7 +275,7 @@ Create a model with training in the completed state.
 
 1. Choose the training you want to create as a model.
 2. Click **Generate Model** Only training in the COMPLETE state can be created as a model.
-3. You will be taken to the model creation page. After checking the contents, click **Create Model** to create a model. For more information on model creation, see [the model](./console-guide/#_30) documentation.
+3. You will be taken to the model creation page. After checking the contents, click **Create Model** to create a model. For more information on model creation, see [the model](./console-guide/#model) documentation.
 
 
 ### Delete Training
@@ -428,7 +428,7 @@ Create a model with the best training of hyperparameter tuning in the completed 
 
 1. Choose the hyperparameter tuning you want to create as a model.
 2. Click **Create Model**. Only hyperparameter tuning in the COMPLETE state can be created as a model.
-3. You will be taken to the model creation page. After checking the contents, click **Create Model** to create a model. For more information on model creation, see [the model](./console-guide/#_30) documentation.
+3. You will be taken to the model creation page. After checking the contents, click **Create Model** to create a model. For more information on model creation, see [the model](./console-guide/#model) documentation.
 
 ### Delete Hyperparameter Tuning
 
