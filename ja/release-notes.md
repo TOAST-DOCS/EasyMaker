@@ -9,9 +9,9 @@
     * 詳細は[ハイパーパラメータチューニングガイド](./console-guide/#_18)文書を参照してください。
 * NHN Cloud AI EasyMakerが提供する基本アルゴリズムを3種追加
     * 詳細については、各アルゴリズムのガイド文書を参照してください。
-    * [Image Classificationガイド](./algorithm-guide/#image_classification)
-    * [Object Detectionガイド](./algorithm-guide/#object_detection)
-    * [Semantic Segmentationガイド](./algorithm-guide/#semantic_segmentation)
+    * [Image Classificationガイド](./algorithm-guide/#image-classification)
+    * [Object Detectionガイド](./algorithm-guide/#object-detection)
+    * [Semantic Segmentationガイド](./algorithm-guide/#semantic-segmentation)
 
 ### 2022. 12. 27.
 #### 新規サービスリリース

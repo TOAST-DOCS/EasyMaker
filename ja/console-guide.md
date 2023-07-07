@@ -542,8 +542,8 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 - **API Gatewayサービスの有効化**
     - AI EasyMakerエンドポイントはNHN Cloud API Gatewayサービスを介してAPIエンドポイントを作成し、APIを管理します。エンドポイント機能を利用するにはAPI Gatewayサービスを必ず有効にする必要があります。
     - API Gatewayサービスの詳細と料金については、次の文書を確認してください。
-        - [API Gatewayサービス案内](https://docs.nhnhcloud.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/Overview/)
-        - [API Gateway利用料金](https://www.nhnhcloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
+        - [API Gatewayサービス案内](https://docs.nhncloud.com/ja/Application%20Service/API%20Gateway/ja/overview/)
+        - [API Gateway利用料金](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
 - **エンドポイント**：新規または既存エンドポイントにステージを追加するかどうかを選択します。
     - **新規エンドポイントとして作成**：新規エンドポイントを作成します。API Gatewayに新規サービスと基本ステージでエンドポイントが作成されます。
     - **既存エンドポイントから新規ステージ追加**：既存エンドポイントのAPI Gatewayのサービスに新規ステージとしてエンドポイントが作成されます。ステージを追加する既存エンドポイントを選択します。
@@ -565,7 +565,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 > **[参考]エンドポイント作成時のAPI Gatewayサービスリソース提供制約**
 > 新規エンドポイントを作成すると、API Gatewayサービスを新規作成します。
 > 既存エンドポイントから新規ステージを追加すると、API Gatewayサービスに新規ステージを作成します。
-> [API Gatewayサービスリソース提供ポリシー](https://docs.nhnhcloud.com/ko/TOAST/ko/resource-policy/#api-gateway)のリソース提供ポリシーを超えた場合、AI EasyMakerでのエンドポイント作成ができません。この場合はAPI Gatewayサービスリソースクォーターを調整してください。
+> [API Gatewayサービスリソース提供ポリシー](https://docs.nhncloud.com/ko/TOAST/ko/resource-policy/#api-gateway)のリソース提供ポリシーを超えた場合、AI EasyMakerでのエンドポイント作成ができません。この場合はAPI Gatewayサービスリソースクォーターを調整してください。
 
 ### エンドポイントリスト
 エンドポイントリストが表示されます。リストのエンドポイントを選択すると、詳細情報を確認して情報を変更できます。
@@ -636,7 +636,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 > 3. エンドポイント作成時に入力したAPI Gatewayリソースパス下位にリソースを追加しないようにします。追加したリソースはエンドポイントステージ追加/変更作業時に削除される場合があります。
 > 4. API Gatewayのステージ設定でAPI Gatewayリソースパスに設定された**バックエンドエンドポイントURL再定義**を無効にするか、URLを変更しないようにします。変更すると、エンドポイントの推論API呼び出しに失敗する可能性があります。
 > 上記の注意事項以外の設定は、必要に応じてAPI Gatewayで提供する機能を利用できます。
-> API Gatewayの詳細については[API Gatewayコンソールガイド](https://docs.nhncloud.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ja/console-guide/)を参照してください。
+> API Gatewayの詳細については[API Gatewayコンソールガイド](https://docs.nhncloud.com/ja/Application%20Service/API%20Gateway/ja/console-guide/)を参照してください。
 
 > **[参考]ステージのAPI Gateway 「配布失敗」状態の場合の復旧方法**
 > 一時的な問題でAI EasyMakerエンドポイントのステージ設定がAPI Gatewayステージに配布されていない場合、配布失敗状態と表示されます。
