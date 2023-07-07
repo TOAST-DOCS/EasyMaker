@@ -7,7 +7,7 @@
 
 * Added hyperparameter tuning feature
     * Hyperparameter tuning is the feature to automate repetitive experiments to find optimized hyperparameters to improve the predictive accuracy and performance of machine learning models.
-    * For more information, please see the [](./console-guide/#_18)Hyperparameter Tuning Guide [](./console-guide/#_18).
+    * For more information, please see the [Hyperparameter Tuning Guide](./console-guide/#hyperparameter-tuning).
 * Added 3 basic algorithms provided by NHN Cloud AI EasyMaker
     * For more information, please see the guide document of each algorithm.
     * [Image Classification Guide](./algorithm-guide/#image-classification)
