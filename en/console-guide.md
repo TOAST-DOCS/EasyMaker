@@ -25,7 +25,7 @@ Create a Jupyter notebook.
         - Data storage is block storage mounted on the `/root/easymaker` directory path. Data on this storage is retained even when the notebook is restarted.
     - Storage size of created notebook cannot be changed, so please specify sufficient storage size at the time of creation.
     - The storage size can be entered in the unit of 10GB, maximum 2,040GB.
-    - If necessary, you can add **NHN Cloud NAS** to which connect your notebook.
+    - If necessary, you can associate **NHN Cloud NAS** to which connect your notebook.
         - Mount Directory Name: Enter the name of the directory to mount on notebook.
         - NHN Cloud NAS Path: Enter directory path in the format `nas://{NAS ID}:/{path}`.
 
@@ -130,158 +130,349 @@ Delete the created notebook.
 > Connected NHN Cloud NAS is not deleted and must be deleted individually from **NHN Cloud NAS**.
 
 
+## Experiment
+Experiments are managed by grouping related trainings into experiments.
+
+### Create Experiment
+
+1. Click **Create Experiment**
+2. Enter an experiment name and description and click **OK**.
+
+> **[Note] Experiment creation time**
+Creating experiments can take several minutes. 
+When creating the initial resources (laptops, trainings, labs, endpoints), it takes an extra few minutes to configure the service environment.
+
+### List of Experiments
+Experiments appears. Select an experiment to view and modify detailed information.
+
+- **Status**: Experiment status appears. Please refer to the table below for main status.
+
+    | Status | Description |
+    | --- | --- |
+    | CREATE REQUESTED | Creating an experiment is requested. |
+    | CREATE IN PROGRESS | An experiment is being created. |
+    | CREATE FAILED | Failed to create an experiment. Please try again. |
+    | ACTIVE | The experiment is successfully created. |
+
+- **Operation**
+    - Click **Go to TensorBoard** to open the TensorBoard in a new browser window, where you can view statistical information about the training included in your experiment. The TensorBoard is only accessible to users who are logged into the console.
+    - **Retry**: If the experiment status is FAIL, you can recover the experiment by clicking **Retry**.
+- **Training**: The **Training** tab on the detailed screen that appears when selecting Training shows trainings included in the experiment.
+
+
+### Delete Experiment
+Delete an experiment.
+
+1. Select an experiment to delete.
+2. Click **Delete Experiment**.
+3. Requested deletion cannot be undone. Click **OK** to proceed.
+
+> **[Note] Unable to delete experiment if associated training exists.** 
+> Experiment cannot be deleted if there is a training associated with the experiment. 
+> Please delete the associated training first, then delete the experiment. 
+> For related training, you can check the list by clicking the **[Training]** tab in the detail screen at the bottom that is displayed when you click the experiment you want to delete.
+
+
 ## Training
-Provides environment where you can train machine learning algorithms and check training results with statistics.
+Provides an training environment where you can learn and identify machine training algorithms based on training results.
 
-### Create Training  
-Select the instance and OS image of training to be performed to set the environment, and proceed with the training by entering the algorithm information and input/output data path want to train.
+### Create Training
+Set the training environment by selecting the instance and OS image to be trained, and proceed with training by entering the algorithm information and input/output data path to learn.
 
-- **Basic Information**: Select basic information about training and experiment to include training.
-    - **Training Name**: Enter training name.
-    - **Training Description**: Enter training description.
-    - **Experiment**: Select the experiment to include the training. Experiments make group related training. If no experiments have been created, click **Add** to create the experiment.
-- **Algorithm Information**: Enter information about the algorithm want to train.
-    - **Algorithm Path**
-        - **NHN Cloud Object Storage**: Enter the path to NHN Cloud Object Storage where the algorithm is stored.<br>
-            - Enter the directory path in the format of obs://{Object Storage API endpoints}/{containerName}/{path}.
-            - If using NHN Cloud Object Storage, please set permissions by referring to [Appendix>1. Add AI EasyMaker system account permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage). If you do not set the required permissions, model creation will fail.
-        - **NHN Cloud NAS**: Enter the NHN Cloud NAS path where the algorithm is stored. <br>
-            Enter the directory path in the format nas://{NASID}:/{path}.
-            
-    - **Entry Point**
-        - Entry point is the entry point of algorithm execution at which the training begins. Creates entry point filename.
-        - Entry point file must exist in the algorithm path.
-        - Creating **requirements.txt** on the same path installs the Python package that script requires.
-    - **Hyperparameter**
-        - To add parameter for training, click the **the + button** to enter the parameter in Key-Value format. You can enter maximum 100 parameters.
-        - Entered hyperparameters are entered as execution factors when entry point is executed. For more information on how to use it, refer to the [Appendix>3. Hyperparameters](./console-guide/#3-hyperparameters).
+- **Training template** : To set training information by loading a training template, select 'Use' and then select a training template to load.
+- **Basic information** : Select basic information about the training and the experiment that the training will be included in.
+    - **Training Name** : Enter a training name.
+    - **Training Description** : Enter a description.
+    - **Experiment** : Select an experiment to include training. Experiments group related trainings. If no experiments have been created, click **Add** to create one.
+- **Algorithm information** : Enter information about the algorithm you want to learn.
+    - **Algorithm Type** : Select the algorithm type.
+        - **Algorithm provided by NHN Cloud** : Use the algorithm provided by AI EasyMaker. For detailed information on the provided algorithm, refer to [the Algorithm Guide document provided by NHN Cloud](./algorithm-guide/#).
+            - **Algorithm** : Select an algorithm.
+            - **Hyperparameter** : Enter the hyperparameter value required for training. For detailed information on hyperparameters for each algorithm, refer to [the Algorithm Guide document provided by NHN Cloud](./algorithm-guide/#).
+            - **Algorithm Metrics** : Displays information about the metrics generated by the algorithm.
+        - **Own Algorithm** : Uses an algorithm written by the user.
+            - **algorithm path**
+                - **NHN Cloud Object Storage** : Enter the path of NHN Cloud Object Storage where algorithms are stored.<br>
+                    - obs://{Object Enter the directory path in the format Storage API endpoint}/{containerName}/{path}.
+                    - When using NHN Cloud Object Storage, refer to [Appendix > 1. Adding AI EasyMaker System Account Permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage) to set permissions. Model creation will fail if you do not set the necessary permissions.
+                - **NHN Cloud NAS** : Enter the NHN Cloud NAS path where the algorithm is stored. <br>
+                    nas://{NAS Enter the directory path in the format ID}:/{path}.
+                    
+            - **entry point**
+                - The entry point is the point of entry into the execution of the algorithm from which training begins. Creates the entry point file name.
+                - The entry point file must exist in the algorithm path.
+                - Creating **requirements.txt** in the same path will install the required python packages from the script.
+            - **hyperparameter**
+                - To add parameters for training, click **the + button** to enter parameters in Key-Value format. Up to 100 parameters can be entered.
+                - The entered hyperparameters are entered as execution arguments when the entry point is executed. For detailed usage, please refer to [Appendix > 3. Hyperparameters](./console-guide/#3-hyperparameters).
 
-- **Image**: Select the image of instance for the environment in which you need to run the training.
+- **Image** : Choose an image for your instance that matches the environment in which you need to run your training.
 
 - **Training Instance Information**
-    - ** Training Instance Type**: Select type of instance on which you want to run the training.
-    - **Number of Training Instances**: Enter the number of instances to run the training. If you enter more than one instance, the training run is parallel, allowing to complete training faster.
+    - **Training instance type** : Select an instance type to run training.
+    - **Number of training instances** : Enter the number of instances to perform training. If you enter more than 2 instance counts, the training runs run in parallel, allowing training to complete more quickly.
 
-- **Data Information**
-    - **Input Data**: Enter the data set on which you want to run the training. You can set maximum 10 data sets.
-        - Dataset Name - Enter dataset name.
-        - Data path: Enter the path to NHN Cloud Object Storage or NHN Cloud NAS.
-    - **Output Data**: Enter the path to store the data to store the results of training run.
-        - Enter the path to the NHN Cloud Object Storage or NHN Cloud NAS.
+- **data information**
+    - **Input data** : Enter the data set to run training on. You can set up to 10 data sets.
+        - Dataset name: Enter a name for your data set.
+        - Data Path: Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Output data** : Enter the data storage path to save the training execution results.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
 
-- **Additional Settings**
-    - **Checkpoint**: If algorithm provides checkpoint, enter the storage path for checkpoint. 
-        - Created checkpoints are available When to resume training from previous training.
-        - Enter the path to the NHN Cloud Object Storage or NHN Cloud NAS.
-    - **Data Storage Size**: Enter the data storage size of the instance on which you want to run the training.
-        - Used only if you are using NHN Cloud Object Storage. Please specify sufficient size to ensure that all the data needed for training is stored.
-    - **Maximum Training Time**: Specifies the maximum wait time for training to complete. Training that has exceeded the maximum wait time will be processed as an end.
-    - **Log Management**: Logs that occur during training can be stored in the NHN Cloud Log & Crash service. 
-        - For more details, refer to [Appendix>2. NHN Cloud Log & Crash Search Service User Guide and Check Logs](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
-    - **Tag**: To add tag, click the **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
+- **Additional settings**
+    - **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint. 
+        - Created checkpoints can be used to resume training from previous training.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Data storage size** : Enter the data storage size of the instance to run training.
+        - Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for training.
+    - **Maximum training time** : Specifies the maximum waiting time until training is complete. training that exceeds the maximum waiting time will be terminated.
+    - **Log Management** : Logs generated during training can be stored in the NHN Cloud Log & Crash service. 
+        - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
+    - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
-> **[Caution] When using NHN Cloud NAS** 
-> Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
+> **[Caution] When using NHN Cloud NAS,** 
+> Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
 
-> **[Caution] Training failed when deleting training input data** 
-> If not retained your input data until the training is completed, the training may fail.
+> **[Caution] training failure when deleting training input data** 
+> Training may fail if the input data is deleted before training is completed.
 
 ### Training List
-Training list is displayed. Select Train in the list to view details and change the information.
+A list of studies is displayed. If you select a training from the list, you can check detailed information and change the information.
 
-- **Description**: Training Description is displayed. You can change the description by clicking **Change** on the details screen.
-- **Training Time**: Displays the time the training took place.
-- **Status**: Training status is displayed. Please refer to the table below for main status.
+- **Description** : The training description is displayed. You can change the description by clicking **Change** on the detail screen.
+- **Training time** : Displays the training time.
+- **Status** : Shows the status of training. Please refer to the table below for the main status.
 
     | Status | Description |
     | --- | --- |
-    | CREATE REQUESTED | Training creation is requested.  |
-    | CREATE IN PROGRESS | Resources need for training is being created.  |
-    | RUNNING | Training is running.  |
-    | STOPPED | Training is stopped by users’ request.  |
-    | COMPLETE | Training is properly completed.  |
-    | STOP IN PROGRESS | Training stop in progress |
-    | FAIL TRAIN | Failed state while training is in progress. Detailed failure information can be found in Log & Crash Search log when log management is enabled. |
-    | CREATE FAILED | Training creation has failed. If creation keeps failing, please contact Customer service center. |
-    | FAIL TRAIN IN PROGRESS, COMPLETE IN PROGRESS | Resources used for training resource clear is in progress.  |
-    
-- **Action**
-    - **Go to TensorBoard **: TensorBoard opens in a new browser window where you can check training statistics.<br/>
-    For information on how to leave TensorBoard logs, refer to [ Appendix>5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). Only users who are logged into the console can access TensorBoard.
-    - **Training Stop **: You can stop training in progress.
+    | CREATE REQUESTED | You have requested to create a training. |
+    | CREATE IN PROGRESS | This is a state in which resources necessary for training are being created. |
+    | RUNNING | Training is in progress. |
+    | STOPPED | Training is stopped at the user's request. |
+    | COMPLETE | Training has been completed normally. |
+    | STOP IN PROGRESS | Training is stopping. |
+    | FAIL TRAIN | This is a failed state during training. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
+    | CREATE FAILED | The training creation failed. If creation continues to fail, please contact customer service. |
+    | FAIL TRAIN IN PROGRESS, COMPLETE IN PROGRESS | The resources used for training are being cleaned up. |
 
-- **Hyperparameters**: You can check the hyper parameter values you set for training on the **Hyperparameters** tab of the detailed screen that displays when you select Training.
+- **Operation**
+    - **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
+    For how to leave a TensorBoard log, refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
+    - **Stop training** : You can stop training in progress.
+
+- **Hyperparameters** : You can check the hyperparameter values set for training on **the hyperparameter** tab of the detailed screen displayed when selecting training.
 
 ### Copy Training
-Create new training with the same settings as existing training.
+Create a new training with the same settings as an existing training.
 
-1. Select the training want to copy.
+1. Select the training you want to copy.
 2. Click **Copy Training**.
-3. Create Training screen is displayed with the same settings as the existing training.
-4. If want to change information for settings, change it and click **Create Training** to create training.
+3. The create training screen is displayed with the same settings as the existing training.
+4. If there is any information you would like to change the settings for, make the changes and then click **Create Training** to create the training.
 
-### Create Model in Training
-Create model with Training in completed state.
+### Create a Model from Training
+Create a model with training in the completed state.
 
-1. Select the Training you want to create as model.
-2. Click **Create Model**. Only training in the COMPLETE state can be created as model.
-3. Get moved to Model Creation page. After checking the contents, click **Create Model** to create a model. 
-For more information on creating models, refer to [Model](./console-guide/#model) documentation.
+1. Choose the training you want to create as a model.
+2. Click **Generate Model** Only training in the COMPLETE state can be created as a model.
+3. You will be taken to the model creation page. After checking the contents, click **Create Model** to create a model. For more information on model creation, see [the model](./console-guide/#model) documentation.
 
 
-### Delete Training  
-Delete a training.
+### Delete Training
+Deletes a training.
 
-1. Select training you want to delete. 
+1. Select the training you want to delete.
 2. Click **Delete Training**. Training in progress can be deleted after stopping.
-3. Requested deletion action cannot be cancelled. To proceed, please click **Confirm**
+3. Requested deletion cannot be undone. Click **OK** to proceed.
 
-> **[Note] Unable to delete training if associated models exists** 
-> You cannot delete training if a model created by the training you want to delete is existed. Please delete the model first and then delete it.
+> **[Note] Training cannot be deleted if a related model exists.** 
+Training cannot be deleted if a model created by the training to be deleted exists. Please delete the model first and then the training.
 
-## Experiment
-Experiments manage associated training by grouping it into experiments.
 
-### Create Experiment 
+## Hyperparameter Tuning
 
-1. Click **Create Experiment**.
-2. Enter name and description for experiment and click **Confirm**.
+Hyperparameter tuning is the process of optimizing hyperparameter values to maximize a model's predictive accuracy. If you don't use this feature, you'll have to manually tune the hyperparameters to find the optimal values while running many training jobs yourself.
 
-> **[Note] Time to create experiments** 
-> Creating experiment can take several minutes. 
-> Creation of initial resources (notebooks, training, experiments, endpoints) takes additional few minutes to configure the service environment.
+### Create Hyperparameter Tuning
 
-### Experiments List
-Experiments list is displayed. Selecting an experiment in the list allows to view detailed information and make changes to it.
+How to configure a hyperparameter tuning job.
 
-- **Status**: Experiment status is displayed. Please refer to the table below for main status.
+- **Training Template**
+    - **Use** : Select whether to use the training template. Using a training template, some configuration values for hyperparameter tuning are populated with pre-specified values.
+    - **Training Template**: Select a training template to use to automatically populate some configuration values for hyperparameter tuning.
+- **Basic Information**
+    - **Hyperparameter Tuning Name**: Enter a name for the hyperparameter tuning job.
+    - **Description**: Input when a description of the hyperparameter tuning task is required.
+    - **Experiment**: Select an experiment to include hyperparameter tuning. Experiments group related hyperparameter tunings. If no experiments have been created, click **Add** to create one.
+- **Algorithm Information**
+    - **algorithm path**
+        - **NHN Cloud Object Storage** : Enter the path of NHN Cloud Object Storage where algorithms are stored.<br>
+            - obs://{Object Enter the directory path in the format Storage API endpoint}/{containerName}/{path}.
+            - When using NHN Cloud Object Storage, refer to [Appendix > 1. Adding AI EasyMaker System Account Permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage) to set permissions. Model creation will fail if you do not set the necessary permissions.
+        - **NHN Cloud NAS** : Enter the NHN Cloud NAS path where the algorithm is stored. <br>
+            nas://{NAS Enter the directory path in the format ID}:/{path}.
+    - **entry point**
+        - The entry point is the point of entry into the execution of the algorithm from which training begins. Creates the entry point file name.
+        - The entry point file must exist in the algorithm path.
+        - Creating **requirements.txt** in the same path will install the required python packages from the script.
+    - **Hyperparameter Specification**
+        - **Name** : Defines which hyperparameters to tune.
+        - **Type** : Select the data type of the hyperparameter.
+        - **Value/Range**
+            - **Min**: Defines the minimum value.
+            - **Max**: Defines the maximum value.
+            - **Step**: Determines the size of the hyperparameter value change when using the "Grid" tuning strategy.
+            - **Comma-Separated Values**: Tune hyperparameters using static values (e.g. sgd, adam).
+- **Image** : Choose an image for your instance that matches the environment in which you need to run your training.
+- **Training Instance Information**
+    - **Training instance type** : Select an instance type to run training.
+    - **Number of training instances** : Enter the number of instances to perform training. If you enter more than 2 instance counts, the training runs run in parallel, allowing training to complete more quickly.
+- **Input Data**
+    - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
+        - Dataset name: Enter a name for your data set.
+        - Data Path: Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+- **Output Data**
+    - **Output data** : Enter the data storage path to save the training execution results.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint.
+        - Created checkpoints can be used to resume training from previous training.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+- **Algorithm Metrics**
+    - **Metric Name**: Define which metric to collect from logs output by the training code.
+    - **Metric Format**: Enter a regular expression to use to collect metrics. The training algorithm should output metrics to match the regular expression.
+- **Target Indicator**
+    - **Metric Name**: Choose which metric you want to optimize for.
+    - **Goal Metric Type**: Choose an optimization type.
+    - **Goal Metric Goal**: The tuning job will end when the goal metric reaches this value.
+- **Tuning Resource Configuration**
+    - **Maximum Number of Failed Trainings**: Define the maximum number of failed lessons. When the number of failed trainings reaches this value, tuning ends in failure.
+    - **Maximum Number of Trainings**: Defines the maximum number of lessons. Tuning runs until the number of auto-run training reaches this value.
+- **Tuning Strategy**
+    - **Strategy Name**: Choose which strategy to use to find the optimal hyperparameters.
+    - **Random State**: Determines random number generation. Specify a fixed value for reproducible results.
+- **Early Stop Training**
+    - **Name**: Stop training early if the model is no longer good even though training continues.
+    - **Min Trainings Required**: Define how many trainings the target metric value will be taken from when calculating the median.
+    - **Start Step**: Set the training step from which to apply early stop.
+- **Additional settings**
+    - **Data storage size** : Enter the data storage size of the instance to run training.
+        - Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for training.
+    - **Maximum Progress Time**: Specifies the maximum progress time until training is completed. training that exceeds the maximum progress time will be terminated.
+    - **Log Management** : Logs generated during training can be stored in the NHN Cloud Log & Crash service.
+        - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
+    - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
+
+> **[Caution] When using NHN Cloud NAS** 
+> Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
+
+> **[Caution] Training failure when deleting training input data** 
+> Training may fail if the input data is deleted before training is completed.
+
+### Hyperparameter Tuning List
+
+A list of hyperparameter tunings is displayed. Select a hyperparameter tuning from the list to view details and change information.
+
+- **Time Spent** : Shows the time spent tuning hyperparameters.
+- **Completed Training**: Indicates the number of completed trainings among the automatically generated trainings by hyperparameter tuning.
+- **Training In Progress**: Indicates the number of trainings in progress.
+- **Failed Training** : Indicates the number of failed lessons.
+- **Best Training**: Indicates the target metric information of the training that recorded the highest target metric value among the training automatically generated by hyperparameter tuning.
+- **Status** : Shows the status of hyperparameter tuning. Please refer to the table below for the main status.
 
     | Status | Description |
     | --- | --- |
-    | CREATE IN PROGRESS | Experiment create in progress. |
-    | CREATE RESOURCE IN PROGRESS | Experiment create in progress. |
-    | CREATE EXPERIMENT IN PROGRESS | Experiment create in progress. |
-    | ACTIVE | Experiment is properly created. |
-    | FAILED TO CREATE RESOURCE | Create experiment has failed.  |
-    | FAILED TO CREATE EXPERIMENT | Create experiment has failed.  |
+    | CREATE REQUESTED | Requested to create hyperparameter tuning. |
+    | CREATE IN PROGRESS | Resources required for hyperparameter tuning are being created. |
+    | RUNNING | Hyperparameter tuning is in progress. |
+    | STOPPED | Hyperparameter tuning is stopped at the user's request. |
+    | COMPLETE | Hyperparameter tuning has been successfully completed. |
+    | STOP IN PROGRESS | Hyperparameter tuning is stopping. |
+    | FAIL HYPERPARAMETER TUNING | A failed state during hyperparameter tuning in progress. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
+    | CREATE FAILED | Hyperparameter tuning generation failed. If creation continues to fail, please contact customer service. |
+    | FAIL HYPERPARAMETER TUNING IN PROGRESS, COMPLETE IN PROGRESS, STOP IN PROGRESS | Resources used for hyperparameter tuning are being cleaned up. |
 
-- **Action**
-    - Click **Go to TensorBoard** to open a new browser window where you can view the training statistics included in the experiment. Only users who are logged into the console can access the TensorBoard.
-    - **Retry**: If the experiment status is FAIL, you can recover the experiment by clicking **Retry**.
-- **Training**: **Training** tab on the detailed screen that displays when select Training displays Training list included in the experiment.
+- **Operation**
+    - **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
+    For instructions on how to leave TensorBoard logs, please refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
+    - **Stop Hyperparameter Tuning** : You can stop hyperparameter tuning in progress.
 
+### List of Trainings for Hyperparameter Tuning
 
-### Delete Experiment  
-Delete an experiment. 
+Displays a list of trainings auto-generated by hyperparameter tuning. Select a training from the list to check detailed information.
 
-1. Select the experiment to be deleted. 
-2. Click ** Experiment Deletion **. You cannot delete an experiment if it is in creation progress.
-3. Requested deletion task cannot be cancelled. If want to proceed, please click **Confirm**
+- **Target Metric Value**: Indicates the target metric value.
+- **Status** : Shows the status of the training automatically generated by hyperparameter tuning. Please refer to the table below for the main status.
 
-> **[Note] Unable to delete training if associated experiment exists** 
-> You cannot delete an experiment if training associated with the experiment exists. Please delete the associated training first and then delete it. 
-> The associated training can be checked by clicking **Training** tab in details screen at the bottom when click the experiment you want to delete.
+    | Status | Description |
+    | --- | --- |
+    | CREATED | Training has been created. |
+    | RUNNING | Training is in progress. |
+    | SUCCEEDED | Training has been completed normally. |
+    | KILLED | Training is stopped by the system. |
+    | FAILED| This is a failed state during training. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
+    | METRICS_UNAVAILABLE | This is a state where target metrics cannot be collected. |
+    | EARLY_STOPPED | Performance (goal metric) is not getting better while training is in progress, so it is in an early-stopped state. |
 
+### Copy Hyperparameter Tuning
+
+Create a new hyperparameter tuning with the same settings as the existing hyperparameter tuning.
+
+1. Select the hyperparameter tuning you want to copy.
+2. Click **Copy Hyperparameter Tuning**.
+3. The Create Hyperparameter Tuning screen is displayed with the same settings as the existing hyperparameter tuning.
+4. If there is any information you would like to change the settings for, make the changes and click **Create Hyperparameter Tuning** to create a hyperparameter tuning.
+
+### Create a Model from Hyperparameter Tuning
+
+Create a model with the best training of hyperparameter tuning in the completed state.
+
+1. Choose the hyperparameter tuning you want to create as a model.
+2. Click **Create Model**. Only hyperparameter tuning in the COMPLETE state can be created as a model.
+3. You will be taken to the model creation page. After checking the contents, click **Create Model** to create a model. For more information on model creation, see [the model](./console-guide/#model) documentation.
+
+### Delete Hyperparameter Tuning
+
+Delete a hyperparameter tuning.
+
+1. Select the hyperparameter tuning you want to delete.
+2. Click **Delete Hyperparameter Tuning**. Hyperparameter tuning in progress can be stopped and then deleted.
+3. Requested deletion cannot be undone. Click **OK** to proceed.
+
+> **[Note] Hyperparameter tuning cannot be deleted if the associated model exists.** 
+> Hyperparameter tuning cannot be deleted if the model created by the hyperparameter tuning you want to delete exists. Please delete the model first, then the hyperparameter tuning.
+
+## Training Template
+
+By creating a training template in advance, you can import the values entered into the template when creating training or hyperparameter tuning.
+
+### Create Training Template
+
+For information on what you can set in your training template, see [Creating a training](./console-guide/#create-training).
+
+### List of Training Templates
+
+Displays a list of training templates. Select a training template from the list to view details and change information.
+
+- **Operation**
+    - **Change** : You can change training template information.
+- **Hyperparameters** : You can check the names of hyperparameters set in the training template on **the Hyperparameters** tab of the detailed screen displayed when you select a training template.
+
+### Copy Training Template
+
+Create a new training template with the same settings as an existing training template.
+
+1. Select the training template you want to copy.
+2. Click **Copy Training Template**.
+3. The Create training Template screen appears with the same settings as the existing training template.
+4. If there is any information you would like to change the settings for, change it and then click **Create Training Template** to create a training template.
+
+### Delete Training Template
+
+Delete the training template.
+
+1. Select the training template you want to delete.
+2. Click **Delete Training Template**
+3. Requested deletion cannot be undone. Click **OK** to proceed.
 
 ## Model 
 Can manage models of AI EasyMaker's training outcomes or external models as artifacts.
@@ -350,8 +541,8 @@ Create and manage endpoints that can serve the model.
 - **Enable API Gateway Service**
     - AI EasyMaker endpoints create API endpoints and manage APIs through NHN Cloud API Gateway service. API Gateway service must be enabled to take advantage of endpoint feature.
     - For more information on API Gateway services and fees, please refer to the following documents:
-        - [API Gateway Service Guide](https://docs.toast.com/en/Application%20Service/API%20Gateway/en/overview/)
-        - [API Gateway Usage Fee](https://www.toast.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
+        - [API Gateway Service Guide](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/overview/)
+        - [API Gateway Usage Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
 - **Endpoint**: Select whether to add stage to new or existing endpoint.
     - **Create as New Endpoint**: Create new endpoint. Endpoint is created in API Gateway with new service and default stage.
     - **Add New Stage at Default Endpoint**: Endpoint is created as new stage in the service of API Gateway of existing endpoint. Select existing endpoint to add a stage.
@@ -373,7 +564,7 @@ Create and manage endpoints that can serve the model.
 > **[Note] Restrictions on API Gateway service resource provision when creating endpoints** 
 > When you create a new endpoint, create a new API Gateway service. 
 > Adding new stage on existing endpoint creates new stage in API Gateway service. 
-> If you exceed the resource provision policy in [API Gateway Service Resource Provision Policy](https://docs.toast.com/en/TOAST/en/resource-policy/#resource-provision-policy-for-api-gateway-service), you might not be able to create endpoints in AI EasyMaker. In this case, adjust API Gateway service resource quota.
+> If you exceed the resource provision policy in [API Gateway Service Resource Provision Policy](https://docs.nhncloud.com/en/TOAST/en/resource-policy/#resource-provision-policy-for-api-gateway-service), you might not be able to create endpoints in AI EasyMaker. In this case, adjust API Gateway service resource quota.
 
 ### Endpoint List
 Endpoints list is displayed. Select an endpoint in the list to check details and make changes to the information.
@@ -444,7 +635,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 > 3. Avoid adding resources in API Gateway resource path that was entered when creating endpoints. The added resources may be deleted when adding or changing endpoint stages. 
 > 4. In the stage settings of API Gateway, do not disable **Backend Endpoint Url Redifinition** or change the URL set in API Gateway resource path. If you change the url, endpoint's inference API call might fail.
 > Other than above precautions, other settings are available with features provided by API Gateway as necessary. 
-> For more information about how to use API Gateway, refer to [API Gateway Console Guide](https://docs.toast.com/en/Application%20Service/API%20Gateway/en/console-guide/).
+> For more information about how to use API Gateway, refer to [API Gateway Console Guide](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/console-guide/).
 
 > **[Note] Recovery method when the stage's API Gateway is in 'Deployment Failed' status**
 > If stage settings of AI EasyMaker endpoint are not deployed to the API Gateway stage due to a temporary issue, deployment status is displayed as failed.
@@ -549,7 +740,7 @@ To add read/write permissions to AI EasyMaker system account in Object Storage, 
 1. Click **[Training]** or **[Model]** Tab>**AI EasyMaker System Account Information**. 
 2. Archive the AI EasyMaker system account information, **AI EasyMaker Tenant ID** and **AI EasyMaker API User ID**. 
 3. Go to the NHN Cloud Object Storage console.
-4. [Allow specific projects or users to read/write](https://docs.toast.com/en/Storage/Object%20Storage/en/acl-guide/#allow-readwrite-to-specific-projects-or-specific-users) Refer to documents to add required read and write permissions to AI EasyMaker system account in NHN Cloud Object Storage console.
+4. [Allow specific projects or users to read/write](https://docs.nhncloud.com/en/Storage/Object%20Storage/en/acl-guide/#allow-readwrite-to-specific-projects-or-specific-users) Refer to documents to add required read and write permissions to AI EasyMaker system account in NHN Cloud Object Storage console.
 
 
 ### 2. NHN Cloud Log & Crash Search Service Usage Guide and Log Inquiry Guide
@@ -560,8 +751,8 @@ To store logs in the Log & Crash Search service, you have to enable Log & Crash 
 
 - **Information on Log & Crash Search service use and fee** 
     - For more information and fees on the Log & Crash Search service, please refer to the following documents 
-        - [Log & Crash Search Service Guide](https://docs.toast.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/Overview/)
-        - [Log & Crash Search Fee](https://www.toast.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
+        - [Log & Crash Search Service Guide](https://docs.nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/Overview/)
+        - [Log & Crash Search Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
 #### Log Query
 
@@ -573,7 +764,7 @@ To store logs in the Log & Crash Search service, you have to enable Log & Crash 
         * Question: category:"easymaker.inference"
     * AI EasyMaker Log Full Query: Query logs with logType field "NNHCloud-AIEasyMaker" 
         * Question: logType:"NHNCloud-AIEasyMaker"
-3. For more information on how to use Log & Crash Search service, refer to [Log & Crash Search Service Console Guide](https://docs.toast.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/console-guide/).
+3. For more information on how to use Log & Crash Search service, refer to [Log & Crash Search Service Console Guide](https://docs.nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/console-guide/).
 
 AI EasyMaker service sends logs to Log & Crash Search service in the following defined fields:
 

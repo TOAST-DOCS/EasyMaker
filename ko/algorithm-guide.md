@@ -90,7 +90,7 @@ Image Classification 알고리즘은 다음의 지표를 생성합니다.
 ### 추론  
 학습된 모델로 엔드포인트를 생성하고 추론을 요청하려면 [엔드포인트 생성과 추론 요청](./algorithm-guide/#_15) 문서를 참고해 주세요.
 
-### 응답 형식 
+#### 응답 형식 
 이미지 종류(label)별 score 값이 응답됩니다.
 
 [예시] Cat-Dog 분류의 추론 API 응답 본문 
@@ -249,7 +249,7 @@ folder/test/annotations/0003.png
 * test.json 
 image와 segmentation map의 매핑 파일을 작성합니다. 
 
-```
+```json
 [
     {
         "image": "images/0001.png",
@@ -289,7 +289,7 @@ Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 #### 응답 형식
 요청 이미지를 512 X 512 크기로 조정한 후, 각 이미지의 픽셀마다 label 값이 배열 형태로 응답됩니다.
 
-```
+```json
 {
     "predictions": [
         [

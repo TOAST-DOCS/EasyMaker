@@ -13,7 +13,7 @@ python -m pip install easymaker
 앱키(Appkey)와 비밀 키(Secret key)는 콘솔 오른쪽 상단의 **URL & Appkey** 메뉴에서 확인할 수 있습니다.
 활성화한 AI EasyMaker 상품의 앱키, 비밀 키, 리전 정보를 입력합니다.
 AI EasyMaker SDK를 사용하기 위해서는 초기화 코드가 필요합니다.
-```
+```python
 import easymaker
 
 easymaker.init(
@@ -34,7 +34,7 @@ easymaker.init(
 | experiment_description | String  | 선택    | 없음   | 최대 255자     | 실험에 대한 설명                                                  |
 | wait                   | Boolean | 선택    | True | True, False | True: 실험 생성이 완료된 이후 실험 ID를 반환, False: 생성 요청 후 즉시 실험 ID를 반환 |
 
-```
+```python
 experiment_id = easymaker.Experiment().create(
     experiment_name='experiment_name',
     experiment_description='experiment_description',
@@ -74,7 +74,7 @@ experiment_id = easymaker.Experiment().create(
 | use_log                                    | Boolean | 선택                    | False | True, False | Log & Crash 상품에 로그를 남길지 여부                                      |
 | wait                                       | Boolean | 선택                    | True  | True, False | True: 학습 생성이 완료된 이후 학습 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환      |
 
-```
+```python
 training_id = easymaker.Training().run(
     experiment_id=experiment_id,
     training_name='training_name',
@@ -83,7 +83,7 @@ training_id = easymaker.Training().run(
     train_instance_name='m2.c4m8',
     train_instance_count=1,
     data_storage_size=300,  # minimum size : 300GB
-    source_dir_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
+    source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
     entry_point='training_start.py',
     hyperparameter_list=[
         {
@@ -96,16 +96,16 @@ training_id = easymaker.Training().run(
         }
     ],
     timeout_hours=100,
-    model_upload_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
-    check_point_upload_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
+    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    check_point_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
     dataset_list=[
         {
             "datasetName": "train",
-            "dataUri": "obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_download_path}"
+            "dataUri": "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_download_path}"
         },
         {
             "datasetName": "test",
-            "dataUri": "obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_download_path}"
+            "dataUri": "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_download_path}"
         }
     ],
     tag_list=[
@@ -142,12 +142,12 @@ training_id = easymaker.Training().run(
 | check_point_upload_uri                                    | String         | 선택                                                    | 없음    | 최대 255자                                     | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)              |
 | timeout_hours                                             | Integer        | 선택                                                    | 720   | 1~720                                       | 최대 하이퍼파라미터 튜닝 시간(단위: 시간)                                                   |
 | hyperparameter_spec_list                                  | Array          | 선택                                                    | 없음    | 최대 100개                                     | 하이퍼파라미터 스펙 정보                                                              |
-| hyperparameter_spec_list[0].hyperparameterName            | String         | 선택                                                    | 없음    | 최대 255자                                     | 하이퍼파라미터 이름                                                                 |
-| hyperparameter_spec_list[0].hyperparameterTypeCode        | String         | 선택                                                    | 없음    | INT, DOUBLE, DISCRETE, CATEGORICAL          | 하이퍼파라미터 타입                                                                 |
-| hyperparameter_spec_list[0].hyperparameterMinValue        | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수            | 없음    | 없음                                          | 하이퍼파라미터 최소값                                                                |
-| hyperparameter_spec_list[0].hyperparameterMaxValue        | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수            | 없음    | 없음                                          | 하이퍼파라미터 최대값                                                                |
-| hyperparameter_spec_list[0].hyperparameterStep            | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE이면서 GRID 전략인 경우 필수 | 없음    | 없음                                          | "Grid" 튜닝 전략을 사용할 때 하이퍼파라미터 값의 변화 크기                                                             |
-| hyperparameter_spec_list[0].hyperparameterSpecifiedValues | String         | hyperparameterTypeCode가 DISCRETE, CATEGORICAL 경우 필수   | 없음    | 최대 3천자                                      | 정해진 하이퍼파라미터 목록(`,`로 구분된 문자열이나 숫자)                                         |
+| hyperparameter_spec_list[0].<br>hyperparameterName            | String         | 선택                                                    | 없음    | 최대 255자                                     | 하이퍼파라미터 이름                                                                 |
+| hyperparameter_spec_list[0].<br>hyperparameterTypeCode        | String         | 선택                                                    | 없음    | INT, DOUBLE, DISCRETE, CATEGORICAL          | 하이퍼파라미터 타입                                                                 |
+| hyperparameter_spec_list[0].<br>hyperparameterMinValue        | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수            | 없음    | 없음                                          | 하이퍼파라미터 최소값                                                                |
+| hyperparameter_spec_list[0].<br>hyperparameterMaxValue        | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수            | 없음    | 없음                                          | 하이퍼파라미터 최대값                                                                |
+| hyperparameter_spec_list[0].<br>hyperparameterStep            | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE이면서 GRID 전략인 경우 필수 | 없음    | 없음                                          | "Grid" 튜닝 전략을 사용할 때 하이퍼파라미터 값의 변화 크기                                                             |
+| hyperparameter_spec_list[0].<br>hyperparameterSpecifiedValues | String         | hyperparameterTypeCode가 DISCRETE, CATEGORICAL 경우 필수   | 없음    | 최대 3천자                                      | 정해진 하이퍼파라미터 목록(`,`로 구분된 문자열이나 숫자)                                         |
 | dataset_list                                              | Array          | 선택                                                    | 없음    | 최대 10개                                      | 하이퍼파라미터 튜닝에 사용될 데이터 세트 정보(datasetName/dataUri로 구성)                         |
 | dataset_list[0].datasetName                               | String         | 선택                                                    | 없음    | 최대 36자                                      | 데이터 이름                                                                     |
 | dataset_list[0].datasetUri                                | String         | 선택                                                    | 없음    | 최대 255자                                     | 데이터 경로                                                                     |
@@ -160,7 +160,7 @@ training_id = easymaker.Training().run(
 | max_trial_count                                           | Integer        | 선택                                                    | 없음    | 없음                                          | 최대 학습 수를 정의합니다. 자동 실행된 학습의 개수가 이 값에 도달할 때까지 튜닝이 실행됩니다.                    |
 | tuning_strategy_name                                      | String         | 필수                                                    | 없음    | 없음                                          | 어떤 전략을 사용해서 최적의 하이퍼파라미터를 찾을지 선택합니다.                                       |
 | tuning_strategy_random_state                              | Integer        | 선택                                                    | 없음    | 없음                                          | 난수 생성을 결정합니다. 재현 가능한 결과를 위해 고정된 값으로 지정합니다.                                 |
-| early_stopping_algorithm                                  | String         | 필수                                                    | 없음    | EARLY_STOPPING_ALGORITHM.MEDIAN             | 학습이 계속 진행되어도 모델이 더 이상 좋아지지 않으면 학습을 조기에 종료합니다.                              |
+| early_stopping_algorithm                                  | String         | 필수                                                    | 없음    | EARLY_STOPPING_ALGORITHM.<br>MEDIAN             | 학습이 계속 진행되어도 모델이 더 이상 좋아지지 않으면 학습을 조기에 종료합니다.                              |
 | early_stopping_min_trial_count                            | Integer        | 필수                                                    | 3     | 없음                                          | 중간값을 계산할 때 몇 개의 학습으로부터 목표 지표 값을 가져올지 정의합니다.                               |
 | early_stopping_start_step                                 | Integer        | 필수                                                    | 4     | 없음                                          | 몇 번째 학습 단계부터 조기 중지를 적용할지 설정합니다.                                           |
 | tag_list                                                  | Array          | 선택                                                    | 없음    | 최대 10개                                      | 태그 정보                                                                      |
@@ -169,7 +169,7 @@ training_id = easymaker.Training().run(
 | use_log                                                   | Boolean        | 선택                                                    | False | True, False                                 | Log & Crash 상품에 로그를 남길지 여부                                                 |
 | wait                                                      | Boolean        | 선택                                                    | True  | True, False                                 | True: 하이퍼파라미터 튜닝 생성이 완료된 이후 하이퍼파라미터 튜닝 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환 |
 
-```
+```python
 hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
     experiment_id=experiment_id,
     hyperparameter_tuning_name='hyperparameter_tuning_name',
@@ -178,7 +178,7 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
     instance_name='m2.c8m16',
     instance_count=1,
     data_storage_size=300,
-    source_dir_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
+    source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
     entry_point='training_start.py',
     hyperparameter_spec_list=[
         {
@@ -195,16 +195,16 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
         }
     ],
     timeout_hours=10,
-    model_upload_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
-    check_point_upload_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
+    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    check_point_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
     dataset_list=[
         {
             "datasetName": "train",
-            "dataUri": "obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_download_path}"
+            "dataUri": "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_download_path}"
         },
         {
             "datasetName": "test",
-            "dataUri": "obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_download_path}"
+            "dataUri": "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_download_path}"
         }
     ],
     metric_list=["val_loss", "loss", "accuracy"],
@@ -247,7 +247,7 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
 | tag_list[0].tagValue     | String | 선택                                 | 없음  | 최대 255자 | 태그 값                                |
 
 
-```
+```python
 model_id = easymaker.Model().create(
     training_id=training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning_id,
     model_name='model_name',
@@ -270,10 +270,10 @@ model_id = easymaker.Model().create(
 | tag_list[0].tagValue | String | 선택    | 없음  | 최대 255자                                 | 태그 값                                                |
 
 
-```
+```python
 model_id = easymaker.Model().create_by_model_uri(
     framework_code=easymaker.TENSORFLOW,
-    model_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    model_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
     model_description='model_description',
 )
@@ -299,7 +299,7 @@ model_id = easymaker.Model().create_by_model_uri(
 | use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                             |        
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 엔드포인트 생성이 완료된 이후 엔드포인트 ID를 반환, False: 엔드포인트 요청 후 즉시 엔드포인트 ID를 반환 |
 
-```
+```python
 endpoint = easymaker.Endpoint()
 endpoint_id = endpoint.create(
     model_id=model_id,
@@ -315,7 +315,7 @@ endpoint_id = endpoint.create(
 
 생성해둔 엔드포인트 사용
 
-```
+```python
 endpoint = easymaker.Endpoint()
 ```
 
@@ -337,7 +337,7 @@ endpoint = easymaker.Endpoint()
 | tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                               |
 | use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                         |        
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 스테이지 생성이 완료된 이후 스테이지 ID를 반환, False: 스테이지 요청 후 즉시 스테이지 ID를 반환 |
-```
+```python
 stage_id = endpoint.create_stage(
     model_id=model_id,
     stage_name='stage01',  # 30자 이내 소문자/숫자
@@ -353,14 +353,14 @@ stage_id = endpoint.create_stage(
 
 기본 스테이지에 인퍼런스
 
-```
+```python
 input_data = [6.8, 2.8, 4.8, 1.4]
 endpoint.predict(json={'instances': [input_data]})
 ```
 
 특정 스테이지 지정하여 인퍼런스
 
-```
+```python
 # 스테이지 정보 조회
 endpoint_stage_info_list = endpoint.get_endpoint_stage_info_list()
 for endpoint_stage_info in endpoint_stage_info_list:
@@ -375,7 +375,7 @@ for endpoint_stage_info in endpoint_stage_info_list:
 ```
 
 ### NHN Cloud - Log & Crash 로그 전송 기능
-```
+```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product
 easymaker_logger.send(log_message='log meassage',
@@ -386,16 +386,16 @@ easymaker_logger.send(log_message='log meassage',
 
 ### NHN Cloud - Object Storage 파일 전송 기능
 Object Storage 상품으로 파일을 업로드하고 다운로드하는 기능을 제공합니다.
-```
+```python
 easymaker.upload(
-    easymaker_obs_uri='obs://api-storage.cloud.toast.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
+    easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
     src_dir_path='./local_dir',
     username='userId@nhn.com',
     password='nhn_object_storage_api_password'
 )
 
 easymaker.download(
-    easymaker_obs_uri='obs://api-storage.cloud.toast.com/v1/AUTH_00000000000000000000000000000000/SDK/sample/source_dir',
+    easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_00000000000000000000000000000000/SDK/sample/source_dir',
     download_dir_path='./download_dir',
     username='userId@nhn.com',
     password='nhn_object_storage_api_password'
