@@ -404,12 +404,13 @@ easymaker.download(
 ## CLI Command
 アプリケーションキー、秘密鍵、リージョン情報を知っている場合は、コンソールにアクセスせずにPython CLIを介してさまざまな情報を確認できます。
 
-| 機能              | コマンド                                                                                    |
-|---------------------|--------------------------------------------------------------------------------------------|
-| instance typeリスト照会 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -instance   |
-| imageリスト照会     | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -image      |
-| algorithmリスト照会    | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -algorithm |
-| experimentリスト照会 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -experiment |
-| trainingリスト照会  | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -training   |
-| modelリスト照会     | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -model      |
-| endpointリスト照会  | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -endpoint   |
+| 機能                         | コマンド                                                                                       |
+|----------------------------|--------------------------------------------------------------------------------------------|
+| Instance typeリスト照会         | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -instance   |
+| Imageリスト照会                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -image      |
+| Algorithmリスト照会             | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -algorithm  |
+| Experimentリスト照会            | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -experiment |
+| Trainingリスト照会              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -training   |
+| Hyperparameter tuningリスト照会 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -tuning     |
+| Modelリスト照会                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -model      |
+| Endpointリスト照会              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -endpoint   |
