@@ -36,7 +36,7 @@ folder/train/dog/golden_retriever.png
 ...
 ```
 
-#### Validation (optional)
+#### Validation (required)
 This is the data set for validation. Data sets should be prepared in a directory structure defined as follows. 
 
 ```
@@ -442,6 +442,23 @@ For detailed format, refer to Data format and Object Detection in the [format-da
     ]
 }
 ```
+
+#### Validation (required)
+This is the data set for validation. Datasets should be prepared in a defined directory structure like this:
+
+```
+folder/validation/_annotations.coco.json
+
+folder/validation/0001.png
+folder/validation/0002.png
+folder/validation/0003.png
+...
+```
+
+* \_annotations.coco.json file  
+It is written in the format of COCO Dataset.
+For detailed format, refer to Data format and Object Detection in the [format-data document of COCO Dataset](https://cocodataset.org/#format-data).
+
 
 #### Test (required)
 This is the data set for test. Datasets should be prepared in a defined directory structure like this: 

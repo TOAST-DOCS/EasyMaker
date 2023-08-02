@@ -36,7 +36,7 @@ folder/train/dog/golden_retriever.png
 ...
 ```
 
-#### validation(선택)
+#### validation(필수)
 검증을 위한 데이터 세트입니다. 데이터 세트는 다음과 같이 정의된 디렉터리 구조로 준비해야 합니다. 
 
 ```
@@ -442,6 +442,23 @@ COCO Dataset의 형식으로 작성합니다.
     ]
 }
 ```
+
+#### validation(필수)
+검증을 위한 데이터 세트입니다. 데이터 세트는 다음과 같이 정의된 디렉터리 구조로 준비해야 합니다.
+
+```
+folder/validation/_annotations.coco.json
+
+folder/validation/0001.png
+folder/validation/0002.png
+folder/validation/0003.png
+...
+```
+
+* _annotations.coco.json 파일  
+COCO Dataset의 형식으로 작성합니다.
+자세한 형식은 [COCO Dataset의 format-data](https://cocodataset.org/#format-data) 문서의 Data format와 Object Detection 내용을 참고합니다.
+
 
 #### test(필수)
 test를 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉터리 구조로 준비해야 합니다. 

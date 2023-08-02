@@ -36,7 +36,7 @@ folder/train/dog/golden_retriever.png
 ...
 ```
 
-#### validation(選択)
+#### validation(必須)
 検証用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。 
 
 ```
@@ -442,6 +442,23 @@ COCO Datasetの形式で作成します。
     ]
 }
 ```
+
+#### validation(必須)
+検証用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。
+
+```
+folder/validation/_annotations.coco.json
+
+folder/validation/0001.png
+folder/validation/0002.png
+folder/validation/0003.png
+...
+```
+
+* _annotations.coco.jsonファイル
+COCO Datasetの形式で作成します。
+詳細な形式は、[COCO Datasetのformat-data](https://cocodataset.org/#format-data)文書のData formatとObject Detection内容を参照してください。
+
 
 #### test(必須)
 test用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。 
