@@ -304,25 +304,37 @@ How to configure a hyperparameter tuning job.
     - **Hyperparameter Tuning Name**: Enter a name for the hyperparameter tuning job.
     - **Description**: Input when a description of the hyperparameter tuning task is required.
     - **Experiment**: Select an experiment to include hyperparameter tuning. Experiments group related hyperparameter tunings. If no experiments have been created, click **Add** to create one.
-- **Algorithm Information**
-    - **algorithm path**
-        - **NHN Cloud Object Storage** : Enter the path of NHN Cloud Object Storage where algorithms are stored.<br>
-            - obs://{Object Enter the directory path in the format Storage API endpoint}/{containerName}/{path}.
-            - When using NHN Cloud Object Storage, refer to [Appendix > 1. Adding AI EasyMaker System Account Permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage) to set permissions. Model creation will fail if you do not set the necessary permissions.
-        - **NHN Cloud NAS** : Enter the NHN Cloud NAS path where the algorithm is stored. <br>
-            nas://{NAS Enter the directory path in the format ID}:/{path}.
-    - **entry point**
-        - The entry point is the point of entry into the execution of the algorithm from which training begins. Creates the entry point file name.
-        - The entry point file must exist in the algorithm path.
-        - Creating **requirements.txt** in the same path will install the required python packages from the script.
-    - **Hyperparameter Specification**
-        - **Name** : Defines which hyperparameters to tune.
-        - **Type** : Select the data type of the hyperparameter.
-        - **Value/Range**
-            - **Min**: Defines the minimum value.
-            - **Max**: Defines the maximum value.
-            - **Step**: Determines the size of the hyperparameter value change when using the "Grid" tuning strategy.
-            - **Comma-Separated Values**: Tune hyperparameters using static values (e.g. sgd, adam).
+- **Algorithm Information**: 학습하려는 알고리즘에 대한 정보를 입력합니다.
+    - **알고리즘 유형**: 알고리즘 유형을 선택합니다.
+        - **NHN Cloud 제공 알고리즘**: AI EasyMaker에서 제공하는 알고리즘을 사용합니다. 제공하는 알고리즘에 대한 상세 정보는 [NHN Cloud 제공 알고리즘 가이드](./algorithm-guide/#) 문서를 참고합니다.
+            - **알고리즘**: 알고리즘을 선택합니다.
+            - **하이퍼파라미터 스펙**: 하이퍼파라미터 튜닝에 사용할 하이퍼파라미터 값 범위를 입력합니다. 알고리즘별 하이퍼파라미터에 대한 자세한 정보는  [NHN Cloud 제공 알고리즘 가이드](./algorithm-guide/#) 문서를 참고합니다.
+                - **이름**: 어떤 하이퍼파라미터를 튜닝할지 정의합니다. 알고리즘 별로 정해져 있습니다.
+                - **유형**: 하이퍼파라미터의 데이터 유형을 선택합니다. 알고리즘 별로 정해져 있습니다.
+                - **값/범위**
+                    - **Min**: 최솟값을 정의합니다.
+                    - **Max**: 최댓값을 정의합니다.
+                    - **Step**: "Grid" 튜닝 전략을 사용할 때 하이퍼파라미터 값의 변화 크기를 결정합니다.
+            - **알고리즘 지표**: 알고리즘에서 생성되는 지표에 대한 정보가 표시됩니다.
+        - **자체 알고리즘**: 사용자가 작성한 알고리즘을 사용합니다.
+            - **algorithm path**
+                - **NHN Cloud Object Storage** : Enter the path of NHN Cloud Object Storage where algorithms are stored.<br>
+                    - obs://{Object Enter the directory path in the format Storage API endpoint}/{containerName}/{path}.
+                    - When using NHN Cloud Object Storage, refer to [Appendix > 1. Adding AI EasyMaker System Account Permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage) to set permissions. Model creation will fail if you do not set the necessary permissions.
+                - **NHN Cloud NAS** : Enter the NHN Cloud NAS path where the algorithm is stored. <br>
+                  nas://{NAS Enter the directory path in the format ID}:/{path}.
+            - **entry point**
+                - The entry point is the point of entry into the execution of the algorithm from which training begins. Creates the entry point file name.
+                - The entry point file must exist in the algorithm path.
+                - Creating **requirements.txt** in the same path will install the required python packages from the script.
+            - **Hyperparameter Specification**
+                - **Name** : Defines which hyperparameters to tune.
+                - **Type** : Select the data type of the hyperparameter.
+                - **Value/Range**
+                    - **Min**: Defines the minimum value.
+                    - **Max**: Defines the maximum value.
+                    - **Step**: Determines the size of the hyperparameter value change when using the "Grid" tuning strategy.
+                    - **Comma-Separated Values**: Tune hyperparameters using static values (e.g. sgd, adam).
 - **Image** : Choose an image for your instance that matches the environment in which you need to run your training.
 - **Training Instance Information**
     - **Training instance type** : Select an instance type to run training.
