@@ -406,12 +406,13 @@ easymaker.download(
 ## CLI Command
 앱키, 비밀 키, 리전 정보를 알고 있다면, 콘솔에 접근하지 않고도 파이썬 CLI를 통해 여러 정보를 확인할 수 있습니다.
 
-| 기능                  | 명령어                                                                                        |
-|---------------------|--------------------------------------------------------------------------------------------|
-| instance type 목록 조회 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -instance   |
-| image 목록 조회         | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -image      |
-| algorithm 목록 조회      | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -algorithm |
-| experiment 목록 조회    | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -experiment |
-| training 목록 조회      | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -training   |
-| model 목록 조회         | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -model      |
-| endpoint 목록 조회      | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -endpoint   |
+| 기능                          | 명령어                                                                                        |
+|-----------------------------|--------------------------------------------------------------------------------------------|
+| Instance type 목록 조회         | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -instance   |
+| Image 목록 조회                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -image      |
+| Algorithm 목록 조회             | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -algorithm  |
+| Experiment 목록 조회            | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -experiment |
+| Training 목록 조회              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -training   |
+| Hyperparameter tuning 목록 조회 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -tuning     |
+| Model 목록 조회                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -model      |
+| Endpoint 목록 조회              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -endpoint   |
