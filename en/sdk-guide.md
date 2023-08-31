@@ -42,6 +42,17 @@ experiment_id = easymaker.Experiment().create(
 )
 ```
 
+### 실험 삭제
+
+[Parameter]
+
+| 이름                     | 타입      | 필수 여부 | 기본값  | 유효 범위  | 설명    |
+|------------------------|---------|-------|------|--------|-------|
+| experiment_id          | String  | 필수    | 없음   | 최대 36자 | 실험 ID |
+
+```python
+easymaker.Experiment().delete(experiment_id)
+```
 
 ### Create Training
 
@@ -123,6 +134,18 @@ training_id = easymaker.Training().run(
     use_log=True,
     # wait=False,
 )
+```
+
+### 학습 삭제
+
+[Parameter]
+
+| 이름                     | 타입      | 필수 여부 | 기본값  | 유효 범위  | 설명    |
+|------------------------|---------|-------|------|--------|-------|
+| training_id          | String  | 필수    | 없음   | 최대 36자 | 학습 ID |
+
+```python
+easymaker.Training().delete(training_id)
 ```
 
 ### Create Hyperparameter Tuning
@@ -235,6 +258,18 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
 )
 ```
 
+### 하이퍼파라미터튜닝 삭제
+
+[Parameter]
+
+| 이름                     | 타입      | 필수 여부 | 기본값  | 유효 범위  | 설명           |
+|------------------------|---------|-------|------|--------|--------------|
+| hyperparameter_tuning_id          | String  | 필수    | 없음   | 최대 36자 | 하이퍼파라미터튜닝 ID |
+
+```python
+easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
+```
+
 ### Create Model
 Request to create a model with the training ID.
 The model is used when creating endpoints.
@@ -282,6 +317,18 @@ model_id = easymaker.Model().create_by_model_uri(
     model_name='model_name',
     model_description='model_description',
 )
+```
+
+### 모델 삭제
+
+[Parameter]
+
+| 이름                        | 타입      | 필수 여부 | 기본값  | 유효 범위  | 설명    |
+|---------------------------|---------|-------|------|--------|-------|
+| model_id | String  | 필수    | 없음   | 최대 36자 | 모델 ID |
+
+```python
+easymaker.Model().delete(model_id)
 ```
 
 ### Create Endpoint
@@ -377,6 +424,30 @@ for endpoint_stage_info in endpoint_stage_info_list:
     if endpoint_stage_info['stage_name'] == 'stage01':
         endpoint.predict(json={'instances': [input_data]},
                          endpoint_stage_info=endpoint_stage_info)
+```
+
+### 엔드포인트 삭제
+
+[Parameter]
+
+| 이름            | 타입      | 필수 여부 | 기본값  | 유효 범위  | 설명       |
+|---------------|---------|-------|------|--------|----------|
+| endpoint_id   | String  | 필수    | 없음   | 최대 36자 | 엔드포인트 ID |
+
+```python
+endpoint.Endpoint().delete_endpoint(endpoint_id)
+```
+
+### 엔드포인트 스테이지 삭제
+
+[Parameter]
+
+| 이름         | 타입      | 필수 여부 | 기본값  | 유효 범위  | 설명      |
+|------------|---------|-------|------|--------|---------|
+| stage_id   | String  | 필수    | 없음   | 최대 36자 | 스테이지 ID |
+
+```python
+endpoint.Endpoint().delete_endpoint_stage(stage_id)
 ```
 
 ### NHN Cloud - Log & Crash Log Sending Feature
