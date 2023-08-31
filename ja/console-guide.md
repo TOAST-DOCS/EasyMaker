@@ -210,17 +210,20 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
     - **学習インスタンスタイプ**：学習を実行するインスタンスタイプを選択します。
     - **学習インスタンス数**：学習を実行するインスタンス数を入力します。インスタンス数を2つ以上入力すると、学習の実行が並列で進行し、速く学習を完了できます。
 
-- **データ情報**
-    - **入力データ**：学習を実行するデータセットを入力します。データセットは最大10個まで設定できます。
-        - データセット名：データセット名を入力します。
-        - データパス：NHN Cloud Object StorageまたはNHN Cloud NASパスを入力します。
+- **入力データ**
+    - **データセット**：学習を実行するデータセットを入力します。データセットは最大10個まで設定できます。
+        - データセット名：データセットの名前を入力します。
+        - データパス：NHN Cloud Object StorageまたはNHN Cloud NASのパスを入力します。
+    - **チェックポイント**:저장된 체크 포인트부터 학습을 진행하려는 경우, 체크 포인트의 저장 경로를 입력합니다。
+        - NHN Cloud Object StorageまたはNHN Cloud NASのパスを入力します。
+- **出力データ**
     - **出力データ**：学習の実行結果を保存するデータ保存パスを入力します。
-        - NHN Cloud Object StorageまたはNHN Cloud NASパスを入力します。
+        - NHN Cloud Object StorageまたはNHN Cloud NASのパスを入力します。
+    - **チェックポイント**:アルゴリズムがチェックポイントを提供する場合、チェックポイントの保存パスを入力します。
+        - 作成されたチェックポイントは以前の学習から学習を再開する際に利用できます。
+        - NHN Cloud Object StorageまたはNHN Cloud NASのパスを入力します。
 
 - **追加設定**
-    - **チェックポイント**：アルゴリズムがチェックポイントを提供する場合、チェックポイントの保存パスを入力します。
-        - 作成されたチェックポイントは以前の学習から学習を再開する時に利用できます。
-        - NHN Cloud Object StorageまたはNHN Cloud NASパスを入力します。
     - **データストレージサイズ**：学習を実行するインスタンスのデータストレージサイズを入力します。
         - NHN Cloud Object Storageを使用する場合にのみ使用されます。学習に必要なデータがすべて保存できるように十分なサイズを指定してください。
     - **最大学習時間**：学習が完了するまでの最大待機時間を指定します。最大待機時間を超えた学習は終了処理されます。
@@ -341,6 +344,8 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
     - **データセット**：学習を実行するデータセットを入力します。データセットは最大10個まで設定できます。
         - データセット名：データセットの名前を入力します。
         - データパス：NHN Cloud Object StorageまたはNHN Cloud NASのパスを入力します。
+    - **チェックポイント**:저장된 체크 포인트부터 학습을 진행하려는 경우, 체크 포인트의 저장 경로를 입력합니다。
+        - NHN Cloud Object StorageまたはNHN Cloud NASのパスを入力します。
 - **出力データ**
     - **出力データ**：学習の実行結果を保存するデータ保存パスを入力します。
         - NHN Cloud Object StorageまたはNHN Cloud NASのパスを入力します。
@@ -838,12 +843,13 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
 * **主な環境変数**
 
     | 環境変数名                         | 説明 |
-    | --- | --- |
+-------------------------------| --- | --- |
     | EM_SOURCE_DIR                 | 学習作成時に入力したアルゴリズムスクリプトがダウンロードされているフォルダの絶対パス |
     | EM_ENTRY_POINT                | 学習作成時に入力したアルゴリズムエントリーポイント名 |
     | EM_DATASET_${データセット名}         | 学習作成時に入力したそれぞれのデータセットがダウンロードされているフォルダの絶対パス |
     | EM_DATASETS                   | 全体データセットリスト(json形式) |
     | EM_MODEL_DIR                  | モデル保存パス |
+    | EM_CHECKPOINT_INPUT_DIR       | 입력 체크 포인트 저장 경로                             |
     | EM_CHECKPOINT_DIR             | チェックポイント保存パス |
     | EM_HP_${大文字に変換されたハイパーパラメータキー} | ハイパーパラメータキーに対応するハイパーパラメータ値 |
     | EM_HPS                        | 全体ハイパーパラメータリスト(json形式) |
@@ -860,6 +866,7 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
         train_data = read_data(dataset_dir, "train.csv")
 
         model = ... # 入力したデータを利用してモデル実装
+        model.load_weights(os.environ.get('EM_CHECKPOINT_INPUT_DIR', None))
         callbacks = [
             tensorflow.keras.callbacks.ModelCheckpoint(filepath=f'{os.environ.get("EM_CHECKPOINT_DIR")}/cp-{{epoch:04d}}.ckpt', save_freq='epoch', period=50),
             tensorflow.keras.callbacks.TensorBoard(log_dir=f'{os.environ.get("EM_TENSORBOARD_LOG_DIR")}'),

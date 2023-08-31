@@ -212,17 +212,21 @@ Set the training environment by selecting the instance and OS image to be traine
     - **Training instance type** : Select an instance type to run training.
     - **Number of training instances** : Enter the number of instances to perform training. If you enter more than 2 instance counts, the training runs run in parallel, allowing training to complete more quickly.
 
-- **data information**
-    - **Input data** : Enter the data set to run training on. You can set up to 10 data sets.
+- **Input Data**
+    - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
         - Dataset name: Enter a name for your data set.
         - Data Path: Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Checkpoint** : 저장된 체크 포인트부터 학습을 진행하려는 경우, 체크 포인트의 저장 경로를 입력합니다.
+      - NHN Cloud Object Storage 또는 NHN Cloud NAS 경로를 입력합니다.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+- **Output Data**
     - **Output data** : Enter the data storage path to save the training execution results.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint.
+        - Created checkpoints can be used to resume training from previous training.
         - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
 
 - **Additional settings**
-    - **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint. 
-        - Created checkpoints can be used to resume training from previous training.
-        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
     - **Data storage size** : Enter the data storage size of the instance to run training.
         - Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for training.
     - **Maximum training time** : Specifies the maximum waiting time until training is complete. training that exceeds the maximum waiting time will be terminated.
@@ -343,6 +347,9 @@ How to configure a hyperparameter tuning job.
     - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
         - Dataset name: Enter a name for your data set.
         - Data Path: Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Checkpoint** : 저장된 체크 포인트부터 학습을 진행하려는 경우, 체크 포인트의 저장 경로를 입력합니다.
+        - NHN Cloud Object Storage 또는 NHN Cloud NAS 경로를 입력합니다.
+            - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
 - **Output Data**
     - **Output data** : Enter the data storage path to save the training execution results.
         - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
@@ -837,19 +844,20 @@ As shown in the example below, you can use hyperparameter values entered during 
 * Models that have been trained in the code must be saved in the EM_MODEL_DIR path.
 * **Key Environment Variables**
 
-    | Environment variable name              | Description |
-    | --- | --- |
-    | EM_SOURCE_DIR                          | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded |
-    | EM_ENTRY_POINT                         | Algorithm entry point name entered at training creation |
-    | EM_DATASET_${Data set name}            | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
-    | EM_DATASETS                            | Full data set list ( json format) |
-    | EM_MODEL_DIR                           | Model storage path |
-    | EM_CHECKPOINT_DIR                      | Checkpoint Storage Path |
+    | Environment variable name                          | Description |
+----------------------------------------------------| --- | --- |
+    | EM_SOURCE_DIR                                      | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded |
+    | EM_ENTRY_POINT                                     | Algorithm entry point name entered at training creation |
+    | EM_DATASET_${Data set name}                        | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
+    | EM_DATASETS                                        | Full data set list ( json format) |
+    | EM_MODEL_DIR                                       | Model storage path |
+    | EM_CHECKPOINT_INPUT_DIR                            | 입력 체크 포인트 저장 경로                             |
+    | EM_CHECKPOINT_DIR                                  | Checkpoint Storage Path |
     | EM_HP_${ Upper case converted Hyperparameter key } | Hyperparameter value corresponding to the hyperparameter key |
-    | EM_HPS                                 | Full Hyperparameter List (in json format) |
-    | EM_TENSORBOARD_LOG_DIR                 | TensorBoard log path for checking training results |
-    | EM_REGION                              | Current Region Information |
-    | EM_APPKEY                              | Appkey of AI EasyMaker service currently in use |
+    | EM_HPS                                             | Full Hyperparameter List (in json format) |
+    | EM_TENSORBOARD_LOG_DIR                             | TensorBoard log path for checking training results |
+    | EM_REGION                                          | Current Region Information |
+    | EM_APPKEY                                          | Appkey of AI EasyMaker service currently in use |
 
 * **Example code for utilizing environment variables**
 
@@ -860,6 +868,7 @@ As shown in the example below, you can use hyperparameter values entered during 
         train_data = read_data(dataset_dir, "train.csv")
 
         model = ... # Implement the model using input data
+        model.load_weights(os.environ.get('EM_CHECKPOINT_INPUT_DIR', None))
         callbacks = [
             tensorflow.keras.callbacks.ModelCheckpoint(filepath=f'{os.environ.get("EM_CHECKPOINT_DIR")}/cp-{{epoch:04d}}.ckpt', save_freq='epoch', period=50),
             tensorflow.keras.callbacks.TensorBoard(log_dir=f'{os.environ.get("EM_TENSORBOARD_LOG_DIR")}'),

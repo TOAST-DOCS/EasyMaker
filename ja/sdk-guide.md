@@ -60,6 +60,7 @@ experiment_id = easymaker.Experiment().create(
 | source_dir_uri                             | String  | 独自アルゴリズムを使用する場合は必須          | なし     | 最大255文字     | 学習に必要なファイルがあるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)          |
 | entry_point                                | String  | 独自アルゴリズムを使用する場合は必須          | なし     | 最大255文字     | source_dir_uri内で最初に実行されるPythonファイル情報                               |
 | model_upload_uri                           | String  | 必須                          | なし     | 最大255文字     | 学習完了したモデルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)    |
+| check_point_input_uri                      | String  | 選択                          | なし    | 最大255文字     | 입력 체크 포인트 파일 경로(NHN Cloud Object StorageまたはNHN Cloud NAS)                 |
 | check_point_upload_uri                     | String  | 選択                          | なし     | 最大255文字     | チェックポイントファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
 | timeout_hours                              | Integer | 任意                          | 720    | 1～720       | 最大学習時間(単位:時間)                                                      |
 | hyperparameter_list                        | Array   | 選択                          | なし     | 最大100個      | ハイパーパラメータ情報(hyperparameterKey/hyperparameterValueで構成)              |
@@ -97,6 +98,7 @@ training_id = easymaker.Training().run(
     ],
     timeout_hours=100,
     model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    check_point_input_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_input_path}',
     check_point_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
     dataset_list=[
         {
@@ -140,6 +142,7 @@ training_id = easymaker.Training().run(
 | source_dir_uri                                                | String         | 独自アルゴリズムを使用する場合は必須                                | なし    | 最大255文字                                      | ハイパーパラメータチューニングに必要なファイルがあるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)           |
 | entry_point                                                   | String         | 独自アルゴリズムを使用する場合は必須                                | なし    | 最大255文字                                      | source_dir_uri内で最初に実行されるPythonファイル情報                                             |
 | model_upload_uri                                              | String         | 必須                                                | なし    | 最大255文字                                      | ハイパーパラメータチューニングで学習が完了したモデルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
+| check_point_input_uri                                         | String         | 選択                                                | なし    | 最大255文字                                      | 입력 체크 포인트 파일 경로(NHN Cloud Object StorageまたはNHN Cloud NAS)                 |
 | check_point_upload_uri                                        | String         | 任意                                                | なし    | 最大255文字                                      | チェックポイントファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)               |
 | timeout_hours                                                 | Integer        | 任意                                                | 720   | 1～720                                        | 最大ハイパーパラメータチューニング時間(単位：時間)                                                       |
 | hyperparameter_spec_list                                      | Array          | 任意                                                | なし    | 最大100個                                       | ハイパーパラメータのスペック情報                                                                 |
@@ -197,6 +200,7 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
     ],
     timeout_hours=10,
     model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    check_point_input_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_input_path}',
     check_point_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
     dataset_list=[
         {

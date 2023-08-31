@@ -3,8 +3,8 @@
 ## Notebook
 Create and manage Jupyter notebook with essential packages installed for machine learning development.
 
-### Create Notebook   
-Create a Jupyter notebook. 
+### Create Notebook
+Create a Jupyter notebook.
 
 - **Image**: Select OS image to be installed on the notebook instance.
     - **Core Type**: CPU, GPU core type of the image is displayed.
@@ -16,10 +16,10 @@ Create a Jupyter notebook.
     - **Python Version**: Displays the installed Python version in the image.
 
 - **Notebook Information**
-    - Enter name and description of notebook. 
+    - Enter name and description of notebook.
     - Select instance type for notebook. The specifications of instance is selected based on Instance type selected.
 
-- **Storage** 
+- **Storage**
     - Specifies size of notebook boot storage and data storage.
         - Boot storage is the storage on which Jupiter notebooks and underlying virtual environments are installed. This storage is initialized when the notebook is restarted.
         - Data storage is block storage mounted on the `/root/easymaker` directory path. Data on this storage is retained even when the notebook is restarted.
@@ -29,15 +29,15 @@ Create a Jupyter notebook.
         - Mount Directory Name: Enter the name of the directory to mount on notebook.
         - NHN Cloud NAS Path: Enter directory path in the format `nas://{NAS ID}:/{path}`.
 
-- **Additional Settings** 
+- **Additional Settings**
     - Tags: Allows to specify tags in Key-Value format. You can enter maximum 10 tags.
 
 
-> **[Caution] When using NHN Cloud NAS** 
+> **[Caution] When using NHN Cloud NAS**
 > Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
 
-> **[Note] Time to create notebooks** 
-> Notebooks can take several minutes to create. 
+> **[Note] Time to create notebooks**
+> Notebooks can take several minutes to create.
 > Creation of the initial resources (notebooks, training, experiments, endpoint) takes additional few minutes to configure the service environment.
 
 ### Notebook List
@@ -46,20 +46,20 @@ A list of notebooks are displayed. Select a notebook in the list to check detail
 - **Name**: Notebook name is displayed. You can change the name by clicking **Change** on the details screen.
 - **Status**: Status of the notebook is displayed. Please refer to the table below for the main status.
 
-    | Status | Description |
-    | --- | --- |
-    | CREATE REQUESTED | Notebook creation is requested.  |
-    | CREATE IN PROGRESS | Notebook instance is in the process of creation. |
-    | ACTIVE (HEALTHY) | Notebook application is in normal operation.  |
-    | ACTIVE (UNHEALTHY) | Notebook application is not operating properly. If this condition persists after restarting the notebook, please contact customer service center. |
-    | STOP IN PROGRESS | Notebook stop in progress.  |
-    | STOPPED | Notebook stopped.  |
-    | START IN PROGRESS | Notebook start in progress |
-    | DELETE IN PROGRESS | Notebook delete in progress.  |
-    | CREATE FAILED | Failed to crate notebook. If keep fails to create, please contact Customer service center.   |
-    | STOP FAILED | Failed to stop notebook. Please try to stop again.  |
-    | START FAILED | Failed to start notebook. Please try to start again.  |
-    | DELETE FAILED | Failed to delete notebook. Please try to delete again.  |
+  | Status | Description |
+      | --- | --- |
+  | CREATE REQUESTED | Notebook creation is requested.  |
+  | CREATE IN PROGRESS | Notebook instance is in the process of creation. |
+  | ACTIVE (HEALTHY) | Notebook application is in normal operation.  |
+  | ACTIVE (UNHEALTHY) | Notebook application is not operating properly. If this condition persists after restarting the notebook, please contact customer service center. |
+  | STOP IN PROGRESS | Notebook stop in progress.  |
+  | STOPPED | Notebook stopped.  |
+  | START IN PROGRESS | Notebook start in progress |
+  | DELETE IN PROGRESS | Notebook delete in progress.  |
+  | CREATE FAILED | Failed to crate notebook. If keep fails to create, please contact Customer service center.   |
+  | STOP FAILED | Failed to stop notebook. Please try to stop again.  |
+  | START FAILED | Failed to start notebook. Please try to start again.  |
+  | DELETE FAILED | Failed to delete notebook. Please try to delete again.  |
 
 - **Action > Open Jupyter Notebook**: Click **Open Jupyter Notebook** button to open the notebook in a new browser window. The notebook is only accessible to users who are logged in to the console.
 - **Tag**: Tag for notebook is displayed. You can change the tag by clicking **Change**.
@@ -74,14 +74,14 @@ Please refer to the following guide to configure your virtual environment.
 
 1. On the console menu, go to **Open Jupyter Notebook **>**Jupyter Notebook > Launcher>Terminal**.
 2. Go to `/root/easymaker/custom-conda-envs` path.
-    
+
         cd /root/easymaker/custom-conda-envs
-    
+
 3. To create virtual environment called `easymaker_env` in python 3.8 version, run the command `conda create` as follows
-    
+
         conda create --prefix ./easymaker_env python=3.8
-    
-4. Created virtual environment can be checked with `conda env list` command. 
+
+4. Created virtual environment can be checked with `conda env list` command.
 
         (base) root@nb-xxxxxx-0:~# conda env list 
         # conda environments: 
@@ -90,23 +90,23 @@ Please refer to the following guide to configure your virtual environment.
                                 /opt/intel/oneapi/intelpython/latest/envs/2022.2.1 
         base                *   /opt/miniconda3 
         easymaker_env           /root/easymaker/custom-conda-envs/easymaker_env
-           
-### Stop Notebook
-Stop the running notebook or start the stopped notebook.   
 
-1. Select the notebook want to start or stop from Notebook List. 
+### Stop Notebook
+Stop the running notebook or start the stopped notebook.
+
+1. Select the notebook want to start or stop from Notebook List.
 2. Click **Start Notebook** or **Stop Notebook**.
 3. Requested action cannot be cancelled. To proceed, please click **Confirm**
 
-> **[Caution] How to retain your virtual environment and external libraries when starting the notebook after stopping it** 
-> When stopping and starting the notebook, the virtual environment and external libraries that the user create can be initialized. 
+> **[Caution] How to retain your virtual environment and external libraries when starting the notebook after stopping it**
+> When stopping and starting the notebook, the virtual environment and external libraries that the user create can be initialized.
 > In order to retain, configure your virtual environment by referring to [User Virtual Execution Environment Configuration](./console-guide/#configure-user-virtual-execution-environment).
 
 
-> **[Note] Time to start and stop notebooks** 
+> **[Note] Time to start and stop notebooks**
 > It may take several minutes to start and stop notebooks.
 
-### Change Notebook Instance Flavor 
+### Change Notebook Instance Flavor
 Change the instance flavor of the created notebook.
 Instance flavor you want to change can only be changed to the same core type instance flavor as the existing instance.
 
@@ -114,19 +114,19 @@ Instance flavor you want to change can only be changed to the same core type ins
 2. If the notebook is running (ACTIVE), click **Stop Notebook** to stop the notebook.
 3. Click **Change Instance Flavor**.
 4. Select the instance flavor you want to change and click Confirm.
-    
-> **[Note] Time to change instance flavors** 
+
+> **[Note] Time to change instance flavors**
 > It may take several minutes to change the instance flavor.
 
-### Delete Notebook   
-Delete the created notebook. 
+### Delete Notebook
+Delete the created notebook.
 
-1. Select notebook you want to delete from the list. 
+1. Select notebook you want to delete from the list.
 2. Click **Delete Notebook**
 3. Requested deletion task cannot be cancelled. To proceed, please click **Confirm**
 
-> **[Note] Storage** 
-> When deleting a notebook, boot storage and data storage are to be deleted. 
+> **[Note] Storage**
+> When deleting a notebook, boot storage and data storage are to be deleted.
 > Connected NHN Cloud NAS is not deleted and must be deleted individually from **NHN Cloud NAS**.
 
 
@@ -139,7 +139,7 @@ Experiments are managed by grouping related trainings into experiments.
 2. Enter an experiment name and description and click **OK**.
 
 > **[Note] Experiment creation time**
-Creating experiments can take several minutes. 
+Creating experiments can take several minutes.
 When creating the initial resources (laptops, trainings, labs, endpoints), it takes an extra few minutes to configure the service environment.
 
 ### List of Experiments
@@ -147,12 +147,12 @@ Experiments appears. Select an experiment to view and modify detailed informatio
 
 - **Status**: Experiment status appears. Please refer to the table below for main status.
 
-    | Status | Description |
-    | --- | --- |
-    | CREATE REQUESTED | Creating an experiment is requested. |
-    | CREATE IN PROGRESS | An experiment is being created. |
-    | CREATE FAILED | Failed to create an experiment. Please try again. |
-    | ACTIVE | The experiment is successfully created. |
+  | Status | Description |
+      | --- | --- |
+  | CREATE REQUESTED | Creating an experiment is requested. |
+  | CREATE IN PROGRESS | An experiment is being created. |
+  | CREATE FAILED | Failed to create an experiment. Please try again. |
+  | ACTIVE | The experiment is successfully created. |
 
 - **Operation**
     - Click **Go to TensorBoard** to open the TensorBoard in a new browser window, where you can view statistical information about the training included in your experiment. The TensorBoard is only accessible to users who are logged into the console.
@@ -167,9 +167,9 @@ Delete an experiment.
 2. Click **Delete Experiment**.
 3. Requested deletion cannot be undone. Click **OK** to proceed.
 
-> **[Note] Unable to delete experiment if associated training exists.** 
-> Experiment cannot be deleted if there is a training associated with the experiment. 
-> Please delete the associated training first, then delete the experiment. 
+> **[Note] Unable to delete experiment if associated training exists.**
+> Experiment cannot be deleted if there is a training associated with the experiment.
+> Please delete the associated training first, then delete the experiment.
 > For related training, you can check the list by clicking the **[Training]** tab in the detail screen at the bottom that is displayed when you click the experiment you want to delete.
 
 
@@ -196,8 +196,8 @@ Set the training environment by selecting the instance and OS image to be traine
                     - obs://{Object Enter the directory path in the format Storage API endpoint}/{containerName}/{path}.
                     - When using NHN Cloud Object Storage, refer to [Appendix > 1. Adding AI EasyMaker System Account Permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage) to set permissions. Model creation will fail if you do not set the necessary permissions.
                 - **NHN Cloud NAS** : Enter the NHN Cloud NAS path where the algorithm is stored. <br>
-                    nas://{NAS Enter the directory path in the format ID}:/{path}.
-                    
+                  nas://{NAS Enter the directory path in the format ID}:/{path}.
+
             - **entry point**
                 - The entry point is the point of entry into the execution of the algorithm from which training begins. Creates the entry point file name.
                 - The entry point file must exist in the algorithm path.
@@ -212,28 +212,32 @@ Set the training environment by selecting the instance and OS image to be traine
     - **Training instance type** : Select an instance type to run training.
     - **Number of training instances** : Enter the number of instances to perform training. If you enter more than 2 instance counts, the training runs run in parallel, allowing training to complete more quickly.
 
-- **data information**
-    - **Input data** : Enter the data set to run training on. You can set up to 10 data sets.
+- **Input Data**
+    - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
         - Dataset name: Enter a name for your data set.
         - Data Path: Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Checkpoint** : 저장된 체크 포인트부터 학습을 진행하려는 경우, 체크 포인트의 저장 경로를 입력합니다.
+        - NHN Cloud Object Storage 또는 NHN Cloud NAS 경로를 입력합니다.
+            - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+- **Output Data**
     - **Output data** : Enter the data storage path to save the training execution results.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint.
+        - Created checkpoints can be used to resume training from previous training.
         - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
 
 - **Additional settings**
-    - **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint. 
-        - Created checkpoints can be used to resume training from previous training.
-        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
     - **Data storage size** : Enter the data storage size of the instance to run training.
         - Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for training.
     - **Maximum training time** : Specifies the maximum waiting time until training is complete. training that exceeds the maximum waiting time will be terminated.
-    - **Log Management** : Logs generated during training can be stored in the NHN Cloud Log & Crash service. 
+    - **Log Management** : Logs generated during training can be stored in the NHN Cloud Log & Crash service.
         - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
     - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
-> **[Caution] When using NHN Cloud NAS,** 
+> **[Caution] When using NHN Cloud NAS,**
 > Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
 
-> **[Caution] training failure when deleting training input data** 
+> **[Caution] training failure when deleting training input data**
 > Training may fail if the input data is deleted before training is completed.
 
 ### Training List
@@ -243,21 +247,21 @@ A list of studies is displayed. If you select a training from the list, you can 
 - **Training time** : Displays the training time.
 - **Status** : Shows the status of training. Please refer to the table below for the main status.
 
-    | Status | Description |
-    | --- | --- |
-    | CREATE REQUESTED | You have requested to create a training. |
-    | CREATE IN PROGRESS | This is a state in which resources necessary for training are being created. |
-    | RUNNING | Training is in progress. |
-    | STOPPED | Training is stopped at the user's request. |
-    | COMPLETE | Training has been completed normally. |
-    | STOP IN PROGRESS | Training is stopping. |
-    | FAIL TRAIN | This is a failed state during training. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
-    | CREATE FAILED | The training creation failed. If creation continues to fail, please contact customer service. |
-    | FAIL TRAIN IN PROGRESS, COMPLETE IN PROGRESS | The resources used for training are being cleaned up. |
+  | Status | Description |
+      | --- | --- |
+  | CREATE REQUESTED | You have requested to create a training. |
+  | CREATE IN PROGRESS | This is a state in which resources necessary for training are being created. |
+  | RUNNING | Training is in progress. |
+  | STOPPED | Training is stopped at the user's request. |
+  | COMPLETE | Training has been completed normally. |
+  | STOP IN PROGRESS | Training is stopping. |
+  | FAIL TRAIN | This is a failed state during training. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
+  | CREATE FAILED | The training creation failed. If creation continues to fail, please contact customer service. |
+  | FAIL TRAIN IN PROGRESS, COMPLETE IN PROGRESS | The resources used for training are being cleaned up. |
 
 - **Operation**
     - **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
-    For how to leave a TensorBoard log, refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
+      For how to leave a TensorBoard log, refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
     - **Stop training** : You can stop training in progress.
 
 - **Hyperparameters** : You can check the hyperparameter values set for training on **the hyperparameter** tab of the detailed screen displayed when selecting training.
@@ -285,7 +289,7 @@ Deletes a training.
 2. Click **Delete Training**. Training in progress can be deleted after stopping.
 3. Requested deletion cannot be undone. Click **OK** to proceed.
 
-> **[Note] Training cannot be deleted if a related model exists.** 
+> **[Note] Training cannot be deleted if a related model exists.**
 Training cannot be deleted if a model created by the training to be deleted exists. Please delete the model first and then the training.
 
 
@@ -343,6 +347,9 @@ How to configure a hyperparameter tuning job.
     - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
         - Dataset name: Enter a name for your data set.
         - Data Path: Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Checkpoint** : 저장된 체크 포인트부터 학습을 진행하려는 경우, 체크 포인트의 저장 경로를 입력합니다.
+        - NHN Cloud Object Storage 또는 NHN Cloud NAS 경로를 입력합니다.
+            - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
 - **Output Data**
     - **Output data** : Enter the data storage path to save the training execution results.
         - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
@@ -374,10 +381,10 @@ How to configure a hyperparameter tuning job.
         - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
     - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
-> **[Caution] When using NHN Cloud NAS** 
+> **[Caution] When using NHN Cloud NAS**
 > Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
 
-> **[Caution] Training failure when deleting training input data** 
+> **[Caution] Training failure when deleting training input data**
 > Training may fail if the input data is deleted before training is completed.
 
 ### Hyperparameter Tuning List
@@ -391,21 +398,21 @@ A list of hyperparameter tunings is displayed. Select a hyperparameter tuning fr
 - **Best Training**: Indicates the target metric information of the training that recorded the highest target metric value among the training automatically generated by hyperparameter tuning.
 - **Status** : Shows the status of hyperparameter tuning. Please refer to the table below for the main status.
 
-    | Status | Description |
-    | --- | --- |
-    | CREATE REQUESTED | Requested to create hyperparameter tuning. |
-    | CREATE IN PROGRESS | Resources required for hyperparameter tuning are being created. |
-    | RUNNING | Hyperparameter tuning is in progress. |
-    | STOPPED | Hyperparameter tuning is stopped at the user's request. |
-    | COMPLETE | Hyperparameter tuning has been successfully completed. |
-    | STOP IN PROGRESS | Hyperparameter tuning is stopping. |
-    | FAIL HYPERPARAMETER TUNING | A failed state during hyperparameter tuning in progress. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
-    | CREATE FAILED | Hyperparameter tuning generation failed. If creation continues to fail, please contact customer service. |
-    | FAIL HYPERPARAMETER TUNING IN PROGRESS, COMPLETE IN PROGRESS, STOP IN PROGRESS | Resources used for hyperparameter tuning are being cleaned up. |
+  | Status | Description |
+      | --- | --- |
+  | CREATE REQUESTED | Requested to create hyperparameter tuning. |
+  | CREATE IN PROGRESS | Resources required for hyperparameter tuning are being created. |
+  | RUNNING | Hyperparameter tuning is in progress. |
+  | STOPPED | Hyperparameter tuning is stopped at the user's request. |
+  | COMPLETE | Hyperparameter tuning has been successfully completed. |
+  | STOP IN PROGRESS | Hyperparameter tuning is stopping. |
+  | FAIL HYPERPARAMETER TUNING | A failed state during hyperparameter tuning in progress. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
+  | CREATE FAILED | Hyperparameter tuning generation failed. If creation continues to fail, please contact customer service. |
+  | FAIL HYPERPARAMETER TUNING IN PROGRESS, COMPLETE IN PROGRESS, STOP IN PROGRESS | Resources used for hyperparameter tuning are being cleaned up. |
 
 - **Operation**
     - **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
-    For instructions on how to leave TensorBoard logs, please refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
+      For instructions on how to leave TensorBoard logs, please refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
     - **Stop Hyperparameter Tuning** : You can stop hyperparameter tuning in progress.
 
 ### List of Trainings for Hyperparameter Tuning
@@ -415,15 +422,15 @@ Displays a list of trainings auto-generated by hyperparameter tuning. Select a t
 - **Target Metric Value**: Indicates the target metric value.
 - **Status** : Shows the status of the training automatically generated by hyperparameter tuning. Please refer to the table below for the main status.
 
-    | Status | Description |
-    | --- | --- |
-    | CREATED | Training has been created. |
-    | RUNNING | Training is in progress. |
-    | SUCCEEDED | Training has been completed normally. |
-    | KILLED | Training is stopped by the system. |
-    | FAILED| This is a failed state during training. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
-    | METRICS_UNAVAILABLE | This is a state where target metrics cannot be collected. |
-    | EARLY_STOPPED | Performance (goal metric) is not getting better while training is in progress, so it is in an early-stopped state. |
+  | Status | Description |
+      | --- | --- |
+  | CREATED | Training has been created. |
+  | RUNNING | Training is in progress. |
+  | SUCCEEDED | Training has been completed normally. |
+  | KILLED | Training is stopped by the system. |
+  | FAILED| This is a failed state during training. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
+  | METRICS_UNAVAILABLE | This is a state where target metrics cannot be collected. |
+  | EARLY_STOPPED | Performance (goal metric) is not getting better while training is in progress, so it is in an early-stopped state. |
 
 ### Copy Hyperparameter Tuning
 
@@ -450,7 +457,7 @@ Delete a hyperparameter tuning.
 2. Click **Delete Hyperparameter Tuning**. Hyperparameter tuning in progress can be stopped and then deleted.
 3. Requested deletion cannot be undone. Click **OK** to proceed.
 
-> **[Note] Hyperparameter tuning cannot be deleted if the associated model exists.** 
+> **[Note] Hyperparameter tuning cannot be deleted if the associated model exists.**
 > Hyperparameter tuning cannot be deleted if the model created by the hyperparameter tuning you want to delete exists. Please delete the model first, then the hyperparameter tuning.
 
 ## Training Template
@@ -486,10 +493,10 @@ Delete the training template.
 2. Click **Delete Training Template**
 3. Requested deletion cannot be undone. Click **OK** to proceed.
 
-## Model 
+## Model
 Can manage models of AI EasyMaker's training outcomes or external models as artifacts.
 
-### Create Model  
+### Create Model
 
 - **Basic Information**: Enter basic information of model.
     - **Name**: Enter model name.
@@ -500,20 +507,20 @@ Can manage models of AI EasyMaker's training outcomes or external models as arti
     - **Framework Version**: Enter Model framework Version.
 - **Model Information**: Enter the storage where model's artifacts are stored.
     - **NHN Cloud Object Storage**: Enter Object Storage path where model artifact was stored.
-        - Enter a directory path in form of `obs://{Object Storage API endpoint}/{containerName}/{path}`. 
+        - Enter a directory path in form of `obs://{Object Storage API endpoint}/{containerName}/{path}`.
         - If using NHN Cloud Object Storage, please set permissions by referring to [Appendix>1. Add AI EasyMaker system account permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage). If do not set the required permissions, model creation will fail as unable to access to model artifact.
-    - **NHN Cloud NAS**: Enter NHN Cloud NAS path where model artifact is stored. 
+    - **NHN Cloud NAS**: Enter NHN Cloud NAS path where model artifact is stored.
         - Enter directory path in form of `nas://{NAS ID}:/{path}`
 - **Additional Settings**: Enter the additional information of model.
     - **Tag**: To add tag, click the **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
-> **[Caution] When using NHN Cloud NAS** 
+> **[Caution] When using NHN Cloud NAS**
 Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
 
-> **[Caution] Retain model artifacts in storage** 
+> **[Caution] Retain model artifacts in storage**
 > If not retained the model artifacts stored in storage, the creation of endpoints for that model fails.
 
-### Model List 
+### Model List
 Model list is displayed. Selecting a model in the list allows to check detailed information and make changes to it.
 
 - **Name**: Model name and description are displayed. Model name and description can be changed by clicking **Change**.
@@ -529,26 +536,26 @@ Create an endpoint that can serve the selected model.
 
 1. Select the model you want to create as an endpoint from the list.
 2. Click **Create Endpoint**.
-3. Get moved to **Create Endpoint** page. After checking the contents, click **Create Endpoint** to create a model. 
-For more information on creating models, refer to **Endpoint** documents.
+3. Get moved to **Create Endpoint** page. After checking the contents, click **Create Endpoint** to create a model.
+   For more information on creating models, refer to **Endpoint** documents.
 
 
-### Delete Model   
+### Delete Model
 Delete a model.
 
-1. Select the model want to delete from list. 
+1. Select the model want to delete from list.
 2. Click **Delete Model**.
 3. Requested deletion task cannot be cancelled. To proceed, please click **Confirm**
 
-> **[Note] Unable to delete model if associated endpoint exists** 
-> You cannot delete model if endpoint created by model want to delete is existed. 
+> **[Note] Unable to delete model if associated endpoint exists**
+> You cannot delete model if endpoint created by model want to delete is existed.
 > To delete, delete the endpoint created by the model first and then delete the model.
 
 
 ## Endpoint
 Create and manage endpoints that can serve the model.
 
-### Create Endpoint  
+### Create Endpoint
 
 - **Enable API Gateway Service**
     - AI EasyMaker endpoints create API endpoints and manage APIs through NHN Cloud API Gateway service. API Gateway service must be enabled to take advantage of endpoint feature.
@@ -569,13 +576,13 @@ Create and manage endpoints that can serve the model.
     - **Number of Instances**: Enter the number of drives for instance.
 - **Additional Settings > Tag**: To add a tag, click **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
-> **[Note] Time to create endpoints** 
-> Endpoint creation can take several minutes. 
+> **[Note] Time to create endpoints**
+> Endpoint creation can take several minutes.
 > Creation of the initial resources (notebooks, training, experiments, endpoints) takes additional few minutes to configure the service environment.
 
-> **[Note] Restrictions on API Gateway service resource provision when creating endpoints** 
-> When you create a new endpoint, create a new API Gateway service. 
-> Adding new stage on existing endpoint creates new stage in API Gateway service. 
+> **[Note] Restrictions on API Gateway service resource provision when creating endpoints**
+> When you create a new endpoint, create a new API Gateway service.
+> Adding new stage on existing endpoint creates new stage in API Gateway service.
 > If you exceed the resource provision policy in [API Gateway Service Resource Provision Policy](https://docs.nhncloud.com/en/TOAST/en/resource-policy/#resource-provision-policy-for-api-gateway-service), you might not be able to create endpoints in AI EasyMaker. In this case, adjust API Gateway service resource quota.
 
 ### Endpoint List
@@ -584,29 +591,29 @@ Endpoints list is displayed. Select an endpoint in the list to check details and
 - **Default Stage URL**: Displays URL of default stage among the stages on the endpoint.
 - **Status**: Status of endpoint. Please refer to the table below for main status.
 
-    | Status | Description |
-    | --- | --- |
-    | CREATE REQUESTED |  Endpoint creation is requested.  |
-    | CREATE IN PROGRESS | Endpoint creation is in progress.  |
-    | UPDATE IN PROGRESS | Some of endpoint stages have tasks in progress.<br/>You can check the status of task for each stage in the endpoint stage list. |
-    | DELETE IN PROGRESS | Endpoint deletion is in progress. |
-    | ACTIVE | Endpoint is in normal operation. |
-    | CREATE FAILED | Endpoint creation has failed. <br/>You must delete and recreate the endpoint. If the creation fails repeatedly, please contact the Customer Center. |
-    | UPDATE FAILED | Some of endpoint stages are not serviced properly. You must delete and recreate the stages with issues. |
+  | Status | Description |
+      | --- | --- |
+  | CREATE REQUESTED |  Endpoint creation is requested.  |
+  | CREATE IN PROGRESS | Endpoint creation is in progress.  |
+  | UPDATE IN PROGRESS | Some of endpoint stages have tasks in progress.<br/>You can check the status of task for each stage in the endpoint stage list. |
+  | DELETE IN PROGRESS | Endpoint deletion is in progress. |
+  | ACTIVE | Endpoint is in normal operation. |
+  | CREATE FAILED | Endpoint creation has failed. <br/>You must delete and recreate the endpoint. If the creation fails repeatedly, please contact the Customer Center. |
+  | UPDATE FAILED | Some of endpoint stages are not serviced properly. You must delete and recreate the stages with issues. |
 
 - **API Gateway Status**: Displays API Gateway status information for default stage of endpoint. Please refer to the table below for main status.
-    
-    | Status | Description |
-    | --- | --- |
-    | CREATE IN PROGRESS |  API Gateway Resource creation in progress.  |
-    | STAGE DEPLOYING |  API Gateway default stage deploying in progress. |
-    | ACTIVE |  API Gateway default stage is successfully deployed and activated. |
-    | NOT FOUND: STAGE | Default stage for endpoint is not found.<br/>Please check if the stage exists in API Gateway console.<br/>If stage is deleted, the deleted API Gateway stage cannot be recovered, and the endpoint have to be deleted and recreated. |
-    | NOT FOUND: STAGE DEPLOY RESULT | The deployment status of the endpoint default stage is not found.<br/>Please check if the default stage is deployed in API Gateway console. |
-    | STAGE DEPLOY FAIL |  API Gateway default stage has failed to deploy. <br/>[Note] Please refer to **Recovery method when the stage's API Gateway in 'Deployment Failure' status** and recover from the deployment failed state. |
-    
 
-### Create Endpoint Stage  
+  | Status | Description |
+      | --- | --- |
+  | CREATE IN PROGRESS |  API Gateway Resource creation in progress.  |
+  | STAGE DEPLOYING |  API Gateway default stage deploying in progress. |
+  | ACTIVE |  API Gateway default stage is successfully deployed and activated. |
+  | NOT FOUND: STAGE | Default stage for endpoint is not found.<br/>Please check if the stage exists in API Gateway console.<br/>If stage is deleted, the deleted API Gateway stage cannot be recovered, and the endpoint have to be deleted and recreated. |
+  | NOT FOUND: STAGE DEPLOY RESULT | The deployment status of the endpoint default stage is not found.<br/>Please check if the default stage is deployed in API Gateway console. |
+  | STAGE DEPLOY FAIL |  API Gateway default stage has failed to deploy. <br/>[Note] Please refer to **Recovery method when the stage's API Gateway in 'Deployment Failure' status** and recover from the deployment failed state. |
+
+
+### Create Endpoint Stage
 Add new stage to existing endpoint. You can create and test the new stage without affecting default stage.
 
 1. In Endpoint list, click **Endpoint Name**.
@@ -619,15 +626,15 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 
 - **Status**: Displays status of endpoint stage. Please refer to the table below for main status.
 
-    | Status | Description |
-    | --- | --- |
-    | CREATE REQUESTED |  Endpoint stage creation requested.  |
-    | CREATE IN PROGRESS |  Endpoint stage creation is in progress.  |
-    | DEPLOY IN PROGRESS |  Model deployment to the endpoint stage is in progress.|
-    | DELETE IN PROGRESS |  Endpoint stage deletion is in progress.  |
-    | ACTIVE |  Endpoint stage is normal operation. |
-    | CREATE FAILED |  Endpoint stage creation has failed. Please try again.   |
-    | DEPLOY FAILED |  Deployment to the endpoint stage has failed. Please try again.   |
+  | Status | Description |
+      | --- | --- |
+  | CREATE REQUESTED |  Endpoint stage creation requested.  |
+  | CREATE IN PROGRESS |  Endpoint stage creation is in progress.  |
+  | DEPLOY IN PROGRESS |  Model deployment to the endpoint stage is in progress.|
+  | DELETE IN PROGRESS |  Endpoint stage deletion is in progress.  |
+  | ACTIVE |  Endpoint stage is normal operation. |
+  | CREATE FAILED |  Endpoint stage creation has failed. Please try again.   |
+  | DEPLOY FAILED |  Deployment to the endpoint stage has failed. Please try again.   |
 
 - **API Gateway Status**: Displays stage status of API Gateway from where endpoint stage is deployed.
 - **Default Stage Check**: Displays whether it is a default stage or not.
@@ -644,10 +651,10 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 > Please note the following precautions when changing API Gateway services and stages created by AI EasyMaker directly from API Gateway service console.
 > 1. Avoid deleting API Gateway services and stages created by AI EasyMaker. Deletion may prevent the endpoint from displaying API Gateway information correctly, and changes made to endpoint may not be applied to API Gateway.
 > 2. Avoid changing or deleting resources in API Gateway resource path that was entered when creating endpoints. Deletion may cause the endpoint's inference API call to fail
-> 3. Avoid adding resources in API Gateway resource path that was entered when creating endpoints. The added resources may be deleted when adding or changing endpoint stages. 
+> 3. Avoid adding resources in API Gateway resource path that was entered when creating endpoints. The added resources may be deleted when adding or changing endpoint stages.
 > 4. In the stage settings of API Gateway, do not disable **Backend Endpoint Url Redifinition** or change the URL set in API Gateway resource path. If you change the url, endpoint's inference API call might fail.
-> Other than above precautions, other settings are available with features provided by API Gateway as necessary. 
-> For more information about how to use API Gateway, refer to [API Gateway Console Guide](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/console-guide/).
+     > Other than above precautions, other settings are available with features provided by API Gateway as necessary.
+     > For more information about how to use API Gateway, refer to [API Gateway Console Guide](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/console-guide/).
 
 > **[Note] Recovery method when the stage's API Gateway is in 'Deployment Failed' status**
 > If stage settings of AI EasyMaker endpoint are not deployed to the API Gateway stage due to a temporary issue, deployment status is displayed as failed.
@@ -690,7 +697,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 
 ### Change Endpoint Default Stage
 
-Change the default stage of the endpoint to another stage. 
+Change the default stage of the endpoint to another stage.
 To change the model of an endpoint without service stop, AI EasyMaker recommends deploying the model using stage capabilities.
 
 1. Stages operating as actual services are operated by the default stage.
@@ -701,18 +708,18 @@ To change the model of an endpoint without service stop, AI EasyMaker recommends
 6. Requested deletion task cannot be cancelled. If want to proceed, please click **Confirm**
 7. Stage that you want to change changes to the default stage, and resources of existing default stage are automatically deleted.
 
-### Delete Endpoint Stage  
+### Delete Endpoint Stage
 
 1. In Endpoint list, click **Endpoint Name** to go to Endpoint Stage list.
 2. In Endpoint Stages list, select the endpoint stage want to delete. You cannot delete default stage.
 3. Click **Delete Stage**.
 4. Requested deletion task cannot be cancelled. If want to proceed, please click **Confirm**
 
-> **[Caution] Delete stage of API Gateway service when deleting the endpoint stage** 
-> Deleting an endpoint stage in AI EasyMaker also deletes the stage in API Gateway service from which the endpoint's stage is deployed. 
+> **[Caution] Delete stage of API Gateway service when deleting the endpoint stage**
+> Deleting an endpoint stage in AI EasyMaker also deletes the stage in API Gateway service from which the endpoint's stage is deployed.
 > If there is an API running on the API Gateway stage to be deleted, please be noted that API calls cannot be made.
 
-### Delete Endpoint  
+### Delete Endpoint
 Delete an endpoint.
 
 1. Select the endpoint want to delete from endpoints list.
@@ -720,8 +727,8 @@ Delete an endpoint.
 3. Click **Delete Endpoint**.
 4. Requested deletion task cannot be cancelled. If want to proceed, please click **Confirm**
 
-> **[Caution] Delete API Gateway service when deleting the endpoint stage** 
-> Deleting an endpoint stage in AI EasyMaker also deletes API Gateway service from which the endpoint's stage was deployed. 
+> **[Caution] Delete API Gateway service when deleting the endpoint stage**
+> Deleting an endpoint stage in AI EasyMaker also deletes API Gateway service from which the endpoint's stage was deployed.
 > If there is API running on the API Gateway service to be deleted, please be noted that API calls cannot be made.
 
 
@@ -729,7 +736,7 @@ Delete an endpoint.
 
 ### 1. Add AI EasyMaker system account permissions to NHN Cloud Object Storage
 
-Some features of AI EasyMaker use the user's NHN Cloud Object Storage as input/output storage 
+Some features of AI EasyMaker use the user's NHN Cloud Object Storage as input/output storage
 You must allow read or write access to user’s AI EasyMaker system account in NHN Cloud Object Storage container for running normal features.
 
 Allowing read/write permissions on the AI EasyMaker system account to the user's NHN Cloud Object Storage container is meaning that AI EasyMaker system account can read or write files in accordance with permissions granted to all files in the user's NHN Cloud Object Storage container.
@@ -749,8 +756,8 @@ The 'User' take responsibility for all consequences of allowing the user to acce
 
 To add read/write permissions to AI EasyMaker system account in Object Storage, refer to the following:
 
-1. Click **[Training]** or **[Model]** Tab>**AI EasyMaker System Account Information**. 
-2. Archive the AI EasyMaker system account information, **AI EasyMaker Tenant ID** and **AI EasyMaker API User ID**. 
+1. Click **[Training]** or **[Model]** Tab>**AI EasyMaker System Account Information**.
+2. Archive the AI EasyMaker system account information, **AI EasyMaker Tenant ID** and **AI EasyMaker API User ID**.
 3. Go to the NHN Cloud Object Storage console.
 4. [Allow specific projects or users to read/write](https://docs.nhncloud.com/en/Storage/Object%20Storage/en/acl-guide/#allow-readwrite-to-specific-projects-or-specific-users) Refer to documents to add required read and write permissions to AI EasyMaker system account in NHN Cloud Object Storage console.
 
@@ -758,11 +765,11 @@ To add read/write permissions to AI EasyMaker system account in Object Storage, 
 ### 2. NHN Cloud Log & Crash Search Service Usage Guide and Log Inquiry Guide
 
 #### NHN Cloud Log & Crash Search Service Usage Guide
-Logs and events generated by the AI EasyMaker service can be stored in the NHN Cloud Log & Crash Search service. 
+Logs and events generated by the AI EasyMaker service can be stored in the NHN Cloud Log & Crash Search service.
 To store logs in the Log & Crash Search service, you have to enable Log & Crash service and separate usage fee will be charged.
 
-- **Information on Log & Crash Search service use and fee** 
-    - For more information and fees on the Log & Crash Search service, please refer to the following documents 
+- **Information on Log & Crash Search service use and fee**
+    - For more information and fees on the Log & Crash Search service, please refer to the following documents
         - [Log & Crash Search Service Guide](https://docs.nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/Overview/)
         - [Log & Crash Search Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
@@ -774,38 +781,38 @@ To store logs in the Log & Crash Search service, you have to enable Log & Crash 
         * Question: category:"easymaker.training"
     * AI EasyMaker endpoint logs query: Query logs with category field "easymaker.inference"
         * Question: category:"easymaker.inference"
-    * AI EasyMaker Log Full Query: Query logs with logType field "NNHCloud-AIEasyMaker" 
+    * AI EasyMaker Log Full Query: Query logs with logType field "NNHCloud-AIEasyMaker"
         * Question: logType:"NHNCloud-AIEasyMaker"
 3. For more information on how to use Log & Crash Search service, refer to [Log & Crash Search Service Console Guide](https://docs.nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/console-guide/).
 
 AI EasyMaker service sends logs to Log & Crash Search service in the following defined fields:
 
-- **Common Log Field** 
+- **Common Log Field**
 
-    | Name | Description | Valid range |
-    | --- | --- | --- | 
-    | easymakerAppKey | AI EasyMaker Appkey(AppKey) | - |
-    | category | Log category | easymaker.training, easymaker.inference |
-    | logLevel | Log level | INFO, WARNING, ERROR |
-    | body | Log contents | - |
-    | logType | Service name provided by log | NHNCloud-AIEasyMaker |
-    | time | Log Occurrence Time (UTC Time) | - |
+  | Name | Description | Valid range |
+      | --- | --- | --- | 
+  | easymakerAppKey | AI EasyMaker Appkey(AppKey) | - |
+  | category | Log category | easymaker.training, easymaker.inference |
+  | logLevel | Log level | INFO, WARNING, ERROR |
+  | body | Log contents | - |
+  | logType | Service name provided by log | NHNCloud-AIEasyMaker |
+  | time | Log Occurrence Time (UTC Time) | - |
 
 - **Training Log field**
 
-    | Name | Description |
-    |---------------------| --- |
-    | trainingId | AI EasyMaker training ID  |
+  | Name | Description |
+      |---------------------| --- |
+  | trainingId | AI EasyMaker training ID  |
 
 - **Endpoint Log Field**
 
-    | Name | Description |
-    | --- | --- | 
-    | endpointId | AI EasyMaker Endpoint ID |
-    | endpointStageId | Endpoint stage ID | 
-    | inferenceId | Inference request own ID | 
-    | action | Action classification (Endpoint.Model) | 
-    | modelName | Model name to be inferred | 
+  | Name | Description |
+      | --- | --- | 
+  | endpointId | AI EasyMaker Endpoint ID |
+  | endpointStageId | Endpoint stage ID | 
+  | inferenceId | Inference request own ID | 
+  | action | Action classification (Endpoint.Model) | 
+  | modelName | Model name to be inferred | 
 
 ### 3. Hyperparameters
 
@@ -837,19 +844,20 @@ As shown in the example below, you can use hyperparameter values entered during 
 * Models that have been trained in the code must be saved in the EM_MODEL_DIR path.
 * **Key Environment Variables**
 
-    | Environment variable name              | Description |
-    | --- | --- |
-    | EM_SOURCE_DIR                          | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded |
-    | EM_ENTRY_POINT                         | Algorithm entry point name entered at training creation |
-    | EM_DATASET_${Data set name}            | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
-    | EM_DATASETS                            | Full data set list ( json format) |
-    | EM_MODEL_DIR                           | Model storage path |
-    | EM_CHECKPOINT_DIR                      | Checkpoint Storage Path |
-    | EM_HP_${ Upper case converted Hyperparameter key } | Hyperparameter value corresponding to the hyperparameter key |
-    | EM_HPS                                 | Full Hyperparameter List (in json format) |
-    | EM_TENSORBOARD_LOG_DIR                 | TensorBoard log path for checking training results |
-    | EM_REGION                              | Current Region Information |
-    | EM_APPKEY                              | Appkey of AI EasyMaker service currently in use |
+  | Environment variable name                          | Description |
+  ----------------------------------------------------| --- | --- |
+  | EM_SOURCE_DIR                                      | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded |
+  | EM_ENTRY_POINT                                     | Algorithm entry point name entered at training creation |
+  | EM_DATASET_${Data set name}                        | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
+  | EM_DATASETS                                        | Full data set list ( json format) |
+  | EM_MODEL_DIR                                       | Model storage path |
+  | EM_CHECKPOINT_INPUT_DIR                            | 입력 체크 포인트 저장 경로                             |
+  | EM_CHECKPOINT_DIR                                  | Checkpoint Storage Path |
+  | EM_HP_${ Upper case converted Hyperparameter key } | Hyperparameter value corresponding to the hyperparameter key |
+  | EM_HPS                                             | Full Hyperparameter List (in json format) |
+  | EM_TENSORBOARD_LOG_DIR                             | TensorBoard log path for checking training results |
+  | EM_REGION                                          | Current Region Information |
+  | EM_APPKEY                                          | Appkey of AI EasyMaker service currently in use |
 
 * **Example code for utilizing environment variables**
 
@@ -860,6 +868,7 @@ As shown in the example below, you can use hyperparameter values entered during 
         train_data = read_data(dataset_dir, "train.csv")
 
         model = ... # Implement the model using input data
+        model.load_weights(os.environ.get('EM_CHECKPOINT_INPUT_DIR', None))
         callbacks = [
             tensorflow.keras.callbacks.ModelCheckpoint(filepath=f'{os.environ.get("EM_CHECKPOINT_DIR")}/cp-{{epoch:04d}}.ckpt', save_freq='epoch', period=50),
             tensorflow.keras.callbacks.TensorBoard(log_dir=f'{os.environ.get("EM_TENSORBOARD_LOG_DIR")}'),
@@ -876,7 +885,7 @@ As shown in the example below, you can use hyperparameter values entered during 
 * **Example code for Tesnsorboard log storage (TensorFlow)**
 
         import tensorflow as tf 
- 
+
         # Specify the TensorBoard log path 
         tb_log = tf.keras.callbacks.TensorBoard(log_dir=os.environ.get("EM_TENSORBOARD_LOG_DIR")) 
         
