@@ -15,6 +15,7 @@ It is an algorithm (ResNet-50) that classifies types of images.
 | per_device_eval_batch_size | False | int | 16 | [1~∞) |evaluation batch size per GPU/TPU core/CPU |
 | num_train_epochs | False | int | 3 | [1~∞) | The total number of times the entire training is performed  |
 | save_steps  | False | int | 500 | [1~∞) | Step cycle to store checkpoints |
+| logging_steps  | False | int | 10 | [1~∞)   | 로그를 출력하는 step 주기 |
 
 
 ### Data Set
@@ -36,7 +37,7 @@ folder/train/dog/golden_retriever.png
 ...
 ```
 
-#### Validation (optional)
+#### Validation (required)
 This is the data set for validation. Data sets should be prepared in a directory structure defined as follows. 
 
 ```
@@ -120,6 +121,7 @@ An algorithm (SegFormer-B3) that predicts the label of every pixel region within
 | per_device_train_batch_size | False | int | 4 | [0~∞) |Training batch size per GPU/TPU core/CPU  |
 | num_train_epochs | False | float | 3.0 | [0.0~∞) | The total number of times the entire training is performed  |
 | save_steps  | False | int | 500 | [1~∞) | Step cycle to store checkpoints |
+| logging_steps  | False | int | 10 | [1~∞)   | 로그를 출력하는 step 주기 |
 
 
 ### Data Set
@@ -319,6 +321,7 @@ An algorithm (detr-resnet-50) that predicts the position (bbox) and class (class
 | num_train_epochs | False | float | 3.0 | [0.0~∞) | The total number of times the entire training is performed |
 | threshold | False | float | 0.5 | [0.0~1.0] | Inference Threshold | 
 | save_steps  | False | int | 500 | [1~∞) | Step cycle to store checkpoints |
+| logging_steps  | False | int | 10 | [1~∞)   | 로그를 출력하는 step 주기 |
 
 
 ### Data Set
@@ -442,6 +445,23 @@ For detailed format, refer to Data format and Object Detection in the [format-da
     ]
 }
 ```
+
+#### Validation (required)
+This is the data set for validation. Datasets should be prepared in a defined directory structure like this:
+
+```
+folder/validation/_annotations.coco.json
+
+folder/validation/0001.png
+folder/validation/0002.png
+folder/validation/0003.png
+...
+```
+
+* \_annotations.coco.json file  
+It is written in the format of COCO Dataset.
+For detailed format, refer to Data format and Object Detection in the [format-data document of COCO Dataset](https://cocodataset.org/#format-data).
+
 
 #### Test (required)
 This is the data set for test. Datasets should be prepared in a defined directory structure like this: 

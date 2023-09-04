@@ -212,17 +212,21 @@ Set the training environment by selecting the instance and OS image to be traine
     - **Training instance type** : Select an instance type to run training.
     - **Number of training instances** : Enter the number of instances to perform training. If you enter more than 2 instance counts, the training runs run in parallel, allowing training to complete more quickly.
 
-- **data information**
-    - **Input data** : Enter the data set to run training on. You can set up to 10 data sets.
+- **Input Data**
+    - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
         - Dataset name: Enter a name for your data set.
         - Data Path: Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Checkpoint** : 저장된 체크 포인트부터 학습을 진행하려는 경우, 체크 포인트의 저장 경로를 입력합니다.
+      - NHN Cloud Object Storage 또는 NHN Cloud NAS 경로를 입력합니다.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+- **Output Data**
     - **Output data** : Enter the data storage path to save the training execution results.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint.
+        - Created checkpoints can be used to resume training from previous training.
         - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
 
 - **Additional settings**
-    - **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint. 
-        - Created checkpoints can be used to resume training from previous training.
-        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
     - **Data storage size** : Enter the data storage size of the instance to run training.
         - Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for training.
     - **Maximum training time** : Specifies the maximum waiting time until training is complete. training that exceeds the maximum waiting time will be terminated.
@@ -304,25 +308,37 @@ How to configure a hyperparameter tuning job.
     - **Hyperparameter Tuning Name**: Enter a name for the hyperparameter tuning job.
     - **Description**: Input when a description of the hyperparameter tuning task is required.
     - **Experiment**: Select an experiment to include hyperparameter tuning. Experiments group related hyperparameter tunings. If no experiments have been created, click **Add** to create one.
-- **Algorithm Information**
-    - **algorithm path**
-        - **NHN Cloud Object Storage** : Enter the path of NHN Cloud Object Storage where algorithms are stored.<br>
-            - obs://{Object Enter the directory path in the format Storage API endpoint}/{containerName}/{path}.
-            - When using NHN Cloud Object Storage, refer to [Appendix > 1. Adding AI EasyMaker System Account Permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage) to set permissions. Model creation will fail if you do not set the necessary permissions.
-        - **NHN Cloud NAS** : Enter the NHN Cloud NAS path where the algorithm is stored. <br>
-            nas://{NAS Enter the directory path in the format ID}:/{path}.
-    - **entry point**
-        - The entry point is the point of entry into the execution of the algorithm from which training begins. Creates the entry point file name.
-        - The entry point file must exist in the algorithm path.
-        - Creating **requirements.txt** in the same path will install the required python packages from the script.
-    - **Hyperparameter Specification**
-        - **Name** : Defines which hyperparameters to tune.
-        - **Type** : Select the data type of the hyperparameter.
-        - **Value/Range**
-            - **Min**: Defines the minimum value.
-            - **Max**: Defines the maximum value.
-            - **Step**: Determines the size of the hyperparameter value change when using the "Grid" tuning strategy.
-            - **Comma-Separated Values**: Tune hyperparameters using static values (e.g. sgd, adam).
+- **Algorithm Information**: 학습하려는 알고리즘에 대한 정보를 입력합니다.
+    - **알고리즘 유형**: 알고리즘 유형을 선택합니다.
+        - **NHN Cloud 제공 알고리즘**: AI EasyMaker에서 제공하는 알고리즘을 사용합니다. 제공하는 알고리즘에 대한 상세 정보는 [NHN Cloud 제공 알고리즘 가이드](./algorithm-guide/#) 문서를 참고합니다.
+            - **알고리즘**: 알고리즘을 선택합니다.
+            - **하이퍼파라미터 스펙**: 하이퍼파라미터 튜닝에 사용할 하이퍼파라미터 값 범위를 입력합니다. 알고리즘별 하이퍼파라미터에 대한 자세한 정보는  [NHN Cloud 제공 알고리즘 가이드](./algorithm-guide/#) 문서를 참고합니다.
+                - **이름**: 어떤 하이퍼파라미터를 튜닝할지 정의합니다. 알고리즘 별로 정해져 있습니다.
+                - **유형**: 하이퍼파라미터의 데이터 유형을 선택합니다. 알고리즘 별로 정해져 있습니다.
+                - **값/범위**
+                    - **Min**: 최솟값을 정의합니다.
+                    - **Max**: 최댓값을 정의합니다.
+                    - **Step**: "Grid" 튜닝 전략을 사용할 때 하이퍼파라미터 값의 변화 크기를 결정합니다.
+            - **알고리즘 지표**: 알고리즘에서 생성되는 지표에 대한 정보가 표시됩니다.
+        - **자체 알고리즘**: 사용자가 작성한 알고리즘을 사용합니다.
+            - **algorithm path**
+                - **NHN Cloud Object Storage** : Enter the path of NHN Cloud Object Storage where algorithms are stored.<br>
+                    - obs://{Object Enter the directory path in the format Storage API endpoint}/{containerName}/{path}.
+                    - When using NHN Cloud Object Storage, refer to [Appendix > 1. Adding AI EasyMaker System Account Permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage) to set permissions. Model creation will fail if you do not set the necessary permissions.
+                - **NHN Cloud NAS** : Enter the NHN Cloud NAS path where the algorithm is stored. <br>
+                  nas://{NAS Enter the directory path in the format ID}:/{path}.
+            - **entry point**
+                - The entry point is the point of entry into the execution of the algorithm from which training begins. Creates the entry point file name.
+                - The entry point file must exist in the algorithm path.
+                - Creating **requirements.txt** in the same path will install the required python packages from the script.
+            - **Hyperparameter Specification**
+                - **Name** : Defines which hyperparameters to tune.
+                - **Type** : Select the data type of the hyperparameter.
+                - **Value/Range**
+                    - **Min**: Defines the minimum value.
+                    - **Max**: Defines the maximum value.
+                    - **Step**: Determines the size of the hyperparameter value change when using the "Grid" tuning strategy.
+                    - **Comma-Separated Values**: Tune hyperparameters using static values (e.g. sgd, adam).
 - **Image** : Choose an image for your instance that matches the environment in which you need to run your training.
 - **Training Instance Information**
     - **Training instance type** : Select an instance type to run training.
@@ -331,6 +347,9 @@ How to configure a hyperparameter tuning job.
     - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
         - Dataset name: Enter a name for your data set.
         - Data Path: Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Checkpoint** : 저장된 체크 포인트부터 학습을 진행하려는 경우, 체크 포인트의 저장 경로를 입력합니다.
+        - NHN Cloud Object Storage 또는 NHN Cloud NAS 경로를 입력합니다.
+            - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
 - **Output Data**
     - **Output data** : Enter the data storage path to save the training execution results.
         - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
@@ -825,19 +844,20 @@ As shown in the example below, you can use hyperparameter values entered during 
 * Models that have been trained in the code must be saved in the EM_MODEL_DIR path.
 * **Key Environment Variables**
 
-    | Environment variable name              | Description |
-    | --- | --- |
-    | EM_SOURCE_DIR                          | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded |
-    | EM_ENTRY_POINT                         | Algorithm entry point name entered at training creation |
-    | EM_DATASET_${Data set name}            | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
-    | EM_DATASETS                            | Full data set list ( json format) |
-    | EM_MODEL_DIR                           | Model storage path |
-    | EM_CHECKPOINT_DIR                      | Checkpoint Storage Path |
+    | Environment variable name                          | Description |
+----------------------------------------------------| --- | --- |
+    | EM_SOURCE_DIR                                      | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded |
+    | EM_ENTRY_POINT                                     | Algorithm entry point name entered at training creation |
+    | EM_DATASET_${Data set name}                        | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
+    | EM_DATASETS                                        | Full data set list ( json format) |
+    | EM_MODEL_DIR                                       | Model storage path |
+    | EM_CHECKPOINT_INPUT_DIR                            | 입력 체크 포인트 저장 경로                             |
+    | EM_CHECKPOINT_DIR                                  | Checkpoint Storage Path |
     | EM_HP_${ Upper case converted Hyperparameter key } | Hyperparameter value corresponding to the hyperparameter key |
-    | EM_HPS                                 | Full Hyperparameter List (in json format) |
-    | EM_TENSORBOARD_LOG_DIR                 | TensorBoard log path for checking training results |
-    | EM_REGION                              | Current Region Information |
-    | EM_APPKEY                              | Appkey of AI EasyMaker service currently in use |
+    | EM_HPS                                             | Full Hyperparameter List (in json format) |
+    | EM_TENSORBOARD_LOG_DIR                             | TensorBoard log path for checking training results |
+    | EM_REGION                                          | Current Region Information |
+    | EM_APPKEY                                          | Appkey of AI EasyMaker service currently in use |
 
 * **Example code for utilizing environment variables**
 
@@ -848,6 +868,7 @@ As shown in the example below, you can use hyperparameter values entered during 
         train_data = read_data(dataset_dir, "train.csv")
 
         model = ... # Implement the model using input data
+        model.load_weights(os.environ.get('EM_CHECKPOINT_INPUT_DIR', None))
         callbacks = [
             tensorflow.keras.callbacks.ModelCheckpoint(filepath=f'{os.environ.get("EM_CHECKPOINT_DIR")}/cp-{{epoch:04d}}.ckpt', save_freq='epoch', period=50),
             tensorflow.keras.callbacks.TensorBoard(log_dir=f'{os.environ.get("EM_TENSORBOARD_LOG_DIR")}'),
