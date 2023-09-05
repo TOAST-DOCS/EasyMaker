@@ -568,9 +568,11 @@ Create and manage endpoints that can serve the model.
 - **Endpoint name**: Enter the endpoint name. Endpoint names cannot be duplicated.
 - **Stage Name**: When adding new stage on existing endpoint, enter name for new stage. Stage names cannot be duplicated.
 - **Description**: Enter the description of endpoint stage.
-- **Model Information**: Enter the information for model artifacts to deploy to endpoint.
+- **Stage Resource Information**: Enter the information for model artifacts to deploy to endpoint.
     - **Model**: Select the model you want to deploy to endpoint. If have not created model yet, please create model first.
     - **API Gateway Resource Path**: Enter API resource path for the model being deployed. For example, if set to `/inference`, you can request inference API at `POST https://{point-domain}/inference`.
+    - **파드 수**: 스테이지 리소스의 파드 수를 입력합니다.
+    - **설명**: 스테이지 리소스 설명을 입력합니다.
 - **Instance Information**: Enter instance information for the model to be served.
     - **Instance Flavor**: Select instance type.
     - **Number of Instances**: Enter the number of drives for instance.
@@ -639,12 +641,11 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 - **API Gateway Status**: Displays stage status of API Gateway from where endpoint stage is deployed.
 - **Default Stage Check**: Displays whether it is a default stage or not.
 - **Stage URL**: Displays Stage URL of API Gateway where the model is served.
-- **Stage Endpoint URL**: Endpoint URL of the model deployed on stage. API client can request API to displayed URL.
 - **View API Gateway Settings**: Click **View Settings** to see settings that AI EasyMaker has deployed to API Gateway stage.
 - **View API Gateway Statistics**: Click **View Statistics** to view API statistics of endpoints.
-- **Model ID/Name/Artifact Path**: Displays information of models deployed on stage.
 - **Instance Flavor**: Displays endpoint instance type the model is serving.
 - **Number of Work Nodes/Pods In Progress**: Displays the number of nodes and pods being used by endpoint.
+- **스테이지 리소스**: 스테이지에 배포된 모델 아티팩트 정보가 표시됩니다.
 
 > **[Caution] Precautions when changing settings for API Gateway created by AI EasyMaker**
 > When creating an endpoint or an endpoint stage, AI EasyMaker creates API Gateway services and stages for the endpoint.
@@ -661,15 +662,40 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 > In this case, you can deploy API Gateway stage manually by clicking Select Stage from the Stage list > View API Gateway Settings > 'Deploy Stage' in the bottom detail screen.
 > If this guide couldn’t recover the deployment status, please contact the Customer Center.
 
+### 스테이지 리소스 생성
+기존 엔드포인트 스테이지에 신규 리소스를 추가합니다.
+
+- **모델**: 엔드포인트에 배포하려는 모델을 선택합니다. 모델을 생성하지 않은 경우 모델을 먼저 생성하시기 바랍니다.
+- **API Gateway 리소스 경로**: 배포되는 모델의 API 리소스 경로를 입력합니다. 예를 들어 `/inference`로 설정한 경우, `POST https://{enpdoint-domain}/inference`로 추론 API를 요청할 수 있습니다.
+- **파드 수**: 스테이지 리소스의 파드 수를 입력합니다.
+- **설명**: 스테이지 리소스 설명을 입력합니다.
+
+### 스테이지 리소스 목록
+엔드포인트 스테이지 하위에 생성된 리소스 목록이 표시됩니다.
+
+- **상태**: 스테이지 리소스의 상태가 표시됩니다. 주요 상태는 아래 표를 참고해 주세요.
+
+    | 상태 | 설명 |
+    | --- | --- |
+    | CREATE REQUESTED |  스테이지 리소스 생성이 요청된 상태입니다. |
+    | CREATE IN PROGRESS |  스테이지 리소스를 생성 중인 상태입니다. |
+    | DELETE IN PROGRESS |  스테이지 리소스를 삭제 중인 상태입니다. |
+    | ACTIVE |  스테이지 리소스가 정상적으로 배포된 상태입니다. |
+    | CREATE FAILED |  스테이지 리소스 생성에 실패한 상태입니다. 다시 시도해 주세요. |
+
+ - **모델 이름**: 스테이지에 배포된 모델의 이름입니다.
+ - **API Gateway 리소스 경로**: 스테이지에 배포된 모델의 엔드포인트 URL입니다. API 클라이언트는 표시된 URL로 API를 요청할 수 있습니다.
+ - **파드 수**: 리소스에서 사용 중인 정상 파드와 전체 파드 수가 표시됩니다.
+
 ### Call Endpoint Inference
 
 1. When you click Stage in Endpoint > Endpoint Stage, Stage details screen is displayed at the bottom.
-2. Check stage endpoint URL on detail screen.
-3. When the stage endpoint URL is called the HTTP POST Method, inference API is called.
+2. 상세화면의 스테이지 리소스 탭에서 API Gateway 리소스 경로를 확인합니다.
+3. When the API Gateway resource path is called the HTTP POST Method, inference API is called.
     - Request and response specifications of the inference API differ depending on the algorithm user created.
 
             // Inference API example: Request
-            curl --location --request POST '{Stage Endpoint URL}' \
+            curl --location --request POST '{API Gateway Resource Path}' \
                     --header 'Content-Type: application/json' \
                     --data-raw '{
                 "instances": [
@@ -694,6 +720,14 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
                 ]
             }
 
+
+### 스테이지 리소스 삭제
+
+1. 엔드포인트 목록에서 **엔드포인트 이름**을 클릭하여 엔드포인트 스테이지 목록으로 이동합니다.
+2. 엔드포인트 스테이지 목록에서 삭제할 스테이지 리소스가 배포된 엔드포인트 스테이지를 클릭합니다. 클릭하면, 하단에 스테이지 상세화면이 표시됩니다.
+3. 상세화면의 스테이지 리소스 탭에서 삭제할 스테이지 리소스를 선택합니다.
+3. **스테이지 리소스 삭제**를 클릭합니다.
+4. 요청된 삭제 작업은 취소할 수 없습니다. 계속 진행하려면 **확인**을 클릭합니다.
 
 ### Change Endpoint Default Stage
 

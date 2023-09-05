@@ -46,20 +46,20 @@ A list of notebooks are displayed. Select a notebook in the list to check detail
 - **Name**: Notebook name is displayed. You can change the name by clicking **Change** on the details screen.
 - **Status**: Status of the notebook is displayed. Please refer to the table below for the main status.
 
-  | Status | Description |
-      | --- | --- |
-  | CREATE REQUESTED | Notebook creation is requested.  |
-  | CREATE IN PROGRESS | Notebook instance is in the process of creation. |
-  | ACTIVE (HEALTHY) | Notebook application is in normal operation.  |
-  | ACTIVE (UNHEALTHY) | Notebook application is not operating properly. If this condition persists after restarting the notebook, please contact customer service center. |
-  | STOP IN PROGRESS | Notebook stop in progress.  |
-  | STOPPED | Notebook stopped.  |
-  | START IN PROGRESS | Notebook start in progress |
-  | DELETE IN PROGRESS | Notebook delete in progress.  |
-  | CREATE FAILED | Failed to crate notebook. If keep fails to create, please contact Customer service center.   |
-  | STOP FAILED | Failed to stop notebook. Please try to stop again.  |
-  | START FAILED | Failed to start notebook. Please try to start again.  |
-  | DELETE FAILED | Failed to delete notebook. Please try to delete again.  |
+    | Status | Description |
+    | --- | --- |
+    | CREATE REQUESTED | Notebook creation is requested.  |
+    | CREATE IN PROGRESS | Notebook instance is in the process of creation. |
+    | ACTIVE (HEALTHY) | Notebook application is in normal operation.  |
+    | ACTIVE (UNHEALTHY) | Notebook application is not operating properly. If this condition persists after restarting the notebook, please contact customer service center. |
+    | STOP IN PROGRESS | Notebook stop in progress.  |
+    | STOPPED | Notebook stopped.  |
+    | START IN PROGRESS | Notebook start in progress |
+    | DELETE IN PROGRESS | Notebook delete in progress.  |
+    | CREATE FAILED | Failed to crate notebook. If keep fails to create, please contact Customer service center.   |
+    | STOP FAILED | Failed to stop notebook. Please try to stop again.  |
+    | START FAILED | Failed to start notebook. Please try to start again.  |
+    | DELETE FAILED | Failed to delete notebook. Please try to delete again.  |
 
 - **Action > Open Jupyter Notebook**: Click **Open Jupyter Notebook** button to open the notebook in a new browser window. The notebook is only accessible to users who are logged in to the console.
 - **Tag**: Tag for notebook is displayed. You can change the tag by clicking **Change**.
@@ -147,12 +147,12 @@ Experiments appears. Select an experiment to view and modify detailed informatio
 
 - **Status**: Experiment status appears. Please refer to the table below for main status.
 
-  | Status | Description |
-      | --- | --- |
-  | CREATE REQUESTED | Creating an experiment is requested. |
-  | CREATE IN PROGRESS | An experiment is being created. |
-  | CREATE FAILED | Failed to create an experiment. Please try again. |
-  | ACTIVE | The experiment is successfully created. |
+    | Status | Description |
+    | --- | --- |
+    | CREATE REQUESTED | Creating an experiment is requested. |
+    | CREATE IN PROGRESS | An experiment is being created. |
+    | CREATE FAILED | Failed to create an experiment. Please try again. |
+    | ACTIVE | The experiment is successfully created. |
 
 - **Operation**
     - Click **Go to TensorBoard** to open the TensorBoard in a new browser window, where you can view statistical information about the training included in your experiment. The TensorBoard is only accessible to users who are logged into the console.
@@ -196,7 +196,7 @@ Set the training environment by selecting the instance and OS image to be traine
                     - obs://{Object Enter the directory path in the format Storage API endpoint}/{containerName}/{path}.
                     - When using NHN Cloud Object Storage, refer to [Appendix > 1. Adding AI EasyMaker System Account Permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage) to set permissions. Model creation will fail if you do not set the necessary permissions.
                 - **NHN Cloud NAS** : Enter the NHN Cloud NAS path where the algorithm is stored. <br>
-                  nas://{NAS Enter the directory path in the format ID}:/{path}.
+                    nas://{NAS Enter the directory path in the format ID}:/{path}.
 
             - **entry point**
                 - The entry point is the point of entry into the execution of the algorithm from which training begins. Creates the entry point file name.
@@ -217,8 +217,8 @@ Set the training environment by selecting the instance and OS image to be traine
         - Dataset name: Enter a name for your data set.
         - Data Path: Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
     - **Checkpoint** : 저장된 체크 포인트부터 학습을 진행하려는 경우, 체크 포인트의 저장 경로를 입력합니다.
-        - NHN Cloud Object Storage 또는 NHN Cloud NAS 경로를 입력합니다.
-            - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+      - NHN Cloud Object Storage 또는 NHN Cloud NAS 경로를 입력합니다.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
 - **Output Data**
     - **Output data** : Enter the data storage path to save the training execution results.
         - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
@@ -247,21 +247,21 @@ A list of studies is displayed. If you select a training from the list, you can 
 - **Training time** : Displays the training time.
 - **Status** : Shows the status of training. Please refer to the table below for the main status.
 
-  | Status | Description |
-      | --- | --- |
-  | CREATE REQUESTED | You have requested to create a training. |
-  | CREATE IN PROGRESS | This is a state in which resources necessary for training are being created. |
-  | RUNNING | Training is in progress. |
-  | STOPPED | Training is stopped at the user's request. |
-  | COMPLETE | Training has been completed normally. |
-  | STOP IN PROGRESS | Training is stopping. |
-  | FAIL TRAIN | This is a failed state during training. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
-  | CREATE FAILED | The training creation failed. If creation continues to fail, please contact customer service. |
-  | FAIL TRAIN IN PROGRESS, COMPLETE IN PROGRESS | The resources used for training are being cleaned up. |
+    | Status | Description |
+    | --- | --- |
+    | CREATE REQUESTED | You have requested to create a training. |
+    | CREATE IN PROGRESS | This is a state in which resources necessary for training are being created. |
+    | RUNNING | Training is in progress. |
+    | STOPPED | Training is stopped at the user's request. |
+    | COMPLETE | Training has been completed normally. |
+    | STOP IN PROGRESS | Training is stopping. |
+    | FAIL TRAIN | This is a failed state during training. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
+    | CREATE FAILED | The training creation failed. If creation continues to fail, please contact customer service. |
+    | FAIL TRAIN IN PROGRESS, COMPLETE IN PROGRESS | The resources used for training are being cleaned up. |
 
 - **Operation**
     - **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
-      For how to leave a TensorBoard log, refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
+    For how to leave a TensorBoard log, refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
     - **Stop training** : You can stop training in progress.
 
 - **Hyperparameters** : You can check the hyperparameter values set for training on **the hyperparameter** tab of the detailed screen displayed when selecting training.
@@ -398,21 +398,21 @@ A list of hyperparameter tunings is displayed. Select a hyperparameter tuning fr
 - **Best Training**: Indicates the target metric information of the training that recorded the highest target metric value among the training automatically generated by hyperparameter tuning.
 - **Status** : Shows the status of hyperparameter tuning. Please refer to the table below for the main status.
 
-  | Status | Description |
-      | --- | --- |
-  | CREATE REQUESTED | Requested to create hyperparameter tuning. |
-  | CREATE IN PROGRESS | Resources required for hyperparameter tuning are being created. |
-  | RUNNING | Hyperparameter tuning is in progress. |
-  | STOPPED | Hyperparameter tuning is stopped at the user's request. |
-  | COMPLETE | Hyperparameter tuning has been successfully completed. |
-  | STOP IN PROGRESS | Hyperparameter tuning is stopping. |
-  | FAIL HYPERPARAMETER TUNING | A failed state during hyperparameter tuning in progress. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
-  | CREATE FAILED | Hyperparameter tuning generation failed. If creation continues to fail, please contact customer service. |
-  | FAIL HYPERPARAMETER TUNING IN PROGRESS, COMPLETE IN PROGRESS, STOP IN PROGRESS | Resources used for hyperparameter tuning are being cleaned up. |
+    | Status | Description |
+    | --- | --- |
+    | CREATE REQUESTED | Requested to create hyperparameter tuning. |
+    | CREATE IN PROGRESS | Resources required for hyperparameter tuning are being created. |
+    | RUNNING | Hyperparameter tuning is in progress. |
+    | STOPPED | Hyperparameter tuning is stopped at the user's request. |
+    | COMPLETE | Hyperparameter tuning has been successfully completed. |
+    | STOP IN PROGRESS | Hyperparameter tuning is stopping. |
+    | FAIL HYPERPARAMETER TUNING | A failed state during hyperparameter tuning in progress. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
+    | CREATE FAILED | Hyperparameter tuning generation failed. If creation continues to fail, please contact customer service. |
+    | FAIL HYPERPARAMETER TUNING IN PROGRESS, COMPLETE IN PROGRESS, STOP IN PROGRESS | Resources used for hyperparameter tuning are being cleaned up. |
 
 - **Operation**
     - **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
-      For instructions on how to leave TensorBoard logs, please refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
+    For instructions on how to leave TensorBoard logs, please refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
     - **Stop Hyperparameter Tuning** : You can stop hyperparameter tuning in progress.
 
 ### List of Trainings for Hyperparameter Tuning
@@ -422,15 +422,15 @@ Displays a list of trainings auto-generated by hyperparameter tuning. Select a t
 - **Target Metric Value**: Indicates the target metric value.
 - **Status** : Shows the status of the training automatically generated by hyperparameter tuning. Please refer to the table below for the main status.
 
-  | Status | Description |
-      | --- | --- |
-  | CREATED | Training has been created. |
-  | RUNNING | Training is in progress. |
-  | SUCCEEDED | Training has been completed normally. |
-  | KILLED | Training is stopped by the system. |
-  | FAILED| This is a failed state during training. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
-  | METRICS_UNAVAILABLE | This is a state where target metrics cannot be collected. |
-  | EARLY_STOPPED | Performance (goal metric) is not getting better while training is in progress, so it is in an early-stopped state. |
+    | Status | Description |
+    | --- | --- |
+    | CREATED | Training has been created. |
+    | RUNNING | Training is in progress. |
+    | SUCCEEDED | Training has been completed normally. |
+    | KILLED | Training is stopped by the system. |
+    | FAILED| This is a failed state during training. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
+    | METRICS_UNAVAILABLE | This is a state where target metrics cannot be collected. |
+    | EARLY_STOPPED | Performance (goal metric) is not getting better while training is in progress, so it is in an early-stopped state. |
 
 ### Copy Hyperparameter Tuning
 
@@ -537,7 +537,7 @@ Create an endpoint that can serve the selected model.
 1. Select the model you want to create as an endpoint from the list.
 2. Click **Create Endpoint**.
 3. Get moved to **Create Endpoint** page. After checking the contents, click **Create Endpoint** to create a model.
-   For more information on creating models, refer to **Endpoint** documents.
+For more information on creating models, refer to **Endpoint** documents.
 
 
 ### Delete Model
@@ -568,9 +568,11 @@ Create and manage endpoints that can serve the model.
 - **Endpoint name**: Enter the endpoint name. Endpoint names cannot be duplicated.
 - **Stage Name**: When adding new stage on existing endpoint, enter name for new stage. Stage names cannot be duplicated.
 - **Description**: Enter the description of endpoint stage.
-- **Model Information**: Enter the information for model artifacts to deploy to endpoint.
+- **Stage Resource Information**: Enter the information for model artifacts to deploy to endpoint.
     - **Model**: Select the model you want to deploy to endpoint. If have not created model yet, please create model first.
     - **API Gateway Resource Path**: Enter API resource path for the model being deployed. For example, if set to `/inference`, you can request inference API at `POST https://{point-domain}/inference`.
+    - **파드 수**: 스테이지 리소스의 파드 수를 입력합니다.
+    - **설명**: 스테이지 리소스 설명을 입력합니다.
 - **Instance Information**: Enter instance information for the model to be served.
     - **Instance Flavor**: Select instance type.
     - **Number of Instances**: Enter the number of drives for instance.
@@ -591,26 +593,26 @@ Endpoints list is displayed. Select an endpoint in the list to check details and
 - **Default Stage URL**: Displays URL of default stage among the stages on the endpoint.
 - **Status**: Status of endpoint. Please refer to the table below for main status.
 
-  | Status | Description |
-      | --- | --- |
-  | CREATE REQUESTED |  Endpoint creation is requested.  |
-  | CREATE IN PROGRESS | Endpoint creation is in progress.  |
-  | UPDATE IN PROGRESS | Some of endpoint stages have tasks in progress.<br/>You can check the status of task for each stage in the endpoint stage list. |
-  | DELETE IN PROGRESS | Endpoint deletion is in progress. |
-  | ACTIVE | Endpoint is in normal operation. |
-  | CREATE FAILED | Endpoint creation has failed. <br/>You must delete and recreate the endpoint. If the creation fails repeatedly, please contact the Customer Center. |
-  | UPDATE FAILED | Some of endpoint stages are not serviced properly. You must delete and recreate the stages with issues. |
+    | Status | Description |
+    | --- | --- |
+    | CREATE REQUESTED |  Endpoint creation is requested.  |
+    | CREATE IN PROGRESS | Endpoint creation is in progress.  |
+    | UPDATE IN PROGRESS | Some of endpoint stages have tasks in progress.<br/>You can check the status of task for each stage in the endpoint stage list. |
+    | DELETE IN PROGRESS | Endpoint deletion is in progress. |
+    | ACTIVE | Endpoint is in normal operation. |
+    | CREATE FAILED | Endpoint creation has failed. <br/>You must delete and recreate the endpoint. If the creation fails repeatedly, please contact the Customer Center. |
+    | UPDATE FAILED | Some of endpoint stages are not serviced properly. You must delete and recreate the stages with issues. |
 
 - **API Gateway Status**: Displays API Gateway status information for default stage of endpoint. Please refer to the table below for main status.
 
-  | Status | Description |
-      | --- | --- |
-  | CREATE IN PROGRESS |  API Gateway Resource creation in progress.  |
-  | STAGE DEPLOYING |  API Gateway default stage deploying in progress. |
-  | ACTIVE |  API Gateway default stage is successfully deployed and activated. |
-  | NOT FOUND: STAGE | Default stage for endpoint is not found.<br/>Please check if the stage exists in API Gateway console.<br/>If stage is deleted, the deleted API Gateway stage cannot be recovered, and the endpoint have to be deleted and recreated. |
-  | NOT FOUND: STAGE DEPLOY RESULT | The deployment status of the endpoint default stage is not found.<br/>Please check if the default stage is deployed in API Gateway console. |
-  | STAGE DEPLOY FAIL |  API Gateway default stage has failed to deploy. <br/>[Note] Please refer to **Recovery method when the stage's API Gateway in 'Deployment Failure' status** and recover from the deployment failed state. |
+    | Status | Description |
+    | --- | --- |
+    | CREATE IN PROGRESS |  API Gateway Resource creation in progress.  |
+    | STAGE DEPLOYING |  API Gateway default stage deploying in progress. |
+    | ACTIVE |  API Gateway default stage is successfully deployed and activated. |
+    | NOT FOUND: STAGE | Default stage for endpoint is not found.<br/>Please check if the stage exists in API Gateway console.<br/>If stage is deleted, the deleted API Gateway stage cannot be recovered, and the endpoint have to be deleted and recreated. |
+    | NOT FOUND: STAGE DEPLOY RESULT | The deployment status of the endpoint default stage is not found.<br/>Please check if the default stage is deployed in API Gateway console. |
+    | STAGE DEPLOY FAIL |  API Gateway default stage has failed to deploy. <br/>[Note] Please refer to **Recovery method when the stage's API Gateway in 'Deployment Failure' status** and recover from the deployment failed state. |
 
 
 ### Create Endpoint Stage
@@ -626,25 +628,24 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 
 - **Status**: Displays status of endpoint stage. Please refer to the table below for main status.
 
-  | Status | Description |
-      | --- | --- |
-  | CREATE REQUESTED |  Endpoint stage creation requested.  |
-  | CREATE IN PROGRESS |  Endpoint stage creation is in progress.  |
-  | DEPLOY IN PROGRESS |  Model deployment to the endpoint stage is in progress.|
-  | DELETE IN PROGRESS |  Endpoint stage deletion is in progress.  |
-  | ACTIVE |  Endpoint stage is normal operation. |
-  | CREATE FAILED |  Endpoint stage creation has failed. Please try again.   |
-  | DEPLOY FAILED |  Deployment to the endpoint stage has failed. Please try again.   |
+    | Status | Description |
+    | --- | --- |
+    | CREATE REQUESTED |  Endpoint stage creation requested.  |
+    | CREATE IN PROGRESS |  Endpoint stage creation is in progress.  |
+    | DEPLOY IN PROGRESS |  Model deployment to the endpoint stage is in progress.|
+    | DELETE IN PROGRESS |  Endpoint stage deletion is in progress.  |
+    | ACTIVE |  Endpoint stage is normal operation. |
+    | CREATE FAILED |  Endpoint stage creation has failed. Please try again.   |
+    | DEPLOY FAILED |  Deployment to the endpoint stage has failed. Please try again.   |
 
 - **API Gateway Status**: Displays stage status of API Gateway from where endpoint stage is deployed.
 - **Default Stage Check**: Displays whether it is a default stage or not.
 - **Stage URL**: Displays Stage URL of API Gateway where the model is served.
-- **Stage Endpoint URL**: Endpoint URL of the model deployed on stage. API client can request API to displayed URL.
 - **View API Gateway Settings**: Click **View Settings** to see settings that AI EasyMaker has deployed to API Gateway stage.
 - **View API Gateway Statistics**: Click **View Statistics** to view API statistics of endpoints.
-- **Model ID/Name/Artifact Path**: Displays information of models deployed on stage.
 - **Instance Flavor**: Displays endpoint instance type the model is serving.
 - **Number of Work Nodes/Pods In Progress**: Displays the number of nodes and pods being used by endpoint.
+- **스테이지 리소스**: 스테이지에 배포된 모델 아티팩트 정보가 표시됩니다.
 
 > **[Caution] Precautions when changing settings for API Gateway created by AI EasyMaker**
 > When creating an endpoint or an endpoint stage, AI EasyMaker creates API Gateway services and stages for the endpoint.
@@ -653,23 +654,48 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 > 2. Avoid changing or deleting resources in API Gateway resource path that was entered when creating endpoints. Deletion may cause the endpoint's inference API call to fail
 > 3. Avoid adding resources in API Gateway resource path that was entered when creating endpoints. The added resources may be deleted when adding or changing endpoint stages.
 > 4. In the stage settings of API Gateway, do not disable **Backend Endpoint Url Redifinition** or change the URL set in API Gateway resource path. If you change the url, endpoint's inference API call might fail.
-     > Other than above precautions, other settings are available with features provided by API Gateway as necessary.
-     > For more information about how to use API Gateway, refer to [API Gateway Console Guide](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/console-guide/).
+> Other than above precautions, other settings are available with features provided by API Gateway as necessary.
+> For more information about how to use API Gateway, refer to [API Gateway Console Guide](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/console-guide/).
 
 > **[Note] Recovery method when the stage's API Gateway is in 'Deployment Failed' status**
 > If stage settings of AI EasyMaker endpoint are not deployed to the API Gateway stage due to a temporary issue, deployment status is displayed as failed.
 > In this case, you can deploy API Gateway stage manually by clicking Select Stage from the Stage list > View API Gateway Settings > 'Deploy Stage' in the bottom detail screen.
 > If this guide couldn’t recover the deployment status, please contact the Customer Center.
 
+### 스테이지 리소스 생성
+엔드포인트 스테이지에 신규 리소스를 추가합니다.
+
+- **모델**: 엔드포인트에 배포하려는 모델을 선택합니다. 모델을 생성하지 않은 경우 모델을 먼저 생성하시기 바랍니다.
+- **API Gateway 리소스 경로**: 배포되는 모델의 API 리소스 경로를 입력합니다. 예를 들어 `/inference`로 설정한 경우, `POST https://{enpdoint-domain}/inference`로 추론 API를 요청할 수 있습니다.
+- **파드 수**: 스테이지 리소스의 파드 수를 입력합니다.
+- **설명**: 스테이지 리소스 설명을 입력합니다.
+
+### 스테이지 리소스 목록
+엔드포인트 스테이지 하위에 생성된 리소스 목록이 표시됩니다.
+
+- **상태**: 스테이지 리소스의 상태가 표시됩니다. 주요 상태는 아래 표를 참고해 주세요.
+
+    | 상태 | 설명 |
+    | --- | --- |
+    | CREATE REQUESTED |  스테이지 리소스 생성이 요청된 상태입니다. |
+    | CREATE IN PROGRESS |  스테이지 리소스를 생성 중인 상태입니다. |
+    | DELETE IN PROGRESS |  스테이지 리소스를 삭제 중인 상태입니다. |
+    | ACTIVE |  스테이지 리소스가 정상적으로 배포된 상태입니다. |
+    | CREATE FAILED |  스테이지 리소스 생성에 실패한 상태입니다. 다시 시도해 주세요. |
+
+ - **모델 이름**: 스테이지에 배포된 모델의 이름입니다.
+ - **API Gateway 리소스 경로**: 스테이지에 배포된 모델의 엔드포인트 URL입니다. API 클라이언트는 표시된 URL로 API를 요청할 수 있습니다.
+ - **파드 수**: 리소스에서 사용 중인 정상 파드와 전체 파드 수가 표시됩니다.
+
 ### Call Endpoint Inference
 
 1. When you click Stage in Endpoint > Endpoint Stage, Stage details screen is displayed at the bottom.
-2. Check stage endpoint URL on detail screen.
-3. When the stage endpoint URL is called the HTTP POST Method, inference API is called.
+2. 상세화면의 스테이지 리소스 탭에서 API Gateway 리소스 경로를 확인합니다.
+3. When the API Gateway resource path is called the HTTP POST Method, inference API is called.
     - Request and response specifications of the inference API differ depending on the algorithm user created.
 
             // Inference API example: Request
-            curl --location --request POST '{Stage Endpoint URL}' \
+            curl --location --request POST '{API Gateway Resource Path}' \
                     --header 'Content-Type: application/json' \
                     --data-raw '{
                 "instances": [
@@ -694,6 +720,14 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
                 ]
             }
 
+
+### 스테이지 리소스 삭제
+
+1. 엔드포인트 목록에서 **엔드포인트 이름**을 클릭하여 엔드포인트 스테이지 목록으로 이동합니다.
+2. 엔드포인트 스테이지 목록에서 삭제할 스테이지 리소스가 배포된 엔드포인트 스테이지를 클릭합니다. 클릭하면, 하단에 스테이지 상세화면이 표시됩니다.
+3. 상세화면의 스테이지 리소스 탭에서 삭제할 스테이지 리소스를 선택합니다.
+3. **스테이지 리소스 삭제**를 클릭합니다.
+4. 요청된 삭제 작업은 취소할 수 없습니다. 계속 진행하려면 **확인**을 클릭합니다.
 
 ### Change Endpoint Default Stage
 
@@ -789,30 +823,30 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
 
 - **Common Log Field**
 
-  | Name | Description | Valid range |
-      | --- | --- | --- |
-  | easymakerAppKey | AI EasyMaker Appkey(AppKey) | - |
-  | category | Log category | easymaker.training, easymaker.inference |
-  | logLevel | Log level | INFO, WARNING, ERROR |
-  | body | Log contents | - |
-  | logType | Service name provided by log | NHNCloud-AIEasyMaker |
-  | time | Log Occurrence Time (UTC Time) | - |
+    | Name | Description | Valid range |
+    | --- | --- | --- |
+    | easymakerAppKey | AI EasyMaker Appkey(AppKey) | - |
+    | category | Log category | easymaker.training, easymaker.inference |
+    | logLevel | Log level | INFO, WARNING, ERROR |
+    | body | Log contents | - |
+    | logType | Service name provided by log | NHNCloud-AIEasyMaker |
+    | time | Log Occurrence Time (UTC Time) | - |
 
 - **Training Log field**
 
-  | Name | Description |
-      |---------------------| --- |
-  | trainingId | AI EasyMaker training ID  |
+    | Name | Description |
+    |---------------------| --- |
+    | trainingId | AI EasyMaker training ID  |
 
 - **Endpoint Log Field**
 
-  | Name | Description |
-      | --- | --- |
-  | endpointId | AI EasyMaker Endpoint ID |
-  | endpointStageId | Endpoint stage ID |
-  | inferenceId | Inference request own ID |
-  | action | Action classification (Endpoint.Model) |
-  | modelName | Model name to be inferred |
+    | Name | Description |
+    | --- | --- |
+    | endpointId | AI EasyMaker Endpoint ID |
+    | endpointStageId | Endpoint stage ID |
+    | inferenceId | Inference request own ID |
+    | action | Action classification (Endpoint.Model) |
+    | modelName | Model name to be inferred |
 
 ### 3. Hyperparameters
 
@@ -844,20 +878,20 @@ As shown in the example below, you can use hyperparameter values entered during 
 * Models that have been trained in the code must be saved in the EM_MODEL_DIR path.
 * **Key Environment Variables**
 
-  | Environment variable name                          | Description |
-  ----------------------------------------------------| --- | --- |
-  | EM_SOURCE_DIR                                      | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded |
-  | EM_ENTRY_POINT                                     | Algorithm entry point name entered at training creation |
-  | EM_DATASET_${Data set name}                        | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
-  | EM_DATASETS                                        | Full data set list ( json format) |
-  | EM_MODEL_DIR                                       | Model storage path |
-  | EM_CHECKPOINT_INPUT_DIR                            | 입력 체크 포인트 저장 경로                             |
-  | EM_CHECKPOINT_DIR                                  | Checkpoint Storage Path |
-  | EM_HP_${ Upper case converted Hyperparameter key } | Hyperparameter value corresponding to the hyperparameter key |
-  | EM_HPS                                             | Full Hyperparameter List (in json format) |
-  | EM_TENSORBOARD_LOG_DIR                             | TensorBoard log path for checking training results |
-  | EM_REGION                                          | Current Region Information |
-  | EM_APPKEY                                          | Appkey of AI EasyMaker service currently in use |
+    | Environment variable name                          | Description |
+----------------------------------------------------| --- | --- |
+    | EM_SOURCE_DIR                                      | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded |
+    | EM_ENTRY_POINT                                     | Algorithm entry point name entered at training creation |
+    | EM_DATASET_${Data set name}                        | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
+    | EM_DATASETS                                        | Full data set list ( json format) |
+    | EM_MODEL_DIR                                       | Model storage path |
+    | EM_CHECKPOINT_INPUT_DIR                            | 입력 체크 포인트 저장 경로                             |
+    | EM_CHECKPOINT_DIR                                  | Checkpoint Storage Path |
+    | EM_HP_${ Upper case converted Hyperparameter key } | Hyperparameter value corresponding to the hyperparameter key |
+    | EM_HPS                                             | Full Hyperparameter List (in json format) |
+    | EM_TENSORBOARD_LOG_DIR                             | TensorBoard log path for checking training results |
+    | EM_REGION                                          | Current Region Information |
+    | EM_APPKEY                                          | Appkey of AI EasyMaker service currently in use |
 
 * **Example code for utilizing environment variables**
 
