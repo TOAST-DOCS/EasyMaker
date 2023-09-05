@@ -83,12 +83,12 @@ Please refer to the following guide to configure your virtual environment.
 
 4. Created virtual environment can be checked with `conda env list` command.
 
-        (base) root@nb-xxxxxx-0:~# conda env list 
-        # conda environments: 
-        # 
-                                /opt/intel/oneapi/intelpython/latest 
-                                /opt/intel/oneapi/intelpython/latest/envs/2022.2.1 
-        base                *   /opt/miniconda3 
+        (base) root@nb-xxxxxx-0:~# conda env list
+        # conda environments:
+        #
+                                /opt/intel/oneapi/intelpython/latest
+                                /opt/intel/oneapi/intelpython/latest/envs/2022.2.1
+        base                *   /opt/miniconda3
         easymaker_env           /root/easymaker/custom-conda-envs/easymaker_env
 
 ### Stop Notebook
@@ -668,7 +668,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 3. When the stage endpoint URL is called the HTTP POST Method, inference API is called.
     - Request and response specifications of the inference API differ depending on the algorithm user created.
 
-            // Inference API example: Request 
+            // Inference API example: Request
             curl --location --request POST '{Stage Endpoint URL}' \
                     --header 'Content-Type: application/json' \
                     --data-raw '{
@@ -677,21 +677,21 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
                     [6.0,  3.4,  4.5,  1.6]
                     ]
             }'
-                        
-            // Inference API Example: Response 
-            { 
-                "predictions" : [ 
-                    [ 
-                        0.337502569, 
-                        0.332836747, 
-                        0.329660654 
-                    ], 
-                    [ 
-                        0.337530434, 
-                        0.332806051, 
-                        0.329663515 
-                    ] 
-                ] 
+
+            // Inference API Example: Response
+            {
+                "predictions" : [
+                    [
+                        0.337502569,
+                        0.332836747,
+                        0.329660654
+                    ],
+                    [
+                        0.337530434,
+                        0.332806051,
+                        0.329663515
+                    ]
+                ]
             }
 
 
@@ -790,7 +790,7 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
 - **Common Log Field**
 
   | Name | Description | Valid range |
-      | --- | --- | --- | 
+      | --- | --- | --- |
   | easymakerAppKey | AI EasyMaker Appkey(AppKey) | - |
   | category | Log category | easymaker.training, easymaker.inference |
   | logLevel | Log level | INFO, WARNING, ERROR |
@@ -807,12 +807,12 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
 - **Endpoint Log Field**
 
   | Name | Description |
-      | --- | --- | 
+      | --- | --- |
   | endpointId | AI EasyMaker Endpoint ID |
-  | endpointStageId | Endpoint stage ID | 
-  | inferenceId | Inference request own ID | 
-  | action | Action classification (Endpoint.Model) | 
-  | modelName | Model name to be inferred | 
+  | endpointStageId | Endpoint stage ID |
+  | inferenceId | Inference request own ID |
+  | action | Action classification (Endpoint.Model) |
+  | modelName | Model name to be inferred |
 
 ### 3. Hyperparameters
 
@@ -824,17 +824,17 @@ As shown in the example below, you can use hyperparameter values entered during 
 ![HyperParameter Input Screen](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_en.png)
 
         import argparse
-    
+
         model_version = os.environ.get("EM_HP_MODEL_VERSION")
-    
+
         def parse_hyperparameters():
             parser = argparse.ArgumentParser()
-    
+
             # Parsing the entered hyper parameter
             parser.add_argument("--epochs", type=int, default=500)
             parser.add_argument("--batch_size", type=int, default=32)
             ...
-    
+
             return parser.parse_known_args()
 
 ### 4. Environment Variables
@@ -884,14 +884,14 @@ As shown in the example below, you can use hyperparameter values entered during 
 
 * **Example code for Tesnsorboard log storage (TensorFlow)**
 
-        import tensorflow as tf 
+        import tensorflow as tf
 
-        # Specify the TensorBoard log path 
-        tb_log = tf.keras.callbacks.TensorBoard(log_dir=os.environ.get("EM_TENSORBOARD_LOG_DIR")) 
-        
+        # Specify the TensorBoard log path
+        tb_log = tf.keras.callbacks.TensorBoard(log_dir=os.environ.get("EM_TENSORBOARD_LOG_DIR"))
+
         model = ... # model implementation
-        
-        model.fit(x_train, y_train, validation_data=(x_test, y_test), 
+
+        model.fit(x_train, y_train, validation_data=(x_test, y_test),
                 epochs=100, batch_size=20, callbacks=[tb_log])
 
 ![Check TensorBoard Log](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_tensorboard.png)

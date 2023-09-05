@@ -19,7 +19,7 @@ Jupyterノートパソコンを作成します。
     - ノートパソコンの名前、説明を入力します。
     - ノートパソコンのインスタンスタイプを選択します。選択したタイプに基づいてインスタンスの仕様が選択されます。
 
-- **ストレージ** 
+- **ストレージ**
     - ノートパソコンのブートストレージとデータストレージサイズを指定します。
         - ブートストレージは、Jupyterノートパソコンおよび基本仮想環境がインストールされるストレージです。このストレージはノートパソコンを再起動すると初期化されます。
         - データストレージは`/root/easymaker`ディレクトリパスにマウントされるブロックストレージです。このストレージのデータはノートパソコンを再起動しても維持されます。
@@ -29,7 +29,7 @@ Jupyterノートパソコンを作成します。
         - マウントディレクトリ名：ノートパソコンにマウントするディレクトリ名を入力します。
         - NHN Cloud NASパス：`nas://{NAS ID}:/{path}`形式のディレクトリパスを入力します。
 
-- **追加設定** 
+- **追加設定**
     - タグ：Key-Value形式のタグを指定できます。タグは最大10個まで入力できます。
 
 
@@ -74,14 +74,14 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
 
 1. コンソールノートパソコンメニューの**Jupyterノートパソコンを開く** > **Jupyterノートパソコン > Launcher > Terminal**をクリックします。
 2. `/root/easymaker/custom-conda-envs`パスに移動します。
-    
+
         cd /root/easymaker/custom-conda-envs
-    
+
 3. Python 3.8バージョンの`easymaker_env`という仮想環境を作成するには、次のように`conda create`コマンドを実行します。
-    
+
         conda create --prefix ./easymaker_env python=3.8
-    
-4. 作成された仮想環境は`conda env list`コマンドで確認できます。 
+
+4. 作成された仮想環境は`conda env list`コマンドで確認できます。
 
         (base) root@nb-xxxxxx-0:~# conda env list
         # conda environments:
@@ -90,7 +90,7 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
                                 /opt/intel/oneapi/intelpython/latest/envs/2022.2.1
         base                *   /opt/miniconda3
         easymaker_env           /root/easymaker/custom-conda-envs/easymaker_env
-    
+
 ### ノートパソコンの停止
 動作中のノートパソコンを停止するか、停止したノートパソコンを起動します。
 
@@ -106,7 +106,7 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
 > **[参考]ノートパソコンの起動と停止の所要時間**
 > ノートパソコンの起動と停止は数分かかる場合があります。
 
-### ノートパソコンインスタンスタイプの変更 
+### ノートパソコンインスタンスタイプの変更
 作成されたノートパソコンのインスタンスタイプを変更します。
 変更するインスタンスタイプは既存インスタンスと同じコアタイプのインスタンスタイプにのみ変更できます。
 
@@ -114,11 +114,11 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
 2. ノートパソコンが動作中の状態(ACTIVE)の場合は、**ノートパソコンの停止**をクリックしてノートパソコンを停止します。
 3. **インスタンスタイプの変更**をクリックします。
 4. 変更するインスタンスタイプを選択し、[OK]をクリックします。
-    
+
 > **[参考]インスタンスタイプ変更所要時間**
 > インスタンスタイプの変更は数分かかる場合があります。
 
-### ノートパソコンの削除 
+### ノートパソコンの削除
 作成されたノートパソコンを削除します。
 
 1. リストから削除するノートパソコンを選択します。
@@ -227,7 +227,7 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
     - **データストレージサイズ**：学習を実行するインスタンスのデータストレージサイズを入力します。
         - NHN Cloud Object Storageを使用する場合にのみ使用されます。学習に必要なデータがすべて保存できるように十分なサイズを指定してください。
     - **最大学習時間**：学習が完了するまでの最大待機時間を指定します。最大待機時間を超えた学習は終了処理されます。
-    - **ログ管理**：学習進行中に発生するログをNHN Cloud Log & Crashサービスに保存できます。 
+    - **ログ管理**：学習進行中に発生するログをNHN Cloud Log & Crashサービスに保存できます。
         - 詳細は[付録 > 2. NHN Cloud Log & Crash Searchサービス利用案内およびログ確認](./console-guide/#2-nhn-cloud-log-crash-search)を参照してください。
     - **タグ**：タグを追加するには**+ボタン**をクリックしてKey-Value形式でタグを入力します。タグは最大10個まで入力できます。
 
@@ -255,7 +255,7 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
     | FAIL TRAIN | 学習の進行中に失敗した状態です。詳細な失敗情報はログ管理が有効になっている場合は、Log & Crash Searchログで確認できます。|
     | CREATE FAILED | 学習の作成に失敗した状態です。作成が継続的に失敗する場合はサポートにお問い合わせください。|
     | FAIL TRAIN IN PROGRESS, COMPLETE IN PROGRESS | 学習に使用されたリソースを整理中の状態です。 |
-    
+
 - **作業**
     - **Tensorboard**：学習の統計情報を確認できるTensorboardがブラウザの新しいウィンドウで開きます。<br/>
     Tensorboardログを残す方法は[付録 > 5. Tensorboardを活用するための指標ログを保存](./console-guide/#5-tensorboard)を参照してください。Tensorboardはコンソールにログインしたユーザーのみ接続できます。
@@ -492,7 +492,7 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
 3. リクエストされた削除作業はキャンセルできません。続行するには**確認**をクリックします。
 
 
-## モデル 
+## モデル
 AI EasyMakerの学習結果のモデルまたは外部のモデルをアーティファクトとして管理できます。
 
 ### モデルの作成
@@ -519,7 +519,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 > **[注意]リポジトリのモデルアーティファクトを維持**
 > リポジトリに保存されているモデルアーティファクトを維持しない場合、該当モデルのエンドポイント作成が失敗します。
 
-### モデルリスト 
+### モデルリスト
 モデルリストが表示されます。リストのモデルを選択すると詳細情報を確認して情報を変更できます。
 
 - **名前**：モデル名と説明が表示されます。モデル名と説明は**変更**をクリックして変更できます。
@@ -539,7 +539,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 エンドポイントの作成の詳細については[エンドポイント](./console-guide/#_35)文書を参照してください。
 
 
-### モデルの削除 
+### モデルの削除
 モデルを削除します。
 
 1. リストから削除するモデルを選択します。
@@ -601,7 +601,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
     | UPDATE FAILED | エンドポイントのステージの一部が正常にサービスされていない状態です。問題となるステージを削除してもう一度作成する必要があります。 |
 
 - **API Gateway状態**：エンドポイント基本ステージのAPI Gateway状態情報が表示されます。主な状態は下表を参照してください。
-    
+
     | 状態 | 説明 |
     | --- | --- |
     | CREATE IN PROGRESS |  API Gatewayリソースを作成中の状態です。 |
@@ -610,7 +610,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
     | NOT FOUND: STAGE | エンドポイントの基本ステージが見つからない状態です。<br/>API Gatewayコンソールでステージが存在することを確認してください。<br/>ステージが削除された場合、削除されたAPI Gatewayステージは復元できず、エンドポイントを削除してからもう一度作成する必要があります。|
     | NOT FOUND: STAGE DEPLOY RESULT | エンドポイント基本ステージの配布状態が見つからない状態です。<br/>API Gatewayコンソールで基本ステージが配布された状態であることを確認してください。|
     | STAGE DEPLOY FAIL |  API Gateway基本ステージが配布失敗した状態です。<br/>**[参考]ステージのAPI Gateway「配布失敗」状態の場合の復旧方法**を参照して配布失敗状態を復旧できます。|
-    
+
 
 ### エンドポイントステージの作成
 既存のエンドポイントに新規ステージを追加します。新規ステージを作成して基本ステージの影響を受けずに新規ステージをテストできます。
@@ -667,7 +667,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 3. HTTP POST MethodでステージエンドポイントURLを呼び出すと、推論APIが呼び出されます。
     - ユーザーが作成したアルゴリズムによって推論APIのリクエスト、レスポンス仕様は異なります。
 
-            // 推論API例：リクエスト 
+            // 推論API例：リクエスト
             curl --location --request POST '{ステージエンドポイントURL}' \
             --header 'Content-Type: application/json' \
             --data-raw '{
@@ -676,8 +676,8 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
                     [6.0,  3.4,  4.5,  1.6]
                 ]
             }'
-            
-            // 推論API例：レスポンス 
+
+            // 推論API例：レスポンス
             {
                 "predictions" : [
                     [
@@ -754,8 +754,8 @@ AI EasyMakerの一部機能で入出力ストレージとしてユーザーのNH
 
 NHN Cloud Object StorageにAI EasyMakerシステムアカウントの読み取り/書き込み権限を追加するには、次の内容を参照してください。
 
-1. **[学習]**または**[モデル]**タブ > **AI EasyMakerシステムアカウント情報**をクリックします。 
-2. AI EasyMakerシステムアカウント情報の**AI EasyMakerテナントID**と**AI EasyMaker APIユーザーID**をアーカイブします。 
+1. **[学習]**または**[モデル]**タブ > **AI EasyMakerシステムアカウント情報**をクリックします。
+2. AI EasyMakerシステムアカウント情報の**AI EasyMakerテナントID**と**AI EasyMaker APIユーザーID**をアーカイブします。
 3. NHN Cloud Object Storageコンソールに移動します。
 4. [特定プロジェクトまたは特定ユーザーに読み取り/書き込み許可](https://docs.nhncloud.com/ja/Storage/Object%20Storage/ja/acl-guide/#_4)文書を参照してNHN Cloud Object StorageコンソールでAI EasyMakerシステムアカウントに必要な読み取りおよび書き込み許可権限を追加します。
 
@@ -766,8 +766,8 @@ NHN Cloud Object StorageにAI EasyMakerシステムアカウントの読み取�
 AI EasyMakerサービスで発生するログ、イベントをNHN Cloud Log & Crash Searchサービスに保存できます。
 Log & Crash Searchサービスにログを保存するには、Log & Crashサービスを有効にする必要があり、別途利用料金がかかります。
 
-- **Log & Crash Searchサービス利用および料金案内** 
-    - Log & Crash Searchサービスの詳細内容と料金は、次の文書を確認してください。 
+- **Log & Crash Searchサービス利用および料金案内**
+    - Log & Crash Searchサービスの詳細内容と料金は、次の文書を確認してください。
         - [Log & Crash Searchサービス案内](https://docs.nhncloud.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ja/Overview/)
         - [Log & Crash Search利用料金](https://www.nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
@@ -785,10 +785,10 @@ Log & Crash Searchサービスにログを保存するには、Log & Crashサー
 
 AI EasyMakerサービスは、Log & Crash Searchサービスに次のように定義されたフィールドにログを転送します。
 
-- **共通ログフィールド** 
+- **共通ログフィールド**
 
     | 名前 | 説明 | 有効範囲 |
-    | --- | --- | --- | 
+    | --- | --- | --- |
     | easymakerAppKey | AI EasyMakerアプリケーションキー(AppKey) | - |
     | category | ログカテゴリー | easymaker.training, easymaker.inference |
     | logLevel | ログレベル | INFO, WARNING, ERROR |
@@ -805,12 +805,12 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
 - **エンドポイントログフィールド**
 
     | 名前 | 説明 |
-    | --- | --- | 
+    | --- | --- |
     | endpointId | AI EasyMakerエンドポイントID |
-    | endpointStageId | エンドポイントステージID | 
-    | inferenceId | 推論リクエスト固有ID | 
-    | action | Action区分(Endpoint.Model) | 
-    | modelName | 推論対象モデル名 | 
+    | endpointStageId | エンドポイントステージID |
+    | inferenceId | 推論リクエスト固有ID |
+    | action | Action区分(Endpoint.Model) |
+    | modelName | 推論対象モデル名 |
 
 ### 3. ハイパーパラメータ
 
@@ -822,17 +822,17 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
 ![ハイパーパラメータの入力画面](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_ja.png)
 
         import argparse
-        
+
         model_version = os.environ.get("EM_HP_MODEL_VERSION")
-        
+
         def parse_hyperparameters():
             parser = argparse.ArgumentParser()
-        
+
             # 入力したハイパーパラメータ解析
             parser.add_argument("--epochs", type=int, default=500)
             parser.add_argument("--batch_size", type=int, default=32)
             ...
-        
+
             return parser.parse_known_args()
 
 ### 4. 環境変数
