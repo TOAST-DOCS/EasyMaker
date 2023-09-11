@@ -465,7 +465,7 @@ Provide a feature to upload and download files with Object Storage.
 ```python
 easymaker.upload(
     easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
-    src_dir_path='./local_dir',
+    local_path='./local_dir',
     username='userId@nhn.com',
     password='nhn_object_storage_api_password'
 )

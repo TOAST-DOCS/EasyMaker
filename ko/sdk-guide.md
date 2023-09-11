@@ -467,7 +467,7 @@ Object Storage 상품으로 파일을 업로드하고 다운로드하는 기능�
 ```python
 easymaker.upload(
     easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
-    src_dir_path='./local_dir',
+    local_path='./local_dir',
     username='userId@nhn.com',
     password='nhn_object_storage_api_password'
 )
