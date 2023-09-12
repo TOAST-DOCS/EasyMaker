@@ -339,29 +339,38 @@ When creating an endpoint, the default stage is created.
 
 | Name                                    | Type      | Required | Default value   | Valid range                      | Description                                                                     |
 |---------------------------------------|---------|-------|-------|----------------------------|------------------------------------------------------------------------|
-| model_id                              | String  | Required    | None    | None                         | Model ID to be created with endpoint                                                       |
 | endpoint_name                         | String  | Required    | None    | Up to 50 characters                     | Endpoint name                                                               |
 | endpoint_description                  | String  | Optional    | None    | Up to 255 characters                    | Description for endpoint                                                           |
 | endpoint_instance_name                | String  | Required    | None    | None                         | Instance flavor name to be used for endpoint                                                  |
 | endpoint_instance_count               | Integer | Optional    | 1     | 1~10                       | Instance count to be used for endpoint                                                      |
-| apigw_resource_uri                    | String  | Required    | None    | Up to 255 characters                    | Path for API Gateway resource starting with /                                             |
+| endpoint_model_resource_list          | Array   | Required    | None   | Max 10                    | 스테이지에 사용될 리소스 정보                                                 |
+| endpoint_model_resource_list[0].modelId           | String   | Required    | None    | None                      | 스테이지 리소스로 생성할 모델 ID                                   |
+| endpoint_model_resource_list[0].apigwResourceUri  | String   | Required    | None    | Up to 255 characters      | /로 시작하는 API Gateway 리소스 경로                             |
+| endpoint_model_resource_list[0].podCount          | Integer  | Required    | None    | 1~100                     | 스테이지 리소스에 사용될 파드 수                                    |
+| endpoint_model_resource_list[0].description       | String   | Optional | None    | Up to 255 characters      | 스테이지 리소스에 대한 설명                                       |
 | tag_list                              | Array   | Optional    | None    | Max 10                     | Tag information                                                                  |
 | tag_list[0].tagKey                    | String  | Optional    | None    | Up to 64 characters                     | Tag key                                                                   |
 | tag_list[0].tagValue                  | String  | Optional    | None    | Up to 255 characters                    | Tag value                                                                   |
-| use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in Log & Crash product                                             |        
+| use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in Log & Crash product                                             |
 | wait                                  | Boolean | Optional    | True  | True, False                | True: Return the endpoint ID after creating endpoint, False: Return the endpoint ID immediately after requesting endpoint |
 
 ```python
 endpoint = easymaker.Endpoint()
 endpoint_id = endpoint.create(
-    model_id=model_id,
     endpoint_name='endpoint_name',
     endpoint_description='endpoint_description',
     endpoint_instance_name='c2.c16m16',
-    endpoint_instance_count=1
-apigw_resource_uri='/predict',
-                   use_log=True,
-# wait=False,
+    endpoint_instance_count=1,
+    endpoint_model_resource_list=[
+        {
+            'modelId': model_id,
+            'apigwResourceUri': '/predict',
+            'podCount': 1,
+            'description': 'stage_resource_description'
+        }
+    ],
+    use_log=True,
+    # wait=False,
 )
 ```
 
@@ -379,23 +388,34 @@ You can add a new stage to existing endpoints.
 
 | Name                                    | Type      | Required | Default value   | Valid range                      | Description                                                                 |
 |---------------------------------------|---------|-------|-------|----------------------------|--------------------------------------------------------------------|
-| model_id                              | String  | Required    | None    | None                         | Model ID to be created with endpoint                                                   |
 | stage_name                            | String  | Required    | None    | Up to 50 characters                     |                                                             |
-|                      | String  | Optional    | None    | Up to 255 characters                    | Description for stage                                                        |
+| stage_description    | String  | Optional    | None    | Up to 255 characters                    | Description for stage                                                        |
 | endpoint_instance_name                | String  | Required    | None    | None                         | Instance flavor name to be used for endpoint                                              |
 | endpoint_instance_count               | Integer | Optional    | 1     | 1~10                       | Instance count to be used for endpoint                                                  |
+| endpoint_model_resource_list          | Array   | Required    | None   | Max 10                    | 스테이지에 사용될 리소스 정보                                                 |
+| endpoint_model_resource_list[0].modelId           | String   | Required    | None    | None                      | 스테이지 리소스로 생성할 모델 ID                                   |
+| endpoint_model_resource_list[0].apigwResourceUri  | String   | Required    | None    | Up to 255 characters      | /로 시작하는 API Gateway 리소스 경로                             |
+| endpoint_model_resource_list[0].podCount          | Integer  | Required    | None    | 1~100                     | 스테이지 리소스에 사용될 파드 수                                    |
+| endpoint_model_resource_list[0].description       | String   | Optional | None    | Up to 255 characters      | 스테이지 리소스에 대한 설명                                       |
 | tag_list                              | Array   | Optional    | None    | Max 10                     | Tag information                                                              |
 | tag_list[0].tagKey                    | String  | Optional    | None    | Up to 64 characters                     | Tag key                                                               |
 | tag_list[0].tagValue                  | String  | Optional    | None    | Up to 255 characters                    | Tag value                                                               |
-| use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in Log & Crash product                                         |        
+| use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in Log & Crash product                                         |
 | wait                                  | Boolean | Optional    | True  | True, False                | True: Return the stage ID after creating stage, False: Return the stage ID immediately after requesting stage |
 ```python
 stage_id = endpoint.create_stage(
-    model_id=model_id,
     stage_name='stage01',  # Lowercase letters within 30 characters and numbers
     stage_description='test endpoint',
     endpoint_instance_name='c2.c16m16',
     endpoint_instance_count=1,
+    endpoint_model_resource_list=[
+        {
+            'modelId': model_id,
+            'apigwResourceUri': '/predict',
+            'podCount': 1,
+            'description': 'stage_resource_description'
+        }
+    ],
     use_log=True,
     # wait=False,
 )
@@ -406,24 +426,29 @@ stage_id = endpoint.create_stage(
 Inference to the default stage
 
 ```python
-input_data = [6.8, 2.8, 4.8, 1.4]
-endpoint.predict(json={'instances': [input_data]})
+# 기본 스테이지 정보 조회
+endpoint_stage_info = endpoint.get_default_endpoint_stage()
+print(f'endpoint_stage_info : {endpoint_stage_info}')
+
+# Request inference by specifying a stage
+input_data = [6.0, 3.4, 4.5, 1.6]
+endpoint.predict(endpoint_stage_info=endpoint_stage_info,
+                 model_id=model_id,
+                 json={'instances': [input_data]})
 ```
 
 Inference by specifying a specific stage
 
 ```python
 # Query stage information
-endpoint_stage_info_list = endpoint.get_endpoint_stage_info_list()
-for endpoint_stage_info in endpoint_stage_info_list:
-    print(f'endpoint_stage_info : {endpoint_stage_info}')
+endpoint_stage_info = endpoint.get_endpoint_stage_by_id(endpoint_stage_id=stage_id)
+print(f'endpoint_stage_info : {endpoint_stage_info}')
 
 # Request inference by specifying a stage
 input_data = [6.0, 3.4, 4.5, 1.6]
-for endpoint_stage_info in endpoint_stage_info_list:
-    if endpoint_stage_info['stage_name'] == 'stage01':
-        endpoint.predict(json={'instances': [input_data]},
-                         endpoint_stage_info=endpoint_stage_info)
+endpoint.predict(endpoint_stage_info=endpoint_stage_info,
+                 model_id=model_id,
+                 json={'instances': [input_data]})
 ```
 
 ### 엔드포인트 삭제
@@ -456,7 +481,7 @@ easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key'
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product
 easymaker_logger.send(log_message='log meassage',
                       log_level='ERROR',  # default: INFO
-                      project_version='2.0.0',  # default: 1.0.0 
+                      project_version='2.0.0',  # default: 1.0.0
                       parameters={'serviceType': 'EasyMakerSample'})  # Add custom parameters
 ```
 

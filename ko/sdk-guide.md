@@ -341,27 +341,36 @@ easymaker.Model().delete(model_id)
 
 | 이름                                    | 타입      | 필수 여부 | 기본값   | 유효 범위                      | 설명                                                                     |
 |---------------------------------------|---------|-------|-------|----------------------------|------------------------------------------------------------------------|
-| model_id                              | String  | 필수    | 없음    | 없음                         | 엔드포인트로 생성할 모델 ID                                                       |
 | endpoint_name                         | String  | 필수    | 없음    | 최대 50자                     | 엔드포인트 이름                                                               |
 | endpoint_description                  | String  | 선택    | 없음    | 최대 255자                    | 엔드포인트에 대한 설명                                                           |
 | endpoint_instance_name                | String  | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                                  |
 | endpoint_instance_count               | Integer | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                      |
-| apigw_resource_uri                    | String  | 필수    | 없음    | 최대 255자                    | /로 시작하는 API Gateway 리소스 경로                                             |
+| endpoint_model_resource_list          | Array   | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
+| endpoint_model_resource_list[0].modelId           | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
+| endpoint_model_resource_list[0].apigwResourceUri  | String   | 필수    | 없음    | 최대 255자                  | /로 시작하는 API Gateway 리소스 경로                             |
+| endpoint_model_resource_list[0].podCount          | Integer  | 필수    | 없음    | 1~100                     | 스테이지 리소스에 사용될 파드 수                                    |
+| endpoint_model_resource_list[0].description       | String   | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
 | tag_list                              | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                                  |
 | tag_list[0].tagKey                    | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                                   |
 | tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                                   |
-| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                             |        
+| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                             |
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 엔드포인트 생성이 완료된 이후 엔드포인트 ID를 반환, False: 엔드포인트 요청 후 즉시 엔드포인트 ID를 반환 |
 
 ```python
 endpoint = easymaker.Endpoint()
 endpoint_id = endpoint.create(
-    model_id=model_id,
     endpoint_name='endpoint_name',
     endpoint_description='endpoint_description',
     endpoint_instance_name='c2.c16m16',
-    endpoint_instance_count=1
-    apigw_resource_uri='/predict',
+    endpoint_instance_count=1,
+    endpoint_model_resource_list=[
+        {
+            'modelId': model_id,
+            'apigwResourceUri': '/predict',
+            'podCount': 1,
+            'description': 'stage_resource_description'
+        }
+    ],
     use_log=True,
     # wait=False,
 )
@@ -381,23 +390,34 @@ endpoint = easymaker.Endpoint()
 
 | 이름                                    | 타입      | 필수 여부 | 기본값   | 유효 범위                      | 설명                                                                 |
 |---------------------------------------|---------|-------|-------|----------------------------|--------------------------------------------------------------------|
-| model_id                              | String  | 필수    | 없음    | 없음                         | 엔드포인트로 생성할 모델 ID                                                   |
 | stage_name                            | String  | 필수    | 없음    | 최대 50자                     | 스테이지 이름                                                            |
 | stage_description                     | String  | 선택    | 없음    | 최대 255자                    | 스테이지에 대한 설명                                                        |
 | endpoint_instance_name                | String  | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                              |
 | endpoint_instance_count               | Integer | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                  |
+| endpoint_model_resource_list          | Array   | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
+| endpoint_model_resource_list[0].modelId           | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
+| endpoint_model_resource_list[0].apigwResourceUri  | String   | 필수    | 없음    | 최대 255자                  | /로 시작하는 API Gateway 리소스 경로                             |
+| endpoint_model_resource_list[0].podCount          | Integer  | 필수    | 없음    | 1~100                     | 스테이지 리소스에 사용될 파드 수                                    |
+| endpoint_model_resource_list[0].description       | String   | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
 | tag_list                              | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                              |
 | tag_list[0].tagKey                    | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                               |
 | tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                               |
-| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                         |        
+| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                         |
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 스테이지 생성이 완료된 이후 스테이지 ID를 반환, False: 스테이지 요청 후 즉시 스테이지 ID를 반환 |
 ```python
 stage_id = endpoint.create_stage(
-    model_id=model_id,
     stage_name='stage01',  # 30자 이내 소문자/숫자
     stage_description='test endpoint',
     endpoint_instance_name='c2.c16m16',
     endpoint_instance_count=1,
+    endpoint_model_resource_list=[
+        {
+            'modelId': model_id,
+            'apigwResourceUri': '/predict',
+            'podCount': 1,
+            'description': 'stage_resource_description'
+        }
+    ],
     use_log=True,
     # wait=False,
 )
@@ -408,24 +428,29 @@ stage_id = endpoint.create_stage(
 기본 스테이지에 인퍼런스
 
 ```python
-input_data = [6.8, 2.8, 4.8, 1.4]
-endpoint.predict(json={'instances': [input_data]})
+# 기본 스테이지 정보 조회
+endpoint_stage_info = endpoint.get_default_endpoint_stage()
+print(f'endpoint_stage_info : {endpoint_stage_info}')
+
+# 스테이지를 지정하여 인퍼런스 요청
+input_data = [6.0, 3.4, 4.5, 1.6]
+endpoint.predict(endpoint_stage_info=endpoint_stage_info,
+                 model_id=model_id,
+                 json={'instances': [input_data]})
 ```
 
 특정 스테이지 지정하여 인퍼런스
 
 ```python
 # 스테이지 정보 조회
-endpoint_stage_info_list = endpoint.get_endpoint_stage_info_list()
-for endpoint_stage_info in endpoint_stage_info_list:
-    print(f'endpoint_stage_info : {endpoint_stage_info}')
-    
+endpoint_stage_info = endpoint.get_endpoint_stage_by_id(endpoint_stage_id=stage_id)
+print(f'endpoint_stage_info : {endpoint_stage_info}')
+
 # 스테이지를 지정하여 인퍼런스 요청
 input_data = [6.0, 3.4, 4.5, 1.6]
-for endpoint_stage_info in endpoint_stage_info_list:
-    if endpoint_stage_info['stage_name'] == 'stage01':
-        endpoint.predict(json={'instances': [input_data]},
-                         endpoint_stage_info=endpoint_stage_info)
+endpoint.predict(endpoint_stage_info=endpoint_stage_info,
+                 model_id=model_id,
+                 json={'instances': [input_data]})
 ```
 
 ### 엔드포인트 삭제
@@ -458,7 +483,7 @@ easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key'
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product
 easymaker_logger.send(log_message='log meassage',
                       log_level='ERROR',  # default: INFO
-                      project_version='2.0.0',  # default: 1.0.0 
+                      project_version='2.0.0',  # default: 1.0.0
                       parameters={'serviceType': 'EasyMakerSample'})  # Add custom parameters
 ```
 
