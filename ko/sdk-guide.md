@@ -68,7 +68,7 @@ easymaker.Experiment().delete(experiment_id)
 | distributed_training_count                 | Integer | 필수                        | 없음    | 1~10         | 학습에 적용할 분산 학습 수                                                 |
 | data_storage_size                          | Integer | Obejct Storage 사용 시 필수    | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요               |
 | algorithm_name                             | String  | NHN Cloud 제공 알고리즘 사용 시 필수 | 없음    | 최대 64자      | 알고리즘 이름(CLI로 조회 가능)                                             |
-| source_dir_uri                             | String  | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
+| source_dir_uri                             | String  | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어 있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
 | entry_point                                | String  | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                             |
 | model_upload_uri                           | String  | 필수                        | 없음    | 최대 255자     | 학습 완료된 모델이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)   |
 | check_point_input_uri                      | String  | 선택                        | 없음    | 최대 255자     | 입력 체크 포인트 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)                 |
@@ -159,7 +159,7 @@ easymaker.Training().delete(training_id)
 | hyperparameter_tuning_description                              | String         | 선택                                                    | 없음    | 최대 255자                                      | 하이퍼파라미터 튜닝에 대한 설명                                                          |
 | image_name                                                     | String         | 필수                                                    | 없음    | 없음                                           | 하이퍼파라미터 튜닝에 사용될 이미지 이름(CLI로 조회 가능)                                         |
 | instance_name                                                  | String         | 필수                                                    | 없음    | 없음                                           | 인스턴스 타입 이름(CLI로 조회 가능)                                                     |
-| distributed_training_count                                     | Integer        | 필수                                                    | 1      | distributed_training_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 각 학습 당 적용할 분산 학습 수                                                      |
+| distributed_training_count                                     | Integer        | 필수                                                    | 1      | distributed_training_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 각 학습당 적용할 분산 학습 수                                                      |
 | parallel_trial_count                                           | Integer        | 필수                                                    | 1      | distributed_training_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 병렬로 실행할 학습 수                                                      |
 | data_storage_size                                              | Integer        | Obejct Storage 사용 시 필수                                | 없음    | 300~10000                                    | 하이퍼파라미터 튜닝에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                  |
 | algorithm_name                                                 | String         | NHN Cloud 제공 알고리즘 사용 시 필수                             | 없음    | 최대 64자                                       | 알고리즘 이름(CLI로 조회 가능)                                                        |
@@ -172,10 +172,10 @@ easymaker.Training().delete(training_id)
 | hyperparameter_spec_list                                       | Array          | 선택                                                    | 없음    | 최대 100개                                      | 하이퍼파라미터 스펙 정보                                                              |
 | hyperparameter_spec_list[0].<br>hyperparameterName             | String         | 선택                                                    | 없음    | 최대 255자                                      | 하이퍼파라미터 이름                                                                 |
 | hyperparameter_spec_list[0].<br>hyperparameterTypeCode         | String         | 선택                                                    | 없음    | INT, DOUBLE, DISCRETE, CATEGORICAL           | 하이퍼파라미터 타입                                                                 |
-| hyperparameter_spec_list[0].<br>hyperparameterMinValue         | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수            | 없음    | 없음                                           | 하이퍼파라미터 최소값                                                                |
-| hyperparameter_spec_list[0].<br>hyperparameterMaxValue         | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수            | 없음    | 없음                                           | 하이퍼파라미터 최대값                                                                |
+| hyperparameter_spec_list[0].<br>hyperparameterMinValue         | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수            | 없음    | 없음                                           | 하이퍼파라미터 최솟값                                                                |
+| hyperparameter_spec_list[0].<br>hyperparameterMaxValue         | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수            | 없음    | 없음                                           | 하이퍼파라미터 최댓값                                                                |
 | hyperparameter_spec_list[0].<br>hyperparameterStep             | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE이면서 GRID 전략인 경우 필수 | 없음    | 없음                                           | "Grid" 튜닝 전략을 사용할 때 하이퍼파라미터 값의 변화 크기                                       |
-| hyperparameter_spec_list[0].<br>hyperparameterSpecifiedValues  | String         | hyperparameterTypeCode가 DISCRETE, CATEGORICAL 경우 필수   | 없음    | 최대 3천자                                       | 정해진 하이퍼파라미터 목록(`,`로 구분된 문자열이나 숫자)                                          |
+| hyperparameter_spec_list[0].<br>hyperparameterSpecifiedValues  | String         | hyperparameterTypeCode가 DISCRETE, CATEGORICAL 경우 필수   | 없음    | 최대 3000자                                       | 정해진 하이퍼파라미터 목록(`,`로 구분된 문자열이나 숫자)                                          |
 | dataset_list                                                   | Array          | 선택                                                    | 없음    | 최대 10개                                       | 하이퍼파라미터 튜닝에 사용될 데이터 세트 정보(datasetName/dataUri로 구성)                         |
 | dataset_list[0].datasetName                                    | String         | 선택                                                    | 없음    | 최대 36자                                       | 데이터 이름                                                                     |
 | dataset_list[0].datasetUri                                     | String         | 선택                                                    | 없음    | 최대 255자                                      | 데이터 경로                                                                     |
@@ -260,13 +260,13 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
 )
 ```
 
-### 하이퍼파라미터튜닝 삭제
+### 하이퍼파라미터 튜닝 삭제
 
 [Parameter]
 
 | 이름                     | 타입      | 필수 여부 | 기본값  | 유효 범위  | 설명           |
 |------------------------|---------|-------|------|--------|--------------|
-| hyperparameter_tuning_id          | String  | 필수    | 없음   | 최대 36자 | 하이퍼파라미터튜닝 ID |
+| hyperparameter_tuning_id          | String  | 필수    | 없음   | 최대 36자 | 하이퍼파라미터 튜닝 ID |
 
 ```python
 easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
