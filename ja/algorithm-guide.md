@@ -15,6 +15,7 @@ NHN Cloud AI EasyMakerで提供するアルゴリズムを紹介します。
 | per_device_eval_batch_size | False | int | 16 | [1～∞) |GPU/TPU core/CPUあたりevaluationバッチサイズ |
 | num_train_epochs | False | int | 3 | [1～∞) | 全体trainingを実行する総回数 |
 | save_steps  | False | int | 500 | [1～∞) | チェックポイントを保存するstep周期 |
+| logging_steps  | False | int | 10 | [1~∞)   | 로그를 출력하는 step 주기 |
 
 
 ### データセット
@@ -36,7 +37,7 @@ folder/train/dog/golden_retriever.png
 ...
 ```
 
-#### validation(選択)
+#### validation(必須)
 検証用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。 
 
 ```
@@ -120,6 +121,7 @@ Image Classificationアルゴリズムは、次の指標を作成します。
 | per_device_train_batch_size | False | int | 4 | [0～∞) |GPU/TPU core/CPUあたりのtrainingバッチサイズ |
 | num_train_epochs | False | float | 3.0 | [0.0～∞) | 全体trainingを実行する総回数 |
 | save_steps  | False | int | 500 | [1～∞) | チェックポイントを保存するstep周期 |
+| logging_steps  | False | int | 10 | [1~∞)   | 로그를 출력하는 step 주기 |
 
 
 ### データセット
@@ -319,6 +321,7 @@ Semantic Segmentationアルゴリズムは、次の指標を作成します。
 | num_train_epochs | False | float | 3.0 | [0.0～∞) | 全体trainingを実行する総回数 |
 | threshold | False | float | 0.5 | [0.0～1.0] | 推論Threshold | 
 | save_steps  | False | int | 500 | [1～∞) | チェックポイントを保存するstep周期 |
+| logging_steps  | False | int | 10 | [1~∞)   | 로그를 출력하는 step 주기 |
 
 
 ### データセット
@@ -442,6 +445,23 @@ COCO Datasetの形式で作成します。
     ]
 }
 ```
+
+#### validation(必須)
+検証用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。
+
+```
+folder/validation/_annotations.coco.json
+
+folder/validation/0001.png
+folder/validation/0002.png
+folder/validation/0003.png
+...
+```
+
+* _annotations.coco.jsonファイル
+COCO Datasetの形式で作成します。
+詳細な形式は、[COCO Datasetのformat-data](https://cocodataset.org/#format-data)文書のData formatとObject Detection内容を参照してください。
+
 
 #### test(必須)
 test用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。 
