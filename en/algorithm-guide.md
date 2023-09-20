@@ -7,15 +7,15 @@ It is an algorithm (ResNet-50) that classifies types of images.
 
 ### Hyperparameter 
 
-| Hyperparameter Name | Required | Value Type | Default Value |  Range  | Description |
-| --- | --- | --- | --- | --- | --- |
-| input_size | False | int | 28 | [1~∞)  | Resolution of the output image  |
+| Hyperparameter Name | Required | Value Type | Default Value | Range      | Description |
+| --- | --- | --- | -- |---------| --- |
+| input_size | False | int | 28 | [4~∞)   | Resolution of the output image  |
 | learning_rate | False | float | 0.1 | [0.0~∞) | The initial learning rate value of the AdamW optimizer |
-| per_device_train_batch_size | False | int | 16 | [2~∞) | Training batch size per GPU/TPU core/CPU  |
-| per_device_eval_batch_size | False | int | 16 | [1~∞) |evaluation batch size per GPU/TPU core/CPU |
-| num_train_epochs | False | int | 3 | [1~∞) | The total number of times the entire training is performed  |
-| save_steps  | False | int | 500 | [1~∞) | Step cycle to store checkpoints |
-| logging_steps  | False | int | 10 | [1~∞)   | 로그를 출력하는 step 주기 |
+| per_device_train_batch_size | False | int | 16 | [2~∞)   | Training batch size per GPU/TPU core/CPU  |
+| per_device_eval_batch_size | False | int | 16 | [1~∞)   |evaluation batch size per GPU/TPU core/CPU |
+| num_train_epochs | False | int | 3 | [1~∞)   | The total number of times the entire training is performed  |
+| save_steps  | False | int | 500 | [1~∞)   | Step cycle to store checkpoints |
+| logging_steps  | False | int | 10 | [1~∞)   | Step cycle to output logs |
 
 
 ### Data Set
@@ -37,7 +37,7 @@ folder/train/dog/golden_retriever.png
 ...
 ```
 
-#### Validation (required)
+#### validation (required)
 This is the data set for validation. Data sets should be prepared in a directory structure defined as follows. 
 
 ```
@@ -89,7 +89,7 @@ Indicators generated during training can be checked through **Training > Go to T
 
 
 ### Inference  
-To create an endpoint with a trained model and request inference, see [Create Endpoint and Request Inference](./algorithm-guide/#create-endpoint-and-request-inference).
+To create an endpoint with a trained model and request inference, see [](./algorithm-guide/#_15)Create Endpoint and Request Inference](./algorithm-guide/#_15).
 
 #### Response Format 
 The score value for each image type (label) is answered.
@@ -116,12 +116,12 @@ An algorithm (SegFormer-B3) that predicts the label of every pixel region within
 ### Hyperparameter 
 
 | Hyperparameter Name | Required | Value Type | Default Value | Valid range | Description | 
-| --- | --- | --- | --- | --- | --- |
-| learning_rate | False | float | 2e-4 | [0.0~∞) | The initial learning rate value of the AdamW optimizer |
-| per_device_train_batch_size | False | int | 4 | [0~∞) |Training batch size per GPU/TPU core/CPU  |
-| num_train_epochs | False | float | 3.0 | [0.0~∞) | The total number of times the entire training is performed  |
-| save_steps  | False | int | 500 | [1~∞) | Step cycle to store checkpoints |
-| logging_steps  | False | int | 10 | [1~∞)   | 로그를 출력하는 step 주기 |
+| --- | --- | --- |---------------| --- | --- |
+| learning_rate | False | float | 2e-4          | [0.0~∞) | The initial learning rate value of the AdamW optimizer |
+| per_device_train_batch_size | False | int | 4             | [0~∞) |Training batch size per GPU/TPU core/CPU  |
+| num_train_epochs | False | float | 3.0           | [0.0~∞) | The total number of times the entire training is performed  |
+| save_steps  | False | int | 500           | [1~∞) | Step cycle to store checkpoints |
+| logging_steps  | False | int | 10            | [1~∞)   | Step cycle to output logs |
 
 
 ### Data Set
@@ -168,7 +168,7 @@ folder/train/annotations/0003.png
 * image: Write the image file path.
 * seg_map: Write the segmentation map file path. 
 
-#### Validation (required)
+#### validation (required)
 This is the data set for validation. Datasets should be prepared in a defined directory structure like this: 
 
 ```
@@ -210,7 +210,7 @@ folder/validation/annotations/0003.png
 * seg_map: Write the segmentation map file path. 
 
 
-#### Resources (required)
+#### resources (required)
 Create a dictionary in key-value format to map label IDs to label classes required when setting up the model.
 
 ```
@@ -251,7 +251,7 @@ folder/test/annotations/0003.png
 * test.json
 Create a mapping file of image and segmentation map. 
 
-```
+```json
 [
     {
         "image": "images/0001.png",
@@ -286,12 +286,12 @@ Indicators generated during training can be checked through **Training > Go to T
 
 
 ### Inference  
-To create an endpoint with a trained model and request inference, see [Create Endpoint and Request Inference](./algorithm-guide/#create-endpoint-and-request-inference).
+To create an endpoint with a trained model and request inference, see [](./algorithm-guide/#_15)Create Endpoint and Request Inference](./algorithm-guide/#_15).
 
 #### Response Format
 After resizing the requested image to 512 X 512, the label value for each pixel of each image is returned in the form of an array.
 
-```
+```json
 {
     "predictions": [
         [
@@ -313,15 +313,15 @@ An algorithm (detr-resnet-50) that predicts the position (bbox) and class (class
 
 ### Hyperparameter 
 
-| Hyperparameter Name | Required | Value Type | Default Value | Valid range | Description | 
-| --- | --- | --- | --- | --- | --- |
-| learning_rate | False | float | 2e-4 | [0.0~∞) | The initial learning rate value of the AdamW optimizer |
-| per_device_train_batch_size | False | int | 4 | [0~∞) | Training batch size per GPU/TPU core/CPU  |
-| per_device_eval_batch_size | False | int | 4 | [0~∞) | evaluation batch size per GPU/TPU core/CPU |
-| num_train_epochs | False | float | 3.0 | [0.0~∞) | The total number of times the entire training is performed |
+| Hyperparameter Name | Required | Value Type | Default Value | Valid range     | Description | 
+| --- | --- | --- | -- |-----------| --- |
+| learning_rate | False | float | 2e-4 | [0.0~∞)   | The initial learning rate value of the AdamW optimizer |
+| per_device_train_batch_size | False | int | 4 | [1~∞)     | Training batch size per GPU/TPU core/CPU  |
+| per_device_eval_batch_size | False | int | 4 | [1~∞)     | evaluation batch size per GPU/TPU core/CPU |
+| num_train_epochs | False | float | 3.0 | [0.0~∞)   | The total number of times the entire training is performed |
 | threshold | False | float | 0.5 | [0.0~1.0] | Inference Threshold | 
-| save_steps  | False | int | 500 | [1~∞) | Step cycle to store checkpoints |
-| logging_steps  | False | int | 10 | [1~∞)   | 로그를 출력하는 step 주기 |
+| save_steps  | False | int | 500 | [1~∞)     | Step cycle to store checkpoints |
+| logging_steps  | False | int | 10 | [1~∞)   | Step cycle to output logs |
 
 
 ### Data Set
@@ -341,7 +341,7 @@ folder/train/0003.png
 
 * \_annotations.coco.json file  
 It is written in the format of COCO Dataset.
-For detailed format, refer to Data format and Object Detection in the [format-data document of COCO Dataset](https://cocodataset.org/#format-data).
+For detailed format, refer to Data format and Object Detection in the [](https://cocodataset.org/#format-data)format-data document of COCO Dataset[](https://cocodataset.org/#format-data).
 
 [Example] Example of Balloon Object Detection
 ``` json
@@ -446,8 +446,8 @@ For detailed format, refer to Data format and Object Detection in the [format-da
 }
 ```
 
-#### Validation (required)
-This is the data set for validation. Datasets should be prepared in a defined directory structure like this:
+#### validation (required)
+This is the data set for validation. Data sets should be prepared in a directory structure defined as follows.
 
 ```
 folder/validation/_annotations.coco.json
@@ -460,10 +460,10 @@ folder/validation/0003.png
 
 * \_annotations.coco.json file  
 It is written in the format of COCO Dataset.
-For detailed format, refer to Data format and Object Detection in the [format-data document of COCO Dataset](https://cocodataset.org/#format-data).
+For detailed format, refer to Data format and Object Detection in the [](https://cocodataset.org/#format-data)format-data document of COCO Dataset[](https://cocodataset.org/#format-data).
 
 
-#### Test (required)
+#### test (required)
 This is the data set for test. Datasets should be prepared in a defined directory structure like this: 
 
 ```
@@ -477,11 +477,11 @@ folder/test/0003.png
 
 * \_annotations.coco.json file  
 It is written in the format of COCO Dataset.
-For detailed format, refer to Data format and Object Detection in the [format-data document of COCO Dataset](https://cocodataset.org/#format-data).
+For detailed format, refer to Data format and Object Detection in the [](https://cocodataset.org/#format-data)format-data document of COCO Dataset[](https://cocodataset.org/#format-data).
 
 
 ### Inference  
-To create an endpoint with a trained model and request inference, see [Create Endpoint and Request Inference](./algorithm-guide/#create-endpoint-and-request-inference).
+To create an endpoint with a trained model and request inference, see [](./algorithm-guide/#_15)Create Endpoint and Request Inference](./algorithm-guide/#_15).
 
 #### Response Format
 Returns a list of bboxes (xmin, ymin, xmax, ymax) of detected objects.
@@ -511,10 +511,10 @@ Returns a list of bboxes (xmin, ymin, xmax, ymax) of detected objects.
 }
 ```
 
-## Create Endpoint and Request Inference
+## Endpoint Creation and Inference Requests
 
 Please refer to the following guide to create an endpoint and perform inference with a model that has been trained.
-1. Select a completed training.
+1. Select a completed study.
 2. After clicking the **Create Model** button, write a model name and click the Create Model button to create a model.
 3. (2) Click **Create Endpoint** with the model created in . After entering the endpoint setup information, create the endpoint.
 4. Click the created endpoint name and select a stage.
