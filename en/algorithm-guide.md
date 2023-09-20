@@ -37,7 +37,7 @@ folder/train/dog/golden_retriever.png
 ...
 ```
 
-#### validation (required)
+#### Validation (required)
 This is the data set for validation. Data sets should be prepared in a directory structure defined as follows. 
 
 ```
@@ -89,7 +89,7 @@ Indicators generated during training can be checked through **Training > Go to T
 
 
 ### Inference  
-To create an endpoint with a trained model and request inference, see [](./algorithm-guide/#_15)Create Endpoint and Request Inference](./algorithm-guide/#_15).
+To create an endpoint with a trained model and request inference, see [Create Endpoint and Request Inference](./algorithm-guide/#_15).
 
 #### Response Format 
 The score value for each image type (label) is answered.
@@ -168,7 +168,7 @@ folder/train/annotations/0003.png
 * image: Write the image file path.
 * seg_map: Write the segmentation map file path. 
 
-#### validation (required)
+#### Validation (required)
 This is the data set for validation. Datasets should be prepared in a defined directory structure like this: 
 
 ```
@@ -210,7 +210,7 @@ folder/validation/annotations/0003.png
 * seg_map: Write the segmentation map file path. 
 
 
-#### resources (required)
+#### Resources (required)
 Create a dictionary in key-value format to map label IDs to label classes required when setting up the model.
 
 ```
@@ -286,7 +286,7 @@ Indicators generated during training can be checked through **Training > Go to T
 
 
 ### Inference  
-To create an endpoint with a trained model and request inference, see [](./algorithm-guide/#_15)Create Endpoint and Request Inference](./algorithm-guide/#_15).
+To create an endpoint with a trained model and request inference, see [Create Endpoint and Request Inference](./algorithm-guide/#_15).
 
 #### Response Format
 After resizing the requested image to 512 X 512, the label value for each pixel of each image is returned in the form of an array.
@@ -341,7 +341,7 @@ folder/train/0003.png
 
 * \_annotations.coco.json file  
 It is written in the format of COCO Dataset.
-For detailed format, refer to Data format and Object Detection in the [](https://cocodataset.org/#format-data)format-data document of COCO Dataset[](https://cocodataset.org/#format-data).
+For detailed format, refer to Data format and Object Detection in the [format-data document of COCO Dataset](https://cocodataset.org/#format-data).
 
 [Example] Example of Balloon Object Detection
 ``` json
@@ -446,7 +446,7 @@ For detailed format, refer to Data format and Object Detection in the [](https:/
 }
 ```
 
-#### validation (required)
+#### Validation (required)
 This is the data set for validation. Data sets should be prepared in a directory structure defined as follows.
 
 ```
@@ -460,10 +460,10 @@ folder/validation/0003.png
 
 * \_annotations.coco.json file  
 It is written in the format of COCO Dataset.
-For detailed format, refer to Data format and Object Detection in the [](https://cocodataset.org/#format-data)format-data document of COCO Dataset[](https://cocodataset.org/#format-data).
+For detailed format, refer to Data format and Object Detection in the [format-data document of COCO Dataset](https://cocodataset.org/#format-data).
 
 
-#### test (required)
+#### Test (required)
 This is the data set for test. Datasets should be prepared in a defined directory structure like this: 
 
 ```
@@ -477,11 +477,11 @@ folder/test/0003.png
 
 * \_annotations.coco.json file  
 It is written in the format of COCO Dataset.
-For detailed format, refer to Data format and Object Detection in the [](https://cocodataset.org/#format-data)format-data document of COCO Dataset[](https://cocodataset.org/#format-data).
+For detailed format, refer to Data format and Object Detection in the [format-data document of COCO Dataset](https://cocodataset.org/#format-data).
 
 
 ### Inference  
-To create an endpoint with a trained model and request inference, see [](./algorithm-guide/#_15)Create Endpoint and Request Inference](./algorithm-guide/#_15).
+To create an endpoint with a trained model and request inference, see [Create Endpoint and Request Inference](./algorithm-guide/#_15).
 
 #### Response Format
 Returns a list of bboxes (xmin, ymin, xmax, ymax) of detected objects.
@@ -511,10 +511,10 @@ Returns a list of bboxes (xmin, ymin, xmax, ymax) of detected objects.
 }
 ```
 
-## Endpoint Creation and Inference Requests
+## Create Endpoint and Request Inference
 
 Please refer to the following guide to create an endpoint and perform inference with a model that has been trained.
-1. Select a completed study.
+1. Select a completed training.
 2. After clicking the **Create Model** button, write a model name and click the Create Model button to create a model.
 3. (2) Click **Create Endpoint** with the model created in . After entering the endpoint setup information, create the endpoint.
 4. Click the created endpoint name and select a stage.

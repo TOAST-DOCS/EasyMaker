@@ -150,7 +150,7 @@ training_id = easymaker.Training().run(
 easymaker.Training().delete(training_id)
 ```
 
-### Create hyperparameter tuning
+### Create Hyperparameter Tuning
 
 [Parameter]
 
@@ -469,7 +469,7 @@ endpoint.predict(endpoint_stage_info=endpoint_stage_info,
 endpoint.Endpoint().delete_endpoint(endpoint_id)
 ```
 
-### Select new stage that want to change as default stage from stage want to change.
+### Delete Endpoint Stage
 
 [Parameter]
 
