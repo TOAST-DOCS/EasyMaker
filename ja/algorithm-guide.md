@@ -7,15 +7,15 @@ NHN Cloud AI EasyMakerで提供するアルゴリズムを紹介します。
 
 ### ハイパーパラメータ 
 
-| ハイパーパラメータ名 | 必須かどうか | Value Type | Default Value | 範囲 | 説明 |
-| --- | --- | --- | --- | --- | --- |
-| input_size | False | int | 28 | [1～∞)  | 出力画像の解像度 |
+| ハイパーパラメータ名 | 必須かどうか | Value Type | Default Value | 範囲     | 説明 |
+| --- | --- | --- | -- |---------| --- |
+| input_size | False | int | 28 | [4～∞)   | 出力画像の解像度 |
 | learning_rate | False | float | 0.1 | [0.0～∞) | AdamWオプティマイザーの初期learning rate値 |
-| per_device_train_batch_size | False | int | 16 | [2～∞) | GPU/TPU core/CPUあたりtrainingバッチサイズ |
-| per_device_eval_batch_size | False | int | 16 | [1～∞) |GPU/TPU core/CPUあたりevaluationバッチサイズ |
-| num_train_epochs | False | int | 3 | [1～∞) | 全体trainingを実行する総回数 |
-| save_steps  | False | int | 500 | [1～∞) | チェックポイントを保存するstep周期 |
-| logging_steps  | False | int | 10 | [1~∞)   | 로그를 출력하는 step 주기 |
+| per_device_train_batch_size | False | int | 16 | [2～∞)   | GPU/TPU core/CPUあたりtrainingバッチサイズ |
+| per_device_eval_batch_size | False | int | 16 | [1～∞)   |GPU/TPU core/CPUあたりevaluationバッチサイズ |
+| num_train_epochs | False | int | 3 | [1～∞)   | 全体trainingを実行する総回数 |
+| save_steps  | False | int | 500 | [1～∞)   | チェックポイントを保存するstep周期 |
+| logging_steps  | False | int | 10 | [1～∞)   | ログを出力するstep周期 |
 
 
 ### データセット
@@ -116,12 +116,12 @@ Image Classificationアルゴリズムは、次の指標を作成します。
 ### ハイパーパラメータ 
 
 | ハイパーパラメータ名 | 必須かどうか | Value Type | Default Value | 有効範囲 | 説明 | 
-| --- | --- | --- | --- | --- | --- |
-| learning_rate | False | float | 2e-4 | [0.0～∞) | AdamWオプティマイザーの初期learning rate値 |
-| per_device_train_batch_size | False | int | 4 | [0～∞) |GPU/TPU core/CPUあたりのtrainingバッチサイズ |
-| num_train_epochs | False | float | 3.0 | [0.0～∞) | 全体trainingを実行する総回数 |
-| save_steps  | False | int | 500 | [1～∞) | チェックポイントを保存するstep周期 |
-| logging_steps  | False | int | 10 | [1~∞)   | 로그를 출력하는 step 주기 |
+| --- | --- | --- |---------------| --- | --- |
+| learning_rate | False | float | 2e-4          | [0.0～∞) | AdamWオプティマイザーの初期learning rate値 |
+| per_device_train_batch_size | False | int | 4             | [0～∞) |GPU/TPU core/CPUあたりのtrainingバッチサイズ |
+| num_train_epochs | False | float | 3.0           | [0.0～∞) | 全体trainingを実行する総回数 |
+| save_steps  | False | int | 500           | [1～∞) | チェックポイントを保存するstep周期 |
+| logging_steps  | False | int | 10            | [1～∞)   | ログを出力するstep周期 |
 
 
 ### データセット
@@ -313,15 +313,15 @@ Semantic Segmentationアルゴリズムは、次の指標を作成します。
 
 ### ハイパーパラメータ 
 
-| ハイパーパラメータ名 | 必須かどうか | Value Type | Default Value | 有効範囲 | 説明 | 
-| --- | --- | --- | --- | --- | --- |
-| learning_rate | False | float | 2e-4 | [0.0～∞) | AdamWオプティマイザーの初期learning rate値 |
-| per_device_train_batch_size | False | int | 4 | [0～∞) | GPU/TPU core/CPUあたりのtrainingバッチサイズ |
-| per_device_eval_batch_size | False | int | 4 | [0～∞) | GPU/TPU core/CPUあたりのevaluationバッチサイズ |
-| num_train_epochs | False | float | 3.0 | [0.0～∞) | 全体trainingを実行する総回数 |
+| ハイパーパラメータ名 | 必須かどうか | Value Type | Default Value | 有効範囲    | 説明 | 
+| --- | --- | --- | -- |-----------| --- |
+| learning_rate | False | float | 2e-4 | [0.0～∞)   | AdamWオプティマイザーの初期learning rate値 |
+| per_device_train_batch_size | False | int | 4 | [1～∞)     | GPU/TPU core/CPUあたりのtrainingバッチサイズ |
+| per_device_eval_batch_size | False | int | 4 | [1～∞)     | GPU/TPU core/CPUあたりのevaluationバッチサイズ |
+| num_train_epochs | False | float | 3.0 | [0.0～∞)   | 全体trainingを実行する総回数 |
 | threshold | False | float | 0.5 | [0.0～1.0] | 推論Threshold | 
-| save_steps  | False | int | 500 | [1～∞) | チェックポイントを保存するstep周期 |
-| logging_steps  | False | int | 10 | [1~∞)   | 로그를 출력하는 step 주기 |
+| save_steps  | False | int | 500 | [1～∞)     | チェックポイントを保存するstep周期 |
+| logging_steps  | False | int | 10 | [1～∞)   | ログを出力するstep周期 |
 
 
 ### データセット
@@ -408,7 +408,7 @@ COCO Datasetの形式で作成します。
                 201,
                 166,
                 93.5,
-                144.5
+144.5
             ],
             "area": 13510.75,
             "segmentation": [],
@@ -422,7 +422,7 @@ COCO Datasetの形式で作成します。
                 17,
                 20,
                 217.5,
-                329
+329
             ],
             "area": 71557.5,
             "segmentation": [],
@@ -436,7 +436,7 @@ COCO Datasetの形式で作成します。
                 26,
                 248,
                 162.5,
-                117
+117
             ],
             "area": 19012.5,
             "segmentation": [],
