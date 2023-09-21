@@ -64,6 +64,9 @@ A list of notebooks are displayed. Select a notebook in the list to check detail
 - **Action > Open Jupyter Notebook**: Click **Open Jupyter Notebook** button to open the notebook in a new browser window. The notebook is only accessible to users who are logged in to the console.
 - **Tag**: Tag for notebook is displayed. You can change the tag by clicking **Change**.
 
+- **Monitoring**: On the **Monitoring** tab of the detail screen that appears when you select the notebook, you can see a list of monitored instances and a chart of basic metrics.
+    - The **Monitoring** tab is disabled when the notebook is being created or when there is a task in progress.
+
 ### Configure User Virtual Execution Environment
 AI EasyMaker notebook instance provides native Conda virtual environment with various libraries and kernels required for machine learning.
 Default Conda virtual environment is initialized and driven when the laptop is stopped and started, but the virtual environment and external libraries that the user installs in any path are not automatically initialized and are not retained when the laptop is stopped and started.
@@ -172,7 +175,6 @@ Delete an experiment.
 > Please delete the associated training first, then delete the experiment.
 > For related training, you can check the list by clicking the **[Training]** tab in the detail screen at the bottom that is displayed when you click the experiment you want to delete.
 
-
 ## Training
 Provides an training environment where you can learn and identify machine training algorithms based on training results.
 
@@ -210,14 +212,12 @@ Set the training environment by selecting the instance and OS image to be traine
 
 - **Training Instance Information**
     - **Training instance type** : Select an instance type to run training.
-    - **Number of training instances** : Enter the number of instances to perform training. If you enter more than 2 instance counts, the training runs run in parallel, allowing training to complete more quickly.
-
+   - **Number of Distributed Trainings**: Enter a number of distributed trainings to be performed. Distributed training can be enabled through settings in the algorithm code. For more information, please refer to [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
 - **Input Data**
     - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
         - Dataset name: Enter a name for your data set.
         - Data Path: Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-    - **Checkpoint** : 저장된 체크 포인트부터 학습을 진행하려는 경우, 체크 포인트의 저장 경로를 입력합니다.
-      - NHN Cloud Object Storage 또는 NHN Cloud NAS 경로를 입력합니다.
+    - **Checkpoint** : If you want to start training from a saved checkpoint, enter the save path of the checkpoint.
         - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
 - **Output Data**
     - **Output data** : Enter the data storage path to save the training execution results.
@@ -225,7 +225,6 @@ Set the training environment by selecting the instance and OS image to be traine
     - **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint.
         - Created checkpoints can be used to resume training from previous training.
         - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-
 - **Additional settings**
     - **Data storage size** : Enter the data storage size of the instance to run training.
         - Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for training.
@@ -266,6 +265,9 @@ A list of studies is displayed. If you select a training from the list, you can 
 
 - **Hyperparameters** : You can check the hyperparameter values set for training on **the hyperparameter** tab of the detailed screen displayed when selecting training.
 
+- **Monitoring**: When you select the endpoint stage, you can see a list of monitored instances and basic metrics charts in the **Monitoring** tab of the detailed screen that appears.
+    - The **Monitoring** tab is disabled while an endpoint stage is being created.
+
 ### Copy Training
 Create a new training with the same settings as an existing training.
 
@@ -297,6 +299,7 @@ Training cannot be deleted if a model created by the training to be deleted exis
 
 Hyperparameter tuning is the process of optimizing hyperparameter values to maximize a model's predictive accuracy. If you don't use this feature, you'll have to manually tune the hyperparameters to find the optimal values while running many training jobs yourself.
 
+
 ### Create Hyperparameter Tuning
 
 How to configure a hyperparameter tuning job.
@@ -307,27 +310,27 @@ How to configure a hyperparameter tuning job.
 - **Basic Information**
     - **Hyperparameter Tuning Name**: Enter a name for the hyperparameter tuning job.
     - **Description**: Input when a description of the hyperparameter tuning task is required.
-    - **Experiment**: Select an experiment to include hyperparameter tuning. Experiments group related hyperparameter tunings. If no experiments have been created, click **Add** to create one.
-- **Algorithm Information**: 학습하려는 알고리즘에 대한 정보를 입력합니다.
-    - **알고리즘 유형**: 알고리즘 유형을 선택합니다.
-        - **NHN Cloud 제공 알고리즘**: AI EasyMaker에서 제공하는 알고리즘을 사용합니다. 제공하는 알고리즘에 대한 상세 정보는 [NHN Cloud 제공 알고리즘 가이드](./algorithm-guide/#) 문서를 참고합니다.
-            - **알고리즘**: 알고리즘을 선택합니다.
-            - **하이퍼파라미터 스펙**: 하이퍼파라미터 튜닝에 사용할 하이퍼파라미터 값 범위를 입력합니다. 알고리즘별 하이퍼파라미터에 대한 자세한 정보는  [NHN Cloud 제공 알고리즘 가이드](./algorithm-guide/#) 문서를 참고합니다.
-                - **이름**: 어떤 하이퍼파라미터를 튜닝할지 정의합니다. 알고리즘 별로 정해져 있습니다.
-                - **유형**: 하이퍼파라미터의 데이터 유형을 선택합니다. 알고리즘 별로 정해져 있습니다.
-                - **값/범위**
-                    - **Min**: 최솟값을 정의합니다.
-                    - **Max**: 최댓값을 정의합니다.
-                    - **Step**: "Grid" 튜닝 전략을 사용할 때 하이퍼파라미터 값의 변화 크기를 결정합니다.
-            - **알고리즘 지표**: 알고리즘에서 생성되는 지표에 대한 정보가 표시됩니다.
-        - **자체 알고리즘**: 사용자가 작성한 알고리즘을 사용합니다.
-            - **algorithm path**
-                - **NHN Cloud Object Storage** : Enter the path of NHN Cloud Object Storage where algorithms are stored.<br>
-                    - obs://{Object Enter the directory path in the format Storage API endpoint}/{containerName}/{path}.
-                    - When using NHN Cloud Object Storage, refer to [Appendix > 1. Adding AI EasyMaker System Account Permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage) to set permissions. Model creation will fail if you do not set the necessary permissions.
-                - **NHN Cloud NAS** : Enter the NHN Cloud NAS path where the algorithm is stored. <br>
+    - **Experiment**: Select an experiment to include hyperparameter tuning. Experiments group related hyperparameter tunings. If no experiments have been created, click **Add** to create one.-   
+**Algorithm information** : Enter information about the algorithm you want to learn.
+    - **Algorithm Type** : Select the algorithm type.
+        - **Algorithm provided by NHN Cloud** : Use the algorithm provided by AI EasyMaker. For detailed information on the provided algorithm, refer to [the Algorithm Guide document provided by NHN Cloud](./algorithm-guide/#).
+            - **Algorithm** : Select an algorithm.
+            - **Hyperparameter Spec** : Enter the hyperparameter to use for hyperparameter tuning. For detailed information on hyperparameters for each algorithm, refer to [the Algorithm Guide document provided by NHN Cloud](./algorithm-guide/#).
+             - **Name** : Defines which hyperparameters to tune It is determined by algorithm.
+                - **Type** : Selects the data type of the hyperparameter. It is determined by algorithm.
+                - **Value/Range**
+                    - **Min**: Defines the minimum value.
+                    - **Max**: Defines the maximum value.
+                    - **Step**: Determines the size of the hyperparameter value change when using the "Grid" tuning strategy.
+            - **Algorithm Metrics** : Displays information about the metrics generated by the algorithm.
+        - **Own Algorithm**: Uses an algorithm written by the user.
+            - **Algorithm Path**
+             - **NHN Cloud Object Storage**: Enter the path of NHN Cloud Object Storage where algorithms are stored.<br>
+              - obs: Enter the directory path in the format of obs://{ObjectStorage API endpoint}/{containerName}/{path}.
+              - When using NHN Cloud Object Storage, please set permissions by referring to [Appendix > 1. Adding AI EasyMaker system account permissions to NHN Cloud Object Storage](./console-guide/#1-nhn-cloud-object-storage-ai-easymaker).If you do not set the required permissions, model creation will fail.
+             - **NHN Cloud NAS**: Enter the NHN Cloud NAS path where the algorithm is stored. <br>
                   nas://{NAS Enter the directory path in the format ID}:/{path}.
-            - **entry point**
+            - **Entry Point**
                 - The entry point is the point of entry into the execution of the algorithm from which training begins. Creates the entry point file name.
                 - The entry point file must exist in the algorithm path.
                 - Creating **requirements.txt** in the same path will install the required python packages from the script.
@@ -342,14 +345,15 @@ How to configure a hyperparameter tuning job.
 - **Image** : Choose an image for your instance that matches the environment in which you need to run your training.
 - **Training Instance Information**
     - **Training instance type** : Select an instance type to run training.
-    - **Number of training instances** : Enter the number of instances to perform training. If you enter more than 2 instance counts, the training runs run in parallel, allowing training to complete more quickly.
+    - **Number of Training instances** : Enter the number of instances to perform training. The number of training instances is 'Number of Distributed Trainings' x 'Number of Parallel Trainings'.
+     **Number of Distributed Trainings**: Enter a number of trainings to perform. You can enable distributed training through settings in the algorithm code. For more information, see [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
+    - **Number of Parallel Trainings**: Enter a number of trainings to perform in parallel simultaneously.
 - **Input Data**
     - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
         - Dataset name: Enter a name for your data set.
         - Data Path: Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-    - **Checkpoint** : 저장된 체크 포인트부터 학습을 진행하려는 경우, 체크 포인트의 저장 경로를 입력합니다.
-        - NHN Cloud Object Storage 또는 NHN Cloud NAS 경로를 입력합니다.
-            - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Checkpoint**: If you want to start training from a saved checkpoint, enter the save path of the checkpoint.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
 - **Output Data**
     - **Output data** : Enter the data storage path to save the training execution results.
         - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
@@ -414,6 +418,9 @@ A list of hyperparameter tunings is displayed. Select a hyperparameter tuning fr
     - **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
     For instructions on how to leave TensorBoard logs, please refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
     - **Stop Hyperparameter Tuning** : You can stop hyperparameter tuning in progress.
+
+ - **Monitoring**: When you select hyperparameter tuning, you can check the list of monitored instances and basic indicator charts in the Monitoring tab of the detailed screen that appears.
+    - The **Monitoring** tab is disabled while hyperparameter tuning is being created.
 
 ### List of Trainings for Hyperparameter Tuning
 
@@ -571,8 +578,8 @@ Create and manage endpoints that can serve the model.
 - **Stage Resource Information**: Enter the information for model artifacts to deploy to endpoint.
     - **Model**: Select the model you want to deploy to endpoint. If have not created model yet, please create model first.
     - **API Gateway Resource Path**: Enter API resource path for the model being deployed. For example, if set to `/inference`, you can request inference API at `POST https://{point-domain}/inference`.
-    - **파드 수**: 스테이지 리소스의 파드 수를 입력합니다.
-    - **설명**: 스테이지 리소스 설명을 입력합니다.
+    - **Number of Pods**: Enter a number of pods in the stage resource.
+    - **Description**: Enter a description for the stage resource.
 - **Instance Information**: Enter instance information for the model to be served.
     - **Instance Flavor**: Select instance type.
     - **Number of Instances**: Enter the number of drives for instance.
@@ -645,7 +652,11 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 - **View API Gateway Statistics**: Click **View Statistics** to view API statistics of endpoints.
 - **Instance Flavor**: Displays endpoint instance type the model is serving.
 - **Number of Work Nodes/Pods In Progress**: Displays the number of nodes and pods being used by endpoint.
-- **스테이지 리소스**: 스테이지에 배포된 모델 아티팩트 정보가 표시됩니다.
+- **Stage Resource**: Displays information about model artifacts deployed to the stage.
+- **Monitoring**: When you select the endpoint stage, you can see a list of monitored instances and basic metrics charts in the **Monitoring** tab of the detailed screen that appears.
+    - The **Monitoring** tab is disabled while an endpoint stage is being created.
+- **API Statistics**: You can check the API statistics information of the endpoint stage in the **API Statistics** tab of the details screen that appears when you select the endpoint stage.
+    - The **API Statistics** tab is disabled while the endpoint stage is being created.
 
 > **[Caution] Precautions when changing settings for API Gateway created by AI EasyMaker**
 > When creating an endpoint or an endpoint stage, AI EasyMaker creates API Gateway services and stages for the endpoint.
@@ -662,35 +673,35 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 > In this case, you can deploy API Gateway stage manually by clicking Select Stage from the Stage list > View API Gateway Settings > 'Deploy Stage' in the bottom detail screen.
 > If this guide couldn’t recover the deployment status, please contact the Customer Center.
 
-### 스테이지 리소스 생성
-엔드포인트 스테이지에 신규 리소스를 추가합니다.
+### Create Stage Resource
+Add a new resource to an existing endpoint stage.
 
-- **모델**: 엔드포인트에 배포하려는 모델을 선택합니다. 모델을 생성하지 않은 경우 모델을 먼저 생성하시기 바랍니다.
-- **API Gateway 리소스 경로**: 배포되는 모델의 API 리소스 경로를 입력합니다. 예를 들어 `/inference`로 설정한 경우, `POST https://{enpdoint-domain}/inference`로 추론 API를 요청할 수 있습니다.
-- **파드 수**: 스테이지 리소스의 파드 수를 입력합니다.
-- **설명**: 스테이지 리소스 설명을 입력합니다.
+- **Model**: Select the model you want to deploy to your endpoints. If you have not created a model, please create one first.
+- **API Gateway Resource Path**: Enter the API resource path of the model being deployed. For example, if you set it to ` /inference`, you can request the inference API with `POST https://{enpdoint-domain}/inference`.
+- **Number of Pods**: Enter a number of pods in the stage resource.
+- **Description**: Enter a description for the stage resource.
 
-### 스테이지 리소스 목록
-엔드포인트 스테이지 하위에 생성된 리소스 목록이 표시됩니다.
+### Stage Resource List
+A list of resources created under the endpoint stage is displayed.
 
-- **상태**: 스테이지 리소스의 상태가 표시됩니다. 주요 상태는 아래 표를 참고해 주세요.
+- **Status** : Shows the status of stage resource. Please refer to the table below for the main status.
 
-    | 상태 | 설명 |
+    | Status | Description |
     | --- | --- |
-    | CREATE REQUESTED |  스테이지 리소스 생성이 요청된 상태입니다. |
-    | CREATE IN PROGRESS |  스테이지 리소스를 생성 중인 상태입니다. |
-    | DELETE IN PROGRESS |  스테이지 리소스를 삭제 중인 상태입니다. |
-    | ACTIVE |  스테이지 리소스가 정상적으로 배포된 상태입니다. |
-    | CREATE FAILED |  스테이지 리소스 생성에 실패한 상태입니다. 다시 시도해 주세요. |
+    | CREATE REQUESTED |  Creating stage resource requested. |
+    | CREATE IN PROGRESS |  Stage resource is being created. |
+    | Training is properly completed. |  Stage resource is being deleted. |
+    | ACTIVE |  Stage resource is deployed normally. |
+    | CREATE FAILED |  Creating stage resource failed. Please try again. |
 
- - **모델 이름**: 스테이지에 배포된 모델의 이름입니다.
- - **API Gateway 리소스 경로**: 스테이지에 배포된 모델의 엔드포인트 URL입니다. API 클라이언트는 표시된 URL로 API를 요청할 수 있습니다.
- - **파드 수**: 리소스에서 사용 중인 정상 파드와 전체 파드 수가 표시됩니다.
+ - **Model Name**: The name of the model deployed to the stage.
+ - **API Gateway Resource Path**: The endpoint URL of the model deployed to the stage. API clients can request the API at the displayed URL.
+ - **Number of Pods**: Shows the number of healthy pods and total pods in use on the resource.
 
 ### Call Endpoint Inference
 
 1. When you click Stage in Endpoint > Endpoint Stage, Stage details screen is displayed at the bottom.
-2. 상세화면의 스테이지 리소스 탭에서 API Gateway 리소스 경로를 확인합니다.
+2. Check the API Gateway resource path from the details screen on the Stage Resource tab.
 3. When the API Gateway resource path is called the HTTP POST Method, inference API is called.
     - Request and response specifications of the inference API differ depending on the algorithm user created.
 
@@ -721,13 +732,13 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
             }
 
 
-### 스테이지 리소스 삭제
+### Delete Stage Resource
 
-1. 엔드포인트 목록에서 **엔드포인트 이름**을 클릭하여 엔드포인트 스테이지 목록으로 이동합니다.
-2. 엔드포인트 스테이지 목록에서 삭제할 스테이지 리소스가 배포된 엔드포인트 스테이지를 클릭합니다. 클릭하면, 하단에 스테이지 상세화면이 표시됩니다.
-3. 상세화면의 스테이지 리소스 탭에서 삭제할 스테이지 리소스를 선택합니다.
-3. **스테이지 리소스 삭제**를 클릭합니다.
-4. 요청된 삭제 작업은 취소할 수 없습니다. 계속 진행하려면 **확인**을 클릭합니다.
+1. In the endpoint list, click the **endpoint name** to move it to the Endpoint Stage list.
+2. In the endpoint stage list, click the endpoint stage on which the stage resource you want to delete is deployed. When you click, the stage details screen will be displayed at the bottom.
+3. On the **Stage Resource** tab of the details screen, select the stage resource you want to delete.
+3. Click **Delete Stage Resource**.
+4. Requested deletion cannot be undone. Click **OK** to proceed.
 
 ### Change Endpoint Default Stage
 
@@ -885,7 +896,7 @@ As shown in the example below, you can use hyperparameter values entered during 
     | EM_DATASET_${Data set name}                        | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
     | EM_DATASETS                                        | Full data set list ( json format) |
     | EM_MODEL_DIR                                       | Model storage path |
-    | EM_CHECKPOINT_INPUT_DIR                            | 입력 체크 포인트 저장 경로                             |
+    | EM_CHECKPOINT_INPUT_DIR                            | Input checkout storage path                             |
     | EM_CHECKPOINT_DIR                                  | Checkpoint Storage Path |
     | EM_HP_${ Upper case converted Hyperparameter key } | Hyperparameter value corresponding to the hyperparameter key |
     | EM_HPS                                             | Full Hyperparameter List (in json format) |
@@ -929,3 +940,9 @@ As shown in the example below, you can use hyperparameter values entered during 
                 epochs=100, batch_size=20, callbacks=[tb_log])
 
 ![Check TensorBoard Log](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_tensorboard.png)
+
+### 6. Distributed Training Settings by Framework
+* **Tensorflow**
+    * The environment variable `TF_CONFIG` required for distributed training is automatically set. For more information, please refer to the [Tensorflow guide document](https://www.tensorflow.org/guide/distributed_training#multiworkermirroredstrategy).
+* **Pytorch**
+    * `Backends` settings are required for distributed training. If distributed training is performed on CPU, set it to gloo, and if distributed training is performed on GPU, set it to nccl. For more information, please refer to the [Pytorch guide document](https://pytorch.org/docs/stable/distributed.html).

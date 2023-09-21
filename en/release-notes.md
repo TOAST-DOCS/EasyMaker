@@ -5,20 +5,20 @@
 #### Feature Updates 
 
 * Ubuntu 22.04 version provided 
-  * The new Ubuntu 22.04 version is provided. Ubuntu 18.04 version is no longer available, and existing customers can use the service as it is now.
+    * The new Ubuntu 22.04 version is provided. Ubuntu 18.04 version is no longer available, and existing customers can use the service as it is now.
 
 * Monitoring feature provided 
     * You can check system monitoring metrics for notebook, training, and endpoint.
     * You can view API call metrics for each API resource path in the endpoint.
 
 * Basic algorithm for hyperparameter tuning 
-  * Through hyperparameter tuning, you can optimize the hyperparameters of the basic algorithm provided by AI EasyMaker. 
+    * Through hyperparameter tuning, you can optimize the hyperparameters of the basic algorithm provided by AI EasyMaker. 
 
 * Endpoint > Serving multiple models
-  * You can serve multiple training models on one endpoint stage.
+    * You can serve multiple training models on one endpoint stage.
 
 * Parallel training for hyperparameter tuning
-  * You can optimize the performance of hyperparameter tuning by adjusting the number of parallel trainings.
+    * You can optimize the performance of hyperparameter tuning by adjusting the number of parallel trainings.
 
 
 ### June 27, 2023
