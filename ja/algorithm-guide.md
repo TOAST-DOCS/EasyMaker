@@ -7,14 +7,15 @@ NHN Cloud AI EasyMakerで提供するアルゴリズムを紹介します。
 
 ### ハイパーパラメータ 
 
-| ハイパーパラメータ名 | 必須かどうか | Value Type | Default Value | 範囲 | 説明 |
-| --- | --- | --- | --- | --- | --- |
-| input_size | False | int | 28 | [1～∞)  | 出力画像の解像度 |
+| ハイパーパラメータ名 | 必須かどうか | Value Type | Default Value | 範囲     | 説明 |
+| --- | --- | --- | -- |---------| --- |
+| input_size | False | int | 28 | [4～∞)   | 出力画像の解像度 |
 | learning_rate | False | float | 0.1 | [0.0～∞) | AdamWオプティマイザーの初期learning rate値 |
-| per_device_train_batch_size | False | int | 16 | [2～∞) | GPU/TPU core/CPUあたりtrainingバッチサイズ |
-| per_device_eval_batch_size | False | int | 16 | [1～∞) |GPU/TPU core/CPUあたりevaluationバッチサイズ |
-| num_train_epochs | False | int | 3 | [1～∞) | 全体trainingを実行する総回数 |
-| save_steps  | False | int | 500 | [1～∞) | チェックポイントを保存するstep周期 |
+| per_device_train_batch_size | False | int | 16 | [2～∞)   | GPU/TPU core/CPUあたりtrainingバッチサイズ |
+| per_device_eval_batch_size | False | int | 16 | [1～∞)   |GPU/TPU core/CPUあたりevaluationバッチサイズ |
+| num_train_epochs | False | int | 3 | [1～∞)   | 全体trainingを実行する総回数 |
+| save_steps  | False | int | 500 | [1～∞)   | チェックポイントを保存するstep周期 |
+| logging_steps  | False | int | 10 | [1～∞)   | ログを出力するstep周期 |
 
 
 ### データセット
@@ -36,7 +37,7 @@ folder/train/dog/golden_retriever.png
 ...
 ```
 
-#### validation(選択)
+#### validation(必須)
 検証用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。 
 
 ```
@@ -115,11 +116,12 @@ Image Classificationアルゴリズムは、次の指標を作成します。
 ### ハイパーパラメータ 
 
 | ハイパーパラメータ名 | 必須かどうか | Value Type | Default Value | 有効範囲 | 説明 | 
-| --- | --- | --- | --- | --- | --- |
-| learning_rate | False | float | 2e-4 | [0.0～∞) | AdamWオプティマイザーの初期learning rate値 |
-| per_device_train_batch_size | False | int | 4 | [0～∞) |GPU/TPU core/CPUあたりのtrainingバッチサイズ |
-| num_train_epochs | False | float | 3.0 | [0.0～∞) | 全体trainingを実行する総回数 |
-| save_steps  | False | int | 500 | [1～∞) | チェックポイントを保存するstep周期 |
+| --- | --- | --- |---------------| --- | --- |
+| learning_rate | False | float | 2e-4          | [0.0～∞) | AdamWオプティマイザーの初期learning rate値 |
+| per_device_train_batch_size | False | int | 4             | [0～∞) |GPU/TPU core/CPUあたりのtrainingバッチサイズ |
+| num_train_epochs | False | float | 3.0           | [0.0～∞) | 全体trainingを実行する総回数 |
+| save_steps  | False | int | 500           | [1～∞) | チェックポイントを保存するstep周期 |
+| logging_steps  | False | int | 10            | [1～∞)   | ログを出力するstep周期 |
 
 
 ### データセット
@@ -311,14 +313,15 @@ Semantic Segmentationアルゴリズムは、次の指標を作成します。
 
 ### ハイパーパラメータ 
 
-| ハイパーパラメータ名 | 必須かどうか | Value Type | Default Value | 有効範囲 | 説明 | 
-| --- | --- | --- | --- | --- | --- |
-| learning_rate | False | float | 2e-4 | [0.0～∞) | AdamWオプティマイザーの初期learning rate値 |
-| per_device_train_batch_size | False | int | 4 | [0～∞) | GPU/TPU core/CPUあたりのtrainingバッチサイズ |
-| per_device_eval_batch_size | False | int | 4 | [0～∞) | GPU/TPU core/CPUあたりのevaluationバッチサイズ |
-| num_train_epochs | False | float | 3.0 | [0.0～∞) | 全体trainingを実行する総回数 |
+| ハイパーパラメータ名 | 必須かどうか | Value Type | Default Value | 有効範囲    | 説明 | 
+| --- | --- | --- | -- |-----------| --- |
+| learning_rate | False | float | 2e-4 | [0.0～∞)   | AdamWオプティマイザーの初期learning rate値 |
+| per_device_train_batch_size | False | int | 4 | [1～∞)     | GPU/TPU core/CPUあたりのtrainingバッチサイズ |
+| per_device_eval_batch_size | False | int | 4 | [1～∞)     | GPU/TPU core/CPUあたりのevaluationバッチサイズ |
+| num_train_epochs | False | float | 3.0 | [0.0～∞)   | 全体trainingを実行する総回数 |
 | threshold | False | float | 0.5 | [0.0～1.0] | 推論Threshold | 
-| save_steps  | False | int | 500 | [1～∞) | チェックポイントを保存するstep周期 |
+| save_steps  | False | int | 500 | [1～∞)     | チェックポイントを保存するstep周期 |
+| logging_steps  | False | int | 10 | [1～∞)   | ログを出力するstep周期 |
 
 
 ### データセット
@@ -442,6 +445,23 @@ COCO Datasetの形式で作成します。
     ]
 }
 ```
+
+#### validation(必須)
+検証用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。
+
+```
+folder/validation/_annotations.coco.json
+
+folder/validation/0001.png
+folder/validation/0002.png
+folder/validation/0003.png
+...
+```
+
+* _annotations.coco.jsonファイル
+COCO Datasetの形式で作成します。
+詳細な形式は、[COCO Datasetのformat-data](https://cocodataset.org/#format-data)文書のData formatとObject Detection内容を参照してください。
+
 
 #### test(必須)
 test用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。 
