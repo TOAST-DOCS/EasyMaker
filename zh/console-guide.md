@@ -890,7 +890,7 @@ As shown in the example below, you can use hyperparameter values entered during 
 * **Key Environment Variables**
 
     | Environment variable name                          | Description |
-----------------------------------------------------| --- | --- |
+    | --- | --- |
     | EM_SOURCE_DIR                                      | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded |
     | EM_ENTRY_POINT                                     | Algorithm entry point name entered at training creation |
     | EM_DATASET_${Data set name}                        | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
