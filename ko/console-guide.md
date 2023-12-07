@@ -586,6 +586,15 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 - **인스턴스 정보**: 모델이 서빙될 인스턴스 정보를 입력합니다.
     - **인스턴스 타입**: 인스턴스 타입을 선택합니다.
     - **인스턴스 개수**: 인스턴스의 구동 수를 입력합니다.
+- **오토스케일러**: 오토스케일러는 리소스 사용량 정책에 따라 노드 수를 자동으로 조정하는 기능입니다. 오토스케일러는 스테이지 단위로 설정됩니다.
+    - **사용/사용 안 함**: 오토스케일러 사용 여부를 선택합니다. 사용하는 경우 인스턴스 부하에 따라 인스턴스 수가 스케일 인 또는 아웃됩니다.
+    - **최소 노드 수**: 감축 가능한 최소 노드 수
+    - **최대 노드 수**: 증설 가능한 최대 노드 수
+    - **감축**: 노드 감축 활성 여부 설정
+    - **리소스 사용량 임계치**: 감축의 기준인 리소스 사용량 임계 영역의 기준값
+    - **임계 영역 유지 시간(분)**: 감축 대상이 될 노드의 임계치 이하의 리소스 사용량 유지 시간
+    - **증설 후 감축 지연 시간(분)**: 노드 증설 후 감축 대상 노드로 모니터링하기 시작까지의 지연 시간
+
 - **추가 설정 > 태그**: 태그를 추가하려면 **+ 버튼**을 클릭하여 Key-Value 형식으로 태그를 입력합니다. 태그는 최대 10개까지 입력할 수 있습니다.
 
 > **[참고] 엔드포인트 생성 소요 시간**
@@ -781,6 +790,146 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 > 삭제되는 API Gateway 서비스에 운영 중인 API가 존재하는 경우, API 호출이 불가하므로 주의해 주세요.
 
 
+## 개인 이미지 
+사용자가 개인화한 컨테이너 이미지를 사용하여 노트북, 학습, 하이퍼파라미터 튜닝을 구동할 수있습니다.
+개인 이미지는 AI EasyMaker에서 제공하는 노트북/딥 러닝 이미지를 기반으로 파생된 이미지만 AI EasyMaker에서 사용할 수 있습니다. 
+제공하는 기반 이미지는 아래 표를 참고합니다. 
+
+#### 노트북 이미지 
+| 이미지 주소                                                                                                 | 이미지 이름                               | 코어타입 | 프레임워크      | 프레임워크 버전 | 파이썬 버전 |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------ | ---- | ---------- | -------- | ------ |
+| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204    | Ubuntu 22.04 CPU Python Notebook     | CPU  | Python     | 3.10.12  | 3.10   |
+| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-gpu-py310-ubuntu2204    | Ubuntu 22.04 GPU Python Notebook     | GPU  | Python     | 3.10.12  | 3.10   |
+| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-cpu-py310-ubuntu2204     | Ubuntu 22.04 CPU PyTorch Notebook    | CPU  | PyTorch    | 2.0.1    | 3.10   |
+| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-gpu-py310-ubuntu2204     | Ubuntu 22.04 GPU PyTorch Notebook    | GPU  | PyTorch    | 2.0.1    | 3.10   |
+| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204 | Ubuntu 22.04 CPU TensorFlow Notebook | CPU  | TensorFlow | 2.12.0   | 3.10   |
+| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204 | Ubuntu 22.04 GPU TensorFlow Notebook | GPU  | TensorFlow | 2.12.0   | 3.10   |
+
+#### 딥 러닝 이미지 
+
+| 이미지 주소                                                                                                 | 이미지 이름                               | 코어타입 | 프레임워크      | 프레임워크 버전 | 파이썬 버전 |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------ | ---- | ---------- | -------- | ------ |
+| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204        | Ubuntu 22.04 CPU PyTorch Training    | CPU  | PyTorch    | 2.0.1    | 3.10   |
+| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204        | Ubuntu 22.04 GPU PyTorch Training    | GPU  | PyTorch    | 2.0.1    | 3.10   |
+| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204 | Ubuntu 22.04 CPU TensorFlow Training | CPU  | TensorFlow | 2.12.0   | 3.10   |
+| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204 | Ubuntu 22.04 GPU TensorFlow Training | GPU  | TensorFlow | 2.12.0   | 3.10   |
+
+
+> **[참고] 개인 이미지의 사용시 제약 사항**
+* AI EasyMaker에서 제공하는 이미지를 기반으로 파생된 사용할 수 있습니다.
+* 개인 이미지의 컨테이너 레지스트리 서비스로는 현재 NHN Cloud Registry(NCR)만 연동 가능합니다.  
+
+### 개인 이미지 생성 
+다음 가이드는 도커(Docker)를 활용하여 AI EasyMaker 기반 이미지로 컨테이너 이미지를 생성하여 AI EasyMaker에서 노트북, 학습에서 개인이미지를 사용하는 방법을 안내합니다. 
+
+1. 개인 이미지의 DockerFile를 작성합니다. 
+
+```
+FROM 47a6bb45-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204-2023.09 as easymaker-notebook
+RUN conda create -n example python=3.10
+RUN conda activate example
+RUN pip install torch torchvision
+
+```
+
+2. 개인 이미지 빌드와 컨테이너 레지스트리 Push 
+
+Dockerfile을 빌드한 후, NCR 레지스트리에 이미지를 Push 합니다. 
+```
+docker build -t {이미지 이름}:{태그}
+docker tag {이미지 이름}:{태그} {NCR 레지스트리 주소}/{이미지 이름}:{태그}
+docker push {NCR 레지스트리 주소}/{이미지 이름}:{태그}
+```  
+
+* 예시 
+    ```
+    docker build -t cutstom-training:v1
+    docker tag cutstom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+    docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+    ```  
+
+
+3. 컨테이너 레지스트리 서비스에 Push한 이미지를 개인 이미지로 등록합니다.
+
+    1. AI EasyMaker 콘솔의 **이미지** 메뉴로 이동합니다. 
+    2. **이미지 생성** 버튼을 클릭하여, 생성한 이미지의 정보를 입력합니다.
+        * 이름, 설명: 이미지에 대한 이름과 설명을 입력합니다.
+        * 주소: 레지스트리 이미지 주소를 입력합니다. 
+        * 타입: 컨테이너 이미지의 타입을 입력합니다. 노트북 또는 학습을 선택합니다.
+        * 계정: AI EasyMaker 노트북/학습 노드가 사용자의 레지스트리 저장소에 접근하기 위한 계정을 선택합니다.
+            * 신규 사용: 신규 레지스트리 계정을 등록합니다.
+               * 이름, 설명: 레지스트리 계정에 대한 이름과 설명을 입력합니다. 
+               * 분류: 레지스트리 저장소의 분류를 선택합니다. 현재는 NHN Container Registry만 가능합니다.
+               * 아이디: 레지스트리 저장소의 아이디를 입력합니다. 
+                 * NCR의 경우 NHN Cloud 사용자 계정의 User Access Key를 입력합니다. 
+               * 비밀번호: 레지스트리 저장소의 비밀번호를 입력합니다.  
+                 * NCR의 경우 NHN Cloud 사용자 계정 User Secret Key를 입력합니다.
+            * 기존 계정 사용: 이미 등록된 레지스트리 계정을 선택합니다. 
+
+
+4. 개인 이미지로 학습을 생성합니다.
+
+    1. **학습** 메뉴로 이동합니다. **학습 생성** 버튼을 클릭하여 학습 생성 페이지로 이동합니다. 
+    2. 이미지 정보에서 **개인 이미지** 탭을 클릭합니다. 
+    3. 학습에 사용할 개인 이미지를 선택합니다.
+    4. 학습 정보를 입력한 후 학습을 생성하면, 개인 이미지로 학습이 구동됩니다. 
+
+
+## 레지스트리 계정 관리 
+레지스트리 계정을 관리하려면 AI EasyMaker 콘솔의 **이미지** 메뉴로 이동한 후, **레지스트리 계정** 탭을 선택합니다.
+
+
+### 레지스트리 계정 생성 
+신규 레지스트리 계정을 생성합니다.
+* 이름: 레지스트리 계정의 이름을 입력합니다.
+* 설명: 레지스트리 계정의 설명을 입력합니다.
+* 분류: 컨테이너 레지스트리 서비스의 벤더를 선택합니다. 현재는 NHN Container Registry(NCR)만 지원합니다.
+* 아이디: 레지스트리 계정의 아이디를 입력합니다. 
+* 비밀번호: 레지스트리 계정의 비밀번호를 입력합니다. 
+
+### 레지스트리 계정 수정 
+
+#### 레지스트리 아이디,비밀번호 수정 
+* **레지스트리 계정 수정** 버튼을 클릭합니다.
+* 아이디와 비밀번호를 새로 입력한 후 **확인** 버튼을 클릭합니다. 
+
+> [참고]
+> 레지스트리 계정을 변경하면, 레지스트리 계정과 연동된 이미지를 사용할 때 변경된 레지스트리 아이디/비밀번호로 레지스트리 서비스에 로그인합니다.
+> 잘못된 레지스트리 아이디, 비밀번호를 입력하면 개인 이미지 Pull에 실패되어, 리소스 생성이 실패됩니다. 
+> 수정하려는 레지스트리 계정이 연동된 개인이미지로 생성 중인 리소스가 있거나 수행 중인 학습 및 하이퍼파라미터가 있을 경우에는 수정할 수 없습니다. 
+
+
+#### 레지스트리 계정의 이름, 설명 변경
+1. 레지스트리 계정 목록에서 변경할 계정을 선택합니다.
+2. 하단 화면의 **변경** 버튼을 클릭합니다.
+3. 이름과 설명을 변경한 후 **확인** 버튼을 클릭합니다.   
+
+### 레지스트리 계정 삭제 
+삭제할 레지스트리 계정을 목록에서 선택하고, **레지스트리 계정 삭제**버튼을 클릭합니다. 
+
+> [참고]
+> 삭제하려는 레지스트리 계정이 연동된 이미지가 있을 경우, 레지스트리 계정을 삭제할 수 없습니다. 
+> 삭제하려면, 연동된 이미지를 삭제하고 레지스트리 계정을 삭제해야합니다.
+
+## 대시보드 
+대시보드에서 전체 AI EasyMaker 리소스별 이용현황을 확인할 수 있습니다. 
+
+### 서비스 이용 현황 
+전체 서비스 이용 기간 중 각 리소스별 사용량이 표시됩니다.
+* 노트북: 이용 중인 ACITVE(HEALTHY) 상태의 노트북 수
+* 학습: 완료(COMPLETE)된 학습 수
+* 하이퍼파라미터 튜닝: 완료(COMPLETE)된 하이퍼파라미터 튜닝 수 
+* 엔드포인트: ACTIVE 상태의 엔드포인트 수
+
+### 서비스 모니터링 
+* 엔드포인트의 API 호출이 가장 많은 Top 3 엔드포인트가 노출됩니다.
+* 선택한 엔드포인트 하위의 모든 스테이지의  API 호출 수 합계를 성공, 실패 수 지표를 확인할 수 있습니다.
+
+### 리소스 사용률 
+* CPU, GPU 코어 타입별로 가장 사용량이 많은 리소스를 확인할 수 있씁니다. 
+* 지표 그래프에 마우스 오버시 리소스 정보가 표시됩니다. 
+
+
 ## 부록
 
 ### 1. NHN Cloud Object Storage에 AI EasyMaker 시스템 계정 권한 추가
@@ -950,3 +1099,35 @@ AI EasyMaker 서비스는 Log & Crash Search 서비스에 다음과 같이 정�
     * 분산 학습에 필요한 환경 변수 `TF_CONFIG`는 자동으로 설정됩니다. 자세한 내용은 [Tensorflow 공식 가이드 문서](https://www.tensorflow.org/guide/distributed_training#multiworkermirroredstrategy)를 참고해 주세요.
 * **Pytorch**
     * 분산 학습을 하기 위해서 `Backends` 설정이 필요합니다. 분산 학습을 CPU로 진행할 경우 gloo로, GPU로 진행할 경우 nccl로 설정해 주세요. 자세한 내용은 [Pytorch 공식 가이드 문서](https://pytorch.org/docs/stable/distributed.html)를 참고해 주세요.
+
+
+
+### 7. 클러스터 버전 업그레이드 
+AI EasyMaker 서비스는 안정적인 서비스와 신규 기능 제공을 위해 주기적으로 클러스터 버전을 업그레이드합니다.
+신규 클러스터 버전이 배포되면 구 버전의 클러스터에 구동되는 노트북, 엔드포인트와 같은 리소스를 신규 클러스터로 이전해야합니다.
+
+
+#### 노트북 클러스터 버전 업그레이드 
+
+**노트북** 목록 화면에서 신규 클러스터로 이전해야하는 노트북은 이름 좌측에 **재시작** 버튼이 표시됩니다.
+**재시작** 버튼 위에 커서를 올리면, 재시작 안내 문구와 만료 일시가 표시됩니다. 
+만료 전 다음의 주의 사항을 반드시 확인 한 후 **재시작** 버튼을 클릭합니다.
+
+
+* 재시작시 데이터 스토리지 (/root/easymaker 디렉터리 경로)에 저장된 데이터는 그대로 유지됩니다. 
+* 부트 스토리지에 저장된 데이터는 재시작을 하면 초기화되므로 데이터가 유실 될 수 있습니다. 유실되지 않으려면 데이터 스토리지로 데이터를 이동한 후 재시작해주세요. 
+
+재시작은 최초 재시작시 약 25분 소요되며, 이후 재시작시 약 10분이 소요됩니다. 
+재시작이 실패된 경우, 관리자에게 자동으로 보고됩니다. 
+
+
+#### 엔드포인트 클러스터 버전 업그레이드
+
+**엔드포인트 목록** 화면에서 신규 클러스터로 이전해야 하는 엔드포인트는 이름 좌측에 **! 안내** 문구가 표시됩니다.
+**! 안내** 문구 위에 커서를 올리면, 버전 업그레이드 안내 문구와 만료 일시가 표시됩니다.
+
+1. 서비스 중이지 않은 기본 스테이지 이 외의 스테이지는 삭제 후 재생성합니다. 
+2. 구 버전 클러스터의 기본 스테이지를 대체할 신규 스테이지를 생성합니다. 
+3. 신규 스테이지 엔드포인트에서 정상적인 API 호출과 추론 응답이 반환하는지 확인합니다.
+4. **기본 스테이지 변경** 버튼을 클릭합니다. 신규 스테이지를 선택하여 기본 스테이지로 변경합니다.
+5. 변경이 완료되면, 신규 스테이지가 기본 스테이지로 설정되고, 기존 기본 스테이지는 삭제됩니다. 
