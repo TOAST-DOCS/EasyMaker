@@ -834,10 +834,12 @@ AI EasyMaker의 기반 이미지는 아래 표를 확인해주세요.
 다음 문서는 도커(Docker)를 활용하여 AI EasyMaker 기반 이미지로 컨테이너 이미지를 생성하고, AI EasyMaker에서 노트북용 개인이미지를 사용하는 방법을 안내합니다. 
 
 1. 개인 이미지의 DockerFile를 작성합니다. 
-        FROM 47a6bb45-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204-2023.09 as easymaker-notebook
+        ```
+        FROM fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
         RUN conda create -n example python=3.10
         RUN conda activate example
         RUN pip install torch torchvision
+        ```
 
 2. 개인 이미지 빌드와 컨테이너 레지스트리 Push 
 Dockerfile로 이미지를 빌드하고 NCR 레지스트리에 이미지를 저장(Push) 합니다. 
@@ -845,9 +847,11 @@ Dockerfile로 이미지를 빌드하고 NCR 레지스트리에 이미지를 저�
         docker tag {이미지 이름}:{태그} {NCR 레지스트리 주소}/{이미지 이름}:{태그}
         docker push {NCR 레지스트리 주소}/{이미지 이름}:{태그}
     * 예시 
+        ```
         docker build -t cutstom-training:v1
         docker tag cutstom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
         docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+        ```
         
 3. NCR에 저장(Push)한 이미지를 AI EasyMaker의 개인 이미지로 생성합니다.
 
