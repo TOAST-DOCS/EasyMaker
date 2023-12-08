@@ -606,15 +606,6 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 - **인스턴스 정보**: 모델이 서빙될 인스턴스 정보를 입력합니다.
     - **인스턴스 타입**: 인스턴스 타입을 선택합니다.
     - **인스턴스 개수**: 인스턴스의 구동 수를 입력합니다.
-- **오토스케일러**: 오토스케일러는 리소스 사용량 정책에 따라 노드 수를 자동으로 조정하는 기능입니다. 오토스케일러는 스테이지 단위로 설정됩니다.
-    - **사용/사용 안 함**: 오토스케일러 사용 여부를 선택합니다. 사용하는 경우 인스턴스 부하에 따라 인스턴스 수가 스케일 인 또는 아웃됩니다.
-    - **최소 노드 수**: 감축 가능한 최소 노드 수
-    - **최대 노드 수**: 증설 가능한 최대 노드 수
-    - **감축**: 노드 감축 활성 여부 설정
-    - **리소스 사용량 임계치**: 감축의 기준인 리소스 사용량 임계 영역의 기준값
-    - **임계 영역 유지 시간(분)**: 감축 대상이 될 노드의 임계치 이하의 리소스 사용량 유지 시간
-    - **증설 후 감축 지연 시간(분)**: 노드 증설 후 감축 대상 노드로 모니터링하기 시작까지의 지연 시간
-
 - **추가 설정 > 태그**: 태그를 추가하려면 **+ 버튼**을 클릭하여 Key-Value 형식으로 태그를 입력합니다. 태그는 최대 10개까지 입력할 수 있습니다.
 
 > **[참고] 엔드포인트 생성 소요 시간**
@@ -816,23 +807,23 @@ AI EasyMaker에서 제공하는 노트북/딥 러닝 이미지를 기반으로 �
 AI EasyMaker의 기반 이미지는 아래 표를 확인해주세요.
 
 #### 노트북 이미지 
-| 이미지 주소                                                                                                 | 이미지 이름                               | 코어타입 | 프레임워크      | 프레임워크 버전 | 파이썬 버전 |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------ | ---- | ---------- | -------- | ------ |
-| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204    | Ubuntu 22.04 CPU Python Notebook     | CPU  | Python     | 3.10.12  | 3.10   |
-| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-gpu-py310-ubuntu2204    | Ubuntu 22.04 GPU Python Notebook     | GPU  | Python     | 3.10.12  | 3.10   |
-| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-cpu-py310-ubuntu2204     | Ubuntu 22.04 CPU PyTorch Notebook    | CPU  | PyTorch    | 2.0.1    | 3.10   |
-| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-gpu-py310-ubuntu2204     | Ubuntu 22.04 GPU PyTorch Notebook    | GPU  | PyTorch    | 2.0.1    | 3.10   |
-| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204 | Ubuntu 22.04 CPU TensorFlow Notebook | CPU  | TensorFlow | 2.12.0   | 3.10   |
-| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204 | Ubuntu 22.04 GPU TensorFlow Notebook | GPU  | TensorFlow | 2.12.0   | 3.10   |
+ 이미지 이름 | 코어타입 | 프레임워크 | 프레임워크 버전 | 파이썬 버전 | 이미지 주소 |
+| --- | --- | --- | --- | --- | --- |
+| Ubuntu 22.04 CPU Python Notebook     | CPU  | Python     | 3.10.12  | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204   |
+| Ubuntu 22.04 GPU Python Notebook     | GPU  | Python     | 3.10.12  | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-gpu-py310-ubuntu2204   |
+| Ubuntu 22.04 CPU PyTorch Notebook    | CPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-cpu-py310-ubuntu2204    |
+| Ubuntu 22.04 GPU PyTorch Notebook    | GPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-gpu-py310-ubuntu2204    |
+| Ubuntu 22.04 CPU TensorFlow Notebook | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204|
+| Ubuntu 22.04 GPU TensorFlow Notebook | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204|
 
 #### 딥 러닝 이미지 
 
-| 이미지 주소                                                                                                 | 이미지 이름                               | 코어타입 | 프레임워크      | 프레임워크 버전 | 파이썬 버전 |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------ | ---- | ---------- | -------- | ------ |
-| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204        | Ubuntu 22.04 CPU PyTorch Training    | CPU  | PyTorch    | 2.0.1    | 3.10   |
-| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204        | Ubuntu 22.04 GPU PyTorch Training    | GPU  | PyTorch    | 2.0.1    | 3.10   |
-| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204 | Ubuntu 22.04 CPU TensorFlow Training | CPU  | TensorFlow | 2.12.0   | 3.10   |
-| fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204 | Ubuntu 22.04 GPU TensorFlow Training | GPU  | TensorFlow | 2.12.0   | 3.10   |
+| 이미지 주소 | 이미지 이름 | 코어타입 | 프레임워크 | 프레임워크 버전 | 파이썬 버전 |
+| --- | --- | --- | --- | --- | --- |
+| Ubuntu 22.04 CPU PyTorch Training    | CPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204        |
+| Ubuntu 22.04 GPU PyTorch Training    | GPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204        |
+| Ubuntu 22.04 CPU TensorFlow Training | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204 |
+| Ubuntu 22.04 GPU TensorFlow Training | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204 |
 
 
 > **[참고] 개인 이미지 사용 제약 사항**
@@ -1102,50 +1093,3 @@ AI EasyMaker 서비스는 Log & Crash Search 서비스에 다음과 같이 정�
     * 분산 학습에 필요한 환경 변수 `TF_CONFIG`는 자동으로 설정됩니다. 자세한 내용은 [Tensorflow 공식 가이드 문서](https://www.tensorflow.org/guide/distributed_training#multiworkermirroredstrategy)를 참고해 주세요.
 * **Pytorch**
     * 분산 학습을 하기 위해서 `Backends` 설정이 필요합니다. 분산 학습을 CPU로 진행할 경우 gloo로, GPU로 진행할 경우 nccl로 설정해 주세요. 자세한 내용은 [Pytorch 공식 가이드 문서](https://pytorch.org/docs/stable/distributed.html)를 참고해 주세요.
-
-
-
-### 7. 클러스터 버전 업그레이드 
-AI EasyMaker 서비스는 안정적인 서비스와 신규 기능 제공을 위해 주기적으로 클러스터 버전을 업그레이드합니다.
-신규 클러스터 버전이 배포되면, 구 버전의 클러스터에 구동된 노트북, 엔드포인트를 신규 클러스터로 이전해야합니다.
-리소스별 신규 클러스터 이전 방법을 안내합니다.
-
-
-#### 노트북 클러스터 버전 업그레이드 
-
-**노트북** 목록 화면에서 신규 클러스터로 이전해야하는 노트북은 이름 좌측에 **재시작** 버튼이 표시됩니다.
-**재시작** 버튼 위에 마우스를 오버하면, 재시작 안내 문구와 만료 일시가 표시됩니다. 
-
-* 만료 전, 다음의 주의 사항을 반드시 확인 한 후 **재시작** 버튼을 클릭합니다.
-    * 재시작시 데이터 스토리지 (/root/easymaker 디렉터리 경로)에 저장된 데이터는 그대로 유지됩니다. 
-    * 부트 스토리지에 저장된 데이터는 재시작을 하면 초기화되므로 데이터가 유실 될 수 있습니다. 유실되지 않으려면 데이터 스토리지로 데이터를 이동한 후 재시작해주세요. 
-
-재시작은 최초 재시작시 약 25분 소요되며, 이후 재시작시 약 10분이 소요됩니다. 
-재시작이 실패된 경우, 관리자에게 자동으로 보고됩니다. 
-
-
-#### 엔드포인트 클러스터 버전 업그레이드
-
-**엔드포인트 목록** 화면에서 신규 클러스터로 이전해야 하는 엔드포인트는 이름 좌측에 **! 안내** 문구가 표시됩니다.
-**! 안내** 문구 위에 마우스를 올리면, 버전 업그레이드 안내 문구와 만료 일시가 표시됩니다.
-만료 전까지 다음의 안내에 따라 구 버전 클러스터에서 운영되는 스테이지를 신규 버전 클러스터로 이전해야합니다. 
-
-##### 일반 스테이지의 클러스터 버전 업그레이드 
-
-1. 기본 스테이지가 아닌 일반 스테이지의 경우, 스테이지를 삭제합니다. 삭제 전 서비스 중이진 않은지 확인합니다. 
-2. 스테이지를 다시 생성합니다. 
-3. 신규 스테이지 상태가 ACITVE 상태가 되면, 스테이지 엔드포인트로 정상적으로 API 호출과 추론 응답이 오는지 확인합니다.
-
-
-> [주의] 
-> 스테이지를 삭제하면 엔드포인트가 종료되어 API 호출이 불가합니다. 삭제 전 서비스 중이지 않은 스테이지인지 확인합니다.
-
-##### 기본 스테이지의 클러스터 버전 업그레이드 
-
-기본 스테이지는 실제 서비스가 운영되는 스테이지입니다.
-서비스의 순단 없이 기본 스테이지의 클러스트 버전을 이전하려면 다음의 가이드에 따라 이전합니다. 
-   
-1. 구 버전 클러스터의 기본 스테이지를 대체할 신규 스테이지를 생성합니다. 
-2. 신규 스테이지 엔드포인트에서 정상적으로 API 호출과 추론 응답이 오는지 확인합니다.
-3. **기본 스테이지 변경** 버튼을 클릭합니다. 신규 스테이지를 선택하여 기본 스테이지로 변경합니다.
-4. 변경이 완료되면, 신규 스테이지가 기본 스테이지로 설정되고, 기존 기본 스테이지는 삭제됩니다. 
