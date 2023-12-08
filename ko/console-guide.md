@@ -834,26 +834,21 @@ AI EasyMaker의 기반 이미지는 아래 표를 확인해주세요.
 다음 문서는 도커(Docker)를 활용하여 AI EasyMaker 기반 이미지로 컨테이너 이미지를 생성하고, AI EasyMaker에서 노트북용 개인이미지를 사용하는 방법을 안내합니다. 
 
 1. 개인 이미지의 DockerFile를 작성합니다. 
-```
-FROM 47a6bb45-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204-2023.09 as easymaker-notebook
-RUN conda create -n example python=3.10
-RUN conda activate example
-RUN pip install torch torchvision
-```
+        FROM 47a6bb45-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204-2023.09 as easymaker-notebook
+        RUN conda create -n example python=3.10
+        RUN conda activate example
+        RUN pip install torch torchvision
 
 2. 개인 이미지 빌드와 컨테이너 레지스트리 Push 
 Dockerfile로 이미지를 빌드하고 NCR 레지스트리에 이미지를 저장(Push) 합니다. 
-    ```
-    docker build -t {이미지 이름}:{태그}
-    docker tag {이미지 이름}:{태그} {NCR 레지스트리 주소}/{이미지 이름}:{태그}
-    docker push {NCR 레지스트리 주소}/{이미지 이름}:{태그}
-    ```  
-* 예시 
-    ```
-    docker build -t cutstom-training:v1
-    docker tag cutstom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
-    docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
-    ```  
+        docker build -t {이미지 이름}:{태그}
+        docker tag {이미지 이름}:{태그} {NCR 레지스트리 주소}/{이미지 이름}:{태그}
+        docker push {NCR 레지스트리 주소}/{이미지 이름}:{태그}
+    * 예시 
+        docker build -t cutstom-training:v1
+        docker tag cutstom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+        docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+        
 3. NCR에 저장(Push)한 이미지를 AI EasyMaker의 개인 이미지로 생성합니다.
 
     1. AI EasyMaker 콘솔의 **이미지** 메뉴로 이동합니다. 
@@ -869,11 +864,6 @@ Dockerfile로 이미지를 빌드하고 NCR 레지스트리에 이미지를 저�
                 * 비밀번호: 레지스트리 저장소의 비밀번호를 입력합니다.  
             * 기존 계정 사용: 이미 등록된 레지스트리 계정을 선택합니다. 
 
-> [참고]  컨테이너 레지스트리 서비스:  NHN Container Registry(NCR)
-> 컨테이너 레지스트 서비스로 NCR 서비스만 연동 가능합니다. (2023년 12월 기준)
-> NCR 서비스의 계정 아이디와 비밀번호는 다음의 값을 입력합니다.
-> 아이디: NHN Cloud 사용자 계정의 User Access Key
-> 비밀번호: NHN Cloud 사용자 계정의 User Secret Key
 4. 생성한 개인 이미지로 노트북을 생성합니다.
     1. **노트북** 메뉴로 이동합니다. **노트북 생성** 버튼을 클릭하여 노트북 생성 페이지로 이동합니다. 
     2. 이미지 정보에서 **개인 이미지** 탭을 클릭합니다. 
@@ -882,6 +872,12 @@ Dockerfile로 이미지를 빌드하고 NCR 레지스트리에 이미지를 저�
 
 > [참고] 
 > 노트북 이외 학습, 하이퍼파라미터 튜닝도 동일하게 개인 이미지를 사용하여 리소스를 생성할 수 있습니다.
+
+> [참고]  컨테이너 레지스트리 서비스:  NHN Container Registry(NCR)
+> 컨테이너 레지스트 서비스로 NCR 서비스만 연동 가능합니다. (2023년 12월 기준)
+> NCR 서비스의 계정 아이디와 비밀번호는 다음의 값을 입력합니다.
+> 아이디: NHN Cloud 사용자 계정의 User Access Key
+> 비밀번호: NHN Cloud 사용자 계정의 User Secret Key
 
 
 ## 레지스트리 계정 
