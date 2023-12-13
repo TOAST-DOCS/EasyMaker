@@ -826,7 +826,7 @@ AI EasyMaker의 기반 이미지는 아래 표를 확인해 주세요.
 
 #### 딥 러닝 이미지 
 
-| 이미지 주소 | 이미지 이름 | 코어타입 | 프레임워크 | 프레임워크 버전 | 파이썬 버전 |
+| 이미지 이름 | 코어타입 | 프레임워크 | 프레임워크 버전 | 파이썬 버전 | 이미지 주소 |
 | --- | --- | --- | --- | --- | --- |
 | Ubuntu 22.04 CPU PyTorch Training    | CPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204        |
 | Ubuntu 22.04 GPU PyTorch Training    | GPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204        |
@@ -856,8 +856,8 @@ Dockerfile로 이미지를 빌드하고 NCR 레지스트리에 이미지를 저�
         docker push {NCR 레지스트리 주소}/{이미지 이름}:{태그}
     * 예시 
         ```
-        docker build -t cutstom-training:v1 .
-        docker tag cutstom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+        docker build -t custom-training:v1 .
+        docker tag custom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
         docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
         ```
         
