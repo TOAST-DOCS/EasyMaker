@@ -830,8 +830,8 @@ AI EasyMaker의 기반 이미지는 아래 표를 확인해 주세요.
 | --- | --- | --- | --- | --- | --- |
 | Ubuntu 22.04 CPU PyTorch Training    | CPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204        |
 | Ubuntu 22.04 GPU PyTorch Training    | GPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204        |
-| Ubuntu 22.04 CPU TensorFlow Training | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204 |
-| Ubuntu 22.04 GPU TensorFlow Training | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204 |
+| Ubuntu 22.04 CPU TensorFlow Training | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-cpu-py310-ubuntu2204 |
+| Ubuntu 22.04 GPU TensorFlow Training | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
 
 
 > **[참고] 개인 이미지 사용 제약 사항**
@@ -842,24 +842,28 @@ AI EasyMaker의 기반 이미지는 아래 표를 확인해 주세요.
 다음 문서는 도커(Docker)를 활용하여 AI EasyMaker 기반 이미지로 컨테이너 이미지를 생성하고, AI EasyMaker에서 노트북용 개인 이미지를 사용하는 방법을 안내합니다. 
 
 1. 개인 이미지의 DockerFile을 작성합니다. 
-        ```
-        FROM fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
-        RUN conda create -n example python=3.10
-        RUN conda activate example
-        RUN pip install torch torchvision
-        ```
+```        
+FROM fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
+RUN conda create -n example python=3.10
+RUN conda activate example
+RUN pip install torch torchvision
+```
 
 2. 개인 이미지 빌드와 컨테이너 레지스트리 Push 
 Dockerfile로 이미지를 빌드하고 NCR 레지스트리에 이미지를 저장(Push)합니다. 
-        docker build -t {이미지 이름}:{태그} .
-        docker tag {이미지 이름}:{태그} {NCR 레지스트리 주소}/{이미지 이름}:{태그}
-        docker push {NCR 레지스트리 주소}/{이미지 이름}:{태그}
-    * 예시 
-        ```
-        docker build -t custom-training:v1 .
-        docker tag custom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
-        docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
-        ```
+
+```
+docker build -t {이미지 이름}:{태그} .
+docker tag {이미지 이름}:{태그} {NCR 레지스트리 주소}/{이미지 이름}:{태그}
+docker push {NCR 레지스트리 주소}/{이미지 이름}:{태그}
+```
+
+```
+(예시)
+docker build -t custom-training:v1 .
+docker tag custom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+```
         
 3. NCR에 저장(Push)한 이미지를 AI EasyMaker의 개인 이미지로 생성합니다.
 
