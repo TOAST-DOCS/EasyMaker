@@ -850,9 +850,11 @@ AI EasyMaker의 기반 이미지는 아래 표를 확인해 주세요.
 
 2. 개인 이미지 빌드와 컨테이너 레지스트리 Push 
 Dockerfile로 이미지를 빌드하고 NCR 레지스트리에 이미지를 저장(Push)합니다. 
+
             docker build -t {이미지 이름}:{태그} .
             docker tag {이미지 이름}:{태그} {NCR 레지스트리 주소}/{이미지 이름}:{태그}
             docker push {NCR 레지스트리 주소}/{이미지 이름}:{태그}
+
 
             (예시)
             docker build -t custom-training:v1 .
