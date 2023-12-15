@@ -825,12 +825,12 @@ AI EasyMakerの基盤イメージは下表を確認してください。
 
 #### ディープラーニングイメージ 
 
-| イメージアドレス | イメージ名 | コアタイプ | フレームワーク | フレームワークバージョン | Pythonバージョン |
+| イメージ名 | コアタイプ | フレームワーク | フレームワークバージョン | Pythonバージョン | イメージアドレス |
 | --- | --- | --- | --- | --- | --- |
 | Ubuntu 22.04 CPU PyTorch Training    | CPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204        |
 | Ubuntu 22.04 GPU PyTorch Training    | GPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204        |
-| Ubuntu 22.04 CPU TensorFlow Training | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204 |
-| Ubuntu 22.04 GPU TensorFlow Training | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204 |
+| Ubuntu 22.04 CPU TensorFlow Training | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-cpu-py310-ubuntu2204 |
+| Ubuntu 22.04 GPU TensorFlow Training | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
 
 
 > **[参考]個人イメージ使用制約事項**
