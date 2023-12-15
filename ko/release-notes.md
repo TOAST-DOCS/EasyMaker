@@ -1,5 +1,6 @@
 ## Machine Learning > AI EasyMaker > 릴리스 노트
 
+### 2023. 12. 19.
 
 #### 기능 개선/변경 
 
