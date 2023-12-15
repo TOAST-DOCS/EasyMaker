@@ -841,25 +841,25 @@ AI EasyMakerの基盤イメージは下表を確認してください。
 次の文書は、ドッカー(Docker)を活用してAI EasyMakerベースのイメージでコンテナイメージを作成し、AI EasyMakerでノートパソコン用の個人イメージを使用する方法を案内します。 
 
 1. 個人イメージのDockerFileを作成します。 
-        ```
-        FROM fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
-        RUN conda create -n example python=3.10
-        RUN conda activate example
-        RUN pip install torch torchvision
-        ```
+        
+            FROM fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
+            RUN conda create -n example python=3.10
+            RUN conda activate example
+            RUN pip install torch torchvision
 
 2. 個人イメージビルドとコンテナレジストリPush 
 DockerfileでイメージをビルドしてNCRレジストリにイメージを保存(Push)します。 
-        docker build -t {イメージ名}:{タグ} .
-        docker tag {イメージ名}:{タグ} {NCRレジストリアドレス}/{イメージ名}:{タグ}
-        docker push {NCRレジストリアドレス}/{イメージ名}:{タグ}
-    * 例 
-        ```
-        docker build -t cutstom-training:v1 .
-        docker tag cutstom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
-        docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
-        ```
-
+    
+            docker build -t {イメージ名}:{タグ} .
+            docker tag {イメージ名}:{タグ} {NCRレジストリアドレス}/{イメージ名}:{タグ}
+            docker push {NCRレジストリアドレス}/{イメージ名}:{タグ}
+        
+        
+            (例)
+            docker build -t cutstom-training:v1 .
+            docker tag cutstom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+            docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+    
 3. NCRに保存(Push)したイメージをAI EasyMakerの個人イメージとして作成します。
 
     1. AI EasyMakerコンソールの**イメージ**メニューに移動します。 
