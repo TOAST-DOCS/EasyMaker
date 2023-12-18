@@ -1,5 +1,25 @@
 ## Machine Learning > AI EasyMaker > Console Guide
 
+## Dashboard 
+You can view the usage status of all AI EasyMaker resources in the dashboard. 
+
+### Service Usage
+
+Displays the number of resources in use per resource.
+
+* Notebook: Number of notebooks in ACITIVE (HEALTHY) status that are in use.
+* Training: Number of trainings that are COMPLETE
+* Hyperparameter tuning: Number of hyperparameter tunings that are COMPLETE 
+* Endpoints: Number of endpoints in the ACTIVE state
+
+### Monitoring Services 
+* Displays the top 3 endpoints with the most API calls.
+* Select an endpoint to see the aggregate API success/failure metrics for the child endpoint stage.
+
+### Resource Utilization 
+* You can see the most utilized resources by CPU and GPU core type. 
+* If you hover over a metric, it displays resource information.
+
 ## Notebook
 Create and manage Jupyter notebook with essential packages installed for machine learning development.
 
@@ -284,6 +304,7 @@ Create a model with training in the completed state.
 3. You will be taken to the model creation page. After checking the contents, click **Create Model** to create a model. For more information on model creation, see [the model](./console-guide/#model) documentation.
 
 
+
 ### Delete Training
 Deletes a training.
 
@@ -298,7 +319,6 @@ Training cannot be deleted if a model created by the training to be deleted exis
 ## Hyperparameter Tuning
 
 Hyperparameter tuning is the process of optimizing hyperparameter values to maximize a model's predictive accuracy. If you don't use this feature, you'll have to manually tune the hyperparameters to find the optimal values while running many training jobs yourself.
-
 
 ### Create Hyperparameter Tuning
 
@@ -449,7 +469,8 @@ Create a model with the best training of hyperparameter tuning in the completed 
 
 1. Choose the hyperparameter tuning you want to create as a model.
 2. Click **Create Model**. Only hyperparameter tuning in the COMPLETE state can be created as a model.
-3. You will be taken to the model creation page. After checking the contents, click **Create Model** to create a model. For more information on model creation, see [the model](./console-guide/#model) documentation.
+3. You will be taken to the model creation page. After checking the contents, click **Create Model** to create a model. 
+For more information on model creation, see [the model](./console-guide/#model) documentation.
 
 ### Delete Hyperparameter Tuning
 
@@ -461,6 +482,7 @@ Delete a hyperparameter tuning.
 
 > **[Note] Hyperparameter tuning cannot be deleted if the associated model exists.**
 > Hyperparameter tuning cannot be deleted if the model created by the hyperparameter tuning you want to delete exists. Please delete the model first, then the hyperparameter tuning.
+
 
 ## Training Template
 
@@ -494,6 +516,7 @@ Delete the training template.
 1. Select the training template you want to delete.
 2. Click **Delete Training Template**
 3. Requested deletion cannot be undone. Click **OK** to proceed.
+
 
 ## Model
 Can manage models of AI EasyMaker's training outcomes or external models as artifacts.
@@ -578,6 +601,14 @@ Create and manage endpoints that can serve the model.
 - **Instance Information**: Enter instance information for the model to be served.
     - **Instance Flavor**: Select instance type.
     - **Number of Instances**: Enter the number of drives for instance.
+- **Autoscaler**: The autoscaler is a feature that automatically adjusts the number of nodes based on resource usage policies. The autoscaler is set on a per-stage basis.
+    - **Enable/Disable**: Select whether to enable the autoscaler. If enabled, the number of instances will scale in or out based on the instance load.
+    - **Minimum number of nodes**: The minimum number of nodes that can be scaled down
+    - **Maximum number of nodes**: The maximum number of nodes that can be scaled up
+    - **Scale-down**: Set whether to enable node scale-down
+    - **Resource Usage Threshold**: The default for resource usage threshold, which is the reference point for a scale down
+    - **Threshold Duration (min)**: The resource usage duration at or below the threshold for the nodes to be scaled down
+    - **Scale-up to scale-down latency (min)**: Delay before starting to monitor for scale-down targets after scaling up
 - **Additional Settings > Tag**: To add a tag, click **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
 > **[Note] Time to create endpoints**
@@ -652,6 +683,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
     - The **Monitoring** tab is disabled while an endpoint stage is being created.
 - **API Statistics**: You can check the API statistics information of the endpoint stage in the **API Statistics** tab of the details screen that appears when you select the endpoint stage.
     - The **API Statistics** tab is disabled while the endpoint stage is being created.
+
 
 > **[Caution] Precautions when changing settings for API Gateway created by AI EasyMaker**
 > When creating an endpoint or an endpoint stage, AI EasyMaker creates API Gateway services and stages for the endpoint.
@@ -770,6 +802,129 @@ Delete an endpoint.
 > **[Caution] Delete API Gateway service when deleting the endpoint stage**
 > Deleting an endpoint stage in AI EasyMaker also deletes API Gateway service from which the endpoint's stage was deployed.
 > If there is API running on the API Gateway service to be deleted, please be noted that API calls cannot be made.
+
+
+## Private Image 
+User-personalized container images can be used to drive notebooks, training, and hyperparameter tuning.
+Only private images derived from the notebook/deep learning images provided by AI EasyMaker can be used when creating resources in AI EasyMaker.
+See the table below for the base images in AI EasyMaker.
+
+#### Notebook Image 
+ Image Name | CoreType | Framework | Framework version | Python version | Image address |
+| --- | --- | --- | --- | --- | --- |
+| Ubuntu 22.04 CPU Python Notebook     | CPU  | Python     | 3.10.12  | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204   |
+| Ubuntu 22.04 GPU Python Notebook     | GPU  | Python     | 3.10.12  | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-gpu-py310-ubuntu2204   |
+| Ubuntu 22.04 CPU PyTorch Notebook    | CPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-cpu-py310-ubuntu2204    |
+| Ubuntu 22.04 GPU PyTorch Notebook    | GPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-gpu-py310-ubuntu2204    |
+| Ubuntu 22.04 CPU TensorFlow Notebook | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204|
+| Ubuntu 22.04 GPU TensorFlow Notebook | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-en1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204|
+
+#### Deep Learning Images 
+
+| Image Name | CoreType | Framework | Framework version | Python version | Image address |
+| --- | --- | --- | --- | --- | --- |
+| Ubuntu 22.04 CPU PyTorch Training    | CPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204        |
+| Ubuntu 22.04 GPU PyTorch Training    | GPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-en1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204        |
+| Ubuntu 22.04 CPU TensorFlow Training | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-cpu-py310-ubuntu2204 |
+| Ubuntu 22.04 GPU TensorFlow Training | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
+
+
+> **[Note] Limitations on using private images**
+* Only private images derived from base images provided by AI EasyMaker can be used.
+* Only NHN Container Registry (NCR) can be integrated as a container registry service where private images are stored. (As of December 2023)
+
+### Create Private Image 
+The following document explains how to create a container image with an AI EasyMaker-based image using Docker, and using a private image for notebooks in AI EasyMaker. 
+
+1. Create a DockerFile of private image. 
+      
+            FROM fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
+            RUN conda create -n example python=3.10
+            RUN conda activate example
+            RUN pip install torch torchvision
+
+2. Build a private image and push to the container registry
+Build an image with a Dockerfile and save (push) the image to the NCR registry. 
+
+            docker build -t {image name}:{tags} . .
+            docker tag {image name}:{tag} docker push {NCR registry address}/{image name}:{tag}
+            docker push {NCR registry address}/{image name}:{tag} .
+
+
+            (Example)
+            docker build -t custom-training:v1 .
+            docker tag custom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+            docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+            
+3. Create a private image in AI EasyMaker of the image you saved (pushed) to the NCR.
+
+    1. Go to the **Image** menu in the AI EasyMaker console. 
+    2. Click the **Create image** button to enter the information for the image you created.
+        * Name, description: Enter a name and description for the image.
+        * Address: Enter the address of the registry image. 
+        * Type: Enter the type of container image. Select **Notebook** or **Training**.
+        * Account: Select the account for the AI EasyMaker notebook/learning node to access your registry storage.
+            * New: Register a new registry account.
+                * Name, Description: Enter a name and description for the registry account. 
+                * Category: Select a container registry service. 
+                * ID: Enter the ID of the registry storage. 
+                * Password: Enter the password for the registry storage.  
+            * Use an existing account: Select a registry account that is already registered. 
+
+4. Create a notebook with the private image you created.
+    1. Go to the **Notebook** menu. Click the **Create notebook** button to go to the Create notebook page. 
+    2. Under Image information, click the **Private Image** tab. 
+    3. Select a private image to use as the notebook container image.
+    4. After filling out and creating the other notebook information, the notebook will be running with your private image. 
+
+> [Note]
+You can create resources using your private image in the same way for non-notebook training and hyperparameter tuning.
+
+> [Note] Container registry service: NHN Container Registry (NCR)
+> Only NCR service can be used as a container registry service. (As of December 2023)<br/>
+> Enter the following values for the account ID and password for the NCR service.<br/>
+> ID: User Access Key of NHN Cloud user account<br/>
+> Password: User Secret Key of NHN Cloud user account
+
+
+## Registry Account 
+
+In order for AI EasyMaker to pull an image from a user's registry where private images are stored to power the container, they need to be logged into the user's registry.
+If you save your login information with a registry account, you can reuse it in images linked to that registry account.
+To manage your registry accounts, go to the **Image** menu in the AI EasyMaker console, then select the **Registry Account** tab.
+
+### Create Registry Account 
+
+Create a new registry account.
+
+* Name: Enter the name of registry account.
+* Description: Enter a description of the registry account.
+* Category: Select a container registry service.
+* ID: Enter the ID of the registry account. 
+* Password: Enter the password for the registry account. 
+
+### Modify Registry Account 
+
+#### Modify registry ID and password 
+* Click **Change Registry Account**.
+* Enter an ID and password, then click **Confirm**. 
+
+> [Note]
+> When you change your registry account, you sign in to the registry service with the changed username and password when using images associated with that account.
+> If you enter an incorrect registry username and password, the login during a private image pull fails and the resource creation fails.
+> If there are resources being created with a private image that has a registry account associated with it, or if there are studies and hyperparameters in progress, you cannot modify them. 
+
+
+#### Registry Account > Change Name, Description 
+1. In the Registry Accounts list, select the account you want to change.
+2. Click **Change** on the bottom screen.
+3. After changing the name and description, click the **Confirm** button.   
+
+### Delete Registry Account 
+Select the registry account you want to delete from the list, and click **Delete Registry Account**. 
+
+> [Note]
+> You cannot delete a registry account associated with an image. To delete, delete the associated image first and then delete the registry account.
 
 
 ## Appendix
@@ -941,3 +1096,47 @@ As shown in the example below, you can use hyperparameter values entered during 
     * The environment variable `TF_CONFIG` required for distributed training is automatically set. For more information, please refer to the [Tensorflow guide document](https://www.tensorflow.org/guide/distributed_training#multiworkermirroredstrategy).
 * **Pytorch**
     * `Backends` settings are required for distributed training. If distributed training is performed on CPU, set it to gloo, and if distributed training is performed on GPU, set it to nccl. For more information, please refer to the [Pytorch guide document](https://pytorch.org/docs/stable/distributed.html).
+
+### 7. Upgrade the cluster version 
+The AI EasyMaker service periodically upgrades the cluster version to provide stable service and new features.
+When a new cluster version is deployed, you need to move the notebooks and endpoints that are running on the old version of the cluster to the new cluster.
+Explains how to move new clusters by resource.
+
+
+#### Upgrade Notebook Cluster Version 
+
+On the **Notebook** list screen, notebooks that need to be moved to the new cluster display a **Restart** button to the left of their name.
+Hovering the mouse pointer over the**Restart** button displays restart instructions and an expiration date.
+
+* Before expiration, be sure to read the following caveats before clicking the **Restart** button.
+    * Upon restart, data stored in the data storage (/root/easymaker directory path) will remain intact.
+    * When you run a restart, data stored in boot storage is initialized and may be lost. Move your data to data storage before restarting. 
+
+Restarts take about 25 minutes for the first run, and about 10 minutes for subsequent runs.
+Failed restarts are automatically reported to the administrator. 
+
+
+#### Upgrade the endpoint cluster version
+
+On the **endpoints list** screen, endpoints that need to be moved to the new cluster will have a **! Notice** to the left of the name.
+If you hover over the **! Notice**, it displays a version upgrade announcement and an expiration date.
+Before the expiration, you must follow these instructions to move stages running on the old version cluster to the new version cluster. 
+
+##### Upgrade the cluster version of a general stage 
+
+1. Delete a general stage that is not the default stage. Make sure the stage is in service before deleting. 
+2. Recreate the stage. 
+3. When a new stage becomes ACTIVE, check whether API calls and inference responses come normally to the stage endpoint.
+
+
+> [Caution]
+> Deleting a stage will shut down the endpoint, preventing API calls. Ensure that the stage is not in service before deleting it.
+##### Upgrade the cluster version of the default stage 
+
+The default stage is the stage on which the actual service operates.
+To move the cluster version of the default stage without disrupting the service, use the following guide to move it. 
+
+1. Create a new stage to replace the default stage in an older version of the cluster. 
+2. Verify that API calls and inference responses are coming from the new stage endpoint as normal.
+3. Click **Change Default Stage**. Select a new stage to change it to the default stage.
+4. When the change is complete, the new stage is set as the default stage, and the existing default stage is deleted. 
