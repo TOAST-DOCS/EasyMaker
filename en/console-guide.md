@@ -881,7 +881,7 @@ Build an image with a Dockerfile and save (push) the image to the NCR registry.
 You can create resources using your private image in the same way for non-notebook training and hyperparameter tuning.
 
 > [Note] Container registry service: NHN Container Registry (NCR)
-Only NCR service can be used as a container registry service. (As of December 2023)<br/>
+> Only NCR service can be used as a container registry service. (As of December 2023)<br/>
 > Enter the following values for the account ID and password for the NCR service.<br/>
 > ID: User Access Key of NHN Cloud user account<br/>
 > Password: User Secret Key of NHN Cloud user account
@@ -910,9 +910,9 @@ Create a new registry account.
 * Enter an ID and password, then click **Confirm**. 
 
 > [Note]
-When you change your registry account, you sign in to the registry service with the changed username and password when using images associated with that account.
-If you enter an incorrect registry username and password, the login during a private image pull fails and the resource creation fails.
-If there are resources being created with a private image that has a registry account associated with it, or if there are studies and hyperparameters in progress, you cannot modify them. 
+> When you change your registry account, you sign in to the registry service with the changed username and password when using images associated with that account.
+> If you enter an incorrect registry username and password, the login during a private image pull fails and the resource creation fails.
+> If there are resources being created with a private image that has a registry account associated with it, or if there are studies and hyperparameters in progress, you cannot modify them. 
 
 
 #### Registry Account > Change Name, Description 
@@ -924,7 +924,7 @@ If there are resources being created with a private image that has a registry ac
 Select the registry account you want to delete from the list, and click **Delete Registry Account**. 
 
 > [Note]
-You cannot delete a registry account associated with an image. To delete, delete the associated image first and then delete the registry account.
+> You cannot delete a registry account associated with an image. To delete, delete the associated image first and then delete the registry account.
 
 
 ## Appendix
@@ -1130,7 +1130,7 @@ Before the expiration, you must follow these instructions to move stages running
 
 
 > [Caution]
-Deleting a stage will shut down the endpoint, preventing API calls. Ensure that the stage is not in service before deleting it.
+> Deleting a stage will shut down the endpoint, preventing API calls. Ensure that the stage is not in service before deleting it.
 ##### Upgrade the cluster version of the default stage 
 
 The default stage is the stage on which the actual service operates.
