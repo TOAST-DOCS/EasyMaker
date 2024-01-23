@@ -14,8 +14,8 @@ NHN Cloud AI EasyMakerで提供するアルゴリズムを紹介します。
 | per_device_train_batch_size | False | int | 16 | [2～∞)   | GPU/TPU core/CPUあたりtrainingバッチサイズ |
 | per_device_eval_batch_size | False | int | 16 | [1～∞)   |GPU/TPU core/CPUあたりevaluationバッチサイズ |
 | num_train_epochs | False | int | 3 | [1～∞)   | 全体trainingを実行する総回数 |
-| save_steps  | False | int | 500 | [1～∞)   | チェックポイントを保存するstep周期 |
-| logging_steps  | False | int | 10 | [1～∞)   | ログを出力するstep周期 |
+| save_steps  | False | int | 500 | [500～∞)   | チェックポイントを保存するstep周期 |
+| logging_steps  | False | int | 500 | [500～∞)   | ログを出力するstep周期 |
 
 
 ### データセット
@@ -120,8 +120,8 @@ Image Classificationアルゴリズムは、次の指標を作成します。
 | learning_rate | False | float | 2e-4          | [0.0～∞) | AdamWオプティマイザーの初期learning rate値 |
 | per_device_train_batch_size | False | int | 4             | [0～∞) |GPU/TPU core/CPUあたりのtrainingバッチサイズ |
 | num_train_epochs | False | float | 3.0           | [0.0～∞) | 全体trainingを実行する総回数 |
-| save_steps  | False | int | 500           | [1～∞) | チェックポイントを保存するstep周期 |
-| logging_steps  | False | int | 10            | [1～∞)   | ログを出力するstep周期 |
+| save_steps  | False | int | 500           | [500～∞) | チェックポイントを保存するstep周期 |
+| logging_steps  | False | int | 500            | [500～∞)   | ログを出力するstep周期 |
 
 
 ### データセット
@@ -320,8 +320,8 @@ Semantic Segmentationアルゴリズムは、次の指標を作成します。
 | per_device_eval_batch_size | False | int | 4 | [1～∞)     | GPU/TPU core/CPUあたりのevaluationバッチサイズ |
 | num_train_epochs | False | float | 3.0 | [0.0～∞)   | 全体trainingを実行する総回数 |
 | threshold | False | float | 0.5 | [0.0～1.0] | 推論Threshold | 
-| save_steps  | False | int | 500 | [1～∞)     | チェックポイントを保存するstep周期 |
-| logging_steps  | False | int | 10 | [1～∞)   | ログを出力するstep周期 |
+| save_steps  | False | int | 500 | [500～∞)     | チェックポイントを保存するstep周期 |
+| logging_steps  | False | int | 500 | [500～∞)   | ログを出力するstep周期 |
 
 
 ### データセット
