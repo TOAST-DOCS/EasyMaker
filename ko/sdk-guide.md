@@ -65,7 +65,7 @@ easymaker.Experiment().delete(experiment_id)
 | training_description                       | String  | 선택                        | 없음    | 최대 255자     | 학습에 대한 설명                                                       |
 | train_image_name                           | String  | 필수                        | 없음    | 없음          | 학습에 사용될 이미지 이름(CLI로 조회 가능)                                      |
 | train_instance_name                        | String  | 필수                        | 없음    | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
-| distributed_training_count                 | Integer | 필수                        | 없음    | 1~10         | 학습에 적용할 분산 학습 수                                                 |
+| distributed_node_count                     | Integer | 필수                        | 없음    | 1~10         | 분산 학습을 적용할 노드 수                                                 |
 | use_torchrun                               | Boolean | 선택                        | False  | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                            |
 | nproc_per_node                             | Integer | use_torchrun True 시 필수   | 1      | 1~(CPU 개수 혹은 GPU 개수) | 노드 당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야하는 값       |
 | data_storage_size                          | Integer | Obejct Storage 사용 시 필수    | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요               |
@@ -95,7 +95,7 @@ training_id = easymaker.Training().run(
     training_description='training_description',
     train_image_name='Ubuntu 18.04 CPU TensorFlow Training',
     train_instance_name='m2.c4m8',
-    distributed_training_count=1,
+    distributed_node_count=1,
     data_storage_size=300,  # minimum size : 300GB
     source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
     entry_point='training_start.py',
@@ -161,8 +161,8 @@ easymaker.Training().delete(training_id)
 | hyperparameter_tuning_description                              | String         | 선택                                                    | 없음    | 최대 255자                                      | 하이퍼파라미터 튜닝에 대한 설명                                                          |
 | image_name                                                     | String         | 필수                                                    | 없음    | 없음                                           | 하이퍼파라미터 튜닝에 사용될 이미지 이름(CLI로 조회 가능)                                         |
 | instance_name                                                  | String         | 필수                                                    | 없음    | 없음                                           | 인스턴스 타입 이름(CLI로 조회 가능)                                                     |
-| distributed_training_count                                     | Integer        | 필수                                                    | 1      | distributed_training_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 각 학습당 적용할 분산 학습 수                                                      |
-| parallel_trial_count                                           | Integer        | 필수                                                    | 1      | distributed_training_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 병렬로 실행할 학습 수                                                      |
+| distributed_node_count                                         | Integer        | 필수                                                    | 1      | distributed_node_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 각 학습당 분산 학습을 적용할 노드 수                                                      |
+| parallel_trial_count                                           | Integer        | 필수                                                    | 1      | distributed_node_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 병렬로 실행할 학습 수                                                          |
 | use_torchrun                                                   | Boolean        | 선택                                                    | False  | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                                                 |
 | nproc_per_node                                                 | Integer        | use_torchrun True 시 필수                                | 1      | 1~(CPU 개수 혹은 GPU 개수) | 노드 당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야하는 값                                         |
 | data_storage_size                                              | Integer        | Obejct Storage 사용 시 필수                                | 없음    | 300~10000                                    | 하이퍼파라미터 튜닝에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                  |
@@ -205,7 +205,7 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
     hyperparameter_tuning_description='hyperparameter_tuning_description',
     image_name='Ubuntu 18.04 CPU TensorFlow Training',
     instance_name='m2.c8m16',
-    distributed_training_count=1,
+    distributed_node_count=1,
     parallel_trial_count=1,
     data_storage_size=300,
     source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
