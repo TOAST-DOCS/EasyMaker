@@ -32,7 +32,7 @@ Before creating a training, you must create an experiment to sort trainings.
 |------------------------|---------|-------|------|-------------|------------------------------------------------------------|
 | experiment_name        | String  | Required    | None   | Up to 50 characters      | Experiment name                                                      |
 | experiment_description | String  | Optional    | None   | Up to 255 characters     | Description for experiment                                                  |
-| wait                   | Boolean | Optional    | True | True, False | True: Return the experiment ID after creating the experiment, 
+| wait                   | Boolean | Optional    | True | True, False | True: Return the experiment ID after creating the experiment,
 False: Return the experiment ID immediately after request to create |
 
 ```python
@@ -66,7 +66,7 @@ easymaker.Experiment().delete(experiment_id)
 | training_description                       | String  | Optional                        | None    | Up to 255 characters     | Description for training                                                       |
 | train_image_name                           | String  | Required                        | None    | None          | Image name to be used for training (Inquiry available with CLI)                                      |
 | train_instance_name                        | String  | Required                        | None    | None          | Instance flavor name (Inquiry available with CLI)                                          |
-| distributed_training_count                 | Integer | Required                        | None    | 1~10         | Number of distributed trainings to apply for training                                                 |
+| distributed_node_count                     | Integer | Required                        | None    | 1~10         | Number of distributed trainings to apply for training                                                 |
 | data_storage_size                          | Integer | Required when using Object Storage    | None    | 300~10000   | Storage size to download data for training (unit: GB), unnecessary when using NAS               |
 | algorithm_name                             | String  | Required when using algorithms provided by NHN Cloud | None    | Up to 64 characters      | Algorithm name (Inquiry available with CLI)                                             |
 | source_dir_uri                             | String  | Required when using own algorithm           | None    | Up to 255 characters     | Path of files required for training (NHN Cloud Object Storage or NHN Cloud NAS) |
@@ -85,7 +85,7 @@ easymaker.Experiment().delete(experiment_id)
 | tag_list[0].tagKey                         | String  | Optional                        | None    | Up to 64 characters      | Tag key                                                            |
 | tag_list[0].tagValue                       | String  | Optional                        | None    | Up to 255 characters     | Tag value                                                            |
 | use_log                                    | Boolean | Optional                        | False | True, False | Whether to leave logs in Log & Crash product                                      |
-| wait                                       | Boolean | Optional                        | True  | True, False | True: Return the training ID after creating training, 
+| wait                                       | Boolean | Optional                        | True  | True, False | True: Return the training ID after creating training,
 False: Return the training ID immediately after requesting to create      |
 
 ```python
@@ -95,7 +95,7 @@ training_id = easymaker.Training().run(
     training_description='training_description',
     train_image_name='Ubuntu 18.04 CPU TensorFlow Training',
     train_instance_name='m2.c4m8',
-    distributed_training_count=1,
+    distributed_node_count=1,
     data_storage_size=300,  # minimum size : 300GB
     source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
     entry_point='training_start.py',
@@ -161,8 +161,8 @@ easymaker.Training().delete(training_id)
 | hyperparameter_tuning_description                              | String         | Optional                                                    | None    | Up to 255 characters                                      | Description of hyperparameter tuning                                                          |
 | image_name                                                     | String         | Required                                                    | None    | None                                           | Image name to be used for hyperparameter tuning (can be queried with CLI)                                         |
 | instance_name                                                  | String         | Required                                                    | None    | None                                           | Instance flavor name (Inquiry available with CLI)                                                     |
-| distributed_training_count                                     | Integer        | Required                                                    | 1      | The product of distributed_training_count and parallel_trial_count is 10 or less. | Number of distributed training to apply for each learning in hyperparameter tuning                                                      |
-| parallel_trial_count                                           | Integer        | Required                                                    | 1      | The product of distributed_training_count and parallel_trial_count is 10 or less. | Number of trainings to run in parallel in hyperparameter tuning                                                      |
+| distributed_node_count                                         | Integer        | Required                                                    | 1      | The product of distributed_node_count and parallel_trial_count is 10 or less. | Number of distributed training to apply for each learning in hyperparameter tuning                                                      |
+| parallel_trial_count                                           | Integer        | Required                                                    | 1      | The product of distributed_node_count and parallel_trial_count is 10 or less. | Number of trainings to run in parallel in hyperparameter tuning                                                      |
 | data_storage_size                                              | Integer        | Required when using Object Storage                                | None    | 300~10000                                    | Size of storage space to download data required for hyperparameter tuning (unit: GB), not required when using NAS                  |
 | algorithm_name                                                 | String         | Required when using algorithms provided by NHN Cloud                             | None    | Up to 64 characters                                       | Algorithm name (Inquiry available with CLI)                                                        |
 | source_dir_uri                                                 | String         | Required when using own algorithm                                       | None    | Up to 255 characters                                      | Path containing files required for hyperparameter tuning (NHN Cloud Object Storage or NHN Cloud NAS)    |
@@ -206,7 +206,7 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
     hyperparameter_tuning_description='hyperparameter_tuning_description',
     image_name='Ubuntu 18.04 CPU TensorFlow Training',
     instance_name='m2.c8m16',
-    distributed_training_count=1,
+    distributed_node_count=1,
     parallel_trial_count=1,
     data_storage_size=300,
     source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
@@ -356,7 +356,7 @@ When creating an endpoint, the default stage is created.
 | tag_list[0].tagKey                    | String  | Optional    | None    | Up to 64 characters                     | Tag key                                                                   |
 | tag_list[0].tagValue                  | String  | Optional    | None    | Up to 255 characters                    | Tag value                                                                   |
 | use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in Log & Crash product                                             |
-| wait                                  | Boolean | Optional    | True  | True, False                | True: Return the endpoint ID after creating endpoint, 
+| wait                                  | Boolean | Optional    | True  | True, False                | True: Return the endpoint ID after creating endpoint,
 False: Return the endpoint ID immediately after requesting endpoint |
 
 ```python
