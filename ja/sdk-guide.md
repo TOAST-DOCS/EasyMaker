@@ -65,7 +65,7 @@ easymaker.Experiment().delete(experiment_id)
 | training_description                       | String  | 任意                       | なし    | 最大255文字    | 学習の説明                                                      |
 | train_image_name                           | String  | 必須                       | なし    | なし          | 学習に使用されるイメージ名(CLIで照会可能)                                      |
 | train_instance_name                        | String  | 必須                       | なし    | なし          | インスタンスタイプ名(CLIで照会可能)                                          |
-| distributed_training_count                 | Integer | 必須                       | なし    | 1～10         | 学習に適用する分散学習数                                                 |
+| distributed_node_count                     | Integer | 必須                       | なし    | 1～10         | 学習に適用する分散学習数                                                 |
 | data_storage_size                          | Integer | Obejct Storageを使用する場合は必須   | なし    | 300～10000   | 学習に必要なデータをダウンロードする記憶領域サイズ(単位: GB)、NAS使用時は不要              |
 | algorithm_name                             | String  | NHN Cloud提供アルゴリズムを使用する場合は必須 | なし    | 最大64文字     | アルゴリズム名(CLIで照会可能)                                             |
 | source_dir_uri                             | String  | 独自アルゴリズムを使用する場合は必須          | なし    | 最大255文字    | 学習に必要なファイルがあるパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
@@ -93,7 +93,7 @@ training_id = easymaker.Training().run(
     training_description='training_description',
     train_image_name='Ubuntu 18.04 CPU TensorFlow Training',
     train_instance_name='m2.c4m8',
-    distributed_training_count=1,
+    distributed_node_count=1,
     data_storage_size=300,  # minimum size ：300GB
     source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
     entry_point='training_start.py',
@@ -159,8 +159,8 @@ easymaker.Training().delete(training_id)
 | hyperparameter_tuning_description                              | String         | 任意                                                   | なし    | 最大255文字                                     | ハイパーパラメータチューニングについての説明                                                         |
 | image_name                                                     | String         | 必須                                                   | なし    | なし                                           | ハイパーパラメータチューニングに使用されるイメージ名(CLIで照会可能)                                         |
 | instance_name                                                  | String         | 必須                                                   | なし    | なし                                           | インスタンスタイプ名(CLIで照会可能)                                                     |
-| distributed_training_count                                     | Integer        | 必須                                                   | 1      | distributed_training_countとparallel_trial_countの積が10以下 | ハイパーパラメータチューニングで各学習に適用する分散学習数                                                      |
-| parallel_trial_count                                           | Integer        | 必須                                                   | 1      | distributed_training_countとparallel_trial_countの積が10以下 | ハイパーパラメータチューニングで並列実行する学習数                                                      |
+| distributed_node_count                                         | Integer        | 必須                                                   | 1      | distributed_node_countとparallel_trial_countの積が10以下 | ハイパーパラメータチューニングで各学習に適用する分散学習数                                                      |
+| parallel_trial_count                                           | Integer        | 必須                                                   | 1      | distributed_node_countとparallel_trial_countの積が10以下 | ハイパーパラメータチューニングで並列実行する学習数                                                      |
 | data_storage_size                                              | Integer        | Obejct Storageを使用する場合は必須                               | なし    | 300～10000                                    | ハイパーパラメータチューニングに必要なデータをダウンロードする記憶領域サイズ(単位：GB)、NAS使用時は不要                 |
 | algorithm_name                                                 | String         | NHN Cloud提供アルゴリズムを使用する場合は必須                            | なし    | 最大64文字                                      | アルゴリズム名(CLIで照会可能)                                                        |
 | source_dir_uri                                                 | String         | 独自アルゴリズムを使用する場合は必須                                      | なし    | 最大255文字                                     | ハイパーパラメータチューニングに必要なファイルがあるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)    |
@@ -188,6 +188,9 @@ easymaker.Training().delete(training_id)
 | max_trial_count                                                | Integer        | 任意                                                   | なし    | なし                                           | 最大学習数を定義します。自動実行された学習の数がこの値に達するまでチューニングが実行されます。                     |
 | tuning_strategy_name                                           | String         | 必須                                                   | なし    | なし                                           | どの戦略を使用して最適なハイパーパラメータを探すか選択します。                                        |
 | tuning_strategy_random_state                                   | Integer        | 任意                                                   | なし    | なし                                           | 乱数作成を決定します。再現可能な結果のために固定された値で指定します。                                 |
+| early_stopping_algorithm                                       | String         | 必須                                                   | なし    | EARLY_STOPPING_ALGORITHM.<br>MEDIAN          | 学習を継続してもモデルがそれ以上良くならない場合、早期に学習を終了します。                              |
+| early_stopping_min_trial_count                                 | Integer        | 必須                                                   | 3     | なし                                           | 中間値を計算する際に、いくつの学習から目標指標値を取得するか定義します。                                |
+| early_stopping_start_step                                      | Integer        | 必須                                                   | 4     | なし                                           | 何番目の学習段階から早期終了を適用するか設定します。                                            |
 | tag_list                                                       | Array          | 任意                                                   | なし    | 最大10個                                      | タグ情報                                                                     |
 | tag_list[0].tagKey                                             | String         | 任意                                                   | なし    | 最大64文字                                      | タグキー                                                                       |
 | tag_list[0].tagValue                                           | String         | 任意                                                   | なし    | 最大255文字                                     | タグ値                                                                      |
@@ -201,7 +204,7 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
     hyperparameter_tuning_description='hyperparameter_tuning_description',
     image_name='Ubuntu 18.04 CPU TensorFlow Training',
     instance_name='m2.c8m16',
-    distributed_training_count=1,
+    distributed_node_count=1,
     parallel_trial_count=1,
     data_storage_size=300,
     source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
