@@ -230,9 +230,12 @@ Set the training environment by selecting the instance and OS image to be traine
 
 - **Image** : Choose an image for your instance that matches the environment in which you need to run your training.
 
-- **Training Instance Information**
+- **Training Resource Information**
     - **Training instance type** : Select an instance type to run training.
-   - **Number of Distributed Trainings**: Enter a number of distributed trainings to be performed. Distributed training can be enabled through settings in the algorithm code. For more information, please refer to [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
+     - **Number of Distributed Nodes**: Enter a number of distributed nodes to be performed. Distributed training can be enabled through settings in the algorithm code. For more information, please refer to [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
+    - **Enable torchrun**: Select whether to use torchrun, which is supported by the Pytorch framework. For more information, see [Appendix > 8. How to use torchrun](./console-guide/#8-torchrun-사용-방법).
+    - **Number of processes per node**: If using torchrun, enter the number of processes per node. torchrun enables distributed training by running multiple processes on a single node. The number of processes affects memory usage.
+
 - **Input Data**
     - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
         - Dataset name: Enter a name for your data set.
@@ -363,10 +366,11 @@ How to configure a hyperparameter tuning job.
                     - **Step**: Determines the size of the hyperparameter value change when using the "Grid" tuning strategy.
                     - **Comma-Separated Values**: Tune hyperparameters using static values (e.g. sgd, adam).
 - **Image** : Choose an image for your instance that matches the environment in which you need to run your training.
-- **Training Instance Information**
-    - **Training instance type** : Select an instance type to run training.
-    - **Number of Training instances** : Enter the number of instances to perform training. The number of training instances is 'Number of Distributed Trainings' x 'Number of Parallel Trainings'.
-     **Number of Distributed Trainings**: Enter a number of trainings to perform. You can enable distributed training through settings in the algorithm code. For more information, see [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
+- **Training Resource Information**
+    - **Training instance type** : Select an instance type to run training. 
+    - **Number of Distributed Nodes**: Enter a number of distributed nodes to be performed. Distributed training can be enabled through settings in the algorithm code. For more information, please refer to [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
+    - **Enable torchrun**: Select whether to use torchrun, which is supported by the Pytorch framework. For more information, see [Appendix > 8. How to use torchrun](./console-guide/#8-torchrun-사용-방법).
+    - **Number of processes per node**: If using torchrun, enter the number of processes per node. torchrun enables distributed training by running multiple processes on a single node. The number of processes affects memory usage.
     - **Number of Parallel Trainings**: Enter a number of trainings to perform in parallel simultaneously.
 - **Input Data**
     - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
@@ -433,6 +437,17 @@ A list of hyperparameter tunings is displayed. Select a hyperparameter tuning fr
     | FAIL HYPERPARAMETER TUNING | A failed state during hyperparameter tuning in progress. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
     | CREATE FAILED | Hyperparameter tuning generation failed. If creation continues to fail, please contact customer service. |
     | FAIL HYPERPARAMETER TUNING IN PROGRESS, COMPLETE IN PROGRESS, STOP IN PROGRESS | Resources used for hyperparameter tuning are being cleaned up. |
+
+- **Status Details**: The bracketed content in the `COMPLETE` status is the status details. See the table below for key details.
+
+    | Details | **Target Metric Value**: Indicates the target metric value. |
+    | --- | --- |
+    | GoalReached | Details when training for hyperparameter tuning is complete by reaching the target value. |
+    | MaxTrialsReached | Details when hyperparameter tuning has reached the maximum number of training runs and is complete. |
+    | SuggestionEndReached | Details when the exploration algorithm in Hyperparameter Tuning has explored all hyperparameters. |
+- Hyperparameter tuning generation failed. If creation continues to fail, please contact customer service.
+    - FAIL HYPERPARAMETER TUNING IN PROGRESS, COMPLETE IN PROGRESS, STOP IN PROGRESS<br/>
+    Resources used for hyperparameter tuning are being cleaned up.
 
 - **Operation**
     - **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
@@ -1145,3 +1160,11 @@ To move the cluster version of the default stage without disrupting the service,
 2. Verify that API calls and inference responses are coming from the new stage endpoint as normal.
 3. Click **Change Default Stage**. Select a new stage to change it to the default stage.
 4. When the change is complete, the new stage is set as the default stage, and the existing default stage is deleted. 
+
+### How to Use Torchrun
+* The code has been written to enable distributed learning in Pytorch, and if you enter the number of distributed nodes and the number of processes per node, distributed learning using torchrun and distributed learning using multi-processes will be performed.
+* Training and hyperparameter tuning can fail due to insufficient memory, depending on factors such as the total number of processes, model size, input data size, batch size, etc. If it fails due to insufficient memory, it may leave the following error messages. However, not all of the messages below are due to insufficient memory. Please set the appropriate instance type according to your memory usage.
+```
+exit code : -9 (pid: {pid})
+```
+* For more information about torchrun, see the [Pytorch Guide](https://pytorch.org/docs/stable/elastic/run.html).
