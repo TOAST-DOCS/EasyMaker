@@ -369,9 +369,9 @@ How to configure a hyperparameter tuning job.
 - **Training Resource Information**
     - **Training instance type** : Select an instance type to run training. 
     - **Number of Distributed Nodes**: Enter a number of distributed nodes to be performed. Distributed training can be enabled through settings in the algorithm code. For more information, please refer to [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
+    - **Number of Parallel Trainings**: Enter a number of trainings to perform in parallel simultaneously.
     - **Enable torchrun**: Select whether to use torchrun, which is supported by the Pytorch framework. For more information, see [Appendix > 8. How to use torchrun](./console-guide/#8-torchrun-사용-방법).
     - **Number of processes per node**: If using torchrun, enter the number of processes per node. torchrun enables distributed training by running multiple processes on a single node. The number of processes affects memory usage.
-    - **Number of Parallel Trainings**: Enter a number of trainings to perform in parallel simultaneously.
 - **Input Data**
     - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
         - Dataset name: Enter a name for your data set.
