@@ -334,6 +334,9 @@ How to configure a hyperparameter tuning job.
     - **Hyperparameter Tuning Name**: Enter a name for the hyperparameter tuning job.
     - **Description**: Input when a description of the hyperparameter tuning task is required.
     - **Experiment**: Select an experiment to include hyperparameter tuning. Experiments group related hyperparameter tunings. If no experiments have been created, click **Add** to create one.-   
+- **Tuning Strategy**
+    - **Strategy Name**: Choose which strategy to use to find the optimal hyperparameters.
+    - **Random State**: Determines random number generation. Specify a fixed value for reproducible results.
 **Algorithm information** : Enter information about the algorithm you want to learn.
     - **Algorithm Type** : Select the algorithm type.
         - **Algorithm provided by NHN Cloud** : Use the algorithm provided by AI EasyMaker. For detailed information on the provided algorithm, refer to [the Algorithm Guide document provided by NHN Cloud](./algorithm-guide/#).
@@ -369,9 +372,9 @@ How to configure a hyperparameter tuning job.
 - **Training Resource Information**
     - **Training instance type** : Select an instance type to run training. 
     - **Number of Distributed Nodes**: Enter a number of distributed nodes to be performed. Distributed training can be enabled through settings in the algorithm code. For more information, please refer to [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
+    - **Number of Parallel Trainings**: Enter a number of trainings to perform in parallel simultaneously.
     - **Enable torchrun**: Select whether to use torchrun, which is supported by the Pytorch framework. For more information, see [Appendix > 8. How to use torchrun](./console-guide/#8-torchrun-사용-방법).
     - **Number of processes per node**: If using torchrun, enter the number of processes per node. torchrun enables distributed training by running multiple processes on a single node. The number of processes affects memory usage.
-    - **Number of Parallel Trainings**: Enter a number of trainings to perform in parallel simultaneously.
 - **Input Data**
     - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
         - Dataset name: Enter a name for your data set.
@@ -384,7 +387,7 @@ How to configure a hyperparameter tuning job.
     - **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint.
         - Created checkpoints can be used to resume training from previous training.
         - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-- **Algorithm Metrics**
+- **Metrics**
     - **Metric Name**: Define which metric to collect from logs output by the training code.
     - **Metric Format**: Enter a regular expression to use to collect metrics. The training algorithm should output metrics to match the regular expression.
 - **Target Indicator**
@@ -394,9 +397,6 @@ How to configure a hyperparameter tuning job.
 - **Tuning Resource Configuration**
     - **Maximum Number of Failed Trainings**: Define the maximum number of failed lessons. When the number of failed trainings reaches this value, tuning ends in failure.
     - **Maximum Number of Trainings**: Defines the maximum number of lessons. Tuning runs until the number of auto-run training reaches this value.
-- **Tuning Strategy**
-    - **Strategy Name**: Choose which strategy to use to find the optimal hyperparameters.
-    - **Random State**: Determines random number generation. Specify a fixed value for reproducible results.
 - **Early Stop Training**
     - **Name**: Stop training early if the model is no longer good even though training continues.
     - **Min Trainings Required**: Define how many trainings the target metric value will be taken from when calculating the median.
