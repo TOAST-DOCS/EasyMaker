@@ -387,7 +387,7 @@ How to configure a hyperparameter tuning job.
     - **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint.
         - Created checkpoints can be used to resume training from previous training.
         - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-- **Algorithm Metrics**
+- **Metrics**
     - **Metric Name**: Define which metric to collect from logs output by the training code.
     - **Metric Format**: Enter a regular expression to use to collect metrics. The training algorithm should output metrics to match the regular expression.
 - **Target Indicator**
