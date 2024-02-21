@@ -334,6 +334,9 @@ How to configure a hyperparameter tuning job.
     - **Hyperparameter Tuning Name**: Enter a name for the hyperparameter tuning job.
     - **Description**: Input when a description of the hyperparameter tuning task is required.
     - **Experiment**: Select an experiment to include hyperparameter tuning. Experiments group related hyperparameter tunings. If no experiments have been created, click **Add** to create one.-   
+- **Tuning Strategy**
+    - **Strategy Name**: Choose which strategy to use to find the optimal hyperparameters.
+    - **Random State**: Determines random number generation. Specify a fixed value for reproducible results.
 **Algorithm information** : Enter information about the algorithm you want to learn.
     - **Algorithm Type** : Select the algorithm type.
         - **Algorithm provided by NHN Cloud** : Use the algorithm provided by AI EasyMaker. For detailed information on the provided algorithm, refer to [the Algorithm Guide document provided by NHN Cloud](./algorithm-guide/#).
@@ -394,9 +397,6 @@ How to configure a hyperparameter tuning job.
 - **Tuning Resource Configuration**
     - **Maximum Number of Failed Trainings**: Define the maximum number of failed lessons. When the number of failed trainings reaches this value, tuning ends in failure.
     - **Maximum Number of Trainings**: Defines the maximum number of lessons. Tuning runs until the number of auto-run training reaches this value.
-- **Tuning Strategy**
-    - **Strategy Name**: Choose which strategy to use to find the optimal hyperparameters.
-    - **Random State**: Determines random number generation. Specify a fixed value for reproducible results.
 - **Early Stop Training**
     - **Name**: Stop training early if the model is no longer good even though training continues.
     - **Min Trainings Required**: Define how many trainings the target metric value will be taken from when calculating the median.
