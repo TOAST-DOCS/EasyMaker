@@ -32,8 +32,7 @@ Before creating a training, you must create an experiment to sort trainings.
 |------------------------|---------|-------|------|-------------|------------------------------------------------------------|
 | experiment_name        | String  | Required    | None   | Up to 50 characters      | Experiment name                                                      |
 | experiment_description | String  | Optional    | None   | Up to 255 characters     | Description for experiment                                                  |
-| wait                   | Boolean | Optional    | True | True, False | True: Return the experiment ID after creating the experiment,
-False: Return the experiment ID immediately after request to create |
+| wait                   | Boolean | Optional    | True | True, False | True: Return the experiment ID after creating the experiment,  False: Return the experiment ID immediately after request to create |
 
 ```python
 experiment_id = easymaker.Experiment().create(
@@ -66,7 +65,9 @@ easymaker.Experiment().delete(experiment_id)
 | training_description                       | String  | Optional                        | None    | Up to 255 characters     | Description for training                                                       |
 | train_image_name                           | String  | Required                        | None    | None          | Image name to be used for training (Inquiry available with CLI)                                      |
 | train_instance_name                        | String  | Required                        | None    | None          | Instance flavor name (Inquiry available with CLI)                                          |
-| distributed_node_count                     | Integer | Required                        | None    | 1~10         | Number of distributed trainings to apply for training                                                 |
+| distributed_node_count                     | Integer | Required                        | None    | 1~10         | Number of nodes to apply distributed training to                                                 |
+| use_torchrun                               | Boolean | Optional                        | False  | True, False | Whether torchrun is enabled, only available for Pytorch images                            |
+| nproc_per_node                             | Integer | Required when use_torchrun is True   | 1      | 1 to (number of CPUs or number of GPUs) | Number of processes per node, value that must be set if use_torchrun is enabled       |
 | data_storage_size                          | Integer | Required when using Object Storage    | None    | 300~10000   | Storage size to download data for training (unit: GB), unnecessary when using NAS               |
 | algorithm_name                             | String  | Required when using algorithms provided by NHN Cloud | None    | Up to 64 characters      | Algorithm name (Inquiry available with CLI)                                             |
 | source_dir_uri                             | String  | Required when using own algorithm           | None    | Up to 255 characters     | Path of files required for training (NHN Cloud Object Storage or NHN Cloud NAS) |
@@ -85,8 +86,7 @@ easymaker.Experiment().delete(experiment_id)
 | tag_list[0].tagKey                         | String  | Optional                        | None    | Up to 64 characters      | Tag key                                                            |
 | tag_list[0].tagValue                       | String  | Optional                        | None    | Up to 255 characters     | Tag value                                                            |
 | use_log                                    | Boolean | Optional                        | False | True, False | Whether to leave logs in Log & Crash product                                      |
-| wait                                       | Boolean | Optional                        | True  | True, False | True: Return the training ID after creating training,
-False: Return the training ID immediately after requesting to create      |
+| wait                                       | Boolean | Optional                        | True  | True, False | True: Return the training ID after creating training, False: Return the training ID immediately after requesting to create      |
 
 ```python
 training_id = easymaker.Training().run(
@@ -173,6 +173,8 @@ easymaker.Training().delete(training_id)
 | timeout_hours                                                  | Integer        | Optional                                                    | 720   | 1~720                                        | Maximum hyperparameter tuning time (unit: hours)                                                   |
 | hyperparameter_spec_list                                       | Array          | Optional                                                    | None    | Max 100                                      | Hyperparameter specification information                                                              |
 | hyperparameter_spec_list[0].<br>hyperparameterName             | String         | Optional                                                    | None    | Up to 255 characters                                      | Hyperparameter Name                                                                 |
+| hyperparameter_spec_list                                       | Array          | Optional                                                    | None    | Up to 100                                      | Hyperparameter specification information                                                              |
+| hyperparameter_spec_list[0].<br>hyperparameterName             | String         | Optional                                                    | None    | Up to 255 characters                                      | Hyperparameter name                                                                 |
 | hyperparameter_spec_list[0].<br>hyperparameterTypeCode         | String         | Optional                                                    | None    | INT, DOUBLE, DISCRETE, CATEGORICAL           | Hyperparameter Type                                                                 |
 | hyperparameter_spec_list[0].<br>hyperparameterMinValue         | Integer/Double | Required if hyperparameterTypeCode is INT, DOUBLE            | None    | None                                           | Hyperparameter minimum value                                                                |
 | hyperparameter_spec_list[0].<br>hyperparameterMaxValue         | Integer/Double | Required if hyperparameterTypeCode is INT, DOUBLE            | None    | None                                           | Hyperparameter maximum value                                                                |
@@ -356,8 +358,7 @@ When creating an endpoint, the default stage is created.
 | tag_list[0].tagKey                    | String  | Optional    | None    | Up to 64 characters                     | Tag key                                                                   |
 | tag_list[0].tagValue                  | String  | Optional    | None    | Up to 255 characters                    | Tag value                                                                   |
 | use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in Log & Crash product                                             |
-| wait                                  | Boolean | Optional    | True  | True, False                | True: Return the endpoint ID after creating endpoint,
-False: Return the endpoint ID immediately after requesting endpoint |
+| wait                                  | Boolean | Optional    | True  | True, False                | True: Return the endpoint ID after creating endpoint, False: Return the endpoint ID immediately after requesting endpoint |
 
 ```python
 endpoint = easymaker.Endpoint()
@@ -406,8 +407,7 @@ You can add a new stage to existing endpoints.
 | tag_list[0].tagKey                    | String  | Optional    | None    | Up to 64 characters                     | Tag key                                                               |
 | tag_list[0].tagValue                  | String  | Optional    | None    | Up to 255 characters                    | Tag value                                                               |
 | use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in Log & Crash product                                         |
-| wait                                  | Boolean | Optional    | True  | True, False                | True: Return the stage ID after creating stage,
-False: Return the stage ID immediately after requesting stage |
+| wait                                  | Boolean | Optional    | True  | True, False                | True: Return the stage ID after creating stage, False: Return the stage ID immediately after requesting stage |
 ```python
 stage_id = endpoint.create_stage(
     stage_name='stage01', # Within 30 lowercase letters/numbers
