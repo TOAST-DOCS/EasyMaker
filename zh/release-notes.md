@@ -1,5 +1,19 @@
 ## Machine Learning > AI EasyMaker > Release Notes
 
+### December 19, 2023
+
+#### Feature Updates 
+
+* Notebooks and training with private images  
+    * User-personalized container images can be used to power notebooks, training, and hyperparameter tuning.
+    * By registering private image and registry account, you can easily select private images to create resources.
+
+* Dashboard
+    * See your overall resource utilization, top 3 endpoint service monitoring, and top 3 CPU/GPU utilization on one page.
+
+* Endpoint > Autoscaler
+    * You can dynamically manage the number of nodes by setting policies to scale up/scale down endpoint nodes. 
+    
 ### September 26, 2023
 
 #### Feature Updates 
