@@ -230,9 +230,12 @@ Set the training environment by selecting the instance and OS image to be traine
 
 - **Image** : Choose an image for your instance that matches the environment in which you need to run your training.
 
-- **Training Instance Information**
+- **Training Resource Information**
     - **Training instance type** : Select an instance type to run training.
-   - **Number of Distributed Trainings**: Enter a number of distributed trainings to be performed. Distributed training can be enabled through settings in the algorithm code. For more information, please refer to [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
+     - **Number of Distributed Nodes**: Enter a number of distributed nodes to be performed. Distributed training can be enabled through settings in the algorithm code. For more information, please refer to [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
+    - **Enable torchrun**: Select whether to use torchrun, which is supported by the Pytorch framework. For more information, see [Appendix > 8. How to use torchrun](./console-guide/#8-how-to-use-torchrun).
+    - **Number of processes per node**: If using torchrun, enter the number of processes per node. torchrun enables distributed training by running multiple processes on a single node. The number of processes affects memory usage.
+
 - **Input Data**
     - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
         - Dataset name: Enter a name for your data set.
@@ -331,6 +334,9 @@ How to configure a hyperparameter tuning job.
     - **Hyperparameter Tuning Name**: Enter a name for the hyperparameter tuning job.
     - **Description**: Input when a description of the hyperparameter tuning task is required.
     - **Experiment**: Select an experiment to include hyperparameter tuning. Experiments group related hyperparameter tunings. If no experiments have been created, click **Add** to create one.-   
+- **Tuning Strategy**
+    - **Strategy Name**: Choose which strategy to use to find the optimal hyperparameters.
+    - **Random State**: Determines random number generation. Specify a fixed value for reproducible results.
 **Algorithm information** : Enter information about the algorithm you want to learn.
     - **Algorithm Type** : Select the algorithm type.
         - **Algorithm provided by NHN Cloud** : Use the algorithm provided by AI EasyMaker. For detailed information on the provided algorithm, refer to [the Algorithm Guide document provided by NHN Cloud](./algorithm-guide/#).
@@ -363,11 +369,12 @@ How to configure a hyperparameter tuning job.
                     - **Step**: Determines the size of the hyperparameter value change when using the "Grid" tuning strategy.
                     - **Comma-Separated Values**: Tune hyperparameters using static values (e.g. sgd, adam).
 - **Image** : Choose an image for your instance that matches the environment in which you need to run your training.
-- **Training Instance Information**
-    - **Training instance type** : Select an instance type to run training.
-    - **Number of Training instances** : Enter the number of instances to perform training. The number of training instances is 'Number of Distributed Trainings' x 'Number of Parallel Trainings'.
-     **Number of Distributed Trainings**: Enter a number of trainings to perform. You can enable distributed training through settings in the algorithm code. For more information, see [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
+- **Training Resource Information**
+    - **Training instance type** : Select an instance type to run training. 
+    - **Number of Distributed Nodes**: Enter a number of distributed nodes to be performed. Distributed training can be enabled through settings in the algorithm code. For more information, please refer to [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
     - **Number of Parallel Trainings**: Enter a number of trainings to perform in parallel simultaneously.
+    - **Enable torchrun**: Select whether to use torchrun, which is supported by the Pytorch framework. For more information, see [Appendix > 8. How to use torchrun](./console-guide/#8-how-to-use-torchrun).
+    - **Number of processes per node**: If using torchrun, enter the number of processes per node. torchrun enables distributed training by running multiple processes on a single node. The number of processes affects memory usage.
 - **Input Data**
     - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
         - Dataset name: Enter a name for your data set.
@@ -380,7 +387,7 @@ How to configure a hyperparameter tuning job.
     - **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint.
         - Created checkpoints can be used to resume training from previous training.
         - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-- **Algorithm Metrics**
+- **Metrics**
     - **Metric Name**: Define which metric to collect from logs output by the training code.
     - **Metric Format**: Enter a regular expression to use to collect metrics. The training algorithm should output metrics to match the regular expression.
 - **Target Indicator**
@@ -390,9 +397,10 @@ How to configure a hyperparameter tuning job.
 - **Tuning Resource Configuration**
     - **Maximum Number of Failed Trainings**: Define the maximum number of failed lessons. When the number of failed trainings reaches this value, tuning ends in failure.
     - **Maximum Number of Trainings**: Defines the maximum number of lessons. Tuning runs until the number of auto-run training reaches this value.
-- **Tuning Strategy**
-    - **Strategy Name**: Choose which strategy to use to find the optimal hyperparameters.
-    - **Random State**: Determines random number generation. Specify a fixed value for reproducible results.
+- **Early Stop Training**
+    - **Name**: Stop training early if the model is no longer good even though training continues.
+    - **Min Trainings Required**: Define how many trainings the target metric value will be taken from when calculating the median.
+    - **Start Step**: Set the training step from which to apply early stop.
 - **Additional settings**
     - **Data storage size** : Enter the data storage size of the instance to run training.
         - Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for training.
@@ -430,6 +438,17 @@ A list of hyperparameter tunings is displayed. Select a hyperparameter tuning fr
     | CREATE FAILED | Hyperparameter tuning generation failed. If creation continues to fail, please contact customer service. |
     | FAIL HYPERPARAMETER TUNING IN PROGRESS, COMPLETE IN PROGRESS, STOP IN PROGRESS | Resources used for hyperparameter tuning are being cleaned up. |
 
+- **Status Details**: The bracketed content in the `COMPLETE` status is the status details. See the table below for key details.
+
+    | Details | **Target Metric Value**: Indicates the target metric value. |
+    | --- | --- |
+    | GoalReached | Details when training for hyperparameter tuning is complete by reaching the target value. |
+    | MaxTrialsReached | Details when hyperparameter tuning has reached the maximum number of training runs and is complete. |
+    | SuggestionEndReached | Details when the exploration algorithm in Hyperparameter Tuning has explored all hyperparameters. |
+- Hyperparameter tuning generation failed. If creation continues to fail, please contact customer service.
+    - FAIL HYPERPARAMETER TUNING IN PROGRESS, COMPLETE IN PROGRESS, STOP IN PROGRESS<br/>
+    Resources used for hyperparameter tuning are being cleaned up.
+
 - **Operation**
     - **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
     For instructions on how to leave TensorBoard logs, please refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
@@ -453,7 +472,8 @@ Displays a list of trainings auto-generated by hyperparameter tuning. Select a t
     | KILLED | Training is stopped by the system. |
     | FAILED| This is a failed state during training. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
     | METRICS_UNAVAILABLE | This is a state where target metrics cannot be collected. |
-    
+    | EARLY_STOPPED | Performance (goal metric) is not getting better while training is in progress, so it is in an early-stopped state. |
+
 ### Copy Hyperparameter Tuning
 
 Create a new hyperparameter tuning with the same settings as the existing hyperparameter tuning.
@@ -1140,3 +1160,11 @@ To move the cluster version of the default stage without disrupting the service,
 2. Verify that API calls and inference responses are coming from the new stage endpoint as normal.
 3. Click **Change Default Stage**. Select a new stage to change it to the default stage.
 4. When the change is complete, the new stage is set as the default stage, and the existing default stage is deleted. 
+
+### 8. How to Use Torchrun
+* The code has been written to enable distributed learning in Pytorch, and if you enter the number of distributed nodes and the number of processes per node, distributed learning using torchrun and distributed learning using multi-processes will be performed.
+* Training and hyperparameter tuning can fail due to insufficient memory, depending on factors such as the total number of processes, model size, input data size, batch size, etc. If it fails due to insufficient memory, it may leave the following error messages. However, not all of the messages below are due to insufficient memory. Please set the appropriate instance type according to your memory usage.
+```
+exit code : -9 (pid: {pid})
+```
+* For more information about torchrun, see the [Pytorch Guide](https://pytorch.org/docs/stable/elastic/run.html).

@@ -32,8 +32,7 @@ Before creating a training, you must create an experiment to sort trainings.
 |------------------------|---------|-------|------|-------------|------------------------------------------------------------|
 | experiment_name        | String  | Required    | None   | Up to 50 characters      | Experiment name                                                      |
 | experiment_description | String  | Optional    | None   | Up to 255 characters     | Description for experiment                                                  |
-| wait                   | Boolean | Optional    | True | True, False | True: Return the experiment ID after creating the experiment, 
-False: Return the experiment ID immediately after request to create |
+| wait                   | Boolean | Optional    | True | True, False | True: Return the experiment ID after creating the experiment,  False: Return the experiment ID immediately after request to create |
 
 ```python
 experiment_id = easymaker.Experiment().create(
@@ -66,7 +65,9 @@ easymaker.Experiment().delete(experiment_id)
 | training_description                       | String  | Optional                        | None    | Up to 255 characters     | Description for training                                                       |
 | train_image_name                           | String  | Required                        | None    | None          | Image name to be used for training (Inquiry available with CLI)                                      |
 | train_instance_name                        | String  | Required                        | None    | None          | Instance flavor name (Inquiry available with CLI)                                          |
-| distributed_training_count                 | Integer | Required                        | None    | 1~10         | Number of distributed trainings to apply for training                                                 |
+| distributed_node_count                     | Integer | Required                        | None    | 1~10         | Number of nodes to apply distributed training to                                                 |
+| use_torchrun                               | Boolean | Optional                        | False  | True, False | Whether torchrun is enabled, only available for Pytorch images                            |
+| nproc_per_node                             | Integer | Required when use_torchrun is True   | 1      | 1 to (number of CPUs or number of GPUs) | Number of processes per node, value that must be set if use_torchrun is enabled       |
 | data_storage_size                          | Integer | Required when using Object Storage    | None    | 300~10000   | Storage size to download data for training (unit: GB), unnecessary when using NAS               |
 | algorithm_name                             | String  | Required when using algorithms provided by NHN Cloud | None    | Up to 64 characters      | Algorithm name (Inquiry available with CLI)                                             |
 | source_dir_uri                             | String  | Required when using own algorithm           | None    | Up to 255 characters     | Path of files required for training (NHN Cloud Object Storage or NHN Cloud NAS) |
@@ -85,8 +86,7 @@ easymaker.Experiment().delete(experiment_id)
 | tag_list[0].tagKey                         | String  | Optional                        | None    | Up to 64 characters      | Tag key                                                            |
 | tag_list[0].tagValue                       | String  | Optional                        | None    | Up to 255 characters     | Tag value                                                            |
 | use_log                                    | Boolean | Optional                        | False | True, False | Whether to leave logs in Log & Crash product                                      |
-| wait                                       | Boolean | Optional                        | True  | True, False | True: Return the training ID after creating training, 
-False: Return the training ID immediately after requesting to create      |
+| wait                                       | Boolean | Optional                        | True  | True, False | True: Return the training ID after creating training, False: Return the training ID immediately after requesting to create      |
 
 ```python
 training_id = easymaker.Training().run(
@@ -95,7 +95,7 @@ training_id = easymaker.Training().run(
     training_description='training_description',
     train_image_name='Ubuntu 18.04 CPU TensorFlow Training',
     train_instance_name='m2.c4m8',
-    distributed_training_count=1,
+    distributed_node_count=1,
     data_storage_size=300,  # minimum size : 300GB
     source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
     entry_point='training_start.py',
@@ -161,8 +161,8 @@ easymaker.Training().delete(training_id)
 | hyperparameter_tuning_description                              | String         | Optional                                                    | None    | Up to 255 characters                                      | Description of hyperparameter tuning                                                          |
 | image_name                                                     | String         | Required                                                    | None    | None                                           | Image name to be used for hyperparameter tuning (can be queried with CLI)                                         |
 | instance_name                                                  | String         | Required                                                    | None    | None                                           | Instance flavor name (Inquiry available with CLI)                                                     |
-| distributed_training_count                                     | Integer        | Required                                                    | 1      | The product of distributed_training_count and parallel_trial_count is 10 or less. | Number of distributed training to apply for each learning in hyperparameter tuning                                                      |
-| parallel_trial_count                                           | Integer        | Required                                                    | 1      | The product of distributed_training_count and parallel_trial_count is 10 or less. | Number of trainings to run in parallel in hyperparameter tuning                                                      |
+| distributed_node_count                                         | Integer        | Required                                                    | 1      | The product of distributed_node_count and parallel_trial_count is 10 or less. | Number of distributed training to apply for each learning in hyperparameter tuning                                                      |
+| parallel_trial_count                                           | Integer        | Required                                                    | 1      | The product of distributed_node_count and parallel_trial_count is 10 or less. | Number of trainings to run in parallel in hyperparameter tuning                                                      |
 | data_storage_size                                              | Integer        | Required when using Object Storage                                | None    | 300~10000                                    | Size of storage space to download data required for hyperparameter tuning (unit: GB), not required when using NAS                  |
 | algorithm_name                                                 | String         | Required when using algorithms provided by NHN Cloud                             | None    | Up to 64 characters                                       | Algorithm name (Inquiry available with CLI)                                                        |
 | source_dir_uri                                                 | String         | Required when using own algorithm                                       | None    | Up to 255 characters                                      | Path containing files required for hyperparameter tuning (NHN Cloud Object Storage or NHN Cloud NAS)    |
@@ -171,8 +171,8 @@ easymaker.Training().delete(training_id)
 | check_point_input_uri                                          | String         | Optional                                                    | None    | Up to 255 characters                                      | Input checkpoint file path (NHN Cloud Object Storage or NHN Cloud NAS)                 |
 | check_point_upload_uri                                         | String         | Optional                                                    | None    | Up to 255 characters                                      | The path where the checkpoint file will be uploaded (NHN Cloud Object Storage or NHN Cloud NAS)              |
 | timeout_hours                                                  | Integer        | Optional                                                    | 720   | 1~720                                        | Maximum hyperparameter tuning time (unit: hours)                                                   |
-| hyperparameter_spec_list                                       | Array          | Optional                                                    | None    | Max 100                                      | Hyperparameter specification information                                                              |
-| hyperparameter_spec_list[0].<br>hyperparameterName             | String         | Optional                                                    | None    | Up to 255 characters                                      | Hyperparameter Name                                                                 |
+| hyperparameter_spec_list                                       | Array          | Optional                                                    | None    | Up to 100                                      | Hyperparameter specification information                                                              |
+| hyperparameter_spec_list[0].<br>hyperparameterName             | String         | Optional                                                    | None    | Up to 255 characters                                      | Hyperparameter name                                                                 |
 | hyperparameter_spec_list[0].<br>hyperparameterTypeCode         | String         | Optional                                                    | None    | INT, DOUBLE, DISCRETE, CATEGORICAL           | Hyperparameter Type                                                                 |
 | hyperparameter_spec_list[0].<br>hyperparameterMinValue         | Integer/Double | Required if hyperparameterTypeCode is INT, DOUBLE            | None    | None                                           | Hyperparameter minimum value                                                                |
 | hyperparameter_spec_list[0].<br>hyperparameterMaxValue         | Integer/Double | Required if hyperparameterTypeCode is INT, DOUBLE            | None    | None                                           | Hyperparameter maximum value                                                                |
@@ -190,6 +190,9 @@ easymaker.Training().delete(training_id)
 | max_trial_count                                                | Integer        | Optional                                                    | None    | None                                           | Defines the maximum number of lessons. Tuning runs until the number of auto-run training reaches this value.                     |
 | tuning_strategy_name                                           | String         | Required                                                    | None    | None                                           | Choose which strategy to use to find the optimal hyperparameters.                                        |
 | tuning_strategy_random_state                                   | Integer        | Optional                                                    | None    | None                                           | Determine random number generation. Specify a fixed value for reproducible results.                                 |
+| early_stopping_algorithm                                       | String         | Required                                                    | None    | EARLY_STOPPING_ALGORITHM.<br>MEDIAN          | Stop training early if the model is no longer good even though training continues.                              |
+| early_stopping_min_trial_count                                 | Integer        | Required                                                    | 3     | None                                           | Define how many trainings the target metric value will be taken from when calculating the median.                                |
+| early_stopping_start_step                                      | Integer        | Required                                                    | 4     | None                                           | Set the training step from which to apply early stop.                                            |
 | tag_list                                                       | Array          | Optional                                                    | None    | Max 10                                       | Tag information                                                                      |
 | tag_list[0].tagKey                                             | String         | Optional                                                    | None    | Up to 64 characters                                       | Tag key                                                                       |
 | tag_list[0].tagValue                                           | String         | Optional                                                    | None    | Up to 255 characters                                      | Tag value                                                                       |
@@ -203,7 +206,7 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
     hyperparameter_tuning_description='hyperparameter_tuning_description',
     image_name='Ubuntu 18.04 CPU TensorFlow Training',
     instance_name='m2.c8m16',
-    distributed_training_count=1,
+    distributed_node_count=1,
     parallel_trial_count=1,
     data_storage_size=300,
     source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
@@ -353,8 +356,7 @@ When creating an endpoint, the default stage is created.
 | tag_list[0].tagKey                    | String  | Optional    | None    | Up to 64 characters                     | Tag key                                                                   |
 | tag_list[0].tagValue                  | String  | Optional    | None    | Up to 255 characters                    | Tag value                                                                   |
 | use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in Log & Crash product                                             |
-| wait                                  | Boolean | Optional    | True  | True, False                | True: Return the endpoint ID after creating endpoint, 
-False: Return the endpoint ID immediately after requesting endpoint |
+| wait                                  | Boolean | Optional    | True  | True, False                | True: Return the endpoint ID after creating endpoint, False: Return the endpoint ID immediately after requesting endpoint |
 
 ```python
 endpoint = easymaker.Endpoint()
@@ -403,8 +405,7 @@ You can add a new stage to existing endpoints.
 | tag_list[0].tagKey                    | String  | Optional    | None    | Up to 64 characters                     | Tag key                                                               |
 | tag_list[0].tagValue                  | String  | Optional    | None    | Up to 255 characters                    | Tag value                                                               |
 | use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in Log & Crash product                                         |
-| wait                                  | Boolean | Optional    | True  | True, False                | True: Return the stage ID after creating stage,
-False: Return the stage ID immediately after requesting stage |
+| wait                                  | Boolean | Optional    | True  | True, False                | True: Return the stage ID after creating stage, False: Return the stage ID immediately after requesting stage |
 ```python
 stage_id = endpoint.create_stage(
     stage_name='stage01', # Within 30 lowercase letters/numbers
