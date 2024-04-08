@@ -85,7 +85,7 @@ easymaker.Experiment().delete(experiment_id)
 | tag_list                                   | Array   | 선택                        | 없음    | 최대 10개      | 태그 정보                                                           |
 | tag_list[0].tagKey                         | String  | 선택                        | 없음    | 최대 64자      | 태그 키                                                            |
 | tag_list[0].tagValue                       | String  | 선택                        | 없음    | 최대 255자     | 태그 값                                                            |
-| use_log                                    | Boolean | 선택                        | False | True, False | Log & Crash 상품에 로그를 남길지 여부                                      |
+| use_log                                    | Boolean | 선택                        | False | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                                      |
 | wait                                       | Boolean | 선택                        | True  | True, False | True: 학습 생성이 완료된 이후 학습 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환      |
 
 ```python
@@ -198,7 +198,7 @@ easymaker.Training().delete(training_id)
 | tag_list                                                       | Array          | 선택                                                    | 없음    | 최대 10개                                       | 태그 정보                                                                      |
 | tag_list[0].tagKey                                             | String         | 선택                                                    | 없음    | 최대 64자                                       | 태그 키                                                                       |
 | tag_list[0].tagValue                                           | String         | 선택                                                    | 없음    | 최대 255자                                      | 태그 값                                                                       |
-| use_log                                                        | Boolean        | 선택                                                    | False | True, False                                  | Log & Crash 상품에 로그를 남길지 여부                                                 |
+| use_log                                                        | Boolean        | 선택                                                    | False | True, False                                  | Log & Crash Search 서비스에 로그를 남길지 여부                                                 |
 | wait                                                           | Boolean        | 선택                                                    | True  | True, False                                  | True: 하이퍼파라미터 튜닝 생성이 완료된 이후 하이퍼파라미터 튜닝 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환 |
 
 ```python
@@ -357,7 +357,7 @@ easymaker.Model().delete(model_id)
 | tag_list                              | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                                  |
 | tag_list[0].tagKey                    | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                                   |
 | tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                                   |
-| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                             |
+| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                             |
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 엔드포인트 생성이 완료된 이후 엔드포인트 ID를 반환, False: 엔드포인트 요청 후 즉시 엔드포인트 ID를 반환 |
 
 ```python
@@ -406,7 +406,7 @@ endpoint = easymaker.Endpoint()
 | tag_list                              | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                              |
 | tag_list[0].tagKey                    | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                               |
 | tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                               |
-| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                         |
+| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                         |
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 스테이지 생성이 완료된 이후 스테이지 ID를 반환, False: 스테이지 요청 후 즉시 스테이지 ID를 반환 |
 ```python
 stage_id = endpoint.create_stage(
@@ -505,7 +505,7 @@ endpoint.Endpoint().delete_endpoint_stage(stage_id)
 | tag_list                  | Array   | 선택      | 없음   | 최대 10개   | 태그 정보                                                                             |
 | tag_list[0].tagKey        | String  | 선택      | 없음   | 최대 64자   | 태그 키                                                                               |
 | tag_list[0].tagValue      | String  | 선택      | 없음   | 최대 255자  | 태그 값                                                                               |
-| use_log                   | Boolean | 선택      | False  | True, False | Log & Crash 상품에 로그를 남길지 여부                                                 |
+| use_log                   | Boolean | 선택      | False  | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                                        |
 | wait                      | Boolean | 선택      | True   | True, False | True: 학습 생성이 완료된 이후 학습 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환 |
 
 ```python
