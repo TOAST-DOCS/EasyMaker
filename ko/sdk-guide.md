@@ -85,7 +85,7 @@ easymaker.Experiment().delete(experiment_id)
 | tag_list                                   | Array   | 선택                        | 없음    | 최대 10개      | 태그 정보                                                           |
 | tag_list[0].tagKey                         | String  | 선택                        | 없음    | 최대 64자      | 태그 키                                                            |
 | tag_list[0].tagValue                       | String  | 선택                        | 없음    | 최대 255자     | 태그 값                                                            |
-| use_log                                    | Boolean | 선택                        | False | True, False | Log & Crash 상품에 로그를 남길지 여부                                      |
+| use_log                                    | Boolean | 선택                        | False | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                                      |
 | wait                                       | Boolean | 선택                        | True  | True, False | True: 학습 생성이 완료된 이후 학습 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환      |
 
 ```python
@@ -198,7 +198,7 @@ easymaker.Training().delete(training_id)
 | tag_list                                                       | Array          | 선택                                                    | 없음    | 최대 10개                                       | 태그 정보                                                                      |
 | tag_list[0].tagKey                                             | String         | 선택                                                    | 없음    | 최대 64자                                       | 태그 키                                                                       |
 | tag_list[0].tagValue                                           | String         | 선택                                                    | 없음    | 최대 255자                                      | 태그 값                                                                       |
-| use_log                                                        | Boolean        | 선택                                                    | False | True, False                                  | Log & Crash 상품에 로그를 남길지 여부                                                 |
+| use_log                                                        | Boolean        | 선택                                                    | False | True, False                                  | Log & Crash Search 서비스에 로그를 남길지 여부                                                 |
 | wait                                                           | Boolean        | 선택                                                    | True  | True, False                                  | True: 하이퍼파라미터 튜닝 생성이 완료된 이후 하이퍼파라미터 튜닝 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환 |
 
 ```python
@@ -357,7 +357,7 @@ easymaker.Model().delete(model_id)
 | tag_list                              | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                                  |
 | tag_list[0].tagKey                    | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                                   |
 | tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                                   |
-| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                             |
+| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                             |
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 엔드포인트 생성이 완료된 이후 엔드포인트 ID를 반환, False: 엔드포인트 요청 후 즉시 엔드포인트 ID를 반환 |
 
 ```python
@@ -406,7 +406,7 @@ endpoint = easymaker.Endpoint()
 | tag_list                              | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                              |
 | tag_list[0].tagKey                    | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                               |
 | tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                               |
-| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash 상품에 로그를 남길지 여부                                         |
+| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                         |
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 스테이지 생성이 완료된 이후 스테이지 ID를 반환, False: 스테이지 요청 후 즉시 스테이지 ID를 반환 |
 ```python
 stage_id = endpoint.create_stage(
@@ -479,6 +479,77 @@ endpoint.Endpoint().delete_endpoint(endpoint_id)
 
 ```python
 endpoint.Endpoint().delete_endpoint_stage(stage_id)
+```
+
+### 배치 추론 생성
+
+[Parameter]
+
+| 이름                      | 타입    | 필수 여부 | 기본값 | 유효 범위   | 설명                                                                                  |
+| ------------------------- | ------- | --------- | ------ | ----------- | ------------------------------------------------------------------------------------- |
+| batch_inference_name      | String  | 필수      | 없음   | 최대 50자   | 배치 추론 이름                                                                        |
+| instance_count            | Integer | 필수      | 없음   | 1~10        | 배치 추론에 사용할 인스턴스 수                                                        |
+| timeout_hours             | Integer | 선택      | 720    | 1~720       | 최대 배치 추론 시간(단위: 시간)                                                       |
+| instance_name             | String  | 필수      | 없음   | 없음        | 인스턴스 타입 이름(CLI로 조회 가능)                                                   |
+| model_name                | String  | 필수      | 없음   | 없음        | 모델 이름(CLI로 조회 가능)                                                            |
+| pod_count                 | Integer | 필수      | 없음   | 1~100       | 분산 학습을 적용할 노드 수                                                            |
+| batch_size                | Integer | 필수      | 없음   | 1~1000      | 동시에 처리되는 데이터 샘플의 수                                                      |
+| inference_timeout_seconds | Integer | 필수      | 없음   | 1~1200      | 단일 추론 요청의 최대 허용 시간                                                       |
+| input_data_uri            | String  | 필수      | 없음   | 최대 255자  | 입력 데이터 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)                    |
+| input_data_type           | String  | 필수      | 없음   | JSON, JSONL | 입력 데이터의 유형                                                                    |
+| include_glob_pattern      | String  | 선택      | 없음   | 최대 255자  | 파일 집합을 입력 데이터에서 포함할 Glob 패턴                                          |
+| exclude_glob_pattern      | String  | 선택      | 없음   | 최대 255자  | 파일 집합을 입력 데이터에서 제외할 Glob 패턴                                          |
+| output_upload_uri         | String  | 필수      | 없음   | 최대 255자  | 배치 추론 결과 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)      |
+| data_storage_size         | Integer | 필수      | 없음   | 300~10000   | 배치 추론에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB)                       |
+| description               | String  | 선택      | 없음   | 최대 255자  | 배치 추론에 대한 설명                                                                 |
+| tag_list                  | Array   | 선택      | 없음   | 최대 10개   | 태그 정보                                                                             |
+| tag_list[0].tagKey        | String  | 선택      | 없음   | 최대 64자   | 태그 키                                                                               |
+| tag_list[0].tagValue      | String  | 선택      | 없음   | 최대 255자  | 태그 값                                                                               |
+| use_log                   | Boolean | 선택      | False  | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                                        |
+| wait                      | Boolean | 선택      | True   | True, False | True: 학습 생성이 완료된 이후 학습 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환 |
+
+```python
+batch_inference_id = easymaker.BatchInference().run(
+    batch_inference_name='batch_inference_name',
+    instance_count=1,
+    timeout_hours=100,
+    instance_name='m2.c4m8',
+    model_name='model_name',
+    pod_count=1,
+    batch_size=32,
+    inference_timeout_seconds=120,
+    input_data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    input_data_type='JSONL',
+    include_glob_pattern=None,
+    exclude_glob_pattern=None,
+    output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{output_upload_path}',
+    data_storage_size=300,  # minimum size : 300GB
+    description='description',
+    tag_list=[
+        {
+            "tagKey": "tag1",
+            "tagValue": "test_tag_1",
+        },
+        {
+            "tagKey": "tag2",
+            "tagValue": "test_tag_2",
+        }
+    ],
+    use_log=True,
+    # wait=False,
+)
+```
+
+### 배치 추론 삭제
+
+[Parameter]
+
+| 이름               | 타입   | 필수 여부 | 기본값 | 유효 범위 | 설명         |
+| ------------------ | ------ | --------- | ------ | --------- | ------------ |
+| batch_inference_id | String | 필수      | 없음   | 최대 36자 | 배치 추론 ID |
+
+```python
+easymaker.BatchInference().delete(batch_inference_id)
 ```
 
 ### NHN Cloud - Log & Crash 로그 전송 기능
