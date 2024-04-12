@@ -1,5 +1,25 @@
 ## Machine Learning > AI EasyMaker > Release Notes
 
+### April 23, 2024
+
+#### Feature Updates
+
+* Added the batch inference feature
+    * Provides an environment to make batch inferences from an AI EasyMaker model and view inference results in statistics.
+    * For more information, see the [Batch Inference Guide](./console-guide/#_51) article.
+* Added the resource search feature
+    * You can search for resources from the console screen, and navigate to other resource screens via links.
+* Added the feature to change NAS of notebooks
+    * You can change the NHN Cloud NAS connection settings for running notebooks.
+* Scikit-learn serving support
+    * Enabled Scikit-learn models to be registered in AI EasyMaker to serve as endpoints.
+* Enable notebook shared memory
+    * Enabled more than 64 MB of shared memory to be available.
+    * The size depends on the instance type you selected when creating the notebook.
+* Removed the save_steps hyperparameter from the NHN Cloud-provided algorithms
+    * Removed the hyperparameter save_steps related to saving checkpoints.
+    * The algorithm automatically calculates the appropriate number of save_steps and saves up to three.
+
 ### December 19, 2023
 
 #### Feature Updates 
