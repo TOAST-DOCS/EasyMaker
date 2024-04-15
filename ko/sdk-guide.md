@@ -552,7 +552,7 @@ batch_inference_id = easymaker.BatchInference().run(
 easymaker.BatchInference().delete(batch_inference_id)
 ```
 
-### NHN Cloud - Log & Crash 로그 전송 기능
+### NHN Cloud - Log & Crash Search 로그 전송 기능
 ```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product

@@ -85,7 +85,7 @@ easymaker.Experiment().delete(experiment_id)
 | tag_list                                   | Array   | Optional                        | None    | Max 10      | Tag information                                                           |
 | tag_list[0].tagKey                         | String  | Optional                        | None    | Up to 64 characters      | Tag key                                                            |
 | tag_list[0].tagValue                       | String  | Optional                        | None    | Up to 255 characters     | Tag value                                                            |
-| use_log                                    | Boolean | Optional                        | False | True, False | Whether to leave logs in Log & Crash product                                      |
+| use_log                                    | Boolean | Optional                        | False | True, False | Whether to leave logs in the Log & Crash Search service                                      |
 | wait                                       | Boolean | Optional                        | True  | True, False | True: Return the training ID after creating training, False: Return the training ID immediately after requesting to create      |
 
 ```python
@@ -163,6 +163,8 @@ easymaker.Training().delete(training_id)
 | instance_name                                                  | String         | Required                                                    | None    | None                                           | Instance flavor name (Inquiry available with CLI)                                                     |
 | distributed_node_count                                         | Integer        | Required                                                    | 1      | The product of distributed_node_count and parallel_trial_count is 10 or less. | Number of distributed training to apply for each learning in hyperparameter tuning                                                      |
 | parallel_trial_count                                           | Integer        | Required                                                    | 1      | The product of distributed_node_count and parallel_trial_count is 10 or less. | Number of trainings to run in parallel in hyperparameter tuning                                                      |
+| use_torchrun                                                   | Boolean        | Optioanl                                                    | False  | True, False | Use torchrun or not, Only available in Pytorch images                                                 |
+| nproc_per_node                                                 | Integer        | Required when use_torchrun is True                                | 1      | 1~(Number of CPUs or GPUs) | Number of processes per node, Required when use_torchrun is used                                         |
 | data_storage_size                                              | Integer        | Required when using Object Storage                                | None    | 300~10000                                    | Size of storage space to download data required for hyperparameter tuning (unit: GB), not required when using NAS                  |
 | algorithm_name                                                 | String         | Required when using algorithms provided by NHN Cloud                             | None    | Up to 64 characters                                       | Algorithm name (Inquiry available with CLI)                                                        |
 | source_dir_uri                                                 | String         | Required when using own algorithm                                       | None    | Up to 255 characters                                      | Path containing files required for hyperparameter tuning (NHN Cloud Object Storage or NHN Cloud NAS)    |
@@ -196,7 +198,7 @@ easymaker.Training().delete(training_id)
 | tag_list                                                       | Array          | Optional                                                    | None    | Max 10                                       | Tag information                                                                      |
 | tag_list[0].tagKey                                             | String         | Optional                                                    | None    | Up to 64 characters                                       | Tag key                                                                       |
 | tag_list[0].tagValue                                           | String         | Optional                                                    | None    | Up to 255 characters                                      | Tag value                                                                       |
-| use_log                                                        | Boolean        | Optional                                                    | False | True, False                                  | Whether to leave logs in Log & Crash product                                                 |
+| use_log                                                        | Boolean        | Optional                                                    | False | True, False                                  | Whether to leave logs in the Log & Crash Search service                                                  |
 | wait                                                           | Boolean        | Optional                                                    | True  | True, False                                  | True: returns hyperparameter tuning ID after creation of hyperparameter tuning is complete, False: returns training ID immediately after creation request |
 
 ```python
@@ -355,7 +357,7 @@ When creating an endpoint, the default stage is created.
 | tag_list                              | Array   | Optional    | None    | Max 10                     | Tag information                                                                  |
 | tag_list[0].tagKey                    | String  | Optional    | None    | Up to 64 characters                     | Tag key                                                                   |
 | tag_list[0].tagValue                  | String  | Optional    | None    | Up to 255 characters                    | Tag value                                                                   |
-| use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in Log & Crash product                                             |
+| use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in the Log & Crash Search service     |
 | wait                                  | Boolean | Optional    | True  | True, False                | True: Return the endpoint ID after creating endpoint, False: Return the endpoint ID immediately after requesting endpoint |
 
 ```python
@@ -404,24 +406,24 @@ You can add a new stage to existing endpoints.
 | tag_list                              | Array   | Optional    | None    | Max 10                     | Tag information                                                              |
 | tag_list[0].tagKey                    | String  | Optional    | None    | Up to 64 characters                     | Tag key                                                               |
 | tag_list[0].tagValue                  | String  | Optional    | None    | Up to 255 characters                    | Tag value                                                               |
-| use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in Log & Crash product                                         |
+| use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in the Log & Crash Search service                                           |
 | wait                                  | Boolean | Optional    | True  | True, False                | True: Return the stage ID after creating stage, False: Return the stage ID immediately after requesting stage |
 ```python
 stage_id = endpoint.create_stage(
     stage_name='stage01', # Within 30 lowercase letters/numbers
     stage_description='test endpoint',
     endpoint_instance_name='c2.c16m16',
-    endpoint_instance_count=1;
+    endpoint_instance_count=1,
     endpoint_model_resource_list=[
         {
             'modelId': model_id,
             'apigwResourceUri': '/predict',
-            'podCount': 1;
+            'podCount': 1,
             'description': 'stage_resource_description'
         }
     ],
-    use_log=True;
-    #wait=False,
+    use_log=True,
+    # wait=False,
 )
 ```
 
@@ -479,7 +481,78 @@ endpoint.Endpoint().delete_endpoint(endpoint_id)
 endpoint.Endpoint().delete_endpoint_stage(stage_id)
 ```
 
-### NHN Cloud - Log & Crash Log Sending Feature
+### Create Batch Inference
+
+[Parameter]
+
+| Name                      | Type    | Required | Default value | Valid range   | Description                                                                                  |
+| ------------------------- | ------- | --------- | ------ | ----------- | ------------------------------------------------------------------------------------- |
+| batch_inference_name      | String  | Required      | None   | Up to 50 characters   | Batch inference name                                                                        |
+| instance_count            | Integer | Required      | None   | 1~10        | Number of instances to use for batch inference                                                        |
+| timeout_hours             | Integer | Optional      | 720    | 1~720       | Maximum batch inference time (in hours)                                                       |
+| instance_name             | String  | Required      | None   | None        | Instance flavor name (Inquiry available with CLI)                                                   |
+| model_name                | String  | Required      | None   | None        | Model name (can be viewed with the CLI)                                                            |
+| pod_count                 | Integer | Required      | None   | 1~100       | Number of nodes to apply distributed learning to                                                            |
+| batch_size                | Integer | Required      | None   | 1 to 1000      | Number of data samples processed simultaneously                                                      |
+| inference_timeout_seconds | Integer | Required      | None   | 1 to 1200      | Maximum allowable time for a single inference request                                                       |
+| input_data_uri            | String  | Required      | None   | Up to 255 characters  | Path for input data file (NHN Cloud Object Storage or NHN Cloud NAS)                    |
+| input_data_type           | String  | Required      | None   | JSON, JSONL | Input data type                                                                    |
+| include_glob_pattern      | String  | Optional      | None   | Up to 255 characters  | Glob pattern to include a set of files in the input data                                          |
+| exclude_glob_pattern      | String  | Optional      | None   | Up to 255 characters  | Glob pattern to exclude a set of files in the input data                                          |
+| output_upload_uri         | String  | Required      | None   | Up to 255 characters  | The path where the batch inference result file will be uploaded (NHN Cloud Object Storage or NHN Cloud NAS)      |
+| data_storage_size         | Integer | Required      | None   | 300~10000   | Storage size to download data for batch inference (unit: GB)                       |
+| description               | String  | Optional      | None   | Up to 255 characters  | Explanation of batch inference                                                                 |
+| tag_list                  | Array   | Optional      | None   | Max 10   | Tag information                                                                             |
+| tag_list[0].tagKey        | String  | Optional      | None   | Up to 64 characters   | Tag key                                                                               |
+| tag_list[0].tagValue      | String  | Optional      | None   | Up to 255 characters  | Tag value                                                                               |
+| use_log                   | Boolean | Optional      | False  | True, False | Whether to leave logs with the Log & Crash Search service                                        |
+| wait                      | Boolean | Optional      | True   | True, False | True: Return the training ID after creating training |
+
+```python
+batch_inference_id = easymaker.BatchInference().run(
+    batch_inference_name='batch_inference_name',
+    instance_count=1,
+    timeout_hours=100,
+    instance_name='m2.c4m8',
+    model_name='model_name',
+    pod_count=1,
+    batch_size=32,
+    inference_timeout_seconds=120,
+    input_data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    input_data_type='JSONL',
+    include_glob_pattern=None,
+    exclude_glob_pattern=None,
+    output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{output_upload_path}',
+    data_storage_size=300, # minimum size : 300GB
+    description='description',
+    tag_list=[
+        {
+            "tagKey": "tag1",
+            "tagValue": "test_tag_1",
+        },
+        {
+            "tagKey": "tag2",
+            "tagValue": "test_tag_2",
+        }
+    ],
+    use_log=True,
+    # wait=False,
+)
+```
+
+### Delete Batch Inference
+
+[Parameter]
+
+| Name               | Type   | Required | Default value | Valid range | Description         |
+| ------------------ | ------ | --------- | ------ | --------- | ------------ |
+| batch_inference_id | String | Required      | None   | Up to 36 characters | Batch Inference ID |
+
+```python
+easymaker.BatchInference().delete(batch_inference_id)
+```
+
+### NHN Cloud - Log & Crash Log Search Sending Feature
 ```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product
