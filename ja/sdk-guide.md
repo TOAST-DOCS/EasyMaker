@@ -198,7 +198,7 @@ easymaker.Training().delete(training_id)
 | tag_list                                                       | Array          | 任意                                                   | なし    | 最大10個                                      | タグ情報                                                                     |
 | tag_list[0].tagKey                                             | String         | 任意                                                   | なし    | 最大64文字                                      | タグキー                                                                       |
 | tag_list[0].tagValue                                           | String         | 任意                                                   | なし    | 最大255文字                                     | タグ値                                                                      |
-| use_log                                                        | Boolean        | 任意                                                  | False | True、False                                  | Searchサービスにログを残すかどうか                                                |
+| use_log                                                        | Boolean        | 任意                                                  | False | True、False                                  | Log & Crash Searchサービスにログを残すかどうか                                                |
 | wait                                                           | Boolean        | 任意                                                   | True  | True、False                                  | True:ハイパーパラメータチューニングの作成完了後、ハイパーパラメータチューニングIDを返却、False:作成リクエスト後すぐに学習IDを返却 |
 
 ```
@@ -357,7 +357,7 @@ easymaker.Model().delete(model_id)
 | tag_list                              | Array   | 任意 | なし  | 最大10個                 | タグ情報                                                              |
 | tag_list[0].tagKey                    | String  | 任意 | なし  | 最大64文字                 | タグキー                                                                  |
 | tag_list[0].tagValue                  | String  | 任意 | なし  | 最大255文字                | タグ値                                                               |
-| use_log                               | Boolean | 任意 | False | True, False                | Searchサービスにログを残すかどうか                                           |
+| use_log                               | Boolean | 任意 | False | True, False                | Log & Crash Searchサービスにログを残すかどうか                                           |
 | wait                                  | Boolean | 任意 | True  | True, False                | True：エンドポイントの作成が完了した後にエンドポイントIDを返す。False：エンドポイントリクエスト後、すぐにエンドポイントIDを返す |
 
 ```python
@@ -406,7 +406,7 @@ endpoint = easymaker.Endpoint()
 | tag_list                              | Array   | 任意 | なし  | 最大10個                 | タグ情報                                                          |
 | tag_list[0].tagKey                    | String  | 任意 | なし  | 最大64文字                 | タグキー                                                              |
 | tag_list[0].tagValue                  | String  | 任意 | なし  | 最大255文字                | タグ値                                                           |
-| use_log                               | Boolean | 任意 | False | True、False                | Searchサービスにログを残すかどうか                                      |
+| use_log                               | Boolean | 任意 | False | True、False                | Log & Crash Searchサービスにログを残すかどうか                                      |
 | wait                                  | Boolean | 任意 | True  | True, False                | True：ステージの作成が完了した後にステージIDを返す。False：ステージリクエスト後、すぐにステージIDを返す |
 ```python
 stage_id = endpoint.create_stage(
@@ -552,7 +552,7 @@ batch_inference_id = easymaker.BatchInference().run(
 easymaker.BatchInference().delete(batch_inference_id)
 ```
 
-### NHN Cloud - Log & Crashログ転送機能
+### NHN Cloud - Log & Crash Search ログ転送機能
 ```
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product

@@ -85,7 +85,7 @@ easymaker.Experiment().delete(experiment_id)
 | tag_list                                   | Array   | Optional                        | None    | Max 10      | Tag information                                                           |
 | tag_list[0].tagKey                         | String  | Optional                        | None    | Up to 64 characters      | Tag key                                                            |
 | tag_list[0].tagValue                       | String  | Optional                        | None    | Up to 255 characters     | Tag value                                                            |
-| use_log                                    | Boolean | Optional                        | False | True, False | Whether to leave logs in the Log & Crash service                                      |
+| use_log                                    | Boolean | Optional                        | False | True, False | Whether to leave logs in the Log & Crash Search service                                      |
 | wait                                       | Boolean | Optional                        | True  | True, False | True: Return the training ID after creating training, False: Return the training ID immediately after requesting to create      |
 
 ```python
@@ -198,7 +198,7 @@ easymaker.Training().delete(training_id)
 | tag_list                                                       | Array          | Optional                                                    | None    | Max 10                                       | Tag information                                                                      |
 | tag_list[0].tagKey                                             | String         | Optional                                                    | None    | Up to 64 characters                                       | Tag key                                                                       |
 | tag_list[0].tagValue                                           | String         | Optional                                                    | None    | Up to 255 characters                                      | Tag value                                                                       |
-| use_log                                                        | Boolean        | Optional                                                    | False | True, False                                  | Whether to leave logs in the Log & Crash service                                                  |
+| use_log                                                        | Boolean        | Optional                                                    | False | True, False                                  | Whether to leave logs in the Log & Crash Search service                                                  |
 | wait                                                           | Boolean        | Optional                                                    | True  | True, False                                  | True: returns hyperparameter tuning ID after creation of hyperparameter tuning is complete, False: returns training ID immediately after creation request |
 
 ```python
@@ -357,7 +357,7 @@ When creating an endpoint, the default stage is created.
 | tag_list                              | Array   | Optional    | None    | Max 10                     | Tag information                                                                  |
 | tag_list[0].tagKey                    | String  | Optional    | None    | Up to 64 characters                     | Tag key                                                                   |
 | tag_list[0].tagValue                  | String  | Optional    | None    | Up to 255 characters                    | Tag value                                                                   |
-| use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in the Log & Crash service     |
+| use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in the Log & Crash Search service     |
 | wait                                  | Boolean | Optional    | True  | True, False                | True: Return the endpoint ID after creating endpoint, False: Return the endpoint ID immediately after requesting endpoint |
 
 ```python
@@ -406,7 +406,7 @@ You can add a new stage to existing endpoints.
 | tag_list                              | Array   | Optional    | None    | Max 10                     | Tag information                                                              |
 | tag_list[0].tagKey                    | String  | Optional    | None    | Up to 64 characters                     | Tag key                                                               |
 | tag_list[0].tagValue                  | String  | Optional    | None    | Up to 255 characters                    | Tag value                                                               |
-| use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in the Log & Crash service                                           |
+| use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in the Log & Crash Search service                                           |
 | wait                                  | Boolean | Optional    | True  | True, False                | True: Return the stage ID after creating stage, False: Return the stage ID immediately after requesting stage |
 ```python
 stage_id = endpoint.create_stage(
@@ -506,7 +506,7 @@ endpoint.Endpoint().delete_endpoint_stage(stage_id)
 | tag_list[0].tagKey        | String  | Optional      | None   | Up to 64 characters   | Tag key                                                                               |
 | tag_list[0].tagValue      | String  | Optional      | None   | Up to 255 characters  | Tag value                                                                               |
 | use_log                   | Boolean | Optional      | False  | True, False | Whether to leave logs with the Log & Crash Search service                                        |
-| wait                      | Boolean | Optional      | True   | True, False | True: Return the training ID after creating training, 
+| wait                      | Boolean | Optional      | True   | True, False | True: Return the training ID after creating training |
 
 ```python
 batch_inference_id = easymaker.BatchInference().run(
@@ -552,7 +552,7 @@ batch_inference_id = easymaker.BatchInference().run(
 easymaker.BatchInference().delete(batch_inference_id)
 ```
 
-### NHN Cloud - Log & Crash Log Sending Feature
+### NHN Cloud - Log & Crash Search Log Sending Feature
 ```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product
