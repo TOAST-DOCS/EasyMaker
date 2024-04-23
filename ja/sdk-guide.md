@@ -85,7 +85,7 @@ easymaker.Experiment().delete(experiment_id)
 | tag_list                                   | Array   | 任意                       | なし    | 最大10個     | タグ情報                                                          |
 | tag_list[0].tagKey                         | String  | 任意                       | なし    | 最大64文字     | タグキー                                                            |
 | tag_list[0].tagValue                       | String  | 任意                       | なし    | 最大255文字    | タグ値                                                           |
-| use_log                                    | Boolean | 任意                       | False | True、False | Log & Crash商品にログを残すかどうか                                      |
+| use_log                                    | Boolean | 任意                      | False | True、False | Log & Crash Searchサービスにログを残すかどうか                                     |
 | wait                                       | Boolean | 任意                       | True  | True、False | True:学習作成が完了した後に学習IDを返す。False:作成リクエスト後すぐに学習IDを返す      |
 
 ```
@@ -198,7 +198,7 @@ easymaker.Training().delete(training_id)
 | tag_list                                                       | Array          | 任意                                                   | なし    | 最大10個                                      | タグ情報                                                                     |
 | tag_list[0].tagKey                                             | String         | 任意                                                   | なし    | 最大64文字                                      | タグキー                                                                       |
 | tag_list[0].tagValue                                           | String         | 任意                                                   | なし    | 最大255文字                                     | タグ値                                                                      |
-| use_log                                                        | Boolean        | 任意                                                   | False | True、False                                  | Log & Crash製品にログを残すかどうか                                                 |
+| use_log                                                        | Boolean        | 任意                                                  | False | True、False                                  | Log & Crash Searchサービスにログを残すかどうか                                                |
 | wait                                                           | Boolean        | 任意                                                   | True  | True、False                                  | True:ハイパーパラメータチューニングの作成完了後、ハイパーパラメータチューニングIDを返却、False:作成リクエスト後すぐに学習IDを返却 |
 
 ```
@@ -357,7 +357,7 @@ easymaker.Model().delete(model_id)
 | tag_list                              | Array   | 任意 | なし  | 最大10個                 | タグ情報                                                              |
 | tag_list[0].tagKey                    | String  | 任意 | なし  | 最大64文字                 | タグキー                                                                  |
 | tag_list[0].tagValue                  | String  | 任意 | なし  | 最大255文字                | タグ値                                                               |
-| use_log                               | Boolean | 任意 | False | True, False                | Log & Crash商品にログを残すかどうか                                            |
+| use_log                               | Boolean | 任意 | False | True, False                | Log & Crash Searchサービスにログを残すかどうか                                           |
 | wait                                  | Boolean | 任意 | True  | True, False                | True：エンドポイントの作成が完了した後にエンドポイントIDを返す。False：エンドポイントリクエスト後、すぐにエンドポイントIDを返す |
 
 ```python
@@ -406,7 +406,7 @@ endpoint = easymaker.Endpoint()
 | tag_list                              | Array   | 任意 | なし  | 最大10個                 | タグ情報                                                          |
 | tag_list[0].tagKey                    | String  | 任意 | なし  | 最大64文字                 | タグキー                                                              |
 | tag_list[0].tagValue                  | String  | 任意 | なし  | 最大255文字                | タグ値                                                           |
-| use_log                               | Boolean | 任意 | False | True、False                | Log & Crash商品にログを残すかどうか                                       |
+| use_log                               | Boolean | 任意 | False | True、False                | Log & Crash Searchサービスにログを残すかどうか                                      |
 | wait                                  | Boolean | 任意 | True  | True, False                | True：ステージの作成が完了した後にステージIDを返す。False：ステージリクエスト後、すぐにステージIDを返す |
 ```python
 stage_id = endpoint.create_stage(
@@ -481,7 +481,78 @@ endpoint.Endpoint().delete_endpoint(endpoint_id)
 endpoint.Endpoint().delete_endpoint_stage(stage_id)
 ```
 
-### NHN Cloud - Log & Crashログ転送機能
+### バッチ推論の作成
+
+[Parameter]
+
+| 名前                     | タイプ   | 必須かどうか | デフォルト値 | 有効範囲  | 説明                                                                                 |
+| ------------------------- | ------- | --------- | ------ | ----------- | ------------------------------------------------------------------------------------- |
+| batch_inference_name      | String  | 必須     | なし   | 最大50文字  | バッチ推論名前                                                                       |
+| instance_count            | Integer | 必須     | なし   | 1～10        | バッチ推論に使用するインスタンス数                                                       |
+| timeout_hours             | Integer | 選択     | 720    | 1～720       | 最大バッチ推論時間(単位:時間)                                                       |
+| instance_name             | String  | 必須     | なし   | なし        | インスタンスタイプ名(CLIで照会可能)                                                   |
+| model_name                | String  | 必須     | なし   | なし        | モデル名(CLIで照会可能)                                                            |
+| pod_count                 | Integer | 必須     | なし   | 1～100       | 分散学習を適用するノード数                                                           |
+| batch_size                | Integer | 必須     | なし   | 1～1000      | 同時に処理されるデータサンプルの数                                                      |
+| inference_timeout_seconds | Integer | 必須     | なし   | 1～1200      | 単一推論リクエストの最大許容時間                                                      |
+| input_data_uri            | String  | 必須     | なし   | 最大255文字 | 入力データファイルのパス(NHN Cloud Object StorageまたはNHN Cloud NAS)                    |
+| input_data_type           | String  | 必須     | なし   | JSON, JSONL | 入力データのタイプ                                                                   |
+| include_glob_pattern      | String  | 選択     | なし   | 最大255文字 | ファイルセットを入力データに含めるGlobパターン                                         |
+| exclude_glob_pattern      | String  | 選択     | なし   | 最大255文字 | ファイルセットを入力データから除外するGlobパターン                                         |
+| output_upload_uri         | String  | 必須     | なし   | 最大255文字 | バッチ推論結果ファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)      |
+| data_storage_size         | Integer | 必須     | なし   | 300～10000   | バッチ推論に必要なデータをダウンロードする記憶領域のサイズ(単位: GB)                       |
+| description               | String  | 選択     | なし   | 最大255文字 | バッチ推論の説明                                                                |
+| tag_list                  | Array   | 選択     | なし   | 最大10個  | タグ情報                                                                            |
+| tag_list[0].tagKey        | String  | 選択     | なし   | 最大64文字  | タグキー                                                                               |
+| tag_list[0].tagValue      | String  | 選択     | なし   | 最大255文字 | タグ値                                                                              |
+| use_log                   | Boolean | 選択     | False  | True, False | Log & Crash Searchサービスにログを残すかどうか                                        |
+| wait                      | Boolean | 選択     | True   | True, False | True:学習作成が完了した後に学習IDを返す。False:作成リクエスト後、すぐに学習IDを返す |
+
+```python
+batch_inference_id = easymaker.BatchInference().run(
+    batch_inference_name='batch_inference_name',
+    instance_count=1,
+    timeout_hours=100,
+    instance_name='m2.c4m8',
+    model_name='model_name',
+    pod_count=1,
+    batch_size=32,
+    inference_timeout_seconds=120,
+    input_data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    input_data_type='JSONL',
+    include_glob_pattern=None,
+    exclude_glob_pattern=None,
+    output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{output_upload_path}',
+    data_storage_size=300,  # minimum size : 300GB
+    description='description',
+    tag_list=[
+        {
+            "tagKey": "tag1",
+            "tagValue": "test_tag_1",
+        },
+        {
+            "tagKey": "tag2",
+            "tagValue": "test_tag_2",
+        }
+    ],
+    use_log=True,
+    # wait=False,
+)
+```
+
+### バッチ推論削除
+
+[Parameter]
+
+| 名前              | タイプ  | 必須かどうか | デフォルト値 | 有効範囲 | 説明        |
+| ------------------ | ------ | --------- | ------ | --------- | ------------ |
+| batch_inference_id | String | 必須     | なし   | 最大36文字 | バッチ推論ID |
+
+```python
+easymaker.BatchInference().delete(batch_inference_id)
+```
+
+### NHN Cloud - Log & Crash Search ログ転送機能
 ```
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product

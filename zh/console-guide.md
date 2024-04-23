@@ -265,7 +265,6 @@ Set the training environment by selecting the instance and OS image to be traine
 ### Training List
 A list of studies is displayed. If you select a training from the list, you can check detailed information and change the information.
 
-- **Description** : The training description is displayed. You can change the description by clicking **Change** on the detail screen.
 - **Training time** : Displays the training time.
 - **Status** : Shows the status of training. Please refer to the table below for the main status.
 
@@ -823,6 +822,101 @@ Delete an endpoint.
 > Deleting an endpoint stage in AI EasyMaker also deletes API Gateway service from which the endpoint's stage was deployed.
 > If there is API running on the API Gateway service to be deleted, please be noted that API calls cannot be made.
 
+## Batch Inference
+
+Provides an environment to make batch inferences from an AI EasyMaker model and view inference results in statistics.
+
+### Create Batch Inference
+
+Set up the environment in which batch inference will be performed by selecting an instance and OS image, and enter the paths to the input/output data to be inferred to proceed with batch inference.
+
+* **Basic Information**: Enter basic information about a batch inference.
+    * **Batch Inference Name**: Enter a name for the batch inference.
+    * **Batch Inference Description**: Enter a description.
+* **Instance information**
+    * **Instance Type**: Select the instance type to run batch inference on.
+    * **Number of Instances**: The number of instances to perform batch inference on.
+* **Model Information**
+    * **Model**: Select the model from which you want to make a batch inference. If you did not create a model, create one first.
+    * **Number of Pods**: Enter the number of pods in the model.
+    * **Resource Information**: You can see the actual resources used by the model. The actual usage is split and allocated to each pod based on the number of pods you entered.
+* **Input Data**
+    * **Data Path**: Enter the path to the data that you want to run batch inference on.
+        * Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    * **Input Data Type**: Select the type of data you want to run batch inference on.
+        * **JSON**: Use valid JSON data from a file as input.
+        * **JSONL**: Use JSON lines files where each line is valid JSON as input.
+            * Note: [https://jsonlines.org/](https://jsonlines.org/)
+    * **Glob Pattern**
+        * **Specify File to Include**: Enter a set of files to include in the input data in a Glob pattern.
+        * **Specify File to Exclude**: Enter a set of files to exclude from the input data in a Glob pattern.
+* **Output Data**
+    * **Output Data**: Enter the data storage path to save the batch inference results.
+        * Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+* **Additional Settings**
+    * **Batch Options**
+        * **Batch Size**: Enter the number of data samples that are processed simultaneously in one inference job.
+        * **Inference Timeout (in seconds)**: Enter the timeout period for batch inference. You can set the maximum allowable time before a single inference request is processed and results are returned.
+    * **Data Storage Size** : Enter the data storage size of the instance to run batch inference.
+        * Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for batch inference.
+    * **Maximum Batch Inference Time** : Specify the maximum waiting time until batch inference is complete. Batch inference that exceeds the maximum waiting time will be terminated.
+    * **Log Management** : Logs generated during batch inference can be stored in the NHN Cloud Log & Crash Search service.
+        * For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
+    * **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
+
+> **[Caution] When using NHN Cloud NAS**
+> Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
+
+> **[Caution] Batch inference fails when batch inference input data is deleted**
+> Batch inference can fail if you delete input data before batch inference is complete.
+
+> **[Caution] When setting input data detailed options**
+> If the Glob pattern is not entered properly, batch inference may not work properly because the input data cannot be found.
+> When used together with the **Include Glob pattern**, the **Exclude Glob pattern** takes precedence.
+
+> **[Caution] When setting batch options** 
+> You must set the **batch size** and **inference timeout** appropriately based on the performance of the model you are batch inferring.
+> If the settings you enter are incorrect, batch inference might not perform well enough.
+
+### Batch Inference List
+
+Displays a list of batch inferences. Select a batch inference from the list to check the details and change the information.
+
+* **Inference Time**: Displays how long the batch inference has been running.
+* **Status** : Displays the status of batch inference. Please refer to the table below for the main status.
+
+    | **Failed Training** : Indicates the number of failed lessons. | **Best Training**: Indicates the target metric information of the training that recorded the highest target metric value among the training automatically generated by hyperparameter tuning. |
+    | --- | --- |
+    | **Status** : Shows the status of hyperparameter tuning. Please refer to the table below for the main status. | You have requested to create a batch inference. |
+    | **API Gateway Status**: Displays API Gateway status information for default stage of endpoint. Please refer to the table below for main status. | This is a state in which resources necessary for batch inference are being created. |
+    | Description | Batch inference is in progress. |
+    | Resources required for hyperparameter tuning are being created. | Batch inference is stopped at the user's request. |
+    | COMPLETE | Batch inference has been completed successfully. |
+    | STOP IN PROGRESS | Batch inference is stopping. |
+    | FAIL BATCH INFERENCE | This is a failed state during batch inference. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
+    | Stage resource is being deleted. | The batch inference creation failed. If creation continues to fail, please contact customer service. |
+    | FAIL BATCH INFERENCE IN PROGRESS, COMPLETE IN PROGRESS | The resources used for batch inference are being cleaned up. |
+* **Operation**
+    * **Stop**: You can stop batch inference in progress.
+* **Monitoring**: When you select a batch inference, you can check the list of monitored instances and basic indicator charts in the **Monitoring** tab of the detailed screen that appears.
+    * The **Monitoring** tab is disabled while batch inference is being created.
+
+### Copy Batch Inference
+
+Create a new batch inference with the same settings as an existing batch inference.
+
+1. Select the batch inference you want to copy.
+2. Click **Copy Batch Inference**.
+3. The Create batch inference screen appears with the same settings as an existing batch inference.
+4. If there is any information you would like to change the settings for, make the changes and then click **Create Batch Inference** to create the batch inference.
+
+### Delete Batch Inference
+
+Delete a batch inference.
+
+1. Select the batch inference you want to delete.
+2. Click **Delete Batch Inference**. Batch inference in progress can be deleted after stopping.
+3. Requested deletion task cannot be cancelled. To proceed, please click **Confirm**
 
 ## Private Image 
 User-personalized container images can be used to drive notebooks, training, and hyperparameter tuning.
@@ -1013,11 +1107,18 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
     | logType | Service name provided by log | NHNCloud-AIEasyMaker |
     | time | Log Occurrence Time (UTC Time) | - |
 
-- **Training Log field**
+- **Training Log Field**
 
     | Name | Description |
     |---------------------| --- |
     | trainingId | AI EasyMaker training ID  |
+
+
+- **Hyperparameter Tuning Log Field**
+
+    | Name | Description |
+    | --- | --- |
+    | hyperparameterTuningId | AI EasyMaker hyperparameter tuning ID |
 
 - **Endpoint Log Field**
 
@@ -1028,6 +1129,12 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
     | inferenceId | Inference request own ID |
     | action | Action classification (Endpoint.Model) |
     | modelName | Model name to be inferred |
+
+- **Batch Inference Log Field**
+
+    | Name | Description |
+    | --- | --- |
+    | batchInferenceId | AI EasyMaker batch inference ID |
 
 ### 3. Hyperparameters
 
