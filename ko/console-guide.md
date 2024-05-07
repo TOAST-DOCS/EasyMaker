@@ -75,7 +75,7 @@
     | STOP IN PROGRESS   | 노트북을 중지 중인 상태입니다.                                                         |
     | STOPPED            | 노트북을 중지한 상태입니다.                                                           |
     | START IN PROGRESS  | 노트북을 시작 중인 상태입니다.                                                         |
-    | REBOOT IN PROGRESS | 노트북을 재시작중인 상태입니다.                                                         |
+    | REBOOT IN PROGRESS | 노트북을 재부팅 중인 상태입니다.                                                         |
     | DELETE IN PROGRESS | 노트북을 삭제 중인 상태입니다.                                                         |
     | CREATE FAILED      | 노트북 생성 중 실패한 상태입니다. 생성이 지속적으로 실패하면 고객 센터로 문의해 주세요.                        |
     | STOP FAILED        | 노트북 중지를 실패한 상태입니다. 다시 시도해 주세요.                                            |
