@@ -1,5 +1,11 @@
 ## Machine Learning > AI EasyMaker > Release Notes
 
+### May 10, 2024
+
+#### Feature Updates
+
+* Added the feature to reboot notebooks
+
 ### April 23, 2024
 
 #### Feature Updates
