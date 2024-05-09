@@ -66,20 +66,22 @@ A list of notebooks are displayed. Select a notebook in the list to check detail
 - **Name**: Notebook name is displayed. You can change the name by clicking **Change** on the details screen.
 - **Status**: Status of the notebook is displayed. Please refer to the table below for the main status.
 
-    | Status | Description |
-    | --- | --- |
-    | CREATE REQUESTED | Notebook creation is requested.  |
-    | CREATE IN PROGRESS | Notebook instance is in the process of creation. |
-    | ACTIVE (HEALTHY) | Notebook application is in normal operation.  |
+    | Status                 | Description                                                                        |
+    |--------------------|---------------------------------------------------------------------------|
+    | CREATE REQUESTED   | Notebook creation is requested.                                                        |
+    | CREATE IN PROGRESS | Notebook instance is in the process of creation.                                                    |
+    | ACTIVE (HEALTHY)   | Notebook application is in normal operation.                                            |
     | ACTIVE (UNHEALTHY) | Notebook application is not operating properly. If this condition persists after restarting the notebook, please contact customer service center. |
-    | STOP IN PROGRESS | Notebook stop in progress.  |
-    | STOPPED | Notebook stopped.  |
-    | START IN PROGRESS | Notebook start in progress |
-    | DELETE IN PROGRESS | Notebook delete in progress.  |
-    | CREATE FAILED | Failed to crate notebook. If keep fails to create, please contact Customer service center.   |
-    | STOP FAILED | Failed to stop notebook. Please try to stop again.  |
-    | START FAILED | Failed to start notebook. Please try to start again.  |
-    | DELETE FAILED | Failed to delete notebook. Please try to delete again.  |
+    | STOP IN PROGRESS   | Notebook stop in progress.                                                         |
+    | STOPPED            | Notebook stopped.                                                           |
+    | START IN PROGRESS  | Notebook start in progress                                                         |
+    | REBOOT IN PROGRESS | Notebook reboot in progress.                                                         |
+    | DELETE IN PROGRESS | Notebook delete in progress.                                                         |
+    | CREATE FAILED      | Failed to crate notebook. If keep fails to create, please contact Customer service center.                        |
+    | STOP FAILED        | Failed to stop notebook. Please try to stop again.                                            |
+    | START FAILED       | Failed to start notebook. Please try to start again.                                            |
+    | REBOOT FAILED      | Failed to reboot notebook. Please try to start again.                                           |
+    | DELETE FAILED      | Failed to delete notebook. Please try to delete again.                                            |
 
 - **Action > Open Jupyter Notebook**: Click **Open Jupyter Notebook** button to open the notebook in a new browser window. The notebook is only accessible to users who are logged in to the console.
 - **Tag**: Tag for notebook is displayed. You can change the tag by clicking **Change**.
@@ -140,6 +142,19 @@ Instance flavor you want to change can only be changed to the same core type ins
 
 > **[Note] Time to change instance flavors**
 > It may take several minutes to change the instance flavor.
+
+
+### Reboot Notebook
+If a problem occurs while using the notebook, or if the status is ACTIVE but you can't access the notebook,
+you can reboot the notebook.
+
+1. Select notebook you want to reboot.
+2. Click **Reboot Notebook**
+3. Requested deletion task cannot be cancelled. To proceed, please click **Confirm**
+
+> **[Caution] How to retain your virtual environment and external libraries when rebooting the notebook**
+> When rebooting the notebook, the virtual environment and external libraries that the user create can be initialized.
+> In order to retain, configure your virtual environment by referring to [User Virtual Execution Environment Configuration](./console-guide/#_8).
 
 ### Delete Notebook
 Delete the created notebook.
