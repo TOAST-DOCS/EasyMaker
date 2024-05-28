@@ -7,7 +7,7 @@ You can view the usage status of all AI EasyMaker resources in the dashboard.
 
 Displays the number of resources in use per resource.
 
-* Notebook: Number of notebooks in ACITIVE (HEALTHY) status that are in use.
+* Notebook: Number of notebooks in ACTIVE (HEALTHY) status that are in use.
 * Training: Number of trainings that are COMPLETE
 * Hyperparameter tuning: Number of hyperparameter tunings that are COMPLETE 
 * Endpoints: Number of endpoints in the ACTIVE state
