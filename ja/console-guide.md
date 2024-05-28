@@ -117,6 +117,20 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
         base                *   /opt/miniconda3
         easymaker_env           /root/easymaker/custom-conda-envs/easymaker_env
 
+### 사용자 스크립트
+노트북을 중지하고 시작할 때 자동으로 실행되어야 하는 스크립트를 `/root/easymaker/cont-init.d` 경로에 등록할 수 있습니다.
+알파벳 숫자(alphanumeric) 순서에 따라 오름차순으로 실행됩니다.
+
+- 스크립트 위치 및 권한
+    - `/root/easymaker/cont-init.d` 경로에 위치한 파일만 실행됩니다.
+    - 실행 권한이 있는 스크립트만 실행됩니다.
+- 스크립트 내용
+    - 스크립트의 첫 번째 줄은 반드시 `#!`으로 시작해야 합니다.
+    - 스크립트는 root 권한으로 실행됩니다.
+- 스크립트 실행 기록은 아래 위치에 저장됩니다.
+    - 스크립트 종료 코드: `/root/easymaker/cont-init.d/{SCRIPT}.exitcode`
+    - 스크립트 표준 출력 및 표준 에러 스트림: `/root/easymaker/cont-init.d/{SCRIPT}.output`
+
 ### ノートパソコンの停止
 動作中のノートパソコンを停止するか、停止したノートパソコンを起動します。
 
