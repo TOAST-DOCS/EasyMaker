@@ -129,6 +129,7 @@ Please refer to the following guide to configure your virtual environment.
 - 스크립트 실행 기록은 아래 위치에 저장됩니다.
     - 스크립트 종료 코드: `/root/easymaker/cont-init.d/{SCRIPT}.exitcode`
     - 스크립트 표준 출력 및 표준 에러 스트림: `/root/easymaker/cont-init.d/{SCRIPT}.output`
+    - 전체 실행 로그: `/root/easymaker/cont-init.output`
 
 ### Stop Notebook
 Stop the running notebook or start the stopped notebook.
