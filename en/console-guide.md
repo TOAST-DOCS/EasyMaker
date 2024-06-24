@@ -116,6 +116,21 @@ Please refer to the following guide to configure your virtual environment.
         base                *   /opt/miniconda3
         easymaker_env           /root/easymaker/custom-conda-envs/easymaker_env
 
+### User Script
+You can register scripts in the path `/root/easymaker/cont-init.d` that should run automatically when the notebook is stopped and started.
+The scripts are executed in ascending alphanumeric order.
+
+- Script location and permission
+    - Only files located in the path `/root/easymaker/cont-init.d` are executed.
+    - Only scripts for which you have permission to run are executed.
+- Script content
+    - The first line of scripts must start with `#!`.
+    - Scripts are executed with the root permission.
+- The script execution history is stored in the following locations.
+    - Script exit code: `/root/easymaker/cont-init.d/{SCRIPT}.exitcode`
+    - Script standard output and standard error streams: `/root/easymaker/cont-init.d/{SCRIPT}.output`
+    - Full execution log: `/root/easymaker/cont-init.output`
+
 ### Stop Notebook
 Stop the running notebook or start the stopped notebook.
 
