@@ -7,7 +7,7 @@ You can view the usage status of all AI EasyMaker resources in the dashboard.
 
 Displays the number of resources in use per resource.
 
-* Notebook: Number of notebooks in ACITIVE (HEALTHY) status that are in use.
+* Notebook: Number of notebooks in ACTIVE (HEALTHY) status that are in use.
 * Training: Number of trainings that are COMPLETE
 * Hyperparameter tuning: Number of hyperparameter tunings that are COMPLETE 
 * Endpoints: Number of endpoints in the ACTIVE state
@@ -66,20 +66,22 @@ A list of notebooks are displayed. Select a notebook in the list to check detail
 - **Name**: Notebook name is displayed. You can change the name by clicking **Change** on the details screen.
 - **Status**: Status of the notebook is displayed. Please refer to the table below for the main status.
 
-    | Status | Description |
-    | --- | --- |
-    | CREATE REQUESTED | Notebook creation is requested.  |
-    | CREATE IN PROGRESS | Notebook instance is in the process of creation. |
-    | ACTIVE (HEALTHY) | Notebook application is in normal operation.  |
+    | Status                 | Description                                                                        |
+    |--------------------|---------------------------------------------------------------------------|
+    | CREATE REQUESTED   | Notebook creation is requested.                                                        |
+    | CREATE IN PROGRESS | Notebook instance is in the process of creation.                                                    |
+    | ACTIVE (HEALTHY)   | Notebook application is in normal operation.                                            |
     | ACTIVE (UNHEALTHY) | Notebook application is not operating properly. If this condition persists after restarting the notebook, please contact customer service center. |
-    | STOP IN PROGRESS | Notebook stop in progress.  |
-    | STOPPED | Notebook stopped.  |
-    | START IN PROGRESS | Notebook start in progress |
-    | DELETE IN PROGRESS | Notebook delete in progress.  |
-    | CREATE FAILED | Failed to crate notebook. If keep fails to create, please contact Customer service center.   |
-    | STOP FAILED | Failed to stop notebook. Please try to stop again.  |
-    | START FAILED | Failed to start notebook. Please try to start again.  |
-    | DELETE FAILED | Failed to delete notebook. Please try to delete again.  |
+    | STOP IN PROGRESS   | Notebook stop in progress.                                                         |
+    | STOPPED            | Notebook stopped.                                                           |
+    | START IN PROGRESS  | Notebook start in progress                                                         |
+    | REBOOT IN PROGRESS | Notebook reboot in progress.                                                         |
+    | DELETE IN PROGRESS | Notebook delete in progress.                                                         |
+    | CREATE FAILED      | Failed to crate notebook. If keep fails to create, please contact Customer service center.                        |
+    | STOP FAILED        | Failed to stop notebook. Please try to stop again.                                            |
+    | START FAILED       | Failed to start notebook. Please try to start again.                                            |
+    | REBOOT FAILED      | Failed to reboot notebook. Please try to start again.                                           |
+    | DELETE FAILED      | Failed to delete notebook. Please try to delete again.                                            |
 
 - **Action > Open Jupyter Notebook**: Click **Open Jupyter Notebook** button to open the notebook in a new browser window. The notebook is only accessible to users who are logged in to the console.
 - **Tag**: Tag for notebook is displayed. You can change the tag by clicking **Change**.
@@ -114,6 +116,21 @@ Please refer to the following guide to configure your virtual environment.
         base                *   /opt/miniconda3
         easymaker_env           /root/easymaker/custom-conda-envs/easymaker_env
 
+### User Script
+You can register scripts in the path `/root/easymaker/cont-init.d` that should run automatically when the notebook is stopped and started.
+The scripts are executed in ascending alphanumeric order.
+
+- Script location and permission
+    - Only files located in the path `/root/easymaker/cont-init.d` are executed.
+    - Only scripts for which you have permission to run are executed.
+- Script content
+    - The first line of scripts must start with `#!`.
+    - Scripts are executed with the root permission.
+- The script execution history is stored in the following locations.
+    - Script exit code: `/root/easymaker/cont-init.d/{SCRIPT}.exitcode`
+    - Script standard output and standard error streams: `/root/easymaker/cont-init.d/{SCRIPT}.output`
+    - Full execution log: `/root/easymaker/cont-init.output`
+
 ### Stop Notebook
 Stop the running notebook or start the stopped notebook.
 
@@ -140,6 +157,19 @@ Instance flavor you want to change can only be changed to the same core type ins
 
 > **[Note] Time to change instance flavors**
 > It may take several minutes to change the instance flavor.
+
+
+### Reboot Notebook
+If a problem occurs while using the notebook, or if the status is ACTIVE but you can't access the notebook,
+you can reboot the notebook.
+
+1. Select notebook you want to reboot.
+2. Click **Reboot Notebook**
+3. Requested deletion task cannot be cancelled. To proceed, please click **Confirm**
+
+> **[Caution] How to retain your virtual environment and external libraries when rebooting the notebook**
+> When rebooting the notebook, the virtual environment and external libraries that the user create can be initialized.
+> In order to retain, configure your virtual environment by referring to [User Virtual Execution Environment Configuration](./console-guide/#_8).
 
 ### Delete Notebook
 Delete the created notebook.
