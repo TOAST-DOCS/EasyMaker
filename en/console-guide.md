@@ -655,22 +655,29 @@ Create and manage endpoints that can serve the model.
 * **Endpoint name**: Enter the endpoint name. Endpoint names cannot be duplicated.
 * **Stage Name**: When adding new stage on existing endpoint, enter name for new stage. Stage names cannot be duplicated.
 * **Description**: Enter the description of endpoint stage.
-* **Stage Resource Information**: Enter the information for model artifacts to deploy to endpoint.
-    * **Model**: Select the model you want to deploy to endpoint. If have not created model yet, please create model first.
-    * **API Gateway Resource Path**: Enter API resource path for the model being deployed. For example, if set to `/inference`, you can request inference API at `POST https://{point-domain}/inference`.
-    * **Number of Pods**: Enter a number of pods in the stage resource.
-    * **Description**: Enter a description for the stage resource.
 * **Instance Information**: Enter instance information for the model to be served.
     * **Instance Flavor**: Select instance type.
     * **Number of Instances**: Enter the number of drives for instance.
-* **Autoscaler**: The autoscaler is a feature that automatically adjusts the number of nodes based on resource usage policies. The autoscaler is set on a per-stage basis.
-    * **Enable/Disable**: Select whether to enable the autoscaler. If enabled, the number of instances will scale in or out based on the instance load.
-    * **Minimum number of nodes**: The minimum number of nodes that can be scaled down
-    * **Maximum number of nodes**: The maximum number of nodes that can be scaled up
-    * **Scale-down**: Set whether to enable node scale-down
-    * **Resource Usage Threshold**: The default for resource usage threshold, which is the reference point for a scale down
-    * **Threshold Duration (min)**: The resource usage duration at or below the threshold for the nodes to be scaled down
-    * **Scale-up to scale-down latency (min)**: Delay before starting to monitor for scale-down targets after scaling up
+    * **Autoscaler**: The autoscaler is a feature that automatically adjusts the number of nodes based on resource usage policies. The autoscaler is set on a per-stage basis.
+        * **Enable/Disable**: Select whether to enable the autoscaler. If enabled, the number of instances will scale in or out based on the instance load.
+        * **Minimum number of nodes**: The minimum number of nodes that can be scaled down
+        * **Maximum number of nodes**: The maximum number of nodes that can be scaled up
+        * **Scale-down**: Set whether to enable node scale-down
+        * **Resource Usage Threshold**: The default for resource usage threshold, which is the reference point for a scale down
+        * **Threshold Duration (min)**: The resource usage duration at or below the threshold for the nodes to be scaled down
+        * **Scale-up to scale-down latency (min)**: Delay before starting to monitor for scale-down targets after scaling up
+* **Stage Resource Information**: Enter the information for model artifacts to deploy to endpoint.
+    * **Model**: Select the model you want to deploy to endpoint. If have not created model yet, please create model first. 모델 프레임워크별 서빙 참고 사항은 [부록 > 10. 프레임워크별 서빙 참고 사항](./console-guide/#10)을 참고해 주세요.
+    * **API Gateway Resource Path**: Enter API resource path for the model being deployed. For example, if set to `/inference`, you can request inference API at `POST https://{point-domain}/inference`.
+    * **리소스 할당(%)**: 모델에 할당될 리소스를 입력합니다. 인스턴스의 리소스 실 사용량을 고정 비율로 할당합니다.
+    * **Description**: Enter a description for the stage resource.
+    * **파드 오토 스케일러**: 모델의 요청량에 따라 파드 수를 자동으로 조정하는 기능입니다. 오토 스케일러는 모델 단위로 설정됩니다.
+        * **사용/사용 안 함**: 오토 스케일러 사용 여부를 선택합니다. 사용하는 경우 모델 부하에 따라 파드 수가 스케일 인 또는 아웃됩니다.
+        * **증설 단위**: 파드 증설 단위를 입력합니다.
+            * **동시 처리 수(Concurrency)**: 최근 60초의 평균 동시 요청량에 따라 파드 수가 조절됩니다.
+            * **초당 요청 수(RPS)**: 초당 요청 수에 따라 파드 수가 조절됩니다.
+        * **임계치 값**: 파드가 증설될 증설 단위별 임계치 값입니다.
+    * **리소스 정보**: 실제 사용하는 리소스를 확인할 수 있습니다. 입력한 모델의 할당량에 따라 리소스 실 사용량을 각 모델에 할당됩니다. 자세한 내용은 [부록 > 9. 리소스 정보](./console-guide/#9)를 참고해 주세요.
 * **Additional Settings > Tag**: To add a tag, click **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
 > **[Note] Time to create endpoints**
@@ -886,7 +893,7 @@ Set up the environment in which batch inference will be performed by selecting a
 * **Model Information**
     * **Model**: Select the model from which you want to make a batch inference. If you did not create a model, create one first.
     * **Number of Pods**: Enter the number of pods in the model.
-    * **Resource Information**: You can see the actual resources used by the model. The actual usage is split and allocated to each pod based on the number of pods you entered.
+    * **Resource Information**: You can see the actual resources used by the model. The actual usage is split and allocated to each pod based on the number of pods you entered. 자세한 내용은 [부록 > 9. 리소스 정보](./console-guide/#9)를 참고해 주세요.
 * **Input Data**
     * **Data Path**: Enter the path to the data that you want to run batch inference on.
         * Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
@@ -1349,10 +1356,10 @@ AI EasyMaker는 TorchServe로 PyTorch 모델(.mar)을 서빙합니다.
 model-archiver를 사용해서 만든 MAR파일을 사용하는 것을 권장드리며, weight 파일로도 서빙이 가능하지만 weight 파일과 함께 필요한 파일들이 있습니다.
 필요한 파일과 상세한 설명은 아래의 표와 [model-archiver 설명 문서](https://github.com/pytorch/serve/blob/master/model-archiver/README.md)를 확인해주세요.
 
-| 파일 이름                    | 필수 여부 | 설명                                                              | 비고 |
-| ---------------------------- | --------- | ----------------------------------------------------------------- | ---- |
-| model.py                     | 필수      | model-file 파라미터로 전달되는 모델 구조 파일입니다.              |      |
-| handler.py                   | 필수      | 추론 로직을 처리하기 위한 handler 파라미터로 전달되는 파일입니다. |      |
-| weight 파일(.pt, .pth, .bin) | 필수      |                                                                   |      |
-| requirements.txt             | 선택      |                                                                   |      |
-| extra/                       | 선택      | 디렉토리에 있는 파일은 extra-files 파라미터로 전달됩니다.         |      |
+| 파일 이름                    | 필수 여부 | 설명                                                              |
+| ---------------------------- | --------- | ----------------------------------------------------------------- |
+| model.py                     | 필수      | model-file 파라미터로 전달되는 모델 구조 파일입니다.              |
+| handler.py                   | 필수      | 추론 로직을 처리하기 위한 handler 파라미터로 전달되는 파일입니다. |
+| weight 파일(.pt, .pth, .bin) | 필수      |                                                                   |
+| requirements.txt             | 선택      |                                                                   |
+| extra/                       | 선택      | 디렉토리에 있는 파일은 extra-files 파라미터로 전달됩니다.         |
