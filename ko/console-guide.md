@@ -1330,3 +1330,32 @@ exit code : -9 (pid: {pid})
 ```
 
 - torchrun에 관한 더 자세한 내용은 [Pytorch 공식 가이드 문서](https://pytorch.org/docs/stable/elastic/run.html)를 참고해 주세요.
+
+### 9. 리소스 정보
+
+배치 추론과 엔드포인트는 선택한 인스턴스 타입에서 AI EasyMaker의 기본 사용량을 제외한 나머지가 할당됩니다.
+배치 추론은 실 사용량을 파드 수로 나누어 각 파드에 할당되고, 엔드포인트는 설정 값에 따라 모델별로 리소스가 할당됩니다.
+할당된 리소스가 추론에 필요한 최소 사용량보다 적을 경우 생성 실패할 수 있습니다.
+CPU와 메모리 실 사용량에 맞게 인스턴스 타입, 인스턴스 수 등 입력값을 적절히 조절해야합니다.
+
+### 10. 프레임워크별 서빙 참고 사항
+
+#### TensorFlow 프레임워크
+
+AI EasyMaker에서 제공하는 TensorFlow 모델 서빙은 TensorFlow에서 권장하는 SavedModel(.pb)을 사용하고 있습니다.
+체크 포인트를 사용하기 위해서는 SavedModel로 저장된 체크포인트 variables 디렉토리를 모델 디렉토리에 같이 저장하면 모델 서빙에 사용됩니다.
+참고 : [https://www.tensorflow.org/guide/saved_model](https://www.tensorflow.org/guide/saved_model)
+
+#### PyTorch 프레임워크
+
+AI EasyMaker는 TorchServe로 PyTorch 모델(.mar)을 서빙합니다.
+model-archiver를 사용해서 만든 MAR파일을 사용하는 것을 권장드리며, weight 파일로도 서빙이 가능하지만 weight 파일과 함께 필요한 파일들이 있습니다.
+필요한 파일과 상세한 설명은 아래의 표와 [model-archiver 설명 문서](https://github.com/pytorch/serve/blob/master/model-archiver/README.md)를 확인해주세요.
+
+| 파일 이름                    | 필수 여부 | 설명                                                              | 비고 |
+| ---------------------------- | --------- | ----------------------------------------------------------------- | ---- |
+| model.py                     | 필수      | model-file 파라미터로 전달되는 모델 구조 파일입니다.              |      |
+| handler.py                   | 필수      | 추론 로직을 처리하기 위한 handler 파라미터로 전달되는 파일입니다. |      |
+| weight 파일(.pt, .pth, .bin) | 필수      |                                                                   |      |
+| requirements.txt             | 선택      |                                                                   |      |
+| extra/                       | 선택      | 디렉토리에 있는 파일은 extra-files 파라미터로 전달됩니다.         |      |

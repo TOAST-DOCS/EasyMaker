@@ -6,15 +6,5 @@
         "editor.codeActionsOnSave": {
             "source.fixAll.markdownlint": "always"
         }
-    },
-    "markdownlint.config": {
-        "default": true,
-        "MD007": {
-            "indent": 4
-        },
-        "MD024": false,
-        "MD028": false,
-        "MD033": false,
-        "MD041": false
     }
 }
