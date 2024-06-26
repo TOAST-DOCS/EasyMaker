@@ -8,11 +8,12 @@ python -m pip install easymaker
 
 * AI EasyMaker is installed in the notebook by default.
 
-
 ### Initialize AI EasyMaker SDK
+
 You can find AppKey and Secret key in the **URL & Appkey** menu at the right top on the console.
 Enter the AppKey, SecretKey, and region information of enabled AI EasyMaker.
 Intialization code is required to use the AI EasyMaker SDK.
+
 ```python
 import easymaker
 
@@ -24,6 +25,7 @@ easymaker.init(
 ```
 
 ### Create Experiment
+
 Before creating a training, you must create an experiment to sort trainings.
 
 [Parameter]
@@ -277,6 +279,7 @@ easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
 ```
 
 ### Create Model
+
 Request to create a model with the training ID.
 The model is used when creating endpoints.
 
@@ -291,7 +294,6 @@ The model is used when creating endpoints.
 | tag_list                 | Array  | Optional                                 | None  | Max 10  | Tag information                               |
 | tag_list[0].tagKey       | String | Optional                                 | None  | Up to 64 characters  | Tag key                                |
 | tag_list[0].tagValue     | String | Optional                                 | None  | Up to 255 characters | Tag value                                |
-
 
 ```python
 model_id = easymaker.Model().create(
@@ -314,7 +316,6 @@ Even if there is no training ID, you can create a model by entering the path inf
 | tag_list             | Array  | Optional    | None  | Max 10                                  | Tag information                                               |
 | tag_list[0].tagKey   | String | Optional    | None  | Up to 64 characters                                  | Tag key                                                |
 | tag_list[0].tagValue | String | Optional    | None  | Up to 255 characters                                 | Tag value                                                |
-
 
 ```python
 model_id = easymaker.Model().create_by_model_uri(
@@ -408,6 +409,7 @@ You can add a new stage to existing endpoints.
 | tag_list[0].tagValue                  | String  | Optional    | None    | Up to 255 characters                    | Tag value                                                               |
 | use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in the Log & Crash Search service                                           |
 | wait                                  | Boolean | Optional    | True  | True, False                | True: Return the stage ID after creating stage, False: Return the stage ID immediately after requesting stage |
+
 ```python
 stage_id = endpoint.create_stage(
     stage_name='stage01', # Within 30 lowercase letters/numbers
@@ -553,6 +555,7 @@ easymaker.BatchInference().delete(batch_inference_id)
 ```
 
 ### NHN Cloud - Log & Crash Search Log Sending Feature
+
 ```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product
@@ -563,7 +566,9 @@ easymaker_logger.send(log_message='log meassage',
 ```
 
 ### NHN Cloud - Object Storage File Sending Feature
+
 Provide a feature to upload and download files with Object Storage.
+
 ```python
 easymaker.upload(
     easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
@@ -581,6 +586,7 @@ easymaker.download(
 ```
 
 ## CLI Command
+
 If you know the app key, secret key, and region information, you can check various information through Python CLI without accessing the console.
 
 | Feature                          | Command                                                                                        |

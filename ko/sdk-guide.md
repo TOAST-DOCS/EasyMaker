@@ -8,11 +8,12 @@ python -m pip install easymaker
 
 * AI EasyMaker 노트북에는 기본적으로 설치되어 있습니다.
 
-
 ### AI EasyMaker SDK 초기화
+
 앱키(Appkey)와 비밀 키(Secret key)는 콘솔 오른쪽 상단의 **URL & Appkey** 메뉴에서 확인할 수 있습니다.
 활성화한 AI EasyMaker 상품의 앱키, 비밀 키, 리전 정보를 입력합니다.
 AI EasyMaker SDK를 사용하기 위해서는 초기화 코드가 필요합니다.
+
 ```python
 import easymaker
 
@@ -24,6 +25,7 @@ easymaker.init(
 ```
 
 ### 실험 생성
+
 학습을 생성하기 전에 학습을 분류할 수 있는 실험 생성이 필요합니다.
 
 [Parameter]
@@ -277,6 +279,7 @@ easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
 ```
 
 ### 모델 생성
+
 학습 ID 값으로 모델 생성을 요청할 수 있습니다.
 모델은 엔드포인트 생성 시 사용됩니다.
 
@@ -291,7 +294,6 @@ easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
 | tag_list                 | Array  | 선택                                 | 없음  | 최대 10개  | 태그 정보                               |
 | tag_list[0].tagKey       | String | 선택                                 | 없음  | 최대 64자  | 태그 키                                |
 | tag_list[0].tagValue     | String | 선택                                 | 없음  | 최대 255자 | 태그 값                                |
-
 
 ```python
 model_id = easymaker.Model().create(
@@ -314,7 +316,6 @@ model_id = easymaker.Model().create(
 | tag_list             | Array  | 선택    | 없음  | 최대 10개                                  | 태그 정보                                               |
 | tag_list[0].tagKey   | String | 선택    | 없음  | 최대 64자                                  | 태그 키                                                |
 | tag_list[0].tagValue | String | 선택    | 없음  | 최대 255자                                 | 태그 값                                                |
-
 
 ```python
 model_id = easymaker.Model().create_by_model_uri(
@@ -408,6 +409,7 @@ endpoint = easymaker.Endpoint()
 | tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                               |
 | use_log                               | Boolean | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                         |
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 스테이지 생성이 완료된 이후 스테이지 ID를 반환, False: 스테이지 요청 후 즉시 스테이지 ID를 반환 |
+
 ```python
 stage_id = endpoint.create_stage(
     stage_name='stage01',  # 30자 이내 소문자/숫자
@@ -553,6 +555,7 @@ easymaker.BatchInference().delete(batch_inference_id)
 ```
 
 ### NHN Cloud - Log & Crash Search 로그 전송 기능
+
 ```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product
@@ -563,7 +566,9 @@ easymaker_logger.send(log_message='log meassage',
 ```
 
 ### NHN Cloud - Object Storage 파일 전송 기능
+
 Object Storage 상품으로 파일을 업로드하고 다운로드하는 기능을 제공합니다.
+
 ```python
 easymaker.upload(
     easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
@@ -581,6 +586,7 @@ easymaker.download(
 ```
 
 ## CLI Command
+
 앱키, 비밀 키, 리전 정보를 알고 있다면, 콘솔에 접근하지 않고도 파이썬 CLI를 통해 여러 정보를 확인할 수 있습니다.
 
 | 기능                          | 명령어                                                                                        |
