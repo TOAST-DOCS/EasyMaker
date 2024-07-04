@@ -57,10 +57,10 @@ Create a Jupyter notebook.
 * **Additional Settings**
     * Tags: Allows to specify tags in Key-Value format. You can enter maximum 10 tags.
 
-> **[Caution] When using NHN Cloud NAS**
+> [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
 
-> **[Note] Time to create notebooks**
+> [Note] Time to create notebooks:
 > Notebooks can take several minutes to create.
 > Creation of the initial resources (notebooks, training, experiments, endpoint) takes additional few minutes to configure the service environment.
 
@@ -146,11 +146,11 @@ Stop the running notebook or start the stopped notebook.
 2. Click **Start Notebook** or **Stop Notebook**.
 3. Requested action cannot be cancelled. To proceed, please click **Confirm**
 
-> **[Caution] How to retain your virtual environment and external libraries when starting the notebook after stopping it**
+> [Caution] How to retain your virtual environment and external libraries when starting the notebook after stopping it:
 > When stopping and starting the notebook, the virtual environment and external libraries that the user create can be initialized.
 > In order to retain, configure your virtual environment by referring to [User Virtual Execution Environment Configuration](./console-guide/#configure-user-virtual-execution-environment).
 
-> **[Note] Time to start and stop notebooks**
+> [Note] Time to start and stop notebooks:
 > It may take several minutes to start and stop notebooks.
 
 ### Change Notebook Instance Flavor
@@ -163,7 +163,7 @@ Instance flavor you want to change can only be changed to the same core type ins
 3. Click **Change Instance Flavor**.
 4. Select the instance flavor you want to change and click Confirm.
 
-> **[Note] Time to change instance flavors**
+> [Note] Time to change instance flavors:
 > It may take several minutes to change the instance flavor.
 
 ### Reboot Notebook
@@ -175,7 +175,7 @@ you can reboot the notebook.
 2. Click **Reboot Notebook**
 3. Requested deletion task cannot be cancelled. To proceed, please click **Confirm**
 
-> **[Caution] How to retain your virtual environment and external libraries when rebooting the notebook**
+> [Caution] How to retain your virtual environment and external libraries when rebooting the notebook:
 > When rebooting the notebook, the virtual environment and external libraries that the user create can be initialized.
 > In order to retain, configure your virtual environment by referring to [User Virtual Execution Environment Configuration](./console-guide/#_8).
 
@@ -187,7 +187,7 @@ Delete the created notebook.
 2. Click **Delete Notebook**
 3. Requested deletion task cannot be cancelled. To proceed, please click **Confirm**
 
-> **[Note] Storage**
+> [Note] Storage:
 > When deleting a notebook, boot storage and data storage are to be deleted.
 > Connected NHN Cloud NAS is not deleted and must be deleted individually from **NHN Cloud NAS**.
 
@@ -200,7 +200,7 @@ Experiments are managed by grouping related trainings into experiments.
 1. Click **Create Experiment**
 2. Enter an experiment name and description and click **OK**.
 
-> **[Note] Experiment creation time**
+> [Note] Experiment creation time:
 Creating experiments can take several minutes.
 When creating the initial resources (laptops, trainings, labs, endpoints), it takes an extra few minutes to configure the service environment.
 
@@ -230,7 +230,7 @@ Delete an experiment.
 2. Click **Delete Experiment**.
 3. Requested deletion cannot be undone. Click **OK** to proceed.
 
-> **[Note] Unable to delete experiment if associated training exists.**
+> [Note] Unable to delete experiment if associated training exists:
 > Experiment cannot be deleted if there is a training associated with the experiment.
 > Please delete the associated training first, then delete the experiment.
 > For related training, you can check the list by clicking the **[Training]** tab in the detail screen at the bottom that is displayed when you click the experiment you want to delete.
@@ -298,10 +298,10 @@ Set the training environment by selecting the instance and OS image to be traine
         * For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
     * **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
-> **[Caution] When using NHN Cloud NAS,**
+> [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
 
-> **[Caution] training failure when deleting training input data**
+> [Caution] training failure when deleting training input data:
 > Training may fail if the input data is deleted before training is completed.
 
 ### Training List
@@ -358,7 +358,7 @@ Deletes a training.
 2. Click **Delete Training**. Training in progress can be deleted after stopping.
 3. Requested deletion cannot be undone. Click **OK** to proceed.
 
-> **[Note] Training cannot be deleted if a related model exists.**
+> [Note] Training cannot be deleted if a related model exists:
 Training cannot be deleted if a model created by the training to be deleted exists. Please delete the model first and then the training.
 
 ## Hyperparameter Tuning
@@ -451,10 +451,10 @@ How to configure a hyperparameter tuning job.
         * For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
     * **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
-> **[Caution] When using NHN Cloud NAS**
+> [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
 
-> **[Caution] Training failure when deleting training input data**
+> [Caution] Training failure when deleting training input data:
 > Training may fail if the input data is deleted before training is completed.
 
 ### Hyperparameter Tuning List
@@ -542,7 +542,7 @@ Delete a hyperparameter tuning.
 2. Click **Delete Hyperparameter Tuning**. Hyperparameter tuning in progress can be stopped and then deleted.
 3. Requested deletion cannot be undone. Click **OK** to proceed.
 
-> **[Note] Hyperparameter tuning cannot be deleted if the associated model exists.**
+> [Note] Hyperparameter tuning cannot be deleted if the associated model exists:
 > Hyperparameter tuning cannot be deleted if the model created by the hyperparameter tuning you want to delete exists. Please delete the model first, then the hyperparameter tuning.
 
 ## Training Template
@@ -600,10 +600,10 @@ Can manage models of AI EasyMaker's training outcomes or external models as arti
 * **Additional Settings**: Enter the additional information of model.
     * **Tag**: To add tag, click the **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
-> **[Caution] When using NHN Cloud NAS**
+> [Caution] When using NHN Cloud NAS:
 Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
 
-> **[Caution] Retain model artifacts in storage**
+> [Caution] Retain model artifacts in storage:
 > If not retained the model artifacts stored in storage, the creation of endpoints for that model fails.
 
 ### Model List
@@ -634,7 +634,7 @@ Delete a model.
 2. Click **Delete Model**.
 3. Requested deletion task cannot be cancelled. To proceed, please click **Confirm**
 
-> **[Note] Unable to delete model if associated endpoint exists**
+> [Note] Unable to delete model if associated endpoint exists:
 > You cannot delete model if endpoint created by model want to delete is existed.
 > To delete, delete the endpoint created by the model first and then delete the model.
 
@@ -680,11 +680,11 @@ Create and manage endpoints that can serve the model.
     * **리소스 정보**: 실제 사용하는 리소스를 확인할 수 있습니다. 입력한 모델의 할당량에 따라 리소스 실 사용량을 각 모델에 할당합니다. 자세한 내용은 [부록 > 9. 리소스 정보](./console-guide/#9)를 참고하세요.
 * **Additional Settings > Tag**: To add a tag, click **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
-> **[Note] Time to create endpoints**
+> [Note] Time to create endpoints:
 > Endpoint creation can take several minutes.
 > Creation of the initial resources (notebooks, training, experiments, endpoints) takes additional few minutes to configure the service environment.
 
-> **[Note] Restrictions on API Gateway service resource provision when creating endpoints**
+> [Note] Restrictions on API Gateway service resource provision when creating endpoints:
 > When you create a new endpoint, create a new API Gateway service.
 > Adding new stage on existing endpoint creates new stage in API Gateway service.
 > If you exceed the resource provision policy in [API Gateway Service Resource Provision Policy](https://docs.nhncloud.com/en/TOAST/en/resource-policy/#resource-provision-policy-for-api-gateway-service), you might not be able to create endpoints in AI EasyMaker. In this case, adjust API Gateway service resource quota.
@@ -755,7 +755,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 * **API Statistics**: You can check the API statistics information of the endpoint stage in the **API Statistics** tab of the details screen that appears when you select the endpoint stage.
     * The **API Statistics** tab is disabled while the endpoint stage is being created.
 
-> **[Caution] Precautions when changing settings for API Gateway created by AI EasyMaker**
+> [Caution] Precautions when changing settings for API Gateway created by AI EasyMaker:
 > When creating an endpoint or an endpoint stage, AI EasyMaker creates API Gateway services and stages for the endpoint.
 > Please note the following precautions when changing API Gateway services and stages created by AI EasyMaker directly from API Gateway service console.
 >
@@ -766,7 +766,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 > Other than above precautions, other settings are available with features provided by API Gateway as necessary.
 > For more information about how to use API Gateway, refer to [API Gateway Console Guide](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/console-guide/).
 
-> **[Note] Recovery method when the stage's API Gateway is in 'Deployment Failed' status**
+> [Note] Recovery method when the stage's API Gateway is in 'Deployment Failed' status:
 > If stage settings of AI EasyMaker endpoint are not deployed to the API Gateway stage due to a temporary issue, deployment status is displayed as failed.
 > In this case, you can deploy API Gateway stage manually by clicking Select Stage from the Stage list > View API Gateway Settings > 'Deploy Stage' in the bottom detail screen.
 > If this guide couldn’t recover the deployment status, please contact the Customer Center.
@@ -859,7 +859,7 @@ To change the model of an endpoint without service stop, AI EasyMaker recommends
 3. Click **Delete Stage**.
 4. Requested deletion task cannot be cancelled. If want to proceed, please click **Confirm**
 
-> **[Caution] Delete stage of API Gateway service when deleting the endpoint stage**
+> [Caution] Delete stage of API Gateway service when deleting the endpoint stage:
 > Deleting an endpoint stage in AI EasyMaker also deletes the stage in API Gateway service from which the endpoint's stage is deployed.
 > If there is an API running on the API Gateway stage to be deleted, please be noted that API calls cannot be made.
 
@@ -872,7 +872,7 @@ Delete an endpoint.
 3. Click **Delete Endpoint**.
 4. Requested deletion task cannot be cancelled. If want to proceed, please click **Confirm**
 
-> **[Caution] Delete API Gateway service when deleting the endpoint stage**
+> [Caution] Delete API Gateway service when deleting the endpoint stage:
 > Deleting an endpoint stage in AI EasyMaker also deletes API Gateway service from which the endpoint's stage was deployed.
 > If there is API running on the API Gateway service to be deleted, please be noted that API calls cannot be made.
 
@@ -918,17 +918,17 @@ Set up the environment in which batch inference will be performed by selecting a
         * For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
     * **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
-> **[Caution] When using NHN Cloud NAS**
+> [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
 
-> **[Caution] Batch inference fails when batch inference input data is deleted**
+> [Caution] Batch inference fails when batch inference input data is deleted:
 > Batch inference can fail if you delete input data before batch inference is complete.
 
-> **[Caution] When setting input data detailed options**
+> [Caution] When setting input data detailed options:
 > If the Glob pattern is not entered properly, batch inference may not work properly because the input data cannot be found.
 > When used together with the **Include Glob pattern**, the **Exclude Glob pattern** takes precedence.
 
-> **[Caution] When setting batch options**
+> [Caution] When setting batch options:
 > You must set the **batch size** and **inference timeout** appropriately based on the performance of the model you are batch inferring.
 > If the settings you enter are incorrect, batch inference might not perform well enough.
 
@@ -998,7 +998,7 @@ See the table below for the base images in AI EasyMaker.
 | Ubuntu 22.04 CPU TensorFlow Training | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-cpu-py310-ubuntu2204 |
 | Ubuntu 22.04 GPU TensorFlow Training | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
 
-> **[Note] Limitations on using private images**
+> [Note] Limitations on using private images:
 
 * Only private images derived from base images provided by AI EasyMaker can be used.
 * Only NHN Container Registry (NCR) can be integrated as a container registry service where private images are stored. (As of December 2023)
