@@ -1110,7 +1110,7 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
 
 대부분의 파이프라인은 데이터셋, 모델, 평가 메트릭 등과 같은 하나 이상의 ML 아티팩트를 생성하는 것을 목표로 합니다.
 
-> [참고] Kubeflow Pipelines (KFP) 공식 문서
+> [참고] Kubeflow Pipelines(KFP) 공식 문서
 > - [KFP 사용자 가이드](https://www.kubeflow.org/docs/components/pipelines/user-guides/)
 > - [KFP SDK 레퍼런스](https://kubeflow-pipelines.readthedocs.io/en/stable/)
 
