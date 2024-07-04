@@ -1206,7 +1206,7 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
     | STOP IN PROGRESS              | 파이프라인 실행이 중지 중인 상태입니다.                                                                |
     | STOPPED                       | 파이프라인 실행이 사용자의 요청으로 중지된 상태입니다.                                                        |
     | FAIL PIPELINE RUN IN PROGRESS | 파이프라인 실행에 사용된 리소스를 정리 중인 상태입니다.                                                       |
-    | FAIL PIPELINE RUN             | 파이프라인 실행에 실패한 상태입니다. 자세한 실패 정보는 로그 관리가 활성화된 경우, Log & Crash Search 로그를 통해 확인할 수 있습니다. |
+    | FAIL PIPELINE RUN             | 파이프라인 실행이 실패한 상태입니다. 자세한 실패 정보는 로그 관리가 활성화된 경우, Log & Crash Search 로그를 통해 확인할 수 있습니다. |
 
 - **작업**
     - **중지**: 진행 중인 파이프라인 실행을 중지할 수 있습니다.
