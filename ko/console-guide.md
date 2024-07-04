@@ -1356,7 +1356,7 @@ AI EasyMaker에서 제공하는 TensorFlow 모델 서빙은 TensorFlow에서 권
 #### PyTorch 프레임워크
 
 AI EasyMaker는 TorchServe로 PyTorch 모델(.mar)을 서빙합니다.
-model-archiver를 사용해서 만든 MAR 파일을 사용하는 것을 권장드리며, weight 파일로도 서빙이 가능하지만 weight 파일과 함께 필요한 파일들이 있습니다.
+model-archiver를 사용해서 만든 MAR 파일을 사용하는 것을 권장하며, weight 파일로도 서빙이 가능하지만 weight 파일과 함께 필요한 파일들이 있습니다.
 필요한 파일과 상세한 설명은 아래의 표와 [model-archiver 설명 문서](https://github.com/pytorch/serve/blob/master/model-archiver/README.md)를 확인하세요.
 
 | 파일 이름                    | 필수 여부 | 설명                                                              |
