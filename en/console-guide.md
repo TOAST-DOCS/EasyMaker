@@ -667,9 +667,9 @@ Create and manage endpoints that can serve the model.
         * **Threshold Duration (min)**: The resource usage duration at or below the threshold for the nodes to be scaled down
         * **Scale-up to scale-down latency (min)**: Delay before starting to monitor for scale-down targets after scaling up
 * **Stage Resource Information**: Enter the information for model artifacts to deploy to endpoint.
-    * **Model**: Select the model you want to deploy to endpoint. If have not created model yet, please create model first. 모델 프레임워크별 서빙 참고 사항은 [부록 > 10. 프레임워크별 서빙 참고 사항](./console-guide/#10)을 참고해 주세요.
+    * **Model**: Select the model you want to deploy to endpoint. If have not created model yet, please create model first. 모델 프레임워크별 서빙 참고 사항은 [부록 > 10. 프레임워크별 서빙 참고 사항](./console-guide/#10)을 참고하세요.
     * **API Gateway Resource Path**: Enter API resource path for the model being deployed. For example, if set to `/inference`, you can request inference API at `POST https://{point-domain}/inference`.
-    * **리소스 할당(%)**: 모델에 할당될 리소스를 입력합니다. 인스턴스의 리소스 실 사용량을 고정 비율로 할당합니다.
+    * **리소스 할당(%)**: 모델에 할당할 리소스를 입력합니다. 인스턴스의 리소스 실 사용량을 고정 비율로 할당합니다.
     * **Description**: Enter a description for the stage resource.
     * **파드 오토 스케일러**: 모델의 요청량에 따라 파드 수를 자동으로 조정하는 기능입니다. 오토 스케일러는 모델 단위로 설정됩니다.
         * **사용/사용 안 함**: 오토 스케일러 사용 여부를 선택합니다. 사용하는 경우 모델 부하에 따라 파드 수가 스케일 인 또는 아웃됩니다.
@@ -677,7 +677,7 @@ Create and manage endpoints that can serve the model.
             * **동시 처리 수(Concurrency)**: 최근 60초의 평균 동시 요청량에 따라 파드 수가 조절됩니다.
             * **초당 요청 수(RPS)**: 초당 요청 수에 따라 파드 수가 조절됩니다.
         * **임계치 값**: 파드가 증설될 증설 단위별 임계치 값입니다.
-    * **리소스 정보**: 실제 사용하는 리소스를 확인할 수 있습니다. 입력한 모델의 할당량에 따라 리소스 실 사용량을 각 모델에 할당됩니다. 자세한 내용은 [부록 > 9. 리소스 정보](./console-guide/#9)를 참고해 주세요.
+    * **리소스 정보**: 실제 사용하는 리소스를 확인할 수 있습니다. 입력한 모델의 할당량에 따라 리소스 실 사용량을 각 모델에 할당합니다. 자세한 내용은 [부록 > 9. 리소스 정보](./console-guide/#9)를 참고하세요.
 * **Additional Settings > Tag**: To add a tag, click **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
 > **[Note] Time to create endpoints**
@@ -893,7 +893,7 @@ Set up the environment in which batch inference will be performed by selecting a
 * **Model Information**
     * **Model**: Select the model from which you want to make a batch inference. If you did not create a model, create one first.
     * **Number of Pods**: Enter the number of pods in the model.
-    * **Resource Information**: You can see the actual resources used by the model. The actual usage is split and allocated to each pod based on the number of pods you entered. 자세한 내용은 [부록 > 9. 리소스 정보](./console-guide/#9)를 참고해 주세요.
+    * **Resource Information**: You can see the actual resources used by the model. The actual usage is split and allocated to each pod based on the number of pods you entered. 자세한 내용은 [부록 > 9. 리소스 정보](./console-guide/#9)를 참고하세요.
 * **Input Data**
     * **Data Path**: Enter the path to the data that you want to run batch inference on.
         * Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
@@ -1338,28 +1338,28 @@ exit code : -9 (pid: {pid})
 ### 9. 리소스 정보
 
 배치 추론과 엔드포인트는 선택한 인스턴스 타입에서 AI EasyMaker의 기본 사용량을 제외한 나머지가 할당됩니다.
-배치 추론은 실 사용량을 파드 수로 나누어 각 파드에 할당되고, 엔드포인트는 설정 값에 따라 모델별로 리소스가 할당됩니다.
+배치 추론은 실 사용량을 파드 수로 나누어 각 파드에 할당되고, 엔드포인트는 설정값에 따라 모델별로 리소스가 할당됩니다.
 할당된 리소스가 추론에 필요한 최소 사용량보다 적을 경우 생성 실패할 수 있습니다.
-CPU와 메모리 실 사용량에 맞게 인스턴스 타입, 인스턴스 수 등 입력값을 적절히 조절해야합니다.
+CPU와 메모리 실 사용량에 맞게 인스턴스 타입, 인스턴스 수 등 입력값을 적절히 조절해야 합니다.
 
 ### 10. 프레임워크별 서빙 참고 사항
 
 #### TensorFlow 프레임워크
 
 AI EasyMaker에서 제공하는 TensorFlow 모델 서빙은 TensorFlow에서 권장하는 SavedModel(.pb)을 사용하고 있습니다.
-체크 포인트를 사용하기 위해서는 SavedModel로 저장된 체크포인트 variables 디렉토리를 모델 디렉토리에 같이 저장하면 모델 서빙에 사용됩니다.
-참고 : [https://www.tensorflow.org/guide/saved_model](https://www.tensorflow.org/guide/saved_model)
+체크 포인트를 사용하기 위해서는 SavedModel로 저장된 체크포인트 variables 디렉터리를 모델 디렉터리에 같이 저장하면 모델 서빙에 사용됩니다.
+참고: [https://www.tensorflow.org/guide/saved_model](https://www.tensorflow.org/guide/saved_model)
 
 #### PyTorch 프레임워크
 
 AI EasyMaker는 TorchServe로 PyTorch 모델(.mar)을 서빙합니다.
-model-archiver를 사용해서 만든 MAR파일을 사용하는 것을 권장드리며, weight 파일로도 서빙이 가능하지만 weight 파일과 함께 필요한 파일들이 있습니다.
-필요한 파일과 상세한 설명은 아래의 표와 [model-archiver 설명 문서](https://github.com/pytorch/serve/blob/master/model-archiver/README.md)를 확인해주세요.
+model-archiver를 사용해서 만든 MAR 파일을 사용하는 것을 권장하며, weight 파일로도 서빙이 가능하지만 weight 파일과 함께 필요한 파일들이 있습니다.
+필요한 파일과 상세한 설명은 아래의 표와 [model-archiver 설명 문서](https://github.com/pytorch/serve/blob/master/model-archiver/README.md)를 확인하세요.
 
 | 파일 이름                    | 필수 여부 | 설명                                                              |
 | ---------------------------- | --------- | ----------------------------------------------------------------- |
 | model.py                     | 필수      | model-file 파라미터로 전달되는 모델 구조 파일입니다.              |
 | handler.py                   | 필수      | 추론 로직을 처리하기 위한 handler 파라미터로 전달되는 파일입니다. |
-| weight 파일(.pt, .pth, .bin) | 필수      |                                                                   |
-| requirements.txt             | 선택      |                                                                   |
-| extra/                       | 선택      | 디렉토리에 있는 파일은 extra-files 파라미터로 전달됩니다.         |
+| weight 파일(.pt, .pth, .bin) | 필수      | 모델의 가중치와 구조를 저장한 파일입니다.                         |
+| requirements.txt             | 선택      | 서빙할 때 필요한 Python 패키지를 설치하기 위한 파일입니다.        |
+| extra/                       | 선택      | 디렉터리에 있는 파일은 extra-files 파라미터로 전달됩니다.         |
