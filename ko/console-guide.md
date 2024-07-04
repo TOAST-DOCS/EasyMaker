@@ -1182,7 +1182,7 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
         - 자세한 내용은 [부록 > 2. NHN Cloud Log & Crash Search 서비스 이용 안내 및 로그 확인](./console-guide/#2-nhn-cloud-log-crash-search)을 참고하세요.
     - **태그**: Key-Value 형식의 태그를 지정할 수 있습니다. 태그는 최대 10개까지 입력할 수 있습니다.
 
-> [주의] NHN Cloud NAS를 사용하는 경우
+> [주의] NHN Cloud NAS를 사용하는 경우:
 > AI EasyMaker와 동일한 프로젝트에서 생성된 NHN Cloud NAS만 사용 가능합니다.
 
 > [참고] 파이프라인 실행 생성 소요 시간:
