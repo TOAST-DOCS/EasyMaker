@@ -78,9 +78,9 @@ easymaker.Experiment().delete(experiment_id)
 | check_point_input_uri                      | String  | Optional                        | None    | Up to 255 characters     | Input checkpoint file path (NHN Cloud Object Storage or NHN Cloud NAS)                 |
 | check_point_upload_uri                     | String  | Optional                        | None    | Up to 255 characters     | The path where the checkpoint file will be uploaded (NHN Cloud Object Storage or NHN Cloud NAS)   |
 | timeout_hours                              | Integer | Optional                        | 720   | 1~720       | Max training time (unit: hour)                                                |
-| hyperparameter_list                        | Array   | Optional                        | None    | Max 100     | Information of hyperparameters (consists of hyperparameterKey/hyperparameterValue)           |
-| hyperparameter_list[0].hyperparameterKey   | String  | Optional                        | None    | Up to 255 characters     | Hyperparameter key                                                       |
-| hyperparameter_list[0].hyperparameterValue | String  | Optional                        | None    | Up to 1000 characters    | Hyperparameter value                                                       |
+| hyperparameter_list                        | Array   | Optional                        | None    | Max 100     | Information of hyperparameters (consists of parameterKey/parameterValue)           |
+| hyperparameter_list[0].parameterKey   | String  | Optional                        | None    | Up to 255 characters     | Hyperparameter key                                                       |
+| hyperparameter_list[0].parameterValue | String  | Optional                        | None    | Up to 1000 characters    | Hyperparameter value                                                       |
 | dataset_list                               | Array   | Optional                        | None    | Max 10      | Information of dataset to be used for training (consists of datasetName/dataUri)                      |
 | dataset_list[0].datasetName                | String  | Optional                        | None    | Up to 36 characters      | Data name                                                          |
 | dataset_list[0].datasetUri                 | String  | Optional                        | None    | Up to 255 characters     | Data pah                                                          |
@@ -103,12 +103,12 @@ training_id = easymaker.Training().run(
     entry_point='training_start.py',
     hyperparameter_list=[
         {
-            "hyperparameterKey": "epochs",
-            "hyperparameterValue": "10",
+            "parameterKey": "epochs",
+            "parameterValue": "10",
         },
         {
-            "hyperparameterKey": "batch-size",
-            "hyperparameterValue": "30",
+            "parameterKey": "batch-size",
+            "parameterValue": "30",
         }
     ],
     timeout_hours=100,
