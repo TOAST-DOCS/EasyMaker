@@ -78,9 +78,9 @@ easymaker.Experiment().delete(experiment_id)
 | check_point_input_uri                      | String  | 任意                       | なし    | 最大255文字    | 入力チェックポイントファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS)                 |
 | check_point_upload_uri                     | String  | 任意                       | なし    | 最大255文字    | チェックポイントファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)   |
 | timeout_hours                              | Integer | 任意                       | 720   | 1～720       | 最大学習時間(単位:時間)                                                |
-| hyperparameter_list                        | Array   | 任意                       | なし    | 最大100個    | ハイパーパラメータ情報(hyperparameterKey/hyperparameterValueで構成)           |
-| hyperparameter_list[0].hyperparameterKey   | String  | 任意                       | なし    | 最大255文字    | ハイパーパラメータキー                                                       |
-| hyperparameter_list[0].hyperparameterValue | String  | 任意                       | なし    | 最大1000文字   | ハイパーパラメータ値                                                      |
+| hyperparameter_list                        | Array   | 任意                       | なし    | 最大100個    | ハイパーパラメータ情報(parameterKey/parameterValueで構成)           |
+| hyperparameter_list[0].parameterKey   | String  | 任意                       | なし    | 最大255文字    | ハイパーパラメータキー                                                       |
+| hyperparameter_list[0].parameterValue | String  | 任意                       | なし    | 最大1000文字   | ハイパーパラメータ値                                                      |
 | dataset_list                               | Array   | 任意                       | なし    | 最大10個     | 学習に使用されるデータセット情報(datasetName/dataUriで構成)                      |
 | dataset_list[0].datasetName                | String  | 任意                       | なし    | 最大36文字     | データ名                                                         |
 | dataset_list[0].datasetUri                 | String  | 任意                       | なし    | 最大255文字    | データパス                                                         |
@@ -103,12 +103,12 @@ training_id = easymaker.Training().run(
     entry_point='training_start.py',
     hyperparameter_list=[
         {
-            "hyperparameterKey"："epochs",
-            "hyperparameterValue"："10",
+            "parameterKey"："epochs",
+            "parameterValue"："10",
         },
         {
-            "hyperparameterKey"："batch-size",
-            "hyperparameterValue"："30",
+            "parameterKey"："batch-size",
+            "parameterValue"："30",
         }
     ],
     timeout_hours=100,
