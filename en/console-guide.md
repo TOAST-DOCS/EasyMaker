@@ -666,18 +666,18 @@ Create and manage endpoints that can serve the model.
         * **Resource Usage Threshold**: The default for resource usage threshold, which is the reference point for a scale down
         * **Threshold Duration (min)**: The resource usage duration at or below the threshold for the nodes to be scaled down
         * **Scale-up to scale-down latency (min)**: Delay before starting to monitor for scale-down targets after scaling up
-* **Stage Resource Information**: Enter the information for model artifacts to deploy to endpoint.
-    * **Model**: Select the model you want to deploy to endpoint. If have not created model yet, please create model first. 모델 프레임워크별 서빙 참고 사항은 [부록 > 10. 프레임워크별 서빙 참고 사항](./console-guide/#10)을 참고하세요.
-    * **API Gateway Resource Path**: Enter API resource path for the model being deployed. For example, if set to `/inference`, you can request inference API at `POST https://{point-domain}/inference`.
-    * **리소스 할당(%)**: 모델에 할당할 리소스를 입력합니다. 인스턴스의 리소스 실 사용량을 고정 비율로 할당합니다.
-    * **Description**: Enter a description for the stage resource.
-    * **파드 오토 스케일러**: 모델의 요청량에 따라 파드 수를 자동으로 조정하는 기능입니다. 오토 스케일러는 모델 단위로 설정됩니다.
-        * **사용/사용 안 함**: 오토 스케일러 사용 여부를 선택합니다. 사용하는 경우 모델 부하에 따라 파드 수가 스케일 인 또는 아웃됩니다.
-        * **증설 단위**: 파드 증설 단위를 입력합니다.
-            * **동시 처리 수(Concurrency)**: 최근 60초의 평균 동시 요청량에 따라 파드 수가 조절됩니다.
-            * **초당 요청 수(RPS)**: 초당 요청 수에 따라 파드 수가 조절됩니다.
-        * **임계치 값**: 파드가 증설될 증설 단위별 임계치 값입니다.
-    * **리소스 정보**: 실제 사용하는 리소스를 확인할 수 있습니다. 입력한 모델의 할당량에 따라 리소스 실 사용량을 각 모델에 할당합니다. 자세한 내용은 [부록 > 9. 리소스 정보](./console-guide/#9)를 참고하세요.
+* **Stage Information**: Enter the information for model artifacts to deploy to endpoint.
+    - **Model**: Select a model you want to deploy to the endpoint. If you haven't created a model, create one first. For information on model framework-specific serving, please see [Appendix > 10. Serving by Framework](./console-guide/#10).
+    - **API Gateway Resource Path**: Enter the path to the API resource to which the model is deployed. For example, if you set it to `/inference`, you can request the inference API with `POST https://{enpdoint-domain}/inference`.
+    - **Resource Allocation (%)**: Enter the resource you want to allocate to the model. Allocate a fixed percentage of the actual resource usage by instance.
+    - **Description**: Enter a stage resource description.
+    - **Pod Autoscaler**: The feature to automatically adjust the number of pods based on the request volume of your model. The autoscaler is set on a per-model basis.
+        - **Enable/Disable**: Select whether to use the auto scaler. When enabled, the number of Pods scales in or out based on the model load.
+        - **Scaling Unit**: Enter the Pod Scaling Unit.
+            - **Concurrent Processings**: The number of Pods is scaled based on the average concurrent requests over the last 60 seconds.
+            - **Requests Per Second (RPS)**: The number of pods scales with the number of requests per second.
+        - **Threshold (%)**: The threshold value per increment at which the Pod will be scaled up.
+    - **Resource Information:**: You can see the resources you're actually using. Allocates resource room usage to each model based on the quota for the model you entered. For more information, please see [Appendix > 9. Resource Information](./console-guide/#9).
 * **Additional Settings > Tag**: To add a tag, click **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
 > [Note] Time to create endpoints:
@@ -893,7 +893,7 @@ Set up the environment in which batch inference will be performed by selecting a
 * **Model Information**
     * **Model**: Select the model from which you want to make a batch inference. If you did not create a model, create one first.
     * **Number of Pods**: Enter the number of pods in the model.
-    * **Resource Information**: You can see the actual resources used by the model. The actual usage is split and allocated to each pod based on the number of pods you entered. 자세한 내용은 [부록 > 9. 리소스 정보](./console-guide/#9)를 참고하세요.
+    * **Resource Information**: You can see the actual resources used by the model. The actual usage is split and allocated to each pod based on the number of pods you entered. For more information, see [Appendix > 9. Resource Information](./console-guide/#9).
 * **Input Data**
     * **Data Path**: Enter the path to the data that you want to run batch inference on.
         * Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
@@ -1097,6 +1097,225 @@ Select the registry account you want to delete from the list, and click **Delete
 
 > [Note]
 > You cannot delete a registry account associated with an image. To delete, delete the associated image first and then delete the registry account.
+
+## Pipeline
+
+ML Pipeline is a feature for managing and executing portable and scalable machine learning workflows.
+You can use the Kubeflow Pipelines (KFP) Python SDK to write components and pipelines, compile pipelines into intermediate representation YAML, and run them in AI EasyMaker.
+
+> [Note] What is a pipeline?
+> A pipeline is a definition of a workflow that combines one or more components to form a directed acyclic graph (DAG).
+> Each component runs a single container during execution, which can generate ML artifacts.
+> [Note] What are ML artifacts?
+> Components can take inputs and produce outputs. There are two types of I/O types. Parameters and artifacts:
+> 1. Parameters are useful for passing small amounts of data between components.
+> 2. Artifact types are for ML artifact outputs, such as datasets, models, metrics, etc. Provides a convenient mechanism for saving to object storage.
+Most pipelines aim to produce one or more ML artifacts, such as datasets, models, evaluation metrics, etc.
+
+> [Reference] Kubeflow Pipelines (KFP) official documentation
+> - [KFP User Guide](https://www.kubeflow.org/docs/components/pipelines/user-guides/)
+> - [KFP SDK Reference](https://kubeflow-pipelines.readthedocs.io/en/stable/)
+
+### Upload a Pipeline
+
+Upload a pipeline.
+
+- **Name**: Enter a pipeline name.
+- **Description**: Enter description.
+- **File registration**: Select the YAML file to upload.
+- **Tag**: You can specify tags in key-value format. You can enter maximum 10 tags.
+
+> [Note] Pipeline upload time:
+> Uploading a pipeline can take a few minutes.
+> The initial resource creation requires an additional few minutes of time to configure the service environment.
+
+### Pipeline List
+
+A list of pipelines is displayed. Select a pipeline in the list to view details and make changes to the information.
+
+- **Status**: The status of the pipeline is displayed. See the table below for key statuses.
+
+    | Status                | Description                             |
+    |--------------------|--------------------------------|
+    | CREATE REQUESTED   | Pipeline creation has been requested.           |
+    | CREATE IN PROGRESS | Pipeline creation is in progress.         |
+    | CREATE FAILED      | Pipeline creation failed. Try again. |
+    | ACTIVE             | The pipeline was created successfully.        |
+
+### Pipeline Graph
+
+A pipeline graph is displayed. Select a node in the graph to see more information.
+
+A graph is a pictorial representation of a pipeline. Each node in the graph represents a step in the pipeline, with arrows indicating the parent/child relationship between the pipeline components represented by each step.
+
+### Delete a Pipeline
+
+Delete the pipeline.
+
+1. Select the pipeline you want to delete.
+2. Click **Delete Pipeline**. You can't delete a pipeline while it's being created.
+3. The requested delete task cannot be canceled. Click **Delete** to proceed.
+
+## Run a Pipeline
+
+You can run and manage your uploaded pipelines in AI EasyMaker.
+
+### Create a Pipeline Run
+
+Run the pipeline.
+
+- **Basic Information**
+    - **Name**: Enter a name for the pipeline run.
+    - **Description**: Enter description.
+    - **Pipeline**: Select the pipeline you want to run.
+    - **Experiment**: Select an experiment that will include pipeline execution. Experiments group related pipeline runs. If no experiments have been created, click **Add** to create an experiment.
+- **Execution Information**
+    - **Execution Parameters**: Enter a value if the pipeline has defined input parameters.
+    - **Execution Type**: Select the type of pipeline execution. If you select **One-time**, the pipeline runs only once. To run the pipeline repeatedly at regular intervals, select **Enable Recurring Run** and then see [Create Recurring Run](./console-guide/#_81) to configure recurring runs.
+- **Instance Information**
+    - **Instance Type**: Select the instance type to run the pipeline on.
+    - **Number of Instances**: Enter the number of instances to use to run the pipeline.
+- **Additional Settings**
+    - **Boot Storage Size**: Enter the boot storage size of the instance on which you want to run the pipeline.
+    - **NHN Cloud NAS**: You can connect an **NHN Cloud NAS** to the instance where you want to run the pipeline.
+        - **The name of the mount directory**: Enter the name of the directory to mount on the instance.
+        - **NAS Path**: Enter the path in the following format: `nas://{NAS ID}:/{path}`.
+    - **Manage Logs**: Logs that occur during pipeline execution can be stored in the NHN Cloud Log & Crash Search service.
+        - For more information, refer to [Appendix > 2. NHN Cloud Log & Crash Search service usage guide and checking logs](./console-guide/#2-nhn-cloud-log-crash-search).
+    - **Tag**: You can specify tags in key-value format. You can enter maximum 10 tags.
+
+> [Caution] If you are using NHN Cloud NAS:
+> Only NHN Cloud NAS created in the same project as AI EasyMaker is available.
+> [Note] Pipeline run generation time:
+> Creating a pipeline run can take a few minutes.
+> The initial resource creation requires an additional few minutes of time to configure the service environment.
+
+### Pipeline Run List
+
+A list of pipeline runs is displayed. Select a pipeline run in the list to view details and make changes to the information.
+
+- **Status**: The status of the pipeline execution is displayed. See the table below for key statuses.
+
+    | Status                           | Description                                                                                    |
+    |-------------------------------|---------------------------------------------------------------------------------------|
+    | CREATE REQUESTED              | Pipeline execution creation is requested.                                                               |
+    | CREATE IN PROGRESS            | Pipeline run creation is in progress.                                                             |
+    | CREATE FAILED                 | Pipeline execution creation failed. Try again.                                                     |
+    | RUNNING                       | Pipeline execution is in progress.                                                                |
+    | COMPLETE IN PROGRESS          | The resources used to run the pipeline are being cleaned up.                                                       |
+    | COMPLETE                      | The pipeline execution has completed successfully.                                                            |
+    | Hyperparameter tuning is stopped at the user's request.              | The pipeline is stopping running.                                                                |
+    | STOPPED                       | The pipeline execution has been stopped at the user's request.                                                        |
+    | FAIL PIPELINE RUN IN PROGRESS | The resources used to run the pipeline are being cleaned up.                                                       |
+    | FAIL PIPELINE RUN             | The pipeline execution has failed. Detailed failure information can be found in the Log & Crash Search log when log management is enabled. |
+
+- **Operation**
+    - **Stop**: You can stop running a pipeline in progress.
+- **Monitoring**: When you select Run a pipeline from the list, you can see a list of monitored instances and a basic metrics chart on the **Monitoring** tab of the detail screen that appears.
+    - The **Monitoring** tab is disabled while a pipeline run is being created.
+
+### Pipeline Run Graph
+
+A graph of the pipeline run is displayed. Select a node in the graph to see more information.
+
+The graph is a pictorial representation of the pipeline execution. This graph shows the steps that have already been executed and the steps that are currently executing during pipeline execution, with arrows indicating the parent/child relationship between the pipeline components represented by each step. Each node in the graph represents a step in the pipeline.
+
+### Stop Pipeline Run
+
+Stop running pipelines in progress.
+
+1. Select the pipeline execution you want to stop from the list.
+2. Click **Stop running**.
+3. The requested action can't be canceled. Click **Confirm** to continue.
+
+> [Note] How long it takes to stop running a pipeline:
+> Stopping pipeline execution can take a few minutes.
+### Copy Pipeline Run
+
+
+Create a new pipeline run with the same settings as an existing pipeline run.
+
+1. Select the pipeline run you want to copy.
+2. Click **Copy Pipeline Run**.
+3. The Create pipeline run screen displays with the same settings as an existing pipeline run.
+4. If you want to change any settings, make any changes, and then click **Create Pipeline Run**.
+
+### Delete a Pipeline Run
+
+Delete a pipeline run.
+
+1. Select the pipeline run you want to delete.
+2. Click **Delete Pipeline Run**. You cannot delete a pipeline run that is in progress.
+3. The requested delete task cannot be canceled. Click **Delete** to proceed.
+
+## Pipeline Recurring Run
+
+You can create and manage a recurring run to periodically run the uploaded pipeline repeatedly in AI EasyMaker.
+
+### Create a Recurring Run
+
+Create a recurring run to run the pipeline in periodic iterations.
+
+For information beyond the items below that you can set in creating a pipeline schedule, see [Create Recurring Run](./console-guide/#_74).
+
+- **Execution Information**
+    - **Execution Type**: Select the type of pipeline execution. If you select **Enable Recurring Run**, the pipeline will repeat periodically. Select **One-time** to run the pipeline only once.
+    - **Trigger Type**: Select the type of pipeline execution trigger. You can choose **Time Interval** or **Cron Expression**.
+        - To run a pipeline repeatedly with a time interval setting, select a **Time Interval** and enter a number and time units.
+        - To run the pipeline repeatedly through a Cron expression setup, select **Cron Expression**, and then enter a Cron expression.
+    - **Setting up Concurrency**: Depending on the trigger cycle (**time interval** or **Cron expression**), a new pipeline run may be created before the previously created pipeline run ends. You can specify a maximum number of concurrent runs to limit the number of runs in parallel.
+    - **Start Time**: You can set the start time of a pipeline recurring run. Generates pipeline executions at the interval you set when not entered.
+    - **End Time**: You can set the end time of a pipeline recurring run. On no input, generate pipeline execution until stopped.
+    - **Catching up on missed runs**: If a pipeline run falls behind recurring run, determine if it needs to be caught up.
+        - For example, if a pipeline recurring run is briefly stopped and later restarted, Setting **Use** will catch up on missed pipeline runs. 
+        - If the pipeline handles backfill internally, it should be **disabled** to prevent duplicate backfill operations.
+
+> [Note] How long it takes to create a pipeline recurring run:
+> Creating a recurring run can take a few minutes.
+> The initial resource creation requires an additional few minutes of time to configure the service environment.
+> [Note] Cron expression format:
+> The Cron expression uses six space-separated fields to represent the time.
+> For more information, see the [Cron Expression Format](https://pkg.go.dev/github.com/robfig/cron#hdr-CRON_Expression_Format) documentation.
+### Pipeline Recurring Runs
+
+A list of pipeline schedules is displayed. Select a pipeline recurring run in the list to view details and make changes to the information.
+
+- **Status**: The status of the pipeline recurring run is displayed. See the table below for key statuses.
+
+    | Status                           | Description                                          |
+    |-------------------------------|---------------------------------------------|
+    | CREATE REQUESTED              | Pipeline recurring run creation has been requested.                     |
+    | CREATE FAILED                 | Pipeline recurring run creation failed. Try again.           |
+    | ENABLED                       | The pipeline recurring run has started normally.                  |
+    | ENABLED(EXPIRED)              | The pipeline recurring run started successfully but has passed the end time you set. |
+    | DISABLED                      | The pipeline recurring run has been stopped at the user's request.              |
+
+- **Manage Execution**: When you select a pipeline recurring run in the list, you can view the list of runs generated by the pipeline recurring run on the **Manage Run** tab of the detail screen that appears.
+
+### Start and Stop Recurring Run
+
+Stop a started pipeline recurring run or start a stopped pipeline recurring run.
+
+1. Select the pipeline recurring run you want to start or stop from the list.
+2. Click **Start Recurring Run** or **Stop Recurring Run**.
+
+### Copy a Pipeline Recurring Run
+
+Create a new pipeline recurring run with the same settings as an existing pipeline recurring run.
+
+1. Select the pipeline recurring run you want to copy.
+2. Click **Copy Pipeline Recurring Run**.
+3. The Create pipeline schedule screen displays with the same settings as an existing pipeline schedule.
+4. Make any changes to the settings you want to make, and then click **Create Pipeline Recurring Run**.
+
+### Delete a pipeline recurring run
+
+Delete a pipeline recurring run.
+
+1. Select the pipeline recurring run you want to delete.
+2. Click **Delete Pipeline Recurring Run**.
+3. The requested delete task cannot be canceled. Click **Delete** to proceed.
+
 
 ## Appendix
 
@@ -1335,31 +1554,32 @@ exit code : -9 (pid: {pid})
 
 * For more information about torchrun, see the [Pytorch Guide](https://pytorch.org/docs/stable/elastic/run.html).
 
-### 9. 리소스 정보
 
-배치 추론과 엔드포인트는 선택한 인스턴스 타입에서 AI EasyMaker의 기본 사용량을 제외한 나머지가 할당됩니다.
-배치 추론은 실 사용량을 파드 수로 나누어 각 파드에 할당되고, 엔드포인트는 설정값에 따라 모델별로 리소스가 할당됩니다.
-할당된 리소스가 추론에 필요한 최소 사용량보다 적을 경우 생성 실패할 수 있습니다.
-CPU와 메모리 실 사용량에 맞게 인스턴스 타입, 인스턴스 수 등 입력값을 적절히 조절해야 합니다.
+### 9. Resource Information
 
-### 10. 프레임워크별 서빙 참고 사항
+Batch inference and endpoints are allocated minus the base usage of AI EasyMaker on the selected instance type.
+Batch inference divides actual usage by the number of pods to allocate resources to each pod, and endpoints are allocated resources per model based on their settings.
+Creation can fail if the allocated resources are less than the minimum usage required for inference.
+Be sure to adjust inputs such as instance type and number of instances appropriately for your CPU and memory footprint.
 
-#### TensorFlow 프레임워크
+### 10. Serving by Framework
 
-AI EasyMaker에서 제공하는 TensorFlow 모델 서빙은 TensorFlow에서 권장하는 SavedModel(.pb)을 사용하고 있습니다.
-체크 포인트를 사용하기 위해서는 SavedModel로 저장된 체크포인트 variables 디렉터리를 모델 디렉터리에 같이 저장하면 모델 서빙에 사용됩니다.
-참고: [https://www.tensorflow.org/guide/saved_model](https://www.tensorflow.org/guide/saved_model)
+#### TensorFlow Framework
 
-#### PyTorch 프레임워크
+The TensorFlow model serving provided by AI EasyMaker uses the SavedModel (.pb) recommended by TensorFlow.
+To use checkpoints, save the checkpoint variables directory saved as a SavedModel along with the model directory, which will be used to serve the model.
+Reference: [https://www.tensorflow.org/guide/saved_model](https://www.tensorflow.org/guide/saved_model)
 
-AI EasyMaker는 TorchServe로 PyTorch 모델(.mar)을 서빙합니다.
-model-archiver를 사용해서 만든 MAR 파일을 사용하는 것을 권장하며, weight 파일로도 서빙이 가능하지만 weight 파일과 함께 필요한 파일들이 있습니다.
-필요한 파일과 상세한 설명은 아래의 표와 [model-archiver 설명 문서](https://github.com/pytorch/serve/blob/master/model-archiver/README.md)를 확인하세요.
+#### PyTorch Framework
 
-| 파일 이름                    | 필수 여부 | 설명                                                              |
+AI EasyMaker serves PyTorch models (.mar) with TorchServe.
+We recommend using MAR files created using model-archiver, weight files can also be served, but there are files that are required along with the weight files.
+See the table below and the [model-archiver documentation](https://github.com/pytorch/serve/blob/master/model-archiver/README.md) for the required files and detailed descriptions.
+
+| File name                    | Necessity | Description                                                              |
 | ---------------------------- | --------- | ----------------------------------------------------------------- |
-| model.py                     | 필수      | model-file 파라미터로 전달되는 모델 구조 파일입니다.              |
-| handler.py                   | 필수      | 추론 로직을 처리하기 위한 handler 파라미터로 전달되는 파일입니다. |
-| weight 파일(.pt, .pth, .bin) | 필수      | 모델의 가중치와 구조를 저장한 파일입니다.                         |
-| requirements.txt             | 선택      | 서빙할 때 필요한 Python 패키지를 설치하기 위한 파일입니다.        |
-| extra/                       | 선택      | 디렉터리에 있는 파일은 extra-files 파라미터로 전달됩니다.         |
+| model.py                     | Required      | The model structure file passed in the model-file parameter.              |
+| handler.py                   | Required      | The file passed to the handler parameter to handle the inference logic. |
+| weight files (.pt, .pth, .bin) | Required      | The file that stores the weights and structure of the model.                         |
+| requirements.txt             | Optional      | Files for installing Python packages needed when serving.        |
+| extra/                       | Optional      | The files in the directory are passed in the extra-files parameter.         |
