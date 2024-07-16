@@ -356,7 +356,7 @@ easymaker.Model().delete(model_id)
 | endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | 필수    | 없음    |                                  | 스테이지 리소스의 상세 정보                 |
 | endpoint_model_resource_list[0].resourceOptionDetail.requests.cpu    | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
 | endpoint_model_resource_list[0].resourceOptionDetail.requests.memory | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | 필수    | 없음    | 0.0                              | 스테이지 리소스에 사용될 cpu                |
+| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | 필수    | 없음    | 0.0                              | 스테이지 리소스에 사용될 CPU                |
 | endpoint_model_resource_list[0].resourceOptionDetail.limits.memory   | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 memory             |
 | endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
 | endpoint_model_resource_list[0].scaleMetricCode                      | String   | 선택    | 없음    | CONCURRENCY, REQUESTS_PER_SECOND | 스테이지 리소스에 사용될 증설 단위          |
