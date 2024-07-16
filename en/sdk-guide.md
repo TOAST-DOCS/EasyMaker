@@ -354,10 +354,10 @@ When creating an endpoint, the default stage is created.
 | endpoint_model_resource_list[0].modelId           | String   | Required    | None    | None                       | Model ID to be created as a stage resource                                   |
 | endpoint_model_resource_list[0].apigwResourceUri  | String   | Required    | None    | Up to 255 characters                  | Path for API Gateway resource starting with /                             |
 | endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | Required    | None    |                                  | 스테이지 리소스의 상세 정보                 |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.cpu    | Double   | Required    | None    | 0.0~                             | 스테이지 리소스에 사용될 cpu                |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.memory | Object   | Required    | None    | 1Mi~                             | 스테이지 리소스에 사용될 memory             |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | Required    | None    | 0.0                              | 스테이지 리소스에 사용될 cpu                |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.memory   | Object   | Required    | None    | 1Mi~                             | 스테이지 리소스에 사용될 memory             |
+| endpoint_model_resource_list[0].resourceOptionDetail.requests.cpu    | Double   | Required    | None    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.requests.memory | Object   | Required    | None    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
+| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | Required    | None    | 0.0                              | 스테이지 리소스에 사용될 CPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.limits.memory   | Object   | Required    | None    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
 | endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | Optional    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
 | endpoint_model_resource_list[0].scaleMetricCode                      | String   | Optional    | None    | CONCURRENCY, REQUESTS_PER_SECOND | 스테이지 리소스에 사용될 증설 단위          |
 | endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | Optional    | None    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
@@ -420,10 +420,10 @@ You can add a new stage to existing endpoints.
 | endpoint_model_resource_list[0].apigwResourceUri  | String   | Required    | None    | Up to 255 characters                  | Path for API Gateway resource starting with /                             |
 | endpoint_model_resource_list[0].podCount          | Integer  | Required    | None    | 1~100                     | Number of pods to be used for stage resources                                    |
 | endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | Required    | None    |                                  | 스테이지 리소스의 상세 정보                 |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.cpu    | Double   | Required    | None    | 0.0~                             | 스테이지 리소스에 사용될 cpu                |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.memory | Object   | Required    | None    | 1Mi~                             | 스테이지 리소스에 사용될 memory             |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | Required    | None    | 0.0                              | 스테이지 리소스에 사용될 cpu                |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.memory   | Object   | Required    | None    | 1Mi~                             | 스테이지 리소스에 사용될 memory             |
+| endpoint_model_resource_list[0].resourceOptionDetail.requests.cpu    | Double   | Required    | None    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.requests.memory | Object   | Required    | None    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
+| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | Required    | None    | 0.0                              | 스테이지 리소스에 사용될 CPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.limits.memory   | Object   | Required    | None    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
 | endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | Optional    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
 | endpoint_model_resource_list[0].scaleMetricCode                      | String   | Optional    | None    | CONCURRENCY, REQUESTS_PER_SECOND | 스테이지 리소스에 사용될 증설 단위          |
 | endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | Optional    | None    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
