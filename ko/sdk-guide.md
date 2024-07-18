@@ -354,10 +354,8 @@ easymaker.Model().delete(model_id)
 | endpoint_model_resource_list[0].modelId           | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
 | endpoint_model_resource_list[0].apigwResourceUri  | String   | 필수    | 없음    | 최대 255자                  | /로 시작하는 API Gateway 리소스 경로                             |
 | endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | 필수    | 없음    |                                  | 스테이지 리소스의 상세 정보                 |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.cpu    | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.memory | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.memory   | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
 | endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
 | endpoint_model_resource_list[0].scaleMetricCode                      | String   | 선택    | 없음    | CONCURRENCY, REQUESTS_PER_SECOND | 스테이지 리소스에 사용될 증설 단위          |
 | endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
@@ -380,14 +378,8 @@ endpoint_id = endpoint.create(
             'modelId': model_id,
             'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
-                'requests': {
-                    'cpu': '15',
-                    'memory': '15Gi'
-                },
-                'limits': {
-                    'cpu': '15',
-                    'memory': '15Gi'
-                }
+                'cpu': '15',
+                'memory': '15Gi'
             },
             'description': 'stage_resource_description'
         }
@@ -419,10 +411,8 @@ endpoint = easymaker.Endpoint()
 | endpoint_model_resource_list[0].modelId           | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
 | endpoint_model_resource_list[0].apigwResourceUri  | String   | 필수    | 없음    | 최대 255자                  | /로 시작하는 API Gateway 리소스 경로                             |
 | endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | 필수    | 없음    |                                  | 스테이지 리소스의 상세 정보                 |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.cpu    | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.memory | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.memory   | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
 | endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
 | endpoint_model_resource_list[0].scaleMetricCode                      | String   | 선택    | 없음    | CONCURRENCY, REQUESTS_PER_SECOND | 스테이지 리소스에 사용될 증설 단위          |
 | endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
@@ -444,14 +434,8 @@ stage_id = endpoint.create_stage(
             'modelId': model_id,
             'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
-                'requests': {
-                    'cpu': '15',
-                    'memory': '15Gi'
-                },
-                'limits': {
-                    'cpu': '15',
-                    'memory': '15Gi'
-                }
+                'cpu': '15',
+                'memory': '15Gi'
             },
             'description': 'stage_resource_description'
         }
