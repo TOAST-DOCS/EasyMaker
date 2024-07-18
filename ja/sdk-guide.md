@@ -354,10 +354,8 @@ easymaker.Model().delete(model_id)
 | endpoint_model_resource_list[0].modelId           | String   | 必須   | なし   | なし                      | ステージリソースで作成するモデルID                                   |
 | endpoint_model_resource_list[0].apigwResourceUri  | String   | 必須   | なし   | 最大255文字                 | /で始まるAPI Gatewayリソースパス                            |
 | endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | 必須   | なし   |                                  | ステージリソースの詳細情報                |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.cpu    | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.memory | Object   | 必須   | なし   | 1Mi~                             | ステージリソースに使用されるメモリ            |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.memory   | Object   | 必須   | なし   | 1Mi~                             | ステージリソースに使用されるメモリ            |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | 必須   | なし   | 1Mi~                             | ステージリソースに使用されるメモリ            |
 | endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | 任意   | False   | True, False                      | ステージリソースに使用されるPodオートスケーラー |
 | endpoint_model_resource_list[0].scaleMetricCode                      | String   | 任意   | なし   | CONCURRENCY, REQUESTS_PER_SECOND | ステージリソースに使用される増設単位         |
 | endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | 任意   | なし   | 1~                               | ステージリソースに使用される増設しきい値    |
@@ -380,14 +378,8 @@ endpoint_id = endpoint.create(
             'modelId': model_id,
             'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
-                'requests': {
-                    'cpu': '15',
-                    'memory': '15Gi'
-                },
-                'limits': {
-                    'cpu': '15',
-                    'memory': '15Gi'
-                }
+                'cpu': '15',
+                'memory': '15Gi'
             },
             'description': 'stage_resource_description'
         }
@@ -420,10 +412,8 @@ endpoint = easymaker.Endpoint()
 | endpoint_model_resource_list[0].apigwResourceUri  | String   | 必須   | なし   | 最大255文字                 | /で始まるAPI Gatewayリソースパス                            |
 | endpoint_model_resource_list[0].podCount          | Integer  | 必須   | なし   | 1～100                     | ステージリソースに使用されるPod数                                   |
 | endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | 必須   | なし   |                                  | ステージリソースの詳細情報                |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.cpu    | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.memory | Object   | 必須   | なし   | 1Mi~                             | ステージリソースに使用されるメモリ            |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.memory   | Object   | 必須   | なし   | 1Mi~                             | ステージリソースに使用されるメモリ            |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | 必須   | なし   | 1Mi~                             | ステージリソースに使用されるメモリ            |
 | endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | 任意   | False   | True, False                      | ステージリソースに使用されるPodオートスケーラー |
 | endpoint_model_resource_list[0].scaleMetricCode                      | String   | 任意   | なし   | CONCURRENCY, REQUESTS_PER_SECOND | ステージリソースに使用される増設単位         |
 | endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | 任意   | なし   | 1~                               | ステージリソースに使用される増設しきい値    |
@@ -445,14 +435,8 @@ stage_id = endpoint.create_stage(
             'modelId': model_id,
             'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
-                'requests': {
-                    'cpu': '15',
-                    'memory': '15Gi'
-                },
-                'limits': {
-                    'cpu': '15',
-                    'memory': '15Gi'
-                }
+                'cpu': '15',
+                'memory': '15Gi'
             },
             'description': 'stage_resource_description'
         }

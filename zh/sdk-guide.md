@@ -354,10 +354,8 @@ When creating an endpoint, the default stage is created.
 | endpoint_model_resource_list[0].modelId           | String   | Required    | None    | None                       | Model ID to be created as a stage resource                                   |
 | endpoint_model_resource_list[0].apigwResourceUri  | String   | Required    | None    | Up to 255 characters                  | Path for API Gateway resource starting with /                             |
 | endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | Required    | None    |                                  | Details of stage resource                |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.cpu    | Double   | Required    | None    | 0.0~                             | CPU to be used for stage resource                |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.memory | Object   | Required    | None    | 1Mi~                             | Memory to be used for stage resource             |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | Required    | None    | 0.0~                             | CPU to be used for stage resource                |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.memory   | Object   | Required    | None    | 1Mi~                             | Memory to be used for stage resource            |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | Required    | None    | 0.0~                             | CPU to be used for stage resource                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | Required    | None    | 1Mi~                             | Memory to be used for stage resource             |
 | endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | Optional    | False   | True, False                      | Pod autoscaler to be used for stage resource |
 | endpoint_model_resource_list[0].scaleMetricCode                      | String   | Optional    | None    | CONCURRENCY, REQUESTS_PER_SECOND | Scaling unit to be used for stage resource          |
 | endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | Optional    | None    | 1~                               | Scaling threshold to be used for stage resource     |
@@ -380,14 +378,8 @@ endpoint_id = endpoint.create(
             'modelId': model_id,
             'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
-                'requests': {
-                    'cpu': '15',
-                    'memory': '15Gi'
-                },
-                'limits': {
-                    'cpu': '15',
-                    'memory': '15Gi'
-                }
+                'cpu': '15',
+                'memory': '15Gi'
             },
             'description': 'stage_resource_description'
         }
@@ -420,10 +412,8 @@ You can add a new stage to existing endpoints.
 | endpoint_model_resource_list[0].apigwResourceUri  | String   | Required    | None    | Up to 255 characters                  | Path for API Gateway resource starting with /                             |
 | endpoint_model_resource_list[0].podCount          | Integer  | Required    | None    | 1~100                     | Number of pods to be used for stage resources                                    |
 | endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | Required    | None    |                                  | Details of stage resource                |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.cpu    | Double   | Required    | None    | 0.0~                             | CPU to be used for stage resource                |
-| endpoint_model_resource_list[0].resourceOptionDetail.requests.memory | Object   | Required    | None    | 1Mi~                             | Memory to be used for stage resource             |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | Required    | None    | 0.0~                             | CPU to be used for stage resource                |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.memory   | Object   | Required    | None    | 1Mi~                             | Memory to be used for stage resource             |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | Required    | None    | 0.0~                             | CPU to be used for stage resource                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | Required    | None    | 1Mi~                             | Memory to be used for stage resource             |
 | endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | Optional    | False   | True, False                      | Pod autoscaler to be used for stage resource      |
 | endpoint_model_resource_list[0].scaleMetricCode                      | String   | Optional    | None    | CONCURRENCY, REQUESTS_PER_SECOND | Scaling unit to be used for stage resource          |
 | endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | Optional    | None    | 1~                               | Scaling threshold to be used for stage resource     |
@@ -445,14 +435,8 @@ stage_id = endpoint.create_stage(
             'modelId': model_id,
             'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
-                'requests': {
-                    'cpu': '15',
-                    'memory': '15Gi'
-                },
-                'limits': {
-                    'cpu': '15',
-                    'memory': '15Gi'
-                }
+                'cpu': '15',
+                'memory': '15Gi'
             },
             'description': 'stage_resource_description'
         }
