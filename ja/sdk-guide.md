@@ -356,7 +356,7 @@ easymaker.Model().delete(model_id)
 | endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | 必須   | なし   |                                  | ステージリソースの詳細情報                |
 | endpoint_model_resource_list[0].resourceOptionDetail.requests.cpu    | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
 | endpoint_model_resource_list[0].resourceOptionDetail.requests.memory | Object   | 必須   | なし   | 1Mi~                             | ステージリソースに使用されるメモリ            |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | 必須   | なし   | 0.0                              | ステージリソースに使用されるCPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
 | endpoint_model_resource_list[0].resourceOptionDetail.limits.memory   | Object   | 必須   | なし   | 1Mi~                             | ステージリソースに使用されるメモリ            |
 | endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | 任意   | False   | True, False                      | ステージリソースに使用されるPodオートスケーラー |
 | endpoint_model_resource_list[0].scaleMetricCode                      | String   | 任意   | なし   | CONCURRENCY, REQUESTS_PER_SECOND | ステージリソースに使用される増設単位         |
@@ -422,7 +422,7 @@ endpoint = easymaker.Endpoint()
 | endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | 必須   | なし   |                                  | ステージリソースの詳細情報                |
 | endpoint_model_resource_list[0].resourceOptionDetail.requests.cpu    | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
 | endpoint_model_resource_list[0].resourceOptionDetail.requests.memory | Object   | 必須   | なし   | 1Mi~                             | ステージリソースに使用されるメモリ            |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | 必須   | なし   | 0.0                              | ステージリソースに使用されるCPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
 | endpoint_model_resource_list[0].resourceOptionDetail.limits.memory   | Object   | 必須   | なし   | 1Mi~                             | ステージリソースに使用されるメモリ            |
 | endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | 任意   | False   | True, False                      | ステージリソースに使用されるPodオートスケーラー |
 | endpoint_model_resource_list[0].scaleMetricCode                      | String   | 任意   | なし   | CONCURRENCY, REQUESTS_PER_SECOND | ステージリソースに使用される増設単位         |
