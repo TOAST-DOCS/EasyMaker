@@ -356,7 +356,7 @@ When creating an endpoint, the default stage is created.
 | endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | Required    | None    |                                  | Details of stage resource                |
 | endpoint_model_resource_list[0].resourceOptionDetail.requests.cpu    | Double   | Required    | None    | 0.0~                             | CPU to be used for stage resource                |
 | endpoint_model_resource_list[0].resourceOptionDetail.requests.memory | Object   | Required    | None    | 1Mi~                             | Memory to be used for stage resource             |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | Required    | None    | 0.0                              | CPU to be used for stage resource                |
+| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | Required    | None    | 0.0~                             | CPU to be used for stage resource                |
 | endpoint_model_resource_list[0].resourceOptionDetail.limits.memory   | Object   | Required    | None    | 1Mi~                             | Memory to be used for stage resource            |
 | endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | Optional    | False   | True, False                      | Pod autoscaler to be used for stage resource |
 | endpoint_model_resource_list[0].scaleMetricCode                      | String   | Optional    | None    | CONCURRENCY, REQUESTS_PER_SECOND | Scaling unit to be used for stage resource          |
@@ -422,7 +422,7 @@ You can add a new stage to existing endpoints.
 | endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | Required    | None    |                                  | Details of stage resource                |
 | endpoint_model_resource_list[0].resourceOptionDetail.requests.cpu    | Double   | Required    | None    | 0.0~                             | CPU to be used for stage resource                |
 | endpoint_model_resource_list[0].resourceOptionDetail.requests.memory | Object   | Required    | None    | 1Mi~                             | Memory to be used for stage resource             |
-| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | Required    | None    | 0.0                              | CPU to be used for stage resource                |
+| endpoint_model_resource_list[0].resourceOptionDetail.limits.cpu      | Double   | Required    | None    | 0.0~                             | CPU to be used for stage resource                |
 | endpoint_model_resource_list[0].resourceOptionDetail.limits.memory   | Object   | Required    | None    | 1Mi~                             | Memory to be used for stage resource             |
 | endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | Optional    | False   | True, False                      | Pod autoscaler to be used for stage resource      |
 | endpoint_model_resource_list[0].scaleMetricCode                      | String   | Optional    | None    | CONCURRENCY, REQUESTS_PER_SECOND | Scaling unit to be used for stage resource          |
