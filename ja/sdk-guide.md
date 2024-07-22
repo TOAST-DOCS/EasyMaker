@@ -8,11 +8,12 @@ python -m pip install easymaker
 
 * AI EasyMakerノートパソコンには基本的にインストールされています。
 
-
 ### AI EasyMaker SDK初期化
+
 アプリケーションキー(Appkey)と秘密鍵(Secret key)はコンソール右上の**URL & Appkey**メニューで確認できます。
 有効にしたAI EasyMaker商品のアプリケーションキー、秘密鍵、リージョン情報を入力します。
 AI EasyMaker SDKを使用するには初期化コードが必要です。
+
 ```
 import easymaker
 
@@ -24,6 +25,7 @@ easymaker.init(
 ```
 
 ### 実験の作成
+
 学習を作成する前に、学習を分類できる実験の作成が必要です。
 
 [Parameter]
@@ -76,9 +78,9 @@ easymaker.Experiment().delete(experiment_id)
 | check_point_input_uri                      | String  | 任意                       | なし    | 最大255文字    | 入力チェックポイントファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS)                 |
 | check_point_upload_uri                     | String  | 任意                       | なし    | 最大255文字    | チェックポイントファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)   |
 | timeout_hours                              | Integer | 任意                       | 720   | 1～720       | 最大学習時間(単位:時間)                                                |
-| hyperparameter_list                        | Array   | 任意                       | なし    | 最大100個    | ハイパーパラメータ情報(hyperparameterKey/hyperparameterValueで構成)           |
-| hyperparameter_list[0].hyperparameterKey   | String  | 任意                       | なし    | 最大255文字    | ハイパーパラメータキー                                                       |
-| hyperparameter_list[0].hyperparameterValue | String  | 任意                       | なし    | 最大1000文字   | ハイパーパラメータ値                                                      |
+| hyperparameter_list                        | Array   | 任意                       | なし    | 最大100個    | ハイパーパラメータ情報(parameterKey/parameterValueで構成)           |
+| hyperparameter_list[0].parameterKey   | String  | 任意                       | なし    | 最大255文字    | ハイパーパラメータキー                                                       |
+| hyperparameter_list[0].parameterValue | String  | 任意                       | なし    | 最大1000文字   | ハイパーパラメータ値                                                      |
 | dataset_list                               | Array   | 任意                       | なし    | 最大10個     | 学習に使用されるデータセット情報(datasetName/dataUriで構成)                      |
 | dataset_list[0].datasetName                | String  | 任意                       | なし    | 最大36文字     | データ名                                                         |
 | dataset_list[0].datasetUri                 | String  | 任意                       | なし    | 最大255文字    | データパス                                                         |
@@ -101,12 +103,12 @@ training_id = easymaker.Training().run(
     entry_point='training_start.py',
     hyperparameter_list=[
         {
-            "hyperparameterKey"："epochs",
-            "hyperparameterValue"："10",
+            "parameterKey"："epochs",
+            "parameterValue"："10",
         },
         {
-            "hyperparameterKey"："batch-size",
-            "hyperparameterValue"："30",
+            "parameterKey"："batch-size",
+            "parameterValue"："30",
         }
     ],
     timeout_hours=100,
@@ -277,6 +279,7 @@ easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
 ```
 
 ### モデル作成
+
 学習ID値でモデルの作成をリクエストできます。
 モデルはエンドポイント作成時に使用されます。
 
@@ -291,7 +294,6 @@ easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
 | tag_list                 | Array  | 選択                                | なし  | 最大10個 | タグ情報                              |
 | tag_list[0].tagKey       | String | 選択                                | なし  | 最大64文字 | タグキー                                |
 | tag_list[0].tagValue     | String | 選択                                | なし  | 最大255文字 | タグ値                               |
-
 
 ```
 model_id = easymaker.Model().create(
@@ -314,7 +316,6 @@ model_id = easymaker.Model().create(
 | tag_list             | Array  | 任意 | なし | 最大10個                              | タグ情報                                           |
 | tag_list[0].tagKey   | String | 任意 | なし | 最大64文字                              | タグキー                                               |
 | tag_list[0].tagValue | String | 任意 | なし | 最大255文字                             | タグ値                                            |
-
 
 ```
 model_id = easymaker.Model().create_by_model_uri(
@@ -352,7 +353,12 @@ easymaker.Model().delete(model_id)
 | endpoint_model_resource_list          | Array   | 必須   | なし   | 最大10個                     | ステージに使用されるリソース情報                                                |
 | endpoint_model_resource_list[0].modelId           | String   | 必須   | なし   | なし                      | ステージリソースで作成するモデルID                                   |
 | endpoint_model_resource_list[0].apigwResourceUri  | String   | 必須   | なし   | 最大255文字                 | /で始まるAPI Gatewayリソースパス                            |
-| endpoint_model_resource_list[0].podCount          | Integer  | 必須   | なし   | 1～100                     | ステージリソースに使用されるPod数                                   |
+| endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | 必須   | なし   |                                  | ステージリソースの詳細情報                |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | 必須   | なし   | 1Mi~                             | ステージリソースに使用されるメモリ            |
+| endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | 任意   | False   | True, False                      | ステージリソースに使用されるPodオートスケーラー |
+| endpoint_model_resource_list[0].scaleMetricCode                      | String   | 任意   | なし   | CONCURRENCY, REQUESTS_PER_SECOND | ステージリソースに使用される増設単位         |
+| endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | 任意   | なし   | 1~                               | ステージリソースに使用される増設しきい値    |
 | endpoint_model_resource_list[0].description       | String   | 任意   | なし   | 最大255文字                 | ステージリソースの説明                                      |
 | tag_list                              | Array   | 任意 | なし  | 最大10個                 | タグ情報                                                              |
 | tag_list[0].tagKey                    | String  | 任意 | なし  | 最大64文字                 | タグキー                                                                  |
@@ -371,7 +377,10 @@ endpoint_id = endpoint.create(
         {
             'modelId': model_id,
             'apigwResourceUri': '/predict',
-            'podCount': 1,
+            'resourceOptionDetail': {
+                'cpu': '15',
+                'memory': '15Gi'
+            },
             'description': 'stage_resource_description'
         }
     ],
@@ -402,12 +411,19 @@ endpoint = easymaker.Endpoint()
 | endpoint_model_resource_list[0].modelId           | String   | 必須   | なし   | なし                      | ステージリソースで作成するモデルID                                   |
 | endpoint_model_resource_list[0].apigwResourceUri  | String   | 必須   | なし   | 最大255文字                 | /で始まるAPI Gatewayリソースパス                            |
 | endpoint_model_resource_list[0].podCount          | Integer  | 必須   | なし   | 1～100                     | ステージリソースに使用されるPod数                                   |
+| endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | 必須   | なし   |                                  | ステージリソースの詳細情報                |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | 必須   | なし   | 1Mi~                             | ステージリソースに使用されるメモリ            |
+| endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | 任意   | False   | True, False                      | ステージリソースに使用されるPodオートスケーラー |
+| endpoint_model_resource_list[0].scaleMetricCode                      | String   | 任意   | なし   | CONCURRENCY, REQUESTS_PER_SECOND | ステージリソースに使用される増設単位         |
+| endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | 任意   | なし   | 1~                               | ステージリソースに使用される増設しきい値    |
 | endpoint_model_resource_list[0].description       | String   | 任意   | なし   | 最大255文字                 | ステージリソースの説明                                      |
 | tag_list                              | Array   | 任意 | なし  | 最大10個                 | タグ情報                                                          |
 | tag_list[0].tagKey                    | String  | 任意 | なし  | 最大64文字                 | タグキー                                                              |
 | tag_list[0].tagValue                  | String  | 任意 | なし  | 最大255文字                | タグ値                                                           |
 | use_log                               | Boolean | 任意 | False | True、False                | Log & Crash Searchサービスにログを残すかどうか                                      |
 | wait                                  | Boolean | 任意 | True  | True, False                | True：ステージの作成が完了した後にステージIDを返す。False：ステージリクエスト後、すぐにステージIDを返す |
+
 ```python
 stage_id = endpoint.create_stage(
     stage_name='stage01',  # 30文字以内小文字/数字
@@ -418,7 +434,10 @@ stage_id = endpoint.create_stage(
         {
             'modelId': model_id,
             'apigwResourceUri': '/predict',
-            'podCount': 1,
+            'resourceOptionDetail': {
+                'cpu': '15',
+                'memory': '15Gi'
+            },
             'description': 'stage_resource_description'
         }
     ],
@@ -553,6 +572,7 @@ easymaker.BatchInference().delete(batch_inference_id)
 ```
 
 ### NHN Cloud - Log & Crash Search ログ転送機能
+
 ```
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product
@@ -563,7 +583,9 @@ easymaker_logger.send(log_message='log meassage',
 ```
 
 ### NHN Cloud - Object Storageファイル転送機能
+
 Object Storage商品にファイルをアップロードし、ダウンロードする機能を提供します。
+
 ```
 easymaker.upload(
     easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
@@ -581,6 +603,7 @@ easymaker.download(
 ```
 
 ## CLI Command
+
 アプリケーションキー、秘密鍵、リージョン情報を知っている場合は、コンソールにアクセスせずにPython CLIを介してさまざまな情報を確認できます。
 
 | 機能                         | コマンド                                                                                       |

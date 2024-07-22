@@ -8,11 +8,12 @@ python -m pip install easymaker
 
 * AI EasyMaker 노트북에는 기본적으로 설치되어 있습니다.
 
-
 ### AI EasyMaker SDK 초기화
+
 앱키(Appkey)와 비밀 키(Secret key)는 콘솔 오른쪽 상단의 **URL & Appkey** 메뉴에서 확인할 수 있습니다.
 활성화한 AI EasyMaker 상품의 앱키, 비밀 키, 리전 정보를 입력합니다.
 AI EasyMaker SDK를 사용하기 위해서는 초기화 코드가 필요합니다.
+
 ```python
 import easymaker
 
@@ -24,6 +25,7 @@ easymaker.init(
 ```
 
 ### 실험 생성
+
 학습을 생성하기 전에 학습을 분류할 수 있는 실험 생성이 필요합니다.
 
 [Parameter]
@@ -76,9 +78,9 @@ easymaker.Experiment().delete(experiment_id)
 | check_point_input_uri                      | String  | 선택                        | 없음    | 최대 255자     | 입력 체크 포인트 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)                 |
 | check_point_upload_uri                     | String  | 선택                        | 없음    | 최대 255자     | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)   |
 | timeout_hours                              | Integer | 선택                        | 720   | 1~720       | 최대 학습 시간(단위: 시간)                                                |
-| hyperparameter_list                        | Array   | 선택                        | 없음    | 최대 100개     | 하이퍼파라미터 정보(hyperparameterKey/hyperparameterValue로 구성)           |
-| hyperparameter_list[0].hyperparameterKey   | String  | 선택                        | 없음    | 최대 255자     | 하이퍼파라미터 키                                                       |
-| hyperparameter_list[0].hyperparameterValue | String  | 선택                        | 없음    | 최대 1000자    | 하이퍼파라미터 값                                                       |
+| hyperparameter_list                        | Array   | 선택                        | 없음    | 최대 100개     | 하이퍼파라미터 정보(parameterKey/parameterValue로 구성)           |
+| hyperparameter_list[0].parameterKey   | String  | 선택                        | 없음    | 최대 255자     | 하이퍼파라미터 키                                                       |
+| hyperparameter_list[0].parameterValue | String  | 선택                        | 없음    | 최대 1000자    | 하이퍼파라미터 값                                                       |
 | dataset_list                               | Array   | 선택                        | 없음    | 최대 10개      | 학습에 사용될 데이터 세트 정보(datasetName/dataUri로 구성)                      |
 | dataset_list[0].datasetName                | String  | 선택                        | 없음    | 최대 36자      | 데이터 이름                                                          |
 | dataset_list[0].datasetUri                 | String  | 선택                        | 없음    | 최대 255자     | 데이터 경로                                                          |
@@ -101,12 +103,12 @@ training_id = easymaker.Training().run(
     entry_point='training_start.py',
     hyperparameter_list=[
         {
-            "hyperparameterKey": "epochs",
-            "hyperparameterValue": "10",
+            "parameterKey": "epochs",
+            "parameterValue": "10",
         },
         {
-            "hyperparameterKey": "batch-size",
-            "hyperparameterValue": "30",
+            "parameterKey": "batch-size",
+            "parameterValue": "30",
         }
     ],
     timeout_hours=100,
@@ -277,6 +279,7 @@ easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
 ```
 
 ### 모델 생성
+
 학습 ID 값으로 모델 생성을 요청할 수 있습니다.
 모델은 엔드포인트 생성 시 사용됩니다.
 
@@ -291,7 +294,6 @@ easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
 | tag_list                 | Array  | 선택                                 | 없음  | 최대 10개  | 태그 정보                               |
 | tag_list[0].tagKey       | String | 선택                                 | 없음  | 최대 64자  | 태그 키                                |
 | tag_list[0].tagValue     | String | 선택                                 | 없음  | 최대 255자 | 태그 값                                |
-
 
 ```python
 model_id = easymaker.Model().create(
@@ -314,7 +316,6 @@ model_id = easymaker.Model().create(
 | tag_list             | Array  | 선택    | 없음  | 최대 10개                                  | 태그 정보                                               |
 | tag_list[0].tagKey   | String | 선택    | 없음  | 최대 64자                                  | 태그 키                                                |
 | tag_list[0].tagValue | String | 선택    | 없음  | 최대 255자                                 | 태그 값                                                |
-
 
 ```python
 model_id = easymaker.Model().create_by_model_uri(
@@ -352,7 +353,12 @@ easymaker.Model().delete(model_id)
 | endpoint_model_resource_list          | Array   | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
 | endpoint_model_resource_list[0].modelId           | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
 | endpoint_model_resource_list[0].apigwResourceUri  | String   | 필수    | 없음    | 최대 255자                  | /로 시작하는 API Gateway 리소스 경로                             |
-| endpoint_model_resource_list[0].podCount          | Integer  | 필수    | 없음    | 1~100                     | 스테이지 리소스에 사용될 파드 수                                    |
+| endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | 필수    | 없음    |                                  | 스테이지 리소스의 상세 정보                 |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
+| endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
+| endpoint_model_resource_list[0].scaleMetricCode                      | String   | 선택    | 없음    | CONCURRENCY, REQUESTS_PER_SECOND | 스테이지 리소스에 사용될 증설 단위          |
+| endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
 | endpoint_model_resource_list[0].description       | String   | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
 | tag_list                              | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                                  |
 | tag_list[0].tagKey                    | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                                   |
@@ -371,7 +377,10 @@ endpoint_id = endpoint.create(
         {
             'modelId': model_id,
             'apigwResourceUri': '/predict',
-            'podCount': 1,
+            'resourceOptionDetail': {
+                'cpu': '15',
+                'memory': '15Gi'
+            },
             'description': 'stage_resource_description'
         }
     ],
@@ -401,13 +410,19 @@ endpoint = easymaker.Endpoint()
 | endpoint_model_resource_list          | Array   | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
 | endpoint_model_resource_list[0].modelId           | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
 | endpoint_model_resource_list[0].apigwResourceUri  | String   | 필수    | 없음    | 최대 255자                  | /로 시작하는 API Gateway 리소스 경로                             |
-| endpoint_model_resource_list[0].podCount          | Integer  | 필수    | 없음    | 1~100                     | 스테이지 리소스에 사용될 파드 수                                    |
+| endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | 필수    | 없음    |                                  | 스테이지 리소스의 상세 정보                 |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
+| endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
+| endpoint_model_resource_list[0].scaleMetricCode                      | String   | 선택    | 없음    | CONCURRENCY, REQUESTS_PER_SECOND | 스테이지 리소스에 사용될 증설 단위          |
+| endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
 | endpoint_model_resource_list[0].description       | String   | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
 | tag_list                              | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                              |
 | tag_list[0].tagKey                    | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                               |
 | tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                               |
 | use_log                               | Boolean | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                         |
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 스테이지 생성이 완료된 이후 스테이지 ID를 반환, False: 스테이지 요청 후 즉시 스테이지 ID를 반환 |
+
 ```python
 stage_id = endpoint.create_stage(
     stage_name='stage01',  # 30자 이내 소문자/숫자
@@ -418,7 +433,10 @@ stage_id = endpoint.create_stage(
         {
             'modelId': model_id,
             'apigwResourceUri': '/predict',
-            'podCount': 1,
+            'resourceOptionDetail': {
+                'cpu': '15',
+                'memory': '15Gi'
+            },
             'description': 'stage_resource_description'
         }
     ],
@@ -553,6 +571,7 @@ easymaker.BatchInference().delete(batch_inference_id)
 ```
 
 ### NHN Cloud - Log & Crash Search 로그 전송 기능
+
 ```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product
@@ -563,7 +582,9 @@ easymaker_logger.send(log_message='log meassage',
 ```
 
 ### NHN Cloud - Object Storage 파일 전송 기능
+
 Object Storage 상품으로 파일을 업로드하고 다운로드하는 기능을 제공합니다.
+
 ```python
 easymaker.upload(
     easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
@@ -581,6 +602,7 @@ easymaker.download(
 ```
 
 ## CLI Command
+
 앱키, 비밀 키, 리전 정보를 알고 있다면, 콘솔에 접근하지 않고도 파이썬 CLI를 통해 여러 정보를 확인할 수 있습니다.
 
 | 기능                          | 명령어                                                                                        |

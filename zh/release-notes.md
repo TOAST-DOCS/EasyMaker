@@ -22,9 +22,9 @@
 
 ### December 19, 2023
 
-#### Feature Updates 
+#### Feature Updates
 
-* Notebooks and training with private images  
+* Notebooks and training with private images
     * User-personalized container images can be used to power notebooks, training, and hyperparameter tuning.
     * By registering private image and registry account, you can easily select private images to create resources.
 
@@ -32,28 +32,27 @@
     * See your overall resource utilization, top 3 endpoint service monitoring, and top 3 CPU/GPU utilization on one page.
 
 * Endpoint > Autoscaler
-    * You can dynamically manage the number of nodes by setting policies to scale up/scale down endpoint nodes. 
-    
+    * You can dynamically manage the number of nodes by setting policies to scale up/scale down endpoint nodes.
+
 ### September 26, 2023
 
-#### Feature Updates 
+#### Feature Updates
 
-* Ubuntu 22.04 version provided 
+* Ubuntu 22.04 version provided
     * The new Ubuntu 22.04 version is provided. Ubuntu 18.04 version is no longer available, and existing customers can use the service as it is now.
 
-* Monitoring feature provided 
+* Monitoring feature provided
     * You can check system monitoring metrics for notebook, training, and endpoint.
     * You can view API call metrics for each API resource path in the endpoint.
 
-* Basic algorithm for hyperparameter tuning 
-    * Through hyperparameter tuning, you can optimize the hyperparameters of the basic algorithm provided by AI EasyMaker. 
+* Basic algorithm for hyperparameter tuning
+    * Through hyperparameter tuning, you can optimize the hyperparameters of the basic algorithm provided by AI EasyMaker.
 
 * Endpoint > Serving multiple models
     * You can serve multiple training models on one endpoint stage.
 
 * Parallel training for hyperparameter tuning
     * You can optimize the performance of hyperparameter tuning by adjusting the number of parallel trainings.
-
 
 ### June 27, 2023
 
@@ -68,7 +67,8 @@
     * [Object Detection Guide](./algorithm-guide/#object-detection)
     * [Semantic Segmentation Guide](./algorithm-guide/#semantic-segmentation)
 
-
 ### December 27, 2022
-#### Release of a New Service 
+
+#### Release of a New Service
+
 * AI EasyMaker is an AI platform for environment, training and advancement, and endpoint services for machine learning development.
