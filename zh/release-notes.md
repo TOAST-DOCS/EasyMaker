@@ -1,5 +1,23 @@
 ## Machine Learning > AI EasyMaker > Release Notes
 
+### July 23, 2024
+
+#### Feature Updates
+
+* Add ML pipeline feature
+    * ML Pipeline is a feature for managing and executing portable and scalable machine learning workflows.
+    * For more information, see the ML pipeline guide documentation.
+* Improved endpoint functionality
+    * Optimized resource allocation.
+* Support for serving PyTorch no-archive model
+    * Enabled PyTorch no-archive models to be registered in AI EasyMaker to serve as endpoints.
+
+### May 10, 2024
+
+#### Feature Updates
+
+* Added the feature to reboot notebooks
+
 ### April 23, 2024
 
 #### Feature Updates
