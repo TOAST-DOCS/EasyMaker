@@ -480,14 +480,11 @@ A list of hyperparameter tunings is displayed. Select a hyperparameter tuning fr
 
 * **Status Details**: The bracketed content in the `COMPLETE` status is the status details. See the table below for key details.
 
-    | Details | **Target Metric Value**: Indicates the target metric value. |
+    | Details | Description |
     | --- | --- |
     | GoalReached | Details when training for hyperparameter tuning is complete by reaching the target value. |
     | MaxTrialsReached | Details when hyperparameter tuning has reached the maximum number of training runs and is complete. |
     | SuggestionEndReached | Details when the exploration algorithm in Hyperparameter Tuning has explored all hyperparameters. |
-* Hyperparameter tuning generation failed. If creation continues to fail, please contact customer service.
-    * FAIL HYPERPARAMETER TUNING IN PROGRESS, COMPLETE IN PROGRESS, STOP IN PROGRESS<br/>
-    Resources used for hyperparameter tuning are being cleaned up.
 
 * **Operation**
     * **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
