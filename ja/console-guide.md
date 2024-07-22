@@ -394,7 +394,8 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
                 * **NHN Cloud Object Storage**：アルゴリズムが保存されているNHN Cloud Object Storageのパスを入力します。
                     * obs://{Object Storage APIエンドポイント}/{containerName}/{path}形式でディレクトリパスを入力します。
                     * NHN Cloud Object Storageを利用する場合[付録 > 1. NHN Cloud Object StorageにAI EasyMakerシステムアカウント権限追加](./console-guide/#1-nhn-cloud-object-storageai-easymaker)を参照して権限を設定してください。必要な権限を設定しない場合はモデルの作成に失敗します。
-                * **NHN Cloud NAS**：アルゴリズムが保存されているNHN Cloud NASパスを入力します。nas://{NAS ID}:/{path}形式でディレクトリパスを入力します。
+                * **NHN Cloud NAS**：アルゴリズムが保存されているNHN Cloud NASパスを入力します。
+                    * nas://{NAS ID}:/{path}形式でディレクトリパスを入力します。
             * **エントリーポイント**
                 * エントリーポイントは学習が始まるアルゴリズム実行の入口点です。エントリーポイントファイル名を作成します。
                 * エントリーポイントファイルはアルゴリズムパスに存在する必要があります。
