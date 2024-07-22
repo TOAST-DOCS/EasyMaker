@@ -231,8 +231,7 @@ Delete an experiment.
 3. Requested deletion cannot be undone. Click **OK** to proceed.
 
 > [Note] Unable to delete experiment if associated training exists:
-> Experiment cannot be deleted if there is a training associated with the experiment.
-> Please delete the associated training first, then delete the experiment.
+> Experiment cannot be deleted if there is a training associated with the experiment. Please delete the associated training first, then delete the experiment.
 > For related training, you can check the list by clicking the **[Training]** tab in the detail screen at the bottom that is displayed when you click the experiment you want to delete.
 
 ## Training
@@ -277,7 +276,6 @@ Set the training environment by selecting the instance and OS image to be traine
     * **Number of Distributed Nodes**: Enter a number of distributed nodes to be performed. Distributed training can be enabled through settings in the algorithm code. For more information, please refer to [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
     * **Enable torchrun**: Select whether to use torchrun, which is supported by the Pytorch framework. For more information, see [Appendix > 8. How to use torchrun](./console-guide/#8-how-to-use-torchrun).
     * **Number of processes per node**: If using torchrun, enter the number of processes per node. torchrun enables distributed training by running multiple processes on a single node. The number of processes affects memory usage.
-
 * **Input Data**
     * **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
         * Dataset name: Enter a name for your data set.
@@ -396,8 +394,7 @@ How to configure a hyperparameter tuning job.
             * **NHN Cloud Object Storage**: Enter the path of NHN Cloud Object Storage where algorithms are stored.<br>
                 * obs: Enter the directory path in the format of obs://{ObjectStorage API endpoint}/{containerName}/{path}.
                 * When using NHN Cloud Object Storage, please set permissions by referring to [Appendix > 1. Adding AI EasyMaker system account permissions to NHN Cloud Object Storage](./console-guide/#1-nhn-cloud-object-storage-ai-easymaker).If you do not set the required permissions, model creation will fail.
-            * **NHN Cloud NAS**: Enter the NHN Cloud NAS path where the algorithm is stored. <br>
-                  nas://{NAS Enter the directory path in the format ID}:/{path}.
+            * **NHN Cloud NAS**: Enter the NHN Cloud NAS path where the algorithm is stored. nas://{NAS Enter the directory path in the format ID}:/{path}.
             * **Entry Point**
                 * The entry point is the point of entry into the execution of the algorithm from which training begins. Creates the entry point file name.
                 * The entry point file must exist in the algorithm path.
@@ -950,6 +947,7 @@ Displays a list of batch inferences. Select a batch inference from the list to c
     | FAIL BATCH INFERENCE | This is a failed state during batch inference. Detailed failure information can be checked through the Log & Crash Search log when log management is enabled. |
     | Stage resource is being deleted. | The batch inference creation failed. If creation continues to fail, please contact customer service. |
     | FAIL BATCH INFERENCE IN PROGRESS, COMPLETE IN PROGRESS | The resources used for batch inference are being cleaned up. |
+
 * **Operation**
     * **Stop**: You can stop batch inference in progress.
 * **Monitoring**: When you select a batch inference, you can check the list of monitored instances and basic indicator charts in the **Monitoring** tab of the detailed screen that appears.
@@ -1106,10 +1104,12 @@ You can use the Kubeflow Pipelines (KFP) Python SDK to write components and pipe
 > [Note] What is a pipeline?
 > A pipeline is a definition of a workflow that combines one or more components to form a directed acyclic graph (DAG).
 > Each component runs a single container during execution, which can generate ML artifacts.
+
 > [Note] What are ML artifacts?
 > Components can take inputs and produce outputs. There are two types of I/O types. Parameters and artifacts:
 > 1. Parameters are useful for passing small amounts of data between components.
 > 2. Artifact types are for ML artifact outputs, such as datasets, models, metrics, etc. Provides a convenient mechanism for saving to object storage.
+
 Most pipelines aim to produce one or more ML artifacts, such as datasets, models, evaluation metrics, etc.
 
 > [Reference] Kubeflow Pipelines (KFP) official documentation
@@ -1186,6 +1186,7 @@ Run the pipeline.
 
 > [Caution] If you are using NHN Cloud NAS:
 > Only NHN Cloud NAS created in the same project as AI EasyMaker is available.
+
 > [Note] Pipeline run generation time:
 > Creating a pipeline run can take a few minutes.
 > The initial resource creation requires an additional few minutes of time to configure the service environment.
@@ -1230,8 +1231,8 @@ Stop running pipelines in progress.
 
 > [Note] How long it takes to stop running a pipeline:
 > Stopping pipeline execution can take a few minutes.
-### Copy Pipeline Run
 
+### Copy Pipeline Run
 
 Create a new pipeline run with the same settings as an existing pipeline run.
 
@@ -1273,9 +1274,11 @@ For information beyond the items below that you can set in creating a pipeline s
 > [Note] How long it takes to create a pipeline recurring run:
 > Creating a recurring run can take a few minutes.
 > The initial resource creation requires an additional few minutes of time to configure the service environment.
+
 > [Note] Cron expression format:
 > The Cron expression uses six space-separated fields to represent the time.
 > For more information, see the [Cron Expression Format](https://pkg.go.dev/github.com/robfig/cron#hdr-CRON_Expression_Format) documentation.
+
 ### Pipeline Recurring Runs
 
 A list of pipeline schedules is displayed. Select a pipeline recurring run in the list to view details and make changes to the information.
@@ -1315,7 +1318,6 @@ Delete a pipeline recurring run.
 1. Select the pipeline recurring run you want to delete.
 2. Click **Delete Pipeline Recurring Run**.
 3. The requested delete task cannot be canceled. Click **Delete** to proceed.
-
 
 ## Appendix
 
@@ -1532,7 +1534,7 @@ Before the expiration, you must follow these instructions to move stages running
 
 > [Caution]
 > Deleting a stage will shut down the endpoint, preventing API calls. Ensure that the stage is not in service before deleting it.
->
+
 ##### Upgrade the cluster version of the default stage
 
 The default stage is the stage on which the actual service operates.
@@ -1553,7 +1555,6 @@ exit code : -9 (pid: {pid})
 ```
 
 * For more information about torchrun, see the [Pytorch Guide](https://pytorch.org/docs/stable/elastic/run.html).
-
 
 ### 9. Resource Information
 
