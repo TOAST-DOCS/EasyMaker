@@ -8,11 +8,12 @@ python -m pip install easymaker
 
 * AI EasyMaker is installed in the notebook by default.
 
-
 ### Initialize AI EasyMaker SDK
+
 You can find AppKey and Secret key in the **URL & Appkey** menu at the right top on the console.
 Enter the AppKey, SecretKey, and region information of enabled AI EasyMaker.
 Intialization code is required to use the AI EasyMaker SDK.
+
 ```python
 import easymaker
 
@@ -24,6 +25,7 @@ easymaker.init(
 ```
 
 ### Create Experiment
+
 Before creating a training, you must create an experiment to sort trainings.
 
 [Parameter]
@@ -76,9 +78,9 @@ easymaker.Experiment().delete(experiment_id)
 | check_point_input_uri                      | String  | Optional                        | None    | Up to 255 characters     | Input checkpoint file path (NHN Cloud Object Storage or NHN Cloud NAS)                 |
 | check_point_upload_uri                     | String  | Optional                        | None    | Up to 255 characters     | The path where the checkpoint file will be uploaded (NHN Cloud Object Storage or NHN Cloud NAS)   |
 | timeout_hours                              | Integer | Optional                        | 720   | 1~720       | Max training time (unit: hour)                                                |
-| hyperparameter_list                        | Array   | Optional                        | None    | Max 100     | Information of hyperparameters (consists of hyperparameterKey/hyperparameterValue)           |
-| hyperparameter_list[0].hyperparameterKey   | String  | Optional                        | None    | Up to 255 characters     | Hyperparameter key                                                       |
-| hyperparameter_list[0].hyperparameterValue | String  | Optional                        | None    | Up to 1000 characters    | Hyperparameter value                                                       |
+| hyperparameter_list                        | Array   | Optional                        | None    | Max 100     | Information of hyperparameters (consists of parameterKey/parameterValue)           |
+| hyperparameter_list[0].parameterKey   | String  | Optional                        | None    | Up to 255 characters     | Hyperparameter key                                                       |
+| hyperparameter_list[0].parameterValue | String  | Optional                        | None    | Up to 1000 characters    | Hyperparameter value                                                       |
 | dataset_list                               | Array   | Optional                        | None    | Max 10      | Information of dataset to be used for training (consists of datasetName/dataUri)                      |
 | dataset_list[0].datasetName                | String  | Optional                        | None    | Up to 36 characters      | Data name                                                          |
 | dataset_list[0].datasetUri                 | String  | Optional                        | None    | Up to 255 characters     | Data pah                                                          |
@@ -101,12 +103,12 @@ training_id = easymaker.Training().run(
     entry_point='training_start.py',
     hyperparameter_list=[
         {
-            "hyperparameterKey": "epochs",
-            "hyperparameterValue": "10",
+            "parameterKey": "epochs",
+            "parameterValue": "10",
         },
         {
-            "hyperparameterKey": "batch-size",
-            "hyperparameterValue": "30",
+            "parameterKey": "batch-size",
+            "parameterValue": "30",
         }
     ],
     timeout_hours=100,
@@ -277,6 +279,7 @@ easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
 ```
 
 ### Create Model
+
 Request to create a model with the training ID.
 The model is used when creating endpoints.
 
@@ -291,7 +294,6 @@ The model is used when creating endpoints.
 | tag_list                 | Array  | Optional                                 | None  | Max 10  | Tag information                               |
 | tag_list[0].tagKey       | String | Optional                                 | None  | Up to 64 characters  | Tag key                                |
 | tag_list[0].tagValue     | String | Optional                                 | None  | Up to 255 characters | Tag value                                |
-
 
 ```python
 model_id = easymaker.Model().create(
@@ -314,7 +316,6 @@ Even if there is no training ID, you can create a model by entering the path inf
 | tag_list             | Array  | Optional    | None  | Max 10                                  | Tag information                                               |
 | tag_list[0].tagKey   | String | Optional    | None  | Up to 64 characters                                  | Tag key                                                |
 | tag_list[0].tagValue | String | Optional    | None  | Up to 255 characters                                 | Tag value                                                |
-
 
 ```python
 model_id = easymaker.Model().create_by_model_uri(
@@ -352,7 +353,12 @@ When creating an endpoint, the default stage is created.
 | endpoint_model_resource_list          | Array   | Required    | None    | Max 10                     | Resource information to be used on the stage                                                 |
 | endpoint_model_resource_list[0].modelId           | String   | Required    | None    | None                       | Model ID to be created as a stage resource                                   |
 | endpoint_model_resource_list[0].apigwResourceUri  | String   | Required    | None    | Up to 255 characters                  | Path for API Gateway resource starting with /                             |
-| endpoint_model_resource_list[0].podCount          | Integer  | Required    | None    | 1~100                     | Number of pods to be used for stage resources                                    |
+| endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | Required    | None    |                                  | Details of stage resource                |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | Required    | None    | 0.0~                             | CPU to be used for stage resource                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | Required    | None    | 1Mi~                             | Memory to be used for stage resource             |
+| endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | Optional    | False   | True, False                      | Pod autoscaler to be used for stage resource |
+| endpoint_model_resource_list[0].scaleMetricCode                      | String   | Optional    | None    | CONCURRENCY, REQUESTS_PER_SECOND | Scaling unit to be used for stage resource          |
+| endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | Optional    | None    | 1~                               | Scaling threshold to be used for stage resource     |
 | endpoint_model_resource_list[0].description       | String   | Optional    | None    | Up to 255 characters                  | Description of stage resource                                       |
 | tag_list                              | Array   | Optional    | None    | Max 10                     | Tag information                                                                  |
 | tag_list[0].tagKey                    | String  | Optional    | None    | Up to 64 characters                     | Tag key                                                                   |
@@ -371,7 +377,10 @@ endpoint_id = endpoint.create(
         {
             'modelId': model_id,
             'apigwResourceUri': '/predict',
-            'podCount': 1,
+            'resourceOptionDetail': {
+                'cpu': '15',
+                'memory': '15Gi'
+            },
             'description': 'stage_resource_description'
         }
     ],
@@ -402,12 +411,19 @@ You can add a new stage to existing endpoints.
 | endpoint_model_resource_list[0].modelId           | String   | Required    | None    | None                       | Model ID to be created as a stage resource                                   |
 | endpoint_model_resource_list[0].apigwResourceUri  | String   | Required    | None    | Up to 255 characters                  | Path for API Gateway resource starting with /                             |
 | endpoint_model_resource_list[0].podCount          | Integer  | Required    | None    | 1~100                     | Number of pods to be used for stage resources                                    |
+| endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | Required    | None    |                                  | Details of stage resource                |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | Required    | None    | 0.0~                             | CPU to be used for stage resource                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | Required    | None    | 1Mi~                             | Memory to be used for stage resource             |
+| endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | Optional    | False   | True, False                      | Pod autoscaler to be used for stage resource      |
+| endpoint_model_resource_list[0].scaleMetricCode                      | String   | Optional    | None    | CONCURRENCY, REQUESTS_PER_SECOND | Scaling unit to be used for stage resource          |
+| endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | Optional    | None    | 1~                               | Scaling threshold to be used for stage resource     |
 | endpoint_model_resource_list[0].description       | String   | Optional    | None    | Up to 255 characters                  | Description of stage resource                                       |
 | tag_list                              | Array   | Optional    | None    | Max 10                     | Tag information                                                              |
 | tag_list[0].tagKey                    | String  | Optional    | None    | Up to 64 characters                     | Tag key                                                               |
 | tag_list[0].tagValue                  | String  | Optional    | None    | Up to 255 characters                    | Tag value                                                               |
 | use_log                               | Boolean | Optional    | False | True, False                | Whether to leave logs in the Log & Crash Search service                                           |
 | wait                                  | Boolean | Optional    | True  | True, False                | True: Return the stage ID after creating stage, False: Return the stage ID immediately after requesting stage |
+
 ```python
 stage_id = endpoint.create_stage(
     stage_name='stage01', # Within 30 lowercase letters/numbers
@@ -418,7 +434,10 @@ stage_id = endpoint.create_stage(
         {
             'modelId': model_id,
             'apigwResourceUri': '/predict',
-            'podCount': 1,
+            'resourceOptionDetail': {
+                'cpu': '15',
+                'memory': '15Gi'
+            },
             'description': 'stage_resource_description'
         }
     ],
@@ -553,6 +572,7 @@ easymaker.BatchInference().delete(batch_inference_id)
 ```
 
 ### NHN Cloud - Log & Crash Search Log Sending Feature
+
 ```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
 easymaker_logger.send('test log meassage')  # Output to stdout & send log to log&crash product
@@ -563,7 +583,9 @@ easymaker_logger.send(log_message='log meassage',
 ```
 
 ### NHN Cloud - Object Storage File Sending Feature
+
 Provide a feature to upload and download files with Object Storage.
+
 ```python
 easymaker.upload(
     easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
@@ -581,6 +603,7 @@ easymaker.download(
 ```
 
 ## CLI Command
+
 If you know the app key, secret key, and region information, you can check various information through Python CLI without accessing the console.
 
 | Feature                          | Command                                                                                        |
