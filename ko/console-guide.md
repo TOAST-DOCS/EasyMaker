@@ -680,7 +680,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 > [참고] 추론 요청 API 스펙
 > AI EasyMaker 서비스는 OIP(Open Inference Protocol) 스펙을 기반으로 한 엔드포인트를 제공합니다. 엔드포인트 API 스펙 명세는 [부록 > 10. 엔드포인트 API 스펙 명세](./console-guide/#10-api)를 참고하세요.
 > 별도의 엔드포인트를 사용하려면 API Gateway 서비스에 생성된 리소스를 참고하여 새로운 리소스를 생성해 사용하기 바랍니다.
-> OIP 스펙에 대한 상세한 내용은 [OIP 스펙](https://github.com/kserve/open-inference-protocol)을 참고하세요.
+> OIP 스펙에 대한 자세한 내용은 [OIP 스펙](https://github.com/kserve/open-inference-protocol)을 참고하세요.
 
 > [참고] 엔드포인트 생성 소요 시간:
 > 엔드포인트 생성은 몇 분의 시간이 소요될 수 있습니다.
@@ -1578,6 +1578,9 @@ CPU와 메모리 실 사용량에 맞게 인스턴스 타입, 인스턴스 수 �
 
 ### 10. 엔드포인트 API 스펙 명세
 
+AI EasyMaker 서비스는 OIP(Open Inference Protocol) 스펙을 기반으로 한 엔드포인트를 제공합니다.
+OIP 스펙에 대한 상세한 내용은 [OIP 스펙](https://github.com/kserve/open-inference-protocol)을 참고하세요.
+
 | 이름             | 메서드 | API 경로                                     |
 | ---------------- | ------ | -------------------------------------------- |
 | 모델 목록        | GET    | /<model_name>/v1/models                      |
@@ -1590,8 +1593,8 @@ CPU와 메모리 실 사용량에 맞게 인스턴스 타입, 인스턴스 수 �
 | 모델 정보        | GET    | /<model_name>/v2/models/<model_name>         |
 | 모델 Ready       | GET    | /<model_name>/v2/models/<model_name>/ready   |
 | 추론             | POST   | /<model_name>/v2/models/<model_name>/infer   |
-| 생성형 모델 추론 | POST   | /<model_name>/openai/v1/completetions        |
-| 생성형 모델 추론 | POST   | /<model_name>/openai/v1/chat/completetions   |
+| 생성형 모델 추론 | POST   | /<model_name>/openai/v1/completions          |
+| 생성형 모델 추론 | POST   | /<model_name>/openai/v1/chat/completions     |
 
 ### 11. 프레임워크별 서빙 참고 사항
 
