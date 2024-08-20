@@ -1,6 +1,6 @@
-## NHN Cloud > SDK 사용 가이드 > AI EasyMaker
+## Machine Learning > AI EasyMaker > SDK 사용 가이드
 
-## 개발 가이드
+## SDK 설정
 
 ### AI EasyMaker 파이썬 SDK 설치
 
@@ -23,6 +23,23 @@ easymaker.init(
     secret_key='EASYMAKER_SECRET_KEY',
 )
 ```
+
+## CLI Command
+
+앱키, 비밀 키, 리전 정보를 알고 있다면, 콘솔에 접근하지 않고도 파이썬 CLI를 통해 여러 정보를 확인할 수 있습니다.
+
+| 기능                          | 명령어                                                                                        |
+|-----------------------------|--------------------------------------------------------------------------------------------|
+| Instance type 목록 조회         | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -instance   |
+| Image 목록 조회                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -image      |
+| Algorithm 목록 조회             | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -algorithm  |
+| Experiment 목록 조회            | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -experiment |
+| Training 목록 조회              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -training   |
+| Hyperparameter tuning 목록 조회 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -tuning     |
+| Model 목록 조회                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -model      |
+| Endpoint 목록 조회              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -endpoint   |
+
+## 실험
 
 ### 실험 생성
 
@@ -55,6 +72,8 @@ experiment_id = easymaker.Experiment().create(
 ```python
 easymaker.Experiment().delete(experiment_id)
 ```
+
+## 학습
 
 ### 학습 생성
 
@@ -151,6 +170,8 @@ training_id = easymaker.Training().run(
 ```python
 easymaker.Training().delete(training_id)
 ```
+
+## 하이퍼파라미터 튜닝
 
 ### 하이퍼파라미터 튜닝 생성
 
@@ -278,6 +299,8 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
 easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
 ```
 
+## 모델
+
 ### 모델 생성
 
 학습 ID 값으로 모델 생성을 요청할 수 있습니다.
@@ -337,6 +360,8 @@ model_id = easymaker.Model().create_by_model_uri(
 ```python
 easymaker.Model().delete(model_id)
 ```
+
+## 엔드포인트
 
 ### 엔드포인트 생성
 
@@ -499,6 +524,8 @@ endpoint.Endpoint().delete_endpoint(endpoint_id)
 endpoint.Endpoint().delete_endpoint_stage(stage_id)
 ```
 
+## 배치 추론
+
 ### 배치 추론 생성
 
 [Parameter]
@@ -570,7 +597,9 @@ batch_inference_id = easymaker.BatchInference().run(
 easymaker.BatchInference().delete(batch_inference_id)
 ```
 
-### NHN Cloud - Log & Crash Search 로그 전송 기능
+## 기타 기능
+
+### NHN Cloud - Log & Crash Search 로그 전송
 
 ```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
@@ -581,7 +610,7 @@ easymaker_logger.send(log_message='log meassage',
                       parameters={'serviceType': 'EasyMakerSample'})  # Add custom parameters
 ```
 
-### NHN Cloud - Object Storage 파일 전송 기능
+### NHN Cloud - Object Storage 파일 전송
 
 Object Storage 상품으로 파일을 업로드하고 다운로드하는 기능을 제공합니다.
 
@@ -600,18 +629,3 @@ easymaker.download(
     password='nhn_object_storage_api_password'
 )
 ```
-
-## CLI Command
-
-앱키, 비밀 키, 리전 정보를 알고 있다면, 콘솔에 접근하지 않고도 파이썬 CLI를 통해 여러 정보를 확인할 수 있습니다.
-
-| 기능                          | 명령어                                                                                        |
-|-----------------------------|--------------------------------------------------------------------------------------------|
-| Instance type 목록 조회         | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -instance   |
-| Image 목록 조회                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -image      |
-| Algorithm 목록 조회             | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -algorithm  |
-| Experiment 목록 조회            | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -experiment |
-| Training 목록 조회              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -training   |
-| Hyperparameter tuning 목록 조회 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -tuning     |
-| Model 목록 조회                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -model      |
-| Endpoint 목록 조회              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -endpoint   |
