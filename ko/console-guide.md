@@ -1120,12 +1120,14 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
 
 > [참고] ML 아티팩트란?
 > 컴포넌트는 입력을 받고 출력을 생성할 수 있습니다. 두 가지 유형의 I/O 타입이 있습니다. 매개변수(parameters)와 아티팩트(artifacts)입니다:
+>
 > 1. 매개변수는 컴포넌트 간에 작은 양의 데이터를 전달하는 데 유용합니다.
 > 2. 아티팩트 유형은 데이터셋, 모델, 메트릭 등과 같은 ML 아티팩트 출력을 위한 것입니다. 오브젝트 스토리지에 저장하기 위한 편리한 메커니즘을 제공합니다.
 
 대부분의 파이프라인은 데이터셋, 모델, 평가 메트릭 등과 같은 하나 이상의 ML 아티팩트를 생성하는 것을 목표로 합니다.
 
 > [참고] Kubeflow Pipelines(KFP) 공식 문서
+>
 > - [KFP 사용자 가이드](https://www.kubeflow.org/docs/components/pipelines/user-guides/)
 > - [KFP SDK 레퍼런스](https://kubeflow-pipelines.readthedocs.io/en/stable/)
 
@@ -1593,8 +1595,13 @@ OIP 스펙에 대한 상세한 내용은 [OIP 스펙](https://github.com/kserve/
 | 모델 정보        | GET    | /<model_name>/v2/models/<model_name>         |
 | 모델 Ready       | GET    | /<model_name>/v2/models/<model_name>/ready   |
 | 추론             | POST   | /<model_name>/v2/models/<model_name>/infer   |
-| 생성형 모델 추론 | POST   | /<model_name>/openai/v1/completions          |
-| 생성형 모델 추론 | POST   | /<model_name>/openai/v1/chat/completions     |
+| OpenAI 생성형 모델 추론 | POST   | /<model_name>/openai/v1/completions          |
+| OpenAI 생성형 모델 추론 | POST   | /<model_name>/openai/v1/chat/completions     |
+
+> [참고] OpenAI 생성형 모델 추론
+> OpenAI 생성형 모델 추론은 OpenAI의 GPT-3와 같은 생성형 모델을 사용하는 경우에 사용됩니다.
+> 추론에 필요한 입력값은 OpenAI의 API 스펙에 따라 입력해야 합니다.
+> 자세한 내용은 [OpenAI API 문서](https://platform.openai.com/docs/api-reference/chat)를 참고하세요.
 
 ### 11. 프레임워크별 서빙 참고 사항
 
