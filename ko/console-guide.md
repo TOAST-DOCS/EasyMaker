@@ -1599,9 +1599,9 @@ OIP 스펙에 대한 상세한 내용은 [OIP 스펙](https://github.com/kserve/
 | OpenAI 생성형 모델 추론 | POST   | /<model_name>/openai/v1/chat/completions     |
 
 > [참고] OpenAI 생성형 모델 추론
-> OpenAI 생성형 모델 추론은 OpenAI의 GPT-3와 같은 생성형 모델을 사용하는 경우에 사용됩니다.
-> 추론에 필요한 입력값은 OpenAI의 API 스펙에 따라 입력해야 합니다.
-> 자세한 내용은 [OpenAI API 문서](https://platform.openai.com/docs/api-reference/chat)를 참고하세요.
+> OpenAI 생성형 모델 추론은 OpenAI의 GPT-4o와 같은 생성형 모델을 사용하는 경우에 사용됩니다.
+> 추론에 필요한 입력값은 OpenAI의 API 스펙에 따라 입력해야 합니다. 자세한 내용은 [OpenAI API 문서](https://platform.openai.com/docs/api-reference/chat)를 참고하세요.
+> AI EasyMaker에서 제공하는 Completion, Chat Completion API를 지원하는 모델은 [Model endpoint compatibillity](https://platform.openai.com/docs/models/model-endpoint-compatibility)를 확인하세요.
 
 ### 11. 프레임워크별 서빙 참고 사항
 
