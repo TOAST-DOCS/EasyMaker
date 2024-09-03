@@ -97,8 +97,8 @@ easymaker.Experiment().delete(experiment_id)
 | check_point_input_uri                      | String  | 선택                        | 없음    | 최대 255자     | 입력 체크 포인트 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)                 |
 | check_point_upload_uri                     | String  | 선택                        | 없음    | 최대 255자     | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)   |
 | timeout_hours                              | Integer | 선택                        | 720   | 1~720       | 최대 학습 시간(단위: 시간)                                                |
-| hyperparameter_list                        | Array   | 선택                        | 없음    | 최대 100개     | 하이퍼파라미터 정보(parameterKey/parameterValue로 구성)           |
-| hyperparameter_list[0].parameterKey   | String  | 선택                        | 없음    | 최대 255자     | 하이퍼파라미터 키                                                       |
+| hyperparameter_list                        | Array   | 선택                        | 없음    | 최대 100개     | 하이퍼파라미터 정보(parameterName/parameterValue로 구성)           |
+| hyperparameter_list[0].parameterName   | String  | 선택                        | 없음    | 최대 255자     | 하이퍼파라미터 키                                                       |
 | hyperparameter_list[0].parameterValue | String  | 선택                        | 없음    | 최대 1000자    | 하이퍼파라미터 값                                                       |
 | dataset_list                               | Array   | 선택                        | 없음    | 최대 10개      | 학습에 사용될 데이터 세트 정보(datasetName/dataUri로 구성)                      |
 | dataset_list[0].datasetName                | String  | 선택                        | 없음    | 최대 36자      | 데이터 이름                                                          |
@@ -122,11 +122,11 @@ training_id = easymaker.Training().run(
     entry_point='training_start.py',
     hyperparameter_list=[
         {
-            "parameterKey": "epochs",
+            "parameterName": "epochs",
             "parameterValue": "10",
         },
         {
-            "parameterKey": "batch-size",
+            "parameterName": "batch-size",
             "parameterValue": "30",
         }
     ],
@@ -332,18 +332,21 @@ model_id = easymaker.Model().create(
 
 | 이름                   | 타입     | 필수 여부 | 기본값 | 유효 범위                                   | 설명                                                  |
 |----------------------|--------|-------|-----|-----------------------------------------|-----------------------------------------------------|
-| framework_code       | Enum   | 필수    | 없음  | easymaker.TENSORFLOW, easymaker.PYTORCH | 학습에 사용된 프레임워크 정보                                    |
-| model_uri            | String | 필수    | 없음  | 최대 255자                                 | 모델 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
+| model_type_code       | Enum   | 필수    | 없음  | easymaker.TENSORFLOW, easymaker.PYTORCH | 학습에 사용된 프레임워크 정보                                    |
+| model_upload_uri            | String | 필수    | 없음  | 최대 255자                                 | 모델 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
 | model_name           | String | 필수    | 없음  | 최대 50자                                  | 모델 이름                                               |
 | model_description    | String | 선택    | 없음  | 최대 255자                                 | 모델에 대한 설명                                           |
+| parameter_list                   | Array  | 선택    | 없음  | 최대 10개                                  | 파라미터 정보(parameterName/parameterValue로 구성)         |
+| parameter_list[0].parameterName  | String | 선택    | 없음  | 최대 64자                                  | 파라미터 이름                                              |
+| parameter_list[0].parameterValue | String | 선택    | 없음  | 최대 255자                                 | 파라미터 값                                                |
 | tag_list             | Array  | 선택    | 없음  | 최대 10개                                  | 태그 정보                                               |
 | tag_list[0].tagKey   | String | 선택    | 없음  | 최대 64자                                  | 태그 키                                                |
 | tag_list[0].tagValue | String | 선택    | 없음  | 최대 255자                                 | 태그 값                                                |
 
 ```python
-model_id = easymaker.Model().create_by_model_uri(
-    framework_code=easymaker.TENSORFLOW,
-    model_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+model_id = easymaker.Model().create_by_model_upload_uri(
+    model_type_code=easymaker.TENSORFLOW,
+    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
     model_description='model_description',
 )
