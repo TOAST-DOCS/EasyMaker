@@ -1598,7 +1598,7 @@ AI EasyMaker 서비스는 안정적인 서비스와 신규 기능 제공을 위�
 - Pytorch에서 분산 학습이 가능하도록 코드를 작성하였고, 분산 노드 수와 노드당 프로세스 개수를 입력하면 torchrun을 이용한 분산 노드 및 멀티 프로세스를 활용한 분산 학습이 이루어집니다.
 - 총 프로세스 개수, 모델 크기, 입력 데이터 크기, 배치 사이즈 등의 요소에 의하여 메모리 부족으로 학습 및 하이퍼파라미터 튜닝이 실패할 수 있습니다. 메모리 부족으로 실패하는 경우 아래와 같은 에러 메시지가 남을 수 있습니다. 단, 아래의 메시지가 남는다고 하여 모두 메모리 부족으로 인한 실패는 아닙니다. 메모리 사용량에 따라 적절한 인스턴스 타입을 설정하세요.
 
-```
+```plaintext
 exit code : -9 (pid: {pid})
 ```
 
@@ -1619,18 +1619,18 @@ OIP 스펙에 대한 상세한 내용은 [OIP 스펙](https://github.com/kserve/
 
 | 이름             | 메서드 | API 경로                                     |
 | ---------------- | ------ | -------------------------------------------- |
-| 모델 목록        | GET    | /<model_name>/v1/models                      |
-| 모델 Ready       | GET    | /<model_name>/v1/models/<model_name>         |
-| 추론             | POST   | /<model_name>/v1/models/<model_name>/predict |
-| 설명             | POST   | /<model_name>/v1/models/<model_name>/explain |
-| 서버 정보        | GET    | /<model_name>/v2                             |
-| 서버 Live        | GET    | /<model_name>/v2/health/live                 |
-| 서버 Ready       | GET    | /<model_name>/v2/health/ready                |
-| 모델 정보        | GET    | /<model_name>/v2/models/<model_name>         |
-| 모델 Ready       | GET    | /<model_name>/v2/models/<model_name>/ready   |
-| 추론             | POST   | /<model_name>/v2/models/<model_name>/infer   |
-| OpenAI 생성형 모델 추론 | POST   | /<model_name>/openai/v1/completions          |
-| OpenAI 생성형 모델 추론 | POST   | /<model_name>/openai/v1/chat/completions     |
+| 모델 목록        | GET    | /\<model_name\>/v1/models                      |
+| 모델 Ready       | GET    | /\<model_name\>/v1/models/\<model_name\>         |
+| 추론             | POST   | /\<model_name\>/v1/models/\<model_name\>/predict |
+| 설명             | POST   | /\<model_name\>/v1/models/\<model_name\>/explain |
+| 서버 정보        | GET    | /\<model_name\>/v2                             |
+| 서버 Live        | GET    | /\<model_name\>/v2/health/live                 |
+| 서버 Ready       | GET    | /\<model_name\>/v2/health/ready                |
+| 모델 정보        | GET    | /\<model_name\>/v2/models/\<model_name\>         |
+| 모델 Ready       | GET    | /\<model_name\>/v2/models/\<model_name\>/ready   |
+| 추론             | POST   | /\<model_name\>/v2/models/\<model_name\>/infer   |
+| OpenAI 생성형 모델 추론 | POST   | /\<model_name\>/openai/v1/completions          |
+| OpenAI 생성형 모델 추론 | POST   | /\<model_name\>/openai/v1/chat/completions     |
 
 > [참고] OpenAI 생성형 모델 추론
 > OpenAI 생성형 모델 추론은 OpenAI의 GPT-4o와 같은 생성형 모델을 사용하는 경우에 사용됩니다.
@@ -1691,22 +1691,22 @@ TensorFlow와 PyTorch로 학습된 Hugging Face 모델을 서빙하는 방법입
 
    - 아래의 예시코드처럼 transformers 라이브러리의 AutoTokenizer, AutoConfig, AutoModel을 사용해서 다운로드할 수 있습니다.
 
-   ```python
-   from transformers import AutoTokenizer, AutoConfig, AutoModel
+        ```python
+        from transformers import AutoTokenizer, AutoConfig, AutoModel
 
-   model_id = "<model_id>"
-   revision = "main"
+        model_id = "<model_id>"
+        revision = "main"
 
-   model_dir = f"./models/{model_id}/{revision}"
+        model_dir = f"./models/{model_id}/{revision}"
 
-   tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision)
-   model_config = AutoConfig.from_pretrained(model_id, revision=revision)
-   model = AutoModel.from_config(model_config)
+        tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision)
+        model_config = AutoConfig.from_pretrained(model_id, revision=revision)
+        model = AutoModel.from_config(model_config)
 
-   tokenizer.save_pretrained(model_dir)
-   model.save_pretrained(model_dir)
+        tokenizer.save_pretrained(model_dir)
+        model.save_pretrained(model_dir)
 
-   ```
+        ```
 
    - 모델 다운로드에 실패한다면, AutoModel이 아닌 모델에 맞는 클래스를 import해서 다운로드를 시도하세요.
    - 미세 조정이 필요한 경우 [Hugging Face 미세 조정 가이드](https://huggingface.co/docs/transformers/main/ko/training)에 따라 자체 코드를 작성해서 학습할 수 있습니다.
