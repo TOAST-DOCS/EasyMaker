@@ -1,6 +1,6 @@
-## NHN Cloud > SDK 사용 가이드 > AI EasyMaker
+## Machine Learning > AI EasyMaker > SDK 사용 가이드
 
-## 개발 가이드
+## SDK 설정
 
 ### AI EasyMaker 파이썬 SDK 설치
 
@@ -23,6 +23,23 @@ easymaker.init(
     secret_key='EASYMAKER_SECRET_KEY',
 )
 ```
+
+## CLI Command
+
+앱키, 비밀 키, 리전 정보를 알고 있다면, 콘솔에 접근하지 않고도 파이썬 CLI를 통해 여러 정보를 확인할 수 있습니다.
+
+| 기능                          | 명령어                                                                                        |
+|-----------------------------|--------------------------------------------------------------------------------------------|
+| Instance type 목록 조회         | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -instance   |
+| Image 목록 조회                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -image      |
+| Algorithm 목록 조회             | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -algorithm  |
+| Experiment 목록 조회            | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -experiment |
+| Training 목록 조회              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -training   |
+| Hyperparameter tuning 목록 조회 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -tuning     |
+| Model 목록 조회                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -model      |
+| Endpoint 목록 조회              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -endpoint   |
+
+## 실험
 
 ### 실험 생성
 
@@ -56,6 +73,8 @@ experiment_id = easymaker.Experiment().create(
 easymaker.Experiment().delete(experiment_id)
 ```
 
+## 학습
+
 ### 학습 생성
 
 [Parameter]
@@ -78,8 +97,8 @@ easymaker.Experiment().delete(experiment_id)
 | check_point_input_uri                      | String  | 선택                        | 없음    | 최대 255자     | 입력 체크 포인트 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)                 |
 | check_point_upload_uri                     | String  | 선택                        | 없음    | 최대 255자     | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)   |
 | timeout_hours                              | Integer | 선택                        | 720   | 1~720       | 최대 학습 시간(단위: 시간)                                                |
-| hyperparameter_list                        | Array   | 선택                        | 없음    | 최대 100개     | 하이퍼파라미터 정보(parameterKey/parameterValue로 구성)           |
-| hyperparameter_list[0].parameterKey   | String  | 선택                        | 없음    | 최대 255자     | 하이퍼파라미터 키                                                       |
+| hyperparameter_list                        | Array   | 선택                        | 없음    | 최대 100개     | 하이퍼파라미터 정보(parameterName/parameterValue로 구성)           |
+| hyperparameter_list[0].parameterName   | String  | 선택                        | 없음    | 최대 255자     | 하이퍼파라미터 키                                                       |
 | hyperparameter_list[0].parameterValue | String  | 선택                        | 없음    | 최대 1000자    | 하이퍼파라미터 값                                                       |
 | dataset_list                               | Array   | 선택                        | 없음    | 최대 10개      | 학습에 사용될 데이터 세트 정보(datasetName/dataUri로 구성)                      |
 | dataset_list[0].datasetName                | String  | 선택                        | 없음    | 최대 36자      | 데이터 이름                                                          |
@@ -103,11 +122,11 @@ training_id = easymaker.Training().run(
     entry_point='training_start.py',
     hyperparameter_list=[
         {
-            "parameterKey": "epochs",
+            "parameterName": "epochs",
             "parameterValue": "10",
         },
         {
-            "parameterKey": "batch-size",
+            "parameterName": "batch-size",
             "parameterValue": "30",
         }
     ],
@@ -151,6 +170,8 @@ training_id = easymaker.Training().run(
 ```python
 easymaker.Training().delete(training_id)
 ```
+
+## 하이퍼파라미터 튜닝
 
 ### 하이퍼파라미터 튜닝 생성
 
@@ -278,6 +299,8 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
 easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
 ```
 
+## 모델
+
 ### 모델 생성
 
 학습 ID 값으로 모델 생성을 요청할 수 있습니다.
@@ -309,18 +332,21 @@ model_id = easymaker.Model().create(
 
 | 이름                   | 타입     | 필수 여부 | 기본값 | 유효 범위                                   | 설명                                                  |
 |----------------------|--------|-------|-----|-----------------------------------------|-----------------------------------------------------|
-| framework_code       | Enum   | 필수    | 없음  | easymaker.TENSORFLOW, easymaker.PYTORCH | 학습에 사용된 프레임워크 정보                                    |
-| model_uri            | String | 필수    | 없음  | 최대 255자                                 | 모델 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
+| model_type_code       | Enum   | 필수    | 없음  | easymaker.TENSORFLOW, easymaker.PYTORCH | 학습에 사용된 프레임워크 정보                                    |
+| model_upload_uri            | String | 필수    | 없음  | 최대 255자                                 | 모델 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
 | model_name           | String | 필수    | 없음  | 최대 50자                                  | 모델 이름                                               |
 | model_description    | String | 선택    | 없음  | 최대 255자                                 | 모델에 대한 설명                                           |
+| parameter_list                   | Array  | 선택    | 없음  | 최대 10개                                  | 파라미터 정보(parameterName/parameterValue로 구성)         |
+| parameter_list[0].parameterName  | String | 선택    | 없음  | 최대 64자                                  | 파라미터 이름                                              |
+| parameter_list[0].parameterValue | String | 선택    | 없음  | 최대 255자                                 | 파라미터 값                                                |
 | tag_list             | Array  | 선택    | 없음  | 최대 10개                                  | 태그 정보                                               |
 | tag_list[0].tagKey   | String | 선택    | 없음  | 최대 64자                                  | 태그 키                                                |
 | tag_list[0].tagValue | String | 선택    | 없음  | 최대 255자                                 | 태그 값                                                |
 
 ```python
-model_id = easymaker.Model().create_by_model_uri(
-    framework_code=easymaker.TENSORFLOW,
-    model_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+model_id = easymaker.Model().create_by_model_upload_uri(
+    model_type_code=easymaker.TENSORFLOW,
+    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
     model_description='model_description',
 )
@@ -337,6 +363,8 @@ model_id = easymaker.Model().create_by_model_uri(
 ```python
 easymaker.Model().delete(model_id)
 ```
+
+## 엔드포인트
 
 ### 엔드포인트 생성
 
@@ -499,6 +527,8 @@ endpoint.Endpoint().delete_endpoint(endpoint_id)
 endpoint.Endpoint().delete_endpoint_stage(stage_id)
 ```
 
+## 배치 추론
+
 ### 배치 추론 생성
 
 [Parameter]
@@ -570,7 +600,9 @@ batch_inference_id = easymaker.BatchInference().run(
 easymaker.BatchInference().delete(batch_inference_id)
 ```
 
-### NHN Cloud - Log & Crash Search 로그 전송 기능
+## 기타 기능
+
+### NHN Cloud - Log & Crash Search 로그 전송
 
 ```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
@@ -581,7 +613,7 @@ easymaker_logger.send(log_message='log meassage',
                       parameters={'serviceType': 'EasyMakerSample'})  # Add custom parameters
 ```
 
-### NHN Cloud - Object Storage 파일 전송 기능
+### NHN Cloud - Object Storage 파일 전송
 
 Object Storage 상품으로 파일을 업로드하고 다운로드하는 기능을 제공합니다.
 
@@ -600,18 +632,3 @@ easymaker.download(
     password='nhn_object_storage_api_password'
 )
 ```
-
-## CLI Command
-
-앱키, 비밀 키, 리전 정보를 알고 있다면, 콘솔에 접근하지 않고도 파이썬 CLI를 통해 여러 정보를 확인할 수 있습니다.
-
-| 기능                          | 명령어                                                                                        |
-|-----------------------------|--------------------------------------------------------------------------------------------|
-| Instance type 목록 조회         | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -instance   |
-| Image 목록 조회                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -image      |
-| Algorithm 목록 조회             | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -algorithm  |
-| Experiment 목록 조회            | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -experiment |
-| Training 목록 조회              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -training   |
-| Hyperparameter tuning 목록 조회 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -tuning     |
-| Model 목록 조회                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -model      |
-| Endpoint 목록 조회              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -endpoint   |
