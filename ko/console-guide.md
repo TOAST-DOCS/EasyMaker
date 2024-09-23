@@ -1078,13 +1078,13 @@ AI EasyMaker의 기반 이미지는 아래 표를 확인하세요.
     3. 노트북 컨테이너 이미지로 사용할 개인 이미지를 선택합니다.
     4. 기타 노트북 정보를 입력한 후 생성하면, 개인 이미지로 노트북이 구동됩니다.
 
-> [참고]
-> 노트북 이외 학습, 하이퍼파라미터 튜닝도 동일하게 개인 이미지를 사용하여 리소스를 생성할 수 있습니다.
+> [참고] 개인 이미지 사용처:
+> 개인 이미지는 노트북, 학습, 하이퍼파라미터 튜닝에 사용하여 리소스를 생성할 수 있습니다.
 
 > [참고] 컨테이너 레지스트리 서비스: NHN Container Registry(NCR)
-> 컨테이너 레지스트 서비스로 NCR 서비스만 연동 가능합니다. (2023년 12월 기준)<br/>
-> NCR 서비스의 계정 아이디와 비밀번호는 다음의 값을 입력합니다.<br/>
-> 아이디: NHN Cloud 사용자 계정의 User Access Key<br/>
+> 컨테이너 레지스트 서비스로 NCR 서비스만 연동 가능합니다. (2023년 12월 기준)
+> NCR 서비스의 계정 아이디와 비밀번호는 다음의 값을 입력합니다.
+> 아이디: NHN Cloud 사용자 계정의 User Access Key
 > 비밀번호: NHN Cloud 사용자 계정의 User Secret Key
 
 ## 레지스트리 계정
@@ -1619,18 +1619,18 @@ OIP 스펙에 대한 상세한 내용은 [OIP 스펙](https://github.com/kserve/
 
 | 이름             | 메서드 | API 경로                                     |
 | ---------------- | ------ | -------------------------------------------- |
-| 모델 목록        | GET    | /\<model_name\>/v1/models                      |
-| 모델 Ready       | GET    | /\<model_name\>/v1/models/\<model_name\>         |
-| 추론             | POST   | /\<model_name\>/v1/models/\<model_name\>/predict |
-| 설명             | POST   | /\<model_name\>/v1/models/\<model_name\>/explain |
-| 서버 정보        | GET    | /\<model_name\>/v2                             |
-| 서버 Live        | GET    | /\<model_name\>/v2/health/live                 |
-| 서버 Ready       | GET    | /\<model_name\>/v2/health/ready                |
-| 모델 정보        | GET    | /\<model_name\>/v2/models/\<model_name\>         |
-| 모델 Ready       | GET    | /\<model_name\>/v2/models/\<model_name\>/ready   |
-| 추론             | POST   | /\<model_name\>/v2/models/\<model_name\>/infer   |
-| OpenAI 생성형 모델 추론 | POST   | /\<model_name\>/openai/v1/completions          |
-| OpenAI 생성형 모델 추론 | POST   | /\<model_name\>/openai/v1/chat/completions     |
+| 모델 목록        | GET    | /{model_name}/v1/models                      |
+| 모델 Ready       | GET    | /{model_name}/v1/models/{model_name}         |
+| 추론             | POST   | /{model_name}/v1/models/{model_name}/predict |
+| 설명             | POST   | /{model_name}/v1/models/{model_name}/explain |
+| 서버 정보        | GET    | /{model_name}/v2                             |
+| 서버 Live        | GET    | /{model_name}/v2/health/live                 |
+| 서버 Ready       | GET    | /{model_name}/v2/health/ready                |
+| 모델 정보        | GET    | /{model_name}/v2/models/{model_name}         |
+| 모델 Ready       | GET    | /{model_name}/v2/models/{model_name}/ready   |
+| 추론             | POST   | /{model_name}/v2/models/{model_name}/infer   |
+| OpenAI 생성형 모델 추론 | POST   | /{model_name}/openai/v1/completions          |
+| OpenAI 생성형 모델 추론 | POST   | /{model_name}/openai/v1/chat/completions     |
 
 > [참고] OpenAI 생성형 모델 추론
 > OpenAI 생성형 모델 추론은 OpenAI의 GPT-4o와 같은 생성형 모델을 사용하는 경우에 사용됩니다.
@@ -1688,10 +1688,8 @@ Hugging Face Runtime 서빙은 미세 조정을 지원하지 않습니다. 미�
 TensorFlow와 PyTorch로 학습된 Hugging Face 모델을 서빙하는 방법입니다.
 
 1. Hugging Face 모델을 다운로드합니다.
-
    - 아래의 예시코드처럼 transformers 라이브러리의 AutoTokenizer, AutoConfig, AutoModel을 사용해서 다운로드할 수 있습니다.
 
-        ```python
         from transformers import AutoTokenizer, AutoConfig, AutoModel
 
         model_id = "<model_id>"
@@ -1706,16 +1704,11 @@ TensorFlow와 PyTorch로 학습된 Hugging Face 모델을 서빙하는 방법입
         tokenizer.save_pretrained(model_dir)
         model.save_pretrained(model_dir)
 
-        ```
-
    - 모델 다운로드에 실패한다면, AutoModel이 아닌 모델에 맞는 클래스를 import해서 다운로드를 시도하세요.
    - 미세 조정이 필요한 경우 [Hugging Face 미세 조정 가이드](https://huggingface.co/docs/transformers/main/ko/training)에 따라 자체 코드를 작성해서 학습할 수 있습니다.
      - AI EasyMaker 학습에 대한 자세한 내용은 [학습](./console-guide/#_18)을 확인하세요.
-
 2. Hugging Face 모델 정보를 확인해서 서빙에 필요한 파일을 생성합니다.
-
    - 프레임워크별 서빙에 필요한 형태로 모델을 저장합니다.
    - 자세한 사항은 TensorFlow, PyTorch 프레임워크의 참고 사항을 확인하세요.
-
 3. OBS 또는 NAS에 모델 파일을 업로드합니다.
 4. 이후의 과정은 [모델 생성](./console-guide/#_37)과 [엔드포인트 생성](./console-guide/#_42) 가이드를 확인하세요.
