@@ -1707,6 +1707,7 @@ TensorFlow와 PyTorch로 학습된 Hugging Face 모델을 서빙하는 방법입
     - 모델 다운로드에 실패한다면, AutoModel이 아닌 모델에 맞는 클래스를 import해서 다운로드를 시도하세요.
     - 미세 조정이 필요한 경우 [Hugging Face 미세 조정 가이드](https://huggingface.co/docs/transformers/main/ko/training)에 따라 자체 코드를 작성해서 학습할 수 있습니다.
         - AI EasyMaker 학습에 대한 자세한 내용은 [학습](./console-guide/#_18)을 확인하세요.
+
 2. Hugging Face 모델 정보를 확인해서 서빙에 필요한 파일을 생성합니다.
     - 프레임워크별 서빙에 필요한 형태로 모델을 저장합니다.
     - 자세한 사항은 TensorFlow, PyTorch 프레임워크의 참고 사항을 확인하세요.
