@@ -1690,19 +1690,19 @@ TensorFlow와 PyTorch로 학습된 Hugging Face 모델을 서빙하는 방법입
 1. Hugging Face 모델을 다운로드합니다.
     - 아래의 예시코드처럼 transformers 라이브러리의 AutoTokenizer, AutoConfig, AutoModel을 사용해서 다운로드할 수 있습니다.
 
-        from transformers import AutoTokenizer, AutoConfig, AutoModel
+            from transformers import AutoTokenizer, AutoConfig, AutoModel
 
-        model_id = "<model_id>"
-        revision = "main"
+            model_id = "<model_id>"
+            revision = "main"
 
-        model_dir = f"./models/{model_id}/{revision}"
+            model_dir = f"./models/{model_id}/{revision}"
 
-        tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision)
-        model_config = AutoConfig.from_pretrained(model_id, revision=revision)
-        model = AutoModel.from_config(model_config)
+            tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision)
+            model_config = AutoConfig.from_pretrained(model_id, revision=revision)
+            model = AutoModel.from_config(model_config)
 
-        tokenizer.save_pretrained(model_dir)
-        model.save_pretrained(model_dir)
+            tokenizer.save_pretrained(model_dir)
+            model.save_pretrained(model_dir)
 
     - 모델 다운로드에 실패한다면, AutoModel이 아닌 모델에 맞는 클래스를 import해서 다운로드를 시도하세요.
     - 미세 조정이 필요한 경우 [Hugging Face 미세 조정 가이드](https://huggingface.co/docs/transformers/main/ko/training)에 따라 자체 코드를 작성해서 학습할 수 있습니다.
