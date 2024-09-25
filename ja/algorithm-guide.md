@@ -330,7 +330,6 @@ Semantic Segmentationアルゴリズムは、次の指標を作成します。
 | per_device_train_batch_size | False | int | 4 | [1～∞)     | GPU/TPU core/CPUあたりのtrainingバッチサイズ |
 | per_device_eval_batch_size | False | int | 4 | [1～∞)     | GPU/TPU core/CPUあたりのevaluationバッチサイズ |
 | num_train_epochs | False | float | 3.0 | [0.0～∞)   | 全体trainingを実行する総回数 |
-| threshold | False | float | 0.5 | [0.0～1.0] | 推論Threshold |
 | logging_steps  | False | int | 500 | [500～∞)   | ログを出力するstep周期 |
 
 ### データセット
