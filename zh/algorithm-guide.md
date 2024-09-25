@@ -330,7 +330,6 @@ An algorithm (detr-resnet-50) that predicts the position (bbox) and class (class
 | per_device_train_batch_size | False | int | 4 | [1~∞)     | Training batch size per GPU/TPU core/CPU  |
 | per_device_eval_batch_size | False | int | 4 | [1~∞)     | evaluation batch size per GPU/TPU core/CPU |
 | num_train_epochs | False | float | 3.0 | [0.0~∞)   | The total number of times the entire training is performed |
-| threshold | False | float | 0.5 | [0.0~1.0] | Inference Threshold |
 | logging_steps  | False | int | 500 | [500~∞)   | Step cycle to output logs |
 
 ### Data Set
