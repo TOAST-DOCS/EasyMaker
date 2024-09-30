@@ -35,7 +35,7 @@ easymaker.init(
 |------------------------|---------|-------|------|-------------|------------------------------------------------------------|
 | experiment_name        | String  | 必須 | なし | 最大50文字  | 実験名                                                  |
 | experiment_description | String  | 任意 | なし | 最大255文字 | 実験の説明                                              |
-| wait                   | Boolean | 任意 | True | True, False | True：実験の作成が完了した後に実験IDを返す。False：作成リクエスト後、すぐに実験IDを返す |
+| wait                   | Boolean | 任意 | True | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
 experiment = easymaker.Experiment().create(
@@ -61,35 +61,35 @@ easymaker.Experiment(experiment_id).delete()
 
 [Parameter]
 
-| 名前                                        | タイプ     | 必須かどうか                      | デフォルト値  | 有効範囲      | 説明                                                             |
-|--------------------------------------------|---------|-----------------------------|-------|-------------|-----------------------------------------------------------------|
-| experiment_id                              | String  | easymaker.init에서 미입력 시 必須   | なし    | なし          | 実験ID                                                           |
-| training_name                              | String  | 必須                          | なし    | 最大50文字     | 学習名                                                          |
-| training_description                       | String  | 任意                          | なし    | 最大255文字    | 学習の説明                                                      |
-| train_image_name                           | String  | 必須                          | なし    | なし          | 学習に使用されるイメージ名(CLIで照会可能)                                      |
-| train_instance_name                        | String  | 必須                          | なし    | なし          | インスタンスタイプ名(CLIで照会可能)                                          |
-| distributed_node_count                     | Integer | 必須                          | なし    | 1~10         | 分散学習を適用するノード数                                                |
-| use_torchrun                               | Boolean | 選択                          | False  | True, False | torchrunの使用有無、Pytorchイメージでのみ使用可                           |
-| nproc_per_node                             | Integer | use_torchrun Trueの場合は必須     | 1      | 1～(CPU数またはGPU数) | ノードあたりのプロセス数、 use_torchrunを使用する場合は必ず設定しなければならない値      |
-| data_storage_size                          | Integer | Obejct Storageを使用する場合は必須    | なし    | 300～10000   | 学習に必要なデータをダウンロードする記憶領域サイズ(単位: GB)、NAS使用時は不要              |
-| algorithm_name                             | String  | NHN Cloud提供アルゴリズムを使用する場合は必須 | なし    | 最大64文字     | アルゴリズム名(CLIで照会可能)                                             |
-| source_dir_uri                             | String  | 独自アルゴリズムを使用する場合は必須          | なし    | 最大255文字    | 学習に必要なファイルがあるパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
-| entry_point                                | String  | 独自アルゴリズムを使用する場合は必須          | なし    | 最大255文字    | source_dir_uri内で最初に実行されるPythonファイル情報                            |
-| model_upload_uri                           | String  | 必須                          | なし    | 最大255文字    | 学習完了したモデルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)   |
-| check_point_input_uri                      | String  | 任意                          | なし    | 最大255文字    | 入力チェックポイントファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS)                 |
-| check_point_upload_uri                     | String  | 任意                          | なし    | 最大255文字    | チェックポイントファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)   |
-| timeout_hours                              | Integer | 任意                          | 720   | 1～720       | 最大学習時間(単位:時間)                                                |
-| hyperparameter_list                        | Array   | 任意                          | なし    | 最大100個    | ハイパーパラメータ情報(parameterKey/parameterValueで構成)           |
-| hyperparameter_list[0].parameterKey   | String  | 任意                          | なし    | 最大255文字    | ハイパーパラメータキー                                                       |
-| hyperparameter_list[0].parameterValue | String  | 任意                          | なし    | 最大1000文字   | ハイパーパラメータ値                                                      |
-| dataset_list                               | Array   | 任意                          | なし    | 最大10個     | 学習に使用されるデータセット情報(datasetName/dataUriで構成)                      |
-| dataset_list[0].datasetName                | String  | 任意                          | なし    | 最大36文字     | データ名                                                         |
-| dataset_list[0].datasetUri                 | String  | 任意                          | なし    | 最大255文字    | データパス                                                         |
-| tag_list                                   | Array   | 任意                          | なし    | 最大10個     | タグ情報                                                          |
-| tag_list[0].tagKey                         | String  | 任意                          | なし    | 最大64文字     | タグキー                                                            |
-| tag_list[0].tagValue                       | String  | 任意                          | なし    | 最大255文字    | タグ値                                                           |
-| use_log                                    | Boolean | 任意                          | False | True、False | Log & Crash Searchサービスにログを残すかどうか                                     |
-| wait                                       | Boolean | 任意                          | True  | True、False | True:学習作成が完了した後に学習IDを返す。False:作成リクエスト後すぐに学習IDを返す      |
+| 名前                                     | タイプ     | 必須かどうか                      | デフォルト値  | 有効範囲            | 説明                                                             |
+|----------------------------------------|---------|-----------------------------|---------|-----------------|-----------------------------------------------------------------|
+| experiment_id                          | String  | easymaker.init에서 미입력 시 必須   | なし      | なし              | 実験ID                                                           |
+| training_name                          | String  | 必須                          | なし      | 最大50文字          | 学習名                                                          |
+| training_description                   | String  | 任意                          | なし      | 最大255文字         | 学習の説明                                                      |
+| train_image_name                       | String  | 必須                          | なし      | なし              | 学習に使用されるイメージ名(CLIで照会可能)                                      |
+| train_instance_name                    | String  | 必須                          | なし      | なし              | インスタンスタイプ名(CLIで照会可能)                                          |
+| distributed_node_count                 | Integer | 必須                          | なし      | 1~10            | 分散学習を適用するノード数                                                |
+| use_torchrun                           | Boolean | 選択                          | False   | True, False     | torchrunの使用有無、Pytorchイメージでのみ使用可                           |
+| nproc_per_node                         | Integer | use_torchrun Trueの場合は必須     | 1       | 1～(CPU数またはGPU数) | ノードあたりのプロセス数、 use_torchrunを使用する場合は必ず設定しなければならない値      |
+| data_storage_size                      | Integer | Obejct Storageを使用する場合は必須    | なし      | 300～10000       | 学習に必要なデータをダウンロードする記憶領域サイズ(単位: GB)、NAS使用時は不要              |
+| algorithm_name                         | String  | NHN Cloud提供アルゴリズムを使用する場合は必須 | なし      | 最大64文字          | アルゴリズム名(CLIで照会可能)                                             |
+| source_dir_uri                         | String  | 独自アルゴリズムを使用する場合は必須          | なし      | 最大255文字         | 学習に必要なファイルがあるパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
+| entry_point                            | String  | 独自アルゴリズムを使用する場合は必須          | なし      | 最大255文字         | source_dir_uri内で最初に実行されるPythonファイル情報                            |
+| model_upload_uri                       | String  | 必須                          | なし      | 最大255文字         | 学習完了したモデルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)   |
+| check_point_input_uri                  | String  | 任意                          | なし      | 最大255文字         | 入力チェックポイントファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS)                 |
+| check_point_upload_uri                 | String  | 任意                          | なし      | 最大255文字         | チェックポイントファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)   |
+| timeout_hours                          | Integer | 任意                          | 720     | 1～720           | 最大学習時間(単位:時間)                                                |
+| hyperparameter_list                    | Array   | 任意                          | なし      | 最大100個          | ハイパーパラメータ情報(parameterKey/parameterValueで構成)           |
+| hyperparameter_list[0].parameterKey    | String  | 任意                          | なし      | 最大255文字         | ハイパーパラメータキー                                                       |
+| hyperparameter_list[0].parameterValue  | String  | 任意                          | なし      | 最大1000文字        | ハイパーパラメータ値                                                      |
+| dataset_list                           | Array   | 任意                          | なし      | 最大10個           | 学習に使用されるデータセット情報(datasetName/dataUriで構成)                      |
+| dataset_list[0].datasetName            | String  | 任意                          | なし      | 最大36文字          | データ名                                                         |
+| dataset_list[0].datasetUri             | String  | 任意                          | なし      | 最大255文字         | データパス                                                         |
+| tag_list                               | Array   | 任意                          | なし      | 最大10個           | タグ情報                                                          |
+| tag_list[0].tagKey                     | String  | 任意                          | なし      | 最大64文字          | タグキー                                                            |
+| tag_list[0].tagValue                   | String  | 任意                          | なし      | 最大255文字         | タグ値                                                           |
+| use_log                                | Boolean | 任意                          | False   | True、False      | Log & Crash Searchサービスにログを残すかどうか                                     |
+| wait                                   | Boolean | 任意                          | True    | True、False      | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
 training = easymaker.Training().run(
@@ -202,7 +202,7 @@ easymaker.Training(training_id).delete()
 | tag_list[0].tagKey                                             | String         | 任意                                                | なし    | 最大64文字                                      | タグキー                                                                       |
 | tag_list[0].tagValue                                           | String         | 任意                                                | なし    | 最大255文字                                     | タグ値                                                                      |
 | use_log                                                        | Boolean        | 任意                                                | False | True、False                                  | Log & Crash Searchサービスにログを残すかどうか                                                |
-| wait                                                           | Boolean        | 任意                                                | True  | True、False                                  | True:ハイパーパラメータチューニングの作成完了後、ハイパーパラメータチューニングIDを返却、False:作成リクエスト後すぐに学習IDを返却 |
+| wait                                                           | Boolean        | 任意                                                | True  | True、False                                  | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
 hyperparameter_tuning = easymaker.HyperparameterTuning().run(
@@ -345,27 +345,27 @@ easymaker.Model(model_id).delete()
 
 [Parameter]
 
-| 名前                                | タイプ  | 必須かどうか | デフォルト値 | 有効範囲                  | 説明                                                                 |
-|---------------------------------------|---------|-------|-------|----------------------------|------------------------------------------------------------------------|
-| endpoint_name                         | String  | 必須 | なし  | 最大50文字                 | エンドポイント名                                                           |
-| endpoint_description                  | String  | 任意 | なし  | 最大255文字                | エンドポイントの説明                                                       |
-| endpoint_instance_name                | String  | 必須 | なし  | なし                       | エンドポイントに使用されるインスタンスタイプ名                                              |
-| endpoint_instance_count               | Integer | 任意 | 1     | 1～10                       | エンドポイントに使用されるインスタンス数                                                     |
-| endpoint_model_resource_list          | Array   | 必須   | なし   | 最大10個                     | ステージに使用されるリソース情報                                                |
-| endpoint_model_resource_list[0].modelId           | String   | 必須   | なし   | なし                      | ステージリソースで作成するモデルID                                   |
-| endpoint_model_resource_list[0].apigwResourceUri  | String   | 必須   | なし   | 最大255文字                 | /で始まるAPI Gatewayリソースパス                            |
-| endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | 必須   | なし   |                                  | ステージリソースの詳細情報                |
-| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
-| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | 必須   | なし   | 1Mi~                             | ステージリソースに使用されるメモリ            |
-| endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | 任意   | False   | True, False                      | ステージリソースに使用されるPodオートスケーラー |
-| endpoint_model_resource_list[0].scaleMetricCode                      | String   | 任意   | なし   | CONCURRENCY, REQUESTS_PER_SECOND | ステージリソースに使用される増設単位         |
-| endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | 任意   | なし   | 1~                               | ステージリソースに使用される増設しきい値    |
-| endpoint_model_resource_list[0].description       | String   | 任意   | なし   | 最大255文字                 | ステージリソースの説明                                      |
-| tag_list                              | Array   | 任意 | なし  | 最大10個                 | タグ情報                                                              |
-| tag_list[0].tagKey                    | String  | 任意 | なし  | 最大64文字                 | タグキー                                                                  |
-| tag_list[0].tagValue                  | String  | 任意 | なし  | 最大255文字                | タグ値                                                               |
-| use_log                               | Boolean | 任意 | False | True, False                | Log & Crash Searchサービスにログを残すかどうか                                           |
-| wait                                  | Boolean | 任意 | True  | True, False                | True：エンドポイントの作成が完了した後にエンドポイントIDを返す。False：エンドポイントリクエスト後、すぐにエンドポイントIDを返す |
+| 名前                                                          | タイプ  | 必須かどうか | デフォルト値  | 有効範囲                             | 説明                                                                 |
+|-------------------------------------------------------------|---------|-------|---------|----------------------------------|------------------------------------------------------------------------|
+| endpoint_name                                               | String  | 必須 | なし      | 最大50文字                           | エンドポイント名                                                           |
+| endpoint_description                                        | String  | 任意 | なし      | 最大255文字                          | エンドポイントの説明                                                       |
+| endpoint_instance_name                                      | String  | 必須 | なし      | なし                               | エンドポイントに使用されるインスタンスタイプ名                                              |
+| endpoint_instance_count                                     | Integer | 任意 | 1       | 1～10                             | エンドポイントに使用されるインスタンス数                                                     |
+| endpoint_model_resource_list                                | Array   | 必須   | なし      | 最大10個                            | ステージに使用されるリソース情報                                                |
+| endpoint_model_resource_list[0].modelId                     | String   | 必須   | なし      | なし                               | ステージリソースで作成するモデルID                                   |
+| endpoint_model_resource_list[0].apigwResourceUri            | String   | 必須   | なし      | 最大255文字                          | /で始まるAPI Gatewayリソースパス                            |
+| endpoint_model_resource_list[0].resourceOptionDetail        | Object   | 必須   | なし      |                                  | ステージリソースの詳細情報                |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | 必須   | なし      | 0.0~                             | ステージリソースに使用されるCPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | 必須   | なし      | 1Mi~                             | ステージリソースに使用されるメモリ            |
+| endpoint_model_resource_list[0].podAutoScaleEnable          | Boolean  | 任意   | False   | True, False                      | ステージリソースに使用されるPodオートスケーラー |
+| endpoint_model_resource_list[0].scaleMetricCode             | String   | 任意   | なし      | CONCURRENCY, REQUESTS_PER_SECOND | ステージリソースに使用される増設単位         |
+| endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | 任意   | なし      | 1~                               | ステージリソースに使用される増設しきい値    |
+| endpoint_model_resource_list[0].description                 | String   | 任意   | なし      | 最大255文字                          | ステージリソースの説明                                      |
+| tag_list                                                    | Array   | 任意 | なし      | 最大10個                            | タグ情報                                                              |
+| tag_list[0].tagKey                                          | String  | 任意 | なし      | 最大64文字                           | タグキー                                                                  |
+| tag_list[0].tagValue                                        | String  | 任意 | なし      | 最大255文字                          | タグ値                                                               |
+| use_log                                                     | Boolean | 任意 | False   | True, False                      | Log & Crash Searchサービスにログを残すかどうか                                           |
+| wait                                                        | Boolean | 任意 | True    | True, False                      | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
 endpoint = easymaker.Endpoint().create(
@@ -401,28 +401,28 @@ endpoint = easymaker.Endpoint(endpoint_id)
 
 [Parameter]
 
-| 名前                                | タイプ  | 必須かどうか | デフォルト値 | 有効範囲                  | 説明                                                             |
-|---------------------------------------|---------|-------|-------|----------------------------|--------------------------------------------------------------------|
-| stage_name                            | String  | 必須 | なし  | 最大50文字                 | ステージ名                                                        |
-| stage_description                     | String  | 任意 | なし  | 最大255文字                | ステージの説明                                                    |
-| endpoint_instance_name                | String  | 必須 | なし  | なし                       | エンドポイントに使用されるインスタンスタイプ名                                          |
-| endpoint_instance_count               | Integer | 任意 | 1     | 1～10                       | エンドポイントに使用されるインスタンス数                                                 |
-| endpoint_model_resource_list          | Array   | 必須   | なし   | 最大10個                     | ステージに使用されるリソース情報                                                |
-| endpoint_model_resource_list[0].modelId           | String   | 必須   | なし   | なし                      | ステージリソースで作成するモデルID                                   |
-| endpoint_model_resource_list[0].apigwResourceUri  | String   | 必須   | なし   | 最大255文字                 | /で始まるAPI Gatewayリソースパス                            |
-| endpoint_model_resource_list[0].podCount          | Integer  | 必須   | なし   | 1～100                     | ステージリソースに使用されるPod数                                   |
-| endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | 必須   | なし   |                                  | ステージリソースの詳細情報                |
-| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
-| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | 必須   | なし   | 1Mi~                             | ステージリソースに使用されるメモリ            |
-| endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | 任意   | False   | True, False                      | ステージリソースに使用されるPodオートスケーラー |
-| endpoint_model_resource_list[0].scaleMetricCode                      | String   | 任意   | なし   | CONCURRENCY, REQUESTS_PER_SECOND | ステージリソースに使用される増設単位         |
-| endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | 任意   | なし   | 1~                               | ステージリソースに使用される増設しきい値    |
-| endpoint_model_resource_list[0].description       | String   | 任意   | なし   | 最大255文字                 | ステージリソースの説明                                      |
-| tag_list                              | Array   | 任意 | なし  | 最大10個                 | タグ情報                                                          |
-| tag_list[0].tagKey                    | String  | 任意 | なし  | 最大64文字                 | タグキー                                                              |
-| tag_list[0].tagValue                  | String  | 任意 | なし  | 最大255文字                | タグ値                                                           |
-| use_log                               | Boolean | 任意 | False | True、False                | Log & Crash Searchサービスにログを残すかどうか                                      |
-| wait                                  | Boolean | 任意 | True  | True, False                | True：ステージの作成が完了した後にステージIDを返す。False：ステージリクエスト後、すぐにステージIDを返す |
+| 名前                                                          | タイプ  | 必須かどうか | デフォルト値 | 有効範囲                             | 説明                                                             |
+|-------------------------------------------------------------|---------|-------|-------|----------------------------------|--------------------------------------------------------------------|
+| stage_name                                                  | String  | 必須 | なし  | 最大50文字                           | ステージ名                                                        |
+| stage_description                                           | String  | 任意 | なし  | 最大255文字                          | ステージの説明                                                    |
+| endpoint_instance_name                                      | String  | 必須 | なし  | なし                               | エンドポイントに使用されるインスタンスタイプ名                                          |
+| endpoint_instance_count                                     | Integer | 任意 | 1     | 1～10                             | エンドポイントに使用されるインスタンス数                                                 |
+| endpoint_model_resource_list                                | Array   | 必須   | なし   | 最大10個                            | ステージに使用されるリソース情報                                                |
+| endpoint_model_resource_list[0].modelId                     | String   | 必須   | なし   | なし                               | ステージリソースで作成するモデルID                                   |
+| endpoint_model_resource_list[0].apigwResourceUri            | String   | 必須   | なし   | 最大255文字                          | /で始まるAPI Gatewayリソースパス                            |
+| endpoint_model_resource_list[0].podCount                    | Integer  | 必須   | なし   | 1～100                            | ステージリソースに使用されるPod数                                   |
+| endpoint_model_resource_list[0].resourceOptionDetail        | Object   | 必須   | なし   |                                  | ステージリソースの詳細情報                |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | 必須   | なし   | 1Mi~                             | ステージリソースに使用されるメモリ            |
+| endpoint_model_resource_list[0].podAutoScaleEnable          | Boolean  | 任意   | False   | True, False                      | ステージリソースに使用されるPodオートスケーラー |
+| endpoint_model_resource_list[0].scaleMetricCode             | String   | 任意   | なし   | CONCURRENCY, REQUESTS_PER_SECOND | ステージリソースに使用される増設単位         |
+| endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | 任意   | なし   | 1~                               | ステージリソースに使用される増設しきい値    |
+| endpoint_model_resource_list[0].description                 | String   | 任意   | なし   | 最大255文字                          | ステージリソースの説明                                      |
+| tag_list                                                    | Array   | 任意 | なし  | 最大10個                            | タグ情報                                                          |
+| tag_list[0].tagKey                                          | String  | 任意 | なし  | 最大64文字                           | タグキー                                                              |
+| tag_list[0].tagValue                                        | String  | 任意 | なし  | 最大255文字                          | タグ値                                                           |
+| use_log                                                     | Boolean | 任意 | False | True、False                       | Log & Crash Searchサービスにログを残すかどうか                                      |
+| wait                                                        | Boolean | 任意 | True  | True, False                      | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
 endpoint_stage = endpoint.EndpointStage().create(
@@ -517,7 +517,8 @@ easymaker.EndpointStage(stage_id).delete()
 | tag_list[0].tagKey        | String  | 選択     | なし   | 最大64文字  | タグキー                                                                               |
 | tag_list[0].tagValue      | String  | 選択     | なし   | 最大255文字 | タグ値                                                                              |
 | use_log                   | Boolean | 選択     | False  | True, False | Log & Crash Searchサービスにログを残すかどうか                                        |
-| wait                      | Boolean | 選択     | True   | True, False | True:学習作成が完了した後に学習IDを返す。False:作成リクエスト後、すぐに学習IDを返す |
+| wait                      | Boolean | 選択     | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+
 
 ```python
 batch_inference = easymaker.BatchInference().run(
