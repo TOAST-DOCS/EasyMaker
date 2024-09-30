@@ -48,11 +48,11 @@ easymaker.init(
 
 [Parameter]
 
-| 이름                     | 타입      | 필수 여부 | 기본값  | 유효 범위       | 설명                                                         |
-|------------------------|---------|-------|------|-------------|------------------------------------------------------------|
-| experiment_name        | String  | 필수    | 없음   | 최대 50자      | 실험 이름                                                      |
-| experiment_description | String  | 선택    | 없음   | 최대 255자     | 실험에 대한 설명                                                  |
-| wait                   | Boolean | 선택    | True | True, False | True: 실험 생성이 완료된 이후 실험 ID를 반환, False: 생성 요청 후 즉시 실험 ID를 반환 |
+| 이름                       | 타입       | 필수 여부 | 기본값  | 유효 범위       | 설명                                                         |
+|--------------------------|----------|-------|------|-------------|------------------------------------------------------------|
+| experiment_name          | String   | 필수    | 없음   | 최대 50자      | 실험 이름                                                      |
+| experiment_description   | String   | 선택    | 없음   | 최대 255자     | 실험에 대한 설명                                                  |
+| wait                     | Boolean  | 선택    | True | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
 experiment = easymaker.Experiment().create(
@@ -80,35 +80,35 @@ easymaker.Experiment(experiment_id).delete()
 
 [Parameter]
 
-| 이름                                         | 타입      | 필수 여부                     | 기본값   | 유효 범위       | 설명                                                              |
-|--------------------------------------------|---------|---------------------------|-------|-------------|-----------------------------------------------------------------|
-| experiment_id                              | String  | easymaker.init에서 미입력 시 필수 | 없음    | 없음          | 실험 ID                                                           |
-| training_name                              | String  | 필수                        | 없음    | 최대 50자      | 학습 이름                                                           |
-| training_description                       | String  | 선택                        | 없음    | 최대 255자     | 학습에 대한 설명                                                       |
-| train_image_name                           | String  | 필수                        | 없음    | 없음          | 학습에 사용될 이미지 이름(CLI로 조회 가능)                                      |
-| train_instance_name                        | String  | 필수                        | 없음    | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
-| distributed_node_count                     | Integer | 필수                        | 없음    | 1~10         | 분산 학습을 적용할 노드 수                                                 |
-| use_torchrun                               | Boolean | 선택                        | False  | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                            |
-| nproc_per_node                             | Integer | use_torchrun True 시 필수    | 1      | 1~(CPU 개수 또는 GPU 개수) | 노드 당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값       |
-| data_storage_size                          | Integer | Obejct Storage 사용 시 필수    | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요               |
-| algorithm_name                             | String  | NHN Cloud 제공 알고리즘 사용 시 필수 | 없음    | 최대 64자      | 알고리즘 이름(CLI로 조회 가능)                                             |
-| source_dir_uri                             | String  | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어 있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
-| entry_point                                | String  | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                             |
-| model_upload_uri                           | String  | 필수                        | 없음    | 최대 255자     | 학습 완료된 모델이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)   |
-| check_point_input_uri                      | String  | 선택                        | 없음    | 최대 255자     | 입력 체크 포인트 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)                 |
-| check_point_upload_uri                     | String  | 선택                        | 없음    | 최대 255자     | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)   |
-| timeout_hours                              | Integer | 선택                        | 720   | 1~720       | 최대 학습 시간(단위: 시간)                                                |
-| hyperparameter_list                        | Array   | 선택                        | 없음    | 최대 100개     | 하이퍼파라미터 정보(parameterName/parameterValue로 구성)           |
-| hyperparameter_list[0].parameterName   | String  | 선택                        | 없음    | 최대 255자     | 하이퍼파라미터 키                                                       |
+| 이름                                    | 타입      | 필수 여부                     | 기본값   | 유효 범위       | 설명                                                              |
+|---------------------------------------|---------|---------------------------|-------|-------------|-----------------------------------------------------------------|
+| experiment_id                         | String  | easymaker.init에서 미입력 시 필수 | 없음    | 최대 36자          | 실험 ID                                                           |
+| training_name                         | String  | 필수                        | 없음    | 최대 50자      | 학습 이름                                                           |
+| training_description                  | String  | 선택                        | 없음    | 최대 255자     | 학습에 대한 설명                                                       |
+| train_image_name                      | String  | 필수                        | 없음    | 없음          | 학습에 사용될 이미지 이름(CLI로 조회 가능)                                      |
+| train_instance_name                   | String  | 필수                        | 없음    | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
+| distributed_node_count                | Integer | 필수                        | 없음    | 1~10         | 분산 학습을 적용할 노드 수                                                 |
+| use_torchrun                          | Boolean | 선택                        | False  | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                            |
+| nproc_per_node                        | Integer | use_torchrun True 시 필수    | 1      | 1~(CPU 개수 또는 GPU 개수) | 노드 당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값       |
+| data_storage_size                     | Integer | Obejct Storage 사용 시 필수    | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요               |
+| algorithm_name                        | String  | NHN Cloud 제공 알고리즘 사용 시 필수 | 없음    | 최대 64자      | 알고리즘 이름(CLI로 조회 가능)                                             |
+| source_dir_uri                        | String  | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어 있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
+| entry_point                           | String  | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                             |
+| model_upload_uri                      | String  | 필수                        | 없음    | 최대 255자     | 학습 완료된 모델이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)   |
+| check_point_input_uri                 | String  | 선택                        | 없음    | 최대 255자     | 입력 체크 포인트 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)                 |
+| check_point_upload_uri                | String  | 선택                        | 없음    | 최대 255자     | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)   |
+| timeout_hours                         | Integer | 선택                        | 720   | 1~720       | 최대 학습 시간(단위: 시간)                                                |
+| hyperparameter_list                   | Array   | 선택                        | 없음    | 최대 100개     | 하이퍼파라미터 정보(parameterName/parameterValue로 구성)           |
+| hyperparameter_list[0].parameterName  | String  | 선택                        | 없음    | 최대 255자     | 하이퍼파라미터 키                                                       |
 | hyperparameter_list[0].parameterValue | String  | 선택                        | 없음    | 최대 1000자    | 하이퍼파라미터 값                                                       |
-| dataset_list                               | Array   | 선택                        | 없음    | 최대 10개      | 학습에 사용될 데이터 세트 정보(datasetName/dataUri로 구성)                      |
-| dataset_list[0].datasetName                | String  | 선택                        | 없음    | 최대 36자      | 데이터 이름                                                          |
-| dataset_list[0].datasetUri                 | String  | 선택                        | 없음    | 최대 255자     | 데이터 경로                                                          |
-| tag_list                                   | Array   | 선택                        | 없음    | 최대 10개      | 태그 정보                                                           |
-| tag_list[0].tagKey                         | String  | 선택                        | 없음    | 최대 64자      | 태그 키                                                            |
-| tag_list[0].tagValue                       | String  | 선택                        | 없음    | 최대 255자     | 태그 값                                                            |
-| use_log                                    | Boolean | 선택                        | False | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                                      |
-| wait                                       | Boolean | 선택                        | True  | True, False | True: 학습 생성이 완료된 이후 학습 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환      |
+| dataset_list                          | Array   | 선택                        | 없음    | 최대 10개      | 학습에 사용될 데이터 세트 정보(datasetName/dataUri로 구성)                      |
+| dataset_list[0].datasetName           | String  | 선택                        | 없음    | 최대 36자      | 데이터 이름                                                          |
+| dataset_list[0].datasetUri            | String  | 선택                        | 없음    | 최대 255자     | 데이터 경로                                                          |
+| tag_list                              | Array   | 선택                        | 없음    | 최대 10개      | 태그 정보                                                           |
+| tag_list[0].tagKey                    | String  | 선택                        | 없음    | 최대 64자      | 태그 키                                                            |
+| tag_list[0].tagValue                  | String  | 선택                        | 없음    | 최대 255자     | 태그 값                                                            |
+| use_log                               | Boolean | 선택                        | False | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                                      |
+| wait                                  | Boolean | 선택                        | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
 training = easymaker.Training().run(
@@ -178,52 +178,52 @@ easymaker.Training(training_id).delete()
 
 [Parameter]
 
-| 이름                                                             | 타입             | 필수 여부                                                 | 기본값   | 유효 범위                                        | 설명                                                                         |
-|----------------------------------------------------------------|----------------|-------------------------------------------------------|-------|----------------------------------------------|----------------------------------------------------------------------------|
-| experiment_id                                                  | String         | easymaker.init에서 미입력 시 필수                                                    | 없음    | 없음                                           | 실험 ID                                                                      |
-| hyperparameter_tuning_name                                     | String         | 필수                                                    | 없음    | 최대 50자                                       | 하이퍼파라미터 튜닝 이름                                                              |
-| hyperparameter_tuning_description                              | String         | 선택                                                    | 없음    | 최대 255자                                      | 하이퍼파라미터 튜닝에 대한 설명                                                          |
-| image_name                                                     | String         | 필수                                                    | 없음    | 없음                                           | 하이퍼파라미터 튜닝에 사용될 이미지 이름(CLI로 조회 가능)                                         |
-| instance_name                                                  | String         | 필수                                                    | 없음    | 없음                                           | 인스턴스 타입 이름(CLI로 조회 가능)                                                     |
-| distributed_node_count                                         | Integer        | 필수                                                    | 1      | distributed_node_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 각 학습당 분산 학습을 적용할 노드 수                                                      |
-| parallel_trial_count                                           | Integer        | 필수                                                    | 1      | distributed_node_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 병렬로 실행할 학습 수                                                          |
-| use_torchrun                                                   | Boolean        | 선택                                                    | False  | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                                                 |
-| nproc_per_node                                                 | Integer        | use_torchrun True 시 필수                                | 1      | 1~(CPU 개수 또는 GPU 개수) | 노드 당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값                                         |
-| data_storage_size                                              | Integer        | Obejct Storage 사용 시 필수                                | 없음    | 300~10000                                    | 하이퍼파라미터 튜닝에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                  |
-| algorithm_name                                                 | String         | NHN Cloud 제공 알고리즘 사용 시 필수                             | 없음    | 최대 64자                                       | 알고리즘 이름(CLI로 조회 가능)                                                        |
-| source_dir_uri                                                 | String         | 자체 알고리즘 사용 시 필수                                       | 없음    | 최대 255자                                      | 하이퍼파라미터 튜닝에 필요한 파일들이 들어있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)    |
-| entry_point                                                    | String         | 자체 알고리즘 사용 시 필수                                       | 없음    | 최대 255자                                      | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                                        |
-| model_upload_uri                                               | String         | 필수                                                    | 없음    | 최대 255자                                      | 하이퍼파라미터 튜닝에서 학습 완료된 모델이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
-| check_point_input_uri                                          | String         | 선택                                                    | 없음    | 최대 255자                                      | 입력 체크 포인트 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)                 |
-| check_point_upload_uri                                         | String         | 선택                                                    | 없음    | 최대 255자                                      | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)              |
-| timeout_hours                                                  | Integer        | 선택                                                    | 720   | 1~720                                        | 최대 하이퍼파라미터 튜닝 시간(단위: 시간)                                                   |
-| hyperparameter_spec_list                                       | Array          | 선택                                                    | 없음    | 최대 100개                                      | 하이퍼파라미터 스펙 정보                                                              |
-| hyperparameter_spec_list[0].<br>hyperparameterName             | String         | 선택                                                    | 없음    | 최대 255자                                      | 하이퍼파라미터 이름                                                                 |
-| hyperparameter_spec_list[0].<br>hyperparameterTypeCode         | String         | 선택                                                    | 없음    | INT, DOUBLE, DISCRETE, CATEGORICAL           | 하이퍼파라미터 타입                                                                 |
-| hyperparameter_spec_list[0].<br>hyperparameterMinValue         | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수            | 없음    | 없음                                           | 하이퍼파라미터 최솟값                                                                |
-| hyperparameter_spec_list[0].<br>hyperparameterMaxValue         | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수            | 없음    | 없음                                           | 하이퍼파라미터 최댓값                                                                |
-| hyperparameter_spec_list[0].<br>hyperparameterStep             | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE이면서 GRID 전략인 경우 필수 | 없음    | 없음                                           | "Grid" 튜닝 전략을 사용할 때 하이퍼파라미터 값의 변화 크기                                       |
-| hyperparameter_spec_list[0].<br>hyperparameterSpecifiedValues  | String         | hyperparameterTypeCode가 DISCRETE, CATEGORICAL 경우 필수   | 없음    | 최대 3000자                                       | 정해진 하이퍼파라미터 목록(`,`로 구분된 문자열이나 숫자)                                          |
-| dataset_list                                                   | Array          | 선택                                                    | 없음    | 최대 10개                                       | 하이퍼파라미터 튜닝에 사용될 데이터 세트 정보(datasetName/dataUri로 구성)                         |
-| dataset_list[0].datasetName                                    | String         | 선택                                                    | 없음    | 최대 36자                                       | 데이터 이름                                                                     |
-| dataset_list[0].datasetUri                                     | String         | 선택                                                    | 없음    | 최대 255자                                      | 데이터 경로                                                                     |
-| metric_list                                                    | Array          | 자체 알고리즘 사용 시 필수                                       | 없음    | 최대 10개(지표 이름들로 된 문자열 리스트)                    | 학습 코드가 출력하는 로그 중에 어떤 지표를 수집할지 정의합니다.                                       |
-| metric_regex                                                   | String         | 자체 알고리즘 사용 시 선택                                       | ([\w\ | -]+)\s*=\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?) | 최대 255자                                                                    | 지표를 수집하는 데 사용할 정규 표현식을 입력합니다. 학습 알고리즘이 정규 표현식에 맞게 지표를 출력해야 합니다.                                                          |
-| objective_metric_name                                          | String         | 자체 알고리즘 사용 시 필수                                       | 없음    | 최대 36자, metric_list 중 하나                     | 어떤 지표를 최적화하는 게 목표인지 선택합니다.                                                 |
-| objective_type_code                                            | String         | 자체 알고리즘 사용 시 필수                                       | 없음    | MINIMIZE, MAXIMIZE                           | 목표 지표 최적화 유형을 선택합니다.                                                       |
-| objective_goal                                                 | Double         | 선택                                                    | 없음    | 없음                                           | 목표 지표가 이 값에 도달하면 튜닝 작업이 종료됩니다.                                             |
-| max_failed_trial_count                                         | Integer        | 선택                                                    | 없음    | 없음                                           | 실패한 학습의 최대 개수를 정의합니다. 실패한 학습의 개수가 이 값에 도달하면 튜닝이 실패로 종료됩니다.                 |
-| max_trial_count                                                | Integer        | 선택                                                    | 없음    | 없음                                           | 최대 학습 수를 정의합니다. 자동 실행된 학습의 개수가 이 값에 도달할 때까지 튜닝이 실행됩니다.                     |
-| tuning_strategy_name                                           | String         | 필수                                                    | 없음    | 없음                                           | 어떤 전략을 사용해서 최적의 하이퍼파라미터를 찾을지 선택합니다.                                        |
-| tuning_strategy_random_state                                   | Integer        | 선택                                                    | 없음    | 없음                                           | 난수 생성을 결정합니다. 재현 가능한 결과를 위해 고정된 값으로 지정합니다.                                 |
-| early_stopping_algorithm                                       | String         | 필수                                                    | 없음    | EARLY_STOPPING_ALGORITHM.<br>MEDIAN          | 학습이 계속 진행되어도 모델이 더 이상 좋아지지 않으면 학습을 조기에 종료합니다.                              |
-| early_stopping_min_trial_count                                 | Integer        | 필수                                                    | 3     | 없음                                           | 중간값을 계산할 때 몇 개의 학습으로부터 목표 지표 값을 가져올지 정의합니다.                                |
-| early_stopping_start_step                                      | Integer        | 필수                                                    | 4     | 없음                                           | 몇 번째 학습 단계부터 조기 중지를 적용할지 설정합니다.                                            |
-| tag_list                                                       | Array          | 선택                                                    | 없음    | 최대 10개                                       | 태그 정보                                                                      |
-| tag_list[0].tagKey                                             | String         | 선택                                                    | 없음    | 최대 64자                                       | 태그 키                                                                       |
-| tag_list[0].tagValue                                           | String         | 선택                                                    | 없음    | 최대 255자                                      | 태그 값                                                                       |
-| use_log                                                        | Boolean        | 선택                                                    | False | True, False                                  | Log & Crash Search 서비스에 로그를 남길지 여부                                                 |
-| wait                                                           | Boolean        | 선택                                                    | True  | True, False                                  | True: 하이퍼파라미터 튜닝 생성이 완료된 이후 하이퍼파라미터 튜닝 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환 |
+| 이름                                                            | 타입             | 필수 여부                                                 | 기본값   | 유효 범위                                        | 설명                                                                         |
+|---------------------------------------------------------------|----------------|-------------------------------------------------------|-------|----------------------------------------------|----------------------------------------------------------------------------|
+| experiment_id                                                 | String         | easymaker.init에서 미입력 시 필수                             | 없음    | 최대 36자                                           | 실험 ID                                                                      |
+| hyperparameter_tuning_name                                    | String         | 필수                                                    | 없음    | 최대 50자                                       | 하이퍼파라미터 튜닝 이름                                                              |
+| hyperparameter_tuning_description                             | String         | 선택                                                    | 없음    | 최대 255자                                      | 하이퍼파라미터 튜닝에 대한 설명                                                          |
+| image_name                                                    | String         | 필수                                                    | 없음    | 없음                                           | 하이퍼파라미터 튜닝에 사용될 이미지 이름(CLI로 조회 가능)                                         |
+| instance_name                                                 | String         | 필수                                                    | 없음    | 없음                                           | 인스턴스 타입 이름(CLI로 조회 가능)                                                     |
+| distributed_node_count                                        | Integer        | 필수                                                    | 1      | distributed_node_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 각 학습당 분산 학습을 적용할 노드 수                                                      |
+| parallel_trial_count                                          | Integer        | 필수                                                    | 1      | distributed_node_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 병렬로 실행할 학습 수                                                          |
+| use_torchrun                                                  | Boolean        | 선택                                                    | False  | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                                                 |
+| nproc_per_node                                                | Integer        | use_torchrun True 시 필수                                | 1      | 1~(CPU 개수 또는 GPU 개수) | 노드 당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값                                         |
+| data_storage_size                                             | Integer        | Obejct Storage 사용 시 필수                                | 없음    | 300~10000                                    | 하이퍼파라미터 튜닝에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                  |
+| algorithm_name                                                | String         | NHN Cloud 제공 알고리즘 사용 시 필수                             | 없음    | 최대 64자                                       | 알고리즘 이름(CLI로 조회 가능)                                                        |
+| source_dir_uri                                                | String         | 자체 알고리즘 사용 시 필수                                       | 없음    | 최대 255자                                      | 하이퍼파라미터 튜닝에 필요한 파일들이 들어있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)    |
+| entry_point                                                   | String         | 자체 알고리즘 사용 시 필수                                       | 없음    | 최대 255자                                      | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                                        |
+| model_upload_uri                                              | String         | 필수                                                    | 없음    | 최대 255자                                      | 하이퍼파라미터 튜닝에서 학습 완료된 모델이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
+| check_point_input_uri                                         | String         | 선택                                                    | 없음    | 최대 255자                                      | 입력 체크 포인트 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)                 |
+| check_point_upload_uri                                        | String         | 선택                                                    | 없음    | 최대 255자                                      | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)              |
+| timeout_hours                                                 | Integer        | 선택                                                    | 720   | 1~720                                        | 최대 하이퍼파라미터 튜닝 시간(단위: 시간)                                                   |
+| hyperparameter_spec_list                                      | Array          | 선택                                                    | 없음    | 최대 100개                                      | 하이퍼파라미터 스펙 정보                                                              |
+| hyperparameter_spec_list[0].<br>hyperparameterName            | String         | 선택                                                    | 없음    | 최대 255자                                      | 하이퍼파라미터 이름                                                                 |
+| hyperparameter_spec_list[0].<br>hyperparameterTypeCode        | String         | 선택                                                    | 없음    | INT, DOUBLE, DISCRETE, CATEGORICAL           | 하이퍼파라미터 타입                                                                 |
+| hyperparameter_spec_list[0].<br>hyperparameterMinValue        | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수            | 없음    | 없음                                           | 하이퍼파라미터 최솟값                                                                |
+| hyperparameter_spec_list[0].<br>hyperparameterMaxValue        | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수            | 없음    | 없음                                           | 하이퍼파라미터 최댓값                                                                |
+| hyperparameter_spec_list[0].<br>hyperparameterStep            | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE이면서 GRID 전략인 경우 필수 | 없음    | 없음                                           | "Grid" 튜닝 전략을 사용할 때 하이퍼파라미터 값의 변화 크기                                       |
+| hyperparameter_spec_list[0].<br>hyperparameterSpecifiedValues | String         | hyperparameterTypeCode가 DISCRETE, CATEGORICAL 경우 필수   | 없음    | 최대 3000자                                       | 정해진 하이퍼파라미터 목록(`,`로 구분된 문자열이나 숫자)                                          |
+| dataset_list                                                  | Array          | 선택                                                    | 없음    | 최대 10개                                       | 하이퍼파라미터 튜닝에 사용될 데이터 세트 정보(datasetName/dataUri로 구성)                         |
+| dataset_list[0].datasetName                                   | String         | 선택                                                    | 없음    | 최대 36자                                       | 데이터 이름                                                                     |
+| dataset_list[0].datasetUri                                    | String         | 선택                                                    | 없음    | 최대 255자                                      | 데이터 경로                                                                     |
+| metric_list                                                   | Array          | 자체 알고리즘 사용 시 필수                                       | 없음    | 최대 10개(지표 이름들로 된 문자열 리스트)                    | 학습 코드가 출력하는 로그 중에 어떤 지표를 수집할지 정의합니다.                                       |
+| metric_regex                                                  | String         | 자체 알고리즘 사용 시 선택                                       | ([\w\ | -]+)\s*=\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?) | 최대 255자                                                                    | 지표를 수집하는 데 사용할 정규 표현식을 입력합니다. 학습 알고리즘이 정규 표현식에 맞게 지표를 출력해야 합니다.                                                          |
+| objective_metric_name                                         | String         | 자체 알고리즘 사용 시 필수                                       | 없음    | 최대 36자, metric_list 중 하나                     | 어떤 지표를 최적화하는 게 목표인지 선택합니다.                                                 |
+| objective_type_code                                           | String         | 자체 알고리즘 사용 시 필수                                       | 없음    | MINIMIZE, MAXIMIZE                           | 목표 지표 최적화 유형을 선택합니다.                                                       |
+| objective_goal                                                | Double         | 선택                                                    | 없음    | 없음                                           | 목표 지표가 이 값에 도달하면 튜닝 작업이 종료됩니다.                                             |
+| max_failed_trial_count                                        | Integer        | 선택                                                    | 없음    | 없음                                           | 실패한 학습의 최대 개수를 정의합니다. 실패한 학습의 개수가 이 값에 도달하면 튜닝이 실패로 종료됩니다.                 |
+| max_trial_count                                               | Integer        | 선택                                                    | 없음    | 없음                                           | 최대 학습 수를 정의합니다. 자동 실행된 학습의 개수가 이 값에 도달할 때까지 튜닝이 실행됩니다.                     |
+| tuning_strategy_name                                          | String         | 필수                                                    | 없음    | 없음                                           | 어떤 전략을 사용해서 최적의 하이퍼파라미터를 찾을지 선택합니다.                                        |
+| tuning_strategy_random_state                                  | Integer        | 선택                                                    | 없음    | 없음                                           | 난수 생성을 결정합니다. 재현 가능한 결과를 위해 고정된 값으로 지정합니다.                                 |
+| early_stopping_algorithm                                      | String         | 필수                                                    | 없음    | EARLY_STOPPING_ALGORITHM.<br>MEDIAN          | 학습이 계속 진행되어도 모델이 더 이상 좋아지지 않으면 학습을 조기에 종료합니다.                              |
+| early_stopping_min_trial_count                                | Integer        | 필수                                                    | 3     | 없음                                           | 중간값을 계산할 때 몇 개의 학습으로부터 목표 지표 값을 가져올지 정의합니다.                                |
+| early_stopping_start_step                                     | Integer        | 필수                                                    | 4     | 없음                                           | 몇 번째 학습 단계부터 조기 중지를 적용할지 설정합니다.                                            |
+| tag_list                                                      | Array          | 선택                                                    | 없음    | 최대 10개                                       | 태그 정보                                                                      |
+| tag_list[0].tagKey                                            | String         | 선택                                                    | 없음    | 최대 64자                                       | 태그 키                                                                       |
+| tag_list[0].tagValue                                          | String         | 선택                                                    | 없음    | 최대 255자                                      | 태그 값                                                                       |
+| use_log                                                       | Boolean        | 선택                                                    | False | True, False                                  | Log & Crash Search 서비스에 로그를 남길지 여부                                                 |
+| wait                                                          | Boolean        | 선택                                                    | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
 hyperparameter_tuning = easymaker.HyperparameterTuning().run(
@@ -373,27 +373,27 @@ easymaker.Model(model_id).delete()
 
 [Parameter]
 
-| 이름                                    | 타입      | 필수 여부 | 기본값   | 유효 범위                      | 설명                                                                     |
-|---------------------------------------|---------|-------|-------|----------------------------|------------------------------------------------------------------------|
-| endpoint_name                         | String  | 필수    | 없음    | 최대 50자                     | 엔드포인트 이름                                                               |
-| endpoint_description                  | String  | 선택    | 없음    | 최대 255자                    | 엔드포인트에 대한 설명                                                           |
-| endpoint_instance_name                | String  | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                                  |
-| endpoint_instance_count               | Integer | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                      |
-| endpoint_model_resource_list          | Array   | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
-| endpoint_model_resource_list[0].modelId           | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
-| endpoint_model_resource_list[0].apigwResourceUri  | String   | 필수    | 없음    | 최대 255자                  | /로 시작하는 API Gateway 리소스 경로                             |
-| endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | 필수    | 없음    |                                  | 스테이지 리소스의 상세 정보                 |
-| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
-| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
-| endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
-| endpoint_model_resource_list[0].scaleMetricCode                      | String   | 선택    | 없음    | CONCURRENCY, REQUESTS_PER_SECOND | 스테이지 리소스에 사용될 증설 단위          |
-| endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
-| endpoint_model_resource_list[0].description       | String   | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
-| tag_list                              | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                                  |
-| tag_list[0].tagKey                    | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                                   |
-| tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                                   |
-| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                             |
-| wait                                  | Boolean | 선택    | True  | True, False                | True: 엔드포인트 생성이 완료된 이후 엔드포인트 ID를 반환, False: 엔드포인트 요청 후 즉시 엔드포인트 ID를 반환 |
+| 이름                                                          | 타입      | 필수 여부 | 기본값   | 유효 범위                      | 설명                                                                     |
+|-------------------------------------------------------------|---------|-------|-------|----------------------------|------------------------------------------------------------------------|
+| endpoint_name                                               | String  | 필수    | 없음    | 최대 50자                     | 엔드포인트 이름                                                               |
+| endpoint_description                                        | String  | 선택    | 없음    | 최대 255자                    | 엔드포인트에 대한 설명                                                           |
+| endpoint_instance_name                                      | String  | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                                  |
+| endpoint_instance_count                                     | Integer | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                      |
+| endpoint_model_resource_list                                | Array   | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
+| endpoint_model_resource_list[0].modelId                     | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
+| endpoint_model_resource_list[0].apigwResourceUri            | String   | 필수    | 없음    | 최대 255자                  | /로 시작하는 API Gateway 리소스 경로                             |
+| endpoint_model_resource_list[0].resourceOptionDetail        | Object   | 필수    | 없음    |                                  | 스테이지 리소스의 상세 정보                 |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
+| endpoint_model_resource_list[0].podAutoScaleEnable          | Boolean  | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
+| endpoint_model_resource_list[0].scaleMetricCode             | String   | 선택    | 없음    | CONCURRENCY, REQUESTS_PER_SECOND | 스테이지 리소스에 사용될 증설 단위          |
+| endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
+| endpoint_model_resource_list[0].description                 | String   | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
+| tag_list                                                    | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                                  |
+| tag_list[0].tagKey                                          | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                                   |
+| tag_list[0].tagValue                                        | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                                   |
+| use_log                                                     | Boolean | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                             |
+| wait                                                        | Boolean | 선택    | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
 endpoint = easymaker.Endpoint().create(
@@ -429,27 +429,27 @@ endpoint = easymaker.Endpoint(endpoint_id)
 
 [Parameter]
 
-| 이름                                    | 타입      | 필수 여부 | 기본값   | 유효 범위                      | 설명                                                                 |
-|---------------------------------------|---------|-------|-------|----------------------------|--------------------------------------------------------------------|
-| stage_name                            | String  | 필수    | 없음    | 최대 50자                     | 스테이지 이름                                                            |
-| stage_description                     | String  | 선택    | 없음    | 최대 255자                    | 스테이지에 대한 설명                                                        |
-| endpoint_instance_name                | String  | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                              |
-| endpoint_instance_count               | Integer | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                  |
-| endpoint_model_resource_list          | Array   | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
-| endpoint_model_resource_list[0].modelId           | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
-| endpoint_model_resource_list[0].apigwResourceUri  | String   | 필수    | 없음    | 최대 255자                  | /로 시작하는 API Gateway 리소스 경로                             |
-| endpoint_model_resource_list[0].resourceOptionDetail                 | Object   | 필수    | 없음    |                                  | 스테이지 리소스의 상세 정보                 |
-| endpoint_model_resource_list[0].resourceOptionDetail.cpu             | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
-| endpoint_model_resource_list[0].resourceOptionDetail.memory          | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
-| endpoint_model_resource_list[0].podAutoScaleEnable                   | Boolean  | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
-| endpoint_model_resource_list[0].scaleMetricCode                      | String   | 선택    | 없음    | CONCURRENCY, REQUESTS_PER_SECOND | 스테이지 리소스에 사용될 증설 단위          |
-| endpoint_model_resource_list[0].scaleMetricTarget                    | Integer  | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
-| endpoint_model_resource_list[0].description       | String   | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
-| tag_list                              | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                              |
-| tag_list[0].tagKey                    | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                               |
-| tag_list[0].tagValue                  | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                               |
-| use_log                               | Boolean | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                         |
-| wait                                  | Boolean | 선택    | True  | True, False                | True: 스테이지 생성이 완료된 이후 스테이지 ID를 반환, False: 스테이지 요청 후 즉시 스테이지 ID를 반환 |
+| 이름                                                          | 타입      | 필수 여부 | 기본값   | 유효 범위                      | 설명                                                                 |
+|-------------------------------------------------------------|---------|-------|-------|----------------------------|--------------------------------------------------------------------|
+| stage_name                                                  | String  | 필수    | 없음    | 최대 50자                     | 스테이지 이름                                                            |
+| stage_description                                           | String  | 선택    | 없음    | 최대 255자                    | 스테이지에 대한 설명                                                        |
+| endpoint_instance_name                                      | String  | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                              |
+| endpoint_instance_count                                     | Integer | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                  |
+| endpoint_model_resource_list                                | Array   | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
+| endpoint_model_resource_list[0].modelId                     | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
+| endpoint_model_resource_list[0].apigwResourceUri            | String   | 필수    | 없음    | 최대 255자                  | /로 시작하는 API Gateway 리소스 경로                             |
+| endpoint_model_resource_list[0].resourceOptionDetail        | Object   | 필수    | 없음    |                                  | 스테이지 리소스의 상세 정보                 |
+| endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
+| endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
+| endpoint_model_resource_list[0].podAutoScaleEnable          | Boolean  | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
+| endpoint_model_resource_list[0].scaleMetricCode             | String   | 선택    | 없음    | CONCURRENCY, REQUESTS_PER_SECOND | 스테이지 리소스에 사용될 증설 단위          |
+| endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
+| endpoint_model_resource_list[0].description                 | String   | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
+| tag_list                                                    | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                              |
+| tag_list[0].tagKey                                          | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                               |
+| tag_list[0].tagValue                                        | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                               |
+| use_log                                                     | Boolean | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                         |
+| wait                                                        | Boolean | 선택    | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
 endpoint_stage = endpoint.EndpointStage().create(
@@ -546,7 +546,7 @@ easymaker.EndpointStage(stage_id).delete()
 | tag_list[0].tagKey        | String  | 선택      | 없음   | 최대 64자   | 태그 키                                                                               |
 | tag_list[0].tagValue      | String  | 선택      | 없음   | 최대 255자  | 태그 값                                                                               |
 | use_log                   | Boolean | 선택      | False  | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                                        |
-| wait                      | Boolean | 선택      | True   | True, False | True: 학습 생성이 완료된 이후 학습 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환 |
+| wait                      | Boolean | 선택      | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
 batch_inference = easymaker.BatchInference().run(
@@ -590,6 +590,165 @@ batch_inference = easymaker.BatchInference().run(
 
 ```python
 easymaker.BatchInference(batch_inference_id).delete()
+```
+
+## 파이프라인
+
+### 파이프라인 생성
+
+[Parameter]
+
+| 이름                          | 타입      | 필수 여부 | 기본값 | 유효 범위   | 설명                                        |
+|-----------------------------|---------| --------- | ------ | --------- |-------------------------------------------|
+| pipeline_name               | String  | 필수      | 없음   | 최대 50자   | 파이프라인 이름                                  |
+| pipeline_spec_manifest_path | String  | 필수      | 없음   | 1~10      | 업로드할 파이프라인 파일 경로                          |
+| description                 | String  | 선택      | 없음   | 최대 255자  | 파이프라인에 대한 설명                              |
+| tag_list                    | Array   | 선택      | 없음   | 최대 10개   | 태그 정보                                     |
+| tag_list[0].tagKey          | String  | 선택      | 없음   | 최대 64자   | 태그 키                                      |
+| tag_list[0].tagValue        | String  | 선택      | 없음   | 최대 255자  | 태그 값                                      |
+| wait                        | Boolean | 선택      | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+
+```python
+pipeline = easymaker.Pipeline().upload(
+    pipeline_name='pipeline_01',
+    pipeline_spec_manifest_path='./sample-pipeline.yaml',
+    description='test',
+    tag_list=[],
+    # wait=False,
+)
+```
+
+### 파이프라인 삭제
+
+[Parameter]
+
+| 이름               | 타입   | 필수 여부 | 기본값 | 유효 범위 | 설명       |
+| ------------------ | ------ | --------- | ------ | --------- |----------|
+| pipeline_id | String | 필수      | 없음   | 최대 36자 | 파이프라인 ID |
+
+```python
+easymaker.Pipeline(pipeline_id).delete()
+```
+
+### 파이프라인 실행 생성
+
+[Parameter]
+
+| 이름                               | 타입      | 필수 여부                     | 기본값 | 유효 범위       | 설명                                       |
+|----------------------------------|---------|---------------------------| ------ |-------------|------------------------------------------|
+| pipeline_run_name                | String  | 필수                        | 없음   | 최대 50자      | 파이프라인 실행 이름                              |
+| pipeline_id                      | String  | 필수                        | 없음   | 최대 36자      | 파이프라인 일정 이름                              |
+| experiment_id                    | String  | easymaker.init에서 미입력 시 필수 | 없음    | 최대 36자      | 실험 ID                                    |
+| description                      | String  | 선택                        | 없음   | 최대 255자     | 파이프라인 실행에 대한 설명                          |
+| instance_name                    | String  | 필수                        | 없음   | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                   |
+| instance_count                   | Integer | 필수                        | 없음   | 1~10        | 사용할 인스턴스 수                               |
+| boot_storage_size                | Integer | 필수                        | 없음   | 50~         | 파이프라인을 실행할 인스턴스의 부트 스토리지 크기(단위: GB)      |
+| parameter_list                   | Array   | 선택                        | 없음   | 없음          | 파이프라인에 전달할 파라미터 정보                       |
+| parameter_list[0].parameterKey   | String  | 선택                        | 없음   | 최대 255자     | 파라미터 키                                   |
+| parameter_list[0].parameterValue | String  | 선택                        | 없음   | 최대 1000자    | 파라미터 값                                   |
+| nas_list                         | Array   | 선택                        | 없음   | 최대 10개      | Nas 정보                                   |
+| nas_list[0].mountDirName         | String  | 선택                        | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                       |
+| nas_list[0].nasUri               | String  | 선택                        | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로      |
+| tag_list                         | Array   | 선택                        | 없음   | 최대 10개      | 태그 정보                                    |
+| tag_list[0].tagKey               | String  | 선택                        | 없음   | 최대 64자      | 태그 키                                     |
+| tag_list[0].tagValue             | String  | 선택                        | 없음   | 최대 255자     | 태그 값                                     |
+| wait                             | Boolean | 선택                        | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+
+```python
+pipeline_run = easymaker.PipelineRun().create(
+    pipeline_run_name='pipeline_run',
+    description='test',
+    pipeline_id=pipeline.pipeline_id,
+    experiment_id=experiment.experiment_id, # Optional if already set in init
+    instance_name='m2.c4m8',
+    instance_count=1,
+    boot_storage_size=50,
+    # wait=False,
+)
+```
+
+### 파이프라인 실행 삭제
+
+[Parameter]
+
+| 이름               | 타입   | 필수 여부 | 기본값 | 유효 범위 | 설명          |
+| ------------------ | ------ | --------- | ------ | --------- |-------------|
+| pipeline_run_id | String | 필수      | 없음   | 최대 36자 | 파이프라인 실행 ID |
+
+```python
+easymaker.PipelineRun(pipeline_run_id).delete()
+```
+
+### 파이프라인 일정 생성
+
+[Parameter]
+
+| 이름                               | 타입      | 필수 여부                              | 기본값 | 유효 범위       | 설명                                             |
+|----------------------------------|---------|------------------------------------| ------ |-------------|------------------------------------------------|
+| pipeline_recurring_run_name      | String  | 필수                                 | 없음   | 최대 50자      | 파이프라인 일정 이름                                    |
+| pipeline_id                      | String  | 필수                                 | 없음   | 최대 36자      | 파이프라인 일정 이름                                    |
+| experiment_id                    | String  | easymaker.init에서 미입력 시 필수          | 없음    | 최대 36자      | 실험 ID                                          |
+| description                      | String  | 선택                                 | 없음   | 최대 255자     | 파이프라인 일정에 대한 설명                                |
+| instance_name                    | String  | 필수                                 | 없음   | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                         |
+| instance_count                   | Integer | 필수                                 | 없음   | 1~10        | 사용할 인스턴스 수                                     |
+| boot_storage_size                | Integer | 필수                                 | 없음   | 50~         | 파이프라인을 실행할 인스턴스의 부트 스토리지 크기(단위: GB)            |
+| schedule_periodic_minutes        | String  | schedule_cron_expression 미입력시 필수  | 없음   | 없음          | 파이프라인을 반복 실행할 시간 주기 설정                         |
+| schedule_cron_expression         | String  | schedule_periodic_minutes 미입력시 필수 | 없음   | 없음          | 파이프라인을 반복 실행할 Cron 표현식 설                       |
+| max_concurrency_count            | String  | 선택                                 | 없음   | 없음          | 동시 실행의 최대 개수를 지정하여 병렬로 실행되는 개수에 제한             |
+| schedule_start_datetime          | String  | 선택                                 | 없음   | 없음          | 파이프라인 일정의 시작 시간을 설정, 미입력 시 설정한 주기에 맞춰 파이프라인 실행 |
+| schedule_end_datetime            | String  | 선택                                 | 없음   | 없음          | 파이프라인 일정의 종료 시간을 설정, 미입력 시 중지 전까지 파이프라인 실행을 생성 |
+| use_catchup                      | Boolean | 선택                                 | 없음   | 없음          | 누락 실행 캐치업: 파이프라인 실행이 일정에 뒤처질 경우 이를 따라잡아야 할지 여부 |
+| parameter_list                   | Array   | 선택                                 | 없음   | 없음          | 파이프라인에 전달할 파라미터 정보                             |
+| parameter_list[0].parameterKey   | String  | 선택                                 | 없음   | 최대 255자     | 파라미터 키                                         |
+| parameter_list[0].parameterValue | String  | 선택                                 | 없음   | 최대 1000자    | 파라미터 값                                         |
+| nas_list                         | Array   | 선택                                 | 없음   | 최대 10개      | Nas 정보                                         |
+| nas_list[0].mountDirName         | String  | 선택                                 | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                             |
+| nas_list[0].nasUri               | String  | 선택                                 | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로            |
+| tag_list                         | Array   | 선택                                 | 없음   | 최대 10개      | 태그 정보                                          |
+| tag_list[0].tagKey               | String  | 선택                                 | 없음   | 최대 64자      | 태그 키                                           |
+| tag_list[0].tagValue             | String  | 선택                                 | 없음   | 최대 255자     | 태그 값                                           |
+| wait                             | Boolean | 선택                                 | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환      |
+
+```python
+pipeline_recurring_run = easymaker.PipelineRecurringRun().create(
+    pipeline_recurring_run_name='pipeline_recurring_run',
+    description='test',
+    pipeline_id=pipeline.pipeline_id,
+    experiment_id=experiment.experiment_id, # Optional if already set in init
+    flavor_id='35a73b57-58a7-434d-aa08-5249aaa95b3e',
+    instance_name='m2.c4m8',
+    boot_storage_size=50,
+    schedule_cron_expression='0 0 * * * ?',
+    max_concurrency_count=1,
+    schedule_start_datetime='2025-01-01T00:00:00+09:00'
+    # wait=False,
+)
+```
+
+### 파이프라인 일정 중지/재시작
+
+[Parameter]
+
+| 이름               | 타입   | 필수 여부 | 기본값 | 유효 범위 | 설명          |
+| ------------------ | ------ | --------- | ------ | --------- |-------------|
+| pipeline_recurring_run_id | String | 필수      | 없음   | 최대 36자 | 파이프라인 일정 ID |
+
+```python
+easymaker.PipelineRecurringRun(pipeline_recurring_run_id).stop()
+easymaker.PipelineRecurringRun(pipeline_recurring_run_id).start()
+
+```
+
+### 파이프라인 일정 삭제
+
+[Parameter]
+
+| 이름               | 타입   | 필수 여부 | 기본값 | 유효 범위 | 설명          |
+| ------------------ | ------ | --------- | ------ | --------- |-------------|
+| pipeline_recurring_run_id | String | 필수      | 없음   | 최대 36자 | 파이프라인 일정 ID |
+
+```python
+easymaker.PipelineRecurringRun(pipeline_recurring_run_id).delete()
 ```
 
 ## 기타 기능
