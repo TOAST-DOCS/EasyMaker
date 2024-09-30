@@ -21,6 +21,7 @@ easymaker.init(
     appkey='EASYMAKER_APPKEY',
     region='kr1',
     secret_key='EASYMAKER_SECRET_KEY',
+    experiment_id="EXPERIMENT_ID", # Optional
 )
 ```
 
@@ -54,7 +55,7 @@ easymaker.init(
 | wait                   | Boolean | 선택    | True | True, False | True: 실험 생성이 완료된 이후 실험 ID를 반환, False: 생성 요청 후 즉시 실험 ID를 반환 |
 
 ```python
-experiment_id = easymaker.Experiment().create(
+experiment = easymaker.Experiment().create(
     experiment_name='experiment_name',
     experiment_description='experiment_description',
     # wait=False,
@@ -70,7 +71,7 @@ experiment_id = easymaker.Experiment().create(
 | experiment_id          | String  | 필수    | 없음   | 최대 36자 | 실험 ID |
 
 ```python
-easymaker.Experiment().delete(experiment_id)
+easymaker.Experiment(experiment_id).delete()
 ```
 
 ## 학습
@@ -81,14 +82,14 @@ easymaker.Experiment().delete(experiment_id)
 
 | 이름                                         | 타입      | 필수 여부                     | 기본값   | 유효 범위       | 설명                                                              |
 |--------------------------------------------|---------|---------------------------|-------|-------------|-----------------------------------------------------------------|
-| experiment_id                              | String  | 필수                        | 없음    | 없음          | 실험 ID                                                           |
+| experiment_id                              | String  | easymaker.init에서 미입력 시 필수 | 없음    | 없음          | 실험 ID                                                           |
 | training_name                              | String  | 필수                        | 없음    | 최대 50자      | 학습 이름                                                           |
 | training_description                       | String  | 선택                        | 없음    | 최대 255자     | 학습에 대한 설명                                                       |
 | train_image_name                           | String  | 필수                        | 없음    | 없음          | 학습에 사용될 이미지 이름(CLI로 조회 가능)                                      |
 | train_instance_name                        | String  | 필수                        | 없음    | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
 | distributed_node_count                     | Integer | 필수                        | 없음    | 1~10         | 분산 학습을 적용할 노드 수                                                 |
 | use_torchrun                               | Boolean | 선택                        | False  | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                            |
-| nproc_per_node                             | Integer | use_torchrun True 시 필수   | 1      | 1~(CPU 개수 또는 GPU 개수) | 노드 당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값       |
+| nproc_per_node                             | Integer | use_torchrun True 시 필수    | 1      | 1~(CPU 개수 또는 GPU 개수) | 노드 당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값       |
 | data_storage_size                          | Integer | Obejct Storage 사용 시 필수    | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요               |
 | algorithm_name                             | String  | NHN Cloud 제공 알고리즘 사용 시 필수 | 없음    | 최대 64자      | 알고리즘 이름(CLI로 조회 가능)                                             |
 | source_dir_uri                             | String  | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어 있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
@@ -110,8 +111,8 @@ easymaker.Experiment().delete(experiment_id)
 | wait                                       | Boolean | 선택                        | True  | True, False | True: 학습 생성이 완료된 이후 학습 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환      |
 
 ```python
-training_id = easymaker.Training().run(
-    experiment_id=experiment_id,
+training = easymaker.Training().run(
+    experiment_id=experiment.experiment_id, # Optional if already set in init
     training_name='training_name',
     training_description='training_description',
     train_image_name='Ubuntu 18.04 CPU TensorFlow Training',
@@ -168,7 +169,7 @@ training_id = easymaker.Training().run(
 | training_id          | String  | 필수    | 없음   | 최대 36자 | 학습 ID |
 
 ```python
-easymaker.Training().delete(training_id)
+easymaker.Training(training_id).delete()
 ```
 
 ## 하이퍼파라미터 튜닝
@@ -179,7 +180,7 @@ easymaker.Training().delete(training_id)
 
 | 이름                                                             | 타입             | 필수 여부                                                 | 기본값   | 유효 범위                                        | 설명                                                                         |
 |----------------------------------------------------------------|----------------|-------------------------------------------------------|-------|----------------------------------------------|----------------------------------------------------------------------------|
-| experiment_id                                                  | String         | 필수                                                    | 없음    | 없음                                           | 실험 ID                                                                      |
+| experiment_id                                                  | String         | easymaker.init에서 미입력 시 필수                                                    | 없음    | 없음                                           | 실험 ID                                                                      |
 | hyperparameter_tuning_name                                     | String         | 필수                                                    | 없음    | 최대 50자                                       | 하이퍼파라미터 튜닝 이름                                                              |
 | hyperparameter_tuning_description                              | String         | 선택                                                    | 없음    | 최대 255자                                      | 하이퍼파라미터 튜닝에 대한 설명                                                          |
 | image_name                                                     | String         | 필수                                                    | 없음    | 없음                                           | 하이퍼파라미터 튜닝에 사용될 이미지 이름(CLI로 조회 가능)                                         |
@@ -225,8 +226,8 @@ easymaker.Training().delete(training_id)
 | wait                                                           | Boolean        | 선택                                                    | True  | True, False                                  | True: 하이퍼파라미터 튜닝 생성이 완료된 이후 하이퍼파라미터 튜닝 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환 |
 
 ```python
-hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
-    experiment_id=experiment_id,
+hyperparameter_tuning = easymaker.HyperparameterTuning().run(
+    experiment_id=experiment.experiment_id, # Optional if already set in init
     hyperparameter_tuning_name='hyperparameter_tuning_name',
     hyperparameter_tuning_description='hyperparameter_tuning_description',
     image_name='Ubuntu 18.04 CPU TensorFlow Training',
@@ -296,7 +297,7 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
 | hyperparameter_tuning_id          | String  | 필수    | 없음   | 최대 36자 | 하이퍼파라미터 튜닝 ID |
 
 ```python
-easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
+easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 ```
 
 ## 모델
@@ -319,8 +320,8 @@ easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
 | tag_list[0].tagValue     | String | 선택                                 | 없음  | 최대 255자 | 태그 값                                |
 
 ```python
-model_id = easymaker.Model().create(
-    training_id=training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning_id,
+model = easymaker.Model().create(
+    training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
     model_name='model_name',
     model_description='model_description',
 )
@@ -344,7 +345,7 @@ model_id = easymaker.Model().create(
 | tag_list[0].tagValue | String | 선택    | 없음  | 최대 255자                                 | 태그 값                                                |
 
 ```python
-model_id = easymaker.Model().create_by_model_upload_uri(
+model = easymaker.Model().create_by_model_upload_uri(
     model_type_code=easymaker.TENSORFLOW,
     model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
@@ -361,7 +362,7 @@ model_id = easymaker.Model().create_by_model_upload_uri(
 | model_id | String  | 필수    | 없음   | 최대 36자 | 모델 ID |
 
 ```python
-easymaker.Model().delete(model_id)
+easymaker.Model(model_id).delete()
 ```
 
 ## 엔드포인트
@@ -395,15 +396,14 @@ easymaker.Model().delete(model_id)
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 엔드포인트 생성이 완료된 이후 엔드포인트 ID를 반환, False: 엔드포인트 요청 후 즉시 엔드포인트 ID를 반환 |
 
 ```python
-endpoint = easymaker.Endpoint()
-endpoint_id = endpoint.create(
+endpoint = easymaker.Endpoint().create(
     endpoint_name='endpoint_name',
     endpoint_description='endpoint_description',
     endpoint_instance_name='c2.c16m16',
     endpoint_instance_count=1,
     endpoint_model_resource_list=[
         {
-            'modelId': model_id,
+            'modelId': model.model_id,
             'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
                 'cpu': '15',
@@ -420,7 +420,7 @@ endpoint_id = endpoint.create(
 생성해둔 엔드포인트 사용
 
 ```python
-endpoint = easymaker.Endpoint()
+endpoint = easymaker.Endpoint(endpoint_id)
 ```
 
 ### 스테이지 추가
@@ -452,14 +452,14 @@ endpoint = easymaker.Endpoint()
 | wait                                  | Boolean | 선택    | True  | True, False                | True: 스테이지 생성이 완료된 이후 스테이지 ID를 반환, False: 스테이지 요청 후 즉시 스테이지 ID를 반환 |
 
 ```python
-stage_id = endpoint.create_stage(
+endpoint_stage = endpoint.EndpointStage().create(
     stage_name='stage01',  # 30자 이내 소문자/숫자
     stage_description='test endpoint',
     endpoint_instance_name='c2.c16m16',
     endpoint_instance_count=1,
     endpoint_model_resource_list=[
         {
-            'modelId': model_id,
+            'modelId': model.model_id,
             'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
                 'cpu': '15',
@@ -478,29 +478,21 @@ stage_id = endpoint.create_stage(
 기본 스테이지에 인퍼런스
 
 ```python
-# 기본 스테이지 정보 조회
-endpoint_stage_info = endpoint.get_default_endpoint_stage()
-print(f'endpoint_stage_info : {endpoint_stage_info}')
-
-# 스테이지를 지정하여 인퍼런스 요청
 input_data = [6.0, 3.4, 4.5, 1.6]
-endpoint.predict(endpoint_stage_info=endpoint_stage_info,
-                 model_id=model_id,
-                 json={'instances': [input_data]})
+easymaker.Endpoint('endpoint_id').predict(
+    model_id=model_id,
+    json={'instances': [input_data]},
+)
 ```
 
 특정 스테이지 지정하여 인퍼런스
 
 ```python
-# 스테이지 정보 조회
-endpoint_stage_info = endpoint.get_endpoint_stage_by_id(endpoint_stage_id=stage_id)
-print(f'endpoint_stage_info : {endpoint_stage_info}')
-
-# 스테이지를 지정하여 인퍼런스 요청
 input_data = [6.0, 3.4, 4.5, 1.6]
-endpoint.predict(endpoint_stage_info=endpoint_stage_info,
-                 model_id=model_id,
-                 json={'instances': [input_data]})
+easymaker.EndpointStage('endpoint_stage_id').predict(
+    model_id=model_id,
+    json={'instances': [input_data]},
+)
 ```
 
 ### 엔드포인트 삭제
@@ -512,7 +504,7 @@ endpoint.predict(endpoint_stage_info=endpoint_stage_info,
 | endpoint_id   | String  | 필수    | 없음   | 최대 36자 | 엔드포인트 ID |
 
 ```python
-endpoint.Endpoint().delete_endpoint(endpoint_id)
+easymaker.Endpoint(endpoint_id).delete()
 ```
 
 ### 엔드포인트 스테이지 삭제
@@ -524,7 +516,7 @@ endpoint.Endpoint().delete_endpoint(endpoint_id)
 | stage_id   | String  | 필수    | 없음   | 최대 36자 | 스테이지 ID |
 
 ```python
-endpoint.Endpoint().delete_endpoint_stage(stage_id)
+easymaker.EndpointStage(stage_id).delete()
 ```
 
 ## 배치 추론
@@ -557,7 +549,7 @@ endpoint.Endpoint().delete_endpoint_stage(stage_id)
 | wait                      | Boolean | 선택      | True   | True, False | True: 학습 생성이 완료된 이후 학습 ID를 반환, False: 생성 요청 후 즉시 학습 ID를 반환 |
 
 ```python
-batch_inference_id = easymaker.BatchInference().run(
+batch_inference = easymaker.BatchInference().run(
     batch_inference_name='batch_inference_name',
     instance_count=1,
     timeout_hours=100,
@@ -597,7 +589,7 @@ batch_inference_id = easymaker.BatchInference().run(
 | batch_inference_id | String | 필수      | 없음   | 최대 36자 | 배치 추론 ID |
 
 ```python
-easymaker.BatchInference().delete(batch_inference_id)
+easymaker.BatchInference(batch_inference_id).delete()
 ```
 
 ## 기타 기능

@@ -14,13 +14,14 @@ python -m pip install easymaker
 有効にしたAI EasyMaker商品のアプリケーションキー、秘密鍵、リージョン情報を入力します。
 AI EasyMaker SDKを使用するには初期化コードが必要です。
 
-```
+```python
 import easymaker
 
 easymaker.init(
     appkey='EASYMAKER_APPKEY',
     region='kr1',
     secret_key='EASYMAKER_SECRET_KEY',
+    experiment_id="EXPERIMENT_ID", # Optional
 )
 ```
 
@@ -36,8 +37,8 @@ easymaker.init(
 | experiment_description | String  | 任意 | なし | 最大255文字 | 実験の説明                                              |
 | wait                   | Boolean | 任意 | True | True, False | True：実験の作成が完了した後に実験IDを返す。False：作成リクエスト後、すぐに実験IDを返す |
 
-```
-experiment_id = easymaker.Experiment().create(
+```python
+experiment = easymaker.Experiment().create(
     experiment_name='experiment_name',
     experiment_description='experiment_description',
     # wait=False,
@@ -53,46 +54,46 @@ experiment_id = easymaker.Experiment().create(
 | experiment_id          | String  | 必須   | なし   | 最大36文字 | 実験ID |
 
 ```python
-easymaker.Experiment().delete(experiment_id)
+easymaker.Experiment(experiment_id).delete()
 ```
 
 ### 学習作成
 
 [Parameter]
 
-| 名前                                        | タイプ     | 必須かどうか                    | デフォルト値  | 有効範囲      | 説明                                                             |
-|--------------------------------------------|---------|---------------------------|-------|-------------|-----------------------------------------------------------------|
-| experiment_id                              | String  | 必須                       | なし    | なし          | 実験ID                                                           |
-| training_name                              | String  | 必須                       | なし    | 最大50文字     | 学習名                                                          |
-| training_description                       | String  | 任意                       | なし    | 最大255文字    | 学習の説明                                                      |
-| train_image_name                           | String  | 必須                       | なし    | なし          | 学習に使用されるイメージ名(CLIで照会可能)                                      |
-| train_instance_name                        | String  | 必須                       | なし    | なし          | インスタンスタイプ名(CLIで照会可能)                                          |
-| distributed_node_count                     | Integer | 必須                       | なし    | 1~10         | 分散学習を適用するノード数                                                |
-| use_torchrun                               | Boolean | 選択                       | False  | True, False | torchrunの使用有無、Pytorchイメージでのみ使用可                           |
-| nproc_per_node                             | Integer | use_torchrun Trueの場合は必須  | 1      | 1～(CPU数またはGPU数) | ノードあたりのプロセス数、 use_torchrunを使用する場合は必ず設定しなければならない値      |
-| data_storage_size                          | Integer | Obejct Storageを使用する場合は必須   | なし    | 300～10000   | 学習に必要なデータをダウンロードする記憶領域サイズ(単位: GB)、NAS使用時は不要              |
+| 名前                                        | タイプ     | 必須かどうか                      | デフォルト値  | 有効範囲      | 説明                                                             |
+|--------------------------------------------|---------|-----------------------------|-------|-------------|-----------------------------------------------------------------|
+| experiment_id                              | String  | easymaker.init에서 미입력 시 必須   | なし    | なし          | 実験ID                                                           |
+| training_name                              | String  | 必須                          | なし    | 最大50文字     | 学習名                                                          |
+| training_description                       | String  | 任意                          | なし    | 最大255文字    | 学習の説明                                                      |
+| train_image_name                           | String  | 必須                          | なし    | なし          | 学習に使用されるイメージ名(CLIで照会可能)                                      |
+| train_instance_name                        | String  | 必須                          | なし    | なし          | インスタンスタイプ名(CLIで照会可能)                                          |
+| distributed_node_count                     | Integer | 必須                          | なし    | 1~10         | 分散学習を適用するノード数                                                |
+| use_torchrun                               | Boolean | 選択                          | False  | True, False | torchrunの使用有無、Pytorchイメージでのみ使用可                           |
+| nproc_per_node                             | Integer | use_torchrun Trueの場合は必須     | 1      | 1～(CPU数またはGPU数) | ノードあたりのプロセス数、 use_torchrunを使用する場合は必ず設定しなければならない値      |
+| data_storage_size                          | Integer | Obejct Storageを使用する場合は必須    | なし    | 300～10000   | 学習に必要なデータをダウンロードする記憶領域サイズ(単位: GB)、NAS使用時は不要              |
 | algorithm_name                             | String  | NHN Cloud提供アルゴリズムを使用する場合は必須 | なし    | 最大64文字     | アルゴリズム名(CLIで照会可能)                                             |
 | source_dir_uri                             | String  | 独自アルゴリズムを使用する場合は必須          | なし    | 最大255文字    | 学習に必要なファイルがあるパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
 | entry_point                                | String  | 独自アルゴリズムを使用する場合は必須          | なし    | 最大255文字    | source_dir_uri内で最初に実行されるPythonファイル情報                            |
-| model_upload_uri                           | String  | 必須                       | なし    | 最大255文字    | 学習完了したモデルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)   |
-| check_point_input_uri                      | String  | 任意                       | なし    | 最大255文字    | 入力チェックポイントファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS)                 |
-| check_point_upload_uri                     | String  | 任意                       | なし    | 最大255文字    | チェックポイントファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)   |
-| timeout_hours                              | Integer | 任意                       | 720   | 1～720       | 最大学習時間(単位:時間)                                                |
-| hyperparameter_list                        | Array   | 任意                       | なし    | 最大100個    | ハイパーパラメータ情報(parameterKey/parameterValueで構成)           |
-| hyperparameter_list[0].parameterKey   | String  | 任意                       | なし    | 最大255文字    | ハイパーパラメータキー                                                       |
-| hyperparameter_list[0].parameterValue | String  | 任意                       | なし    | 最大1000文字   | ハイパーパラメータ値                                                      |
-| dataset_list                               | Array   | 任意                       | なし    | 最大10個     | 学習に使用されるデータセット情報(datasetName/dataUriで構成)                      |
-| dataset_list[0].datasetName                | String  | 任意                       | なし    | 最大36文字     | データ名                                                         |
-| dataset_list[0].datasetUri                 | String  | 任意                       | なし    | 最大255文字    | データパス                                                         |
-| tag_list                                   | Array   | 任意                       | なし    | 最大10個     | タグ情報                                                          |
-| tag_list[0].tagKey                         | String  | 任意                       | なし    | 最大64文字     | タグキー                                                            |
-| tag_list[0].tagValue                       | String  | 任意                       | なし    | 最大255文字    | タグ値                                                           |
-| use_log                                    | Boolean | 任意                      | False | True、False | Log & Crash Searchサービスにログを残すかどうか                                     |
-| wait                                       | Boolean | 任意                       | True  | True、False | True:学習作成が完了した後に学習IDを返す。False:作成リクエスト後すぐに学習IDを返す      |
+| model_upload_uri                           | String  | 必須                          | なし    | 最大255文字    | 学習完了したモデルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)   |
+| check_point_input_uri                      | String  | 任意                          | なし    | 最大255文字    | 入力チェックポイントファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS)                 |
+| check_point_upload_uri                     | String  | 任意                          | なし    | 最大255文字    | チェックポイントファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)   |
+| timeout_hours                              | Integer | 任意                          | 720   | 1～720       | 最大学習時間(単位:時間)                                                |
+| hyperparameter_list                        | Array   | 任意                          | なし    | 最大100個    | ハイパーパラメータ情報(parameterKey/parameterValueで構成)           |
+| hyperparameter_list[0].parameterKey   | String  | 任意                          | なし    | 最大255文字    | ハイパーパラメータキー                                                       |
+| hyperparameter_list[0].parameterValue | String  | 任意                          | なし    | 最大1000文字   | ハイパーパラメータ値                                                      |
+| dataset_list                               | Array   | 任意                          | なし    | 最大10個     | 学習に使用されるデータセット情報(datasetName/dataUriで構成)                      |
+| dataset_list[0].datasetName                | String  | 任意                          | なし    | 最大36文字     | データ名                                                         |
+| dataset_list[0].datasetUri                 | String  | 任意                          | なし    | 最大255文字    | データパス                                                         |
+| tag_list                                   | Array   | 任意                          | なし    | 最大10個     | タグ情報                                                          |
+| tag_list[0].tagKey                         | String  | 任意                          | なし    | 最大64文字     | タグキー                                                            |
+| tag_list[0].tagValue                       | String  | 任意                          | なし    | 最大255文字    | タグ値                                                           |
+| use_log                                    | Boolean | 任意                          | False | True、False | Log & Crash Searchサービスにログを残すかどうか                                     |
+| wait                                       | Boolean | 任意                          | True  | True、False | True:学習作成が完了した後に学習IDを返す。False:作成リクエスト後すぐに学習IDを返す      |
 
-```
-training_id = easymaker.Training().run(
-    experiment_id=experiment_id,
+```python
+training = easymaker.Training().run(
+    experiment_id=experiment.experiment_id, # Optional if already set in init
     training_name='training_name',
     training_description='training_description',
     train_image_name='Ubuntu 18.04 CPU TensorFlow Training',
@@ -149,63 +150,63 @@ training_id = easymaker.Training().run(
 | training_id          | String  | 必須   | なし   | 最大36文字 | 学習ID |
 
 ```python
-easymaker.Training().delete(training_id)
+easymaker.Training(training_id).delete()
 ```
 
 ### ハイパーパラメータチューニング作成
 
 [Parameter]
 
-| 名前                                                            | タイプ            | 必須かどうか                                                | デフォルト値  | 有効範囲                                       | 説明                                                                        |
-|----------------------------------------------------------------|----------------|-------------------------------------------------------|-------|----------------------------------------------|----------------------------------------------------------------------------|
-| experiment_id                                                  | String         | 必須                                                   | なし    | なし                                           | 実験ID                                                                      |
-| hyperparameter_tuning_name                                     | String         | 必須                                                   | なし    | 最大50文字                                      | ハイパーパラメータチューニング名                                                             |
-| hyperparameter_tuning_description                              | String         | 任意                                                   | なし    | 最大255文字                                     | ハイパーパラメータチューニングについての説明                                                         |
-| image_name                                                     | String         | 必須                                                   | なし    | なし                                           | ハイパーパラメータチューニングに使用されるイメージ名(CLIで照会可能)                                         |
-| instance_name                                                  | String         | 必須                                                   | なし    | なし                                           | インスタンスタイプ名(CLIで照会可能)                                                     |
-| distributed_node_count                                         | Integer        | 必須                                                   | 1      | distributed_node_countとparallel_trial_countの積が10以下 | ハイパーパラメータチューニングで各学習ごとに分散学習を適用するノード数                                                     |
-| parallel_trial_count                                           | Integer        | 必須                                                   | 1      | distributed_node_countとparallel_trial_countの積が10以下 | ハイパーパラメータチューニングで並列実行する学習数                                                          |
-| use_torchrun                                                   | Boolean        | 選択                                                   | False  | True, False | torchrunの使用有無、Pytorchイメージでのみ使用可                                                |
-| nproc_per_node                                                 | Integer        | use_torchrun Trueの場合は必須                               | 1      | 1～(CPU数またはGPU数) | ノードあたりのプロセス数、 use_torchrunを使用する場合は必ず設定しなければならない値                                        |
-| data_storage_size                                              | Integer        | Obejct Storageを使用する場合は必須                               | なし    | 300～10000                                    | ハイパーパラメータチューニングに必要なデータをダウンロードする記憶領域サイズ(単位：GB)、NAS使用時は不要                 |
-| algorithm_name                                                 | String         | NHN Cloud提供アルゴリズムを使用する場合は必須                            | なし    | 最大64文字                                      | アルゴリズム名(CLIで照会可能)                                                        |
-| source_dir_uri                                                 | String         | 独自アルゴリズムを使用する場合は必須                                      | なし    | 最大255文字                                     | ハイパーパラメータチューニングに必要なファイルがあるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)    |
-| entry_point                                                    | String         | 独自アルゴリズムを使用する場合は必須                                      | なし    | 最大255文字                                     | source_dir_uri内で最初に実行されるPythonファイル情報                                       |
-| model_upload_uri                                               | String         | 必須                                                   | なし    | 最大255文字                                     | ハイパーパラメータチューニングで学習完了したモデルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
-| check_point_input_uri                                          | String         | 任意                                                   | なし    | 最大255文字                                     | 入力チェックポイントファイルのパス(NHN Cloud Object StorageまたはNHN Cloud NAS)                 |
-| check_point_upload_uri                                         | String         | 任意                                                   | なし    | 最大255文字                                     | チェックポイントファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)              |
-| timeout_hours                                                  | Integer        | 任意                                                   | 720   | 1～720                                        | 最大ハイパーパラメータチューニング時間(単位：時間)                                                   |
-| hyperparameter_spec_list                                       | Array          | 任意                                                   | なし    | 最大100個                                     | ハイパーパラメータのスペック情報                                                             |
-| hyperparameter_spec_list[0].<br>hyperparameterName             | String         | 任意                                                   | なし    | 最大255文字                                     | ハイパーパラメータ名                                                                |
-| hyperparameter_spec_list[0].<br>hyperparameterTypeCode         | String         | 任意                                                   | なし    | INT、DOUBLE、DISCRETE、CATEGORICAL           | ハイパーパラメータタイプ                                                                |
+| 名前                                                            | タイプ            | 必須かどうか                                            | デフォルト値  | 有効範囲                                       | 説明                                                                        |
+|----------------------------------------------------------------|----------------|---------------------------------------------------|-------|----------------------------------------------|----------------------------------------------------------------------------|
+| experiment_id                                                  | String         | easymaker.init에서 미입력 시 必須                         | なし    | なし                                           | 実験ID                                                                      |
+| hyperparameter_tuning_name                                     | String         | 必須                                                | なし    | 最大50文字                                      | ハイパーパラメータチューニング名                                                             |
+| hyperparameter_tuning_description                              | String         | 任意                                                | なし    | 最大255文字                                     | ハイパーパラメータチューニングについての説明                                                         |
+| image_name                                                     | String         | 必須                                                | なし    | なし                                           | ハイパーパラメータチューニングに使用されるイメージ名(CLIで照会可能)                                         |
+| instance_name                                                  | String         | 必須                                                | なし    | なし                                           | インスタンスタイプ名(CLIで照会可能)                                                     |
+| distributed_node_count                                         | Integer        | 必須                                                | 1      | distributed_node_countとparallel_trial_countの積が10以下 | ハイパーパラメータチューニングで各学習ごとに分散学習を適用するノード数                                                     |
+| parallel_trial_count                                           | Integer        | 必須                                                | 1      | distributed_node_countとparallel_trial_countの積が10以下 | ハイパーパラメータチューニングで並列実行する学習数                                                          |
+| use_torchrun                                                   | Boolean        | 選択                                                | False  | True, False | torchrunの使用有無、Pytorchイメージでのみ使用可                                                |
+| nproc_per_node                                                 | Integer        | use_torchrun Trueの場合は必須                           | 1      | 1～(CPU数またはGPU数) | ノードあたりのプロセス数、 use_torchrunを使用する場合は必ず設定しなければならない値                                        |
+| data_storage_size                                              | Integer        | Obejct Storageを使用する場合は必須                          | なし    | 300～10000                                    | ハイパーパラメータチューニングに必要なデータをダウンロードする記憶領域サイズ(単位：GB)、NAS使用時は不要                 |
+| algorithm_name                                                 | String         | NHN Cloud提供アルゴリズムを使用する場合は必須                       | なし    | 最大64文字                                      | アルゴリズム名(CLIで照会可能)                                                        |
+| source_dir_uri                                                 | String         | 独自アルゴリズムを使用する場合は必須                                | なし    | 最大255文字                                     | ハイパーパラメータチューニングに必要なファイルがあるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)    |
+| entry_point                                                    | String         | 独自アルゴリズムを使用する場合は必須                                | なし    | 最大255文字                                     | source_dir_uri内で最初に実行されるPythonファイル情報                                       |
+| model_upload_uri                                               | String         | 必須                                                | なし    | 最大255文字                                     | ハイパーパラメータチューニングで学習完了したモデルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
+| check_point_input_uri                                          | String         | 任意                                                | なし    | 最大255文字                                     | 入力チェックポイントファイルのパス(NHN Cloud Object StorageまたはNHN Cloud NAS)                 |
+| check_point_upload_uri                                         | String         | 任意                                                | なし    | 最大255文字                                     | チェックポイントファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)              |
+| timeout_hours                                                  | Integer        | 任意                                                | 720   | 1～720                                        | 最大ハイパーパラメータチューニング時間(単位：時間)                                                   |
+| hyperparameter_spec_list                                       | Array          | 任意                                                | なし    | 最大100個                                     | ハイパーパラメータのスペック情報                                                             |
+| hyperparameter_spec_list[0].<br>hyperparameterName             | String         | 任意                                                | なし    | 最大255文字                                     | ハイパーパラメータ名                                                                |
+| hyperparameter_spec_list[0].<br>hyperparameterTypeCode         | String         | 任意                                                | なし    | INT、DOUBLE、DISCRETE、CATEGORICAL           | ハイパーパラメータタイプ                                                                |
 | hyperparameter_spec_list[0].<br>hyperparameterMinValue         | Integer/Double | hyperparameterTypeCodeがINT、DOUBLEの場合は必須           | なし    | なし                                           | ハイパーパラメータ最小値                                                               |
 | hyperparameter_spec_list[0].<br>hyperparameterMaxValue         | Integer/Double | hyperparameterTypeCodeがINT、DOUBLEの場合は必須           | なし    | なし                                           | ハイパーパラメータ最大値                                                               |
-| hyperparameter_spec_list[0].<br>hyperparameterStep             | Integer/Double | hyperparameterTypeCodeがINT、DOUBLEでGRID戦略の場合は必須 | なし    | なし                                           | "Grid"チューニング戦略を使用する際のハイパーパラメータ値の変化サイズ                                      |
-| hyperparameter_spec_list[0].<br>hyperparameterSpecifiedValues  | String         | hyperparameterTypeCodeがDISCRETE、CATEGORICALの場合は必須  | なし    | 最大3000文字                                      | 決められたハイパーパラメータリスト(`,`で区切られた文字列や数字)                                          |
-| dataset_list                                                   | Array          | 任意                                                   | なし    | 最大10個                                      | ハイパーパラメータチューニングに使用されるデータセット情報(datasetName/dataUriで構成)                         |
-| dataset_list[0].datasetName                                    | String         | 任意                                                   | なし    | 最大36文字                                      | データ名                                                                    |
-| dataset_list[0].datasetUri                                     | String         | 任意                                                   | なし    | 最大255文字                                     | データパス                                                                    |
-| metric_list                                                    | Array          | 独自アルゴリズムを使用する場合は必須                                      | なし    | 最大10個(指標名で構成された文字列リスト)                    | 学習コードが出力するログの中からどの指標を収集するか定義します。                                       |
-| metric_regex                                                   | String         | 独自アルゴリズムを使用する場合は任意                                      | ([\w\ | -]+)\s*=\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?) | 最大255文字                                                                   | 指標の収集に使用する正規表現を入力します。学習アルゴリズムが正規表現に合わせて指標を出力する必要があります。                                                          |
-| objective_metric_name                                          | String         | 独自アルゴリズムを使用する場合は必須                                      | なし    | 最大36文字、metric_listの中で1つ                     | どの指標の最適化が目標なのか選択します。                                                 |
-| objective_type_code                                            | String         | 独自アルゴリズムを使用する場合は必須                                      | なし    | MINIMIZE、MAXIMIZE                           | 目標指標最適化タイプを選択します。                                                       |
-| objective_goal                                                 | Double         | 任意                                                   | なし    | なし                                           | 目標指標がこの値に達するとチューニング作業が終了します。                                             |
-| max_failed_trial_count                                         | Integer        | 任意                                                   | なし    | なし                                           | 失敗した学習の最大数を定義します。失敗した学習の数がこの値に達するとチューニングが失敗となり終了します。                 |
-| max_trial_count                                                | Integer        | 任意                                                   | なし    | なし                                           | 最大学習数を定義します。自動実行された学習の数がこの値に達するまでチューニングが実行されます。                     |
-| tuning_strategy_name                                           | String         | 必須                                                   | なし    | なし                                           | どの戦略を使用して最適なハイパーパラメータを探すか選択します。                                        |
-| tuning_strategy_random_state                                   | Integer        | 任意                                                   | なし    | なし                                           | 乱数作成を決定します。再現可能な結果のために固定された値で指定します。                                 |
-| early_stopping_algorithm                                       | String         | 必須                                                  | なし   | EARLY_STOPPING_ALGORITHM.<br>MEDIAN          | 学習を継続してもモデルがそれ以上良くならない場合、早期に学習を終了します。                              |
-| early_stopping_min_trial_count                                 | Integer        | 必須                                                  | 3     | なし                                          | 中間値を計算する際に、いくつの学習から目標指標値を取得するか定義します。                                |
-| early_stopping_start_step                                      | Integer        | 必須                                                  | 4     | なし                                          | 何番目の学習段階から早期終了を適用するか設定します。                                            |
-| tag_list                                                       | Array          | 任意                                                   | なし    | 最大10個                                      | タグ情報                                                                     |
-| tag_list[0].tagKey                                             | String         | 任意                                                   | なし    | 最大64文字                                      | タグキー                                                                       |
-| tag_list[0].tagValue                                           | String         | 任意                                                   | なし    | 最大255文字                                     | タグ値                                                                      |
-| use_log                                                        | Boolean        | 任意                                                  | False | True、False                                  | Log & Crash Searchサービスにログを残すかどうか                                                |
-| wait                                                           | Boolean        | 任意                                                   | True  | True、False                                  | True:ハイパーパラメータチューニングの作成完了後、ハイパーパラメータチューニングIDを返却、False:作成リクエスト後すぐに学習IDを返却 |
+| hyperparameter_spec_list[0].<br>hyperparameterStep             | Integer/Double | hyperparameterTypeCodeがINT、DOUBLEでGRID戦略の場合は必須    | なし    | なし                                           | "Grid"チューニング戦略を使用する際のハイパーパラメータ値の変化サイズ                                      |
+| hyperparameter_spec_list[0].<br>hyperparameterSpecifiedValues  | String         | hyperparameterTypeCodeがDISCRETE、CATEGORICALの場合は必須 | なし    | 最大3000文字                                      | 決められたハイパーパラメータリスト(`,`で区切られた文字列や数字)                                          |
+| dataset_list                                                   | Array          | 任意                                                | なし    | 最大10個                                      | ハイパーパラメータチューニングに使用されるデータセット情報(datasetName/dataUriで構成)                         |
+| dataset_list[0].datasetName                                    | String         | 任意                                                | なし    | 最大36文字                                      | データ名                                                                    |
+| dataset_list[0].datasetUri                                     | String         | 任意                                                | なし    | 最大255文字                                     | データパス                                                                    |
+| metric_list                                                    | Array          | 独自アルゴリズムを使用する場合は必須                                | なし    | 最大10個(指標名で構成された文字列リスト)                    | 学習コードが出力するログの中からどの指標を収集するか定義します。                                       |
+| metric_regex                                                   | String         | 独自アルゴリズムを使用する場合は任意                                | ([\w\ | -]+)\s*=\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?) | 最大255文字                                                                   | 指標の収集に使用する正規表現を入力します。学習アルゴリズムが正規表現に合わせて指標を出力する必要があります。                                                          |
+| objective_metric_name                                          | String         | 独自アルゴリズムを使用する場合は必須                                | なし    | 最大36文字、metric_listの中で1つ                     | どの指標の最適化が目標なのか選択します。                                                 |
+| objective_type_code                                            | String         | 独自アルゴリズムを使用する場合は必須                                | なし    | MINIMIZE、MAXIMIZE                           | 目標指標最適化タイプを選択します。                                                       |
+| objective_goal                                                 | Double         | 任意                                                | なし    | なし                                           | 目標指標がこの値に達するとチューニング作業が終了します。                                             |
+| max_failed_trial_count                                         | Integer        | 任意                                                | なし    | なし                                           | 失敗した学習の最大数を定義します。失敗した学習の数がこの値に達するとチューニングが失敗となり終了します。                 |
+| max_trial_count                                                | Integer        | 任意                                                | なし    | なし                                           | 最大学習数を定義します。自動実行された学習の数がこの値に達するまでチューニングが実行されます。                     |
+| tuning_strategy_name                                           | String         | 必須                                                | なし    | なし                                           | どの戦略を使用して最適なハイパーパラメータを探すか選択します。                                        |
+| tuning_strategy_random_state                                   | Integer        | 任意                                                | なし    | なし                                           | 乱数作成を決定します。再現可能な結果のために固定された値で指定します。                                 |
+| early_stopping_algorithm                                       | String         | 必須                                                | なし   | EARLY_STOPPING_ALGORITHM.<br>MEDIAN          | 学習を継続してもモデルがそれ以上良くならない場合、早期に学習を終了します。                              |
+| early_stopping_min_trial_count                                 | Integer        | 必須                                                | 3     | なし                                          | 中間値を計算する際に、いくつの学習から目標指標値を取得するか定義します。                                |
+| early_stopping_start_step                                      | Integer        | 必須                                                | 4     | なし                                          | 何番目の学習段階から早期終了を適用するか設定します。                                            |
+| tag_list                                                       | Array          | 任意                                                | なし    | 最大10個                                      | タグ情報                                                                     |
+| tag_list[0].tagKey                                             | String         | 任意                                                | なし    | 最大64文字                                      | タグキー                                                                       |
+| tag_list[0].tagValue                                           | String         | 任意                                                | なし    | 最大255文字                                     | タグ値                                                                      |
+| use_log                                                        | Boolean        | 任意                                                | False | True、False                                  | Log & Crash Searchサービスにログを残すかどうか                                                |
+| wait                                                           | Boolean        | 任意                                                | True  | True、False                                  | True:ハイパーパラメータチューニングの作成完了後、ハイパーパラメータチューニングIDを返却、False:作成リクエスト後すぐに学習IDを返却 |
 
-```
-hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
-    experiment_id=experiment_id,
+```python
+hyperparameter_tuning = easymaker.HyperparameterTuning().run(
+    experiment_id=experiment.experiment_id, # Optional if already set in init
     hyperparameter_tuning_name='hyperparameter_tuning_name',
     hyperparameter_tuning_description='hyperparameter_tuning_description',
     image_name='Ubuntu 18.04 CPU TensorFlow Training',
@@ -275,7 +276,7 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
 | hyperparameter_tuning_id          | String  | 必須   | なし   | 最大36文字 | ハイパーパラメータチューニングID |
 
 ```python
-easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
+easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 ```
 
 ### モデル作成
@@ -295,9 +296,9 @@ easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
 | tag_list[0].tagKey       | String | 選択                                | なし  | 最大64文字 | タグキー                                |
 | tag_list[0].tagValue     | String | 選択                                | なし  | 最大255文字 | タグ値                               |
 
-```
-model_id = easymaker.Model().create(
-    training_id=training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning_id,
+```python
+model = easymaker.Model().create(
+    training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
     model_name='model_name',
     model_description='model_description',
 )
@@ -317,8 +318,8 @@ model_id = easymaker.Model().create(
 | tag_list[0].tagKey   | String | 任意 | なし | 最大64文字                              | タグキー                                               |
 | tag_list[0].tagValue | String | 任意 | なし | 最大255文字                             | タグ値                                            |
 
-```
-model_id = easymaker.Model().create_by_model_uri(
+```python
+model = easymaker.Model().create_by_model_uri(
     framework_code=easymaker.TENSORFLOW,
     model_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
@@ -335,7 +336,7 @@ model_id = easymaker.Model().create_by_model_uri(
 | model_id | String  | 必須   | なし   | 最大36文字 | モデルID |
 
 ```python
-easymaker.Model().delete(model_id)
+easymaker.Model(model_id).delete()
 ```
 
 ### エンドポイントの作成
@@ -367,15 +368,14 @@ easymaker.Model().delete(model_id)
 | wait                                  | Boolean | 任意 | True  | True, False                | True：エンドポイントの作成が完了した後にエンドポイントIDを返す。False：エンドポイントリクエスト後、すぐにエンドポイントIDを返す |
 
 ```python
-endpoint = easymaker.Endpoint()
-endpoint_id = endpoint.create(
+endpoint = easymaker.Endpoint().create(
     endpoint_name='endpoint_name',
     endpoint_description='endpoint_description',
     endpoint_instance_name='c2.c16m16',
     endpoint_instance_count=1,
     endpoint_model_resource_list=[
         {
-            'modelId': model_id,
+            'modelId': model.model_id,
             'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
                 'cpu': '15',
@@ -392,7 +392,7 @@ endpoint_id = endpoint.create(
 作成しておいたエンドポイントの使用
 
 ```python
-endpoint = easymaker.Endpoint()
+endpoint = easymaker.Endpoint(endpoint_id)
 ```
 
 ### ステージの追加
@@ -425,14 +425,14 @@ endpoint = easymaker.Endpoint()
 | wait                                  | Boolean | 任意 | True  | True, False                | True：ステージの作成が完了した後にステージIDを返す。False：ステージリクエスト後、すぐにステージIDを返す |
 
 ```python
-stage_id = endpoint.create_stage(
-    stage_name='stage01',  # 30文字以内小文字/数字
+endpoint_stage = endpoint.EndpointStage().create(
+    stage_name='stage01',  # 30자 이내 소문자/숫자
     stage_description='test endpoint',
     endpoint_instance_name='c2.c16m16',
     endpoint_instance_count=1,
     endpoint_model_resource_list=[
         {
-            'modelId': model_id,
+            'modelId': model.model_id,
             'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
                 'cpu': '15',
@@ -451,29 +451,21 @@ stage_id = endpoint.create_stage(
 基本ステージにインファレンス
 
 ```python
-# 基本ステージ情報照会
-endpoint_stage_info = endpoint.get_default_endpoint_stage()
-print(f'endpoint_stage_info : {endpoint_stage_info}')
-
-# ステージを指定してインファレンスリクエスト
 input_data = [6.0, 3.4, 4.5, 1.6]
-endpoint.predict(endpoint_stage_info=endpoint_stage_info,
-                 model_id=model_id,
-                 json={'instances': [input_data]})
+easymaker.Endpoint('endpoint_id').predict(
+    model_id=model_id,
+    json={'instances': [input_data]},
+)
 ```
 
 特定ステージを指定してインファレンス
 
 ```python
-# ステージ情報照会
-endpoint_stage_info = endpoint.get_endpoint_stage_by_id(endpoint_stage_id=stage_id)
-print(f'endpoint_stage_info : {endpoint_stage_info}')
-
-# ステージを指定してインファレンスリクエスト
 input_data = [6.0, 3.4, 4.5, 1.6]
-endpoint.predict(endpoint_stage_info=endpoint_stage_info,
-                 model_id=model_id,
-                 json={'instances': [input_data]})
+easymaker.EndpointStage('endpoint_stage_id').predict(
+    model_id=model_id,
+    json={'instances': [input_data]},
+)
 ```
 
 ### エンドポイントの削除
@@ -485,7 +477,7 @@ endpoint.predict(endpoint_stage_info=endpoint_stage_info,
 | endpoint_id   | String  | 必須   | なし   | 最大36文字 | エンドポイントID |
 
 ```python
-endpoint.Endpoint().delete_endpoint(endpoint_id)
+easymaker.Endpoint(endpoint_id).delete()
 ```
 
 ### エンドポイントステージの削除
@@ -497,7 +489,7 @@ endpoint.Endpoint().delete_endpoint(endpoint_id)
 | stage_id   | String  | 必須   | なし   | 最大36文字 | ステージID |
 
 ```python
-endpoint.Endpoint().delete_endpoint_stage(stage_id)
+easymaker.EndpointStage(stage_id).delete()
 ```
 
 ### バッチ推論の作成
@@ -528,7 +520,7 @@ endpoint.Endpoint().delete_endpoint_stage(stage_id)
 | wait                      | Boolean | 選択     | True   | True, False | True:学習作成が完了した後に学習IDを返す。False:作成リクエスト後、すぐに学習IDを返す |
 
 ```python
-batch_inference_id = easymaker.BatchInference().run(
+batch_inference = easymaker.BatchInference().run(
     batch_inference_name='batch_inference_name',
     instance_count=1,
     timeout_hours=100,
@@ -568,7 +560,7 @@ batch_inference_id = easymaker.BatchInference().run(
 | batch_inference_id | String | 必須     | なし   | 最大36文字 | バッチ推論ID |
 
 ```python
-easymaker.BatchInference().delete(batch_inference_id)
+easymaker.BatchInference(batch_inference_id).delete()
 ```
 
 ### NHN Cloud - Log & Crash Search ログ転送機能
@@ -586,7 +578,7 @@ easymaker_logger.send(log_message='log meassage',
 
 Object Storage商品にファイルをアップロードし、ダウンロードする機能を提供します。
 
-```
+```python
 easymaker.upload(
     easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
     local_path='./local_dir',

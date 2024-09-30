@@ -21,6 +21,7 @@ easymaker.init(
     appkey='EASYMAKER_APPKEY',
     region='kr1',
     secret_key='EASYMAKER_SECRET_KEY',
+    experiment_id="EXPERIMENT_ID", # Optional
 )
 ```
 
@@ -37,7 +38,7 @@ Before creating a training, you must create an experiment to sort trainings.
 | wait                   | Boolean | Optional    | True | True, False | True: Return the experiment ID after creating the experiment,  False: Return the experiment ID immediately after request to create |
 
 ```python
-experiment_id = easymaker.Experiment().create(
+experiment = easymaker.Experiment().create(
     experiment_name='experiment_name',
     experiment_description='experiment_description',
     # wait=False,
@@ -53,46 +54,46 @@ experiment_id = easymaker.Experiment().create(
 | experiment_id          | String  | Required    | None   | Up to 36 characters | Experiment ID |
 
 ```python
-easymaker.Experiment().delete(experiment_id)
+easymaker.Experiment(experiment_id).delete()
 ```
 
 ### Create Training
 
 [Parameter]
 
-| Name                                         | Type      | Required                     | Default value   | Valid range       | Description                                                              |
-|--------------------------------------------|---------|---------------------------|-------|-------------|-----------------------------------------------------------------|
-| experiment_id                              | String  | Required                        | None    | None          | Experiment ID                                                           |
-| training_name                              | String  | Required                        | None    | Up to 50 characters      | Training name                                                           |
-| training_description                       | String  | Optional                        | None    | Up to 255 characters     | Description for training                                                       |
-| train_image_name                           | String  | Required                        | None    | None          | Image name to be used for training (Inquiry available with CLI)                                      |
-| train_instance_name                        | String  | Required                        | None    | None          | Instance flavor name (Inquiry available with CLI)                                          |
-| distributed_node_count                     | Integer | Required                        | None    | 1~10         | Number of nodes to apply distributed training to                                                 |
-| use_torchrun                               | Boolean | Optional                        | False  | True, False | Whether torchrun is enabled, only available for Pytorch images                            |
-| nproc_per_node                             | Integer | Required when use_torchrun is True   | 1      | 1 to (number of CPUs or number of GPUs) | Number of processes per node, value that must be set if use_torchrun is enabled       |
-| data_storage_size                          | Integer | Required when using Object Storage    | None    | 300~10000   | Storage size to download data for training (unit: GB), unnecessary when using NAS               |
+| Name                                         | Type      | Required                                             | Default value   | Valid range       | Description                                                              |
+|--------------------------------------------|---------|------------------------------------------------------|-------|-------------|-----------------------------------------------------------------|
+| experiment_id                              | String  | easymaker.init에서 미입력 시 Required                      | None    | None          | Experiment ID                                                           |
+| training_name                              | String  | Required                                             | None    | Up to 50 characters      | Training name                                                           |
+| training_description                       | String  | Optional                                             | None    | Up to 255 characters     | Description for training                                                       |
+| train_image_name                           | String  | Required                                             | None    | None          | Image name to be used for training (Inquiry available with CLI)                                      |
+| train_instance_name                        | String  | Required                                             | None    | None          | Instance flavor name (Inquiry available with CLI)                                          |
+| distributed_node_count                     | Integer | Required                                             | None    | 1~10         | Number of nodes to apply distributed training to                                                 |
+| use_torchrun                               | Boolean | Optional                                             | False  | True, False | Whether torchrun is enabled, only available for Pytorch images                            |
+| nproc_per_node                             | Integer | Required when use_torchrun is True                   | 1      | 1 to (number of CPUs or number of GPUs) | Number of processes per node, value that must be set if use_torchrun is enabled       |
+| data_storage_size                          | Integer | Required when using Object Storage                   | None    | 300~10000   | Storage size to download data for training (unit: GB), unnecessary when using NAS               |
 | algorithm_name                             | String  | Required when using algorithms provided by NHN Cloud | None    | Up to 64 characters      | Algorithm name (Inquiry available with CLI)                                             |
-| source_dir_uri                             | String  | Required when using own algorithm           | None    | Up to 255 characters     | Path of files required for training (NHN Cloud Object Storage or NHN Cloud NAS) |
-| entry_point                                | String  | Required when using own algorithm           | None    | Up to 255 characters     | Information of Python files to be executed initially in source_dir_uri                             |
-| model_upload_uri                           | String  | Required                        | None    | Up to 255 characters     | Path to upload the model completed with training (NHN Cloud Object Storage or NHN Cloud NAS)   |
-| check_point_input_uri                      | String  | Optional                        | None    | Up to 255 characters     | Input checkpoint file path (NHN Cloud Object Storage or NHN Cloud NAS)                 |
-| check_point_upload_uri                     | String  | Optional                        | None    | Up to 255 characters     | The path where the checkpoint file will be uploaded (NHN Cloud Object Storage or NHN Cloud NAS)   |
-| timeout_hours                              | Integer | Optional                        | 720   | 1~720       | Max training time (unit: hour)                                                |
-| hyperparameter_list                        | Array   | Optional                        | None    | Max 100     | Information of hyperparameters (consists of parameterKey/parameterValue)           |
-| hyperparameter_list[0].parameterKey   | String  | Optional                        | None    | Up to 255 characters     | Hyperparameter key                                                       |
-| hyperparameter_list[0].parameterValue | String  | Optional                        | None    | Up to 1000 characters    | Hyperparameter value                                                       |
-| dataset_list                               | Array   | Optional                        | None    | Max 10      | Information of dataset to be used for training (consists of datasetName/dataUri)                      |
-| dataset_list[0].datasetName                | String  | Optional                        | None    | Up to 36 characters      | Data name                                                          |
-| dataset_list[0].datasetUri                 | String  | Optional                        | None    | Up to 255 characters     | Data pah                                                          |
-| tag_list                                   | Array   | Optional                        | None    | Max 10      | Tag information                                                           |
-| tag_list[0].tagKey                         | String  | Optional                        | None    | Up to 64 characters      | Tag key                                                            |
-| tag_list[0].tagValue                       | String  | Optional                        | None    | Up to 255 characters     | Tag value                                                            |
-| use_log                                    | Boolean | Optional                        | False | True, False | Whether to leave logs in the Log & Crash Search service                                      |
-| wait                                       | Boolean | Optional                        | True  | True, False | True: Return the training ID after creating training, False: Return the training ID immediately after requesting to create      |
+| source_dir_uri                             | String  | Required when using own algorithm                    | None    | Up to 255 characters     | Path of files required for training (NHN Cloud Object Storage or NHN Cloud NAS) |
+| entry_point                                | String  | Required when using own algorithm                    | None    | Up to 255 characters     | Information of Python files to be executed initially in source_dir_uri                             |
+| model_upload_uri                           | String  | Required                                             | None    | Up to 255 characters     | Path to upload the model completed with training (NHN Cloud Object Storage or NHN Cloud NAS)   |
+| check_point_input_uri                      | String  | Optional                                             | None    | Up to 255 characters     | Input checkpoint file path (NHN Cloud Object Storage or NHN Cloud NAS)                 |
+| check_point_upload_uri                     | String  | Optional                                             | None    | Up to 255 characters     | The path where the checkpoint file will be uploaded (NHN Cloud Object Storage or NHN Cloud NAS)   |
+| timeout_hours                              | Integer | Optional                                             | 720   | 1~720       | Max training time (unit: hour)                                                |
+| hyperparameter_list                        | Array   | Optional                                             | None    | Max 100     | Information of hyperparameters (consists of parameterKey/parameterValue)           |
+| hyperparameter_list[0].parameterKey   | String  | Optional                                             | None    | Up to 255 characters     | Hyperparameter key                                                       |
+| hyperparameter_list[0].parameterValue | String  | Optional                                             | None    | Up to 1000 characters    | Hyperparameter value                                                       |
+| dataset_list                               | Array   | Optional                                             | None    | Max 10      | Information of dataset to be used for training (consists of datasetName/dataUri)                      |
+| dataset_list[0].datasetName                | String  | Optional                                             | None    | Up to 36 characters      | Data name                                                          |
+| dataset_list[0].datasetUri                 | String  | Optional                                             | None    | Up to 255 characters     | Data pah                                                          |
+| tag_list                                   | Array   | Optional                                             | None    | Max 10      | Tag information                                                           |
+| tag_list[0].tagKey                         | String  | Optional                                             | None    | Up to 64 characters      | Tag key                                                            |
+| tag_list[0].tagValue                       | String  | Optional                                             | None    | Up to 255 characters     | Tag value                                                            |
+| use_log                                    | Boolean | Optional                                             | False | True, False | Whether to leave logs in the Log & Crash Search service                                      |
+| wait                                       | Boolean | Optional                                             | True  | True, False | True: Return the training ID after creating training, False: Return the training ID immediately after requesting to create      |
 
 ```python
-training_id = easymaker.Training().run(
-    experiment_id=experiment_id,
+training = easymaker.Training().run(
+    experiment_id=experiment.experiment_id, # Optional if already set in init
     training_name='training_name',
     training_description='training_description',
     train_image_name='Ubuntu 18.04 CPU TensorFlow Training',
@@ -149,63 +150,63 @@ training_id = easymaker.Training().run(
 | training_id          | String  | Required    | None   | Up to 36 characters | Training ID |
 
 ```python
-easymaker.Training().delete(training_id)
+easymaker.Training(training_id).delete()
 ```
 
 ### Create Hyperparameter Tuning
 
 [Parameter]
 
-| Name                                                             | Type             | Required                                                 | Default value   | Valid range                                        | Description                                                                         |
-|----------------------------------------------------------------|----------------|-------------------------------------------------------|-------|----------------------------------------------|----------------------------------------------------------------------------|
-| experiment_id                                                  | String         | Required                                                    | None    | None                                           | Experiment ID                                                                      |
-| hyperparameter_tuning_name                                     | String         | Required                                                    | None    | Up to 50 characters                                       | Hyperparameter Tuning Name                                                              |
-| hyperparameter_tuning_description                              | String         | Optional                                                    | None    | Up to 255 characters                                      | Description of hyperparameter tuning                                                          |
-| image_name                                                     | String         | Required                                                    | None    | None                                           | Image name to be used for hyperparameter tuning (can be queried with CLI)                                         |
-| instance_name                                                  | String         | Required                                                    | None    | None                                           | Instance flavor name (Inquiry available with CLI)                                                     |
-| distributed_node_count                                         | Integer        | Required                                                    | 1      | The product of distributed_node_count and parallel_trial_count is 10 or less. | Number of distributed training to apply for each learning in hyperparameter tuning                                                      |
-| parallel_trial_count                                           | Integer        | Required                                                    | 1      | The product of distributed_node_count and parallel_trial_count is 10 or less. | Number of trainings to run in parallel in hyperparameter tuning                                                      |
-| use_torchrun                                                   | Boolean        | Optioanl                                                    | False  | True, False | Use torchrun or not, Only available in Pytorch images                                                 |
-| nproc_per_node                                                 | Integer        | Required when use_torchrun is True                                | 1      | 1~(Number of CPUs or GPUs) | Number of processes per node, Required when use_torchrun is used                                         |
-| data_storage_size                                              | Integer        | Required when using Object Storage                                | None    | 300~10000                                    | Size of storage space to download data required for hyperparameter tuning (unit: GB), not required when using NAS                  |
-| algorithm_name                                                 | String         | Required when using algorithms provided by NHN Cloud                             | None    | Up to 64 characters                                       | Algorithm name (Inquiry available with CLI)                                                        |
-| source_dir_uri                                                 | String         | Required when using own algorithm                                       | None    | Up to 255 characters                                      | Path containing files required for hyperparameter tuning (NHN Cloud Object Storage or NHN Cloud NAS)    |
-| entry_point                                                    | String         | Required when using own algorithm                                       | None    | Up to 255 characters                                      | Information of Python files to be executed initially in source_dir_uri                                        |
-| model_upload_uri                                               | String         | Required                                                    | None    | Up to 255 characters                                      | The path where the trained model in hyperparameter tuning will be uploaded (NHN Cloud Object Storage or NHN Cloud NAS) |
-| check_point_input_uri                                          | String         | Optional                                                    | None    | Up to 255 characters                                      | Input checkpoint file path (NHN Cloud Object Storage or NHN Cloud NAS)                 |
-| check_point_upload_uri                                         | String         | Optional                                                    | None    | Up to 255 characters                                      | The path where the checkpoint file will be uploaded (NHN Cloud Object Storage or NHN Cloud NAS)              |
-| timeout_hours                                                  | Integer        | Optional                                                    | 720   | 1~720                                        | Maximum hyperparameter tuning time (unit: hours)                                                   |
-| hyperparameter_spec_list                                       | Array          | Optional                                                    | None    | Up to 100                                      | Hyperparameter specification information                                                              |
-| hyperparameter_spec_list[0].<br>hyperparameterName             | String         | Optional                                                    | None    | Up to 255 characters                                      | Hyperparameter name                                                                 |
-| hyperparameter_spec_list[0].<br>hyperparameterTypeCode         | String         | Optional                                                    | None    | INT, DOUBLE, DISCRETE, CATEGORICAL           | Hyperparameter Type                                                                 |
-| hyperparameter_spec_list[0].<br>hyperparameterMinValue         | Integer/Double | Required if hyperparameterTypeCode is INT, DOUBLE            | None    | None                                           | Hyperparameter minimum value                                                                |
-| hyperparameter_spec_list[0].<br>hyperparameterMaxValue         | Integer/Double | Required if hyperparameterTypeCode is INT, DOUBLE            | None    | None                                           | Hyperparameter maximum value                                                                |
+| Name                                                             | Type             | Required                                                            | Default value   | Valid range                                        | Description                                                                         |
+|----------------------------------------------------------------|----------------|---------------------------------------------------------------------|-------|----------------------------------------------|----------------------------------------------------------------------------|
+| experiment_id                                                  | String         | easymaker.init에서 미입력 시 Required                                     | None    | None                                           | Experiment ID                                                                      |
+| hyperparameter_tuning_name                                     | String         | Required                                                            | None    | Up to 50 characters                                       | Hyperparameter Tuning Name                                                              |
+| hyperparameter_tuning_description                              | String         | Optional                                                            | None    | Up to 255 characters                                      | Description of hyperparameter tuning                                                          |
+| image_name                                                     | String         | Required                                                            | None    | None                                           | Image name to be used for hyperparameter tuning (can be queried with CLI)                                         |
+| instance_name                                                  | String         | Required                                                            | None    | None                                           | Instance flavor name (Inquiry available with CLI)                                                     |
+| distributed_node_count                                         | Integer        | Required                                                            | 1      | The product of distributed_node_count and parallel_trial_count is 10 or less. | Number of distributed training to apply for each learning in hyperparameter tuning                                                      |
+| parallel_trial_count                                           | Integer        | Required                                                            | 1      | The product of distributed_node_count and parallel_trial_count is 10 or less. | Number of trainings to run in parallel in hyperparameter tuning                                                      |
+| use_torchrun                                                   | Boolean        | Optioanl                                                            | False  | True, False | Use torchrun or not, Only available in Pytorch images                                                 |
+| nproc_per_node                                                 | Integer        | Required when use_torchrun is True                                  | 1      | 1~(Number of CPUs or GPUs) | Number of processes per node, Required when use_torchrun is used                                         |
+| data_storage_size                                              | Integer        | Required when using Object Storage                                  | None    | 300~10000                                    | Size of storage space to download data required for hyperparameter tuning (unit: GB), not required when using NAS                  |
+| algorithm_name                                                 | String         | Required when using algorithms provided by NHN Cloud                | None    | Up to 64 characters                                       | Algorithm name (Inquiry available with CLI)                                                        |
+| source_dir_uri                                                 | String         | Required when using own algorithm                                   | None    | Up to 255 characters                                      | Path containing files required for hyperparameter tuning (NHN Cloud Object Storage or NHN Cloud NAS)    |
+| entry_point                                                    | String         | Required when using own algorithm                                   | None    | Up to 255 characters                                      | Information of Python files to be executed initially in source_dir_uri                                        |
+| model_upload_uri                                               | String         | Required                                                            | None    | Up to 255 characters                                      | The path where the trained model in hyperparameter tuning will be uploaded (NHN Cloud Object Storage or NHN Cloud NAS) |
+| check_point_input_uri                                          | String         | Optional                                                            | None    | Up to 255 characters                                      | Input checkpoint file path (NHN Cloud Object Storage or NHN Cloud NAS)                 |
+| check_point_upload_uri                                         | String         | Optional                                                            | None    | Up to 255 characters                                      | The path where the checkpoint file will be uploaded (NHN Cloud Object Storage or NHN Cloud NAS)              |
+| timeout_hours                                                  | Integer        | Optional                                                            | 720   | 1~720                                        | Maximum hyperparameter tuning time (unit: hours)                                                   |
+| hyperparameter_spec_list                                       | Array          | Optional                                                            | None    | Up to 100                                      | Hyperparameter specification information                                                              |
+| hyperparameter_spec_list[0].<br>hyperparameterName             | String         | Optional                                                            | None    | Up to 255 characters                                      | Hyperparameter name                                                                 |
+| hyperparameter_spec_list[0].<br>hyperparameterTypeCode         | String         | Optional                                                            | None    | INT, DOUBLE, DISCRETE, CATEGORICAL           | Hyperparameter Type                                                                 |
+| hyperparameter_spec_list[0].<br>hyperparameterMinValue         | Integer/Double | Required if hyperparameterTypeCode is INT, DOUBLE                   | None    | None                                           | Hyperparameter minimum value                                                                |
+| hyperparameter_spec_list[0].<br>hyperparameterMaxValue         | Integer/Double | Required if hyperparameterTypeCode is INT, DOUBLE                   | None    | None                                           | Hyperparameter maximum value                                                                |
 | hyperparameter_spec_list[0].<br>hyperparameterStep             | Integer/Double | Required if hyperparameterTypeCode is INT, DOUBLE and GRID strategy | None    | None                                           | Magnitude of change in hyperparameter values when using the "Grid" tuning strategy                                       |
-| hyperparameter_spec_list[0].<br>hyperparameterSpecifiedValues  | String         | Required if hyperparameterTypeCode is DISCRETE or CATEGORICAL   | None    | Up to 3000 characters                                       | A list of defined hyperparameters (strings or numbers separated by ,)                                          |
-| dataset_list                                                   | Array          | Optional                                                    | None    | Max 10                                       | Dataset information to be used for hyperparameter tuning (configured as datasetName/dataUri)                         |
-| dataset_list[0].datasetName                                    | String         | Optional                                                    | None    | Up to 36 characters                                       | Data name                                                                     |
-| dataset_list[0].datasetUri                                     | String         | Optional                                                    | None    | Up to 255 characters                                      | Data pah                                                                     |
-| metric_list                                                    | Array          | Required when using own algorithm                                       | None    | Up to 10 (string list of indicator names)                    | Define which metrics to collect from logs output by the training code.                                       |
-| metric_regex                                                   | String         | Select when using own algorithm                                       | ([\\w\\ | -]+)\\s\*=\\s*([+-]?\\d*(.\\d+)?([Ee][+-]?\\d+)?) | Up to 255 characters                                                                    | Enter a regular expression to use to collect metrics. The learning algorithm should output metrics to match the regular expression.                                                          |
-| objective_metric_name                                          | String         | Required when using own algorithm                                       | None    | Up to 36 characters, one of metric_list                     | Choose which metrics you want to optimize for.                                                 |
-| objective_type_code                                            | String         | Required when using own algorithm                                       | None    | MINIMIZE, MAXIMIZE                           | Choose a target metric optimization type.                                                       |
-| objective_goal                                                 | Double         | Optional                                                    | None    | None                                           | The tuning job ends when the target metric reaches this value.                                             |
-| max_failed_trial_count                                         | Integer        | Optional                                                    | None    | None                                           | Define the maximum number of failed lessons. When the number of failed trainings reaches this value, tuning ends in failure.                 |
-| max_trial_count                                                | Integer        | Optional                                                    | None    | None                                           | Defines the maximum number of lessons. Tuning runs until the number of auto-run training reaches this value.                     |
-| tuning_strategy_name                                           | String         | Required                                                    | None    | None                                           | Choose which strategy to use to find the optimal hyperparameters.                                        |
-| tuning_strategy_random_state                                   | Integer        | Optional                                                    | None    | None                                           | Determine random number generation. Specify a fixed value for reproducible results.                                 |
-| early_stopping_algorithm                                       | String         | Required                                                    | None    | EARLY_STOPPING_ALGORITHM.<br>MEDIAN          | Stop training early if the model is no longer good even though training continues.                              |
-| early_stopping_min_trial_count                                 | Integer        | Required                                                    | 3     | None                                           | Define how many trainings the target metric value will be taken from when calculating the median.                                |
-| early_stopping_start_step                                      | Integer        | Required                                                    | 4     | None                                           | Set the training step from which to apply early stop.                                            |
-| tag_list                                                       | Array          | Optional                                                    | None    | Max 10                                       | Tag information                                                                      |
-| tag_list[0].tagKey                                             | String         | Optional                                                    | None    | Up to 64 characters                                       | Tag key                                                                       |
-| tag_list[0].tagValue                                           | String         | Optional                                                    | None    | Up to 255 characters                                      | Tag value                                                                       |
-| use_log                                                        | Boolean        | Optional                                                    | False | True, False                                  | Whether to leave logs in the Log & Crash Search service                                                  |
-| wait                                                           | Boolean        | Optional                                                    | True  | True, False                                  | True: returns hyperparameter tuning ID after creation of hyperparameter tuning is complete, False: returns training ID immediately after creation request |
+| hyperparameter_spec_list[0].<br>hyperparameterSpecifiedValues  | String         | Required if hyperparameterTypeCode is DISCRETE or CATEGORICAL       | None    | Up to 3000 characters                                       | A list of defined hyperparameters (strings or numbers separated by ,)                                          |
+| dataset_list                                                   | Array          | Optional                                                            | None    | Max 10                                       | Dataset information to be used for hyperparameter tuning (configured as datasetName/dataUri)                         |
+| dataset_list[0].datasetName                                    | String         | Optional                                                            | None    | Up to 36 characters                                       | Data name                                                                     |
+| dataset_list[0].datasetUri                                     | String         | Optional                                                            | None    | Up to 255 characters                                      | Data pah                                                                     |
+| metric_list                                                    | Array          | Required when using own algorithm                                   | None    | Up to 10 (string list of indicator names)                    | Define which metrics to collect from logs output by the training code.                                       |
+| metric_regex                                                   | String         | Select when using own algorithm                                     | ([\\w\\ | -]+)\\s\*=\\s*([+-]?\\d*(.\\d+)?([Ee][+-]?\\d+)?) | Up to 255 characters                                                                    | Enter a regular expression to use to collect metrics. The learning algorithm should output metrics to match the regular expression.                                                          |
+| objective_metric_name                                          | String         | Required when using own algorithm                                   | None    | Up to 36 characters, one of metric_list                     | Choose which metrics you want to optimize for.                                                 |
+| objective_type_code                                            | String         | Required when using own algorithm                                   | None    | MINIMIZE, MAXIMIZE                           | Choose a target metric optimization type.                                                       |
+| objective_goal                                                 | Double         | Optional                                                            | None    | None                                           | The tuning job ends when the target metric reaches this value.                                             |
+| max_failed_trial_count                                         | Integer        | Optional                                                            | None    | None                                           | Define the maximum number of failed lessons. When the number of failed trainings reaches this value, tuning ends in failure.                 |
+| max_trial_count                                                | Integer        | Optional                                                            | None    | None                                           | Defines the maximum number of lessons. Tuning runs until the number of auto-run training reaches this value.                     |
+| tuning_strategy_name                                           | String         | Required                                                            | None    | None                                           | Choose which strategy to use to find the optimal hyperparameters.                                        |
+| tuning_strategy_random_state                                   | Integer        | Optional                                                            | None    | None                                           | Determine random number generation. Specify a fixed value for reproducible results.                                 |
+| early_stopping_algorithm                                       | String         | Required                                                            | None    | EARLY_STOPPING_ALGORITHM.<br>MEDIAN          | Stop training early if the model is no longer good even though training continues.                              |
+| early_stopping_min_trial_count                                 | Integer        | Required                                                            | 3     | None                                           | Define how many trainings the target metric value will be taken from when calculating the median.                                |
+| early_stopping_start_step                                      | Integer        | Required                                                            | 4     | None                                           | Set the training step from which to apply early stop.                                            |
+| tag_list                                                       | Array          | Optional                                                            | None    | Max 10                                       | Tag information                                                                      |
+| tag_list[0].tagKey                                             | String         | Optional                                                            | None    | Up to 64 characters                                       | Tag key                                                                       |
+| tag_list[0].tagValue                                           | String         | Optional                                                            | None    | Up to 255 characters                                      | Tag value                                                                       |
+| use_log                                                        | Boolean        | Optional                                                            | False | True, False                                  | Whether to leave logs in the Log & Crash Search service                                                  |
+| wait                                                           | Boolean        | Optional                                                            | True  | True, False                                  | True: returns hyperparameter tuning ID after creation of hyperparameter tuning is complete, False: returns training ID immediately after creation request |
 
 ```python
-hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
-    experiment_id=experiment_id,
+hyperparameter_tuning = easymaker.HyperparameterTuning().run(
+    experiment_id=experiment.experiment_id, # Optional if already set in init
     hyperparameter_tuning_name='hyperparameter_tuning_name',
     hyperparameter_tuning_description='hyperparameter_tuning_description',
     image_name='Ubuntu 18.04 CPU TensorFlow Training',
@@ -275,7 +276,7 @@ hyperparameter_tuning_id = easymaker.HyperparameterTuning().run(
 | hyperparameter_tuning_id          | String  | Required    | None   | Up to 36 characters | Hyperparameter Tuning ID |
 
 ```python
-easymaker.HyperparameterTuning().delete(hyperparameter_tuning_id)
+easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 ```
 
 ### Create Model
@@ -296,8 +297,8 @@ The model is used when creating endpoints.
 | tag_list[0].tagValue     | String | Optional                                 | None  | Up to 255 characters | Tag value                                |
 
 ```python
-model_id = easymaker.Model().create(
-    training_id=training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning_id,
+model = easymaker.Model().create(
+    training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
     model_name='model_name',
     model_description='model_description',
 )
@@ -318,7 +319,7 @@ Even if there is no training ID, you can create a model by entering the path inf
 | tag_list[0].tagValue | String | Optional    | None  | Up to 255 characters                                 | Tag value                                                |
 
 ```python
-model_id = easymaker.Model().create_by_model_uri(
+model = easymaker.Model().create_by_model_uri(
     framework_code=easymaker.TENSORFLOW,
     model_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
@@ -335,7 +336,7 @@ model_id = easymaker.Model().create_by_model_uri(
 | model_id | String  | Required    | None   | Up to 36 characters | Model ID |
 
 ```python
-easymaker.Model().delete(model_id)
+easymaker.Model(model_id).delete()
 ```
 
 ### Create Endpoint
@@ -367,15 +368,14 @@ When creating an endpoint, the default stage is created.
 | wait                                  | Boolean | Optional    | True  | True, False                | True: Return the endpoint ID after creating endpoint, False: Return the endpoint ID immediately after requesting endpoint |
 
 ```python
-endpoint = easymaker.Endpoint()
-endpoint_id = endpoint.create(
+endpoint = easymaker.Endpoint().create(
     endpoint_name='endpoint_name',
     endpoint_description='endpoint_description',
     endpoint_instance_name='c2.c16m16',
     endpoint_instance_count=1,
     endpoint_model_resource_list=[
         {
-            'modelId': model_id,
+            'modelId': model.model_id,
             'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
                 'cpu': '15',
@@ -392,7 +392,7 @@ endpoint_id = endpoint.create(
 Use the created endpoint
 
 ```python
-endpoint = easymaker.Endpoint()
+endpoint = easymaker.Endpoint(endpoint_id)
 ```
 
 ### Add Stage
@@ -425,14 +425,14 @@ You can add a new stage to existing endpoints.
 | wait                                  | Boolean | Optional    | True  | True, False                | True: Return the stage ID after creating stage, False: Return the stage ID immediately after requesting stage |
 
 ```python
-stage_id = endpoint.create_stage(
-    stage_name='stage01', # Within 30 lowercase letters/numbers
+endpoint_stage = endpoint.EndpointStage().create(
+    stage_name='stage01',  # 30자 이내 소문자/숫자
     stage_description='test endpoint',
     endpoint_instance_name='c2.c16m16',
     endpoint_instance_count=1,
     endpoint_model_resource_list=[
         {
-            'modelId': model_id,
+            'modelId': model.model_id,
             'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
                 'cpu': '15',
@@ -451,29 +451,21 @@ stage_id = endpoint.create_stage(
 Inference to the default stage
 
 ```python
-# Check basic stage information
-endpoint_stage_info = endpoint.get_default_endpoint_stage()
-print(f'endpoint_stage_info : {endpoint_stage_info}')
-
-# Request inference by specifying a stage
 input_data = [6.0, 3.4, 4.5, 1.6]
-endpoint.predict(endpoint_stage_info=endpoint_stage_info,
-                 model_id=model_id,
-                 json={'instances': [input_data]})
+easymaker.Endpoint('endpoint_id').predict(
+    model_id=model_id,
+    json={'instances': [input_data]},
+)
 ```
 
 Inference by specifying a specific stage
 
 ```python
-# Check stage information
-endpoint_stage_info = endpoint.get_endpoint_stage_by_id(endpoint_stage_id=stage_id)
-print(f'endpoint_stage_info : {endpoint_stage_info}')
-
-# Request inference by specifying a stage
 input_data = [6.0, 3.4, 4.5, 1.6]
-endpoint.predict(endpoint_stage_info=endpoint_stage_info,
-                 model_id=model_id,
-                 json={'instances': [input_data]})
+easymaker.EndpointStage('endpoint_stage_id').predict(
+    model_id=model_id,
+    json={'instances': [input_data]},
+)
 ```
 
 ### Delete Endpoint
@@ -485,7 +477,7 @@ endpoint.predict(endpoint_stage_info=endpoint_stage_info,
 | endpoint_id   | String  | Required    | None   | Up to 36 characters | Endpoint ID |
 
 ```python
-endpoint.Endpoint().delete_endpoint(endpoint_id)
+easymaker.Endpoint(endpoint_id).delete()
 ```
 
 ### Delete Endpoint Stage
@@ -497,7 +489,7 @@ endpoint.Endpoint().delete_endpoint(endpoint_id)
 | stage_id   | String  | Required    | None   | Up to 36 characters | Stage ID |
 
 ```python
-endpoint.Endpoint().delete_endpoint_stage(stage_id)
+easymaker.EndpointStage(stage_id).delete()
 ```
 
 ### Create Batch Inference
@@ -528,7 +520,7 @@ endpoint.Endpoint().delete_endpoint_stage(stage_id)
 | wait                      | Boolean | Optional      | True   | True, False | True: Return the training ID after creating training |
 
 ```python
-batch_inference_id = easymaker.BatchInference().run(
+batch_inference = easymaker.BatchInference().run(
     batch_inference_name='batch_inference_name',
     instance_count=1,
     timeout_hours=100,
@@ -568,7 +560,7 @@ batch_inference_id = easymaker.BatchInference().run(
 | batch_inference_id | String | Required      | None   | Up to 36 characters | Batch Inference ID |
 
 ```python
-easymaker.BatchInference().delete(batch_inference_id)
+easymaker.BatchInference(batch_inference_id).delete()
 ```
 
 ### NHN Cloud - Log & Crash Search Log Sending Feature
