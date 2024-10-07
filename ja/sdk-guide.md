@@ -445,6 +445,13 @@ endpoint_stage = endpoint.EndpointStage().create(
     # wait=False,
 )
 ```
+### 스테이지 목록 조회
+
+엔드포인트 스테이지 목록을 조회합니다.
+
+```python
+endpoint_stage_list = easymaker.Endpoint(endpoint_id).get_stage_list()
+```
 
 ### エンドポイントインファレンス
 

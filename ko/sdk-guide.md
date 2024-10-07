@@ -417,11 +417,6 @@ endpoint = easymaker.Endpoint().create(
 )
 ```
 
-생성해둔 엔드포인트 사용
-
-```python
-endpoint = easymaker.Endpoint(endpoint_id)
-```
 
 ### 스테이지 추가
 
@@ -471,6 +466,14 @@ endpoint_stage = endpoint.EndpointStage().create(
     use_log=True,
     # wait=False,
 )
+```
+
+### 스테이지 목록 조회
+
+엔드포인트 스테이지 목록을 조회합니다.
+
+```python
+endpoint_stage_list = easymaker.Endpoint(endpoint_id).get_stage_list()
 ```
 
 ### 엔드포인트 인퍼런스
