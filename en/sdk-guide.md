@@ -570,6 +570,168 @@ batch_inference = easymaker.BatchInference().run(
 easymaker.BatchInference(batch_inference_id).delete()
 ```
 
+
+## 파이프라인
+
+### 파이프라인 생성
+
+[Parameter]
+
+| 이름                          | 타입      | 필수 여부 | 기본값 | 유효 범위   | 설명                                        |
+|-----------------------------|---------| --------- | ------ | --------- |-------------------------------------------|
+| pipeline_name               | String  | 필수      | 없음   | 최대 50자   | 파이프라인 이름                                  |
+| pipeline_spec_manifest_path | String  | 필수      | 없음   | 1~10      | 업로드할 파이프라인 파일 경로                          |
+| description                 | String  | 선택      | 없음   | 최대 255자  | 파이프라인에 대한 설명                              |
+| tag_list                    | Array   | 선택      | 없음   | 최대 10개   | 태그 정보                                     |
+| tag_list[0].tagKey          | String  | 선택      | 없음   | 최대 64자   | 태그 키                                      |
+| tag_list[0].tagValue        | String  | 선택      | 없음   | 최대 255자  | 태그 값                                      |
+| wait                        | Boolean | 선택      | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+
+```python
+pipeline = easymaker.Pipeline().upload(
+    pipeline_name='pipeline_01',
+    pipeline_spec_manifest_path='./sample-pipeline.yaml',
+    description='test',
+    tag_list=[],
+    # wait=False,
+)
+```
+
+### 파이프라인 삭제
+
+[Parameter]
+
+| 이름               | 타입   | 필수 여부 | 기본값 | 유효 범위 | 설명       |
+| ------------------ | ------ | --------- | ------ | --------- |----------|
+| pipeline_id | String | 필수      | 없음   | 최대 36자 | 파이프라인 ID |
+
+```python
+easymaker.Pipeline(pipeline_id).delete()
+```
+
+### 파이프라인 실행 생성
+
+[Parameter]
+
+| 이름                               | 타입      | 필수 여부                     | 기본값 | 유효 범위       | 설명                                       |
+|----------------------------------|---------|---------------------------| ------ |-------------|------------------------------------------|
+| pipeline_run_name                | String  | 필수                        | 없음   | 최대 50자      | 파이프라인 실행 이름                              |
+| pipeline_id                      | String  | 필수                        | 없음   | 최대 36자      | 파이프라인 일정 이름                              |
+| experiment_id                    | String  | easymaker.init에서 미입력 시 필수 | 없음    | 최대 36자      | 실험 ID                                    |
+| description                      | String  | 선택                        | 없음   | 최대 255자     | 파이프라인 실행에 대한 설명                          |
+| instance_name                    | String  | 필수                        | 없음   | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                   |
+| instance_count                   | Integer | 필수                        | 없음   | 1~10        | 사용할 인스턴스 수                               |
+| boot_storage_size                | Integer | 필수                        | 없음   | 50~         | 파이프라인을 실행할 인스턴스의 부트 스토리지 크기(단위: GB)      |
+| parameter_list                   | Array   | 선택                        | 없음   | 없음          | 파이프라인에 전달할 파라미터 정보                       |
+| parameter_list[0].parameterKey   | String  | 선택                        | 없음   | 최대 255자     | 파라미터 키                                   |
+| parameter_list[0].parameterValue | String  | 선택                        | 없음   | 최대 1000자    | 파라미터 값                                   |
+| nas_list                         | Array   | 선택                        | 없음   | 최대 10개      | Nas 정보                                   |
+| nas_list[0].mountDirName         | String  | 선택                        | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                       |
+| nas_list[0].nasUri               | String  | 선택                        | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로      |
+| tag_list                         | Array   | 선택                        | 없음   | 최대 10개      | 태그 정보                                    |
+| tag_list[0].tagKey               | String  | 선택                        | 없음   | 최대 64자      | 태그 키                                     |
+| tag_list[0].tagValue             | String  | 선택                        | 없음   | 최대 255자     | 태그 값                                     |
+| wait                             | Boolean | 선택                        | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+
+```python
+pipeline_run = easymaker.PipelineRun().create(
+    pipeline_run_name='pipeline_run',
+    description='test',
+    pipeline_id=pipeline.pipeline_id,
+    experiment_id=experiment.experiment_id, # Optional if already set in init
+    instance_name='m2.c4m8',
+    instance_count=1,
+    boot_storage_size=50,
+    # wait=False,
+)
+```
+
+### 파이프라인 실행 삭제
+
+[Parameter]
+
+| 이름               | 타입   | 필수 여부 | 기본값 | 유효 범위 | 설명          |
+| ------------------ | ------ | --------- | ------ | --------- |-------------|
+| pipeline_run_id | String | 필수      | 없음   | 최대 36자 | 파이프라인 실행 ID |
+
+```python
+easymaker.PipelineRun(pipeline_run_id).delete()
+```
+
+### 파이프라인 일정 생성
+
+[Parameter]
+
+| 이름                               | 타입      | 필수 여부                              | 기본값 | 유효 범위       | 설명                                             |
+|----------------------------------|---------|------------------------------------| ------ |-------------|------------------------------------------------|
+| pipeline_recurring_run_name      | String  | 필수                                 | 없음   | 최대 50자      | 파이프라인 일정 이름                                    |
+| pipeline_id                      | String  | 필수                                 | 없음   | 최대 36자      | 파이프라인 일정 이름                                    |
+| experiment_id                    | String  | easymaker.init에서 미입력 시 필수          | 없음    | 최대 36자      | 실험 ID                                          |
+| description                      | String  | 선택                                 | 없음   | 최대 255자     | 파이프라인 일정에 대한 설명                                |
+| instance_name                    | String  | 필수                                 | 없음   | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                         |
+| instance_count                   | Integer | 필수                                 | 없음   | 1~10        | 사용할 인스턴스 수                                     |
+| boot_storage_size                | Integer | 필수                                 | 없음   | 50~         | 파이프라인을 실행할 인스턴스의 부트 스토리지 크기(단위: GB)            |
+| schedule_periodic_minutes        | String  | schedule_cron_expression 미입력시 필수  | 없음   | 없음          | 파이프라인을 반복 실행할 시간 주기 설정                         |
+| schedule_cron_expression         | String  | schedule_periodic_minutes 미입력시 필수 | 없음   | 없음          | 파이프라인을 반복 실행할 Cron 표현식 설                       |
+| max_concurrency_count            | String  | 선택                                 | 없음   | 없음          | 동시 실행의 최대 개수를 지정하여 병렬로 실행되는 개수에 제한             |
+| schedule_start_datetime          | String  | 선택                                 | 없음   | 없음          | 파이프라인 일정의 시작 시간을 설정, 미입력 시 설정한 주기에 맞춰 파이프라인 실행 |
+| schedule_end_datetime            | String  | 선택                                 | 없음   | 없음          | 파이프라인 일정의 종료 시간을 설정, 미입력 시 중지 전까지 파이프라인 실행을 생성 |
+| use_catchup                      | Boolean | 선택                                 | 없음   | 없음          | 누락 실행 캐치업: 파이프라인 실행이 일정에 뒤처질 경우 이를 따라잡아야 할지 여부 |
+| parameter_list                   | Array   | 선택                                 | 없음   | 없음          | 파이프라인에 전달할 파라미터 정보                             |
+| parameter_list[0].parameterKey   | String  | 선택                                 | 없음   | 최대 255자     | 파라미터 키                                         |
+| parameter_list[0].parameterValue | String  | 선택                                 | 없음   | 최대 1000자    | 파라미터 값                                         |
+| nas_list                         | Array   | 선택                                 | 없음   | 최대 10개      | Nas 정보                                         |
+| nas_list[0].mountDirName         | String  | 선택                                 | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                             |
+| nas_list[0].nasUri               | String  | 선택                                 | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로            |
+| tag_list                         | Array   | 선택                                 | 없음   | 최대 10개      | 태그 정보                                          |
+| tag_list[0].tagKey               | String  | 선택                                 | 없음   | 최대 64자      | 태그 키                                           |
+| tag_list[0].tagValue             | String  | 선택                                 | 없음   | 최대 255자     | 태그 값                                           |
+| wait                             | Boolean | 선택                                 | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환      |
+
+```python
+pipeline_recurring_run = easymaker.PipelineRecurringRun().create(
+    pipeline_recurring_run_name='pipeline_recurring_run',
+    description='test',
+    pipeline_id=pipeline.pipeline_id,
+    experiment_id=experiment.experiment_id, # Optional if already set in init
+    instance_name='m2.c4m8',
+    boot_storage_size=50,
+    schedule_cron_expression='0 0 * * * ?',
+    max_concurrency_count=1,
+    schedule_start_datetime='2025-01-01T00:00:00+09:00'
+    # wait=False,
+)
+```
+
+### 파이프라인 일정 중지/재시작
+
+[Parameter]
+
+| 이름               | 타입   | 필수 여부 | 기본값 | 유효 범위 | 설명          |
+| ------------------ | ------ | --------- | ------ | --------- |-------------|
+| pipeline_recurring_run_id | String | 필수      | 없음   | 최대 36자 | 파이프라인 일정 ID |
+
+```python
+easymaker.PipelineRecurringRun(pipeline_recurring_run_id).stop()
+easymaker.PipelineRecurringRun(pipeline_recurring_run_id).start()
+
+```
+
+### 파이프라인 일정 삭제
+
+[Parameter]
+
+| 이름               | 타입   | 필수 여부 | 기본값 | 유효 범위 | 설명          |
+| ------------------ | ------ | --------- | ------ | --------- |-------------|
+| pipeline_recurring_run_id | String | 필수      | 없음   | 최대 36자 | 파이프라인 일정 ID |
+
+```python
+easymaker.PipelineRecurringRun(pipeline_recurring_run_id).delete()
+```
+
+## 기타 기능
+
+
 ### NHN Cloud - Log & Crash Search Log Sending Feature
 
 ```python
