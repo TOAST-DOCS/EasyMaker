@@ -718,7 +718,6 @@ pipeline_recurring_run = easymaker.PipelineRecurringRun().create(
     description='test',
     pipeline_id=pipeline.pipeline_id,
     experiment_id=experiment.experiment_id, # Optional if already set in init
-    flavor_id='35a73b57-58a7-434d-aa08-5249aaa95b3e',
     instance_name='m2.c4m8',
     boot_storage_size=50,
     schedule_cron_expression='0 0 * * * ?',
