@@ -345,11 +345,23 @@ model = easymaker.Model().create(
 | tag_list[0].tagValue | String | 선택    | 없음  | 최대 255자                                 | 태그 값                                                |
 
 ```python
+# TensorFlow 모델
 model = easymaker.Model().create_by_model_upload_uri(
     model_type_code=easymaker.TENSORFLOW,
     model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
     model_description='model_description',
+)
+# HuggingFace 모델
+model = easymaker.Model().create_hugging_face_model(
+    model_name='model_name',
+    model_description='model_description',
+    parameter_list=[
+        {
+            'parameterName': 'model_id',
+            'parameterValue': 'huggingface_model_id',
+        }
+    ],
 )
 ```
 
@@ -416,7 +428,6 @@ endpoint = easymaker.Endpoint().create(
     # wait=False,
 )
 ```
-
 
 ### 스테이지 추가
 
