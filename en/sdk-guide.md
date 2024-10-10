@@ -1,6 +1,6 @@
-## NHN Cloud > SDK User Guide > AI EasyMaker
+## Machine Learning > AI EasyMaker > SDK User Guide
 
-## Development Guide
+## SDK 설정
 
 ### Install AI EasyMaker Python SDK
 
@@ -24,6 +24,23 @@ easymaker.init(
     experiment_id="EXPERIMENT_ID", # Optional
 )
 ```
+
+## CLI Command
+
+If you know the app key, secret key, and region information, you can check various information through Python CLI without accessing the console.
+
+| Feature                          | Command                                                                                        |
+|-----------------------------|--------------------------------------------------------------------------------------------|
+| Query instance type list         | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -instance   |
+| Query image list                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -image      |
+| Query algorithm list             | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -algorithm  |
+| Query experiment list            | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -experiment |
+| Query training list              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -training   |
+| Query hyperparameter tuning list | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -tuning     |
+| Query model list                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -model      |
+| Query endpoint list              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -endpoint   |
+
+## Experiment
 
 ### Create Experiment
 
@@ -57,6 +74,8 @@ experiment = easymaker.Experiment().create(
 easymaker.Experiment(experiment_id).delete()
 ```
 
+## Training
+
 ### Create Training
 
 [Parameter]
@@ -79,9 +98,9 @@ easymaker.Experiment(experiment_id).delete()
 | check_point_input_uri                    | String  | Optional                                             | None          | Up to 255 characters                    | Input checkpoint file path (NHN Cloud Object Storage or NHN Cloud NAS)                          |
 | check_point_upload_uri                   | String  | Optional                                             | None          | Up to 255 characters                    | The path where the checkpoint file will be uploaded (NHN Cloud Object Storage or NHN Cloud NAS) |
 | timeout_hours                            | Integer | Optional                                             | 720           | 1~720                                   | Max training time (unit: hour)                                                                  |
-| hyperparameter_list                      | Array   | Optional                                             | None          | Max 100                                 | Information of hyperparameters (consists of parameterKey/parameterValue)                        |
-| hyperparameter_list[0].parameterKey      | String  | Optional                                             | None          | Up to 255 characters                    | Hyperparameter key                                                                              |
-| hyperparameter_list[0].parameterValue    | String  | Optional                                             | None          | Up to 1000 characters                   | Hyperparameter value                                                                            |
+| hyperparameter_list                      | Array   | Optional                                             | None          | Max 100                                 | Information of hyperparameters (consists of parameterName/parameterValue)                        |
+| hyperparameter_list[0].parameterName      | String  | Optional                                             | None          | Up to 255 characters                    | Parameter name                                                                              |
+| hyperparameter_list[0].parameterValue    | String  | Optional                                             | None          | Up to 1000 characters                   | Parameter value                                                                            |
 | dataset_list                             | Array   | Optional                                             | None          | Max 10                                  | Information of dataset to be used for training (consists of datasetName/dataUri)                |
 | dataset_list[0].datasetName              | String  | Optional                                             | None          | Up to 36 characters                     | Data name                                                                                       |
 | dataset_list[0].datasetUri               | String  | Optional                                             | None          | Up to 255 characters                    | Data pah                                                                                        |
@@ -104,11 +123,11 @@ training = easymaker.Training().run(
     entry_point='training_start.py',
     hyperparameter_list=[
         {
-            "parameterKey": "epochs",
+            "parameterName": "epochs",
             "parameterValue": "10",
         },
         {
-            "parameterKey": "batch-size",
+            "parameterName": "batch-size",
             "parameterValue": "30",
         }
     ],
@@ -152,6 +171,8 @@ training = easymaker.Training().run(
 ```python
 easymaker.Training(training_id).delete()
 ```
+
+## Hyperparameter Tuning
 
 ### Create Hyperparameter Tuning
 
@@ -279,6 +300,8 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
 easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 ```
 
+## Model
+
 ### Create Model
 
 Request to create a model with the training ID.
@@ -310,20 +333,35 @@ Even if there is no training ID, you can create a model by entering the path inf
 
 | Name                   | Type     | Required | Default value | Valid range                                   | Description                                                  |
 |----------------------|--------|-------|-----|-----------------------------------------|-----------------------------------------------------|
-| framework_code       | Enum   | Required    | None  | easymaker.TENSORFLOW, easymaker.PYTORCH | Framework information used for training                                    |
-| model_uri            | String | Required    | None  | Up to 255 characters                                 | Path for model file (NHN Cloud Object Storage or NHN Cloud NAS) |
+| model_type_code       | Enum   | Required    | None  | easymaker.TENSORFLOW, easymaker.PYTORCH | Framework information used for training                                    |
+| model_upload_uri            | String | Required    | None  | Up to 255 characters                                 | Path for model file (NHN Cloud Object Storage or NHN Cloud NAS) |
 | model_name           | String | Required    | None  | Up to 50 characters                                  | Model name                                               |
 | model_description    | String | Optional    | None  | Up to 255 characters                                 | Description for model                                           |
+| parameter_list                   | Array  | Optional    | None  | Max 10                                  | Information of parameters (consists of parameterName/parameterValue)         |
+| parameter_list[0].parameterName  | String | Optional    | None  | Up to 64 characters                     | Parameter name                                              |
+| parameter_list[0].parameterValue | String | Optional    | None  | Up to 255 characters                    | Parameter value                                             |
 | tag_list             | Array  | Optional    | None  | Max 10                                  | Tag information                                               |
 | tag_list[0].tagKey   | String | Optional    | None  | Up to 64 characters                                  | Tag key                                                |
 | tag_list[0].tagValue | String | Optional    | None  | Up to 255 characters                                 | Tag value                                                |
 
 ```python
-model = easymaker.Model().create_by_model_uri(
-    framework_code=easymaker.TENSORFLOW,
-    model_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+# TensorFlow Model
+model = easymaker.Model().create_by_model_upload_uri(
+    model_type_code=easymaker.TENSORFLOW,
+    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
     model_description='model_description',
+)
+# HuggingFace Model
+model = easymaker.Model().create_hugging_face_model(
+    model_name='model_name',
+    model_description='model_description',
+    parameter_list=[
+        {
+            'parameterName': 'model_id',
+            'parameterValue': 'huggingface_model_id',
+        }
+    ],
 )
 ```
 
@@ -338,6 +376,8 @@ model = easymaker.Model().create_by_model_uri(
 ```python
 easymaker.Model(model_id).delete()
 ```
+
+## Endpoint
 
 ### Create Endpoint
 
@@ -500,6 +540,8 @@ easymaker.Endpoint(endpoint_id).delete()
 easymaker.EndpointStage(stage_id).delete()
 ```
 
+## Batch Inference
+
 ### Create Batch Inference
 
 [Parameter]
@@ -526,6 +568,7 @@ easymaker.EndpointStage(stage_id).delete()
 | tag_list[0].tagValue      | String  | Optional      | None   | Up to 255 characters  | Tag value                                                                              |
 | use_log                   | Boolean | Optional      | False  | True, False | Whether to leave logs with the Log & Crash Search service                                       |
 | wait                      | Boolean | Optional      | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+
 ```python
 batch_inference = easymaker.BatchInference().run(
     batch_inference_name='batch_inference_name',
@@ -569,7 +612,6 @@ batch_inference = easymaker.BatchInference().run(
 ```python
 easymaker.BatchInference(batch_inference_id).delete()
 ```
-
 
 ## 파이프라인
 
@@ -731,7 +773,6 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).delete()
 
 ## 기타 기능
 
-
 ### NHN Cloud - Log & Crash Search Log Sending Feature
 
 ```python
@@ -762,18 +803,3 @@ easymaker.download(
     password='nhn_object_storage_api_password'
 )
 ```
-
-## CLI Command
-
-If you know the app key, secret key, and region information, you can check various information through Python CLI without accessing the console.
-
-| Feature                          | Command                                                                                        |
-|-----------------------------|--------------------------------------------------------------------------------------------|
-| Query instance type list         | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -instance   |
-| Query image list                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -image      |
-| Query algorithm list             | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -algorithm  |
-| Query experiment list            | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -experiment |
-| Query training list              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -training   |
-| Query hyperparameter tuning list | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -tuning     |
-| Query model list                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -model      |
-| Query endpoint list              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -endpoint   |

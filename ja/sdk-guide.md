@@ -1,6 +1,6 @@
-## NHN Cloud > SDK使用ガイド > AI EasyMaker
+## Machine Learning > AI EasyMaker > SDK使用ガイド
 
-## 開発ガイド
+## SDK 설정
 
 ### AI EasyMaker Python SDKインストール
 
@@ -24,6 +24,23 @@ easymaker.init(
     experiment_id="EXPERIMENT_ID", # Optional
 )
 ```
+
+## CLI Command
+
+アプリケーションキー、秘密鍵、リージョン情報を知っている場合は、コンソールにアクセスせずにPython CLIを介してさまざまな情報を確認できます。
+
+| 機能                         | コマンド                                                                                       |
+|-----------------------------|--------------------------------------------------------------------------------------------|
+| Instance typeリスト照会        | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -instance   |
+| Imageリスト照会                | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -image      |
+| Algorithmリスト照会            | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -algorithm  |
+| Experimentリスト照会           | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -experiment |
+| Trainingリスト照会             | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -training   |
+| Hyperparameter tuningリスト照会 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -tuning     |
+| Modelリスト照会                | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -model      |
+| Endpointリスト照会             | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -endpoint   |
+
+## 実験
 
 ### 実験の作成
 
@@ -57,6 +74,8 @@ experiment = easymaker.Experiment().create(
 easymaker.Experiment(experiment_id).delete()
 ```
 
+## 学習
+
 ### 学習作成
 
 [Parameter]
@@ -79,9 +98,9 @@ easymaker.Experiment(experiment_id).delete()
 | check_point_input_uri                  | String  | 任意                          | なし      | 最大255文字         | 入力チェックポイントファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS)                 |
 | check_point_upload_uri                 | String  | 任意                          | なし      | 最大255文字         | チェックポイントファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)   |
 | timeout_hours                          | Integer | 任意                          | 720     | 1～720           | 最大学習時間(単位:時間)                                                |
-| hyperparameter_list                    | Array   | 任意                          | なし      | 最大100個          | ハイパーパラメータ情報(parameterKey/parameterValueで構成)           |
-| hyperparameter_list[0].parameterKey    | String  | 任意                          | なし      | 最大255文字         | ハイパーパラメータキー                                                       |
-| hyperparameter_list[0].parameterValue  | String  | 任意                          | なし      | 最大1000文字        | ハイパーパラメータ値                                                      |
+| hyperparameter_list                    | Array   | 任意                          | なし      | 最大100個          | ハイパーパラメータ情報(parameterName/parameterValueで構成)           |
+| hyperparameter_list[0].parameterName    | String  | 任意                          | なし      | 最大255文字         | パラメータ名                                                       |
+| hyperparameter_list[0].parameterValue  | String  | 任意                          | なし      | 最大1000文字        | パラメータ値                                                      |
 | dataset_list                           | Array   | 任意                          | なし      | 最大10個           | 学習に使用されるデータセット情報(datasetName/dataUriで構成)                      |
 | dataset_list[0].datasetName            | String  | 任意                          | なし      | 最大36文字          | データ名                                                         |
 | dataset_list[0].datasetUri             | String  | 任意                          | なし      | 最大255文字         | データパス                                                         |
@@ -104,11 +123,11 @@ training = easymaker.Training().run(
     entry_point='training_start.py',
     hyperparameter_list=[
         {
-            "parameterKey"："epochs",
+            "parameterName"："epochs",
             "parameterValue"："10",
         },
         {
-            "parameterKey"："batch-size",
+            "parameterName"："batch-size",
             "parameterValue"："30",
         }
     ],
@@ -152,6 +171,8 @@ training = easymaker.Training().run(
 ```python
 easymaker.Training(training_id).delete()
 ```
+
+## ハイパーパラメータチューニング
 
 ### ハイパーパラメータチューニング作成
 
@@ -279,6 +300,8 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
 easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 ```
 
+## モデル
+
 ### モデル作成
 
 学習ID値でモデルの作成をリクエストできます。
@@ -310,20 +333,35 @@ model = easymaker.Model().create(
 
 | 名前               | タイプ | 必須かどうか | デフォルト値 | 有効範囲                               | 説明                                              |
 |----------------------|--------|-------|-----|-----------------------------------------|-----------------------------------------------------|
-| framework_code       | Enum   | 必須 | なし | easymaker.TENSORFLOW、 easymaker.PYTORCH | 学習に使用されたフレームワーク情報                                |
-| model_uri            | String | 必須 | なし | 最大255文字                             | モデルファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
+| model_type_code       | Enum   | 必須 | なし | easymaker.TENSORFLOW、 easymaker.PYTORCH | 学習に使用されたフレームワーク情報                                |
+| model_upload_uri            | String | 必須 | なし | 最大255文字                             | モデルファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
 | model_name           | String | 必須 | なし | 最大50文字                              | モデル名                                           |
 | model_description    | String | 任意 | なし | 最大255文字                             | モデルの説明                                       |
+| parameter_list                   | Array  | 任意    | なし  | 最大10個                                  | パラメータ情報(parameterName/parameterValueで構成)         |
+| parameter_list[0].parameterName  | String | 任意    | なし  | 最大64文字                                  | パラメータ名                                              |
+| parameter_list[0].parameterValue | String | 任意    | なし  | 最大255文字                                 | パラメータ値                                              |
 | tag_list             | Array  | 任意 | なし | 最大10個                              | タグ情報                                           |
 | tag_list[0].tagKey   | String | 任意 | なし | 最大64文字                              | タグキー                                               |
 | tag_list[0].tagValue | String | 任意 | なし | 最大255文字                             | タグ値                                            |
 
 ```python
-model = easymaker.Model().create_by_model_uri(
-    framework_code=easymaker.TENSORFLOW,
-    model_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+# TensorFlowモデル
+model = easymaker.Model().create_by_model_upload_uri(
+    model_type_code=easymaker.TENSORFLOW,
+    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
     model_description='model_description',
+)
+# HuggingFaceモデル
+model = easymaker.Model().create_hugging_face_model(
+    model_name='model_name',
+    model_description='model_description',
+    parameter_list=[
+        {
+            'parameterName': 'model_id',
+            'parameterValue': 'huggingface_model_id',
+        }
+    ],
 )
 ```
 
@@ -338,6 +376,8 @@ model = easymaker.Model().create_by_model_uri(
 ```python
 easymaker.Model(model_id).delete()
 ```
+
+## エンドポイント
 
 ### エンドポイントの作成
 
@@ -445,6 +485,7 @@ endpoint_stage = endpoint.EndpointStage().create(
     # wait=False,
 )
 ```
+
 ### 스테이지 목록 조회
 
 엔드포인트 스테이지 목록을 조회합니다.
@@ -499,6 +540,8 @@ easymaker.Endpoint(endpoint_id).delete()
 easymaker.EndpointStage(stage_id).delete()
 ```
 
+## バッチ推論
+
 ### バッチ推論の作成
 
 [Parameter]
@@ -525,7 +568,6 @@ easymaker.EndpointStage(stage_id).delete()
 | tag_list[0].tagValue      | String  | 選択     | なし   | 最大255文字 | タグ値                                                                              |
 | use_log                   | Boolean | 選択     | False  | True, False | Log & Crash Searchサービスにログを残すかどうか                                        |
 | wait                      | Boolean | 選択     | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
-
 
 ```python
 batch_inference = easymaker.BatchInference().run(
@@ -761,18 +803,3 @@ easymaker.download(
     password='nhn_object_storage_api_password'
 )
 ```
-
-## CLI Command
-
-アプリケーションキー、秘密鍵、リージョン情報を知っている場合は、コンソールにアクセスせずにPython CLIを介してさまざまな情報を確認できます。
-
-| 機能                         | コマンド                                                                                       |
-|-----------------------------|--------------------------------------------------------------------------------------------|
-| Instance typeリスト照会        | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -instance   |
-| Imageリスト照会                | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -image      |
-| Algorithmリスト照会            | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -algorithm  |
-| Experimentリスト照会           | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -experiment |
-| Trainingリスト照会             | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -training   |
-| Hyperparameter tuningリスト照会 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -tuning     |
-| Modelリスト照会                | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -model      |
-| Endpointリスト照会             | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -endpoint   |
