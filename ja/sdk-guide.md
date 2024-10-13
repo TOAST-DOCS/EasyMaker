@@ -393,7 +393,6 @@ easymaker.Model(model_id).delete()
 | endpoint_instance_count                                     | Integer | 任意 | 1       | 1～10                             | エンドポイントに使用されるインスタンス数                                                     |
 | endpoint_model_resource_list                                | Array   | 必須   | なし      | 最大10個                            | ステージに使用されるリソース情報                                                |
 | endpoint_model_resource_list[0].modelId                     | String   | 必須   | なし      | なし                               | ステージリソースで作成するモデルID                                   |
-| endpoint_model_resource_list[0].apigwResourceUri            | String   | 必須   | なし      | 最大255文字                          | /で始まるAPI Gatewayリソースパス                            |
 | endpoint_model_resource_list[0].resourceOptionDetail        | Object   | 必須   | なし      |                                  | ステージリソースの詳細情報                |
 | endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | 必須   | なし      | 0.0~                             | ステージリソースに使用されるCPU                |
 | endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | 必須   | なし      | 1Mi~                             | ステージリソースに使用されるメモリ            |
@@ -416,7 +415,6 @@ endpoint = easymaker.Endpoint().create(
     endpoint_model_resource_list=[
         {
             'modelId': model.model_id,
-            'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
                 'cpu': '15',
                 'memory': '15Gi'
@@ -449,7 +447,6 @@ endpoint = easymaker.Endpoint(endpoint_id)
 | endpoint_instance_count                                     | Integer | 任意 | 1     | 1～10                             | エンドポイントに使用されるインスタンス数                                                 |
 | endpoint_model_resource_list                                | Array   | 必須   | なし   | 最大10個                            | ステージに使用されるリソース情報                                                |
 | endpoint_model_resource_list[0].modelId                     | String   | 必須   | なし   | なし                               | ステージリソースで作成するモデルID                                   |
-| endpoint_model_resource_list[0].apigwResourceUri            | String   | 必須   | なし   | 最大255文字                          | /で始まるAPI Gatewayリソースパス                            |
 | endpoint_model_resource_list[0].podCount                    | Integer  | 必須   | なし   | 1～100                            | ステージリソースに使用されるPod数                                   |
 | endpoint_model_resource_list[0].resourceOptionDetail        | Object   | 必須   | なし   |                                  | ステージリソースの詳細情報                |
 | endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | 必須   | なし   | 0.0~                             | ステージリソースに使用されるCPU                |
@@ -473,7 +470,6 @@ endpoint_stage = endpoint.EndpointStage().create(
     endpoint_model_resource_list=[
         {
             'modelId': model.model_id,
-            'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
                 'cpu': '15',
                 'memory': '15Gi'

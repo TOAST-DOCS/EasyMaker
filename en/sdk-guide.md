@@ -393,7 +393,6 @@ When creating an endpoint, the default stage is created.
 | endpoint_instance_count                                     | Integer | Optional    | 1             | 1~10                             | Instance count to be used for endpoint                  |
 | endpoint_model_resource_list                                | Array   | Required    | None          | Max 10                           | Resource information to be used on the stage            |
 | endpoint_model_resource_list[0].modelId                     | String   | Required    | None          | None                             | Model ID to be created as a stage resource              |
-| endpoint_model_resource_list[0].apigwResourceUri            | String   | Required    | None          | Up to 255 characters             | Path for API Gateway resource starting with /           |
 | endpoint_model_resource_list[0].resourceOptionDetail        | Object   | Required    | None          |                                  | Details of stage resource                               |
 | endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | Required    | None          | 0.0~                             | CPU to be used for stage resource                       |
 | endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | Required    | None          | 1Mi~                             | Memory to be used for stage resource                    |
@@ -416,7 +415,6 @@ endpoint = easymaker.Endpoint().create(
     endpoint_model_resource_list=[
         {
             'modelId': model.model_id,
-            'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
                 'cpu': '15',
                 'memory': '15Gi'
@@ -449,7 +447,6 @@ You can add a new stage to existing endpoints.
 | endpoint_instance_count                                     | Integer | Optional    | 1             | 1~10                             | Instance count to be used for endpoint                                                  |
 | endpoint_model_resource_list                                | Array   | Required    | None          | Max 10                           | Resource information to be used on the stage                                                 |
 | endpoint_model_resource_list[0].modelId                     | String   | Required    | None          | None                             | Model ID to be created as a stage resource                                   |
-| endpoint_model_resource_list[0].apigwResourceUri            | String   | Required    | None          | Up to 255 characters             | Path for API Gateway resource starting with /                             |
 | endpoint_model_resource_list[0].podCount                    | Integer  | Required    | None          | 1~100                            | Number of pods to be used for stage resources                                    |
 | endpoint_model_resource_list[0].resourceOptionDetail        | Object   | Required    | None          |                                  | Details of stage resource                |
 | endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | Required    | None          | 0.0~                             | CPU to be used for stage resource                |
@@ -473,7 +470,6 @@ endpoint_stage = endpoint.EndpointStage().create(
     endpoint_model_resource_list=[
         {
             'modelId': model.model_id,
-            'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
                 'cpu': '15',
                 'memory': '15Gi'
