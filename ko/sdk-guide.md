@@ -393,7 +393,6 @@ easymaker.Model(model_id).delete()
 | endpoint_instance_count                                     | Integer | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                      |
 | endpoint_model_resource_list                                | Array   | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
 | endpoint_model_resource_list[0].modelId                     | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
-| endpoint_model_resource_list[0].apigwResourceUri            | String   | 필수    | 없음    | 최대 255자                  | /로 시작하는 API Gateway 리소스 경로                             |
 | endpoint_model_resource_list[0].resourceOptionDetail        | Object   | 필수    | 없음    |                                  | 스테이지 리소스의 상세 정보                 |
 | endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
 | endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
@@ -416,7 +415,6 @@ endpoint = easymaker.Endpoint().create(
     endpoint_model_resource_list=[
         {
             'modelId': model.model_id,
-            'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
                 'cpu': '15',
                 'memory': '15Gi'
@@ -443,7 +441,6 @@ endpoint = easymaker.Endpoint().create(
 | endpoint_instance_count                                     | Integer | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                  |
 | endpoint_model_resource_list                                | Array   | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
 | endpoint_model_resource_list[0].modelId                     | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
-| endpoint_model_resource_list[0].apigwResourceUri            | String   | 필수    | 없음    | 최대 255자                  | /로 시작하는 API Gateway 리소스 경로                             |
 | endpoint_model_resource_list[0].resourceOptionDetail        | Object   | 필수    | 없음    |                                  | 스테이지 리소스의 상세 정보                 |
 | endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
 | endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
@@ -466,7 +463,6 @@ endpoint_stage = endpoint.EndpointStage().create(
     endpoint_model_resource_list=[
         {
             'modelId': model.model_id,
-            'apigwResourceUri': '/predict',
             'resourceOptionDetail': {
                 'cpu': '15',
                 'memory': '15Gi'
