@@ -1684,7 +1684,7 @@ Hugging Face Runtime 서빙은 미세 조정을 지원하지 않습니다. 미�
 
 > [참고] 지원하는 Hugging Face Task:
 > 현재 Hugging Face Runtime은 Hugging Face의 전체 Task를 지원하지 않습니다.
-> 지원하는 Task는 `sequence_classification`, `token_classification`, `fill_mask`, `text_generation`, `text2text_generation` 입니다.
+> 지원하는 Task는 `sequence_classification`, `token_classification`, `fill_mask`, `text_generation`, `text2text_generation`입니다.
 > 지원하지 않는 Task를 사용하려면 TensorFlow/Pytorch Serving 방법을 사용하세요.
 
 > [참고] Gated Model:
