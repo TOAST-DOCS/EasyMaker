@@ -441,6 +441,7 @@ You can add a new stage to existing endpoints.
 
 | Name                                                        | Type      | Required | Default value | Valid range                      | Description                                                                 |
 |-------------------------------------------------------------|---------|-------|---------------|----------------------------------|--------------------------------------------------------------------|
+| endpoint_id                                                 | String  | Required    | None          | Up to 36 characters              | Endpoint ID                                                              |
 | stage_name                                                  | String  | Required    | None          | Up to 50 characters              | Stage name                                                            |
 | stage_description                                           | String  | Optional    | None          | Up to 255 characters             | Description for stage                                                        |
 | endpoint_instance_name                                      | String  | Required    | None          | None                             | Instance flavor name to be used for endpoint                                              |
@@ -462,7 +463,8 @@ You can add a new stage to existing endpoints.
 | wait                                                        | Boolean | Optional    | True          | True, False                      | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
-endpoint_stage = endpoint.EndpointStage().create(
+endpoint_stage = easymaker.EndpointStage().create(
+    endpoint_id=endpoint.endpoint_id,
     stage_name='stage01',  # 30자 이내 소문자/숫자
     stage_description='test endpoint',
     endpoint_instance_name='c2.c16m16',
