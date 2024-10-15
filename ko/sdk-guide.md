@@ -435,6 +435,7 @@ endpoint = easymaker.Endpoint().create(
 
 | 이름                                                          | 타입      | 필수 여부 | 기본값   | 유효 범위                      | 설명                                                                 |
 |-------------------------------------------------------------|---------|-------|-------|----------------------------|--------------------------------------------------------------------|
+| endpoint_id                                                 | String  | 필수    | 없음   | 최대 36자                      | 엔드포인트 ID                                                            |
 | stage_name                                                  | String  | 필수    | 없음    | 최대 50자                     | 스테이지 이름                                                            |
 | stage_description                                           | String  | 선택    | 없음    | 최대 255자                    | 스테이지에 대한 설명                                                        |
 | endpoint_instance_name                                      | String  | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                              |
@@ -455,7 +456,8 @@ endpoint = easymaker.Endpoint().create(
 | wait                                                        | Boolean | 선택    | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
-endpoint_stage = endpoint.EndpointStage().create(
+endpoint_stage = easymaker.EndpointStage().create(
+    endpoint_id=endpoint.endpoint_id,
     stage_name='stage01',  # 30자 이내 소문자/숫자
     stage_description='test endpoint',
     endpoint_instance_name='c2.c16m16',
