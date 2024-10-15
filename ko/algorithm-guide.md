@@ -330,7 +330,6 @@ Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 | per_device_train_batch_size | False | int | 4 | [1~∞)     | GPU/TPU core/CPU당 training 배치 크기  |
 | per_device_eval_batch_size | False | int | 4 | [1~∞)     | GPU/TPU core/CPU당  evaluation 배치 크기 |
 | num_train_epochs | False | float | 3.0 | [0.0~∞)   | 전체 training을 수행하는 총횟수 |
-| threshold | False | float | 0.5 | [0.0~1.0] | 추론 Threshold |
 | logging_steps  | False | int | 500 | [500~∞)   | 로그를 출력하는 step 주기 |
 
 ### 데이터 세트

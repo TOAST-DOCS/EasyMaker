@@ -49,7 +49,6 @@ Create a Jupyter notebook.
         * Boot storage is the storage on which Jupiter notebooks and underlying virtual environments are installed. This storage is initialized when the notebook is restarted.
         * Data storage is block storage mounted on the `/root/easymaker` directory path. Data on this storage is retained even when the notebook is restarted.
     * Storage size of created notebook cannot be changed, so please specify sufficient storage size at the time of creation.
-    * The storage size can be entered in the unit of 10GB, maximum 2,040GB.
     * If necessary, you can associate **NHN Cloud NAS** to which connect your notebook.
         * Mount Directory Name: Enter the name of the directory to mount on notebook.
         * NHN Cloud NAS Path: Enter directory path in the format `nas://{NAS ID}:/{path}`.
