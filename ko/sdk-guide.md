@@ -658,7 +658,7 @@ easymaker.Pipeline(pipeline_id).delete()
 | parameter_list                   | Array   | 선택                        | 없음   | 없음          | 파이프라인에 전달할 파라미터 정보                       |
 | parameter_list[0].parameterKey   | String  | 선택                        | 없음   | 최대 255자     | 파라미터 키                                   |
 | parameter_list[0].parameterValue | String  | 선택                        | 없음   | 최대 1000자    | 파라미터 값                                   |
-| nas_list                         | Array   | 선택                        | 없음   | 최대 10개      | Nas 정보                                   |
+| nas_list                         | Array   | 선택                        | 없음   | 최대 10개      | NAS 정보                                   |
 | nas_list[0].mountDirName         | String  | 선택                        | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                       |
 | nas_list[0].nasUri               | String  | 선택                        | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로      |
 | tag_list                         | Array   | 선택                        | 없음   | 최대 10개      | 태그 정보                                    |
@@ -705,7 +705,7 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 | instance_count                   | Integer | 필수                                 | 없음   | 1~10        | 사용할 인스턴스 수                                     |
 | boot_storage_size                | Integer | 필수                                 | 없음   | 50~         | 파이프라인을 실행할 인스턴스의 부트 스토리지 크기(단위: GB)            |
 | schedule_periodic_minutes        | String  | schedule_cron_expression 미입력시 필수  | 없음   | 없음          | 파이프라인을 반복 실행할 시간 주기 설정                         |
-| schedule_cron_expression         | String  | schedule_periodic_minutes 미입력시 필수 | 없음   | 없음          | 파이프라인을 반복 실행할 Cron 표현식 설                       |
+| schedule_cron_expression         | String  | schedule_periodic_minutes 미입력시 필수 | 없음   | 없음          | 파이프라인을 반복 실행할 Cron 표현식 설정                      |
 | max_concurrency_count            | String  | 선택                                 | 없음   | 없음          | 동시 실행의 최대 개수를 지정하여 병렬로 실행되는 개수에 제한             |
 | schedule_start_datetime          | String  | 선택                                 | 없음   | 없음          | 파이프라인 일정의 시작 시간을 설정, 미입력 시 설정한 주기에 맞춰 파이프라인 실행 |
 | schedule_end_datetime            | String  | 선택                                 | 없음   | 없음          | 파이프라인 일정의 종료 시간을 설정, 미입력 시 중지 전까지 파이프라인 실행을 생성 |
@@ -713,7 +713,7 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 | parameter_list                   | Array   | 선택                                 | 없음   | 없음          | 파이프라인에 전달할 파라미터 정보                             |
 | parameter_list[0].parameterKey   | String  | 선택                                 | 없음   | 최대 255자     | 파라미터 키                                         |
 | parameter_list[0].parameterValue | String  | 선택                                 | 없음   | 최대 1000자    | 파라미터 값                                         |
-| nas_list                         | Array   | 선택                                 | 없음   | 최대 10개      | Nas 정보                                         |
+| nas_list                         | Array   | 선택                                 | 없음   | 최대 10개      | NAS 정보                                         |
 | nas_list[0].mountDirName         | String  | 선택                                 | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                             |
 | nas_list[0].nasUri               | String  | 선택                                 | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로            |
 | tag_list                         | Array   | 선택                                 | 없음   | 최대 10개      | 태그 정보                                          |
