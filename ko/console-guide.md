@@ -1688,7 +1688,7 @@ Hugging Face Runtime 서빙은 미세 조정을 지원하지 않습니다. 미�
 > 지원하지 않는 Task를 사용하려면 TensorFlow/Pytorch Serving 방법을 사용하세요.
 
 > [참고] Gated Model:
-> Gated Model을 서빙하려면 접근이 허용된 계정의 토큰을 모델 파라미터로 입력해야합니다.
+> Gated Model을 서빙하려면 접근이 허용된 계정의 토큰을 모델 파라미터로 입력해야 합니다.
 > 토큰을 입력하지 않거나, 허용되지 않은 계정의 토큰을 입력한 경우 모델 배포에 실패합니다.
 
 ##### TensorFlow/PyTorch Serving
@@ -1696,7 +1696,7 @@ Hugging Face Runtime 서빙은 미세 조정을 지원하지 않습니다. 미�
 TensorFlow와 PyTorch로 학습된 Hugging Face 모델을 서빙하는 방법입니다.
 
 1. Hugging Face 모델을 다운로드합니다.
-    - 아래의 예시코드처럼 transformers 라이브러리의 AutoTokenizer, AutoConfig, AutoModel을 사용해서 다운로드할 수 있습니다.
+    - 아래의 예시 코드처럼 transformers 라이브러리의 AutoTokenizer, AutoConfig, AutoModel을 사용해서 다운로드할 수 있습니다.
 
             from transformers import AutoTokenizer, AutoConfig, AutoModel
 
