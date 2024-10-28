@@ -14,7 +14,7 @@ python -m pip install easymaker
 有効にしたAI EasyMaker商品のアプリケーションキー、秘密鍵、リージョン情報を入力します。
 AI EasyMaker SDKを使用するには初期化コードが必要です。
 
-```
+```python
 import easymaker
 
 easymaker.init(
@@ -54,7 +54,7 @@ easymaker.init(
 | experiment_description   | String   | 選択  | なし | 最大255文字   | 実験の説明                                                |
 | wait                     | Boolean  | 選択  | True | True, False | True：作成が完了した後に返す、False：作成リクエスト後、すぐに返す |
 
-```
+```python
 experiment  = easymaker.Experiment().create(
     experiment_name='experiment_name',
     experiment_description='experiment_description',
@@ -110,7 +110,7 @@ easymaker.Experiment(experiment_id).delete()
 | use_log                               | Boolean | 選択                      | False | True, False | Log & Crash Searchサービスにログを残すかどうか                                    |
 | wait                                  | Boolean | 選択                      | True   | True, False | True：作成が完了した後に返す、False：作成リクエスト後、すぐに返す |
 
-```
+```python
 training = easymaker.Training().run(
     experiment_id=experiment.experiment_id, # Optional if already set in init
     training_name='training_name',
@@ -225,10 +225,10 @@ easymaker.Training(training_id).delete()
 | use_log                                                       | Boolean        | 選択                                                  | False | True, False                                  | Log & Crash Searchサービスにログを残すかどうか                                               |
 | wait                                                          | Boolean        | 選択                                                  | True   | True, False | True：作成が完了した後に返す、False：作成リクエスト後、すぐに返す |
 
-```
+```python
 hyperparameter_tuning = easymaker.HyperparameterTuning().run(
-    experiment_id=experiment_id,
     experiment_id=experiment.experiment_id, # Optional if already set in init
+    hyperparameter_tuning_name='hyperparameter_tuning_name',
     hyperparameter_tuning_description='hyperparameter_tuning_description',
     image_name='Ubuntu 18.04 CPU TensorFlow Training',
     instance_name='m2.c8m16',
@@ -300,6 +300,8 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
 easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 ```
 
+## モデル
+
 ### モデル作成
 
 学習ID値でモデルの作成をリクエストできます。
@@ -317,7 +319,7 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 | tag_list[0].tagKey       | String | 選択                                | なし  | 最大64文字 | タグキー                                |
 | tag_list[0].tagValue     | String | 選択                                | なし  | 最大255文字 | タグ値                               |
 
-```
+```python
 model = easymaker.Model().create(
     training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
     model_name='model_name',
@@ -331,8 +333,8 @@ model = easymaker.Model().create(
 
 | 名前               | タイプ | 必須かどうか | デフォルト値 | 有効範囲                               | 説明                                              |
 |----------------------|--------|-------|-----|-----------------------------------------|-----------------------------------------------------|
-| framework_code       | Enum   | 必須 | なし | easymaker.TENSORFLOW、 easymaker.PYTORCH | 学習に使用されたフレームワーク情報                                |
-| model_uri            | String | 必須 | なし | 最大255文字                             | モデルファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
+| model_type_code       | Enum   | 必須 | なし | easymaker.TENSORFLOW、 easymaker.PYTORCH | 学習に使用されたフレームワーク情報                                |
+| model_upload_uri            | String | 必須 | なし | 最大255文字                             | モデルファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
 | model_name           | String | 必須 | なし | 最大50文字                              | モデル名                                           |
 | model_description    | String | 任意 | なし | 最大255文字                             | モデルの説明                                       |
 | parameter_list                   | Array  | 選択  | なし | 最大10個                                | パラメータ情報(parameterName/parameterValueで構成)         |
@@ -342,7 +344,7 @@ model = easymaker.Model().create(
 | tag_list[0].tagKey   | String | 任意 | なし | 最大64文字                              | タグキー                                               |
 | tag_list[0].tagValue | String | 任意 | なし | 最大255文字                             | タグ値                                            |
 
-```
+```python
 # TensorFlowモデル
 model = easymaker.Model().create_by_model_upload_uri(
     model_type_code=easymaker.TENSORFLOW,
@@ -359,7 +361,7 @@ model = easymaker.Model().create_hugging_face_model(
             'parameterName': 'model_id',
             'parameterValue': 'huggingface_model_id',
         }
-    ],    
+    ],
 )
 ```
 
@@ -744,7 +746,6 @@ pipeline_recurring_run = easymaker.PipelineRecurringRun().create(
 ```python
 easymaker.PipelineRecurringRun(pipeline_recurring_run_id).stop()
 easymaker.PipelineRecurringRun(pipeline_recurring_run_id).start()
-
 ```
 
 ### パイプラインスケジュールの削除
@@ -776,7 +777,7 @@ easymaker_logger.send(log_message='log meassage',
 
 Object Storage商品にファイルをアップロードし、ダウンロードする機能を提供します。
 
-```
+```python
 easymaker.upload(
     easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
     local_path='./local_dir',
