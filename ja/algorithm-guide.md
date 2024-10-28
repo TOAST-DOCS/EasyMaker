@@ -330,7 +330,6 @@ Semantic Segmentationアルゴリズムは、次の指標を作成します。
 | per_device_train_batch_size | False | int | 4 | [1～∞)     | GPU/TPU core/CPUあたりのtrainingバッチサイズ |
 | per_device_eval_batch_size | False | int | 4 | [1～∞)     | GPU/TPU core/CPUあたりのevaluationバッチサイズ |
 | num_train_epochs | False | float | 3.0 | [0.0～∞)   | 全体trainingを実行する総回数 |
-| threshold | False | float | 0.5 | [0.0～1.0] | 推論Threshold |
 | logging_steps  | False | int | 500 | [500～∞)   | ログを出力するstep周期 |
 
 ### データセット
@@ -420,7 +419,7 @@ COCO Datasetの形式で作成します。
                 201,
                 166,
                 93.5,
-                144.5
+144.5
             ],
             "area": 13510.75,
             "segmentation": [],
@@ -434,7 +433,7 @@ COCO Datasetの形式で作成します。
                 17,
                 20,
                 217.5,
-                329
+329
             ],
             "area": 71557.5,
             "segmentation": [],
@@ -448,7 +447,7 @@ COCO Datasetの形式で作成します。
                 26,
                 248,
                 162.5,
-                117
+117
             ],
             "area": 19012.5,
             "segmentation": [],
