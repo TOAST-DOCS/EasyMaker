@@ -1,6 +1,6 @@
 ## Machine Learning > AI EasyMaker > SDK User Guide
 
-## SDK 설정
+## SDK Settings
 
 ### Install AI EasyMaker Python SDK
 
@@ -52,7 +52,7 @@ Before creating a training, you must create an experiment to sort trainings.
 |------------------------|---------|-------|---------------|----------------------|--------------------------------------------|
 | experiment_name        | String  | Required    | None          | Up to 50 characters  | Experiment name                            |
 | experiment_description | String  | Optional    | None          | Up to 255 characters | Description for experiment                 |
-| wait                   | Boolean | Optional    | True          | True, False          | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환  |
+| wait                   | Boolean | Optional    | True          | True, False          | True: return after creation is complete, False: return upon creation request  |
 
 ```python
 experiment = easymaker.Experiment().create(
@@ -82,7 +82,7 @@ easymaker.Experiment(experiment_id).delete()
 
 | Name                                     | Type      | Required                                             | Default value | Valid range                             | Description                                                                                     |
 |------------------------------------------|---------|------------------------------------------------------|---------------|-----------------------------------------|-------------------------------------------------------------------------------------------------|
-| experiment_id                            | String  | easymaker.init에서 미입력 시 Required                      | None          | None                                    | Experiment ID                                                                                   |
+| experiment_id                            | String  | Required if not entered in easymaker.init            | None          | None                                    | Experiment ID                                                                                   |
 | training_name                            | String  | Required                                             | None          | Up to 50 characters                     | Training name                                                                                   |
 | training_description                     | String  | Optional                                             | None          | Up to 255 characters                    | Description for training                                                                        |
 | train_image_name                         | String  | Required                                             | None          | None                                    | Image name to be used for training (Inquiry available with CLI)                                 |
@@ -108,7 +108,7 @@ easymaker.Experiment(experiment_id).delete()
 | tag_list[0].tagKey                       | String  | Optional                                             | None          | Up to 64 characters                     | Tag key                                                                                         |
 | tag_list[0].tagValue                     | String  | Optional                                             | None          | Up to 255 characters                    | Tag value                                                                                       |
 | use_log                                  | Boolean | Optional                                             | False         | True, False                             | Whether to leave logs in the Log & Crash Search service                                         |
-| wait                                     | Boolean | Optional                                             | True          | True, False                             | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                                                       |
+| wait                                     | Boolean | Optional                                             | True          | True, False                             | True: return after creation is complete, False: return upon creation request                                                       |
 
 ```python
 training = easymaker.Training().run(
@@ -223,7 +223,7 @@ easymaker.Training(training_id).delete()
 | tag_list[0].tagKey                                             | String         | Optional                                                            | None    | Up to 64 characters                                                           | Tag key                                                                                                                      |
 | tag_list[0].tagValue                                           | String         | Optional                                                            | None    | Up to 255 characters                                                          | Tag value                                                                                                                    |
 | use_log                                                        | Boolean        | Optional                                                            | False | True, False                                                                   | Whether to leave logs in the Log & Crash Search service                                                                      |
-| wait                                                           | Boolean        | Optional                                                            | True  | True, False                                                                   | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                                                                                    |
+| wait                                                           | Boolean        | Optional                                                            | True  | True, False                                                                   | True: return after creation is complete, False: return upon creation request                                                                                   |
 
 ```python
 hyperparameter_tuning = easymaker.HyperparameterTuning().run(
@@ -404,7 +404,7 @@ When creating an endpoint, the default stage is created.
 | tag_list[0].tagKey                                          | String  | Optional    | None          | Up to 64 characters              | Tag key                                                 |
 | tag_list[0].tagValue                                        | String  | Optional    | None          | Up to 255 characters             | Tag value                                               |
 | use_log                                                     | Boolean | Optional    | False         | True, False                      | Whether to leave logs in the Log & Crash Search service |
-| wait                                                        | Boolean | Optional    | True          | True, False                      | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환               |
+| wait                                                        | Boolean | Optional    | True          | True, False                      | True: return after creation is complete, False: return upon creation request               |
 
 ```python
 endpoint = easymaker.Endpoint().create(
@@ -460,12 +460,12 @@ You can add a new stage to existing endpoints.
 | tag_list[0].tagKey                                          | String  | Optional    | None          | Up to 64 characters              | Tag key                                                               |
 | tag_list[0].tagValue                                        | String  | Optional    | None          | Up to 255 characters             | Tag value                                                               |
 | use_log                                                     | Boolean | Optional    | False         | True, False                      | Whether to leave logs in the Log & Crash Search service                                           |
-| wait                                                        | Boolean | Optional    | True          | True, False                      | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+| wait                                                        | Boolean | Optional    | True          | True, False                      | True: return after creation is complete, False: return upon creation request |
 
 ```python
 endpoint_stage = easymaker.EndpointStage().create(
     endpoint_id=endpoint.endpoint_id,
-    stage_name='stage01',  # 30자 이내 소문자/숫자
+    stage_name='stage01',  # lowercase/number within 30 characters
     stage_description='test endpoint',
     endpoint_instance_name='c2.c16m16',
     endpoint_instance_count=1,
@@ -484,9 +484,9 @@ endpoint_stage = easymaker.EndpointStage().create(
 )
 ```
 
-### 스테이지 목록 조회
+### Retrieve Stages
 
-엔드포인트 스테이지 목록을 조회합니다.
+Retrieves endpoint stages.
 
 ```python
 endpoint_stage_list = easymaker.Endpoint(endpoint_id).get_stage_list()
@@ -565,7 +565,7 @@ easymaker.EndpointStage(stage_id).delete()
 | tag_list[0].tagKey        | String  | Optional      | None   | Up to 64 characters   | Tag key                                                                              |
 | tag_list[0].tagValue      | String  | Optional      | None   | Up to 255 characters  | Tag value                                                                              |
 | use_log                   | Boolean | Optional      | False  | True, False | Whether to leave logs with the Log & Crash Search service                                       |
-| wait                      | Boolean | Optional      | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+| wait                      | Boolean | Optional      | True   | True, False | True: return after creation is complete, False: return upon creation request |
 
 ```python
 batch_inference = easymaker.BatchInference().run(
@@ -611,21 +611,21 @@ batch_inference = easymaker.BatchInference().run(
 easymaker.BatchInference(batch_inference_id).delete()
 ```
 
-## 파이프라인
+## Pipeline
 
-### 파이프라인 생성
+### Create Pipeline
 
 [Parameter]
 
-| 이름                          | 타입      | 필수 여부 | 기본값 | 유효 범위   | 설명                                        |
+| Name               | Type   | Required | Default value | Valid range | Description         |
 |-----------------------------|---------| --------- | ------ | --------- |-------------------------------------------|
-| pipeline_name               | String  | 필수      | 없음   | 최대 50자   | 파이프라인 이름                                  |
-| pipeline_spec_manifest_path | String  | 필수      | 없음   | 1~10      | 업로드할 파이프라인 파일 경로                          |
-| description                 | String  | 선택      | 없음   | 최대 255자  | 파이프라인에 대한 설명                              |
-| tag_list                    | Array   | 선택      | 없음   | 최대 10개   | 태그 정보                                     |
-| tag_list[0].tagKey          | String  | 선택      | 없음   | 최대 64자   | 태그 키                                      |
-| tag_list[0].tagValue        | String  | 선택      | 없음   | 최대 255자  | 태그 값                                      |
-| wait                        | Boolean | 선택      | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+| pipeline_name               | String  | Required      | None   | Max 50 characters   | Pipeline name                                  |
+| pipeline_spec_manifest_path | String  | Required      | None   | 1~10      | Pipeline file path to upload                          |
+| description                 | String  | Optional  | None   | Max 255 characters  | Description for pipeline                              |
+| tag_list                    | Array   | Optional    | None   | Max 10 characters  | Tag Information                         |
+| tag_list[0].tagKey          | String  | Optional    | None   | Max 64 characters  | Tag key                              |
+| tag_list[0].tagValue        | String  | Optional    | None   | Max 255 characters  | Tag value                                      |
+| wait                        | Boolean | Optional    | True   | True, False | True: return after creation is complete, False: return immediately after creation request |
 
 ```python
 pipeline = easymaker.Pipeline().upload(
@@ -637,41 +637,41 @@ pipeline = easymaker.Pipeline().upload(
 )
 ```
 
-### 파이프라인 삭제
+### Delete Pipeline
 
 [Parameter]
 
-| 이름               | 타입   | 필수 여부 | 기본값 | 유효 범위 | 설명       |
+| Name               | Type   | Required | Default value | Valid range | Description         |
 | ------------------ | ------ | --------- | ------ | --------- |----------|
-| pipeline_id | String | 필수      | 없음   | 최대 36자 | 파이프라인 ID |
+| pipeline_id | String | Required | None | Up to 36 characters | Pipeline ID
 
 ```python
 easymaker.Pipeline(pipeline_id).delete()
 ```
 
-### 파이프라인 실행 생성
+### Create Pipeline Run
 
 [Parameter]
 
-| 이름                               | 타입      | 필수 여부                     | 기본값 | 유효 범위       | 설명                                       |
+| Name               | Type   | Required | Default value | Valid range | Description         |
 |----------------------------------|---------|---------------------------| ------ |-------------|------------------------------------------|
-| pipeline_run_name                | String  | 필수                        | 없음   | 최대 50자      | 파이프라인 실행 이름                              |
-| pipeline_id                      | String  | 필수                        | 없음   | 최대 36자      | 파이프라인 일정 이름                              |
-| experiment_id                    | String  | easymaker.init에서 미입력 시 필수 | 없음    | 최대 36자      | 실험 ID                                    |
-| description                      | String  | 선택                        | 없음   | 최대 255자     | 파이프라인 실행에 대한 설명                          |
-| instance_name                    | String  | 필수                        | 없음   | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                   |
-| instance_count                   | Integer | 필수                        | 없음   | 1~10        | 사용할 인스턴스 수                               |
-| boot_storage_size                | Integer | 필수                        | 없음   | 50~         | 파이프라인을 실행할 인스턴스의 부트 스토리지 크기(단위: GB)      |
-| parameter_list                   | Array   | 선택                        | 없음   | 없음          | 파이프라인에 전달할 파라미터 정보                       |
-| parameter_list[0].parameterKey   | String  | 선택                        | 없음   | 최대 255자     | 파라미터 키                                   |
-| parameter_list[0].parameterValue | String  | 선택                        | 없음   | 최대 1000자    | 파라미터 값                                   |
-| nas_list                         | Array   | 선택                        | 없음   | 최대 10개      | Nas 정보                                   |
-| nas_list[0].mountDirName         | String  | 선택                        | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                       |
-| nas_list[0].nasUri               | String  | 선택                        | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로      |
-| tag_list                         | Array   | 선택                        | 없음   | 최대 10개      | 태그 정보                                    |
-| tag_list[0].tagKey               | String  | 선택                        | 없음   | 최대 64자      | 태그 키                                     |
-| tag_list[0].tagValue             | String  | 선택                        | 없음   | 최대 255자     | 태그 값                                     |
-| wait                             | Boolean | 선택                        | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+| pipeline_run_name                | String  | Required                        | None   | Max 50 Characters      | Pipeline run name                             |
+| pipeline_id                      | String  | Required                        | None   | Max 36 Characters     | Pipeline schedule name                              |
+| experiment_id                    | String  | Required if not entered in easymaker.init | None    | Max 36 Characters     | Experiment ID                                    |
+| description                      | String  | Optional                        | None   | Max 255 Characters    | Description of pipeline execution                        |
+| instance_name                    | String  | Required                        | None   | None          | Instance type name (lookupable with the CLI)                   |
+| instance_count                   | Integer | Required                        | None   | 1~10        | Number of instances to use                           |
+| boot_storage_size                | Integer | Required                        | None   | 50~         | The boot storage size (in GB) of the instance that will run the pipeline.      |
+| parameter_list                   | Array   | Optional                        | None   | None          | About parameters to pass to the pipeline                       |
+| parameter_list[0].parameterKey   | String  | Optional                        | None   | Max 255 Characters     | Parameter key                              |
+| parameter_list[0].parameterValue | String  | Optional                        | None   | Max 1000 Characters    | Parameter value                                |
+| nas_list                         | Array   | Optional                        | None   | Max 10 Characters      | NAS information                                 |
+| nas_list[0].mountDirName         | String  | Optional                        | None   | Max 64 Characters     | Directory name to be mounted on instances                  |
+| nas_list[0].nasUri               | String  | Optional                        | None   | Max 255 Characters    | The path to the NAS in the format `nas://{NAS ID}:/{path}`.      |
+| tag_list                         | Array   | Optional                        | None   | Max 10 Characters      | Tag Information                                   |
+| tag_list[0].tagKey               | String  | Optional                        | None   | Max 64 Characters      | Tag key                             |
+| tag_list[0].tagValue             | String  | Optional                        | None   | Max 255 Characters    | Tag value                                    |
+| wait                             | Boolean | Optional                        | True   | True, False | True: return after creation is complete, False: return immediately after creation request |
 
 ```python
 pipeline_run = easymaker.PipelineRun().create(
@@ -686,47 +686,47 @@ pipeline_run = easymaker.PipelineRun().create(
 )
 ```
 
-### 파이프라인 실행 삭제
+### Delete Pipeline Run
 
 [Parameter]
 
-| 이름               | 타입   | 필수 여부 | 기본값 | 유효 범위 | 설명          |
+| Name               | Type   | Required | Default value | Valid range | Description         |
 | ------------------ | ------ | --------- | ------ | --------- |-------------|
-| pipeline_run_id | String | 필수      | 없음   | 최대 36자 | 파이프라인 실행 ID |
+| pipeline_run_id | String | Required      | None   | Max 36 characters | Pipeline run ID |
 
 ```python
 easymaker.PipelineRun(pipeline_run_id).delete()
 ```
 
-### 파이프라인 일정 생성
+### Create Pipeline Schedule
 
 [Parameter]
 
-| 이름                               | 타입      | 필수 여부                              | 기본값 | 유효 범위       | 설명                                             |
+| Name               | Type   | Required | Default value | Valid range | Description         |
 |----------------------------------|---------|------------------------------------| ------ |-------------|------------------------------------------------|
-| pipeline_recurring_run_name      | String  | 필수                                 | 없음   | 최대 50자      | 파이프라인 일정 이름                                    |
-| pipeline_id                      | String  | 필수                                 | 없음   | 최대 36자      | 파이프라인 일정 이름                                    |
-| experiment_id                    | String  | easymaker.init에서 미입력 시 필수          | 없음    | 최대 36자      | 실험 ID                                          |
-| description                      | String  | 선택                                 | 없음   | 최대 255자     | 파이프라인 일정에 대한 설명                                |
-| instance_name                    | String  | 필수                                 | 없음   | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                         |
-| instance_count                   | Integer | 필수                                 | 없음   | 1~10        | 사용할 인스턴스 수                                     |
-| boot_storage_size                | Integer | 필수                                 | 없음   | 50~         | 파이프라인을 실행할 인스턴스의 부트 스토리지 크기(단위: GB)            |
-| schedule_periodic_minutes        | String  | schedule_cron_expression 미입력시 필수  | 없음   | 없음          | 파이프라인을 반복 실행할 시간 주기 설정                         |
-| schedule_cron_expression         | String  | schedule_periodic_minutes 미입력시 필수 | 없음   | 없음          | 파이프라인을 반복 실행할 Cron 표현식 설                       |
-| max_concurrency_count            | String  | 선택                                 | 없음   | 없음          | 동시 실행의 최대 개수를 지정하여 병렬로 실행되는 개수에 제한             |
-| schedule_start_datetime          | String  | 선택                                 | 없음   | 없음          | 파이프라인 일정의 시작 시간을 설정, 미입력 시 설정한 주기에 맞춰 파이프라인 실행 |
-| schedule_end_datetime            | String  | 선택                                 | 없음   | 없음          | 파이프라인 일정의 종료 시간을 설정, 미입력 시 중지 전까지 파이프라인 실행을 생성 |
-| use_catchup                      | Boolean | 선택                                 | 없음   | 없음          | 누락 실행 캐치업: 파이프라인 실행이 일정에 뒤처질 경우 이를 따라잡아야 할지 여부 |
-| parameter_list                   | Array   | 선택                                 | 없음   | 없음          | 파이프라인에 전달할 파라미터 정보                             |
-| parameter_list[0].parameterKey   | String  | 선택                                 | 없음   | 최대 255자     | 파라미터 키                                         |
-| parameter_list[0].parameterValue | String  | 선택                                 | 없음   | 최대 1000자    | 파라미터 값                                         |
-| nas_list                         | Array   | 선택                                 | 없음   | 최대 10개      | Nas 정보                                         |
-| nas_list[0].mountDirName         | String  | 선택                                 | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                             |
-| nas_list[0].nasUri               | String  | 선택                                 | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로            |
-| tag_list                         | Array   | 선택                                 | 없음   | 최대 10개      | 태그 정보                                          |
-| tag_list[0].tagKey               | String  | 선택                                 | 없음   | 최대 64자      | 태그 키                                           |
-| tag_list[0].tagValue             | String  | 선택                                 | 없음   | 최대 255자     | 태그 값                                           |
-| wait                             | Boolean | 선택                                 | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환      |
+| pipeline_recurring_run_name      | String  | Required                                 | None   | Max 50 characters      | Pipeline schedule name                                 |
+| pipeline_id                      | String  | Required                                 | None   | Max 36 character      | Pipeline schedule name                                |
+| experiment_id                    | String  | Required if not entered in easymaker.init     | None    | Max 36 character      | Experiment ID                                          |
+| description                      | String  | Optional                                 | None   | Max 255 character| Description of pipeline schedules                                |
+| instance_name                    | String  | Required                                 | None   | None          | Instance type name (lookupable with the CLI)                         |
+| instance_count                   | Integer | Required                                 | None   | 1~10        | Number of instances to use                                    |
+| boot_storage_size                | Integer | Required                                 | None   | 50~         | The boot storage size (in GB) of the instance that will run the pipeline.            |
+| schedule_periodic_minutes        | String  | schedule_cron_expression 미입력시 Required  | None   | None          | Set a time interval to run the pipeline repeatedly                        |
+| schedule_cron_expression         | String  | schedule_periodic_minutes 미입력시 Required | None   | None          | Set up a Cron expression to run the pipeline repeatedly                 |
+| max_concurrency_count            | String  | Optional                                 | None   | None          | Limit the number of concurrent runs by specifying a maximum number of parallel runs             |
+| schedule_start_datetime          | String  | Optional                                 | None   | None          | Set a start time for the pipeline schedule, which will run the pipeline at the set interval if not entered. |
+| schedule_end_datetime            | String  | Optional                                 | None   | None          | Set an end time for a pipeline schedule, creating a pipeline run until it stops if no input is received. |
+| use_catchup                      | Boolean | Optional                                 | None   | None          | Missed run catch-up: Whether to catch up when pipeline runs fall behind schedule. |
+| parameter_list                   | Array   | Optional                                 | None   | None          | About parameters to pass to the pipeline                           |
+| parameter_list[0].parameterKey   | String  | Optional                                 | None   | Max 255 character     | Parameter key                                     |
+| parameter_list[0].parameterValue | String  | Optional                                 | None   | Max 1000 character  | Parameter value                                     |
+| nas_list                         | Array   | Optional                                 | None   | Max 10 character      | NAS information                                    |
+| nas_list[0].mountDirName         | String  | Optional                                 | None   | Max 64 character      | Directory name to be mounted on instances                  |
+| nas_list[0].nasUri               | String  | Optional                                 | None   | Max 255 character     | The path to the NAS in the format `nas://{NAS ID}:/{path}`.     |
+| tag_list                         | Array   | Optional                                 | None   | Max 10 character      | Tag information                               |
+| tag_list[0].tagKey               | String  | Optional                                 | None   | Max 64 character      | Tag key                                   |
+| tag_list[0].tagValue             | String  | Optional                                 | None   | Max 255 character    | Tag value                                          |
+| wait                             | Boolean | Optional                                 | True   | True, False | True: return after creation is complete, False: return immediately after creation request     |
 
 ```python
 pipeline_recurring_run = easymaker.PipelineRecurringRun().create(
@@ -743,13 +743,13 @@ pipeline_recurring_run = easymaker.PipelineRecurringRun().create(
 )
 ```
 
-### 파이프라인 일정 중지/재시작
+### Stop/Restart Pipeline Schedule
 
 [Parameter]
 
-| 이름               | 타입   | 필수 여부 | 기본값 | 유효 범위 | 설명          |
+| Name               | Type   | Required | Default value | Valid range | Description         |
 | ------------------ | ------ | --------- | ------ | --------- |-------------|
-| pipeline_recurring_run_id | String | 필수      | 없음   | 최대 36자 | 파이프라인 일정 ID |
+| pipeline_recurring_run_id | String | Required      | None   | Max 36 characters | Pipeline Schedule ID |
 
 ```python
 easymaker.PipelineRecurringRun(pipeline_recurring_run_id).stop()
@@ -757,19 +757,19 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).start()
 
 ```
 
-### 파이프라인 일정 삭제
+### Delete Pipeline Schedule
 
 [Parameter]
 
-| 이름               | 타입   | 필수 여부 | 기본값 | 유효 범위 | 설명          |
+| Name               | Type   | Required | Default value | Valid range | Description         |
 | ------------------ | ------ | --------- | ------ | --------- |-------------|
-| pipeline_recurring_run_id | String | 필수      | 없음   | 최대 36자 | 파이프라인 일정 ID |
+| pipeline_recurring_run_id | String | Required      | None   | Max 36 characters | Pipeline Schedule ID |
 
 ```python
 easymaker.PipelineRecurringRun(pipeline_recurring_run_id).delete()
 ```
 
-## 기타 기능
+## Other Features
 
 ### NHN Cloud - Log & Crash Search Log Sending Feature
 
