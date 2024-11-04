@@ -229,9 +229,9 @@ Delete an experiment.
 2. Click **Delete Experiment**.
 3. Requested deletion cannot be undone. Click **OK** to proceed.
 
-> [Note] Unable to delete experiment if associated training exists:
-> Experiment cannot be deleted if there is a training associated with the experiment. Please delete the associated training first, then delete the experiment.
-> For related training, you can check the list by clicking the **[Training]** tab in the detail screen at the bottom that is displayed when you click the experiment you want to delete.
+> [Note] Unable to delete experiment if an associated resource exists:
+> Experiment cannot be deleted if there are a training associated with the experiment, hyperparameter tuning, pipeline execution, pipeline schedule. Please delete the associated training first, then delete resources associated with the experiment.
+> For associated resources, you can check the list by clicking the **[Training]** tab in the detail screen at the bottom that is displayed when you click the experiment you want to delete.
 
 ## Training
 
@@ -583,22 +583,33 @@ Can manage models of AI EasyMaker's training outcomes or external models as arti
         * If model's framework type is PyTorch, you must enter the same model name as PyTorch model name.
     * **Description**: Enter model description.
 * **Framework Information**: Enter Framework Information
-    * **Framework**: Select the model's framework from either TensorFlow or PyTorch.
+    * **Framework**: Select the model's framework.
     * **Framework Version**: Enter Model framework Version.
 * **Model Information**: Enter the storage where model's artifacts are stored.
-    * **NHN Cloud Object Storage**: Enter Object Storage path where model artifact was stored.
-        * Enter a directory path in form of `obs://{Object Storage API endpoint}/{containerName}/{path}`.
-        * If using NHN Cloud Object Storage, please set permissions by referring to [Appendix>1. Add AI EasyMaker system account permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage). If do not set the required permissions, model creation will fail as unable to access to model artifact.
-    * **NHN Cloud NAS**: Enter NHN Cloud NAS path where model artifact is stored.
-        * Enter directory path in form of `nas://{NAS ID}:/{path}`
-* **Additional Settings**: Enter the additional information of model.
-    * **Tag**: To add tag, click the **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
+    - **Model Artifact**: Select a repository where model artifacts are saved.
+        - **NHN Cloud Object Storage**: Enter the path to Object Storage where the model artifacts are stored.
+            - Enter the directory path in the format `obs://{Object Storage API endpoint}/{containerName}/{path}`.
+            - If you are using NHN Cloud Object Storage, refer to [Appendix > 1. Add AI EasyMaker system account permissions to NHN Cloud Object Storage](./console-guide/#1-nhn-cloud-object-storage-ai-easymaker) to set permissions. If you do not set permissions, you will not be able to access the model's artifacts and model creation will fail.
+        - **NHN Cloud NAS**: Enter the path to the NHN Cloud NAS where the model artifact is stored.
+            - Enter the directory path in the format `nas://{NAS ID}:/{path}`.
+    - **Parameter**: Enter the model's parameter information.
+        -**Parameter name**: Enter the name of the parameter in the model.
+        -**Parameter value**: Enter the values of the parameters in the model.
+    * **Tag**: To add tag, click the **+ button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
 > [Caution] When using NHN Cloud NAS:
 Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
 
 > [Caution] Retain model artifacts in storage:
 > If not retained the model artifacts stored in storage, the creation of endpoints for that model fails.
+
+> [Note] Model Parameter:
+> The values entered as model parameters are used when serving the model. Parameters can be used as arguments and environment variables: 
+> Arguments are used as the parameter name as entered, and environment variables are used with the parameter name converted to screaming snake notation.
+> [Note] When creating HuggingFace model:
+> When creating a HuggingFace model, you can create the model by entering the ID of the HuggingFace model as a parameter.
+> The ID of the HuggingFace model can be found in the URL of the HuggingFace model page.
+> For more information, see [Appendix > 11. Framework-specific serving notes](./console-guide/#11).
 
 ### Model List
 
@@ -617,8 +628,18 @@ Create an endpoint that can serve the selected model.
 
 1. Select the model you want to create as an endpoint from the list.
 2. Click **Create Endpoint**.
-3. Get moved to **Create Endpoint** page. After checking the contents, click **Create Endpoint** to create a model.
+3. Go to **Create Endpoint** page. After checking the contents, click **Create Endpoint** to create a model.
 For more information on creating models, refer to **Endpoint** documents.
+
+
+### Create Batch Inference in a Model
+
+Create batch inferences with the selected model and view the inference results as statistics.
+
+1. Select the model you want to create with batch inference from the list. 
+2. Click **Create Batch Inference**. 
+3. You will be taken to the **Create Batch Inference** page. Check the contents and click Create Batch Inference. 
+For more information about creating batch inferences, see [Batch Inference](./console-guide/#_54).
 
 ### Delete Model
 
@@ -660,19 +681,28 @@ Create and manage endpoints that can serve the model.
         * **Resource Usage Threshold**: The default for resource usage threshold, which is the reference point for a scale down
         * **Threshold Duration (min)**: The resource usage duration at or below the threshold for the nodes to be scaled down
         * **Scale-up to scale-down latency (min)**: Delay before starting to monitor for scale-down targets after scaling up
-* **Stage Information**: Enter the information for model artifacts to deploy to endpoint.
-    - **Model**: Select a model you want to deploy to the endpoint. If you haven't created a model, create one first. For information on model framework-specific serving, please see [Appendix > 10. Serving by Framework](./console-guide/#10).
+* **Stage Information**: Enter the information for model artifacts to deploy to endpoint. When you deploy the same model to multiple stage resources, requests are distributed and processed.
+    - **Model**: Select a model you want to deploy to the endpoint. If you haven't created a model, create one first. For information on model framework-specific serving, please see [Appendix > 11. Serving by Framework](./console-guide/#11).
     - **API Gateway Resource Path**: Enter the path to the API resource to which the model is deployed. For example, if you set it to `/inference`, you can request the inference API with `POST https://{enpdoint-domain}/inference`.
     - **Resource Allocation (%)**: Enter the resource you want to allocate to the model. Allocate a fixed percentage of the actual resource usage by instance.
+        - **cpu**: Enter the CPU quota. Enter if you are allocating directly without using an allocation percentage (%).
+        - **memory**: Enter the Memory quota. Enter if you are allocating directly without using an allocation percentage (%).
+        - **gpu**: Enter the GPU quota. Enter if you are allocating directly without using an allocation percentage (%).
     - **Description**: Enter a stage resource description.
     - **Pod Autoscaler**: The feature to automatically adjust the number of pods based on the request volume of your model. The autoscaler is set on a per-model basis.
         - **Enable/Disable**: Select whether to use the auto scaler. When enabled, the number of Pods scales in or out based on the model load.
         - **Scaling Unit**: Enter the Pod Scaling Unit.
-            - **Concurrent Processings**: The number of Pods is scaled based on the average concurrent requests over the last 60 seconds.
-            - **Requests Per Second (RPS)**: The number of pods scales with the number of requests per second.
+            - **CPU**: Adjust the pod count depending on CPU usage.
+            - **Memory**: Adust the memory count depending on CPU usage.
         - **Threshold (%)**: The threshold value per increment at which the Pod will be scaled up.
     - **Resource Information:**: You can see the resources you're actually using. Allocates resource room usage to each model based on the quota for the model you entered. For more information, please see [Appendix > 9. Resource Information](./console-guide/#9).
 * **Additional Settings > Tag**: To add a tag, click **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
+
+
+> [Note] API Specification for Inference Request:
+> The AI EasyMaker service provides endpoints based on the open inference protocol (OIP) specification. For the endpoint API specification, see [Appendix > 10. Endpoint API specification](./console-guide/#10-api).
+> To use a separate endpoint, refer to the resources created in the API Gateway service and create a new resource to use it. 
+> For more information about the OIP specification, see [OIP specification](https://github.com/kserve/open-inference-protocol).
 
 > [Note] Time to create endpoints:
 > Endpoint creation can take several minutes.
@@ -681,7 +711,7 @@ Create and manage endpoints that can serve the model.
 > [Note] Restrictions on API Gateway service resource provision when creating endpoints:
 > When you create a new endpoint, create a new API Gateway service.
 > Adding new stage on existing endpoint creates new stage in API Gateway service.
-> If you exceed the resource provision policy in [API Gateway Service Resource Provision Policy](https://docs.nhncloud.com/en/TOAST/en/resource-policy/#resource-provision-policy-for-api-gateway-service), you might not be able to create endpoints in AI EasyMaker. In this case, adjust API Gateway service resource quota.
+> If you exceed the default provision in [API Gateway Service Resource Provision Policy](https://docs.nhncloud.com/en/TOAST/en/resource-policy/#resource-provision-policy-for-api-gateway-service), you might not be able to create endpoints in AI EasyMaker. In this case, adjust API Gateway service resource quota.
 
 ### Endpoint List
 
@@ -770,9 +800,18 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 Add a new resource to an existing endpoint stage.
 
 * **Model**: Select the model you want to deploy to your endpoints. If you have not created a model, please create one first.
-* **API Gateway Resource Path**: Enter the API resource path of the model being deployed. For example, if you set it to `/inference`, you can request the inference API with `POST https://{enpdoint-domain}/inference`.
+- **Resource quota(%)**: Enter the resources you want to allocate to the model. Allocate a fixed percentage of the instance's resource room usage.
+    - **CPU**: Enter the CPU quota. Enter if you are allocating directly without using an allocation percentage (%).
+    - **Memory**: Enter the memory quota. Enter if you are allocating directly without using an allocation percentage (%).
 * **Number of Pods**: Enter a number of pods in the stage resource.
 * **Description**: Enter a description for the stage resource.
+- **Pod Auto Scaler**: The feature to automatically adjust the number of Pods based on the request volume of your model. The autoscaler is set on a per-model basis.
+    - **Enable/Disable**: Select whether to use the auto scaler. If enabled, the number of Pods will scale in or out based on the model load.
+    - **Scale Unit**: Enter the pod scale unit.
+        - **CPU**: Adjust the pod count depending on CPU usage.
+        - **Memory**: Adjust the pod count depending on memory usage.
+        - **Threshold value**: The threshold value per increment that the Pod will be scaled to.
+
 
 ### Stage Resource List
 
@@ -789,7 +828,7 @@ A list of resources created under the endpoint stage is displayed.
     | CREATE FAILED |  Creating stage resource failed. Please try again. |
 
 * **Model Name**: The name of the model deployed to the stage.
-* **API Gateway Resource Path**: The endpoint URL of the model deployed to the stage. API clients can request the API at the displayed URL.
+* **API Gateway Resource Path**: The inference URL of the model deployed to the stage. API clients can request inference at the displayed URL. For more information, see [Appendix > 10. Endpoint API Specfication](./console-guide/#10-api).
 * **Number of Pods**: Shows the number of healthy pods and total pods in use on the resource.
 
 ### Call Endpoint Inference
@@ -926,6 +965,11 @@ Set up the environment in which batch inference will be performed by selecting a
 > You must set the **batch size** and **inference timeout** appropriately based on the performance of the model you are batch inferring.
 > If the settings you enter are incorrect, batch inference might not perform well enough.
 
+> [Caution] When using GPU instances: 
+> Batch inference using GPU instances allocates GPU instances based on the number of Pods 
+> If `Number of Pods / Number of GPUs` is not divisible by an integer, you may encounter unallocated GPUs 
+> Unallocated GPUs are not used by batch inference, so set the number of Pods appropriately to use GPU instances efficiently.
+
 ### Batch Inference List
 
 Displays a list of batch inferences. Select a batch inference from the list to check the details and change the information.
@@ -994,9 +1038,9 @@ See the table below for the base images in AI EasyMaker.
 | Ubuntu 22.04 GPU TensorFlow Training | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
 
 > [Note] Limitations on using private images:
-
-* Only private images derived from base images provided by AI EasyMaker can be used.
-* Only NHN Container Registry (NCR) can be integrated as a container registry service where private images are stored. (As of December 2023)
+>
+> Only private images derived from base images provided by AI EasyMaker can be used.
+> Only NHN Container Registry (NCR) can be integrated as a container registry service where private images are stored. (As of December 2023)
 
 ### Create Private Image
 
@@ -1043,13 +1087,13 @@ Build an image with a Dockerfile and save (push) the image to the NCR registry.
     3. Select a private image to use as the notebook container image.
     4. After filling out and creating the other notebook information, the notebook will be running with your private image.
 
-> [Note]
-You can create resources using your private image in the same way for non-notebook training and hyperparameter tuning.
+> [Note] Where to use private images:
+> Private images can be used for notebooks, training, and hyperparameter tuning to create resources.
 
 > [Note] Container registry service: NHN Container Registry (NCR)
-> Only NCR service can be used as a container registry service. (As of December 2023)<br/>
-> Enter the following values for the account ID and password for the NCR service.<br/>
-> ID: User Access Key of NHN Cloud user account<br/>
+> Only NCR service can be used as a container registry service. (As of December 2023)
+> Enter the following values for the account ID and password for the NCR service.
+> ID: User Access Key of NHN Cloud user account
 > Password: User Secret Key of NHN Cloud user account
 
 ## Registry Account
@@ -1110,6 +1154,7 @@ You can use the Kubeflow Pipelines (KFP) Python SDK to write components and pipe
 Most pipelines aim to produce one or more ML artifacts, such as datasets, models, evaluation metrics, etc.
 
 > [Reference] Kubeflow Pipelines (KFP) official documentation
+>
 > - [KFP User Guide](https://www.kubeflow.org/docs/components/pipelines/user-guides/)
 > - [KFP SDK Reference](https://kubeflow-pipelines.readthedocs.io/en/stable/)
 
@@ -1153,6 +1198,10 @@ Delete the pipeline.
 2. Click **Delete Pipeline**. You can't delete a pipeline while it's being created.
 3. The requested delete task cannot be canceled. Click **Delete** to proceed.
 
+
+> [Note] Cannot delete a pipeline if an associated pipeline schedule exists: 
+> You cannot delete a pipeline if a schedule created with the pipeline you want to delete exists. Delete the pipeline schedule first, then delete the pipeline.
+
 ## Run a Pipeline
 
 You can run and manage your uploaded pipelines in AI EasyMaker.
@@ -1168,7 +1217,7 @@ Run the pipeline.
     - **Experiment**: Select an experiment that will include pipeline execution. Experiments group related pipeline runs. If no experiments have been created, click **Add** to create an experiment.
 - **Execution Information**
     - **Execution Parameters**: Enter a value if the pipeline has defined input parameters.
-    - **Execution Type**: Select the type of pipeline execution. If you select **One-time**, the pipeline runs only once. To run the pipeline repeatedly at regular intervals, select **Enable Recurring Run** and then see [Create Recurring Run](./console-guide/#_81) to configure recurring runs.
+    - **Execution Type**: Select the type of pipeline execution. If you select **One-time**, the pipeline runs only once. To run the pipeline repeatedly at regular intervals, select **Enable Recurring Run** and then see [Create Recurring Run](./console-guide/#_82) to configure recurring runs.
 - **Instance Information**
     - **Instance Type**: Select the instance type to run the pipeline on.
     - **Number of Instances**: Enter the number of instances to use to run the pipeline.
@@ -1218,6 +1267,11 @@ A graph of the pipeline run is displayed. Select a node in the graph to see more
 
 The graph is a pictorial representation of the pipeline execution. This graph shows the steps that have already been executed and the steps that are currently executing during pipeline execution, with arrows indicating the parent/child relationship between the pipeline components represented by each step. Each node in the graph represents a step in the pipeline.
 
+With node-specific details, you can download the generated artifacts.
+
+> [Caution] Pipeline artifact storage cycle:
+> Artifacts older than 120 days are automatically deleted.
+
 ### Stop Pipeline Run
 
 Stop running pipelines in progress.
@@ -1254,7 +1308,7 @@ You can create and manage a recurring run to periodically run the uploaded pipel
 
 Create a recurring run to run the pipeline in periodic iterations.
 
-For information beyond the items below that you can set in creating a pipeline schedule, see [Create Recurring Run](./console-guide/#_74).
+For information beyond the items below that you can set in creating a pipeline schedule, see [Create Recurring Run](./console-guide/#_75).
 
 - **Execution Information**
     - **Execution Type**: Select the type of pipeline execution. If you select **Enable Recurring Run**, the pipeline will repeat periodically. Select **One-time** to run the pipeline only once.
@@ -1315,6 +1369,9 @@ Delete a pipeline recurring run.
 1. Select the pipeline recurring run you want to delete.
 2. Click **Delete Pipeline Recurring Run**.
 3. The requested delete task cannot be canceled. Click **Delete** to proceed.
+
+> [Note] You cannot delete a pipeline schedule if an associated pipeline run is in progress:
+> You cannot delete a run generated by the pipeline schedule you want to delete if it is in progress. Delete the pipeline schedule after the pipeline run is complete.
 
 ## Appendix
 
@@ -1478,6 +1535,9 @@ As shown in the example below, you can use hyperparameter values entered during 
 
 * In order to check result indicators on the TensorBoard screen after training, the TensorBoard log storage space must be set to the specified location (`EM_TENSORBOARD_LOG_DIR`) when writing the training script.
 
+> [Caution] TensorBoard metrics logs storage cycle:
+> Metrics older than 120 days will be deleted automatically.
+
 * **Example code for Tesnsorboard log storage (TensorFlow)**
 
         import tensorflow as tf
@@ -1547,20 +1607,47 @@ To move the cluster version of the default stage without disrupting the service,
 * The code has been written to enable distributed learning in Pytorch, and if you enter the number of distributed nodes and the number of processes per node, distributed learning using torchrun and distributed learning using multi-processes will be performed.
 * Training and hyperparameter tuning can fail due to insufficient memory, depending on factors such as the total number of processes, model size, input data size, batch size, etc. If it fails due to insufficient memory, it may leave the following error messages. However, not all of the messages below are due to insufficient memory. Please set the appropriate instance type according to your memory usage.
 
-```
+```plaintext
 exit code : -9 (pid: {pid})
 ```
 
 * For more information about torchrun, see the [Pytorch Guide](https://pytorch.org/docs/stable/elastic/run.html).
 
+
 ### 9. Resource Information
 
-Batch inference and endpoints are allocated minus the base usage of AI EasyMaker on the selected instance type.
-Batch inference divides actual usage by the number of pods to allocate resources to each pod, and endpoints are allocated resources per model based on their settings.
-Creation can fail if the allocated resources are less than the minimum usage required for inference.
-Be sure to adjust inputs such as instance type and number of instances appropriately for your CPU and memory footprint.
+When you create batch inferences and endpoints in AI EasyMaker, it allocates resources on the selected instance type, less the default usage.
+The amount of resources you need depends on the demand and complexity of your model, so carefully set the number of pods and resource quota along with the appropriate instance type.
 
-### 10. Serving by Framework
+Batch inference allocates resources to each pod by dividing the actual usage by the number of pods. Endpoint cannot allow the quota you enter to exceed the actual usage of your instance, so check your resource usage beforehand.
+Note that both batch inference and endpoints can fail to create if the allocated resources are less than the minimum usage required by the inference.
+
+### 10. Endpoint API Specification
+
+The AI EasyMaker service provides endpoints based on the open inference protocol (OIP) specification.
+For more information about the OIP specification, see [OIP Specification](https://github.com/kserve/open-inference-protocol).
+
+| Name             | Method | API path                                     |
+| ---------------- | ------ | -------------------------------------------- |
+| Model List       | GET    | /{model_name}/v1/models                      |
+| Model Ready       | GET    | /{model_name}/v1/models/{model_name}         |
+| Inference             | POST   | /{model_name}/v1/models/{model_name}/predict |
+| Description        | POST   | /{model_name}/v1/models/{model_name}/explain |
+| Server information        | GET    | /{model_name}/v2                             |
+| Server Live        | GET    | /{model_name}/v2/health/live                 |
+| Server Ready       | GET    | /{model_name}/v2/health/ready                |
+| Model Information        | GET    | /{model_name}/v2/models/{model_name}         |
+| Model Ready       | GET    | /{model_name}/v2/models/{model_name}/ready   |
+| Inference             | POST   | /{model_name}/v2/models/{model_name}/infer   |
+| OpenAI generative model inference | POST   | /{model_name}/openai/v1/completions          |
+| OpenAI generative model inference | POST   | /{model_name}/openai/v1/chat/completions     |
+
+> [Note] OpenAI generative model inference
+> OpenAI generative model inference is used when using a generative model, such as OpenAI's GPT-4o.
+> The inputs required for inference must be entered according to OpenAI's API specification. For more information, see the [OpenAI API documentation](https://platform.openai.com/docs/api-reference/chat).
+> For models that support the Completion and Chat Completion APIs provided by AI EasyMaker, see [Model endpoint compatibility](https://platform.openai.com/docs/models/model-endpoint-compatibility).
+
+### 11. Considerations for framework-specific serving 
 
 #### TensorFlow Framework
 
@@ -1581,3 +1668,58 @@ See the table below and the [model-archiver documentation](https://github.com/py
 | weight files (.pt, .pth, .bin) | Required      | The file that stores the weights and structure of the model.                         |
 | requirements.txt             | Optional      | Files for installing Python packages needed when serving.        |
 | extra/                       | Optional      | The files in the directory are passed in the extra-files parameter.         |
+
+#### Hugging Face Framework
+
+The Hugging Face model can be served using the Runtime provided by AI EasyMaker, TensorFlow Serving, or TorchServe.
+
+##### Hugging Face Runtime
+
+This is a simple way to serve Hugging Face models.
+Hugging Face Runtime Serving does not support fine-tuning. To serve fine-tuned models, use the TensorFlow/Pytorch Serving method.
+
+1. In Hugging Face, identify the model you want to serve.
+2. Copy the Hugging Face model ID.
+3. On the Create AI EasyMaker Model page, select the Hugging Face framework, and enter the Hugging Face model ID.
+4. Create a model by entering the required inputs based on the model.
+5. Verify the created model, and create an endpoint.
+
+> [Note] Supported Hugging Face Tasks:
+> Currently, the Hugging Face Runtime does not support the full range of Tasks in Hugging Face.
+> The following tasks are supported: `sequence_classification`, `token_classification`, `fill_mask`, `text_generation`, and `text2text_generation`.
+> To use unsupported Tasks, use the TensorFlow/Pytorch Serving method.
+
+> [Note] Gated Model:
+> To serve a gated model, you must enter the token of an account that is allowed access as a model parameter.
+> If you do not enter a token, or if you enter a token from an account that is not allowed, the model deployment fails.
+
+##### TensorFlow/PyTorch Serving
+
+How to serve a Hugging Face model trained with TensorFlow and PyTorch.
+
+1. Download the Hugging Face model.
+    - You can download it using the AutoTokenizer, AutoConfig, and AutoModel from the transformers library, as shown in the example code below.
+
+            from transformers import AutoTokenizer, AutoConfig, AutoModel
+
+            model_id = "<model_id>"
+            revision = "main"
+
+            model_dir = f"./models/{model_id}/{revision}"
+
+            tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision)
+            model_config = AutoConfig.from_pretrained(model_id, revision=revision)
+            model = AutoModel.from_config(model_config)
+
+            tokenizer.save_pretrained(model_dir)
+            model.save_pretrained(model_dir)
+
+    - If the model fails to download, try importing the correct class for your non-AutoModel model and downloading it.
+    - If you need to fine-tune, you can follow the [Hugging Face fine-tuning guide](https://huggingface.co/docs/transformers/main/en/training) to learn how to write your own code.
+        - For more information about AI EasyMaker training, see [Training](./console-guide/#_18).
+
+2. View the Hugging Face model information and generate the files needed to serve it.
+    - Save the model in the form required for framework-specific serving.
+    - For more information, see the TensorFlow, PyTorch framework notes.
+3. Upload the model file to OBS or NAS.
+4. For the rest of the process, check out our guides to [creating models and](./console-guide/#_37) [creating endpoints](./console-guide/#_43).
