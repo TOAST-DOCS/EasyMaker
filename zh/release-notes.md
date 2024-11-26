@@ -1,10 +1,18 @@
 ## Machine Learning > AI EasyMaker > Release Notes
 
+
+### October 29, 2024
+
+* Improved endpoint feature
+    * Improved so that you can set resource allocation values directly.
+* Added support for Hugging Face model
+    * Added the Hugging Face model to AI EasyMaker to serve as an endpoint, batch inference.
+
 ### July 23, 2024
 
 #### Feature Updates
 
-* Add ML pipeline feature
+* Added ML pipeline feature
     * ML Pipeline is a feature for managing and executing portable and scalable machine learning workflows.
     * For more information, see the ML pipeline guide documentation.
 * Improved endpoint functionality
