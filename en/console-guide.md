@@ -8,20 +8,20 @@ You can view the usage status of all AI EasyMaker resources in the dashboard.
 
 Displays the number of resources in use per resource.
 
-* Notebook: Number of notebooks in ACTIVE (HEALTHY) status that are in use.
-* Training: Number of trainings that are COMPLETE
-* Hyperparameter tuning: Number of hyperparameter tunings that are COMPLETE
-* Endpoints: Number of endpoints in the ACTIVE state
+- Notebook: Number of notebooks in ACTIVE (HEALTHY) status that are in use.
+- Training: Number of trainings that are COMPLETE
+- Hyperparameter tuning: Number of hyperparameter tunings that are COMPLETE
+- Endpoints: Number of endpoints in the ACTIVE state
 
 ### Monitoring Services
 
-* Displays the top 3 endpoints with the most API calls.
-* Select an endpoint to see the aggregate API success/failure metrics for the child endpoint stage.
+- Displays the top 3 endpoints with the most API calls.
+- Select an endpoint to see the aggregate API success/failure metrics for the child endpoint stage.
 
 ### Resource Utilization
 
-* You can see the most utilized resources by CPU and GPU core type.
-* If you hover over a metric, it displays resource information.
+- You can see the most utilized resources by CPU and GPU core type.
+- If you hover over a metric, it displays resource information.
 
 ## Notebook
 
@@ -31,30 +31,30 @@ Create and manage Jupyter notebook with essential packages installed for machine
 
 Create a Jupyter notebook.
 
-* **Image**: Select OS image to be installed on the notebook instance.
-    * **Core Type**: CPU, GPU core type of the image is displayed.
-    * **Framework**: Installed framework is displayed on the image.
-        * TENSORFLOW: Image with deep learning TensorFlow framework installed.
-        * PYTORCH: Image with PyTorch deep learning framework installed.
-        * PYTHON: Deep learning framework is not installed and Images with only Python languages installed.
-    * **Framework Version**: Displays the version of the framework installed in the image.
-    * **Python Version**: Displays the installed Python version in the image.
+- **Image**: Select OS image to be installed on the notebook instance.
+    - **Core Type**: CPU, GPU core type of the image is displayed.
+    - **Framework**: Installed framework is displayed on the image.
+        - TENSORFLOW: Image with deep learning TensorFlow framework installed.
+        - PYTORCH: Image with PyTorch deep learning framework installed.
+        - PYTHON: Deep learning framework is not installed and Images with only Python languages installed.
+    - **Framework Version**: Displays the version of the framework installed in the image.
+    - **Python Version**: Displays the installed Python version in the image.
 
-* **Notebook Information**
-    * Enter name and description of notebook.
-    * Select instance type for notebook. The specifications of instance is selected based on Instance type selected.
+- **Notebook Information**
+    - Enter name and description of notebook.
+    - Select instance type for notebook. The specifications of instance is selected based on Instance type selected.
 
-* **Storage**
-    * Specifies size of notebook boot storage and data storage.
-        * Boot storage is the storage on which Jupiter notebooks and underlying virtual environments are installed. This storage is initialized when the notebook is restarted.
-        * Data storage is block storage mounted on the `/root/easymaker` directory path. Data on this storage is retained even when the notebook is restarted.
-    * Storage size of created notebook cannot be changed, so please specify sufficient storage size at the time of creation.
-    * If necessary, you can associate **NHN Cloud NAS** to which connect your notebook.
-        * Mount Directory Name: Enter the name of the directory to mount on notebook.
-        * NHN Cloud NAS Path: Enter directory path in the format `nas://{NAS ID}:/{path}`.
+- **Storage**
+    - Specifies size of notebook boot storage and data storage.
+        - Boot storage is the storage on which Jupiter notebooks and underlying virtual environments are installed. This storage is initialized when the notebook is restarted.
+        - Data storage is block storage mounted on the `/root/easymaker` directory path. Data on this storage is retained even when the notebook is restarted.
+    - Storage size of created notebook cannot be changed, so please specify sufficient storage size at the time of creation.
+    - If necessary, you can associate **NHN Cloud NAS** to which connect your notebook.
+        - Mount Directory Name: Enter the name of the directory to mount on notebook.
+        - NHN Cloud NAS Path: Enter directory path in the format `nas://{NAS ID}:/{path}`.
 
-* **Additional Settings**
-    * Tags: Allows to specify tags in Key-Value format. You can enter maximum 10 tags.
+- **Additional Settings**
+    - Tags: Allows to specify tags in Key-Value format. You can enter maximum 10 tags.
 
 > [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
@@ -67,8 +67,8 @@ Create a Jupyter notebook.
 
 A list of notebooks are displayed. Select a notebook in the list to check details and make changes to it.
 
-* **Name**: Notebook name is displayed. You can change the name by clicking **Change** on the details screen.
-* **Status**: Status of the notebook is displayed. Please refer to the table below for the main status.
+- **Name**: Notebook name is displayed. You can change the name by clicking **Change** on the details screen.
+- **Status**: Status of the notebook is displayed. Please refer to the table below for the main status.
 
     | Status                 | Description                                                                        |
     |--------------------|---------------------------------------------------------------------------|
@@ -87,11 +87,11 @@ A list of notebooks are displayed. Select a notebook in the list to check detail
     | REBOOT FAILED      | Failed to reboot notebook. Please try to start again.                                           |
     | DELETE FAILED      | Failed to delete notebook. Please try to delete again.                                            |
 
-* **Action > Open Jupyter Notebook**: Click **Open Jupyter Notebook** button to open the notebook in a new browser window. The notebook is only accessible to users who are logged in to the console.
-* **Tag**: Tag for notebook is displayed. You can change the tag by clicking **Change**.
+- **Action > Open Jupyter Notebook**: Click **Open Jupyter Notebook** button to open the notebook in a new browser window. The notebook is only accessible to users who are logged in to the console.
+- **Tag**: Tag for notebook is displayed. You can change the tag by clicking **Change**.
 
-* **Monitoring**: On the **Monitoring** tab of the detail screen that appears when you select the notebook, you can see a list of monitored instances and a chart of basic metrics.
-    * The **Monitoring** tab is disabled when the notebook is being created or when there is a task in progress.
+- **Monitoring**: On the **Monitoring** tab of the detail screen that appears when you select the notebook, you can see a list of monitored instances and a chart of basic metrics.
+    - The **Monitoring** tab is disabled when the notebook is being created or when there is a task in progress.
 
 ### Configure User Virtual Execution Environment
 
@@ -126,16 +126,16 @@ Please refer to the following guide to configure your virtual environment.
 You can register scripts in the path `/root/easymaker/cont-init.d` that should run automatically when the notebook is stopped and started.
 The scripts are executed in ascending alphanumeric order.
 
-* Script location and permission
-    * Only files located in the path `/root/easymaker/cont-init.d` are executed.
-    * Only scripts for which you have permission to run are executed.
-* Script content
-    * The first line of scripts must start with `#!`.
-    * Scripts are executed with the root permission.
-* The script execution history is stored in the following locations.
-    * Script exit code: `/root/easymaker/cont-init.d/{SCRIPT}.exitcode`
-    * Script standard output and standard error streams: `/root/easymaker/cont-init.d/{SCRIPT}.output`
-    * Full execution log: `/root/easymaker/cont-init.output`
+- Script location and permission
+    - Only files located in the path `/root/easymaker/cont-init.d` are executed.
+    - Only scripts for which you have permission to run are executed.
+- Script content
+    - The first line of scripts must start with `#!`.
+    - Scripts are executed with the root permission.
+- The script execution history is stored in the following locations.
+    - Script exit code: `/root/easymaker/cont-init.d/{SCRIPT}.exitcode`
+    - Script standard output and standard error streams: `/root/easymaker/cont-init.d/{SCRIPT}.output`
+    - Full execution log: `/root/easymaker/cont-init.output`
 
 ### Stop Notebook
 
@@ -207,7 +207,7 @@ When creating the initial resources (laptops, trainings, labs, endpoints), it ta
 
 Experiments appears. Select an experiment to view and modify detailed information.
 
-* **Status**: Experiment status appears. Please refer to the table below for main status.
+- **Status**: Experiment status appears. Please refer to the table below for main status.
 
     | Status | Description |
     | --- | --- |
@@ -216,10 +216,10 @@ Experiments appears. Select an experiment to view and modify detailed informatio
     | CREATE FAILED | Failed to create an experiment. Please try again. |
     | ACTIVE | The experiment is successfully created. |
 
-* **Operation**
-    * Click **Go to TensorBoard** to open the TensorBoard in a new browser window, where you can view statistical information about the training included in your experiment. The TensorBoard is only accessible to users who are logged into the console.
-    * **Retry**: If the experiment status is FAIL, you can recover the experiment by clicking **Retry**.
-* **Training**: The **Training** tab on the detailed screen that appears when selecting Training shows trainings included in the experiment.
+- **Operation**
+    - Click **Go to TensorBoard** to open the TensorBoard in a new browser window, where you can view statistical information about the training included in your experiment. The TensorBoard is only accessible to users who are logged into the console.
+    - **Retry**: If the experiment status is FAIL, you can recover the experiment by clicking **Retry**.
+- **Training**: The **Training** tab on the detailed screen that appears when selecting Training shows trainings included in the experiment.
 
 ### Delete Experiment
 
@@ -241,59 +241,59 @@ Provides an training environment where you can learn and identify machine traini
 
 Set the training environment by selecting the instance and OS image to be trained, and proceed with training by entering the algorithm information and input/output data path to learn.
 
-* **Training template** : To set training information by loading a training template, select 'Use' and then select a training template to load.
-* **Basic information** : Select basic information about the training and the experiment that the training will be included in.
-    * **Training Name** : Enter a training name.
-    * **Training Description** : Enter a description.
-    * **Experiment** : Select an experiment to include training. Experiments group related trainings. If no experiments have been created, click **Add** to create one.
-* **Algorithm information** : Enter information about the algorithm you want to learn.
-    * **Algorithm Type** : Select the algorithm type.
-        * **Algorithm provided by NHN Cloud** : Use the algorithm provided by AI EasyMaker. For detailed information on the provided algorithm, refer to [the Algorithm Guide document provided by NHN Cloud](./algorithm-guide/#).
-            * **Algorithm** : Select an algorithm.
-            * **Hyperparameter** : Enter the hyperparameter value required for training. For detailed information on hyperparameters for each algorithm, refer to [the Algorithm Guide document provided by NHN Cloud](./algorithm-guide/#).
-            * **Algorithm Metrics** : Displays information about the metrics generated by the algorithm.
-        * **Own Algorithm** : Uses an algorithm written by the user.
-            * **algorithm path**
-                * **NHN Cloud Object Storage** : Enter the path of NHN Cloud Object Storage where algorithms are stored.<br>
-                    * obs://{Object Enter the directory path in the format Storage API endpoint}/{containerName}/{path}.
-                    * When using NHN Cloud Object Storage, refer to [Appendix > 1. Adding AI EasyMaker System Account Permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage) to set permissions. Model creation will fail if you do not set the necessary permissions.
-                * **NHN Cloud NAS** : Enter the NHN Cloud NAS path where the algorithm is stored. <br>
+- **Training template** : To set training information by loading a training template, select 'Use' and then select a training template to load.
+- **Basic information** : Select basic information about the training and the experiment that the training will be included in.
+    - **Training Name** : Enter a training name.
+    - **Training Description** : Enter a description.
+    - **Experiment** : Select an experiment to include training. Experiments group related trainings. If no experiments have been created, click **Add** to create one.
+- **Algorithm information** : Enter information about the algorithm you want to learn.
+    - **Algorithm Type** : Select the algorithm type.
+        - **Algorithm provided by NHN Cloud** : Use the algorithm provided by AI EasyMaker. For detailed information on the provided algorithm, refer to [the Algorithm Guide document provided by NHN Cloud](./algorithm-guide/#).
+            - **Algorithm** : Select an algorithm.
+            - **Hyperparameter** : Enter the hyperparameter value required for training. For detailed information on hyperparameters for each algorithm, refer to [the Algorithm Guide document provided by NHN Cloud](./algorithm-guide/#).
+            - **Algorithm Metrics** : Displays information about the metrics generated by the algorithm.
+        - **Own Algorithm** : Uses an algorithm written by the user.
+            - **algorithm path**
+                - **NHN Cloud Object Storage** : Enter the path of NHN Cloud Object Storage where algorithms are stored.<br>
+                    - obs://{Object Enter the directory path in the format Storage API endpoint}/{containerName}/{path}.
+                    - When using NHN Cloud Object Storage, refer to [Appendix > 1. Adding AI EasyMaker System Account Permissions to NHN Cloud Object Storage](./console-guide/#1-add-ai-easymaker-system-account-permissions-to-nhn-cloud-object-storage) to set permissions. Model creation will fail if you do not set the necessary permissions.
+                - **NHN Cloud NAS** : Enter the NHN Cloud NAS path where the algorithm is stored. <br>
                     nas://{NAS Enter the directory path in the format ID}:/{path}.
 
-            * **entry point**
-                * The entry point is the point of entry into the execution of the algorithm from which training begins. Creates the entry point file name.
-                * The entry point file must exist in the algorithm path.
-                * Creating **requirements.txt** in the same path will install the required python packages from the script.
-            * **hyperparameter**
-                * To add parameters for training, click **the + button** to enter parameters in Key-Value format. Up to 100 parameters can be entered.
-                * The entered hyperparameters are entered as execution arguments when the entry point is executed. For detailed usage, please refer to [Appendix > 3. Hyperparameters](./console-guide/#3-hyperparameters).
+            - **entry point**
+                - The entry point is the point of entry into the execution of the algorithm from which training begins. Creates the entry point file name.
+                - The entry point file must exist in the algorithm path.
+                - Creating **requirements.txt** in the same path will install the required python packages from the script.
+            - **hyperparameter**
+                - To add parameters for training, click **the + button** to enter parameters in Key-Value format. Up to 100 parameters can be entered.
+                - The entered hyperparameters are entered as execution arguments when the entry point is executed. For detailed usage, please refer to [Appendix > 3. Hyperparameters](./console-guide/#3-hyperparameters).
 
-* **Image** : Choose an image for your instance that matches the environment in which you need to run your training.
+- **Image** : Choose an image for your instance that matches the environment in which you need to run your training.
 
-* **Training Resource Information**
-    * **Training instance type** : Select an instance type to run training.
-    * **Number of Distributed Nodes**: Enter a number of distributed nodes to be performed. Distributed training can be enabled through settings in the algorithm code. For more information, please refer to [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
-    * **Enable torchrun**: Select whether to use torchrun, which is supported by the Pytorch framework. For more information, see [Appendix > 8. How to use torchrun](./console-guide/#8-how-to-use-torchrun).
-    * **Number of processes per node**: If using torchrun, enter the number of processes per node. torchrun enables distributed training by running multiple processes on a single node. The number of processes affects memory usage.
-* **Input Data**
-    * **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
-        * Dataset name: Enter a name for your data set.
-        * Data Path: Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-    * **Checkpoint** : If you want to start training from a saved checkpoint, enter the save path of the checkpoint.
-        * Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-* **Output Data**
-    * **Output data** : Enter the data storage path to save the training execution results.
-        * Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-    * **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint.
-        * Created checkpoints can be used to resume training from previous training.
-        * Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-* **Additional settings**
-    * **Data storage size** : Enter the data storage size of the instance to run training.
-        * Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for training.
-    * **Maximum training time** : Specifies the maximum waiting time until training is complete. training that exceeds the maximum waiting time will be terminated.
-    * **Log Management** : Logs generated during training can be stored in the NHN Cloud Log & Crash service.
-        * For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
-    * **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
+- **Training Resource Information**
+    - **Training instance type** : Select an instance type to run training.
+    - **Number of Distributed Nodes**: Enter a number of distributed nodes to be performed. Distributed training can be enabled through settings in the algorithm code. For more information, please refer to [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
+    - **Enable torchrun**: Select whether to use torchrun, which is supported by the Pytorch framework. For more information, see [Appendix > 8. How to use torchrun](./console-guide/#8-how-to-use-torchrun).
+    - **Number of processes per node**: If using torchrun, enter the number of processes per node. torchrun enables distributed training by running multiple processes on a single node. The number of processes affects memory usage.
+- **Input Data**
+    - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
+        - Dataset name: Enter a name for your data set.
+        - Data Path: Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Checkpoint** : If you want to start training from a saved checkpoint, enter the save path of the checkpoint.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+- **Output Data**
+    - **Output data** : Enter the data storage path to save the training execution results.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint.
+        - Created checkpoints can be used to resume training from previous training.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+- **Additional settings**
+    - **Data storage size** : Enter the data storage size of the instance to run training.
+        - Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for training.
+    - **Maximum training time** : Specifies the maximum waiting time until training is complete. training that exceeds the maximum waiting time will be terminated.
+    - **Log Management** : Logs generated during training can be stored in the NHN Cloud Log & Crash service.
+        - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
+    - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
 > [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
@@ -305,8 +305,8 @@ Set the training environment by selecting the instance and OS image to be traine
 
 A list of studies is displayed. If you select a training from the list, you can check detailed information and change the information.
 
-* **Training time** : Displays the training time.
-* **Status** : Shows the status of training. Please refer to the table below for the main status.
+- **Training time** : Displays the training time.
+- **Status** : Shows the status of training. Please refer to the table below for the main status.
 
     | Status | Description |
     | --- | --- |
@@ -320,15 +320,15 @@ A list of studies is displayed. If you select a training from the list, you can 
     | CREATE FAILED | The training creation failed. If creation continues to fail, please contact customer service. |
     | FAIL TRAIN IN PROGRESS, COMPLETE IN PROGRESS | The resources used for training are being cleaned up. |
 
-* **Operation**
-    * **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
+- **Operation**
+    - **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
     For how to leave a TensorBoard log, refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
-    * **Stop training** : You can stop training in progress.
+    - **Stop training** : You can stop training in progress.
 
-* **Hyperparameters** : You can check the hyperparameter values set for training on **the hyperparameter** tab of the detailed screen displayed when selecting training.
+- **Hyperparameters** : You can check the hyperparameter values set for training on **the hyperparameter** tab of the detailed screen displayed when selecting training.
 
-* **Monitoring**: When you select the endpoint stage, you can see a list of monitored instances and basic metrics charts in the **Monitoring** tab of the detailed screen that appears.
-    * The **Monitoring** tab is disabled while an endpoint stage is being created.
+- **Monitoring**: When you select the endpoint stage, you can see a list of monitored instances and basic metrics charts in the **Monitoring** tab of the detailed screen that appears.
+    - The **Monitoring** tab is disabled while an endpoint stage is being created.
 
 ### Copy Training
 
@@ -366,87 +366,87 @@ Hyperparameter tuning is the process of optimizing hyperparameter values to maxi
 
 How to configure a hyperparameter tuning job.
 
-* **Training Template**
-    * **Use** : Select whether to use the training template. Using a training template, some configuration values for hyperparameter tuning are populated with pre-specified values.
-    * **Training Template**: Select a training template to use to automatically populate some configuration values for hyperparameter tuning.
-* **Basic Information**
-    * **Hyperparameter Tuning Name**: Enter a name for the hyperparameter tuning job.
-    * **Description**: Input when a description of the hyperparameter tuning task is required.
-    * **Experiment**: Select an experiment to include hyperparameter tuning. Experiments group related hyperparameter tunings. If no experiments have been created, click **Add** to create one.-
-* **Tuning Strategy**
-    * **Strategy Name**: Choose which strategy to use to find the optimal hyperparameters.
-    * **Random State**: Determines random number generation. Specify a fixed value for reproducible results.
-**Algorithm information** : Enter information about the algorithm you want to learn.
-    * **Algorithm Type** : Select the algorithm type.
-        * **Algorithm provided by NHN Cloud** : Use the algorithm provided by AI EasyMaker. For detailed information on the provided algorithm, refer to [the Algorithm Guide document provided by NHN Cloud](./algorithm-guide/#).
-            * **Algorithm** : Select an algorithm.
-            * **Hyperparameter Spec** : Enter the hyperparameter to use for hyperparameter tuning. For detailed information on hyperparameters for each algorithm, refer to [the Algorithm Guide document provided by NHN Cloud](./algorithm-guide/#).
-            * **Name** : Defines which hyperparameters to tune It is determined by algorithm.
-                * **Type** : Selects the data type of the hyperparameter. It is determined by algorithm.
-                * **Value/Range**
-                    * **Min**: Defines the minimum value.
-                    * **Max**: Defines the maximum value.
-                    * **Step**: Determines the size of the hyperparameter value change when using the "Grid" tuning strategy.
-            * **Algorithm Metrics** : Displays information about the metrics generated by the algorithm.
-        * **Own Algorithm**: Uses an algorithm written by the user.
-            * **Algorithm Path**
-                * **NHN Cloud Object Storage**: Enter the path of NHN Cloud Object Storage where algorithms are stored.<br>
-                    * obs: Enter the directory path in the format of obs://{ObjectStorage API endpoint}/{containerName}/{path}.
-                    * When using NHN Cloud Object Storage, please set permissions by referring to [Appendix > 1. Adding AI EasyMaker system account permissions to NHN Cloud Object Storage](./console-guide/#1-nhn-cloud-object-storage-ai-easymaker).If you do not set the required permissions, model creation will fail.
-                * **NHN Cloud NAS**: Enter the NHN Cloud NAS path where the algorithm is stored.
-                    * nas://{NAS Enter the directory path in the format ID}:/{path}.
-            * **Entry Point**
-                * The entry point is the point of entry into the execution of the algorithm from which training begins. Creates the entry point file name.
-                * The entry point file must exist in the algorithm path.
-                * Creating **requirements.txt** in the same path will install the required python packages from the script.
-            * **Hyperparameter Specification**
-                * **Name** : Defines which hyperparameters to tune.
-                * **Type** : Select the data type of the hyperparameter.
-                * **Value/Range**
-                    * **Min**: Defines the minimum value.
-                    * **Max**: Defines the maximum value.
-                    * **Step**: Determines the size of the hyperparameter value change when using the "Grid" tuning strategy.
-                    * **Comma-Separated Values**: Tune hyperparameters using static values (e.g. sgd, adam).
-* **Image** : Choose an image for your instance that matches the environment in which you need to run your training.
-* **Training Resource Information**
-    * **Training instance type** : Select an instance type to run training.
-    * **Number of Distributed Nodes**: Enter a number of distributed nodes to be performed. Distributed training can be enabled through settings in the algorithm code. For more information, please refer to [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
-    * **Number of Parallel Trainings**: Enter a number of trainings to perform in parallel simultaneously.
-    * **Enable torchrun**: Select whether to use torchrun, which is supported by the Pytorch framework. For more information, see [Appendix > 8. How to use torchrun](./console-guide/#8-how-to-use-torchrun).
-    * **Number of processes per node**: If using torchrun, enter the number of processes per node. torchrun enables distributed training by running multiple processes on a single node. The number of processes affects memory usage.
-* **Input Data**
-    * **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
-        * Dataset name: Enter a name for your data set.
-        * Data Path: Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-    * **Checkpoint**: If you want to start training from a saved checkpoint, enter the save path of the checkpoint.
-        * Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-* **Output Data**
-    * **Output data** : Enter the data storage path to save the training execution results.
-        * Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-    * **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint.
-        * Created checkpoints can be used to resume training from previous training.
-        * Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-* **Metrics**
-    * **Metric Name**: Define which metric to collect from logs output by the training code.
-    * **Metric Format**: Enter a regular expression to use to collect metrics. The training algorithm should output metrics to match the regular expression.
-* **Target Indicator**
-    * **Metric Name**: Choose which metric you want to optimize for.
-    * **Goal Metric Type**: Choose an optimization type.
-    * **Goal Metric Goal**: The tuning job will end when the goal metric reaches this value.
-* **Tuning Resource Configuration**
-    * **Maximum Number of Failed Trainings**: Define the maximum number of failed lessons. When the number of failed trainings reaches this value, tuning ends in failure.
-    * **Maximum Number of Trainings**: Defines the maximum number of lessons. Tuning runs until the number of auto-run training reaches this value.
-* **Early Stop Training**
-    * **Name**: Stop training early if the model is no longer good even though training continues.
-    * **Min Trainings Required**: Define how many trainings the target metric value will be taken from when calculating the median.
-    * **Start Step**: Set the training step from which to apply early stop.
-* **Additional settings**
-    * **Data storage size** : Enter the data storage size of the instance to run training.
-        * Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for training.
-    * **Maximum Progress Time**: Specifies the maximum progress time until training is completed. training that exceeds the maximum progress time will be terminated.
-    * **Log Management** : Logs generated during training can be stored in the NHN Cloud Log & Crash service.
-        * For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
-    * **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
+- **Training Template**
+    - **Use** : Select whether to use the training template. Using a training template, some configuration values for hyperparameter tuning are populated with pre-specified values.
+    - **Training Template**: Select a training template to use to automatically populate some configuration values for hyperparameter tuning.
+- **Basic Information**
+    - **Hyperparameter Tuning Name**: Enter a name for the hyperparameter tuning job.
+    - **Description**: Input when a description of the hyperparameter tuning task is required.
+    - **Experiment**: Select an experiment to include hyperparameter tuning. Experiments group related hyperparameter tunings. If no experiments have been created, click **Add** to create one.-
+- **Tuning Strategy**
+    - **Strategy Name**: Choose which strategy to use to find the optimal hyperparameters.
+    - **Random State**: Determines random number generation. Specify a fixed value for reproducible results.
+- **Algorithm information** : Enter information about the algorithm you want to learn.
+    - **Algorithm Type** : Select the algorithm type.
+        - **Algorithm provided by NHN Cloud** : Use the algorithm provided by AI EasyMaker. For detailed information on the provided algorithm, refer to [the Algorithm Guide document provided by NHN Cloud](./algorithm-guide/#).
+            - **Algorithm** : Select an algorithm.
+            - **Hyperparameter Spec** : Enter the hyperparameter to use for hyperparameter tuning. For detailed information on hyperparameters for each algorithm, refer to [the Algorithm Guide document provided by NHN Cloud](./algorithm-guide/#).
+            - **Name** : Defines which hyperparameters to tune It is determined by algorithm.
+                - **Type** : Selects the data type of the hyperparameter. It is determined by algorithm.
+                - **Value/Range**
+                    - **Min**: Defines the minimum value.
+                    - **Max**: Defines the maximum value.
+                    - **Step**: Determines the size of the hyperparameter value change when using the "Grid" tuning strategy.
+            - **Algorithm Metrics** : Displays information about the metrics generated by the algorithm.
+        - **Own Algorithm**: Uses an algorithm written by the user.
+            - **Algorithm Path**
+                - **NHN Cloud Object Storage**: Enter the path of NHN Cloud Object Storage where algorithms are stored.<br>
+                    - obs: Enter the directory path in the format of obs://{ObjectStorage API endpoint}/{containerName}/{path}.
+                    - When using NHN Cloud Object Storage, please set permissions by referring to [Appendix > 1. Adding AI EasyMaker system account permissions to NHN Cloud Object Storage](./console-guide/#1-nhn-cloud-object-storage-ai-easymaker).If you do not set the required permissions, model creation will fail.
+                - **NHN Cloud NAS**: Enter the NHN Cloud NAS path where the algorithm is stored.
+                    - nas://{NAS Enter the directory path in the format ID}:/{path}.
+            - **Entry Point**
+                - The entry point is the point of entry into the execution of the algorithm from which training begins. Creates the entry point file name.
+                - The entry point file must exist in the algorithm path.
+                - Creating **requirements.txt** in the same path will install the required python packages from the script.
+            - **Hyperparameter Specification**
+                - **Name** : Defines which hyperparameters to tune.
+                - **Type** : Select the data type of the hyperparameter.
+                - **Value/Range**
+                    - **Min**: Defines the minimum value.
+                    - **Max**: Defines the maximum value.
+                    - **Step**: Determines the size of the hyperparameter value change when using the "Grid" tuning strategy.
+                    - **Comma-Separated Values**: Tune hyperparameters using static values (e.g. sgd, adam).
+- **Image** : Choose an image for your instance that matches the environment in which you need to run your training.
+- **Training Resource Information**
+    - **Training instance type** : Select an instance type to run training.
+    - **Number of Distributed Nodes**: Enter a number of distributed nodes to be performed. Distributed training can be enabled through settings in the algorithm code. For more information, please refer to [Appendix > 6. Distributed Training Settings by Framework](./console-guide/#6).
+    - **Number of Parallel Trainings**: Enter a number of trainings to perform in parallel simultaneously.
+    - **Enable torchrun**: Select whether to use torchrun, which is supported by the Pytorch framework. For more information, see [Appendix > 8. How to use torchrun](./console-guide/#8-how-to-use-torchrun).
+    - **Number of processes per node**: If using torchrun, enter the number of processes per node. torchrun enables distributed training by running multiple processes on a single node. The number of processes affects memory usage.
+- **Input Data**
+    - **Data Set**: Enter the data set to run training on. You can set up to 10 data sets.
+        - Dataset name: Enter a name for your data set.
+        - Data Path: Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Checkpoint**: If you want to start training from a saved checkpoint, enter the save path of the checkpoint.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+- **Output Data**
+    - **Output data** : Enter the data storage path to save the training execution results.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Checkpoint** : If the algorithm provides a checkpoint, enter the storage path of the checkpoint.
+        - Created checkpoints can be used to resume training from previous training.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+- **Metrics**
+    - **Metric Name**: Define which metric to collect from logs output by the training code.
+    - **Metric Format**: Enter a regular expression to use to collect metrics. The training algorithm should output metrics to match the regular expression.
+- **Target Indicator**
+    - **Metric Name**: Choose which metric you want to optimize for.
+    - **Goal Metric Type**: Choose an optimization type.
+    - **Goal Metric Goal**: The tuning job will end when the goal metric reaches this value.
+- **Tuning Resource Configuration**
+    - **Maximum Number of Failed Trainings**: Define the maximum number of failed lessons. When the number of failed trainings reaches this value, tuning ends in failure.
+    - **Maximum Number of Trainings**: Defines the maximum number of lessons. Tuning runs until the number of auto-run training reaches this value.
+- **Early Stop Training**
+    - **Name**: Stop training early if the model is no longer good even though training continues.
+    - **Min Trainings Required**: Define how many trainings the target metric value will be taken from when calculating the median.
+    - **Start Step**: Set the training step from which to apply early stop.
+- **Additional settings**
+    - **Data storage size** : Enter the data storage size of the instance to run training.
+        - Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for training.
+    - **Maximum Progress Time**: Specifies the maximum progress time until training is completed. training that exceeds the maximum progress time will be terminated.
+    - **Log Management** : Logs generated during training can be stored in the NHN Cloud Log & Crash service.
+        - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
+    - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
 > [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
@@ -458,12 +458,12 @@ How to configure a hyperparameter tuning job.
 
 A list of hyperparameter tunings is displayed. Select a hyperparameter tuning from the list to view details and change information.
 
-* **Time Spent** : Shows the time spent tuning hyperparameters.
-* **Completed Training**: Indicates the number of completed trainings among the automatically generated trainings by hyperparameter tuning.
-* **Training In Progress**: Indicates the number of trainings in progress.
-* **Failed Training** : Indicates the number of failed lessons.
-* **Best Training**: Indicates the target metric information of the training that recorded the highest target metric value among the training automatically generated by hyperparameter tuning.
-* **Status** : Shows the status of hyperparameter tuning. Please refer to the table below for the main status.
+- **Time Spent** : Shows the time spent tuning hyperparameters.
+- **Completed Training**: Indicates the number of completed trainings among the automatically generated trainings by hyperparameter tuning.
+- **Training In Progress**: Indicates the number of trainings in progress.
+- **Failed Training** : Indicates the number of failed lessons.
+- **Best Training**: Indicates the target metric information of the training that recorded the highest target metric value among the training automatically generated by hyperparameter tuning.
+- **Status** : Shows the status of hyperparameter tuning. Please refer to the table below for the main status.
 
     | Status | Description |
     | --- | --- |
@@ -477,7 +477,7 @@ A list of hyperparameter tunings is displayed. Select a hyperparameter tuning fr
     | CREATE FAILED | Hyperparameter tuning generation failed. If creation continues to fail, please contact customer service. |
     | FAIL HYPERPARAMETER TUNING IN PROGRESS, COMPLETE IN PROGRESS, STOP IN PROGRESS | Resources used for hyperparameter tuning are being cleaned up. |
 
-* **Status Details**: The bracketed content in the `COMPLETE` status is the status details. See the table below for key details.
+- **Status Details**: The bracketed content in the `COMPLETE` status is the status details. See the table below for key details.
 
     | Details | Description |
     | --- | --- |
@@ -485,20 +485,20 @@ A list of hyperparameter tunings is displayed. Select a hyperparameter tuning fr
     | MaxTrialsReached | Details when hyperparameter tuning has reached the maximum number of training runs and is complete. |
     | SuggestionEndReached | Details when the exploration algorithm in Hyperparameter Tuning has explored all hyperparameters. |
 
-* **Operation**
-    * **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
+- **Operation**
+    - **Go to TensorBoard** : TensorBoard, where you can check the statistical information of training, opens in a new browser window.<br/>
     For instructions on how to leave TensorBoard logs, please refer to [Appendix > 5. Store Indicator Logs for TensorBoard Usage](./console-guide/#5-store-indicator-logs-for-tensorboard-usage). TensorBoard can only be accessed by users logged into the console.
-    * **Stop Hyperparameter Tuning** : You can stop hyperparameter tuning in progress.
+    - **Stop Hyperparameter Tuning** : You can stop hyperparameter tuning in progress.
 
-* **Monitoring**: When you select hyperparameter tuning, you can check the list of monitored instances and basic indicator charts in the Monitoring tab of the detailed screen that appears.
-    * The **Monitoring** tab is disabled while hyperparameter tuning is being created.
+- **Monitoring**: When you select hyperparameter tuning, you can check the list of monitored instances and basic indicator charts in the Monitoring tab of the detailed screen that appears.
+    - The **Monitoring** tab is disabled while hyperparameter tuning is being created.
 
 ### List of Trainings for Hyperparameter Tuning
 
 Displays a list of trainings auto-generated by hyperparameter tuning. Select a training from the list to check detailed information.
 
-* **Target Metric Value**: Indicates the target metric value.
-* **Status** : Shows the status of the training automatically generated by hyperparameter tuning. Please refer to the table below for the main status.
+- **Target Metric Value**: Indicates the target metric value.
+- **Status** : Shows the status of the training automatically generated by hyperparameter tuning. Please refer to the table below for the main status.
 
     | Status | Description |
     | --- | --- |
@@ -551,9 +551,9 @@ For information on what you can set in your training template, see [Creating a t
 
 Displays a list of training templates. Select a training template from the list to view details and change information.
 
-* **Operation**
-    * **Change** : You can change training template information.
-* **Hyperparameters** : You can check the names of hyperparameters set in the training template on **the Hyperparameters** tab of the detailed screen displayed when you select a training template.
+- **Operation**
+    - **Change** : You can change training template information.
+- **Hyperparameters** : You can check the names of hyperparameters set in the training template on **the Hyperparameters** tab of the detailed screen displayed when you select a training template.
 
 ### Copy Training Template
 
@@ -578,14 +578,14 @@ Can manage models of AI EasyMaker's training outcomes or external models as arti
 
 ### Create Model
 
-* **Basic Information**: Enter basic information of model.
-    * **Name**: Enter model name.
-        * If model's framework type is PyTorch, you must enter the same model name as PyTorch model name.
-    * **Description**: Enter model description.
-* **Framework Information**: Enter Framework Information
-    * **Framework**: Select the model's framework.
-    * **Framework Version**: Enter Model framework Version.
-* **Model Information**: Enter the storage where model's artifacts are stored.
+- **Basic Information**: Enter basic information of model.
+    - **Name**: Enter model name.
+        - If model's framework type is PyTorch, you must enter the same model name as PyTorch model name.
+    - **Description**: Enter model description.
+- **Framework Information**: Enter Framework Information
+    - **Framework**: Select the model's framework.
+    - **Framework Version**: Enter Model framework Version.
+- **Model Information**: Enter the storage where model's artifacts are stored.
     - **Model Artifact**: Select a repository where model artifacts are saved.
         - **NHN Cloud Object Storage**: Enter the path to Object Storage where the model artifacts are stored.
             - Enter the directory path in the format `obs://{Object Storage API endpoint}/{containerName}/{path}`.
@@ -595,7 +595,7 @@ Can manage models of AI EasyMaker's training outcomes or external models as arti
     - **Parameter**: Enter the model's parameter information.
         -**Parameter name**: Enter the name of the parameter in the model.
         -**Parameter value**: Enter the values of the parameters in the model.
-    * **Tag**: To add tag, click the **+ button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
+    - **Tag**: To add tag, click the **+ button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
 > [Caution] When using NHN Cloud NAS:
 Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
@@ -604,7 +604,7 @@ Only NHN Cloud NAS created on the same project as AI EasyMaker is available to u
 > If not retained the model artifacts stored in storage, the creation of endpoints for that model fails.
 
 > [Note] Model Parameter:
-> The values entered as model parameters are used when serving the model. Parameters can be used as arguments and environment variables: 
+> The values entered as model parameters are used when serving the model. Parameters can be used as arguments and environment variables:
 > Arguments are used as the parameter name as entered, and environment variables are used with the parameter name converted to screaming snake notation.
 > [Note] When creating HuggingFace model:
 > When creating a HuggingFace model, you can create the model by entering the ID of the HuggingFace model as a parameter.
@@ -615,12 +615,12 @@ Only NHN Cloud NAS created on the same project as AI EasyMaker is available to u
 
 Model list is displayed. Selecting a model in the list allows to check detailed information and make changes to it.
 
-* **Name**: Model name and description are displayed. Model name and description can be changed by clicking **Change**.
-* **Tag**: Model tag is displayed. Tag can be changed by clicking **Change**.
-* **Model Artifact Path** displays the storage where the model's artifacts are stored.
-* **Training Name**: For models created from training, training name that is based is displayed.
-* **Training ID**: For models created from training, training ID that is based is displayed.
-* **Framework**: Model's framework information is displayed.
+- **Name**: Model name and description are displayed. Model name and description can be changed by clicking **Change**.
+- **Tag**: Model tag is displayed. Tag can be changed by clicking **Change**.
+- **Model Artifact Path** displays the storage where the model's artifacts are stored.
+- **Training Name**: For models created from training, training name that is based is displayed.
+- **Training ID**: For models created from training, training ID that is based is displayed.
+- **Framework**: Model's framework information is displayed.
 
 ### Create Endpoint from Model
 
@@ -631,14 +631,13 @@ Create an endpoint that can serve the selected model.
 3. Go to **Create Endpoint** page. After checking the contents, click **Create Endpoint** to create a model.
 For more information on creating models, refer to **Endpoint** documents.
 
-
 ### Create Batch Inference in a Model
 
 Create batch inferences with the selected model and view the inference results as statistics.
 
-1. Select the model you want to create with batch inference from the list. 
-2. Click **Create Batch Inference**. 
-3. You will be taken to the **Create Batch Inference** page. Check the contents and click Create Batch Inference. 
+1. Select the model you want to create with batch inference from the list.
+2. Click **Create Batch Inference**.
+3. You will be taken to the **Create Batch Inference** page. Check the contents and click Create Batch Inference.
 For more information about creating batch inferences, see [Batch Inference](./console-guide/#_54).
 
 ### Delete Model
@@ -659,29 +658,29 @@ Create and manage endpoints that can serve the model.
 
 ### Create Endpoint
 
-* **Enable API Gateway Service**
-    * AI EasyMaker endpoints create API endpoints and manage APIs through NHN Cloud API Gateway service. API Gateway service must be enabled to take advantage of endpoint feature.
-    * For more information on API Gateway services and fees, please refer to the following documents:
-        * [API Gateway Service Guide](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/overview/)
-        * [API Gateway Usage Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
-* **Endpoint**: Select whether to add stage to new or existing endpoint.
-    * **Create as New Endpoint**: Create new endpoint. Endpoint is created in API Gateway with new service and default stage.
-    * **Add New Stage at Default Endpoint**: Endpoint is created as new stage in the service of API Gateway of existing endpoint. Select existing endpoint to add a stage.
-* **Endpoint name**: Enter the endpoint name. Endpoint names cannot be duplicated.
-* **Stage Name**: When adding new stage on existing endpoint, enter name for new stage. Stage names cannot be duplicated.
-* **Description**: Enter the description of endpoint stage.
-* **Instance Information**: Enter instance information for the model to be served.
-    * **Instance Flavor**: Select instance type.
-    * **Number of Instances**: Enter the number of drives for instance.
-    * **Autoscaler**: The autoscaler is a feature that automatically adjusts the number of nodes based on resource usage policies. The autoscaler is set on a per-stage basis.
-        * **Enable/Disable**: Select whether to enable the autoscaler. If enabled, the number of instances will scale in or out based on the instance load.
-        * **Minimum number of nodes**: The minimum number of nodes that can be scaled down
-        * **Maximum number of nodes**: The maximum number of nodes that can be scaled up
-        * **Scale-down**: Set whether to enable node scale-down
-        * **Resource Usage Threshold**: The default for resource usage threshold, which is the reference point for a scale down
-        * **Threshold Duration (min)**: The resource usage duration at or below the threshold for the nodes to be scaled down
-        * **Scale-up to scale-down latency (min)**: Delay before starting to monitor for scale-down targets after scaling up
-* **Stage Information**: Enter the information for model artifacts to deploy to endpoint. When you deploy the same model to multiple stage resources, requests are distributed and processed.
+- **Enable API Gateway Service**
+    - AI EasyMaker endpoints create API endpoints and manage APIs through NHN Cloud API Gateway service. API Gateway service must be enabled to take advantage of endpoint feature.
+    - For more information on API Gateway services and fees, please refer to the following documents:
+        - [API Gateway Service Guide](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/overview/)
+        - [API Gateway Usage Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
+- **Endpoint**: Select whether to add stage to new or existing endpoint.
+    - **Create as New Endpoint**: Create new endpoint. Endpoint is created in API Gateway with new service and default stage.
+    - **Add New Stage at Default Endpoint**: Endpoint is created as new stage in the service of API Gateway of existing endpoint. Select existing endpoint to add a stage.
+- **Endpoint name**: Enter the endpoint name. Endpoint names cannot be duplicated.
+- **Stage Name**: When adding new stage on existing endpoint, enter name for new stage. Stage names cannot be duplicated.
+- **Description**: Enter the description of endpoint stage.
+- **Instance Information**: Enter instance information for the model to be served.
+    - **Instance Flavor**: Select instance type.
+    - **Number of Instances**: Enter the number of drives for instance.
+    - **Autoscaler**: The autoscaler is a feature that automatically adjusts the number of nodes based on resource usage policies. The autoscaler is set on a per-stage basis.
+        - **Enable/Disable**: Select whether to enable the autoscaler. If enabled, the number of instances will scale in or out based on the instance load.
+        - **Minimum number of nodes**: The minimum number of nodes that can be scaled down
+        - **Maximum number of nodes**: The maximum number of nodes that can be scaled up
+        - **Scale-down**: Set whether to enable node scale-down
+        - **Resource Usage Threshold**: The default for resource usage threshold, which is the reference point for a scale down
+        - **Threshold Duration (min)**: The resource usage duration at or below the threshold for the nodes to be scaled down
+        - **Scale-up to scale-down latency (min)**: Delay before starting to monitor for scale-down targets after scaling up
+- **Stage Information**: Enter the information for model artifacts to deploy to endpoint. When you deploy the same model to multiple stage resources, requests are distributed and processed.
     - **Model**: Select a model you want to deploy to the endpoint. If you haven't created a model, create one first. For information on model framework-specific serving, please see [Appendix > 11. Serving by Framework](./console-guide/#11).
     - **API Gateway Resource Path**: Enter the path to the API resource to which the model is deployed. For example, if you set it to `/inference`, you can request the inference API with `POST https://{enpdoint-domain}/inference`.
     - **Resource Allocation (%)**: Enter the resource you want to allocate to the model. Allocate a fixed percentage of the actual resource usage by instance.
@@ -696,12 +695,11 @@ Create and manage endpoints that can serve the model.
             - **Memory**: Adust the memory count depending on CPU usage.
         - **Threshold (%)**: The threshold value per increment at which the Pod will be scaled up.
     - **Resource Information:**: You can see the resources you're actually using. Allocates resource room usage to each model based on the quota for the model you entered. For more information, please see [Appendix > 9. Resource Information](./console-guide/#9).
-* **Additional Settings > Tag**: To add a tag, click **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
-
+- **Additional Settings > Tag**: To add a tag, click **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
 > [Note] API Specification for Inference Request:
 > The AI EasyMaker service provides endpoints based on the open inference protocol (OIP) specification. For the endpoint API specification, see [Appendix > 10. Endpoint API specification](./console-guide/#10-api).
-> To use a separate endpoint, refer to the resources created in the API Gateway service and create a new resource to use it. 
+> To use a separate endpoint, refer to the resources created in the API Gateway service and create a new resource to use it.
 > For more information about the OIP specification, see [OIP specification](https://github.com/kserve/open-inference-protocol).
 
 > [Note] Time to create endpoints:
@@ -717,8 +715,8 @@ Create and manage endpoints that can serve the model.
 
 Endpoints list is displayed. Select an endpoint in the list to check details and make changes to the information.
 
-* **Default Stage URL**: Displays URL of default stage among the stages on the endpoint.
-* **Status**: Status of endpoint. Please refer to the table below for main status.
+- **Default Stage URL**: Displays URL of default stage among the stages on the endpoint.
+- **Status**: Status of endpoint. Please refer to the table below for main status.
 
     | Status | Description |
     | --- | --- |
@@ -730,7 +728,7 @@ Endpoints list is displayed. Select an endpoint in the list to check details and
     | CREATE FAILED | Endpoint creation has failed. <br/>You must delete and recreate the endpoint. If the creation fails repeatedly, please contact the Customer Center. |
     | UPDATE FAILED | Some of endpoint stages are not serviced properly. You must delete and recreate the stages with issues. |
 
-* **API Gateway Status**: Displays API Gateway status information for default stage of endpoint. Please refer to the table below for main status.
+- **API Gateway Status**: Displays API Gateway status information for default stage of endpoint. Please refer to the table below for main status.
 
     | Status | Description |
     | --- | --- |
@@ -754,7 +752,7 @@ Add new stage to existing endpoint. You can create and test the new stage withou
 
 Stage list created under endpoint is displayed. Select stage in the list to check more information in the list.
 
-* **Status**: Displays status of endpoint stage. Please refer to the table below for main status.
+- **Status**: Displays status of endpoint stage. Please refer to the table below for main status.
 
     | Status | Description |
     | --- | --- |
@@ -766,18 +764,18 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
     | CREATE FAILED |  Endpoint stage creation has failed. Please try again.   |
     | DEPLOY FAILED |  Deployment to the endpoint stage has failed. Please try again.   |
 
-* **API Gateway Status**: Displays stage status of API Gateway from where endpoint stage is deployed.
-* **Default Stage Check**: Displays whether it is a default stage or not.
-* **Stage URL**: Displays Stage URL of API Gateway where the model is served.
-* **View API Gateway Settings**: Click **View Settings** to see settings that AI EasyMaker has deployed to API Gateway stage.
-* **View API Gateway Statistics**: Click **View Statistics** to view API statistics of endpoints.
-* **Instance Flavor**: Displays endpoint instance type the model is serving.
-* **Number of Work Nodes/Pods In Progress**: Displays the number of nodes and pods being used by endpoint.
-* **Stage Resource**: Displays information about model artifacts deployed to the stage.
-* **Monitoring**: When you select the endpoint stage, you can see a list of monitored instances and basic metrics charts in the **Monitoring** tab of the detailed screen that appears.
-    * The **Monitoring** tab is disabled while an endpoint stage is being created.
-* **API Statistics**: You can check the API statistics information of the endpoint stage in the **API Statistics** tab of the details screen that appears when you select the endpoint stage.
-    * The **API Statistics** tab is disabled while the endpoint stage is being created.
+- **API Gateway Status**: Displays stage status of API Gateway from where endpoint stage is deployed.
+- **Default Stage Check**: Displays whether it is a default stage or not.
+- **Stage URL**: Displays Stage URL of API Gateway where the model is served.
+- **View API Gateway Settings**: Click **View Settings** to see settings that AI EasyMaker has deployed to API Gateway stage.
+- **View API Gateway Statistics**: Click **View Statistics** to view API statistics of endpoints.
+- **Instance Flavor**: Displays endpoint instance type the model is serving.
+- **Number of Work Nodes/Pods In Progress**: Displays the number of nodes and pods being used by endpoint.
+- **Stage Resource**: Displays information about model artifacts deployed to the stage.
+- **Monitoring**: When you select the endpoint stage, you can see a list of monitored instances and basic metrics charts in the **Monitoring** tab of the detailed screen that appears.
+    - The **Monitoring** tab is disabled while an endpoint stage is being created.
+- **API Statistics**: You can check the API statistics information of the endpoint stage in the **API Statistics** tab of the details screen that appears when you select the endpoint stage.
+    - The **API Statistics** tab is disabled while the endpoint stage is being created.
 
 > [Caution] Precautions when changing settings for API Gateway created by AI EasyMaker:
 > When creating an endpoint or an endpoint stage, AI EasyMaker creates API Gateway services and stages for the endpoint.
@@ -799,12 +797,16 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 
 Add a new resource to an existing endpoint stage.
 
-* **Model**: Select the model you want to deploy to your endpoints. If you have not created a model, please create one first.
+- **Model**: Select the model you want to deploy to your endpoints. If you have not created a model, please create one first.
+
 - **Resource quota(%)**: Enter the resources you want to allocate to the model. Allocate a fixed percentage of the instance's resource room usage.
     - **CPU**: Enter the CPU quota. Enter if you are allocating directly without using an allocation percentage (%).
     - **Memory**: Enter the memory quota. Enter if you are allocating directly without using an allocation percentage (%).
-* **Number of Pods**: Enter a number of pods in the stage resource.
-* **Description**: Enter a description for the stage resource.
+
+- **Number of Pods**: Enter a number of pods in the stage resource.
+
+- **Description**: Enter a description for the stage resource.
+
 - **Pod Auto Scaler**: The feature to automatically adjust the number of Pods based on the request volume of your model. The autoscaler is set on a per-model basis.
     - **Enable/Disable**: Select whether to use the auto scaler. If enabled, the number of Pods will scale in or out based on the model load.
     - **Scale Unit**: Enter the pod scale unit.
@@ -812,12 +814,11 @@ Add a new resource to an existing endpoint stage.
         - **Memory**: Adjust the pod count depending on memory usage.
         - **Threshold value**: The threshold value per increment that the Pod will be scaled to.
 
-
 ### Stage Resource List
 
 A list of resources created under the endpoint stage is displayed.
 
-* **Status** : Shows the status of stage resource. Please refer to the table below for the main status.
+- **Status** : Shows the status of stage resource. Please refer to the table below for the main status.
 
     | Status | Description |
     | --- | --- |
@@ -827,16 +828,16 @@ A list of resources created under the endpoint stage is displayed.
     | ACTIVE |  Stage resource is deployed normally. |
     | CREATE FAILED |  Creating stage resource failed. Please try again. |
 
-* **Model Name**: The name of the model deployed to the stage.
-* **API Gateway Resource Path**: The inference URL of the model deployed to the stage. API clients can request inference at the displayed URL. For more information, see [Appendix > 10. Endpoint API Specfication](./console-guide/#10-api).
-* **Number of Pods**: Shows the number of healthy pods and total pods in use on the resource.
+- **Model Name**: The name of the model deployed to the stage.
+- **API Gateway Resource Path**: The inference URL of the model deployed to the stage. API clients can request inference at the displayed URL. For more information, see [Appendix > 10. Endpoint API Specfication](./console-guide/#10-api).
+- **Number of Pods**: Shows the number of healthy pods and total pods in use on the resource.
 
 ### Call Endpoint Inference
 
 1. When you click Stage in Endpoint > Endpoint Stage, Stage details screen is displayed at the bottom.
 2. Check the API Gateway resource path from the details screen on the Stage Resource tab.
 3. When the API Gateway resource path is called the HTTP POST Method, inference API is called.
-    * Request and response specifications of the inference API differ depending on the algorithm user created.
+    - Request and response specifications of the inference API differ depending on the algorithm user created.
 
             // Inference API example: Request
             curl --location --request POST '{API Gateway Resource Path}' \
@@ -917,39 +918,39 @@ Provides an environment to make batch inferences from an AI EasyMaker model and 
 
 Set up the environment in which batch inference will be performed by selecting an instance and OS image, and enter the paths to the input/output data to be inferred to proceed with batch inference.
 
-* **Basic Information**: Enter basic information about a batch inference.
-    * **Batch Inference Name**: Enter a name for the batch inference.
-    * **Batch Inference Description**: Enter a description.
-* **Instance information**
-    * **Instance Type**: Select the instance type to run batch inference on.
-    * **Number of Instances**: The number of instances to perform batch inference on.
-* **Model Information**
-    * **Model**: Select the model from which you want to make a batch inference. If you did not create a model, create one first.
-    * **Number of Pods**: Enter the number of pods in the model.
-    * **Resource Information**: You can see the actual resources used by the model. The actual usage is split and allocated to each pod based on the number of pods you entered. For more information, see [Appendix > 9. Resource Information](./console-guide/#9).
-* **Input Data**
-    * **Data Path**: Enter the path to the data that you want to run batch inference on.
-        * Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-    * **Input Data Type**: Select the type of data you want to run batch inference on.
-        * **JSON**: Use valid JSON data from a file as input.
-        * **JSONL**: Use JSON lines files where each line is valid JSON as input.
-            * Note: [https://jsonlines.org/](https://jsonlines.org/)
-    * **Glob Pattern**
-        * **Specify File to Include**: Enter a set of files to include in the input data in a Glob pattern.
-        * **Specify File to Exclude**: Enter a set of files to exclude from the input data in a Glob pattern.
-* **Output Data**
-    * **Output Data**: Enter the data storage path to save the batch inference results.
-        * Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
-* **Additional Settings**
-    * **Batch Options**
-        * **Batch Size**: Enter the number of data samples that are processed simultaneously in one inference job.
-        * **Inference Timeout (in seconds)**: Enter the timeout period for batch inference. You can set the maximum allowable time before a single inference request is processed and results are returned.
-    * **Data Storage Size** : Enter the data storage size of the instance to run batch inference.
-        * Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for batch inference.
-    * **Maximum Batch Inference Time** : Specify the maximum waiting time until batch inference is complete. Batch inference that exceeds the maximum waiting time will be terminated.
-    * **Log Management** : Logs generated during batch inference can be stored in the NHN Cloud Log & Crash Search service.
-        * For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
-    * **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
+- **Basic Information**: Enter basic information about a batch inference.
+    - **Batch Inference Name**: Enter a name for the batch inference.
+    - **Batch Inference Description**: Enter a description.
+- **Instance information**
+    - **Instance Type**: Select the instance type to run batch inference on.
+    - **Number of Instances**: The number of instances to perform batch inference on.
+- **Model Information**
+    - **Model**: Select the model from which you want to make a batch inference. If you did not create a model, create one first.
+    - **Number of Pods**: Enter the number of pods in the model.
+    - **Resource Information**: You can see the actual resources used by the model. The actual usage is split and allocated to each pod based on the number of pods you entered. For more information, see [Appendix > 9. Resource Information](./console-guide/#9).
+- **Input Data**
+    - **Data Path**: Enter the path to the data that you want to run batch inference on.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+    - **Input Data Type**: Select the type of data you want to run batch inference on.
+        - **JSON**: Use valid JSON data from a file as input.
+        - **JSONL**: Use JSON lines files where each line is valid JSON as input.
+            - Note: [https://jsonlines.org/](https://jsonlines.org/)
+    - **Glob Pattern**
+        - **Specify File to Include**: Enter a set of files to include in the input data in a Glob pattern.
+        - **Specify File to Exclude**: Enter a set of files to exclude from the input data in a Glob pattern.
+- **Output Data**
+    - **Output Data**: Enter the data storage path to save the batch inference results.
+        - Enter the NHN Cloud Object Storage or NHN Cloud NAS path.
+- **Additional Settings**
+    - **Batch Options**
+        - **Batch Size**: Enter the number of data samples that are processed simultaneously in one inference job.
+        - **Inference Timeout (in seconds)**: Enter the timeout period for batch inference. You can set the maximum allowable time before a single inference request is processed and results are returned.
+    - **Data Storage Size** : Enter the data storage size of the instance to run batch inference.
+        - Used only when using NHN Cloud Object Storage. Please specify a size large enough to store all the data required for batch inference.
+    - **Maximum Batch Inference Time** : Specify the maximum waiting time until batch inference is complete. Batch inference that exceeds the maximum waiting time will be terminated.
+    - **Log Management** : Logs generated during batch inference can be stored in the NHN Cloud Log & Crash Search service.
+        - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
+    - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
 > [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
@@ -965,17 +966,17 @@ Set up the environment in which batch inference will be performed by selecting a
 > You must set the **batch size** and **inference timeout** appropriately based on the performance of the model you are batch inferring.
 > If the settings you enter are incorrect, batch inference might not perform well enough.
 
-> [Caution] When using GPU instances: 
-> Batch inference using GPU instances allocates GPU instances based on the number of Pods 
-> If `Number of Pods / Number of GPUs` is not divisible by an integer, you may encounter unallocated GPUs 
+> [Caution] When using GPU instances:
+> Batch inference using GPU instances allocates GPU instances based on the number of Pods
+> If `Number of Pods / Number of GPUs` is not divisible by an integer, you may encounter unallocated GPUs
 > Unallocated GPUs are not used by batch inference, so set the number of Pods appropriately to use GPU instances efficiently.
 
 ### Batch Inference List
 
 Displays a list of batch inferences. Select a batch inference from the list to check the details and change the information.
 
-* **Inference Time**: Displays how long the batch inference has been running.
-* **Status** : Displays the status of batch inference. Please refer to the table below for the main status.
+- **Inference Time**: Displays how long the batch inference has been running.
+- **Status** : Displays the status of batch inference. Please refer to the table below for the main status.
 
     | **Failed Training** : Indicates the number of failed lessons. | **Best Training**: Indicates the target metric information of the training that recorded the highest target metric value among the training automatically generated by hyperparameter tuning. |
     | --- | --- |
@@ -989,10 +990,10 @@ Displays a list of batch inferences. Select a batch inference from the list to c
     | Stage resource is being deleted. | The batch inference creation failed. If creation continues to fail, please contact customer service. |
     | FAIL BATCH INFERENCE IN PROGRESS, COMPLETE IN PROGRESS | The resources used for batch inference are being cleaned up. |
 
-* **Operation**
-    * **Stop**: You can stop batch inference in progress.
-* **Monitoring**: When you select a batch inference, you can check the list of monitored instances and basic indicator charts in the **Monitoring** tab of the detailed screen that appears.
-    * The **Monitoring** tab is disabled while batch inference is being created.
+- **Operation**
+    - **Stop**: You can stop batch inference in progress.
+- **Monitoring**: When you select a batch inference, you can check the list of monitored instances and basic indicator charts in the **Monitoring** tab of the detailed screen that appears.
+    - The **Monitoring** tab is disabled while batch inference is being created.
 
 ### Copy Batch Inference
 
@@ -1070,16 +1071,16 @@ Build an image with a Dockerfile and save (push) the image to the NCR registry.
 
     1. Go to the **Image** menu in the AI EasyMaker console.
     2. Click the **Create image** button to enter the information for the image you created.
-        * Name, description: Enter a name and description for the image.
-        * Address: Enter the address of the registry image.
-        * Type: Enter the type of container image. Select **Notebook** or **Training**.
-        * Account: Select the account for the AI EasyMaker notebook/learning node to access your registry storage.
-            * New: Register a new registry account.
-                * Name, Description: Enter a name and description for the registry account.
-                * Category: Select a container registry service.
-                * ID: Enter the ID of the registry storage.
-                * Password: Enter the password for the registry storage.
-            * Use an existing account: Select a registry account that is already registered.
+        - Name, description: Enter a name and description for the image.
+        - Address: Enter the address of the registry image.
+        - Type: Enter the type of container image. Select **Notebook** or **Training**.
+        - Account: Select the account for the AI EasyMaker notebook/learning node to access your registry storage.
+            - New: Register a new registry account.
+                - Name, Description: Enter a name and description for the registry account.
+                - Category: Select a container registry service.
+                - ID: Enter the ID of the registry storage.
+                - Password: Enter the password for the registry storage.
+            - Use an existing account: Select a registry account that is already registered.
 
 4. Create a notebook with the private image you created.
     1. Go to the **Notebook** menu. Click the **Create notebook** button to go to the Create notebook page.
@@ -1106,18 +1107,18 @@ To manage your registry accounts, go to the **Image** menu in the AI EasyMaker c
 
 Create a new registry account.
 
-* Name: Enter the name of registry account.
-* Description: Enter a description of the registry account.
-* Category: Select a container registry service.
-* ID: Enter the ID of the registry account.
-* Password: Enter the password for the registry account.
+- Name: Enter the name of registry account.
+- Description: Enter a description of the registry account.
+- Category: Select a container registry service.
+- ID: Enter the ID of the registry account.
+- Password: Enter the password for the registry account.
 
 ### Modify Registry Account
 
 #### Modify registry ID and password
 
-* Click **Change Registry Account**.
-* Enter an ID and password, then click **Confirm**.
+- Click **Change Registry Account**.
+- Enter an ID and password, then click **Confirm**.
 
 > [Note]
 > When you change your registry account, you sign in to the registry service with the changed username and password when using images associated with that account.
@@ -1148,6 +1149,7 @@ You can use the Kubeflow Pipelines (KFP) Python SDK to write components and pipe
 
 > [Note] What are ML artifacts?
 > Components can take inputs and produce outputs. There are two types of I/O types. Parameters and artifacts:
+>
 > 1. Parameters are useful for passing small amounts of data between components.
 > 2. Artifact types are for ML artifact outputs, such as datasets, models, metrics, etc. Provides a convenient mechanism for saving to object storage.
 
@@ -1198,8 +1200,7 @@ Delete the pipeline.
 2. Click **Delete Pipeline**. You can't delete a pipeline while it's being created.
 3. The requested delete task cannot be canceled. Click **Delete** to proceed.
 
-
-> [Note] Cannot delete a pipeline if an associated pipeline schedule exists: 
+> [Note] Cannot delete a pipeline if an associated pipeline schedule exists:
 > You cannot delete a pipeline if a schedule created with the pipeline you want to delete exists. Delete the pipeline schedule first, then delete the pipeline.
 
 ## Run a Pipeline
@@ -1319,7 +1320,7 @@ For information beyond the items below that you can set in creating a pipeline s
     - **Start Time**: You can set the start time of a pipeline recurring run. Generates pipeline executions at the interval you set when not entered.
     - **End Time**: You can set the end time of a pipeline recurring run. On no input, generate pipeline execution until stopped.
     - **Catching up on missed runs**: If a pipeline run falls behind recurring run, determine if it needs to be caught up.
-        - For example, if a pipeline recurring run is briefly stopped and later restarted, Setting **Use** will catch up on missed pipeline runs. 
+        - For example, if a pipeline recurring run is briefly stopped and later restarted, Setting **Use** will catch up on missed pipeline runs.
         - If the pipeline handles backfill internally, it should be **disabled** to prevent duplicate backfill operations.
 
 > [Note] How long it takes to create a pipeline recurring run:
@@ -1409,26 +1410,26 @@ To add read/write permissions to AI EasyMaker system account in Object Storage, 
 Logs and events generated by the AI EasyMaker service can be stored in the NHN Cloud Log & Crash Search service.
 To store logs in the Log & Crash Search service, you have to enable Log & Crash service and separate usage fee will be charged.
 
-* **Information on Log & Crash Search service use and fee**
-    * For more information and fees on the Log & Crash Search service, please refer to the following documents
-        * [Log & Crash Search Service Guide](https://docs.nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/Overview/)
-        * [Log & Crash Search Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
+- **Information on Log & Crash Search service use and fee**
+    - For more information and fees on the Log & Crash Search service, please refer to the following documents
+        - [Log & Crash Search Service Guide](https://docs.nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/Overview/)
+        - [Log & Crash Search Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
 #### Log Query
 
 1. Go to the Log & Crash Search service console page.
 2. In Log & Crash Search service, enter search criteria to view the logs.
-    * AI EasyMaker Training Log Query: Query logs with category field "easymaker.training"
-        * Question: category:"easymaker.training"
-    * AI EasyMaker endpoint logs query: Query logs with category field "easymaker.inference"
-        * Question: category:"easymaker.inference"
-    * AI EasyMaker Log Full Query: Query logs with logType field "NNHCloud-AIEasyMaker"
-        * Question: logType:"NHNCloud-AIEasyMaker"
+    - AI EasyMaker Training Log Query: Query logs with category field "easymaker.training"
+        - Question: category:"easymaker.training"
+    - AI EasyMaker endpoint logs query: Query logs with category field "easymaker.inference"
+        - Question: category:"easymaker.inference"
+    - AI EasyMaker Log Full Query: Query logs with logType field "NNHCloud-AIEasyMaker"
+        - Question: logType:"NHNCloud-AIEasyMaker"
 3. For more information on how to use Log & Crash Search service, refer to [Log & Crash Search Service Console Guide](https://docs.nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/console-guide/).
 
 AI EasyMaker service sends logs to Log & Crash Search service in the following defined fields:
 
-* **Common Log Field**
+- **Common Log Field**
 
     | Name | Description | Valid range |
     | --- | --- | --- |
@@ -1439,19 +1440,19 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
     | logType | Service name provided by log | NHNCloud-AIEasyMaker |
     | time | Log Occurrence Time (UTC Time) | - |
 
-* **Training Log Field**
+- **Training Log Field**
 
     | Name | Description |
     |---------------------| --- |
     | trainingId | AI EasyMaker training ID  |
 
-* **Hyperparameter Tuning Log Field**
+- **Hyperparameter Tuning Log Field**
 
     | Name | Description |
     | --- | --- |
     | hyperparameterTuningId | AI EasyMaker hyperparameter tuning ID |
 
-* **Endpoint Log Field**
+- **Endpoint Log Field**
 
     | Name | Description |
     | --- | --- |
@@ -1461,7 +1462,7 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
     | action | Action classification (Endpoint.Model) |
     | modelName | Model name to be inferred |
 
-* **Batch Inference Log Field**
+- **Batch Inference Log Field**
 
     | Name | Description |
     | --- | --- |
@@ -1469,9 +1470,9 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
 
 ### 3. Hyperparameters
 
-* Value in Key-Value format entered through the console.
-* When entry point is executed, it is passed to the execution factor (---{Key}).
-* It can be stored and used as an environment variable (EM_HP_{Key converted to uppercase letter}).
+- Value in Key-Value format entered through the console.
+- When entry point is executed, it is passed to the execution factor (---{Key}).
+- It can be stored and used as an environment variable (EM_HP_{Key converted to uppercase letter}).
 
 As shown in the example below, you can use hyperparameter values entered during training creation.<br>
 ![HyperParameter Input Screen](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_en.png)
@@ -1492,10 +1493,10 @@ As shown in the example below, you can use hyperparameter values entered during 
 
 ### 4. Environment Variables
 
-* Information required for training is passed to training container with **Environment Variable** and the environment variables passed in **Training Script** can be utilized.
-* Environment variable names created by user input are to be capitalized.
-* Models that have been trained in the code must be saved in the EM_MODEL_DIR path.
-* **Key Environment Variables**
+- Information required for training is passed to training container with **Environment Variable** and the environment variables passed in **Training Script** can be utilized.
+- Environment variable names created by user input are to be capitalized.
+- Models that have been trained in the code must be saved in the EM_MODEL_DIR path.
+- **Key Environment Variables**
 
     | Environment variable name                          | Description |
     | --- | --- |
@@ -1512,7 +1513,7 @@ As shown in the example below, you can use hyperparameter values entered during 
     | EM_REGION                                          | Current Region Information |
     | EM_APPKEY                                          | Appkey of AI EasyMaker service currently in use |
 
-* **Example code for utilizing environment variables**
+- **Example code for utilizing environment variables**
 
         import os
         import tensorflow
@@ -1533,12 +1534,12 @@ As shown in the example below, you can use hyperparameter values entered during 
 
 ### 5. Store Indicator Logs for TensorBoard Usage
 
-* In order to check result indicators on the TensorBoard screen after training, the TensorBoard log storage space must be set to the specified location (`EM_TENSORBOARD_LOG_DIR`) when writing the training script.
+- In order to check result indicators on the TensorBoard screen after training, the TensorBoard log storage space must be set to the specified location (`EM_TENSORBOARD_LOG_DIR`) when writing the training script.
 
 > [Caution] TensorBoard metrics logs storage cycle:
 > Metrics older than 120 days will be deleted automatically.
 
-* **Example code for Tesnsorboard log storage (TensorFlow)**
+- **Example code for Tesnsorboard log storage (TensorFlow)**
 
         import tensorflow as tf
 
@@ -1554,10 +1555,10 @@ As shown in the example below, you can use hyperparameter values entered during 
 
 ### 6. Distributed Training Settings by Framework
 
-* **Tensorflow**
-    * The environment variable `TF_CONFIG` required for distributed training is automatically set. For more information, please refer to the [Tensorflow guide document](https://www.tensorflow.org/guide/distributed_training#multiworkermirroredstrategy).
-* **Pytorch**
-    * `Backends` settings are required for distributed training. If distributed training is performed on CPU, set it to gloo, and if distributed training is performed on GPU, set it to nccl. For more information, please refer to the [Pytorch guide document](https://pytorch.org/docs/stable/distributed.html).
+- **Tensorflow**
+    - The environment variable `TF_CONFIG` required for distributed training is automatically set. For more information, please refer to the [Tensorflow guide document](https://www.tensorflow.org/guide/distributed_training#multiworkermirroredstrategy).
+- **Pytorch**
+    - `Backends` settings are required for distributed training. If distributed training is performed on CPU, set it to gloo, and if distributed training is performed on GPU, set it to nccl. For more information, please refer to the [Pytorch guide document](https://pytorch.org/docs/stable/distributed.html).
 
 ### 7. Upgrade the cluster version
 
@@ -1570,9 +1571,9 @@ Explains how to move new clusters by resource.
 On the **Notebook** list screen, notebooks that need to be moved to the new cluster display a **Restart** button to the left of their name.
 Hovering the mouse pointer over the**Restart** button displays restart instructions and an expiration date.
 
-* Before expiration, be sure to read the following caveats before clicking the **Restart** button.
-    * Upon restart, data stored in the data storage (/root/easymaker directory path) will remain intact.
-    * When you run a restart, data stored in boot storage is initialized and may be lost. Move your data to data storage before restarting.
+- Before expiration, be sure to read the following caveats before clicking the **Restart** button.
+    - Upon restart, data stored in the data storage (/root/easymaker directory path) will remain intact.
+    - When you run a restart, data stored in boot storage is initialized and may be lost. Move your data to data storage before restarting.
 
 Restarts take about 25 minutes for the first run, and about 10 minutes for subsequent runs.
 Failed restarts are automatically reported to the administrator.
@@ -1604,15 +1605,14 @@ To move the cluster version of the default stage without disrupting the service,
 
 ### 8. How to Use Torchrun
 
-* The code has been written to enable distributed learning in Pytorch, and if you enter the number of distributed nodes and the number of processes per node, distributed learning using torchrun and distributed learning using multi-processes will be performed.
-* Training and hyperparameter tuning can fail due to insufficient memory, depending on factors such as the total number of processes, model size, input data size, batch size, etc. If it fails due to insufficient memory, it may leave the following error messages. However, not all of the messages below are due to insufficient memory. Please set the appropriate instance type according to your memory usage.
+- The code has been written to enable distributed learning in Pytorch, and if you enter the number of distributed nodes and the number of processes per node, distributed learning using torchrun and distributed learning using multi-processes will be performed.
+- Training and hyperparameter tuning can fail due to insufficient memory, depending on factors such as the total number of processes, model size, input data size, batch size, etc. If it fails due to insufficient memory, it may leave the following error messages. However, not all of the messages below are due to insufficient memory. Please set the appropriate instance type according to your memory usage.
 
 ```plaintext
 exit code : -9 (pid: {pid})
 ```
 
-* For more information about torchrun, see the [Pytorch Guide](https://pytorch.org/docs/stable/elastic/run.html).
-
+- For more information about torchrun, see the [Pytorch Guide](https://pytorch.org/docs/stable/elastic/run.html).
 
 ### 9. Resource Information
 
@@ -1647,7 +1647,7 @@ For more information about the OIP specification, see [OIP Specification](https:
 > The inputs required for inference must be entered according to OpenAI's API specification. For more information, see the [OpenAI API documentation](https://platform.openai.com/docs/api-reference/chat).
 > For models that support the Completion and Chat Completion APIs provided by AI EasyMaker, see [Model endpoint compatibility](https://platform.openai.com/docs/models/model-endpoint-compatibility).
 
-### 11. Considerations for framework-specific serving 
+### 11. Considerations for framework-specific serving
 
 #### TensorFlow Framework
 
