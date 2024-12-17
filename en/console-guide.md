@@ -606,6 +606,7 @@ Only NHN Cloud NAS created on the same project as AI EasyMaker is available to u
 > [Note] Model Parameter:
 > The values entered as model parameters are used when serving the model. Parameters can be used as arguments and environment variables:
 > Arguments are used as the parameter name as entered, and environment variables are used with the parameter name converted to screaming snake notation.
+
 > [Note] When creating HuggingFace model:
 > When creating a HuggingFace model, you can create the model by entering the ID of the HuggingFace model as a parameter.
 > The ID of the HuggingFace model can be found in the URL of the HuggingFace model page.
