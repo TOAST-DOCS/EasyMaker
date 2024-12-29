@@ -615,6 +615,11 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 > HuggingFace 모델의 ID는 HuggingFace 모델 페이지의 URL에서 확인할 수 있습니다.
 > 자세한 내용은 [부록 > 11. 프레임워크별 서빙 참고 사항](./console-guide/#11)을 참고하세요.
 
+> [주의] HuggingFace 모델 지원 유형:
+> HuggingFace 모델의 파일 유형은 safetensors로 제한하고 있습니다.
+> safetensors는 HuggingFace에서 개발한 안전하고 효율적인 머신러닝 모델 파일 형식입니다.
+> 그 외의 파일 형식은 지원하지 않습니다.
+
 ### 모델 목록
 
 모델 목록이 표시됩니다. 목록의 모델을 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
