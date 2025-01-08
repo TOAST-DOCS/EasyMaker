@@ -230,7 +230,7 @@ Delete an experiment.
 3. Requested deletion cannot be undone. Click **OK** to proceed.
 
 > [Note] Unable to delete experiment if an associated resource exists:
-> You cannot delete an experiment if a pipeline schedule associated with the experiment exists, or if there are training, hyperparameter tuning, or pipeline execution in production. Delete the resources associated with the experiment fist, then delete the experiment.
+> You cannot delete an experiment if a pipeline schedule associated with the experiment exists, or if there are training, hyperparameter tuning, or pipeline execution in production. Delete the resources associated with the experiment first, then delete the experiment.
 > For associated resources, you can check the list by clicking the **[Training]** tab in the detail screen at the bottom that is displayed when you click the experiment you want to delete.
 
 ## Training
