@@ -230,8 +230,7 @@ Delete an experiment.
 3. Requested deletion cannot be undone. Click **OK** to proceed.
 
 > [Note] Unable to delete experiment if an associated resource exists:
-> You cannot delete an experiment if a pipeline schedule associated with the experiment exists, or if there are training, hyperparameter tuning, or pipeline execution in production.
-> Delete the associated training first, then delete resources associated with the experiment.
+> You cannot delete an experiment if a pipeline schedule associated with the experiment exists, or if there are training, hyperparameter tuning, or pipeline execution in production. Delete the resources associated with the experiment fist, then delete the experiment.
 > For associated resources, you can check the list by clicking the **[Training]** tab in the detail screen at the bottom that is displayed when you click the experiment you want to delete.
 
 ## Training
@@ -1173,7 +1172,7 @@ You can use the Kubeflow Pipelines (KFP) Python SDK to write components and pipe
 > 2. Artifact types are for ML artifact outputs, such as datasets, models, metrics, etc. Provides a convenient mechanism for saving to object storage.
 
 > [Note] View Pipeline Execution logs
-> The feature to view console output generated while executing a pipeline.
+> The feature to view console output generated while executing a pipeline is not provided.
 > To check the logs of pipeline code, use the [SDK's Log Send feature] (./sdk-guide/#nhn-cloud-log-crash-search) to send the logs to Log & Crash Search.
 
 Most pipelines aim to produce one or more ML artifacts, such as datasets, models, evaluation metrics, etc.
