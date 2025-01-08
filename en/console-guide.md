@@ -230,7 +230,8 @@ Delete an experiment.
 3. Requested deletion cannot be undone. Click **OK** to proceed.
 
 > [Note] Unable to delete experiment if an associated resource exists:
-> Experiment cannot be deleted if there are a training associated with the experiment, hyperparameter tuning, pipeline execution, pipeline schedule. Please delete the associated training first, then delete resources associated with the experiment.
+> You cannot delete an experiment if a pipeline schedule associated with the experiment exists, or if there are training, hyperparameter tuning, or pipeline execution in production.
+> Delete the associated training first, then delete resources associated with the experiment.
 > For associated resources, you can check the list by clicking the **[Training]** tab in the detail screen at the bottom that is displayed when you click the experiment you want to delete.
 
 ## Training
@@ -612,16 +613,33 @@ Only NHN Cloud NAS created on the same project as AI EasyMaker is available to u
 > The ID of the HuggingFace model can be found in the URL of the HuggingFace model page.
 > For more information, see [Appendix > 11. Framework-specific serving notes](./console-guide/#11).
 
+> [Caution] Supported Type for HuggingFace Model:
+> Thee file type for the HuggingFace model are limited to safetensors.
+> Safetensors is a safe and efficient machine learning model developed by HuggingFace.
+> Other file types are not supported.
+
 ### Model List
 
 Model list is displayed. Selecting a model in the list allows to check detailed information and make changes to it.
 
 - **Name**: Model name and description are displayed. Model name and description can be changed by clicking **Change**.
-- **Tag**: Model tag is displayed. Tag can be changed by clicking **Change**.
 - **Model Artifact Path** displays the storage where the model's artifacts are stored.
+- **Status**: Model's status is displayed. For major statuses, see the following table.
+
+    | Status               | Description                                                                              |
+    | ------------------ | --------------------------------------------------------------------------------- |
+    | CREATE REQUESTED   | Model creation is requested.                                                    |
+    | CREATE IN PROGRESS | Resource required for the model is being created.                                        |
+    | DELETE IN PROGRESS | Model is being deleted.                                                      |
+    | ACTIVE             | Model is created successfully.                                              |
+    | CREATE FAILED      | Failed to created a model. If creation fails repeatedly, contact the Customer Center. |
+    | DELETE FAILED      | Failed to delete a model. Please try again.                                   |
+
 - **Training Name**: For models created from training, training name that is based is displayed.
 - **Training ID**: For models created from training, training ID that is based is displayed.
 - **Framework**: Model's framework information is displayed.
+- **Parameter**: Model's parameter is displayed. Parameters are used for inference.
+- **Tag**: Model tag is displayed. Tag can be changed by clicking **Change**.
 
 ### Create Endpoint from Model
 
@@ -1153,6 +1171,10 @@ You can use the Kubeflow Pipelines (KFP) Python SDK to write components and pipe
 >
 > 1. Parameters are useful for passing small amounts of data between components.
 > 2. Artifact types are for ML artifact outputs, such as datasets, models, metrics, etc. Provides a convenient mechanism for saving to object storage.
+
+> [Note] View Pipeline Execution logs
+> The feature to view console output generated while executing a pipeline.
+> To check the logs of pipeline code, use the [SDK's Log Send feature] (./sdk-guide/#nhn-cloud-log-crash-search) to send the logs to Log & Crash Search.
 
 Most pipelines aim to produce one or more ML artifacts, such as datasets, models, evaluation metrics, etc.
 
