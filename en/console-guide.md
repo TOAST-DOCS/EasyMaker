@@ -614,7 +614,7 @@ Only NHN Cloud NAS created on the same project as AI EasyMaker is available to u
 > For more information, see [Appendix > 11. Framework-specific serving notes](./console-guide/#11).
 
 > [Caution] Supported Type for HuggingFace Model:
-> Thee file type for the HuggingFace model are limited to safetensors.
+> The file type for the HuggingFace model are limited to safetensors.
 > Safetensors is a safe and efficient machine learning model developed by HuggingFace.
 > Other file types are not supported.
 
