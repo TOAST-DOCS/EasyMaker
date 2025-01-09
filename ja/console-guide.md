@@ -619,6 +619,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 > HuggingFaceモデルを作成する際、HuggingFaceモデルのIDをパラメータとして入力すると、モデルを作成できます。
 > HuggingFaceモデルのIDはHuggingFaceモデルページのURLで確認できます。
 > 詳細は[付録 > 11. フレームワーク別のサービングに関する注意事項](./console-guide/#11)を参照してください。
+
 > [注意] HuggingFaceモデルのサポートタイプ：
 > HuggingFaceモデルのファイルタイプはsafetensorsに制限しています。
 > safetensorsはHuggingFaceが開発した安全で効率的な機械学習モデルファイル形式です。
