@@ -6,7 +6,7 @@
 
 python -m pip install easymaker
 
-* AI EasyMakerノートパソコンには基本的にインストールされています。
+- AI EasyMakerノートパソコンには基本的にインストールされています。
 
 ### AI EasyMaker SDK初期化
 
@@ -21,7 +21,7 @@ easymaker.init(
     appkey='EASYMAKER_APPKEY',
     region='kr1',
     secret_key='EASYMAKER_SECRET_KEY',
-    experiment_id="EXPERIMENT_ID", # Optional    
+    experiment_id="EXPERIMENT_ID", # Optional
 )
 ```
 
@@ -51,13 +51,13 @@ easymaker.init(
 | 名前                     | タイプ     | 必須かどうか | デフォルト値 | 有効範囲     | 説明                                                       |
 |--------------------------|----------|-------|------|-------------|------------------------------------------------------------|
 | experiment_name          | String   | 必須  | なし | 最大50文字    | 実験名                                                    |
-| experiment_description   | String   | 選択  | なし | 最大255文字   | 実験の説明                                                |
+| description   | String   | 選択  | なし | 最大255文字   | 実験の説明                                                |
 | wait                     | Boolean  | 選択  | True | True, False | True：作成が完了した後に返す、False：作成リクエスト後、すぐに返す |
 
 ```python
 experiment  = easymaker.Experiment().create(
     experiment_name='experiment_name',
-    experiment_description='experiment_description',
+    description='experiment_description',
     # wait=False,
 )
 ```
@@ -84,9 +84,9 @@ easymaker.Experiment(experiment_id).delete()
 |---------------------------------------|---------|---------------------------|-------|-------------|-----------------------------------------------------------------|
 | experiment_id                         | String  | easymaker.initで未入力の場合は必須 | なし  | 最大36文字        | 実験ID                                                           |
 | training_name                         | String  | 必須                      | なし  | 最大50文字    | 学習名                                                         |
-| training_description                  | String  | 選択                      | なし  | 最大255文字   | 学習の説明                                                     |
-| train_image_name                      | String  | 必須                      | なし  | なし        | 学習に使用されるイメージ名(CLIで照会可能)                                      |
-| train_instance_name                   | String  | 必須                      | なし  | なし        | インスタンスタイプ名(CLIで照会可能)                                          |
+| description                  | String  | 選択                      | なし  | 最大255文字   | 学習の説明                                                     |
+| image_name                      | String  | 必須                      | なし  | なし        | 学習に使用されるイメージ名(CLIで照会可能)                                      |
+| instance_name                   | String  | 必須                      | なし  | なし        | インスタンスタイプ名(CLIで照会可能)                                          |
 | distributed_node_count                | Integer | 必須                      | なし  | 1~10         | 分散学習を適用するノード数                                               |
 | use_torchrun                          | Boolean | 選択                      | False  | True, False | torchrunの使用有無、Pytorchイメージでのみ使用可                          |
 | nproc_per_node                        | Integer | use_torchrun Trueの場合は必須  | 1      | 1~(CPU数またはGPU数) | ノードあたりのプロセス数、 use_torchrunを使用する場合は必ず設定しなければならない値     |
@@ -114,9 +114,9 @@ easymaker.Experiment(experiment_id).delete()
 training = easymaker.Training().run(
     experiment_id=experiment.experiment_id, # Optional if already set in init
     training_name='training_name',
-    training_description='training_description',
-    train_image_name='Ubuntu 18.04 CPU TensorFlow Training',
-    train_instance_name='m2.c4m8',
+    description='training_description',
+    image_name='Ubuntu 18.04 CPU TensorFlow Training',
+    instance_name='m2.c4m8',
     distributed_node_count=1,
     data_storage_size=300,  # minimum size ：300GB
     source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
@@ -182,7 +182,7 @@ easymaker.Training(training_id).delete()
 |---------------------------------------------------------------|----------------|-------------------------------------------------------|-------|----------------------------------------------|----------------------------------------------------------------------------|
 | experiment_id                                                 | String         | easymaker.initで未入力の場合は必須                           | なし  | 最大36文字                                         | 実験ID                                                                      |
 | hyperparameter_tuning_name                                    | String         | 必須                                                  | なし  | 最大50文字                                     | ハイパーパラメータチューニング名                                                            |
-| hyperparameter_tuning_description                             | String         | 選択                                                  | なし  | 最大255文字                                    | ハイパーパラメータチューニングについての説明                                                        |
+| description                             | String         | 選択                                                  | なし  | 最大255文字                                    | ハイパーパラメータチューニングについての説明                                                        |
 | image_name                                                    | String         | 必須                                                  | なし  | なし                                         | ハイパーパラメータチューニングに使用されるイメージ名(CLIで照会可能)                                         |
 | instance_name                                                 | String         | 必須                                                  | なし  | なし                                         | インスタンスタイプ名(CLIで照会可能)                                                     |
 | distributed_node_count                                        | Integer        | 必須                                                  | 1      | distributed_node_countとparallel_trial_countの積が10以下 | ハイパーパラメータチューニングで学習ごとに分散学習を適用するノード数                                                    |
@@ -229,7 +229,7 @@ easymaker.Training(training_id).delete()
 hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     experiment_id=experiment.experiment_id, # Optional if already set in init
     hyperparameter_tuning_name='hyperparameter_tuning_name',
-    hyperparameter_tuning_description='hyperparameter_tuning_description',
+    description='hyperparameter_tuning_description',
     image_name='Ubuntu 18.04 CPU TensorFlow Training',
     instance_name='m2.c8m16',
     distributed_node_count=1,
@@ -314,7 +314,7 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 | training_id              | String | hyperparameter_tuning_idがない場合は必須 | なし  | なし      | モデルとして作成する学習ID                       |
 | hyperparameter_tuning_id | String | training_idがない場合は必須             | なし  | なし      | モデルとして作成するハイパーパラメータチューニングID(最高学習で作成済み) |
 | model_name               | String | 必須                                | なし  | 最大50文字 | モデル名                              |
-| model_description        | String | 選択                                | なし  | 最大255文字 | モデルの説明                          |
+| description        | String | 選択                                | なし  | 最大255文字 | モデルの説明                          |
 | tag_list                 | Array  | 選択                                | なし  | 最大10個 | タグ情報                              |
 | tag_list[0].tagKey       | String | 選択                                | なし  | 最大64文字 | タグキー                                |
 | tag_list[0].tagValue     | String | 選択                                | なし  | 最大255文字 | タグ値                               |
@@ -323,7 +323,7 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 model = easymaker.Model().create(
     training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
     model_name='model_name',
-    model_description='model_description',
+    description='model_description',
 )
 ```
 
@@ -336,7 +336,7 @@ model = easymaker.Model().create(
 | model_type_code       | Enum   | 必須 | なし | easymaker.TENSORFLOW、 easymaker.PYTORCH | 学習に使用されたフレームワーク情報                                |
 | model_upload_uri            | String | 必須 | なし | 最大255文字                             | モデルファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
 | model_name           | String | 必須 | なし | 最大50文字                              | モデル名                                           |
-| model_description    | String | 任意 | なし | 最大255文字                             | モデルの説明                                       |
+| description    | String | 任意 | なし | 最大255文字                             | モデルの説明                                       |
 | parameter_list                   | Array  | 選択  | なし | 最大10個                                | パラメータ情報(parameterName/parameterValueで構成)         |
 | parameter_list[0].parameterName  | String | 選択  | なし | 最大64文字                                | パラメータ名                                            |
 | parameter_list[0].parameterValue | String | 選択  | なし | 最大255文字                               | パラメータ値                                              |
@@ -350,12 +350,12 @@ model = easymaker.Model().create_by_model_upload_uri(
     model_type_code=easymaker.TENSORFLOW,
     model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
-    model_description='model_description',
+    description='model_description',
 )
 # HuggingFaceモデル
 model = easymaker.Model().create_hugging_face_model(
     model_name='model_name',
-    model_description='model_description',
+    description='model_description',
     parameter_list=[
         {
             'parameterName': 'model_id',
@@ -388,9 +388,9 @@ easymaker.Model(model_id).delete()
 | 名前                                                        | タイプ    | 必須かどうか | デフォルト値 | 有効範囲                    | 説明                                                                   |
 |-------------------------------------------------------------|---------|-------|-------|----------------------------|------------------------------------------------------------------------|
 | endpoint_name                                               | String  | 必須  | なし  | 最大50文字                   | エンドポイント名                                                             |
-| endpoint_description                                        | String  | 選択  | なし  | 最大255文字                  | エンドポイントの説明                                                         |
-| endpoint_instance_name                                      | String  | 必須  | なし  | なし                       | エンドポイントに使用されるインスタンスタイプ名                                                |
-| endpoint_instance_count                                     | Integer | 選択  | 1     | 1~10                       | エンドポイントに使用されるインスタンス数                                                    |
+| description                                        | String  | 選択  | なし  | 最大255文字                  | エンドポイントの説明                                                         |
+| instance_name                                      | String  | 必須  | なし  | なし                       | エンドポイントに使用されるインスタンスタイプ名                                                |
+| instance_count                                     | Integer | 選択  | 1     | 1~10                       | エンドポイントに使用されるインスタンス数                                                    |
 | endpoint_model_resource_list                                | Array   | 必須  | なし  | 最大10個                   | ステージに使用されるリソース情報                                               |
 | endpoint_model_resource_list[0].modelId                     | String   | 必須  | なし  | なし                     | ステージリソースで作成するモデルID                                   |
 | endpoint_model_resource_list[0].resourceOptionDetail        | Object   | 必須  | なし  |                                  | ステージリソースの詳細情報               |
@@ -409,9 +409,9 @@ easymaker.Model(model_id).delete()
 ```python
 endpoint = easymaker.Endpoint().create(
     endpoint_name='endpoint_name',
-    endpoint_description='endpoint_description',
-    endpoint_instance_name='c2.c16m16',
-    endpoint_instance_count=1,
+    description='endpoint_description',
+    instance_name='c2.c16m16',
+    instance_count=1,
     endpoint_model_resource_list=[
         {
             'modelId': model.model_id,
@@ -437,9 +437,9 @@ endpoint = easymaker.Endpoint().create(
 |-------------------------------------------------------------|---------|-------|-------|----------------------------|--------------------------------------------------------------------|
 | endpoint_id                                                 | String  | 必須  | なし | 最大36文字                    | エンドポイントID                                                            |
 | stage_name                                                  | String  | 必須  | なし  | 最大50文字                   | ステージ名                                                          |
-| stage_description                                           | String  | 選択  | なし  | 最大255文字                  | ステージの説明                                                      |
-| endpoint_instance_name                                      | String  | 必須  | なし  | なし                       | エンドポイントに使用されるインスタンスタイプ名                                            |
-| endpoint_instance_count                                     | Integer | 選択  | 1     | 1~10                       | エンドポイントに使用されるインスタンス数                                                |
+| description                                           | String  | 選択  | なし  | 最大255文字                  | ステージの説明                                                      |
+| instance_name                                      | String  | 必須  | なし  | なし                       | エンドポイントに使用されるインスタンスタイプ名                                            |
+| instance_count                                     | Integer | 選択  | 1     | 1~10                       | エンドポイントに使用されるインスタンス数                                                |
 | endpoint_model_resource_list                                | Array   | 必須  | なし  | 最大10個                   | ステージに使用されるリソース情報                                               |
 | endpoint_model_resource_list[0].modelId                     | String   | 必須  | なし  | なし                     | ステージリソースで作成するモデルID                                   |
 | endpoint_model_resource_list[0].resourceOptionDetail        | Object   | 必須  | なし  |                                  | ステージリソースの詳細情報               |
@@ -459,9 +459,9 @@ endpoint = easymaker.Endpoint().create(
 endpoint_stage = easymaker.EndpointStage().create(
     endpoint_id=endpoint.endpoint_id,
     stage_name='stage01',  # 30文字以内小文字/数字
-    stage_description='test endpoint',
-    endpoint_instance_name='c2.c16m16',
-    endpoint_instance_count=1,
+    description='test endpoint',
+    instance_name='c2.c16m16',
+    instance_count=1,
     endpoint_model_resource_list=[
         {
             'modelId': model.model_id,

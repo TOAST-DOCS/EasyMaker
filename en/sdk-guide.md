@@ -6,7 +6,7 @@
 
 python -m pip install easymaker
 
-* AI EasyMaker is installed in the notebook by default.
+- AI EasyMaker is installed in the notebook by default.
 
 ### Initialize AI EasyMaker SDK
 
@@ -51,13 +51,13 @@ Before creating a training, you must create an experiment to sort trainings.
 | Name                     | Type      | Required | Default value | Valid range          | Description                                |
 |------------------------|---------|-------|---------------|----------------------|--------------------------------------------|
 | experiment_name        | String  | Required    | None          | Up to 50 characters  | Experiment name                            |
-| experiment_description | String  | Optional    | None          | Up to 255 characters | Description for experiment                 |
+| description | String  | Optional    | None          | Up to 255 characters | Description for experiment                 |
 | wait                   | Boolean | Optional    | True          | True, False          | True: return after creation is complete, False: return upon creation request  |
 
 ```python
 experiment = easymaker.Experiment().create(
     experiment_name='experiment_name',
-    experiment_description='experiment_description',
+    description='experiment_description',
     # wait=False,
 )
 ```
@@ -84,9 +84,9 @@ easymaker.Experiment(experiment_id).delete()
 |------------------------------------------|---------|------------------------------------------------------|---------------|-----------------------------------------|-------------------------------------------------------------------------------------------------|
 | experiment_id                            | String  | Required if not entered in easymaker.init            | None          | None                                    | Experiment ID                                                                                   |
 | training_name                            | String  | Required                                             | None          | Up to 50 characters                     | Training name                                                                                   |
-| training_description                     | String  | Optional                                             | None          | Up to 255 characters                    | Description for training                                                                        |
-| train_image_name                         | String  | Required                                             | None          | None                                    | Image name to be used for training (Inquiry available with CLI)                                 |
-| train_instance_name                      | String  | Required                                             | None          | None                                    | Instance flavor name (Inquiry available with CLI)                                               |
+| description                     | String  | Optional                                             | None          | Up to 255 characters                    | Description for training                                                                        |
+| image_name                         | String  | Required                                             | None          | None                                    | Image name to be used for training (Inquiry available with CLI)                                 |
+| instance_name                      | String  | Required                                             | None          | None                                    | Instance flavor name (Inquiry available with CLI)                                               |
 | distributed_node_count                   | Integer | Required                                             | None          | 1~10                                    | Number of nodes to apply distributed training to                                                |
 | use_torchrun                             | Boolean | Optional                                             | False         | True, False                             | Whether torchrun is enabled, only available for Pytorch images                                  |
 | nproc_per_node                           | Integer | Required when use_torchrun is True                   | 1             | 1 to (number of CPUs or number of GPUs) | Number of processes per node, value that must be set if use_torchrun is enabled                 |
@@ -114,9 +114,9 @@ easymaker.Experiment(experiment_id).delete()
 training = easymaker.Training().run(
     experiment_id=experiment.experiment_id, # Optional if already set in init
     training_name='training_name',
-    training_description='training_description',
-    train_image_name='Ubuntu 18.04 CPU TensorFlow Training',
-    train_instance_name='m2.c4m8',
+    description='training_description',
+    image_name='Ubuntu 18.04 CPU TensorFlow Training',
+    instance_name='m2.c4m8',
     distributed_node_count=1,
     data_storage_size=300,  # minimum size : 300GB
     source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
@@ -182,7 +182,7 @@ easymaker.Training(training_id).delete()
 |----------------------------------------------------------------|----------------|---------------------------------------------------------------------|-------|-------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
 | experiment_id                                                  | String         | easymaker.init에서 미입력 시 Required                                     | None    | None                                                                          | Experiment ID                                                                                                                |
 | hyperparameter_tuning_name                                     | String         | Required                                                            | None    | Up to 50 characters                                                           | Hyperparameter Tuning Name                                                                                                   |
-| hyperparameter_tuning_description                              | String         | Optional                                                            | None    | Up to 255 characters                                                          | Description of hyperparameter tuning                                                                                         |
+| description                              | String         | Optional                                                            | None    | Up to 255 characters                                                          | Description of hyperparameter tuning                                                                                         |
 | image_name                                                     | String         | Required                                                            | None    | None                                                                          | Image name to be used for hyperparameter tuning (can be queried with CLI)                                                    |
 | instance_name                                                  | String         | Required                                                            | None    | None                                                                          | Instance flavor name (Inquiry available with CLI)                                                                            |
 | distributed_node_count                                         | Integer        | Required                                                            | 1      | The product of distributed_node_count and parallel_trial_count is 10 or less. | Number of distributed training to apply for each learning in hyperparameter tuning                                           |
@@ -229,7 +229,7 @@ easymaker.Training(training_id).delete()
 hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     experiment_id=experiment.experiment_id, # Optional if already set in init
     hyperparameter_tuning_name='hyperparameter_tuning_name',
-    hyperparameter_tuning_description='hyperparameter_tuning_description',
+    description='hyperparameter_tuning_description',
     image_name='Ubuntu 18.04 CPU TensorFlow Training',
     instance_name='m2.c8m16',
     distributed_node_count=1,
@@ -314,7 +314,7 @@ The model is used when creating endpoints.
 | training_id              | String | Required if hyperparameter_tuning_id does not exist | None  | None      | Training ID to create a model                       |
 | hyperparameter_tuning_id | String | Required if training_id is not present              | None  | None      | Hyperparameter tuning ID to be created by model (created by best learning) |
 | model_name               | String | Required                                 | None  | Up to 50 characters  | Model name                               |
-| model_description        | String | Optional                                 | None  | Up to 255 characters | Description for model                           |
+| description        | String | Optional                                 | None  | Up to 255 characters | Description for model                           |
 | tag_list                 | Array  | Optional                                 | None  | Max 10  | Tag information                               |
 | tag_list[0].tagKey       | String | Optional                                 | None  | Up to 64 characters  | Tag key                                |
 | tag_list[0].tagValue     | String | Optional                                 | None  | Up to 255 characters | Tag value                                |
@@ -323,7 +323,7 @@ The model is used when creating endpoints.
 model = easymaker.Model().create(
     training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
     model_name='model_name',
-    model_description='model_description',
+    description='model_description',
 )
 ```
 
@@ -336,7 +336,7 @@ Even if there is no training ID, you can create a model by entering the path inf
 | model_type_code       | Enum   | Required    | None  | easymaker.TENSORFLOW, easymaker.PYTORCH | Framework information used for training                                    |
 | model_upload_uri            | String | Required    | None  | Up to 255 characters                                 | Path for model file (NHN Cloud Object Storage or NHN Cloud NAS) |
 | model_name           | String | Required    | None  | Up to 50 characters                                  | Model name                                               |
-| model_description    | String | Optional    | None  | Up to 255 characters                                 | Description for model                                           |
+| description    | String | Optional    | None  | Up to 255 characters                                 | Description for model                                           |
 | parameter_list                   | Array  | Optional    | None  | Max 10                                  | Information of parameters (consists of parameterName/parameterValue)         |
 | parameter_list[0].parameterName  | String | Optional    | None  | Up to 64 characters                     | Parameter name                                              |
 | parameter_list[0].parameterValue | String | Optional    | None  | Up to 255 characters                    | Parameter value                                             |
@@ -350,12 +350,12 @@ model = easymaker.Model().create_by_model_upload_uri(
     model_type_code=easymaker.TENSORFLOW,
     model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
-    model_description='model_description',
+    description='model_description',
 )
 # HuggingFace Model
 model = easymaker.Model().create_hugging_face_model(
     model_name='model_name',
-    model_description='model_description',
+    description='model_description',
     parameter_list=[
         {
             'parameterName': 'model_id',
@@ -388,9 +388,9 @@ When creating an endpoint, the default stage is created.
 | Name                                                        | Type      | Required | Default value | Valid range                      | Description                                             |
 |-------------------------------------------------------------|---------|-------|---------------|----------------------------------|---------------------------------------------------------|
 | endpoint_name                                               | String  | Required    | None          | Up to 50 characters              | Endpoint name                                           |
-| endpoint_description                                        | String  | Optional    | None          | Up to 255 characters             | Description for endpoint                                |
-| endpoint_instance_name                                      | String  | Required    | None          | None                             | Instance flavor name to be used for endpoint            |
-| endpoint_instance_count                                     | Integer | Optional    | 1             | 1~10                             | Instance count to be used for endpoint                  |
+| description                                        | String  | Optional    | None          | Up to 255 characters             | Description for endpoint                                |
+| instance_name                                      | String  | Required    | None          | None                             | Instance flavor name to be used for endpoint            |
+| instance_count                                     | Integer | Optional    | 1             | 1~10                             | Instance count to be used for endpoint                  |
 | endpoint_model_resource_list                                | Array   | Required    | None          | Max 10                           | Resource information to be used on the stage            |
 | endpoint_model_resource_list[0].modelId                     | String   | Required    | None          | None                             | Model ID to be created as a stage resource              |
 | endpoint_model_resource_list[0].resourceOptionDetail        | Object   | Required    | None          |                                  | Details of stage resource                               |
@@ -409,9 +409,9 @@ When creating an endpoint, the default stage is created.
 ```python
 endpoint = easymaker.Endpoint().create(
     endpoint_name='endpoint_name',
-    endpoint_description='endpoint_description',
-    endpoint_instance_name='c2.c16m16',
-    endpoint_instance_count=1,
+    description='endpoint_description',
+    instance_name='c2.c16m16',
+    instance_count=1,
     endpoint_model_resource_list=[
         {
             'modelId': model.model_id,
@@ -443,9 +443,9 @@ You can add a new stage to existing endpoints.
 |-------------------------------------------------------------|---------|-------|---------------|----------------------------------|--------------------------------------------------------------------|
 | endpoint_id                                                 | String  | Required    | None          | Up to 36 characters              | Endpoint ID                                                              |
 | stage_name                                                  | String  | Required    | None          | Up to 50 characters              | Stage name                                                            |
-| stage_description                                           | String  | Optional    | None          | Up to 255 characters             | Description for stage                                                        |
-| endpoint_instance_name                                      | String  | Required    | None          | None                             | Instance flavor name to be used for endpoint                                              |
-| endpoint_instance_count                                     | Integer | Optional    | 1             | 1~10                             | Instance count to be used for endpoint                                                  |
+| description                                           | String  | Optional    | None          | Up to 255 characters             | Description for stage                                                        |
+| instance_name                                      | String  | Required    | None          | None                             | Instance flavor name to be used for endpoint                                              |
+| instance_count                                     | Integer | Optional    | 1             | 1~10                             | Instance count to be used for endpoint                                                  |
 | endpoint_model_resource_list                                | Array   | Required    | None          | Max 10                           | Resource information to be used on the stage                                                 |
 | endpoint_model_resource_list[0].modelId                     | String   | Required    | None          | None                             | Model ID to be created as a stage resource                                   |
 | endpoint_model_resource_list[0].podCount                    | Integer  | Required    | None          | 1~100                            | Number of pods to be used for stage resources                                    |
@@ -466,9 +466,9 @@ You can add a new stage to existing endpoints.
 endpoint_stage = easymaker.EndpointStage().create(
     endpoint_id=endpoint.endpoint_id,
     stage_name='stage01',  # lowercase/number within 30 characters
-    stage_description='test endpoint',
-    endpoint_instance_name='c2.c16m16',
-    endpoint_instance_count=1,
+    description='test endpoint',
+    instance_name='c2.c16m16',
+    instance_count=1,
     endpoint_model_resource_list=[
         {
             'modelId': model.model_id,
