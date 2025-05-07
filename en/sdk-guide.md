@@ -11,7 +11,7 @@ python -m pip install easymaker
 ### Initialize AI EasyMaker SDK
 
 You can find AppKey and Secret key in the **URL & Appkey** menu at the right top on the console.
-Enter the AppKey, SecretKey, and region information of enabled AI EasyMaker.
+Enter the AppKey, AccessToken, and region information of enabled AI EasyMaker.
 Intialization code is required to use the AI EasyMaker SDK.
 
 ```python
@@ -20,25 +20,25 @@ import easymaker
 easymaker.init(
     appkey='EASYMAKER_APPKEY',
     region='kr1',
-    secret_key='EASYMAKER_SECRET_KEY',
+    access_token='EASYMAKER_ACCESS_TOKEN',
     experiment_id="EXPERIMENT_ID", # Optional
 )
 ```
 
 ## CLI Command
 
-If you know the app key, secret key, and region information, you can check various information through Python CLI without accessing the console.
+If you know the app key, access token, and region information, you can check various information through Python CLI without accessing the console.
 
 | Feature                          | Command                                                                                        |
 |-----------------------------|--------------------------------------------------------------------------------------------|
-| Query instance type list         | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -instance   |
-| Query image list                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -image      |
-| Query algorithm list             | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -algorithm  |
-| Query experiment list            | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -experiment |
-| Query training list              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -training   |
-| Query hyperparameter tuning list | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -tuning     |
-| Query model list                 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -model      |
-| Query endpoint list              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -endpoint   |
+| Query instance type list         | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -instance   |
+| Query image list                 | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -image      |
+| Query algorithm list             | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -algorithm  |
+| Query experiment list            | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -experiment |
+| Query training list              | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -training   |
+| Query hyperparameter tuning list | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -tuning     |
+| Query model list                 | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -model      |
+| Query endpoint list              | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -endpoint   |
 
 ## Experiment
 

@@ -20,25 +20,25 @@ import easymaker
 easymaker.init(
     appkey='EASYMAKER_APPKEY',
     region='kr1',
-    secret_key='EASYMAKER_SECRET_KEY',
+    access_token='EASYMAKER_ACCESS_TOKEN',
     experiment_id="EXPERIMENT_ID", # Optional
 )
 ```
 
 ## CLI Command
 
-アプリキー、秘密鍵、リージョン情報を知っていれば、コンソールにアクセスしなくても、Python CLIを通じて様々な情報を確認できます。
+アプリキー、access token、リージョン情報を知っていれば、コンソールにアクセスしなくても、Python CLIを通じて様々な情報を確認できます。
 
 | 機能                    | コマンド                                                                                      |
 |-------------------------|--------------------------------------------------------------------------------------------|
-| インスタンスタイプリスト照会         | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -instance   |
-| 学習イメージリスト照会          | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -image      |
-| NHN Cloud提供アルゴリズムリスト照会 | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -algorithm  |
-| 実験リスト照会              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -experiment |
-| 学習リスト照会              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -training   |
-| ハイパーパラメータチューニングリスト照会      | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -tuning     |
-| モデルリスト照会              | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -model      |
-| エンドポイントリスト照会           | python -m easymaker --region kr1 --appkey EM_APPKEY --secret_key EM_SECRET_KEY -endpoint   |
+| インスタンスタイプリスト照会         | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -instance   |
+| 学習イメージリスト照会          | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -image      |
+| NHN Cloud提供アルゴリズムリスト照会 | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -algorithm  |
+| 実験リスト照会              | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -experiment |
+| 学習リスト照会              | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -training   |
+| ハイパーパラメータチューニングリスト照会      | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -tuning     |
+| モデルリスト照会              | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -model      |
+| エンドポイントリスト照会           | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -endpoint   |
 
 ## 実験
 
