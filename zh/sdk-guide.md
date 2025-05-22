@@ -86,7 +86,7 @@ easymaker.Experiment(experiment_id).delete()
 | training_name                            | String  | Required                                             | None          | Up to 50 characters                     | Training name                                                                                   |
 | training_description                     | String  | Optional                                             | None          | Up to 255 characters                    | Description for training                                                                        |
 | train_image_name                         | String  | Required                                             | None          | None                                    | Image name to be used for training (Inquiry available with CLI)                                 |
-| train_instance_type_name                      | String  | Required                                             | None          | None                                    | Instance flavor name (Inquiry available with CLI)                                               |
+| train_instance_name                      | String  | Required                                             | None          | None                                    | Instance flavor name (Inquiry available with CLI)                                               |
 | distributed_node_count                   | Integer | Required                                             | None          | 1~10                                    | Number of nodes to apply distributed training to                                                |
 | use_torchrun                             | Boolean | Optional                                             | False         | True, False                             | Whether torchrun is enabled, only available for Pytorch images                                  |
 | nproc_per_node                           | Integer | Required when use_torchrun is True                   | 1             | 1 to (number of CPUs or number of GPUs) | Number of processes per node, value that must be set if use_torchrun is enabled                 |
@@ -116,7 +116,7 @@ training = easymaker.Training().run(
     training_name='training_name',
     training_description='training_description',
     train_image_name='Ubuntu 18.04 CPU TensorFlow Training',
-    train_instance_type_name='m2.c4m8',
+    train_instance_name='m2.c4m8',
     distributed_node_count=1,
     data_storage_size=300,  # minimum size : 300GB
     source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
@@ -184,7 +184,7 @@ easymaker.Training(training_id).delete()
 | hyperparameter_tuning_name                                     | String         | Required                                                            | None    | Up to 50 characters                                                           | Hyperparameter Tuning Name                                                                                                   |
 | hyperparameter_tuning_description                              | String         | Optional                                                            | None    | Up to 255 characters                                                          | Description of hyperparameter tuning                                                                                         |
 | image_name                                                     | String         | Required                                                            | None    | None                                                                          | Image name to be used for hyperparameter tuning (can be queried with CLI)                                                    |
-| instance_type_name                                                  | String         | Required                                                            | None    | None                                                                          | Instance flavor name (Inquiry available with CLI)                                                                            |
+| instance_name                                                  | String         | Required                                                            | None    | None                                                                          | Instance flavor name (Inquiry available with CLI)                                                                            |
 | distributed_node_count                                         | Integer        | Required                                                            | 1      | The product of distributed_node_count and parallel_trial_count is 10 or less. | Number of distributed training to apply for each learning in hyperparameter tuning                                           |
 | parallel_trial_count                                           | Integer        | Required                                                            | 1      | The product of distributed_node_count and parallel_trial_count is 10 or less. | Number of trainings to run in parallel in hyperparameter tuning                                                              |
 | use_torchrun                                                   | Boolean        | Optioanl                                                            | False  | True, False                                                                   | Use torchrun or not, Only available in Pytorch images                                                                        |
@@ -231,7 +231,7 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     hyperparameter_tuning_name='hyperparameter_tuning_name',
     hyperparameter_tuning_description='hyperparameter_tuning_description',
     image_name='Ubuntu 18.04 CPU TensorFlow Training',
-    instance_type_name='m2.c8m16',
+    instance_name='m2.c8m16',
     distributed_node_count=1,
     parallel_trial_count=1,
     data_storage_size=300,
@@ -389,7 +389,7 @@ When creating an endpoint, the default stage is created.
 |-------------------------------------------------------------|---------|-------|---------------|----------------------------------|---------------------------------------------------------|
 | endpoint_name                                               | String  | Required    | None          | Up to 50 characters              | Endpoint name                                           |
 | endpoint_description                                        | String  | Optional    | None          | Up to 255 characters             | Description for endpoint                                |
-| endpoint_instance_type_name                                      | String  | Required    | None          | None                             | Instance flavor name to be used for endpoint            |
+| endpoint_instance_name                                      | String  | Required    | None          | None                             | Instance flavor name to be used for endpoint            |
 | endpoint_instance_count                                     | Integer | Optional    | 1             | 1~10                             | Instance count to be used for endpoint                  |
 | endpoint_model_resource_list                                | Array   | Required    | None          | Max 10                           | Resource information to be used on the stage            |
 | endpoint_model_resource_list[0].modelId                     | String   | Required    | None          | None                             | Model ID to be created as a stage resource              |
@@ -410,7 +410,7 @@ When creating an endpoint, the default stage is created.
 endpoint = easymaker.Endpoint().create(
     endpoint_name='endpoint_name',
     endpoint_description='endpoint_description',
-    endpoint_instance_type_name='c2.c16m16',
+    endpoint_instance_name='c2.c16m16',
     endpoint_instance_count=1,
     endpoint_model_resource_list=[
         {
@@ -444,7 +444,7 @@ You can add a new stage to existing endpoints.
 | endpoint_id                                                 | String  | Required    | None          | Up to 36 characters              | Endpoint ID                                                              |
 | stage_name                                                  | String  | Required    | None          | Up to 50 characters              | Stage name                                                            |
 | stage_description                                           | String  | Optional    | None          | Up to 255 characters             | Description for stage                                                        |
-| endpoint_instance_type_name                                      | String  | Required    | None          | None                             | Instance flavor name to be used for endpoint                                              |
+| endpoint_instance_name                                      | String  | Required    | None          | None                             | Instance flavor name to be used for endpoint                                              |
 | endpoint_instance_count                                     | Integer | Optional    | 1             | 1~10                             | Instance count to be used for endpoint                                                  |
 | endpoint_model_resource_list                                | Array   | Required    | None          | Max 10                           | Resource information to be used on the stage                                                 |
 | endpoint_model_resource_list[0].modelId                     | String   | Required    | None          | None                             | Model ID to be created as a stage resource                                   |
@@ -467,7 +467,7 @@ endpoint_stage = easymaker.EndpointStage().create(
     endpoint_id=endpoint.endpoint_id,
     stage_name='stage01',  # lowercase/number within 30 characters
     stage_description='test endpoint',
-    endpoint_instance_type_name='c2.c16m16',
+    endpoint_instance_name='c2.c16m16',
     endpoint_instance_count=1,
     endpoint_model_resource_list=[
         {
@@ -549,7 +549,7 @@ easymaker.EndpointStage(stage_id).delete()
 | batch_inference_name      | String  | Required      | None   | Up to 50 characters   | Batch inference name                                                                       |
 | instance_count            | Integer | Required      | None   | 1~10        | Number of instances to use for batch inference                                                       |
 | timeout_hours             | Integer | Optional      | 720    | 1~720       | Maximum batch inference time (in hours)                                                      |
-| instance_type_name             | String  | Required      | None   | None        | Instance flavor name (Inquiry available with CLI)                                                  |
+| instance_name             | String  | Required      | None   | None        | Instance flavor name (Inquiry available with CLI)                                                  |
 | model_name                | String  | Required      | None   | None        | Model name (can be viewed with the CLI)                                                           |
 | pod_count                 | Integer | Required      | None   | 1~100       | Number of nodes to apply distributed learning to                                                           |
 | batch_size                | Integer | Required      | None   | 1 to 1000      | Number of data samples processed simultaneously                                                     |
@@ -572,7 +572,7 @@ batch_inference = easymaker.BatchInference().run(
     batch_inference_name='batch_inference_name',
     instance_count=1,
     timeout_hours=100,
-    instance_type_name='m2.c4m8',
+    instance_name='m2.c4m8',
     model_name='model_name',
     pod_count=1,
     batch_size=32,
@@ -659,7 +659,7 @@ easymaker.Pipeline(pipeline_id).delete()
 | pipeline_id                      | String  | Required                        | None   | Max 36 Characters     | Pipeline schedule name                              |
 | experiment_id                    | String  | Required if not entered in easymaker.init | None    | Max 36 Characters     | Experiment ID                                    |
 | description                      | String  | Optional                        | None   | Max 255 Characters    | Description of pipeline execution                        |
-| instance_type_name                    | String  | Required                        | None   | None          | Instance type name (lookupable with the CLI)                   |
+| instance_name                    | String  | Required                        | None   | None          | Instance type name (lookupable with the CLI)                   |
 | instance_count                   | Integer | Required                        | None   | 1~10        | Number of instances to use                           |
 | boot_storage_size                | Integer | Required                        | None   | 50~         | The boot storage size (in GB) of the instance that will run the pipeline.      |
 | parameter_list                   | Array   | Optional                        | None   | None          | About parameters to pass to the pipeline                       |
@@ -679,7 +679,7 @@ pipeline_run = easymaker.PipelineRun().create(
     description='test',
     pipeline_id=pipeline.pipeline_id,
     experiment_id=experiment.experiment_id, # Optional if already set in init
-    instance_type_name='m2.c4m8',
+    instance_name='m2.c4m8',
     instance_count=1,
     boot_storage_size=50,
     # wait=False,
@@ -708,7 +708,7 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 | pipeline_id                      | String  | Required                                 | None   | Max 36 character      | Pipeline schedule name                                |
 | experiment_id                    | String  | Required if not entered in easymaker.init     | None    | Max 36 character      | Experiment ID                                          |
 | description                      | String  | Optional                                 | None   | Max 255 character| Description of pipeline schedules                                |
-| instance_type_name                    | String  | Required                                 | None   | None          | Instance type name (lookupable with the CLI)                         |
+| instance_name                    | String  | Required                                 | None   | None          | Instance type name (lookupable with the CLI)                         |
 | instance_count                   | Integer | Required                                 | None   | 1~10        | Number of instances to use                                    |
 | boot_storage_size                | Integer | Required                                 | None   | 50~         | The boot storage size (in GB) of the instance that will run the pipeline.            |
 | schedule_periodic_minutes        | String  | schedule_cron_expression 미입력시 Required  | None   | None          | Set a time interval to run the pipeline repeatedly                        |
@@ -734,7 +734,7 @@ pipeline_recurring_run = easymaker.PipelineRecurringRun().create(
     description='test',
     pipeline_id=pipeline.pipeline_id,
     experiment_id=experiment.experiment_id, # Optional if already set in init
-    instance_type_name='m2.c4m8',
+    instance_name='m2.c4m8',
     boot_storage_size=50,
     schedule_cron_expression='0 0 * * * ?',
     max_concurrency_count=1,
