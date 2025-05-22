@@ -1,5 +1,11 @@
 ## Machine Learning > AI EasyMaker > Release Notes
 
+### 2025. 06. 24.
+
+#### 기능 개선/변경
+
+* 모델 평가 기능 추가
+  * 모델의 성능을 측정하고 비교할 수 있습니다.
 
 ### October 29, 2024
 
