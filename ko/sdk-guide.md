@@ -86,7 +86,7 @@ easymaker.Experiment(experiment_id).delete()
 | training_name                         | String  | 필수                        | 없음    | 최대 50자      | 학습 이름                                                           |
 | description                  | String  | 선택                        | 없음    | 최대 255자     | 학습에 대한 설명                                                       |
 | image_name                      | String  | 필수                        | 없음    | 없음          | 학습에 사용될 이미지 이름(CLI로 조회 가능)                                      |
-| instance_name                   | String  | 필수                        | 없음    | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
+| instance_type_name                   | String  | 필수                        | 없음    | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
 | distributed_node_count                | Integer | 필수                        | 없음    | 1~10         | 분산 학습을 적용할 노드 수                                                 |
 | use_torchrun                          | Boolean | 선택                        | False  | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                            |
 | nproc_per_node                        | Integer | use_torchrun True 시 필수    | 1      | 1~(CPU 개수 또는 GPU 개수) | 노드당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값       |
@@ -116,7 +116,7 @@ training = easymaker.Training().run(
     training_name='training_name',
     description='training_description',
     image_name='Ubuntu 18.04 CPU TensorFlow Training',
-    instance_name='m2.c4m8',
+    instance_type_name='m2.c4m8',
     distributed_node_count=1,
     data_storage_size=300,  # minimum size : 300GB
     source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
@@ -184,7 +184,7 @@ easymaker.Training(training_id).delete()
 | hyperparameter_tuning_name                                    | String         | 필수                                                    | 없음    | 최대 50자                                       | 하이퍼파라미터 튜닝 이름                                                              |
 | description                             | String         | 선택                                                    | 없음    | 최대 255자                                      | 하이퍼파라미터 튜닝에 대한 설명                                                          |
 | image_name                                                    | String         | 필수                                                    | 없음    | 없음                                           | 하이퍼파라미터 튜닝에 사용될 이미지 이름(CLI로 조회 가능)                                         |
-| instance_name                                                 | String         | 필수                                                    | 없음    | 없음                                           | 인스턴스 타입 이름(CLI로 조회 가능)                                                     |
+| instance_type_name                                                 | String         | 필수                                                    | 없음    | 없음                                           | 인스턴스 타입 이름(CLI로 조회 가능)                                                     |
 | distributed_node_count                                        | Integer        | 필수                                                    | 1      | distributed_node_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 각 학습당 분산 학습을 적용할 노드 수                                                      |
 | parallel_trial_count                                          | Integer        | 필수                                                    | 1      | distributed_node_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 병렬로 실행할 학습 수                                                          |
 | use_torchrun                                                  | Boolean        | 선택                                                    | False  | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                                                 |
@@ -231,7 +231,7 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     hyperparameter_tuning_name='hyperparameter_tuning_name',
     description='hyperparameter_tuning_description',
     image_name='Ubuntu 18.04 CPU TensorFlow Training',
-    instance_name='m2.c8m16',
+    instance_type_name='m2.c8m16',
     distributed_node_count=1,
     parallel_trial_count=1,
     data_storage_size=300,
@@ -392,19 +392,14 @@ easymaker.Model(model_id).delete()
 | model_id                                  | String  | 필수    | 없음    | 최대 36자                                         | 평가할 모델 ID                                                       |
 | objective_code                            | String  | 필수    | 없음    | easymaker.CLASSIFICATION, easymaker.REGRESSION | 평가 목표                                                           |
 | class_names                               | String  | 선택    | 없음    | 1~5000                                         | 분류 모델에서 결과로 가능한 class 목록(`,`로 구분된 문자열이나 숫자)                     |
-| prediction_label_field_name               | String  | 선택    | 없음    | 최대 255자                                        | 예측 레이블 필드 이름                                                    |
-| prediction_score_field_name               | String  | 선택    | 없음    | 최대 255자                                        | 특성 중요도 평가 여부                                                    |
-| generate_feature_attributions             | Boolean | 선택    | False  | True, False                                    | 특성 중요도 측정 여부                                                    |
-| instance_name                             | String  | 필수    | 없음    | 없음                                             | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
+| instance_type_name                             | String  | 필수    | 없음    | 없음                                             | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
 | input_data_uri                            | String  | 필수    | 없음    | 최대 255자                                        | 입력 데이터 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)         |
 | input_data_type_code                      | String  | 필수    | 없음    | easymaker.CSV, easymaker.JSONL                 | 입력 데이터 타입                                                       |
 | target_field_name                         | String  | 필수    | 없음    | 최대 255자                                        | 정답(Ground truth) 레이블의 필드 이름                                     |
-| boot_storage_size                         | Integer | 필수    | 없음    | 50~2040                                        | 모델 평가를 실행할 인스턴스의 부트 스토리지 크기(단위: GB)                             |
-| data_storage_size                         | Integer | 필수    | 없음    | 300~10000                                      | 모델 평가에 필요한 데이터를 다운로드, 가공할 저장 공간 크기(단위: GB)                      |
 | timeout_hours                             | Integer | 선택    | 720    | 1~720                                          | 최대 모델 평가 시간(단위: 시간)                                             |
-| batch_inference_instance_name             | String  | 필수    | 없음    | 없음                                             | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
+| batch_inference_instance_type_name             | String  | 필수    | 없음    | 없음                                             | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
 | batch_inference_instance_count            | Integer | 필수    | 없음    | 1~10                                           | 배치 추론에 사용할 인스턴스 수                                               |
-| batch_inference_pod_count                 | Integer | 필수    | 없음    | 1~100                                          | 분산 학습을 적용할 노드 수                                                 |
+| batch_inference_pod_count                 | Integer | 필수    | 없음    | 1~100                                          | 분산 추론을 적용할 파드 수                                                 |
 | batch_inference_output_upload_uri         | String  | 필수    | 없음    | 최대 255자                                        | 배치 추론 결과 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
 | batch_inference_max_batch_size            | Integer | 필수    | 없음    | 1~1000                                         | 동시에 처리되는 데이터 샘플의 수                                              |
 | batch_inference_inference_timeout_seconds | Integer | 필수    | 없음    | 1~1200                                         | 단일 추론 요청의 최대 허용 시간                                              |
@@ -418,23 +413,68 @@ model_evaluation  = easymaker.ModelEvaluation().create(
     model_id=model.model_id,
     objective_code=easymaker.REGRESSION,
     class_names="class_a, class_b",
-    prediction_label_field_name="label_field_name",
-    prediction_score_field_name="score_field_name",
     generate_feature_attributions=False,
-    instance_name="m2.c4m8",
+    instance_type_name="m2.c4m8",
     input_data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
     input_data_type_code=easymaker.CSV,
     target_field_name="target_field_name",
     boot_storage_size=50,
     data_storage_size=300,
     timeout_hours=1,
-    batch_inference_instance_name="m2.c4m8",
+    batch_inference_instance_type_name="m2.c4m8",
     batch_inference_instance_count=1,
     batch_inference_pod_count=1,
     batch_inference_output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{output_upload_uri}',
     batch_inference_max_batch_size=32,
     batch_inference_inference_timeout_seconds=120,
     use_log=True,
+    wait=True,
+)
+# 회귀 모델 평가 생성
+regression_model_evaluation  = easymaker.ModelEvaluation().create(
+    model_evaluation_name="regression_model_evaluation",
+    description="regression model evaluation sample",
+    model_id=regression_model.model_id,
+    objective_code=easymaker.REGRESSION,
+    generate_feature_attributions=False,
+    instance_type_name="m2.c4m8",
+    input_data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    input_data_type_code=easymaker.CSV,
+    target_field_name="target_field_name",
+    boot_storage_size=50,
+    data_storage_size=300,
+    timeout_hours=1,
+    batch_inference_instance_type_name="m2.c4m8",
+    batch_inference_instance_count=1,
+    batch_inference_pod_count=1,
+    batch_inference_output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    batch_inference_max_batch_size=100,
+    batch_inference_inference_timeout_seconds=1200,
+    use_log=False,
+    wait=True,
+)
+# 분류 모델 평가 생성
+classification_model_evaluation  = easymaker.ModelEvaluation().create(
+    model_evaluation_name="classification_model_evaluation",
+    description="classification model evaluation sample",
+    model_id=classification_model.model_id,
+    objective_code=easymaker.CLASSIFICATION,
+    class_names="classA,classB,classC",
+    generate_feature_attributions=False,
+    instance_type_name="m2.c4m8",
+    input_data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    input_data_type_code=easymaker.CSV,
+    target_field_name="target_field_name",
+    boot_storage_size=50,
+    data_storage_size=300,
+    timeout_hours=1,
+    batch_inference_instance_type_name="m2.c4m8",
+    batch_inference_instance_count=1,
+    batch_inference_pod_count=1,
+    batch_inference_output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    batch_inference_max_batch_size=100,
+    batch_inference_inference_timeout_seconds=1200,
+    use_log=False,
     wait=True,
 )
 ```
@@ -463,7 +503,7 @@ easymaker.ModelEvaluation(model_evaluation_id).delete()
 |-------------------------------------------------------------|---------|-------|-------|----------------------------|------------------------------------------------------------------------|
 | endpoint_name                                               | String  | 필수    | 없음    | 최대 50자                     | 엔드포인트 이름                                                               |
 | description                                        | String  | 선택    | 없음    | 최대 255자                    | 엔드포인트에 대한 설명                                                           |
-| instance_name                                      | String  | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                                  |
+| instance_type_name                                      | String  | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                                  |
 | instance_count                                     | Integer | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                      |
 | endpoint_model_resource_list                                | Array   | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
 | endpoint_model_resource_list[0].modelId                     | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
@@ -484,7 +524,7 @@ easymaker.ModelEvaluation(model_evaluation_id).delete()
 endpoint = easymaker.Endpoint().create(
     endpoint_name='endpoint_name',
     description='endpoint_description',
-    instance_name='c2.c16m16',
+    instance_type_name='c2.c16m16',
     instance_count=1,
     endpoint_model_resource_list=[
         {
@@ -512,7 +552,7 @@ endpoint = easymaker.Endpoint().create(
 | endpoint_id                                                 | String  | 필수    | 없음   | 최대 36자                      | 엔드포인트 ID                                                            |
 | stage_name                                                  | String  | 필수    | 없음    | 최대 50자                     | 스테이지 이름                                                            |
 | description                                           | String  | 선택    | 없음    | 최대 255자                    | 스테이지에 대한 설명                                                        |
-| instance_name                                      | String  | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                              |
+| instance_type_name                                      | String  | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                              |
 | instance_count                                     | Integer | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                  |
 | endpoint_model_resource_list                                | Array   | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
 | endpoint_model_resource_list[0].modelId                     | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
@@ -534,7 +574,7 @@ endpoint_stage = easymaker.EndpointStage().create(
     endpoint_id=endpoint.endpoint_id,
     stage_name='stage01',  # 30자 이내 소문자/숫자
     description='test endpoint',
-    instance_name='c2.c16m16',
+    instance_type_name='c2.c16m16',
     instance_count=1,
     endpoint_model_resource_list=[
         {
@@ -611,35 +651,35 @@ easymaker.EndpointStage(stage_id).delete()
 
 [파라미터]
 
-| 이름                      | 타입    | 필수 여부 | 기본값 | 유효 범위   | 설명                                                                                  |
-| ------------------------- | ------- | --------- | ------ | ----------- | ------------------------------------------------------------------------------------- |
-| batch_inference_name      | String  | 필수      | 없음   | 최대 50자   | 배치 추론 이름                                                                        |
-| instance_count            | Integer | 필수      | 없음   | 1~10        | 배치 추론에 사용할 인스턴스 수                                                        |
-| timeout_hours             | Integer | 선택      | 720    | 1~720       | 최대 배치 추론 시간(단위: 시간)                                                       |
-| instance_name             | String  | 필수      | 없음   | 없음        | 인스턴스 타입 이름(CLI로 조회 가능)                                                   |
-| model_name                | String  | 필수      | 없음   | 없음        | 모델 이름(CLI로 조회 가능)                                                            |
-| pod_count                 | Integer | 필수      | 없음   | 1~100       | 분산 학습을 적용할 노드 수                                                            |
-| batch_size                | Integer | 필수      | 없음   | 1~1000      | 동시에 처리되는 데이터 샘플의 수                                                      |
-| inference_timeout_seconds | Integer | 필수      | 없음   | 1~1200      | 단일 추론 요청의 최대 허용 시간                                                       |
-| input_data_uri            | String  | 필수      | 없음   | 최대 255자  | 입력 데이터 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)                    |
-| input_data_type           | String  | 필수      | 없음   | JSON, JSONL | 입력 데이터의 유형                                                                    |
-| include_glob_pattern      | String  | 선택      | 없음   | 최대 255자  | 파일 집합을 입력 데이터에서 포함할 Glob 패턴                                          |
-| exclude_glob_pattern      | String  | 선택      | 없음   | 최대 255자  | 파일 집합을 입력 데이터에서 제외할 Glob 패턴                                          |
-| output_upload_uri         | String  | 필수      | 없음   | 최대 255자  | 배치 추론 결과 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)      |
-| data_storage_size         | Integer | 필수      | 없음   | 300~10000   | 배치 추론에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB)                       |
-| description               | String  | 선택      | 없음   | 최대 255자  | 배치 추론에 대한 설명                                                                 |
-| tag_list                  | Array   | 선택      | 없음   | 최대 10개   | 태그 정보                                                                             |
-| tag_list[0].tagKey        | String  | 선택      | 없음   | 최대 64자   | 태그 키                                                                               |
-| tag_list[0].tagValue      | String  | 선택      | 없음   | 최대 255자  | 태그 값                                                                               |
-| use_log                   | Boolean | 선택      | False  | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                                        |
-| wait                      | Boolean | 선택      | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+| 이름                      | 타입    | 필수 여부 | 기본값 | 유효 범위   | 설명                                                              |
+| ------------------------- | ------- | --------- | ------ | ----------- |-----------------------------------------------------------------|
+| batch_inference_name      | String  | 필수      | 없음   | 최대 50자   | 배치 추론 이름                                                        |
+| instance_count            | Integer | 필수      | 없음   | 1~10        | 배치 추론에 사용할 인스턴스 수                                               |
+| timeout_hours             | Integer | 선택      | 720    | 1~720       | 최대 배치 추론 시간(단위: 시간)                                             |
+| instance_type_name             | String  | 필수      | 없음   | 없음        | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
+| model_name                | String  | 필수      | 없음   | 없음        | 모델 이름(CLI로 조회 가능)                                               |
+| pod_count                 | Integer | 필수      | 없음   | 1~100       | 분산 추론을 적용할 파드 수                                                 |
+| batch_size                | Integer | 필수      | 없음   | 1~1000      | 동시에 처리되는 데이터 샘플의 수                                              |
+| inference_timeout_seconds | Integer | 필수      | 없음   | 1~1200      | 단일 추론 요청의 최대 허용 시간                                              |
+| input_data_uri            | String  | 필수      | 없음   | 최대 255자  | 입력 데이터 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)         |
+| input_data_type           | String  | 필수      | 없음   | JSON, JSONL | 입력 데이터의 유형                                                      |
+| include_glob_pattern      | String  | 선택      | 없음   | 최대 255자  | 파일 집합을 입력 데이터에서 포함할 Glob 패턴                                     |
+| exclude_glob_pattern      | String  | 선택      | 없음   | 최대 255자  | 파일 집합을 입력 데이터에서 제외할 Glob 패턴                                     |
+| output_upload_uri         | String  | 필수      | 없음   | 최대 255자  | 배치 추론 결과 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
+| data_storage_size         | Integer | 필수      | 없음   | 300~10000   | 배치 추론에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB)                          |
+| description               | String  | 선택      | 없음   | 최대 255자  | 배치 추론에 대한 설명                                                    |
+| tag_list                  | Array   | 선택      | 없음   | 최대 10개   | 태그 정보                                                           |
+| tag_list[0].tagKey        | String  | 선택      | 없음   | 최대 64자   | 태그 키                                                            |
+| tag_list[0].tagValue      | String  | 선택      | 없음   | 최대 255자  | 태그 값                                                            |
+| use_log                   | Boolean | 선택      | False  | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                              |
+| wait                      | Boolean | 선택      | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                       |
 
 ```python
 batch_inference = easymaker.BatchInference().run(
     batch_inference_name='batch_inference_name',
     instance_count=1,
     timeout_hours=100,
-    instance_name='m2.c4m8',
+    instance_type_name='m2.c4m8',
     model_name='model_name',
     pod_count=1,
     batch_size=32,
@@ -726,7 +766,7 @@ easymaker.Pipeline(pipeline_id).delete()
 | pipeline_id                      | String  | 필수                        | 없음   | 최대 36자      | 파이프라인 일정 이름                              |
 | experiment_id                    | String  | easymaker.init에서 미입력 시 필수 | 없음    | 최대 36자      | 실험 ID                                    |
 | description                      | String  | 선택                        | 없음   | 최대 255자     | 파이프라인 실행에 대한 설명                          |
-| instance_name                    | String  | 필수                        | 없음   | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                   |
+| instance_type_name                    | String  | 필수                        | 없음   | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                   |
 | instance_count                   | Integer | 필수                        | 없음   | 1~10        | 사용할 인스턴스 수                               |
 | boot_storage_size                | Integer | 필수                        | 없음   | 50~         | 파이프라인을 실행할 인스턴스의 부트 스토리지 크기(단위: GB)      |
 | parameter_list                   | Array   | 선택                        | 없음   | 없음          | 파이프라인에 전달할 파라미터 정보                       |
@@ -746,7 +786,7 @@ pipeline_run = easymaker.PipelineRun().create(
     description='test',
     pipeline_id=pipeline.pipeline_id,
     experiment_id=experiment.experiment_id, # Optional if already set in init
-    instance_name='m2.c4m8',
+    instance_type_name='m2.c4m8',
     instance_count=1,
     boot_storage_size=50,
     # wait=False,
@@ -775,7 +815,7 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 | pipeline_id                      | String  | 필수                                 | 없음   | 최대 36자      | 파이프라인 일정 이름                                    |
 | experiment_id                    | String  | easymaker.init에서 미입력 시 필수          | 없음    | 최대 36자      | 실험 ID                                          |
 | description                      | String  | 선택                                 | 없음   | 최대 255자     | 파이프라인 일정에 대한 설명                                |
-| instance_name                    | String  | 필수                                 | 없음   | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                         |
+| instance_type_name                    | String  | 필수                                 | 없음   | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                         |
 | instance_count                   | Integer | 필수                                 | 없음   | 1~10        | 사용할 인스턴스 수                                     |
 | boot_storage_size                | Integer | 필수                                 | 없음   | 50~         | 파이프라인을 실행할 인스턴스의 부트 스토리지 크기(단위: GB)            |
 | schedule_periodic_minutes        | String  | schedule_cron_expression 미입력시 필수  | 없음   | 없음          | 파이프라인을 반복 실행할 시간 주기 설정                         |
@@ -801,7 +841,7 @@ pipeline_recurring_run = easymaker.PipelineRecurringRun().create(
     description='test',
     pipeline_id=pipeline.pipeline_id,
     experiment_id=experiment.experiment_id, # Optional if already set in init
-    instance_name='m2.c4m8',
+    instance_type_name='m2.c4m8',
     boot_storage_size=50,
     schedule_cron_expression='0 0 * * * ?',
     max_concurrency_count=1,
