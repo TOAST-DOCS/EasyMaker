@@ -397,7 +397,7 @@ When creating an endpoint, the default stage is created.
 | endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | Required    | None          | 0.0~                             | CPU to be used for stage resource                       |
 | endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | Required    | None          | 1Mi~                             | Memory to be used for stage resource                    |
 | endpoint_model_resource_list[0].podAutoScaleEnable          | Boolean  | Optional    | False         | True, False                      | Pod autoscaler to be used for stage resource            |
-| endpoint_model_resource_list[0].scaleMetricCode             | String   | Optional    | None          | CONCURRENCY, REQUESTS_PER_SECOND | Scaling unit to be used for stage resource              |
+| endpoint_model_resource_list[0].scaleMetricCode             | String   | Optional    | None          | CPU_UTILIZATION, MEMORY_UTILIZATION | Scaling unit to be used for stage resource              |
 | endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | Optional    | None          | 1~                               | Scaling threshold to be used for stage resource         |
 | endpoint_model_resource_list[0].description                 | String   | Optional    | None          | Up to 255 characters             | Description of stage resource                           |
 | tag_list                                                    | Array   | Optional    | None          | Max 10                           | Tag information                                         |
@@ -453,7 +453,7 @@ You can add a new stage to existing endpoints.
 | endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | Required    | None          | 0.0~                             | CPU to be used for stage resource                |
 | endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | Required    | None          | 1Mi~                             | Memory to be used for stage resource             |
 | endpoint_model_resource_list[0].podAutoScaleEnable          | Boolean  | Optional    | False         | True, False                      | Pod autoscaler to be used for stage resource      |
-| endpoint_model_resource_list[0].scaleMetricCode             | String   | Optional    | None          | CONCURRENCY, REQUESTS_PER_SECOND | Scaling unit to be used for stage resource          |
+| endpoint_model_resource_list[0].scaleMetricCode             | String   | Optional    | None          | CPU_UTILIZATION, MEMORY_UTILIZATION | Scaling unit to be used for stage resource          |
 | endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | Optional    | None          | 1~                               | Scaling threshold to be used for stage resource     |
 | endpoint_model_resource_list[0].description                 | String   | Optional    | None          | Up to 255 characters             | Description of stage resource                                       |
 | tag_list                                                    | Array   | Optional    | None          | Max 10                           | Tag information                                                              |

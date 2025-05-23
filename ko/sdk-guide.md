@@ -397,7 +397,7 @@ easymaker.Model(model_id).delete()
 | endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
 | endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
 | endpoint_model_resource_list[0].podAutoScaleEnable          | Boolean  | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
-| endpoint_model_resource_list[0].scaleMetricCode             | String   | 선택    | 없음    | CONCURRENCY, REQUESTS_PER_SECOND | 스테이지 리소스에 사용될 증설 단위          |
+| endpoint_model_resource_list[0].scaleMetricCode             | String   | 선택    | 없음    | CPU_UTILIZATION, MEMORY_UTILIZATION | 스테이지 리소스에 사용될 증설 단위          |
 | endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
 | endpoint_model_resource_list[0].description                 | String   | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
 | tag_list                                                    | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                                  |
@@ -446,7 +446,7 @@ endpoint = easymaker.Endpoint().create(
 | endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
 | endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
 | endpoint_model_resource_list[0].podAutoScaleEnable          | Boolean  | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
-| endpoint_model_resource_list[0].scaleMetricCode             | String   | 선택    | 없음    | CONCURRENCY, REQUESTS_PER_SECOND | 스테이지 리소스에 사용될 증설 단위          |
+| endpoint_model_resource_list[0].scaleMetricCode             | String   | 선택    | 없음    | CPU_UTILIZATION, MEMORY_UTILIZATION | 스테이지 리소스에 사용될 증설 단위          |
 | endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
 | endpoint_model_resource_list[0].description                 | String   | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
 | tag_list                                                    | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                              |
