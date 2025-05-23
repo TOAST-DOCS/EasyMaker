@@ -104,9 +104,6 @@ easymaker.Experiment(experiment_id).delete()
 | dataset_list                          | Array   | 選択                      | なし  | 最大10個    | 学習に使用されるデータセット情報(datasetName/dataUriで構成)                      |
 | dataset_list[0].datasetName           | String  | 選択                      | なし  | 最大36文字    | データ名                                                        |
 | dataset_list[0].datasetUri            | String  | 選択                      | なし  | 最大255文字   | データパス                                                        |
-| tag_list                              | Array   | 選択                      | なし  | 最大10個    | タグ情報                                                         |
-| tag_list[0].tagKey                    | String  | 選択                      | なし  | 最大64文字    | タグキー                                                          |
-| tag_list[0].tagValue                  | String  | 選択                      | なし  | 最大255文字   | タグ値                                                          |
 | use_log                               | Boolean | 選択                      | False | True, False | Log & Crash Searchサービスにログを残すかどうか                                    |
 | wait                                  | Boolean | 選択                      | True   | True, False | True：作成が完了した後に返す、False：作成リクエスト後、すぐに返す |
 
@@ -144,17 +141,7 @@ training = easymaker.Training().run(
             "datasetName"："test",
             "dataUri"："obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_download_path}"
         }
-    ],
-    tag_list=[
-        {
-            "tagKey"："tag1",
-            "tagValue"："test_tag_1",
-        },
-        {
-            "tagKey"："tag2",
-            "tagValue"："test_tag_2",
-        }
-    ],
+
     use_log=True,
     # wait=False,
 )
@@ -219,9 +206,6 @@ easymaker.Training(training_id).delete()
 | early_stopping_algorithm                                      | String         | 必須                                                  | なし  | EARLY_STOPPING_ALGORITHM.<br>MEDIAN          | 学習を継続してもモデルがそれ以上良くならない場合、早期に学習を終了                            |
 | early_stopping_min_trial_count                                | Integer        | 必須                                                  | 3     | なし                                         | 中間値を計算する際に、いくつの学習から目標指標値を取得するか定義                              |
 | early_stopping_start_step                                     | Integer        | 必須                                                  | 4     | なし                                         | 何番目の学習段階から早期終了を適用するか設定します。                                            |
-| tag_list                                                      | Array          | 選択                                                  | なし  | 最大10個                                     | タグ情報                                                                    |
-| tag_list[0].tagKey                                            | String         | 選択                                                  | なし  | 最大64文字                                     | タグキー                                                                     |
-| tag_list[0].tagValue                                          | String         | 選択                                                  | なし  | 最大255文字                                    | タグ値                                                                     |
 | use_log                                                       | Boolean        | 選択                                                  | False | True, False                                  | Log & Crash Searchサービスにログを残すかどうか                                               |
 | wait                                                          | Boolean        | 選択                                                  | True   | True, False | True：作成が完了した後に返す、False：作成リクエスト後、すぐに返す |
 
@@ -277,12 +261,6 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     early_stopping_algorithm=easymaker.EARLY_STOPPING_ALGORITHM.MEDIAN,
     early_stopping_min_trial_count=3,
     early_stopping_start_step=4,
-    tag_list=[
-        {
-            "tagKey": "tag1",
-            "tagValue": "test_tag_1",
-        }
-    ],
     use_log=True,
     # wait=False,
 )
@@ -315,9 +293,6 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 | hyperparameter_tuning_id | String | training_idがない場合は必須             | なし  | なし      | モデルとして作成するハイパーパラメータチューニングID(最高学習で作成済み) |
 | model_name               | String | 必須                                | なし  | 最大50文字 | モデル名                              |
 | description        | String | 選択                                | なし  | 最大255文字 | モデルの説明                          |
-| tag_list                 | Array  | 選択                                | なし  | 最大10個 | タグ情報                              |
-| tag_list[0].tagKey       | String | 選択                                | なし  | 最大64文字 | タグキー                                |
-| tag_list[0].tagValue     | String | 選択                                | なし  | 最大255文字 | タグ値                               |
 
 ```python
 model = easymaker.Model().create(
@@ -340,9 +315,6 @@ model = easymaker.Model().create(
 | parameter_list                   | Array  | 選択  | なし | 最大10個                                | パラメータ情報(parameterName/parameterValueで構成)         |
 | parameter_list[0].parameterName  | String | 選択  | なし | 最大64文字                                | パラメータ名                                            |
 | parameter_list[0].parameterValue | String | 選択  | なし | 最大255文字                               | パラメータ値                                              |
-| tag_list             | Array  | 任意 | なし | 最大10個                              | タグ情報                                           |
-| tag_list[0].tagKey   | String | 任意 | なし | 最大64文字                              | タグキー                                               |
-| tag_list[0].tagValue | String | 任意 | なし | 最大255文字                             | タグ値                                            |
 
 ```python
 # TensorFlowモデル
@@ -399,11 +371,7 @@ easymaker.Model(model_id).delete()
 | endpoint_model_resource_list[0].podAutoScaleEnable          | Boolean  | 選択  | False   | True, False                      | ステージリソースに使用されるPodオートスケーラー |
 | endpoint_model_resource_list[0].scaleMetricCode             | String   | 選択  | なし  | CONCURRENCY, REQUESTS_PER_SECOND | ステージリソースに使用される増設単位        |
 | endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | 選択  | なし  | 1~                               | ステージリソースに使用される増設しきい値   |
-| endpoint_model_resource_list[0].description                 | String   | 選択  | なし  | 最大255文字                | ステージリソースの説明                                     |
-| tag_list                                                    | Array   | 選択  | なし  | 最大10個                   | タグ情報                                                                |
-| tag_list[0].tagKey                                          | String  | 選択  | なし  | 最大64文字                   | タグキー                                                                 |
-| tag_list[0].tagValue                                        | String  | 選択  | なし  | 最大255文字                  | タグ値                                                                 |
-| use_log                                                     | Boolean | 選択  | False | True, False                | Log & Crash Searchサービスにログを残すかどうか                                           |
+| endpoint_model_resource_list[0].description                 | String   | 選択  | なし  | 最大255文字                | ステージリソースの説明                                     || use_log                                                     | Boolean | 選択  | False | True, False                | Log & Crash Searchサービスにログを残すかどうか                                           |
 | wait                                                        | Boolean | 選択  | True   | True, False | True：作成が完了した後に返す、False：作成リクエスト後、すぐに返す |
 
 ```python
@@ -449,9 +417,6 @@ endpoint = easymaker.Endpoint().create(
 | endpoint_model_resource_list[0].scaleMetricCode             | String   | 選択  | なし  | CONCURRENCY, REQUESTS_PER_SECOND | ステージリソースに使用される増設単位        |
 | endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | 選択  | なし  | 1~                               | ステージリソースに使用される増設しきい値   |
 | endpoint_model_resource_list[0].description                 | String   | 選択  | なし  | 最大255文字                | ステージリソースの説明                                     |
-| tag_list                                                    | Array   | 選択  | なし  | 最大10個                   | タグ情報                                                            |
-| tag_list[0].tagKey                                          | String  | 選択  | なし  | 最大64文字                   | タグキー                                                             |
-| tag_list[0].tagValue                                        | String  | 選択  | なし  | 最大255文字                  | タグ値                                                             |
 | use_log                                                     | Boolean | 選択  | False | True, False                | Log & Crash Searchサービスにログを残すかどうか                                       |
 | wait                                                        | Boolean | 選択  | True   | True, False | True：作成が完了した後に返す、False：作成リクエスト後、すぐに返す |
 
@@ -554,9 +519,6 @@ easymaker.EndpointStage(stage_id).delete()
 | output_upload_uri         | String  | 必須     | なし   | 最大255文字 | バッチ推論結果ファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)      |
 | data_storage_size         | Integer | 必須     | なし   | 300～10000   | バッチ推論に必要なデータをダウンロードする記憶領域のサイズ(単位: GB)                       |
 | description               | String  | 選択     | なし   | 最大255文字 | バッチ推論の説明                                                                |
-| tag_list                  | Array   | 選択     | なし   | 最大10個  | タグ情報                                                                            |
-| tag_list[0].tagKey        | String  | 選択     | なし   | 最大64文字  | タグキー                                                                               |
-| tag_list[0].tagValue      | String  | 選択     | なし   | 最大255文字 | タグ値                                                                              |
 | use_log                   | Boolean | 選択     | False  | True, False | Log & Crash Searchサービスにログを残すかどうか                                        |
 | wait                      | Boolean | 選択    | True   | True, False | True：作成が完了した後に返す、False：作成リクエスト後、すぐに返す |
 
@@ -577,16 +539,6 @@ batch_inference = easymaker.BatchInference().run(
     output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{output_upload_path}',
     data_storage_size=300,  # minimum size : 300GB
     description='description',
-    tag_list=[
-        {
-            "tagKey": "tag1",
-            "tagValue": "test_tag_1",
-        },
-        {
-            "tagKey": "tag2",
-            "tagValue": "test_tag_2",
-        }
-    ],
     use_log=True,
     # wait=False,
 )
@@ -615,9 +567,6 @@ easymaker.BatchInference(batch_inference_id).delete()
 | pipeline_name               | String  | 必須    | なし | 最大50文字 | パイプライン名                                |
 | pipeline_spec_manifest_path | String  | 必須    | なし | 1~10      | アップロードするパイプラインファイルパス                        |
 | description                 | String  | 選択    | なし | 最大255文字 | パイプラインの説明                            |
-| tag_list                    | Array   | 選択    | なし | 最大10個 | タグ情報                                   |
-| tag_list[0].tagKey          | String  | 選択    | なし | 最大64文字 | タグキー                                    |
-| tag_list[0].tagValue        | String  | 選択    | なし | 最大255文字 | タグ値                                    |
 | wait                        | Boolean | 選択    | True   | True, False | True：作成が完了した後に返す、False：作成リクエスト後、すぐに返す |
 
 ```python
@@ -625,7 +574,6 @@ pipeline = easymaker.Pipeline().upload(
     pipeline_name='pipeline_01',
     pipeline_spec_manifest_path='./sample-pipeline.yaml',
     description='test',
-    tag_list=[],
     # wait=False,
 )
 ```
@@ -661,9 +609,6 @@ easymaker.Pipeline(pipeline_id).delete()
 | nas_list                         | Array   | 選択                      | なし | 最大10個    | NAS情報                                 |
 | nas_list[0].mountDirName         | String  | 選択                      | なし | 最大64文字    | インスタンスにマウントするディレクトリ名                     |
 | nas_list[0].nasUri               | String  | 選択                      | なし | 最大255文字   | `nas://{NAS ID}:/{path}`形式のNASパス    |
-| tag_list                         | Array   | 選択                      | なし | 最大10個    | タグ情報                                  |
-| tag_list[0].tagKey               | String  | 選択                      | なし | 最大64文字    | タグキー                                   |
-| tag_list[0].tagValue             | String  | 選択                      | なし | 最大255文字   | タグ値                                   |
 | wait                             | Boolean | 選択                      | True   | True, False | True：作成が完了した後に返す、False：作成リクエスト後、すぐに返す |
 
 ```python
@@ -715,9 +660,6 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 | nas_list                         | Array   | 選択                               | なし | 最大10個    | NAS情報                                       |
 | nas_list[0].mountDirName         | String  | 選択                               | なし | 最大64文字    | インスタンスにマウントするディレクトリ名                           |
 | nas_list[0].nasUri               | String  | 選択                               | なし | 最大255文字   | `nas://{NAS ID}:/{path}`形式のNASパス          |
-| tag_list                         | Array   | 選択                               | なし | 最大10個    | タグ情報                                        |
-| tag_list[0].tagKey               | String  | 選択                               | なし | 最大64文字    | タグキー                                         |
-| tag_list[0].tagValue             | String  | 選択                               | なし | 最大255文字   | タグ値                                         |
 | wait                             | Boolean | 選択                               | True   | True, False | True：作成が完了した後に返す、False：作成リクエスト後、すぐに返す     |
 
 ```python
