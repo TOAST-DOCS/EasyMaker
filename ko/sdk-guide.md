@@ -105,9 +105,6 @@ easymaker.Experiment(experiment_id).delete()
 | dataset_list                          | Array   | 선택                        | 없음    | 최대 10개      | 학습에 사용될 데이터 세트 정보(datasetName/dataUri로 구성)                      |
 | dataset_list[0].datasetName           | String  | 선택                        | 없음    | 최대 36자      | 데이터 이름                                                          |
 | dataset_list[0].datasetUri            | String  | 선택                        | 없음    | 최대 255자     | 데이터 경로                                                          |
-| tag_list                              | Array   | 선택                        | 없음    | 최대 10개      | 태그 정보                                                           |
-| tag_list[0].tagKey                    | String  | 선택                        | 없음    | 최대 64자      | 태그 키                                                            |
-| tag_list[0].tagValue                  | String  | 선택                        | 없음    | 최대 255자     | 태그 값                                                            |
 | use_log                               | Boolean | 선택                        | False | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                                      |
 | wait                                  | Boolean | 선택                        | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
@@ -144,16 +141,6 @@ training = easymaker.Training().run(
         {
             "datasetName": "test",
             "dataUri": "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_download_path}"
-        }
-    ],
-    tag_list=[
-        {
-            "tagKey": "tag1",
-            "tagValue": "test_tag_1",
-        },
-        {
-            "tagKey": "tag2",
-            "tagValue": "test_tag_2",
         }
     ],
     use_log=True,
@@ -220,9 +207,6 @@ easymaker.Training(training_id).delete()
 | early_stopping_algorithm                                      | String         | 필수                                                    | 없음    | EARLY_STOPPING_ALGORITHM.<br>MEDIAN          | 학습이 계속 진행되어도 모델이 더 이상 좋아지지 않으면 학습을 조기에 종료                              |
 | early_stopping_min_trial_count                                | Integer        | 필수                                                    | 3     | 없음                                           | 중간값을 계산할 때 몇 개의 학습으로부터 목표 지표 값을 가져올지 정의                                |
 | early_stopping_start_step                                     | Integer        | 필수                                                    | 4     | 없음                                           | 몇 번째 학습 단계부터 조기 중지를 적용할지 설정합니다.                                            |
-| tag_list                                                      | Array          | 선택                                                    | 없음    | 최대 10개                                       | 태그 정보                                                                      |
-| tag_list[0].tagKey                                            | String         | 선택                                                    | 없음    | 최대 64자                                       | 태그 키                                                                       |
-| tag_list[0].tagValue                                          | String         | 선택                                                    | 없음    | 최대 255자                                      | 태그 값                                                                       |
 | use_log                                                       | Boolean        | 선택                                                    | False | True, False                                  | Log & Crash Search 서비스에 로그를 남길지 여부                                                 |
 | wait                                                          | Boolean        | 선택                                                    | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
@@ -278,12 +262,6 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     early_stopping_algorithm=easymaker.EARLY_STOPPING_ALGORITHM.MEDIAN,
     early_stopping_min_trial_count=3,
     early_stopping_start_step=4,
-    tag_list=[
-        {
-            "tagKey": "tag1",
-            "tagValue": "test_tag_1",
-        }
-    ],
     use_log=True,
     # wait=False,
 )
@@ -316,9 +294,6 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 | hyperparameter_tuning_id | String | training_id가 없는 경우 필수              | 없음  | 없음      | 모델로 생성할 하이퍼파라미터 튜닝 ID(최고 학습으로 생성됨) |
 | model_name               | String | 필수                                 | 없음  | 최대 50자  | 모델 이름                               |
 | description        | String | 선택                                 | 없음  | 최대 255자 | 모델에 대한 설명                           |
-| tag_list                 | Array  | 선택                                 | 없음  | 최대 10개  | 태그 정보                               |
-| tag_list[0].tagKey       | String | 선택                                 | 없음  | 최대 64자  | 태그 키                                |
-| tag_list[0].tagValue     | String | 선택                                 | 없음  | 최대 255자 | 태그 값                                |
 
 ```python
 model = easymaker.Model().create(
@@ -341,9 +316,6 @@ model = easymaker.Model().create(
 | parameter_list                   | Array  | 선택    | 없음  | 최대 10개                                  | 파라미터 정보(parameterName/parameterValue로 구성)         |
 | parameter_list[0].parameterName  | String | 선택    | 없음  | 최대 64자                                  | 파라미터 이름                                              |
 | parameter_list[0].parameterValue | String | 선택    | 없음  | 최대 255자                                 | 파라미터 값                                                |
-| tag_list             | Array  | 선택    | 없음  | 최대 10개                                  | 태그 정보                                               |
-| tag_list[0].tagKey   | String | 선택    | 없음  | 최대 64자                                  | 태그 키                                                |
-| tag_list[0].tagValue | String | 선택    | 없음  | 최대 255자                                 | 태그 값                                                |
 
 ```python
 # TensorFlow 모델
@@ -515,9 +487,6 @@ easymaker.ModelEvaluation(model_evaluation_id).delete()
 | endpoint_model_resource_list[0].scaleMetricCode             | String   | 선택    | 없음    | CPU_UTILIZATION, MEMORY_UTILIZATION | 스테이지 리소스에 사용될 증설 단위          |
 | endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
 | endpoint_model_resource_list[0].description                 | String   | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
-| tag_list                                                    | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                                  |
-| tag_list[0].tagKey                                          | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                                   |
-| tag_list[0].tagValue                                        | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                                   |
 | use_log                                                     | Boolean | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                             |
 | wait                                                        | Boolean | 선택    | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
@@ -564,9 +533,6 @@ endpoint = easymaker.Endpoint().create(
 | endpoint_model_resource_list[0].scaleMetricCode             | String   | 선택    | 없음    | CPU_UTILIZATION, MEMORY_UTILIZATION | 스테이지 리소스에 사용될 증설 단위          |
 | endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
 | endpoint_model_resource_list[0].description                 | String   | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
-| tag_list                                                    | Array   | 선택    | 없음    | 최대 10개                     | 태그 정보                                                              |
-| tag_list[0].tagKey                                          | String  | 선택    | 없음    | 최대 64자                     | 태그 키                                                               |
-| tag_list[0].tagValue                                        | String  | 선택    | 없음    | 최대 255자                    | 태그 값                                                               |
 | use_log                                                     | Boolean | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                         |
 | wait                                                        | Boolean | 선택    | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
@@ -669,9 +635,6 @@ easymaker.EndpointStage(stage_id).delete()
 | output_upload_uri         | String  | 필수      | 없음   | 최대 255자  | 배치 추론 결과 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
 | data_storage_size         | Integer | 필수      | 없음   | 300~10000   | 배치 추론에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB)                          |
 | description               | String  | 선택      | 없음   | 최대 255자  | 배치 추론에 대한 설명                                                    |
-| tag_list                  | Array   | 선택      | 없음   | 최대 10개   | 태그 정보                                                           |
-| tag_list[0].tagKey        | String  | 선택      | 없음   | 최대 64자   | 태그 키                                                            |
-| tag_list[0].tagValue      | String  | 선택      | 없음   | 최대 255자  | 태그 값                                                            |
 | use_log                   | Boolean | 선택      | False  | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                              |
 | wait                      | Boolean | 선택      | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                       |
 
@@ -692,16 +655,6 @@ batch_inference = easymaker.BatchInference().run(
     output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{output_upload_path}',
     data_storage_size=300,  # minimum size : 300GB
     description='description',
-    tag_list=[
-        {
-            "tagKey": "tag1",
-            "tagValue": "test_tag_1",
-        },
-        {
-            "tagKey": "tag2",
-            "tagValue": "test_tag_2",
-        }
-    ],
     use_log=True,
     # wait=False,
 )
@@ -730,9 +683,6 @@ easymaker.BatchInference(batch_inference_id).delete()
 | pipeline_name               | String  | 필수      | 없음   | 최대 50자   | 파이프라인 이름                                  |
 | pipeline_spec_manifest_path | String  | 필수      | 없음   | 1~10      | 업로드할 파이프라인 파일 경로                          |
 | description                 | String  | 선택      | 없음   | 최대 255자  | 파이프라인에 대한 설명                              |
-| tag_list                    | Array   | 선택      | 없음   | 최대 10개   | 태그 정보                                     |
-| tag_list[0].tagKey          | String  | 선택      | 없음   | 최대 64자   | 태그 키                                      |
-| tag_list[0].tagValue        | String  | 선택      | 없음   | 최대 255자  | 태그 값                                      |
 | wait                        | Boolean | 선택      | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
@@ -740,7 +690,6 @@ pipeline = easymaker.Pipeline().upload(
     pipeline_name='pipeline_01',
     pipeline_spec_manifest_path='./sample-pipeline.yaml',
     description='test',
-    tag_list=[],
     # wait=False,
 )
 ```
@@ -776,9 +725,6 @@ easymaker.Pipeline(pipeline_id).delete()
 | nas_list                         | Array   | 선택                        | 없음   | 최대 10개      | NAS 정보                                   |
 | nas_list[0].mountDirName         | String  | 선택                        | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                       |
 | nas_list[0].nasUri               | String  | 선택                        | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로      |
-| tag_list                         | Array   | 선택                        | 없음   | 최대 10개      | 태그 정보                                    |
-| tag_list[0].tagKey               | String  | 선택                        | 없음   | 최대 64자      | 태그 키                                     |
-| tag_list[0].tagValue             | String  | 선택                        | 없음   | 최대 255자     | 태그 값                                     |
 | wait                             | Boolean | 선택                        | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
@@ -831,9 +777,6 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 | nas_list                         | Array   | 선택                                 | 없음   | 최대 10개      | NAS 정보                                         |
 | nas_list[0].mountDirName         | String  | 선택                                 | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                             |
 | nas_list[0].nasUri               | String  | 선택                                 | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로            |
-| tag_list                         | Array   | 선택                                 | 없음   | 최대 10개      | 태그 정보                                          |
-| tag_list[0].tagKey               | String  | 선택                                 | 없음   | 최대 64자      | 태그 키                                           |
-| tag_list[0].tagValue             | String  | 선택                                 | 없음   | 최대 255자     | 태그 값                                           |
 | wait                             | Boolean | 선택                                 | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환      |
 
 ```python

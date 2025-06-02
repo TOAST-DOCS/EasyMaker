@@ -104,9 +104,6 @@ easymaker.Experiment(experiment_id).delete()
 | dataset_list                             | Array   | Optional                                             | None          | Max 10                                  | Information of dataset to be used for training (consists of datasetName/dataUri)                |
 | dataset_list[0].datasetName              | String  | Optional                                             | None          | Up to 36 characters                     | Data name                                                                                       |
 | dataset_list[0].datasetUri               | String  | Optional                                             | None          | Up to 255 characters                    | Data pah                                                                                        |
-| tag_list                                 | Array   | Optional                                             | None          | Max 10                                  | Tag information                                                                                 |
-| tag_list[0].tagKey                       | String  | Optional                                             | None          | Up to 64 characters                     | Tag key                                                                                         |
-| tag_list[0].tagValue                     | String  | Optional                                             | None          | Up to 255 characters                    | Tag value                                                                                       |
 | use_log                                  | Boolean | Optional                                             | False         | True, False                             | Whether to leave logs in the Log & Crash Search service                                         |
 | wait                                     | Boolean | Optional                                             | True          | True, False                             | True: return after creation is complete, False: return upon creation request                    |
 
@@ -143,16 +140,6 @@ training = easymaker.Training().run(
         {
             "datasetName": "test",
             "dataUri": "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_download_path}"
-        }
-    ],
-    tag_list=[
-        {
-            "tagKey": "tag1",
-            "tagValue": "test_tag_1",
-        },
-        {
-            "tagKey": "tag2",
-            "tagValue": "test_tag_2",
         }
     ],
     use_log=True,
@@ -219,9 +206,6 @@ easymaker.Training(training_id).delete()
 | early_stopping_algorithm                                       | String         | Required                                                            | None    | EARLY_STOPPING_ALGORITHM.<br>MEDIAN                                           | Stop training early if the model is no longer good even though training continues.                                           |
 | early_stopping_min_trial_count                                 | Integer        | Required                                                            | 3     | None                                                                          | Define how many trainings the target metric value will be taken from when calculating the median.                            |
 | early_stopping_start_step                                      | Integer        | Required                                                            | 4     | None                                                                          | Set the training step from which to apply early stop.                                                                        |
-| tag_list                                                       | Array          | Optional                                                            | None    | Max 10                                                                        | Tag information                                                                                                              |
-| tag_list[0].tagKey                                             | String         | Optional                                                            | None    | Up to 64 characters                                                           | Tag key                                                                                                                      |
-| tag_list[0].tagValue                                           | String         | Optional                                                            | None    | Up to 255 characters                                                          | Tag value                                                                                                                    |
 | use_log                                                        | Boolean        | Optional                                                            | False | True, False                                                                   | Whether to leave logs in the Log & Crash Search service                                                                      |
 | wait                                                           | Boolean        | Optional                                                            | True  | True, False                                                                   | True: return after creation is complete, False: return upon creation request                                                                                   |
 
@@ -277,12 +261,6 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     early_stopping_algorithm=easymaker.EARLY_STOPPING_ALGORITHM.MEDIAN,
     early_stopping_min_trial_count=3,
     early_stopping_start_step=4,
-    tag_list=[
-        {
-            "tagKey": "tag1",
-            "tagValue": "test_tag_1",
-        }
-    ],
     use_log=True,
     # wait=False,
 )
@@ -315,9 +293,6 @@ The model is used when creating endpoints.
 | hyperparameter_tuning_id | String | Required if training_id is not present              | None  | None      | Hyperparameter tuning ID to be created by model (created by best learning) |
 | model_name               | String | Required                                 | None  | Up to 50 characters  | Model name                               |
 | description        | String | Optional                                 | None  | Up to 255 characters | Description for model                           |
-| tag_list                 | Array  | Optional                                 | None  | Max 10  | Tag information                               |
-| tag_list[0].tagKey       | String | Optional                                 | None  | Up to 64 characters  | Tag key                                |
-| tag_list[0].tagValue     | String | Optional                                 | None  | Up to 255 characters | Tag value                                |
 
 ```python
 model = easymaker.Model().create(
@@ -340,9 +315,6 @@ Even if there is no training ID, you can create a model by entering the path inf
 | parameter_list                   | Array  | Optional    | None  | Max 10                                  | Information of parameters (consists of parameterName/parameterValue)         |
 | parameter_list[0].parameterName  | String | Optional    | None  | Up to 64 characters                     | Parameter name                                              |
 | parameter_list[0].parameterValue | String | Optional    | None  | Up to 255 characters                    | Parameter value                                             |
-| tag_list             | Array  | Optional    | None  | Max 10                                  | Tag information                                               |
-| tag_list[0].tagKey   | String | Optional    | None  | Up to 64 characters                                  | Tag key                                                |
-| tag_list[0].tagValue | String | Optional    | None  | Up to 255 characters                                 | Tag value                                                |
 
 ```python
 # TensorFlow Model
@@ -400,9 +372,6 @@ When creating an endpoint, the default stage is created.
 | endpoint_model_resource_list[0].scaleMetricCode             | String   | Optional    | None          | CPU_UTILIZATION, MEMORY_UTILIZATION | Scaling unit to be used for stage resource              |
 | endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | Optional    | None          | 1~                               | Scaling threshold to be used for stage resource         |
 | endpoint_model_resource_list[0].description                 | String   | Optional    | None          | Up to 255 characters             | Description of stage resource                           |
-| tag_list                                                    | Array   | Optional    | None          | Max 10                           | Tag information                                         |
-| tag_list[0].tagKey                                          | String  | Optional    | None          | Up to 64 characters              | Tag key                                                 |
-| tag_list[0].tagValue                                        | String  | Optional    | None          | Up to 255 characters             | Tag value                                               |
 | use_log                                                     | Boolean | Optional    | False         | True, False                      | Whether to leave logs in the Log & Crash Search service |
 | wait                                                        | Boolean | Optional    | True          | True, False                      | True: return after creation is complete, False: return upon creation request               |
 
@@ -456,9 +425,6 @@ You can add a new stage to existing endpoints.
 | endpoint_model_resource_list[0].scaleMetricCode             | String   | Optional    | None          | CPU_UTILIZATION, MEMORY_UTILIZATION | Scaling unit to be used for stage resource          |
 | endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | Optional    | None          | 1~                               | Scaling threshold to be used for stage resource     |
 | endpoint_model_resource_list[0].description                 | String   | Optional    | None          | Up to 255 characters             | Description of stage resource                                       |
-| tag_list                                                    | Array   | Optional    | None          | Max 10                           | Tag information                                                              |
-| tag_list[0].tagKey                                          | String  | Optional    | None          | Up to 64 characters              | Tag key                                                               |
-| tag_list[0].tagValue                                        | String  | Optional    | None          | Up to 255 characters             | Tag value                                                               |
 | use_log                                                     | Boolean | Optional    | False         | True, False                      | Whether to leave logs in the Log & Crash Search service                                           |
 | wait                                                        | Boolean | Optional    | True          | True, False                      | True: return after creation is complete, False: return upon creation request |
 
@@ -561,9 +527,6 @@ easymaker.EndpointStage(stage_id).delete()
 | output_upload_uri         | String  | Required      | None   | Up to 255 characters  | The path where the batch inference result file will be uploaded (NHN Cloud Object Storage or NHN Cloud NAS)     |
 | data_storage_size         | Integer | Required      | None   | 300~10000   | Storage size to download data for batch inference (unit: GB)                      |
 | description               | String  | Optional      | None   | Up to 255 characters  | Explanation of batch inference                                                                |
-| tag_list                  | Array   | Optional      | None   | Max 10   | Tag information                                                                            |
-| tag_list[0].tagKey        | String  | Optional      | None   | Up to 64 characters   | Tag key                                                                              |
-| tag_list[0].tagValue      | String  | Optional      | None   | Up to 255 characters  | Tag value                                                                              |
 | use_log                   | Boolean | Optional      | False  | True, False | Whether to leave logs with the Log & Crash Search service                                       |
 | wait                      | Boolean | Optional      | True   | True, False | True: return after creation is complete, False: return upon creation request |
 
@@ -584,16 +547,6 @@ batch_inference = easymaker.BatchInference().run(
     output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{output_upload_path}',
     data_storage_size=300, # minimum size : 300GB
     description='description',
-    tag_list=[
-        {
-            "tagKey": "tag1",
-            "tagValue": "test_tag_1",
-        },
-        {
-            "tagKey": "tag2",
-            "tagValue": "test_tag_2",
-        }
-    ],
     use_log=True,
     # wait=False,
 )
@@ -622,9 +575,6 @@ easymaker.BatchInference(batch_inference_id).delete()
 | pipeline_name               | String  | Required      | None   | Max 50 characters   | Pipeline name                                  |
 | pipeline_spec_manifest_path | String  | Required      | None   | 1~10      | Pipeline file path to upload                          |
 | description                 | String  | Optional  | None   | Max 255 characters  | Description for pipeline                              |
-| tag_list                    | Array   | Optional    | None   | Max 10 characters  | Tag Information                         |
-| tag_list[0].tagKey          | String  | Optional    | None   | Max 64 characters  | Tag key                              |
-| tag_list[0].tagValue        | String  | Optional    | None   | Max 255 characters  | Tag value                                      |
 | wait                        | Boolean | Optional    | True   | True, False | True: return after creation is complete, False: return immediately after creation request |
 
 ```python
@@ -632,7 +582,6 @@ pipeline = easymaker.Pipeline().upload(
     pipeline_name='pipeline_01',
     pipeline_spec_manifest_path='./sample-pipeline.yaml',
     description='test',
-    tag_list=[],
     # wait=False,
 )
 ```
@@ -668,9 +617,6 @@ easymaker.Pipeline(pipeline_id).delete()
 | nas_list                         | Array   | Optional                        | None   | Max 10 Characters      | NAS information                                 |
 | nas_list[0].mountDirName         | String  | Optional                        | None   | Max 64 Characters     | Directory name to be mounted on instances                  |
 | nas_list[0].nasUri               | String  | Optional                        | None   | Max 255 Characters    | The path to the NAS in the format `nas://{NAS ID}:/{path}`.      |
-| tag_list                         | Array   | Optional                        | None   | Max 10 Characters      | Tag Information                                   |
-| tag_list[0].tagKey               | String  | Optional                        | None   | Max 64 Characters      | Tag key                             |
-| tag_list[0].tagValue             | String  | Optional                        | None   | Max 255 Characters    | Tag value                                    |
 | wait                             | Boolean | Optional                        | True   | True, False | True: return after creation is complete, False: return immediately after creation request |
 
 ```python
@@ -723,9 +669,6 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 | nas_list                         | Array   | Optional                                 | None   | Max 10 character      | NAS information                                    |
 | nas_list[0].mountDirName         | String  | Optional                                 | None   | Max 64 character      | Directory name to be mounted on instances                  |
 | nas_list[0].nasUri               | String  | Optional                                 | None   | Max 255 character     | The path to the NAS in the format `nas://{NAS ID}:/{path}`.     |
-| tag_list                         | Array   | Optional                                 | None   | Max 10 character      | Tag information                               |
-| tag_list[0].tagKey               | String  | Optional                                 | None   | Max 64 character      | Tag key                                   |
-| tag_list[0].tagValue             | String  | Optional                                 | None   | Max 255 character    | Tag value                                          |
 | wait                             | Boolean | Optional                                 | True   | True, False | True: return after creation is complete, False: return immediately after creation request     |
 
 ```python
