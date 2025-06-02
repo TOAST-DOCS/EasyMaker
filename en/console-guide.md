@@ -148,18 +148,18 @@ Stop the running notebook or start the stopped notebook.
 > [Note] Time to start and stop notebooks:
 > It may take several minutes to start and stop notebooks.
 
-### Change Notebook Instance Flavor
+### Change Notebook Instance Type
 
-Change the instance flavor of the created notebook.
-Instance flavor you want to change can only be changed to the same core type instance flavor as the existing instance.
+Change the instance type of the created notebook.
+Instance type you want to change can only be changed to the same core type instance type as the existing instance.
 
-1. Select the notebook on which you want to change the instance flavor.
+1. Select the notebook on which you want to change the instance type.
 2. If the notebook is running (ACTIVE), click **Stop Notebook** to stop the notebook.
-3. Click **Change Instance Flavor**.
-4. Select the instance flavor you want to change and click Confirm.
+3. Click **Change Instance type**.
+4. Select the instance type you want to change and click Confirm.
 
-> [Note] Time to change instance flavors:
-> It may take several minutes to change the instance flavor.
+> [Note] Time to change instance types:
+> It may take several minutes to change the instance type.
 
 ### Reboot Notebook
 
@@ -680,7 +680,7 @@ Create and manage endpoints that can serve the model.
 - **Stage Name**: When adding new stage on existing endpoint, enter name for new stage. Stage names cannot be duplicated.
 - **Description**: Enter the description of endpoint stage.
 - **Instance Information**: Enter instance information for the model to be served.
-    - **Instance Flavor**: Select instance type.
+    - **Instance Type**: Select instance type.
     - **Number of Instances**: Enter the number of drives for instance.
     - **Autoscaler**: The autoscaler is a feature that automatically adjusts the number of nodes based on resource usage policies. The autoscaler is set on a per-stage basis.
         - **Enable/Disable**: Select whether to enable the autoscaler. If enabled, the number of instances will scale in or out based on the instance load.
@@ -778,7 +778,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 - **Stage URL**: Displays Stage URL of API Gateway where the model is served.
 - **View API Gateway Settings**: Click **View Settings** to see settings that AI EasyMaker has deployed to API Gateway stage.
 - **View API Gateway Statistics**: Click **View Statistics** to view API statistics of endpoints.
-- **Instance Flavor**: Displays endpoint instance type the model is serving.
+- **Instance Type**: Displays endpoint instance type the model is serving.
 - **Number of Work Nodes/Pods In Progress**: Displays the number of nodes and pods being used by endpoint.
 - **Stage Resource**: Displays information about model artifacts deployed to the stage.
 - **Monitoring**: When you select the endpoint stage, you can see a list of monitored instances and basic metrics charts in the **Monitoring** tab of the detailed screen that appears.
