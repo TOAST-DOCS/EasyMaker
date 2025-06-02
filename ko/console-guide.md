@@ -1691,31 +1691,31 @@ model-archiver를 사용해서 만든 MAR 파일을 사용하는 것을 권장�
 
 >[주의] TorchServe를 직접 사용하는 경우와 AI EasyMaker 서빙을 사용하는 경우 요청 형식에 차이가 있으므로, handler.py를 작성할 때 주의하세요.
 >아래 handler.py 예시에서 전달되는 값을 확인하고, 그에 맞게 handler를 작성하세요.
->
->```bash
-># 요청 예제
->  curl --location --request POST '{API Gateway 리소스 경로}' \
->  --header 'Content-Type: application/json' \
->  --data-raw '{
->      "instances": [
->          [1.0, 2.0],
->          [3.0, 4.0]
->      ]
->  }'
->```
->
->```python
->class TestHandler(BaseHandler):
->    ...
->    def preprocess(self, data): # 예시 : data = [[1.0, 2.0], [3.0, 4.0]]
->        features = []
->        for row in data:
->            content = row # 예시 : row = [1.0, 2.0]
->            features.append(content)
->        tensor = torch.tensor(features, dtype=torch.float32).to(self.device)
->        return tensor
->    ...
->```
+
+```bash
+# 요청 예제
+  curl --location --request POST '{API Gateway 리소스 경로}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+      "instances": [
+          [1.0, 2.0],
+          [3.0, 4.0]
+      ]
+  }'
+```
+
+```python
+class TestHandler(BaseHandler):
+    ...
+    def preprocess(self, data): # 예시 : data = [[1.0, 2.0], [3.0, 4.0]]
+        features = []
+        for row in data:
+            content = row # 예시 : row = [1.0, 2.0]
+            features.append(content)
+        tensor = torch.tensor(features, dtype=torch.float32).to(self.device)
+        return tensor
+    ...
+```
 
 #### Scikit-learn 프레임워크
 
