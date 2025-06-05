@@ -82,32 +82,32 @@ for instance in instance_type_list:
 
 [파라미터]
 
-| 이름                                    | 타입                        | 필수 여부                     | 기본값   | 유효 범위       | 설명                                                               |
-|---------------------------------------|---------------------------|---------------------------|-------|-------------|------------------------------------------------------------------|
-| experiment_id                         | String                    | easymaker.init에서 미입력 시 필수 | 없음    | 최대 36자          | 실험 ID                                                            |
-| training_name                         | String                    | 필수                        | 없음    | 최대 50자      | 학습 이름                                                            |
-| description                  | String                    | 선택                        | 없음    | 최대 255자     | 학습에 대한 설명                                                        |
-| image_name                      | String                    | 필수                        | 없음    | 없음          | 학습에 사용될 이미지 이름(CLI로 조회 가능)                                       |
-| instance_type_name                   | String                    | 필수                        | 없음    | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                                           |
-| distributed_node_count                | Integer                   | 필수                        | 없음    | 1~10         | 분산 학습을 적용할 노드 수                                                  |
-| use_torchrun                          | Boolean                   | 선택                        | False  | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                             |
-| nproc_per_node                        | Integer                   | use_torchrun True 시 필수    | 1      | 1~(CPU 개수 또는 GPU 개수) | 노드당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값                  |
-| data_storage_size                     | Integer                   | Obejct Storage 사용 시 필수    | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                |
-| algorithm_name                        | String                    | NHN Cloud 제공 알고리즘 사용 시 필수 | 없음    | 최대 64자      | 알고리즘 이름(CLI로 조회 가능)                                              |
-| source_dir_uri                        | String                    | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어 있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
-| entry_point                           | String                    | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                              |
-| model_upload_uri                      | String                    | 필수                        | 없음    | 최대 255자     | 학습 완료된 모델이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)    |
-| check_point_input_uri                 | String                    | 선택                        | 없음    | 최대 255자     | 입력 체크 포인트 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)       |
-| check_point_upload_uri                | String                    | 선택                        | 없음    | 최대 255자     | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)    |
-| timeout_hours                         | Integer                   | 선택                        | 720   | 1~720       | 최대 학습 시간(단위: 시간)                                                 |
-| hyperparameter_list                   | easymaker.Parameter Array | 선택                        | 없음    | 최대 100개     | 하이퍼파라미터 정보(parameter_name/parameter_value로 구성)                  |
+| 이름                                     | 타입                        | 필수 여부                     | 기본값   | 유효 범위       | 설명                                                               |
+|----------------------------------------|---------------------------|---------------------------|-------|-------------|------------------------------------------------------------------|
+| experiment_id                          | String                    | easymaker.init에서 미입력 시 필수 | 없음    | 최대 36자          | 실험 ID                                                            |
+| training_name                          | String                    | 필수                        | 없음    | 최대 50자      | 학습 이름                                                            |
+| description                            | String                    | 선택                        | 없음    | 최대 255자     | 학습에 대한 설명                                                        |
+| image_name                             | String                    | 필수                        | 없음    | 없음          | 학습에 사용될 이미지 이름(CLI로 조회 가능)                                       |
+| instance_type_name                     | String                    | 필수                        | 없음    | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                                           |
+| distributed_node_count                 | Integer                   | 필수                        | 없음    | 1~10         | 분산 학습을 적용할 노드 수                                                  |
+| use_torchrun                           | Boolean                   | 선택                        | False  | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                             |
+| nproc_per_node                         | Integer                   | use_torchrun True 시 필수    | 1      | 1~(CPU 개수 또는 GPU 개수) | 노드당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값                  |
+| data_storage_size                      | Integer                   | Obejct Storage 사용 시 필수    | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                |
+| algorithm_name                         | String                    | NHN Cloud 제공 알고리즘 사용 시 필수 | 없음    | 최대 64자      | 알고리즘 이름(CLI로 조회 가능)                                              |
+| source_dir_uri                         | String                    | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어 있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
+| entry_point                            | String                    | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                              |
+| model_upload_uri                       | String                    | 필수                        | 없음    | 최대 255자     | 학습 완료된 모델이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)    |
+| check_point_input_uri                  | String                    | 선택                        | 없음    | 최대 255자     | 입력 체크 포인트 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)       |
+| check_point_upload_uri                 | String                    | 선택                        | 없음    | 최대 255자     | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)    |
+| timeout_hours                          | Integer                   | 선택                        | 720   | 1~720       | 최대 학습 시간(단위: 시간)                                                 |
+| hyperparameter_list                    | easymaker.Parameter Array | 선택                        | 없음    | 최대 100개     | 하이퍼파라미터 정보(parameter_name/parameter_value로 구성)                  |
 | hyperparameter_list[0].parameter_name  | String                    | 선택                        | 없음    | 최대 255자     | 하이퍼파라미터 키                                                        |
-| hyperparameter_list[0].parameter_value로 | String                    | 선택                        | 없음    | 최대 1000자    | 하이퍼파라미터 값                                                        |
-| dataset_list                          | easymaker.Dataset Array   | 선택                        | 없음    | 최대 10개      | 학습에 사용될 데이터 세트 정보(dataset_name/data_uri로 구성)                       |
-| dataset_list[0].datasetName           | String                    | 선택                        | 없음    | 최대 36자      | 데이터 이름                                                           |
-| dataset_list[0].data_uri            | String                    | 선택                        | 없음    | 최대 255자     | 데이터 경로                                                           |
-| use_log                               | Boolean                   | 선택                        | False | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                               |
-| wait                                  | Boolean                   | 선택                        | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                        |
+| hyperparameter_list[0].parameter_value | String                    | 선택                        | 없음    | 최대 1000자    | 하이퍼파라미터 값                                                        |
+| dataset_list                           | easymaker.Dataset Array   | 선택                        | 없음    | 최대 10개      | 학습에 사용될 데이터 세트 정보(dataset_name/data_uri로 구성)                       |
+| dataset_list[0].dataset_name           | String                    | 선택                        | 없음    | 최대 36자      | 데이터 이름                                                           |
+| dataset_list[0].data_uri               | String                    | 선택                        | 없음    | 최대 255자     | 데이터 경로                                                           |
+| use_log                                | Boolean                   | 선택                        | False | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                               |
+| wait                                   | Boolean                   | 선택                        | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                        |
 
 ```python
 training = easymaker.Training().run(
@@ -137,11 +137,11 @@ training = easymaker.Training().run(
     dataset_list=[
         easymaker.Dataset(
             dataset_name= "train",
-            data_uri= easymaker.sample.classification_model.train.dataset.train,
+            data_uri= "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}",
         ),
         easymaker.Dataset(
             dataset_name= "test",
-            data_uri= easymaker.sample.classification_model.train.dataset.test,
+            data_uri= "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_path}",
         ),
     ],
     use_log=True,
@@ -261,11 +261,11 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     dataset_list=[
         easymaker.Dataset(
             dataset_name="train",
-            data_uri= "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_download_path}"
+            data_uri= "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}"
         ),
         easymaker.Dataset(
             dataset_name="test",
-            data_uri="obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_download_path}"
+            data_uri="obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_path}"
         )
     ],
     metric_list=[
