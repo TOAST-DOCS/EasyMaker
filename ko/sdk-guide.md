@@ -971,6 +971,8 @@ for pipeline_recurring_run in pipeline_recurring_run_list:
 easymaker.PipelineRecurringRun(pipeline_recurring_run_id).delete()
 ```
 
+## 기타 기능
+
 ### NHN Cloud - Log & Crash Search 로그 전송
 
 ```python
