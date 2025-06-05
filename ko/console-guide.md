@@ -1694,19 +1694,19 @@ model-archiver를 사용해서 만든 MAR 파일을 사용하는 것을 권장�
 
 ```bash
 # 요청 예제
-  curl --location --request POST '{API Gateway 리소스 경로}' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{
-      "instances": [
-          [1.0, 2.0],
-          [3.0, 4.0]
-      ]
-  }'
+curl --location --request POST '{API Gateway 리소스 경로}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "instances": [
+        [1.0, 2.0],
+        [3.0, 4.0]
+    ]
+}'
 ```
 
 ```python
 class TestHandler(BaseHandler):
-    ...
+    # ...
     def preprocess(self, data): # 예시 : data = [[1.0, 2.0], [3.0, 4.0]]
         features = []
         for row in data:
@@ -1714,7 +1714,7 @@ class TestHandler(BaseHandler):
             features.append(content)
         tensor = torch.tensor(features, dtype=torch.float32).to(self.device)
         return tensor
-    ...
+    # ...
 ```
 
 #### Scikit-learn 프레임워크
