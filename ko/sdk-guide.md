@@ -48,6 +48,14 @@ experiment = easymaker.Experiment().create(
 )
 ```
 
+### 실험 목록 조회
+
+```python
+experiment_list = easymaker.Experiment.get_list()
+for experiment in experiment_list:
+    experiment.print_info()
+```
+
 ### 실험 삭제
 
 [파라미터]
@@ -147,6 +155,14 @@ training = easymaker.Training().run(
     use_log=True,
     # wait=False,
 )
+```
+
+### 학습 목록 조회
+
+```python
+training_list = easymaker.Training.get_list()
+for training in training_list:
+    training.print_info()
 ```
 
 ### 학습 삭제
@@ -289,6 +305,14 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
 )
 ```
 
+### 하이퍼파라미터 튜닝 목록 조회
+
+```python
+hyperparameter_tuning_list = easymaker.HyperparameterTuning.get_list()
+for hyperparameter_tuning in hyperparameter_tuning_list:
+    hyperparameter_tuning.print_info()
+```
+
 ### 하이퍼파라미터 튜닝 삭제
 
 [파라미터]
@@ -358,6 +382,14 @@ model = easymaker.Model().create_hugging_face_model(
         }
     ],
 )
+```
+
+### 모델 목록 조회
+
+```python
+model_list = easymaker.Model.get_list()
+for model in model_list:
+    model.print_info()
 ```
 
 ### 모델 삭제
@@ -480,6 +512,14 @@ classification_model_evaluation  = easymaker.ModelEvaluation().create(
     use_log=False,
     wait=True,
 )
+```
+
+### 모델 평가 목록 조회
+
+```python
+model_evaluation_list = easymaker.ModelEvaluation.get_list()
+for model_evaluation in model_evaluation_list:
+    model_evaluation.print_info()
 ```
 
 ### 모델 평가 삭제
@@ -631,6 +671,14 @@ easymaker.EndpointStage('endpoint_stage_id').predict(
 )
 ```
 
+### 엔드포인트 목록 조회
+
+```python
+endpoint_list = easymaker.Endpoint.get_list()
+for endpoint in endpoint_list:
+    endpoint.print_info()
+```
+
 ### 엔드포인트 삭제
 
 [파라미터]
@@ -711,6 +759,14 @@ batch_inference = easymaker.BatchInference().run(
 )
 ```
 
+### 배치 추론 목록 조회
+
+```python
+batch_inference_list = easymaker.BatchInference.get_list()
+for batch_inference in batch_inference_list:
+    batch_inference.print_info()
+```
+
 ### 배치 추론 삭제
 
 [파라미터]
@@ -743,6 +799,14 @@ pipeline = easymaker.Pipeline().upload(
     description='test',
     # wait=False,
 )
+```
+
+### 파이프라인 목록 조회
+
+```python
+pipeline_list = easymaker.Pipeline.get_list()
+for pipeline in pipeline_list:
+    pipeline.print_info()
 ```
 
 ### 파이프라인 삭제
@@ -803,6 +867,14 @@ pipeline_run = easymaker.PipelineRun().create(
     ],
     # wait=False,
 )
+```
+
+### 파이프라인 실행 목록 조회
+
+```python
+pipeline_run_list = easymaker.PipelineRun.get_list()
+for pipeline_run in pipeline_run_list:
+    pipeline_run.print_info()
 ```
 
 ### 파이프라인 실행 삭제
@@ -879,6 +951,14 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).start()
 
 ```
 
+### 파이프라인 일정 목록 조회
+
+```python
+pipeline_recurring_run_list = easymaker.PipelineRecurringRun.get_list()
+for pipeline_recurring_run in pipeline_recurring_run_list:
+    pipeline_recurring_run.print_info()
+```
+
 ### 파이프라인 일정 삭제
 
 [파라미터]
@@ -889,18 +969,6 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).start()
 
 ```python
 easymaker.PipelineRecurringRun(pipeline_recurring_run_id).delete()
-```
-
-## 기타 기능
-
-### (공통) 목록 조회
-
-.get_list() 를 통해 목록 조회를 할 수 있습니다. 
-
-```python
-easymaker_resource_list = easymaker.Experiment.get_list() #  easymaker.Training.get_list(), easymaker.ModelEvaluation.get_list(), ...
-for easymaker_resource in easymaker_resource_list:
-    easymaker_resource.print_info()
 ```
 
 ### NHN Cloud - Log & Crash Search 로그 전송
