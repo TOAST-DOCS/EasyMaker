@@ -26,21 +26,6 @@ easymaker.init(
 )
 ```
 
-## CLI Command
-
-앱키, 인증 토큰, 리전 정보를 알고 있다면, 콘솔에 접근하지 않고도 파이썬 CLI를 통해 여러 정보를 확인할 수 있습니다.
-
-| 기능                      | 명령어                                                                                        |
-|-------------------------|--------------------------------------------------------------------------------------------|
-| 인스턴스 타입 목록 조회           | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -instance   |
-| 학습 이미지 목록 조회            | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -image      |
-| NHN Cloud 제공 알고리즘 목록 조회 | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -algorithm  |
-| 실험 목록 조회                | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -experiment |
-| 학습 목록 조회                | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -training   |
-| 하이퍼파라미터 튜닝 목록 조회        | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -tuning     |
-| 모델 목록 조회                | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -model      |
-| 엔드포인트 목록 조회             | python -m easymaker --region kr1 --appkey EM_APPKEY --access_token EM_ACCESS_TOKEN -endpoint   |
-
 ## 실험
 
 ### 실험 생성
@@ -63,6 +48,14 @@ experiment = easymaker.Experiment().create(
 )
 ```
 
+### 실험 목록 조회
+
+```python
+experiment_list = easymaker.Experiment.get_list()
+for experiment in experiment_list:
+    experiment.print_info()
+```
+
 ### 실험 삭제
 
 [파라미터]
@@ -77,36 +70,52 @@ easymaker.Experiment(experiment_id).delete()
 
 ## 학습
 
+### 이미지 목록 조회
+
+```python
+image_list = easymaker.Training.get_image_list()
+for image in image_list:
+    image.print_info()
+```
+
+### 인스턴스 목록 조회
+
+```python
+instance_type_list = easymaker.Training.get_instance_type_list()
+for instance in instance_type_list:
+    instance.print_info()
+```
+
 ### 학습 생성
 
 [파라미터]
 
-| 이름                                    | 타입      | 필수 여부                     | 기본값   | 유효 범위       | 설명                                                              |
-|---------------------------------------|---------|---------------------------|-------|-------------|-----------------------------------------------------------------|
-| experiment_id                         | String  | easymaker.init에서 미입력 시 필수 | 없음    | 최대 36자          | 실험 ID                                                           |
-| training_name                         | String  | 필수                        | 없음    | 최대 50자      | 학습 이름                                                           |
-| description                  | String  | 선택                        | 없음    | 최대 255자     | 학습에 대한 설명                                                       |
-| image_name                      | String  | 필수                        | 없음    | 없음          | 학습에 사용될 이미지 이름(CLI로 조회 가능)                                      |
-| instance_type_name                   | String  | 필수                        | 없음    | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
-| distributed_node_count                | Integer | 필수                        | 없음    | 1~10         | 분산 학습을 적용할 노드 수                                                 |
-| use_torchrun                          | Boolean | 선택                        | False  | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                            |
-| nproc_per_node                        | Integer | use_torchrun True 시 필수    | 1      | 1~(CPU 개수 또는 GPU 개수) | 노드당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값       |
-| data_storage_size                     | Integer | Obejct Storage 사용 시 필수    | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요               |
-| algorithm_name                        | String  | NHN Cloud 제공 알고리즘 사용 시 필수 | 없음    | 최대 64자      | 알고리즘 이름(CLI로 조회 가능)                                             |
-| source_dir_uri                        | String  | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어 있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
-| entry_point                           | String  | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                             |
-| model_upload_uri                      | String  | 필수                        | 없음    | 최대 255자     | 학습 완료된 모델이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)   |
-| check_point_input_uri                 | String  | 선택                        | 없음    | 최대 255자     | 입력 체크 포인트 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)                 |
-| check_point_upload_uri                | String  | 선택                        | 없음    | 최대 255자     | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)   |
-| timeout_hours                         | Integer | 선택                        | 720   | 1~720       | 최대 학습 시간(단위: 시간)                                                |
-| hyperparameter_list                   | Array   | 선택                        | 없음    | 최대 100개     | 하이퍼파라미터 정보(parameterName/parameterValue로 구성)           |
-| hyperparameter_list[0].parameterName  | String  | 선택                        | 없음    | 최대 255자     | 하이퍼파라미터 키                                                       |
-| hyperparameter_list[0].parameterValue | String  | 선택                        | 없음    | 최대 1000자    | 하이퍼파라미터 값                                                       |
-| dataset_list                          | Array   | 선택                        | 없음    | 최대 10개      | 학습에 사용될 데이터 세트 정보(datasetName/dataUri로 구성)                      |
-| dataset_list[0].datasetName           | String  | 선택                        | 없음    | 최대 36자      | 데이터 이름                                                          |
-| dataset_list[0].datasetUri            | String  | 선택                        | 없음    | 최대 255자     | 데이터 경로                                                          |
-| use_log                               | Boolean | 선택                        | False | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                                      |
-| wait                                  | Boolean | 선택                        | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+| 이름                                     | 타입                        | 필수 여부                     | 기본값   | 유효 범위       | 설명                                                               |
+|----------------------------------------|---------------------------|---------------------------|-------|-------------|------------------------------------------------------------------|
+| experiment_id                          | String                    | easymaker.init에서 미입력 시 필수 | 없음    | 최대 36자          | 실험 ID                                                            |
+| training_name                          | String                    | 필수                        | 없음    | 최대 50자      | 학습 이름                                                            |
+| description                            | String                    | 선택                        | 없음    | 최대 255자     | 학습에 대한 설명                                                        |
+| image_name                             | String                    | 필수                        | 없음    | 없음          | 학습에 사용될 이미지 이름(CLI로 조회 가능)                                       |
+| instance_type_name                     | String                    | 필수                        | 없음    | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                                           |
+| distributed_node_count                 | Integer                   | 필수                        | 없음    | 1~10         | 분산 학습을 적용할 노드 수                                                  |
+| use_torchrun                           | Boolean                   | 선택                        | False  | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                             |
+| nproc_per_node                         | Integer                   | use_torchrun True 시 필수    | 1      | 1~(CPU 개수 또는 GPU 개수) | 노드당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값                  |
+| data_storage_size                      | Integer                   | Obejct Storage 사용 시 필수    | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                |
+| algorithm_name                         | String                    | NHN Cloud 제공 알고리즘 사용 시 필수 | 없음    | 최대 64자      | 알고리즘 이름(CLI로 조회 가능)                                              |
+| source_dir_uri                         | String                    | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어 있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
+| entry_point                            | String                    | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                              |
+| model_upload_uri                       | String                    | 필수                        | 없음    | 최대 255자     | 학습 완료된 모델이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)    |
+| check_point_input_uri                  | String                    | 선택                        | 없음    | 최대 255자     | 입력 체크 포인트 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)       |
+| check_point_upload_uri                 | String                    | 선택                        | 없음    | 최대 255자     | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)    |
+| timeout_hours                          | Integer                   | 선택                        | 720   | 1~720       | 최대 학습 시간(단위: 시간)                                                 |
+| hyperparameter_list                    | easymaker.Parameter Array | 선택                        | 없음    | 최대 100개     | 하이퍼파라미터 정보(parameter_name/parameter_value로 구성)                  |
+| hyperparameter_list[0].parameter_name  | String                    | 선택                        | 없음    | 최대 255자     | 하이퍼파라미터 키                                                        |
+| hyperparameter_list[0].parameter_value | String                    | 선택                        | 없음    | 최대 1000자    | 하이퍼파라미터 값                                                        |
+| dataset_list                           | easymaker.Dataset Array   | 선택                        | 없음    | 최대 10개      | 학습에 사용될 데이터 세트 정보(dataset_name/data_uri로 구성)                       |
+| dataset_list[0].dataset_name           | String                    | 선택                        | 없음    | 최대 36자      | 데이터 이름                                                           |
+| dataset_list[0].data_uri               | String                    | 선택                        | 없음    | 최대 255자     | 데이터 경로                                                           |
+| use_log                                | Boolean                   | 선택                        | False | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                               |
+| wait                                   | Boolean                   | 선택                        | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                        |
 
 ```python
 training = easymaker.Training().run(
@@ -120,32 +129,40 @@ training = easymaker.Training().run(
     source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
     entry_point='training_start.py',
     hyperparameter_list=[
-        {
-            "parameterName": "epochs",
-            "parameterValue": "10",
-        },
-        {
-            "parameterName": "batch-size",
-            "parameterValue": "30",
-        }
+        easymaker.Parameter(
+            parameter_name= "epochs",
+            parameter_value= "10",
+        ),
+        easymaker.Parameter(
+            parameter_name= "batch-size",
+            parameter_value= "30",
+        ),
     ],
     timeout_hours=100,
     model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     check_point_input_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_input_path}',
     check_point_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
     dataset_list=[
-        {
-            "datasetName": "train",
-            "dataUri": "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_download_path}"
-        },
-        {
-            "datasetName": "test",
-            "dataUri": "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_download_path}"
-        }
+        easymaker.Dataset(
+            dataset_name= "train",
+            data_uri= "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}",
+        ),
+        easymaker.Dataset(
+            dataset_name= "test",
+            data_uri= "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_path}",
+        ),
     ],
     use_log=True,
     # wait=False,
 )
+```
+
+### 학습 목록 조회
+
+```python
+training_list = easymaker.Training.get_list()
+for training in training_list:
+    training.print_info()
 ```
 
 ### 학습 삭제
@@ -162,53 +179,70 @@ easymaker.Training(training_id).delete()
 
 ## 하이퍼파라미터 튜닝
 
+### 이미지 목록 조회
+
+```python
+image_list = easymaker.HyperparameterTuning.get_image_list()
+for image in image_list:
+    image.print_info()
+```
+
+### 인스턴스 목록 조회
+
+```python
+instance_type_list = easymaker.HyperparameterTuning.get_instance_type_list()
+for instance in instance_type_list:
+    instance.print_info()
+```
+
 ### 하이퍼파라미터 튜닝 생성
 
 [파라미터]
 
-| 이름                                                            | 타입             | 필수 여부                                                 | 기본값   | 유효 범위                                        | 설명                                                                         |
-|---------------------------------------------------------------|----------------|-------------------------------------------------------|-------|----------------------------------------------|----------------------------------------------------------------------------|
-| experiment_id                                                 | String         | easymaker.init에서 미입력 시 필수                             | 없음    | 최대 36자                                           | 실험 ID                                                                      |
-| hyperparameter_tuning_name                                    | String         | 필수                                                    | 없음    | 최대 50자                                       | 하이퍼파라미터 튜닝 이름                                                              |
-| description                             | String         | 선택                                                    | 없음    | 최대 255자                                      | 하이퍼파라미터 튜닝에 대한 설명                                                          |
-| image_name                                                    | String         | 필수                                                    | 없음    | 없음                                           | 하이퍼파라미터 튜닝에 사용될 이미지 이름(CLI로 조회 가능)                                         |
-| instance_type_name                                                 | String         | 필수                                                    | 없음    | 없음                                           | 인스턴스 타입 이름(CLI로 조회 가능)                                                     |
-| distributed_node_count                                        | Integer        | 필수                                                    | 1      | distributed_node_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 각 학습당 분산 학습을 적용할 노드 수                                                      |
-| parallel_trial_count                                          | Integer        | 필수                                                    | 1      | distributed_node_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 병렬로 실행할 학습 수                                                          |
-| use_torchrun                                                  | Boolean        | 선택                                                    | False  | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                                                 |
-| nproc_per_node                                                | Integer        | use_torchrun True 시 필수                                | 1      | 1~(CPU 개수 또는 GPU 개수) | 노드 당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값                                         |
-| data_storage_size                                             | Integer        | Obejct Storage 사용 시 필수                                | 없음    | 300~10000                                    | 하이퍼파라미터 튜닝에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                  |
-| algorithm_name                                                | String         | NHN Cloud 제공 알고리즘 사용 시 필수                             | 없음    | 최대 64자                                       | 알고리즘 이름(CLI로 조회 가능)                                                        |
-| source_dir_uri                                                | String         | 자체 알고리즘 사용 시 필수                                       | 없음    | 최대 255자                                      | 하이퍼파라미터 튜닝에 필요한 파일들이 들어있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)    |
-| entry_point                                                   | String         | 자체 알고리즘 사용 시 필수                                       | 없음    | 최대 255자                                      | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                                        |
-| model_upload_uri                                              | String         | 필수                                                    | 없음    | 최대 255자                                      | 하이퍼파라미터 튜닝에서 학습 완료된 모델이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
-| check_point_input_uri                                         | String         | 선택                                                    | 없음    | 최대 255자                                      | 입력 체크 포인트 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)                 |
-| check_point_upload_uri                                        | String         | 선택                                                    | 없음    | 최대 255자                                      | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)              |
-| timeout_hours                                                 | Integer        | 선택                                                    | 720   | 1~720                                        | 최대 하이퍼파라미터 튜닝 시간(단위: 시간)                                                   |
-| hyperparameter_spec_list                                      | Array          | 선택                                                    | 없음    | 최대 100개                                      | 하이퍼파라미터 스펙 정보                                                              |
-| hyperparameter_spec_list[0].<br>hyperparameterName            | String         | 선택                                                    | 없음    | 최대 255자                                      | 하이퍼파라미터 이름                                                                 |
-| hyperparameter_spec_list[0].<br>hyperparameterTypeCode        | String         | 선택                                                    | 없음    | INT, DOUBLE, DISCRETE, CATEGORICAL           | 하이퍼파라미터 타입                                                                 |
-| hyperparameter_spec_list[0].<br>hyperparameterMinValue        | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수            | 없음    | 없음                                           | 하이퍼파라미터 최솟값                                                                |
-| hyperparameter_spec_list[0].<br>hyperparameterMaxValue        | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수            | 없음    | 없음                                           | 하이퍼파라미터 최댓값                                                                |
-| hyperparameter_spec_list[0].<br>hyperparameterStep            | Integer/Double | hyperparameterTypeCode가 INT, DOUBLE이면서 GRID 전략인 경우 필수 | 없음    | 없음                                           | "Grid" 튜닝 전략을 사용할 때 하이퍼파라미터 값의 변화 크기                                       |
-| hyperparameter_spec_list[0].<br>hyperparameterSpecifiedValues | String         | hyperparameterTypeCode가 DISCRETE, CATEGORICAL 경우 필수   | 없음    | 최대 3000자                                       | 정해진 하이퍼파라미터 목록(`,`로 구분된 문자열이나 숫자)                                          |
-| dataset_list                                                  | Array          | 선택                                                    | 없음    | 최대 10개                                       | 하이퍼파라미터 튜닝에 사용될 데이터 세트 정보(datasetName/dataUri로 구성)                         |
-| dataset_list[0].datasetName                                   | String         | 선택                                                    | 없음    | 최대 36자                                       | 데이터 이름                                                                     |
-| dataset_list[0].datasetUri                                    | String         | 선택                                                    | 없음    | 최대 255자                                      | 데이터 경로                                                                     |
-| metric_list                                                   | Array          | 자체 알고리즘 사용 시 필수                                       | 없음    | 최대 10개(지표 이름들로 된 문자열 리스트)                    | 학습 코드가 출력하는 로그 중에 어떤 지표를 수집할지 정의                                       |
-| metric_regex                                                  | String         | 자체 알고리즘 사용 시 선택                                       | ([\w\ | -]+)\s*=\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?) | 최대 255자                                                                    | 지표를 수집하는 데 사용할 정규 표현식을 입력. 학습 알고리즘이 정규 표현식에 맞게 지표를 출력해야 함.                                                        |
-| objective_metric_name                                         | String         | 자체 알고리즘 사용 시 필수                                       | 없음    | 최대 36자, metric_list 중 하나                     | 어떤 지표를 최적화하는 게 목표인지 선택                                                 |
-| objective_type_code                                           | String         | 자체 알고리즘 사용 시 필수                                       | 없음    | MINIMIZE, MAXIMIZE                           | 목표 지표 최적화 유형 선택                                                       |
-| objective_goal                                                | Double         | 선택                                                    | 없음    | 없음                                           | 목표 지표가 이 값에 도달하면 튜닝 작업이 종료됨                                             |
-| max_failed_trial_count                                        | Integer        | 선택                                                    | 없음    | 없음                                           | 실패한 학습의 최대 개수를 정의. 실패한 학습의 개수가 이 값에 도달하면 튜닝이 실패로 종료됨.                 |
-| max_trial_count                                               | Integer        | 선택                                                    | 없음    | 없음                                           | 최대 학습 수를 정의. 자동 실행된 학습의 개수가 이 값에 도달할 때까지 튜닝이 실행됨.                     |
-| tuning_strategy_name                                          | String         | 필수                                                    | 없음    | 없음                                           | 어떤 전략을 사용해서 최적의 하이퍼파라미터를 찾을지 선택                                        |
-| tuning_strategy_random_state                                  | Integer        | 선택                                                    | 없음    | 없음                                           | 난수 생성을 결정. 재현 가능한 결과를 위해 고정된 값으로 지정함.                                 |
-| early_stopping_algorithm                                      | String         | 필수                                                    | 없음    | EARLY_STOPPING_ALGORITHM.<br>MEDIAN          | 학습이 계속 진행되어도 모델이 더 이상 좋아지지 않으면 학습을 조기에 종료                              |
-| early_stopping_min_trial_count                                | Integer        | 필수                                                    | 3     | 없음                                           | 중간값을 계산할 때 몇 개의 학습으로부터 목표 지표 값을 가져올지 정의                                |
-| early_stopping_start_step                                     | Integer        | 필수                                                    | 4     | 없음                                           | 몇 번째 학습 단계부터 조기 중지를 적용할지 설정합니다.                                            |
-| use_log                                                       | Boolean        | 선택                                                    | False | True, False                                  | Log & Crash Search 서비스에 로그를 남길지 여부                                                 |
-| wait                                                          | Boolean        | 선택                                                    | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+| 이름                                                               | 타입                                 | 필수 여부                                                         | 기본값   | 유효 범위                                                  | 설명                                                                         |
+|------------------------------------------------------------------|------------------------------------|---------------------------------------------------------------|-------|--------------------------------------------------------|----------------------------------------------------------------------------|
+| experiment_id                                                    | String                             | easymaker.init에서 미입력 시 필수                                     | 없음    | 최대 36자                                                 | 실험 ID                                                                      |
+| hyperparameter_tuning_name                                       | String                             | 필수                                                            | 없음    | 최대 50자                                                 | 하이퍼파라미터 튜닝 이름                                                              |
+| description                                                      | String                             | 선택                                                            | 없음    | 최대 255자                                                | 하이퍼파라미터 튜닝에 대한 설명                                                          |
+| image_name                                                       | String                             | 필수                                                            | 없음    | 없음                                                     | 하이퍼파라미터 튜닝에 사용될 이미지 이름(CLI로 조회 가능)                                         |
+| instance_type_name                                               | String                             | 필수                                                            | 없음    | 없음                                                     | 인스턴스 타입 이름(CLI로 조회 가능)                                                     |
+| distributed_node_count                                           | Integer                            | 필수                                                            | 1      | distributed_node_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 각 학습당 분산 학습을 적용할 노드 수                                         |
+| parallel_trial_count                                             | Integer                            | 필수                                                            | 1      | distributed_node_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 병렬로 실행할 학습 수                                                  |
+| use_torchrun                                                     | Boolean                            | 선택                                                            | False  | True, False                                            | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                                       |
+| nproc_per_node                                                   | Integer                            | use_torchrun True 시 필수                                        | 1      | 1~(CPU 개수 또는 GPU 개수)                                   | 노드 당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값                           |
+| data_storage_size                                                | Integer                            | Obejct Storage 사용 시 필수                                        | 없음    | 300~10000                                              | 하이퍼파라미터 튜닝에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                  |
+| algorithm_name                                                   | String                             | NHN Cloud 제공 알고리즘 사용 시 필수                                     | 없음    | 최대 64자                                                 | 알고리즘 이름(CLI로 조회 가능)                                                        |
+| source_dir_uri                                                   | String                             | 자체 알고리즘 사용 시 필수                                               | 없음    | 최대 255자                                                | 하이퍼파라미터 튜닝에 필요한 파일들이 들어있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)    |
+| entry_point                                                      | String                             | 자체 알고리즘 사용 시 필수                                               | 없음    | 최대 255자                                                | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                                        |
+| model_upload_uri                                                 | String                             | 필수                                                            | 없음    | 최대 255자                                                | 하이퍼파라미터 튜닝에서 학습 완료된 모델이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
+| check_point_input_uri                                            | String                             | 선택                                                            | 없음    | 최대 255자                                                | 입력 체크 포인트 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)                 |
+| check_point_upload_uri                                           | String                             | 선택                                                            | 없음    | 최대 255자                                                | 체크 포인트 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)              |
+| timeout_hours                                                    | Integer                            | 선택                                                            | 720   | 1~720                                                  | 최대 하이퍼파라미터 튜닝 시간(단위: 시간)                                                   |
+| hyperparameter_spec_list                                         | easymaker.HyperparameterSpec Array | 선택                                                            | 없음    | 최대 100개                                                | 하이퍼파라미터 스펙 정보                                                              |
+| hyperparameter_spec_list[0].<br>hyperparameter_name              | String                             | 선택                                                            | 없음    | 최대 255자                                                | 하이퍼파라미터 이름                                                                 |
+| hyperparameter_spec_list[0].<br>hyperparameter_type_code         | easymaker.HYPERPARAMETER_TYPE_CODE                            | 선택                                                            | 없음    | INT, DOUBLE, DISCRETE, CATEGORICAL                     | 하이퍼파라미터 타입                                                                 |
+| hyperparameter_spec_list[0].<br>hyperparameter_min_value         | String                     | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수(string 타입으로 숫자 입력) | 없음    | 없음                                                     | 하이퍼파라미터 최솟값                                                                |
+| hyperparameter_spec_list[0].<br>hyperparameter_max_value         | String                     | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수(string 타입으로 숫자 입력)                    | 없음    | 없음                                                     | 하이퍼파라미터 최댓값                                                                |
+| hyperparameter_spec_list[0].<br>hyperparameter_step              | String                     | hyperparameterTypeCode가 INT, DOUBLE이면서 GRID 전략인 경우 필수         | 없음    | 없음                                                     | "Grid" 튜닝 전략을 사용할 때 하이퍼파라미터 값의 변화 크기                                       |
+| hyperparameter_spec_list[0].<br>hyperparameter_specified_values | String                             | hyperparameterTypeCode가 DISCRETE, CATEGORICAL 경우 필수           | 없음    | 최대 3000자                                               | 정해진 하이퍼파라미터 목록(`,`로 구분된 문자열이나 숫자)                                          |
+| dataset_list                                                     | easymaker.Dataset Array            | 선택                                                            | 없음    | 최대 10개                                                 | 하이퍼파라미터 튜닝에 사용될 데이터 세트 정보(dataset_name/data_uri로 구성)                       |
+| dataset_list[0].dataset_name                                     | String                             | 선택                                                            | 없음    | 최대 36자                                                 | 데이터 이름                                                                     |
+| dataset_list[0].dataset_uri                                      | String                             | 선택                                                            | 없음    | 최대 255자                                                | 데이터 경로                                                                     |
+| metric_list                                                      | easymaker.Metric                   | 자체 알고리즘 사용 시 필수                                               | 없음    | 최대 10개(지표 이름들로 된 문자열 리스트)                              | 학습 코드가 출력하는 로그 중에 어떤 지표를 수집할지 정의                                           |
+| metric_list[0].name                                              | String                             | 자체 알고리즘 사용 시 필수                                               | 없음    | 없음                                                     | 지표 이름                                                                      |
+| metric_regex                                                     | String                             | 자체 알고리즘 사용 시 선택                                               | ([\w\ | -]+)\s*=\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?)           | 최대 255자                                                                    | 지표를 수집하는 데 사용할 정규 표현식을 입력. 학습 알고리즘이 정규 표현식에 맞게 지표를 출력해야 함.                                                        |
+| objective_metric_name                                            | String                             | 자체 알고리즘 사용 시 필수                                               | 없음    | 최대 36자, metric_list 중 하나                               | 어떤 지표를 최적화하는 게 목표인지 선택                                                     |
+| objective_type_code                                              | easymaker.OBJECTIVE_TYPE_CODE                             | 자체 알고리즘 사용 시 필수                                               | 없음    | MINIMIZE, MAXIMIZE                                     | 목표 지표 최적화 유형 선택                                                            |
+| objective_goal                                                   | Double                             | 선택                                                            | 없음    | 없음                                                     | 목표 지표가 이 값에 도달하면 튜닝 작업이 종료됨                                                |
+| max_failed_trial_count                                           | Integer                            | 선택                                                            | 없음    | 없음                                                     | 실패한 학습의 최대 개수를 정의. 실패한 학습의 개수가 이 값에 도달하면 튜닝이 실패로 종료됨.                      |
+| max_trial_count                                                  | Integer                            | 선택                                                            | 없음    | 없음                                                     | 최대 학습 수를 정의. 자동 실행된 학습의 개수가 이 값에 도달할 때까지 튜닝이 실행됨.                          |
+| tuning_strategy_name                                             | easymaker.TUNING_STRATEGY                             | 필수                                                            | 없음    | 없음                                                     | 어떤 전략을 사용해서 최적의 하이퍼파라미터를 찾을지 선택                                            |
+| tuning_strategy_random_state                                     | Integer                            | 선택                                                            | 없음    | 없음                                                     | 난수 생성을 결정. 재현 가능한 결과를 위해 고정된 값으로 지정함.                                      |
+| early_stopping_algorithm                                         | easymaker.EARLY_STOPPING_ALGORITHM                             | 필수                                                            | 없음    | EARLY_STOPPING_ALGORITHM.<br>MEDIAN                    | 학습이 계속 진행되어도 모델이 더 이상 좋아지지 않으면 학습을 조기에 종료                                  |
+| early_stopping_min_trial_count                                   | Integer                            | 필수                                                            | 3     | 없음                                                     | 중간값을 계산할 때 몇 개의 학습으로부터 목표 지표 값을 가져올지 정의                                    |
+| early_stopping_start_step                                        | Integer                            | 필수                                                            | 4     | 없음                                                     | 몇 번째 학습 단계부터 조기 중지를 적용할지 설정합니다.                                            |
+| use_log                                                          | Boolean                            | 선택                                                            | False | True, False                                            | Log & Crash Search 서비스에 로그를 남길지 여부                                         |
+| wait                                                             | Boolean                            | 선택                                                            | True   | True, False                                            | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                                  |
 
 ```python
 hyperparameter_tuning = easymaker.HyperparameterTuning().run(
@@ -223,34 +257,38 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
     entry_point='training_start.py',
     hyperparameter_spec_list=[
-        {
-            "hyperparameterName": "learning_rate",
-            "hyperparameterTypeCode": easymaker.HYPERPARAMETER_TYPE_CODE.DOUBLE,
-            "hyperparameterMinValue": "0.01",
-            "hyperparameterMaxValue": "0.05",
-        },
-         {
-            "hyperparameterName": "epochs",
-            "hyperparameterTypeCode": easymaker.HYPERPARAMETER_TYPE_CODE.INT,
-            "hyperparameterMinValue": "100",
-            "hyperparameterMaxValue": "1000",
-        }
+        easymaker.HyperparameterSpec(
+            hyperparameter_name="learning_rate",
+            hyperparameter_type_code=easymaker.HYPERPARAMETER_TYPE_CODE.DOUBLE,
+            hyperparameter_min_value="0.01",
+            hyperparameter_max_value="0.05",
+        ),
+        easymaker.HyperparameterSpec(
+            hyperparameter_name="epochs",
+            hyperparameter_type_code=easymaker.HYPERPARAMETER_TYPE_CODE.INT,
+            hyperparameter_min_value="100",
+            hyperparameter_max_value="1000",
+        )
     ],
     timeout_hours=10,
     model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     check_point_input_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_input_path}',
     check_point_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
     dataset_list=[
-        {
-            "datasetName": "train",
-            "dataUri": "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_download_path}"
-        },
-        {
-            "datasetName": "test",
-            "dataUri": "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_download_path}"
-        }
+        easymaker.Dataset(
+            dataset_name="train",
+            data_uri= "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}"
+        ),
+        easymaker.Dataset(
+            dataset_name="test",
+            data_uri="obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_path}"
+        )
     ],
-    metric_list=["val_loss", "loss", "accuracy"],
+    metric_list=[
+        easymaker.Metric(name="loss"),
+        easymaker.Metric(name="accuracy"),
+        easymaker.Metric(name="val_loss"),
+    ],
     metric_regex='([\w|-]+)\s*:\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?)',
     objective_metric_name="val_loss",
     objective_type_code=easymaker.OBJECTIVE_TYPE_CODE.MINIMIZE,
@@ -265,6 +303,14 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     use_log=True,
     # wait=False,
 )
+```
+
+### 하이퍼파라미터 튜닝 목록 조회
+
+```python
+hyperparameter_tuning_list = easymaker.HyperparameterTuning.get_list()
+for hyperparameter_tuning in hyperparameter_tuning_list:
+    hyperparameter_tuning.print_info()
 ```
 
 ### 하이퍼파라미터 튜닝 삭제
@@ -338,6 +384,14 @@ model = easymaker.Model().create_hugging_face_model(
 )
 ```
 
+### 모델 목록 조회
+
+```python
+model_list = easymaker.Model.get_list()
+for model in model_list:
+    model.print_info()
+```
+
 ### 모델 삭제
 
 [파라미터]
@@ -351,6 +405,14 @@ easymaker.Model(model_id).delete()
 ```
 
 ## 모델 평가
+
+### 인스턴스 목록 조회
+
+```python
+instance_type_list = easymaker.ModelEvaluation.get_instance_type_list()
+for instance in instance_type_list:
+    instance.print_info()
+```
 
 ### 모델 평가 생성
 
@@ -452,6 +514,14 @@ classification_model_evaluation  = easymaker.ModelEvaluation().create(
 )
 ```
 
+### 모델 평가 목록 조회
+
+```python
+model_evaluation_list = easymaker.ModelEvaluation.get_list()
+for model_evaluation in model_evaluation_list:
+    model_evaluation.print_info()
+```
+
 ### 모델 평가 삭제
 
 [파라미터]
@@ -466,29 +536,37 @@ easymaker.ModelEvaluation(model_evaluation_id).delete()
 
 ## 엔드포인트
 
+### 인스턴스 목록 조회
+
+```python
+instance_type_list = easymaker.Endpoint.get_instance_type_list()
+for instance in instance_type_list:
+    instance.print_info()
+```
+
 ### 엔드포인트 생성
 
 엔드포인트 생성 시 기본 스테이지가 생성됩니다.
 
 [파라미터]
 
-| 이름                                                          | 타입      | 필수 여부 | 기본값   | 유효 범위                      | 설명                                                                     |
-|-------------------------------------------------------------|---------|-------|-------|----------------------------|------------------------------------------------------------------------|
-| endpoint_name                                               | String  | 필수    | 없음    | 최대 50자                     | 엔드포인트 이름                                                               |
-| description                                        | String  | 선택    | 없음    | 최대 255자                    | 엔드포인트에 대한 설명                                                           |
-| instance_type_name                                      | String  | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                                  |
-| instance_count                                     | Integer | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                      |
-| endpoint_model_resource_list                                | Array   | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
-| endpoint_model_resource_list[0].modelId                     | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
-| endpoint_model_resource_list[0].resourceOptionDetail        | Object   | 필수    | 없음    |                                  | 스테이지 리소스의 상세 정보                 |
-| endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
-| endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
-| endpoint_model_resource_list[0].podAutoScaleEnable          | Boolean  | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
-| endpoint_model_resource_list[0].scaleMetricCode             | String   | 선택    | 없음    | CPU_UTILIZATION, MEMORY_UTILIZATION | 스테이지 리소스에 사용될 증설 단위          |
-| endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
-| endpoint_model_resource_list[0].description                 | String   | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
-| use_log                                                     | Boolean | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                             |
-| wait                                                        | Boolean | 선택    | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+| 이름                                                          | 타입                                    | 필수 여부 | 기본값   | 유효 범위                      | 설명                                                                     |
+|-------------------------------------------------------------|---------------------------------------|-------|-------|----------------------------|------------------------------------------------------------------------|
+| endpoint_name                                               | String                                | 필수    | 없음    | 최대 50자                     | 엔드포인트 이름                                                               |
+| description                                                 | String                                | 선택    | 없음    | 최대 255자                    | 엔드포인트에 대한 설명                                                           |
+| instance_type_name                                          | String                                | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                                  |
+| instance_count                                              | Integer                               | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                      |
+| endpoint_model_resource_list                                | easymaker.EndpointModelResource Array | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
+| endpoint_model_resource_list[0].model_id                   | String                                | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
+| endpoint_model_resource_list[0].resource_option_detail        | easymaker.ResourceOptionDetail        | 필수    | 없음    |                                  | 스테이지 리소스의 상세 정보                 |
+| endpoint_model_resource_list[0].resource_option_detail.cpu    | String                                | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
+| endpoint_model_resource_list[0].resource_option_detail.memory | String                                | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
+| endpoint_model_resource_list[0].pod_auto_scale_enable          | Boolean                               | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
+| endpoint_model_resource_list[0].scale_metric_code             | easymaker.SCALE_METRIC_CODE           | 선택    | 없음    | CPU_UTILIZATION, MEMORY_UTILIZATION | 스테이지 리소스에 사용될 증설 단위          |
+| endpoint_model_resource_list[0].scale_metric_target           | Integer                               | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
+| endpoint_model_resource_list[0].description                 | String                                | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
+| use_log                                                     | Boolean                               | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                             |
+| wait                                                        | Boolean                               | 선택    | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
 endpoint = easymaker.Endpoint().create(
@@ -497,14 +575,16 @@ endpoint = easymaker.Endpoint().create(
     instance_type_name='c2.c16m16',
     instance_count=1,
     endpoint_model_resource_list=[
-        {
-            'modelId': model.model_id,
-            'resourceOptionDetail': {
-                'cpu': '15',
-                'memory': '15Gi'
-            },
-            'description': 'stage_resource_description'
-        }
+        easymaker.EndpointModelResource(
+            model_id=model.model_id,
+            resource_option_detail=easymaker.ResourceOptionDetail(
+                cpu="15",
+                memory="15Gi",
+            ),
+            pod_auto_scale_enable=True,
+            scale_metric_code=easymaker.SCALE_METRIC_CODE.CPU_UTILIZATION,
+            scale_metric_target=50,
+        )
     ],
     use_log=True,
     # wait=False,
@@ -517,24 +597,24 @@ endpoint = easymaker.Endpoint().create(
 
 [파라미터]
 
-| 이름                                                          | 타입      | 필수 여부 | 기본값   | 유효 범위                      | 설명                                                                 |
-|-------------------------------------------------------------|---------|-------|-------|----------------------------|--------------------------------------------------------------------|
-| endpoint_id                                                 | String  | 필수    | 없음   | 최대 36자                      | 엔드포인트 ID                                                            |
-| stage_name                                                  | String  | 필수    | 없음    | 최대 50자                     | 스테이지 이름                                                            |
-| description                                           | String  | 선택    | 없음    | 최대 255자                    | 스테이지에 대한 설명                                                        |
-| instance_type_name                                      | String  | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                              |
-| instance_count                                     | Integer | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                  |
-| endpoint_model_resource_list                                | Array   | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
-| endpoint_model_resource_list[0].modelId                     | String   | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
-| endpoint_model_resource_list[0].resourceOptionDetail        | Object   | 필수    | 없음    |                                  | 스테이지 리소스의 상세 정보                 |
-| endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
-| endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
-| endpoint_model_resource_list[0].podAutoScaleEnable          | Boolean  | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
-| endpoint_model_resource_list[0].scaleMetricCode             | String   | 선택    | 없음    | CPU_UTILIZATION, MEMORY_UTILIZATION | 스테이지 리소스에 사용될 증설 단위          |
-| endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
-| endpoint_model_resource_list[0].description                 | String   | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
-| use_log                                                     | Boolean | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                         |
-| wait                                                        | Boolean | 선택    | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+| 이름                                                          | 타입                                    | 필수 여부 | 기본값   | 유효 범위                      | 설명                                                                 |
+|-------------------------------------------------------------|---------------------------------------|-------|-------|----------------------------|--------------------------------------------------------------------|
+| endpoint_id                                                 | String                                | 필수    | 없음   | 최대 36자                      | 엔드포인트 ID                                                            |
+| stage_name                                                  | String                                | 필수    | 없음    | 최대 50자                     | 스테이지 이름                                                            |
+| description                                                 | String                                | 선택    | 없음    | 최대 255자                    | 스테이지에 대한 설명                                                        |
+| instance_type_name                                          | String                                | 필수    | 없음    | 없음                         | 엔드포인트에 사용될 인스턴스 타입 이름                                              |
+| instance_count                                              | Integer                               | 선택    | 1     | 1~10                       | 엔드포인트에 사용될 인스턴스 수                                                  |
+| endpoint_model_resource_list                                | easymaker.EndpointModelResource Array | 필수    | 없음    | 최대 10개                     | 스테이지에 사용될 리소스 정보                                                 |
+| endpoint_model_resource_list[0].model_id                   | String                                | 필수    | 없음    | 없음                       | 스테이지 리소스로 생성할 모델 ID                                   |
+| endpoint_model_resource_list[0].resource_option_detail        | easymaker.ResourceOptionDetail        | 필수    | 없음    |                                  | 스테이지 리소스의 상세 정보                 |
+| endpoint_model_resource_list[0].resource_option_detail.cpu    | String                                | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
+| endpoint_model_resource_list[0].resource_option_detail.memory | String                                | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
+| endpoint_model_resource_list[0].pod_auto_scale_enable          | Boolean                               | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
+| endpoint_model_resource_list[0].scale_metric_code             | easymaker.SCALE_METRIC_CODE           | 선택    | 없음    | CPU_UTILIZATION, MEMORY_UTILIZATION | 스테이지 리소스에 사용될 증설 단위          |
+| endpoint_model_resource_list[0].scale_metric_target           | Integer                               | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
+| endpoint_model_resource_list[0].description                 | String                                | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
+| use_log                                                     | Boolean                               | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                         |
+| wait                                                        | Boolean                               | 선택    | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
 endpoint_stage = easymaker.EndpointStage().create(
@@ -544,14 +624,17 @@ endpoint_stage = easymaker.EndpointStage().create(
     instance_type_name='c2.c16m16',
     instance_count=1,
     endpoint_model_resource_list=[
-        {
-            'modelId': model.model_id,
-            'resourceOptionDetail': {
-                'cpu': '15',
-                'memory': '15Gi'
-            },
-            'description': 'stage_resource_description'
-        }
+        easymaker.EndpointModelResource(
+            model_id=model.model_id,
+            resource_option_detail=easymaker.ResourceOptionDetail(
+                cpu="15",
+                memory="15Gi",
+            ),
+            pod_auto_scale_enable=True,
+            scale_metric_code=easymaker.SCALE_METRIC_CODE.CPU_UTILIZATION,
+            scale_metric_target=50,
+            description='stage_resource_description'
+        )
     ],
     use_log=True,
     # wait=False,
@@ -588,6 +671,14 @@ easymaker.EndpointStage('endpoint_stage_id').predict(
 )
 ```
 
+### 엔드포인트 목록 조회
+
+```python
+endpoint_list = easymaker.Endpoint.get_list()
+for endpoint in endpoint_list:
+    endpoint.print_info()
+```
+
 ### 엔드포인트 삭제
 
 [파라미터]
@@ -613,6 +704,14 @@ easymaker.EndpointStage(stage_id).delete()
 ```
 
 ## 배치 추론
+
+### 인스턴스 목록 조회
+
+```python
+instance_type_list = easymaker.BatchInference.get_instance_type_list()
+for instance in instance_type_list:
+    instance.print_info()
+```
 
 ### 배치 추론 생성
 
@@ -660,6 +759,14 @@ batch_inference = easymaker.BatchInference().run(
 )
 ```
 
+### 배치 추론 목록 조회
+
+```python
+batch_inference_list = easymaker.BatchInference.get_list()
+for batch_inference in batch_inference_list:
+    batch_inference.print_info()
+```
+
 ### 배치 추론 삭제
 
 [파라미터]
@@ -694,6 +801,14 @@ pipeline = easymaker.Pipeline().upload(
 )
 ```
 
+### 파이프라인 목록 조회
+
+```python
+pipeline_list = easymaker.Pipeline.get_list()
+for pipeline in pipeline_list:
+    pipeline.print_info()
+```
+
 ### 파이프라인 삭제
 
 [파라미터]
@@ -706,26 +821,34 @@ pipeline = easymaker.Pipeline().upload(
 easymaker.Pipeline(pipeline_id).delete()
 ```
 
+### 인스턴스 목록 조회
+
+```python
+instance_type_list = easymaker.PipelineRun.get_instance_type_list()
+for instance in instance_type_list:
+    instance.print_info()
+```
+
 ### 파이프라인 실행 생성
 
 [파라미터]
 
-| 이름                               | 타입      | 필수 여부                     | 기본값 | 유효 범위       | 설명                                       |
-|----------------------------------|---------|---------------------------| ------ |-------------|------------------------------------------|
-| pipeline_run_name                | String  | 필수                        | 없음   | 최대 50자      | 파이프라인 실행 이름                              |
-| pipeline_id                      | String  | 필수                        | 없음   | 최대 36자      | 파이프라인 일정 이름                              |
-| experiment_id                    | String  | easymaker.init에서 미입력 시 필수 | 없음    | 최대 36자      | 실험 ID                                    |
-| description                      | String  | 선택                        | 없음   | 최대 255자     | 파이프라인 실행에 대한 설명                          |
-| instance_type_name                    | String  | 필수                        | 없음   | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                   |
-| instance_count                   | Integer | 필수                        | 없음   | 1~10        | 사용할 인스턴스 수                               |
-| boot_storage_size                | Integer | 필수                        | 없음   | 50~         | 파이프라인을 실행할 인스턴스의 부트 스토리지 크기(단위: GB)      |
-| parameter_list                   | Array   | 선택                        | 없음   | 없음          | 파이프라인에 전달할 파라미터 정보                       |
-| parameter_list[0].parameterKey   | String  | 선택                        | 없음   | 최대 255자     | 파라미터 키                                   |
-| parameter_list[0].parameterValue | String  | 선택                        | 없음   | 최대 1000자    | 파라미터 값                                   |
-| nas_list                         | Array   | 선택                        | 없음   | 최대 10개      | NAS 정보                                   |
-| nas_list[0].mountDirName         | String  | 선택                        | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                       |
-| nas_list[0].nasUri               | String  | 선택                        | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로      |
-| wait                             | Boolean | 선택                        | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+| 이름                                | 타입                        | 필수 여부                     | 기본값 | 유효 범위       | 설명                                       |
+|-----------------------------------|---------------------------|---------------------------| ------ |-------------|------------------------------------------|
+| pipeline_run_name                 | String                    | 필수                        | 없음   | 최대 50자      | 파이프라인 실행 이름                              |
+| pipeline_id                       | String                    | 필수                        | 없음   | 최대 36자      | 파이프라인 일정 이름                              |
+| experiment_id                     | String                    | easymaker.init에서 미입력 시 필수 | 없음    | 최대 36자      | 실험 ID                                    |
+| description                       | String                    | 선택                        | 없음   | 최대 255자     | 파이프라인 실행에 대한 설명                          |
+| instance_type_name                | String                    | 필수                        | 없음   | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                   |
+| instance_count                    | Integer                   | 필수                        | 없음   | 1~10        | 사용할 인스턴스 수                               |
+| boot_storage_size                 | Integer                   | 필수                        | 없음   | 50~         | 파이프라인을 실행할 인스턴스의 부트 스토리지 크기(단위: GB)      |
+| parameter_list                    | easymaker.Parameter Array | 선택                        | 없음   | 없음          | 파이프라인에 전달할 파라미터 정보                       |
+| parameter_list[0].parameter_name  | String                    | 선택                        | 없음   | 최대 255자     | 파라미터 키                                   |
+| parameter_list[0].parameter_value | String                    | 선택                        | 없음   | 최대 1000자    | 파라미터 값                                   |
+| nas_list                          | easymaker.Nas Array       | 선택                        | 없음   | 최대 10개      | NAS 정보                                   |
+| nas_list[0].mount_dir_name        | String                    | 선택                        | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                       |
+| nas_list[0].nas_uri               | String                    | 선택                        | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로      |
+| wait                              | Boolean                   | 선택                        | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
 pipeline_run = easymaker.PipelineRun().create(
@@ -736,8 +859,22 @@ pipeline_run = easymaker.PipelineRun().create(
     instance_type_name='m2.c4m8',
     instance_count=1,
     boot_storage_size=50,
+    parameter_list=[
+        easymaker.Parameter(parameter_name="experiment_name", parameter_value="pipeline_experiment"),
+    ],
+    nas_list=[
+        easymaker.Nas(mount_dir_name="user_nas", nas_uri="nas://{NAS ID}:/{path}"),
+    ],
     # wait=False,
 )
+```
+
+### 파이프라인 실행 목록 조회
+
+```python
+pipeline_run_list = easymaker.PipelineRun.get_list()
+for pipeline_run in pipeline_run_list:
+    pipeline_run.print_info()
 ```
 
 ### 파이프라인 실행 삭제
@@ -771,12 +908,12 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 | schedule_start_datetime          | String  | 선택                                 | 없음   | 없음          | 파이프라인 일정의 시작 시간을 설정, 미입력 시 설정한 주기에 맞춰 파이프라인 실행 |
 | schedule_end_datetime            | String  | 선택                                 | 없음   | 없음          | 파이프라인 일정의 종료 시간을 설정, 미입력 시 중지 전까지 파이프라인 실행을 생성 |
 | use_catchup                      | Boolean | 선택                                 | 없음   | 없음          | 누락 실행 캐치업: 파이프라인 실행이 일정에 뒤처질 경우 따라잡을지 여부를 선택 |
-| parameter_list                   | Array   | 선택                                 | 없음   | 없음          | 파이프라인에 전달할 파라미터 정보                             |
-| parameter_list[0].parameterKey   | String  | 선택                                 | 없음   | 최대 255자     | 파라미터 키                                         |
-| parameter_list[0].parameterValue | String  | 선택                                 | 없음   | 최대 1000자    | 파라미터 값                                         |
-| nas_list                         | Array   | 선택                                 | 없음   | 최대 10개      | NAS 정보                                         |
-| nas_list[0].mountDirName         | String  | 선택                                 | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                             |
-| nas_list[0].nasUri               | String  | 선택                                 | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로            |
+| parameter_list                    | easymaker.Parameter Array | 선택                        | 없음   | 없음          | 파이프라인에 전달할 파라미터 정보                       |
+| parameter_list[0].parameter_name  | String                    | 선택                        | 없음   | 최대 255자     | 파라미터 키                                   |
+| parameter_list[0].parameter_value | String                    | 선택                        | 없음   | 최대 1000자    | 파라미터 값                                   |
+| nas_list                          | easymaker.Nas Array       | 선택                        | 없음   | 최대 10개      | NAS 정보                                   |
+| nas_list[0].mount_dir_name        | String                    | 선택                        | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                       |
+| nas_list[0].nas_uri               | String                    | 선택                        | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로      |
 | wait                             | Boolean | 선택                                 | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환      |
 
 ```python
@@ -786,6 +923,12 @@ pipeline_recurring_run = easymaker.PipelineRecurringRun().create(
     pipeline_id=pipeline.pipeline_id,
     experiment_id=experiment.experiment_id, # Optional if already set in init
     instance_type_name='m2.c4m8',
+    parameter_list=[
+        easymaker.Parameter(parameter_name="experiment_name", parameter_value="pipeline_experiment"),
+    ],
+    nas_list=[
+        easymaker.Nas(mount_dir_name="user_nas", nas_uri="nas://{NAS ID}:/{path}"),
+    ],
     boot_storage_size=50,
     schedule_cron_expression='0 0 * * * ?',
     max_concurrency_count=1,
@@ -808,6 +951,14 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).start()
 
 ```
 
+### 파이프라인 일정 목록 조회
+
+```python
+pipeline_recurring_run_list = easymaker.PipelineRecurringRun.get_list()
+for pipeline_recurring_run in pipeline_recurring_run_list:
+    pipeline_recurring_run.print_info()
+```
+
 ### 파이프라인 일정 삭제
 
 [파라미터]
@@ -819,8 +970,6 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).start()
 ```python
 easymaker.PipelineRecurringRun(pipeline_recurring_run_id).delete()
 ```
-
-## 기타 기능
 
 ### NHN Cloud - Log & Crash Search 로그 전송
 
