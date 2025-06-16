@@ -425,11 +425,11 @@ for instance in instance_type_list:
 | model_evaluation_name                     | String  | 필수    | 없음    | 최대 50자                                         | 모델 평가 이름                                                        |
 | description                               | String  | 선택    | 없음    | 최대 255자                                        | 모델 평가에 대한 설명                                                    |
 | model_id                                  | String  | 필수    | 없음    | 최대 36자                                         | 평가할 모델 ID                                                       |
-| objective_code                            | String  | 필수    | 없음    | easymaker.CLASSIFICATION, easymaker.REGRESSION | 평가 목표                                                           |
+| objective_code                            | String  | 필수    | 없음    | "CLASSIFICATION", "REGRESSION" | 평가 목표                                                           |
 | class_names                               | String  | 선택    | 없음    | 1~5000                                         | 분류 모델에서 결과로 가능한 class 목록(`,`로 구분된 문자열이나 숫자)                     |
 | instance_type_name                             | String  | 필수    | 없음    | 없음                                             | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
 | input_data_uri                            | String  | 필수    | 없음    | 최대 255자                                        | 입력 데이터 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)         |
-| input_data_type_code                      | String  | 필수    | 없음    | easymaker.CSV, easymaker.JSONL                 | 입력 데이터 타입                                                       |
+| input_data_type_code                      | String  | 필수    | 없음    | "CSV", "JSONL"                 | 입력 데이터 타입                                                       |
 | target_field_name                         | String  | 필수    | 없음    | 최대 255자                                        | 정답(Ground truth) 레이블의 필드 이름                                     |
 | timeout_hours                             | Integer | 선택    | 720    | 1~720                                          | 최대 모델 평가 시간(단위: 시간)                                             |
 | batch_inference_instance_type_name             | String  | 필수    | 없음    | 없음                                             | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
@@ -442,39 +442,16 @@ for instance in instance_type_list:
 | wait                                      | Boolean | 선택    | True  | True, False                                    | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                       |
 
 ```python
-model_evaluation  = easymaker.ModelEvaluation().create(
-    model_evaluation_name="model_evaluation_name",
-    description="description",
-    model_id=model.model_id,
-    objective_code=easymaker.REGRESSION,
-    class_names="class_a, class_b",
-    generate_feature_attributions=False,
-    instance_type_name="m2.c4m8",
-    input_data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
-    input_data_type_code=easymaker.CSV,
-    target_field_name="target_field_name",
-    boot_storage_size=50,
-    data_storage_size=300,
-    timeout_hours=1,
-    batch_inference_instance_type_name="m2.c4m8",
-    batch_inference_instance_count=1,
-    batch_inference_pod_count=1,
-    batch_inference_output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{output_upload_uri}',
-    batch_inference_max_batch_size=32,
-    batch_inference_inference_timeout_seconds=120,
-    use_log=True,
-    wait=True,
-)
 # 회귀 모델 평가 생성
 regression_model_evaluation  = easymaker.ModelEvaluation().create(
     model_evaluation_name="regression_model_evaluation",
     description="regression model evaluation sample",
     model_id=regression_model.model_id,
-    objective_code=easymaker.REGRESSION,
+    objective_code="REGRESSION",
     generate_feature_attributions=False,
     instance_type_name="m2.c4m8",
     input_data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
-    input_data_type_code=easymaker.CSV,
+    input_data_type_code="CSV",
     target_field_name="target_field_name",
     boot_storage_size=50,
     data_storage_size=300,
@@ -493,12 +470,12 @@ classification_model_evaluation  = easymaker.ModelEvaluation().create(
     model_evaluation_name="classification_model_evaluation",
     description="classification model evaluation sample",
     model_id=classification_model.model_id,
-    objective_code=easymaker.CLASSIFICATION,
+    objective_code="CLASSIFICATION",
     class_names="classA,classB,classC",
     generate_feature_attributions=False,
     instance_type_name="m2.c4m8",
     input_data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
-    input_data_type_code=easymaker.CSV,
+    input_data_type_code="CSV",
     target_field_name="target_field_name",
     boot_storage_size=50,
     data_storage_size=300,
@@ -728,7 +705,7 @@ for instance in instance_type_list:
 | batch_size                | Integer | 필수      | 없음   | 1~1000      | 동시에 처리되는 데이터 샘플의 수                                              |
 | inference_timeout_seconds | Integer | 필수      | 없음   | 1~1200      | 단일 추론 요청의 최대 허용 시간                                              |
 | input_data_uri            | String  | 필수      | 없음   | 최대 255자  | 입력 데이터 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)         |
-| input_data_type           | String  | 필수      | 없음   | JSON, JSONL | 입력 데이터의 유형                                                      |
+| input_data_type           | String  | 필수      | 없음   | "JSON", "JSONL" | 입력 데이터의 유형                                                      |
 | include_glob_pattern      | String  | 선택      | 없음   | 최대 255자  | 파일 집합을 입력 데이터에서 포함할 Glob 패턴                                     |
 | exclude_glob_pattern      | String  | 선택      | 없음   | 최대 255자  | 파일 집합을 입력 데이터에서 제외할 Glob 패턴                                     |
 | output_upload_uri         | String  | 필수      | 없음   | 최대 255자  | 배치 추론 결과 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
