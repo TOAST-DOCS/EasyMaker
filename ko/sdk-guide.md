@@ -694,7 +694,7 @@ for instance in instance_type_list:
 | instance_count            | Integer | 필수      | 없음   | 1~10        | 배치 추론에 사용할 인스턴스 수                                               |
 | timeout_hours             | Integer | 선택      | 720    | 1~720       | 최대 배치 추론 시간(단위: 시간)                                             |
 | instance_type_name             | String  | 필수      | 없음   | 없음        | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
-| model_name                | String  | 필수      | 없음   | 없음        | 모델 이름(CLI로 조회 가능)                                               |
+| model_id                | String  | 필수      | 없음   | 없음        | 모델 ID                                                            |
 | pod_count                 | Integer | 필수      | 없음   | 1~100       | 분산 추론을 적용할 파드 수                                                 |
 | batch_size                | Integer | 필수      | 없음   | 1~1000      | 동시에 처리되는 데이터 샘플의 수                                              |
 | inference_timeout_seconds | Integer | 필수      | 없음   | 1~1200      | 단일 추론 요청의 최대 허용 시간                                              |
@@ -714,7 +714,7 @@ batch_inference = easymaker.BatchInference().run(
     instance_count=1,
     timeout_hours=100,
     instance_type_name='m2.c4m8',
-    model_name='model_name',
+    model_id=model.model_id,
     pod_count=1,
     batch_size=32,
     inference_timeout_seconds=120,
