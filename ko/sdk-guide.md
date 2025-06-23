@@ -10,8 +10,8 @@ python -m pip install easymaker
 
 ### AI EasyMaker SDK 초기화
 
-앱키(Appkey)는 콘솔 오른쪽 상단의 **URL & Appkey** 메뉴에서 확인할 수 있습니다.
-인증 토큰(Access token)에 대한 내용은 [API 호출 및 인증](https://docs.nhncloud.com/ko/nhncloud/ko/public-api/api-authentication/)에서 확인할 수 있습니다.
+앱키(appkey)는 콘솔 오른쪽 상단의 **URL & Appkey** 메뉴에서 확인할 수 있습니다.
+인증 토큰(access token)에 대한 내용은 [API 호출 및 인증](https://docs.nhncloud.com/ko/nhncloud/ko/public-api/api-authentication/)에서 확인할 수 있습니다.
 활성화한 AI EasyMaker 상품의 앱키, 인증 토큰, 리전 정보를 입력합니다.
 AI EasyMaker SDK를 사용하기 위해서는 초기화 코드가 필요합니다.
 
@@ -430,7 +430,7 @@ for instance in instance_type_list:
 | instance_type_name                             | String  | 필수    | 없음    | 없음                                             | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
 | input_data_uri                            | String  | 필수    | 없음    | 최대 255자                                        | 입력 데이터 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)         |
 | input_data_type_code                      | String  | 필수    | 없음    | "CSV", "JSONL"                 | 입력 데이터 타입                                                       |
-| target_field_name                         | String  | 필수    | 없음    | 최대 255자                                        | 정답(Ground truth) 레이블의 필드 이름                                     |
+| target_field_name                         | String  | 필수    | 없음    | 최대 255자                                        | 정답(ground truth) 레이블의 필드 이름                                     |
 | timeout_hours                             | Integer | 선택    | 720    | 1~720                                          | 최대 모델 평가 시간(단위: 시간)                                             |
 | batch_inference_instance_type_name             | String  | 필수    | 없음    | 없음                                             | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
 | batch_inference_instance_count            | Integer | 필수    | 없음    | 1~10                                           | 배치 추론에 사용할 인스턴스 수                                               |
