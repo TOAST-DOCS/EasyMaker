@@ -53,9 +53,6 @@ Create a Jupyter notebook.
         - Mount Directory Name: Enter the name of the directory to mount on notebook.
         - NHN Cloud NAS Path: Enter directory path in the format `nas://{NAS ID}:/{path}`.
 
-- **Additional Settings**
-    - Tags: Allows to specify tags in Key-Value format. You can enter maximum 10 tags.
-
 > [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
 
@@ -88,7 +85,6 @@ A list of notebooks are displayed. Select a notebook in the list to check detail
     | DELETE FAILED      | Failed to delete notebook. Please try to delete again.                                            |
 
 - **Action > Open Jupyter Notebook**: Click **Open Jupyter Notebook** button to open the notebook in a new browser window. The notebook is only accessible to users who are logged in to the console.
-- **Tag**: Tag for notebook is displayed. You can change the tag by clicking **Change**.
 
 - **Monitoring**: On the **Monitoring** tab of the detail screen that appears when you select the notebook, you can see a list of monitored instances and a chart of basic metrics.
     - The **Monitoring** tab is disabled when the notebook is being created or when there is a task in progress.
@@ -152,18 +148,18 @@ Stop the running notebook or start the stopped notebook.
 > [Note] Time to start and stop notebooks:
 > It may take several minutes to start and stop notebooks.
 
-### Change Notebook Instance Flavor
+### Change Notebook Instance Type
 
-Change the instance flavor of the created notebook.
-Instance flavor you want to change can only be changed to the same core type instance flavor as the existing instance.
+Change the instance type of the created notebook.
+Instance type you want to change can only be changed to the same core type instance type as the existing instance.
 
-1. Select the notebook on which you want to change the instance flavor.
+1. Select the notebook on which you want to change the instance type.
 2. If the notebook is running (ACTIVE), click **Stop Notebook** to stop the notebook.
-3. Click **Change Instance Flavor**.
-4. Select the instance flavor you want to change and click Confirm.
+3. Click **Change Instance type**.
+4. Select the instance type you want to change and click Confirm.
 
-> [Note] Time to change instance flavors:
-> It may take several minutes to change the instance flavor.
+> [Note] Time to change instance types:
+> It may take several minutes to change the instance type.
 
 ### Reboot Notebook
 
@@ -293,7 +289,6 @@ Set the training environment by selecting the instance and OS image to be traine
     - **Maximum training time** : Specifies the maximum waiting time until training is complete. training that exceeds the maximum waiting time will be terminated.
     - **Log Management** : Logs generated during training can be stored in the NHN Cloud Log & Crash service.
         - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
-    - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
 > [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
@@ -446,7 +441,6 @@ How to configure a hyperparameter tuning job.
     - **Maximum Progress Time**: Specifies the maximum progress time until training is completed. training that exceeds the maximum progress time will be terminated.
     - **Log Management** : Logs generated during training can be stored in the NHN Cloud Log & Crash service.
         - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
-    - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
 > [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
@@ -595,7 +589,6 @@ Can manage models of AI EasyMaker's training outcomes or external models as arti
     - **Parameter**: Enter the model's parameter information.
         -**Parameter name**: Enter the name of the parameter in the model.
         -**Parameter value**: Enter the values of the parameters in the model.
-    - **Tag**: To add tag, click the **+ button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
 > [Caution] When using NHN Cloud NAS:
 Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
@@ -638,7 +631,6 @@ Model list is displayed. Selecting a model in the list allows to check detailed 
 - **Training ID**: For models created from training, training ID that is based is displayed.
 - **Framework**: Model's framework information is displayed.
 - **Parameter**: Model's parameter is displayed. Parameters are used for inference.
-- **Tag**: Model tag is displayed. Tag can be changed by clicking **Change**.
 
 ### Create Endpoint from Model
 
@@ -688,7 +680,7 @@ Create and manage endpoints that can serve the model.
 - **Stage Name**: When adding new stage on existing endpoint, enter name for new stage. Stage names cannot be duplicated.
 - **Description**: Enter the description of endpoint stage.
 - **Instance Information**: Enter instance information for the model to be served.
-    - **Instance Flavor**: Select instance type.
+    - **Instance Type**: Select instance type.
     - **Number of Instances**: Enter the number of drives for instance.
     - **Autoscaler**: The autoscaler is a feature that automatically adjusts the number of nodes based on resource usage policies. The autoscaler is set on a per-stage basis.
         - **Enable/Disable**: Select whether to enable the autoscaler. If enabled, the number of instances will scale in or out based on the instance load.
@@ -713,7 +705,6 @@ Create and manage endpoints that can serve the model.
             - **Memory**: Adust the memory count depending on CPU usage.
         - **Threshold (%)**: The threshold value per increment at which the Pod will be scaled up.
     - **Resource Information:**: You can see the resources you're actually using. Allocates resource room usage to each model based on the quota for the model you entered. For more information, please see [Appendix > 9. Resource Information](./console-guide/#9).
-- **Additional Settings > Tag**: To add a tag, click **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
 > [Note] API Specification for Inference Request:
 > The AI EasyMaker service provides endpoints based on the open inference protocol (OIP) specification. For the endpoint API specification, see [Appendix > 10. Endpoint API specification](./console-guide/#10-api).
@@ -787,7 +778,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 - **Stage URL**: Displays Stage URL of API Gateway where the model is served.
 - **View API Gateway Settings**: Click **View Settings** to see settings that AI EasyMaker has deployed to API Gateway stage.
 - **View API Gateway Statistics**: Click **View Statistics** to view API statistics of endpoints.
-- **Instance Flavor**: Displays endpoint instance type the model is serving.
+- **Instance Type**: Displays endpoint instance type the model is serving.
 - **Number of Work Nodes/Pods In Progress**: Displays the number of nodes and pods being used by endpoint.
 - **Stage Resource**: Displays information about model artifacts deployed to the stage.
 - **Monitoring**: When you select the endpoint stage, you can see a list of monitored instances and basic metrics charts in the **Monitoring** tab of the detailed screen that appears.
@@ -968,7 +959,6 @@ Set up the environment in which batch inference will be performed by selecting a
     - **Maximum Batch Inference Time** : Specify the maximum waiting time until batch inference is complete. Batch inference that exceeds the maximum waiting time will be terminated.
     - **Log Management** : Logs generated during batch inference can be stored in the NHN Cloud Log & Crash Search service.
         - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
-    - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
 > [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
@@ -1189,7 +1179,6 @@ Upload a pipeline.
 - **Name**: Enter a pipeline name.
 - **Description**: Enter description.
 - **File registration**: Select the YAML file to upload.
-- **Tag**: You can specify tags in key-value format. You can enter maximum 10 tags.
 
 > [Note] Pipeline upload time:
 > Uploading a pipeline can take a few minutes.
@@ -1251,7 +1240,6 @@ Run the pipeline.
         - **NAS Path**: Enter the path in the following format: `nas://{NAS ID}:/{path}`.
     - **Manage Logs**: Logs that occur during pipeline execution can be stored in the NHN Cloud Log & Crash Search service.
         - For more information, refer to [Appendix > 2. NHN Cloud Log & Crash Search service usage guide and checking logs](./console-guide/#2-nhn-cloud-log-crash-search).
-    - **Tag**: You can specify tags in key-value format. You can enter maximum 10 tags.
 
 > [Caution] If you are using NHN Cloud NAS:
 > Only NHN Cloud NAS created in the same project as AI EasyMaker is available.
