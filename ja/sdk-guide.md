@@ -397,7 +397,7 @@ easymaker.Model(model_id).delete()
 | endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | 必須  | なし  | 0.0~                             | ステージリソースに使用されるCPU                |
 | endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | 必須  | なし  | 1Mi~                             | ステージリソースに使用されるメモリ           |
 | endpoint_model_resource_list[0].podAutoScaleEnable          | Boolean  | 選択  | False   | True, False                      | ステージリソースに使用されるPodオートスケーラー |
-| endpoint_model_resource_list[0].scaleMetricCode             | String   | 選択  | なし  | CONCURRENCY, REQUESTS_PER_SECOND | ステージリソースに使用される増設単位        |
+| endpoint_model_resource_list[0].scaleMetricCode             | String   | Optional    | None          | CPU_UTILIZATION, MEMORY_UTILIZATION | Scaling unit to be used for stage resource              |
 | endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | 選択  | なし  | 1~                               | ステージリソースに使用される増設しきい値   |
 | endpoint_model_resource_list[0].description                 | String   | 選択  | なし  | 最大255文字                | ステージリソースの説明                                     |
 | tag_list                                                    | Array   | 選択  | なし  | 最大10個                   | タグ情報                                                                |
@@ -446,7 +446,7 @@ endpoint = easymaker.Endpoint().create(
 | endpoint_model_resource_list[0].resourceOptionDetail.cpu    | Double   | 必須  | なし  | 0.0~                             | ステージリソースに使用されるCPU                |
 | endpoint_model_resource_list[0].resourceOptionDetail.memory | Object   | 必須  | なし  | 1Mi~                             | ステージリソースに使用されるメモリ           |
 | endpoint_model_resource_list[0].podAutoScaleEnable          | Boolean  | 選択  | False   | True, False                      | ステージリソースに使用されるPodオートスケーラー |
-| endpoint_model_resource_list[0].scaleMetricCode             | String   | 選択  | なし  | CONCURRENCY, REQUESTS_PER_SECOND | ステージリソースに使用される増設単位        |
+| endpoint_model_resource_list[0].scaleMetricCode             | String   | Optional    | None          | CPU_UTILIZATION, MEMORY_UTILIZATION | Scaling unit to be used for stage resource          |
 | endpoint_model_resource_list[0].scaleMetricTarget           | Integer  | 選択  | なし  | 1~                               | ステージリソースに使用される増設しきい値   |
 | endpoint_model_resource_list[0].description                 | String   | 選択  | なし  | 最大255文字                | ステージリソースの説明                                     |
 | tag_list                                                    | Array   | 選択  | なし  | 最大10個                   | タグ情報                                                            |
