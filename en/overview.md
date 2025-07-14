@@ -22,6 +22,7 @@ AI EasyMaker provides an AI platform to manage learning, models, and endpoints a
 
 4. Model Management
     - You can manage model artifacts that completed training.
+    - You can measure and compare the performance of models.
 
 5. Endpoint(Serving)
     - Provides an endpoint for model service.
