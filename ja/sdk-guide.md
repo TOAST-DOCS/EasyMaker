@@ -710,7 +710,7 @@ batch_inference = easymaker.BatchInference().run(
     batch_inference_name='batch_inference_name',
     instance_count=1,
     timeout_hours=100,
-    instance_type_name='m2.c4m8',
+    instance_type_name='m2.c4m8
     model_id=model.model_id,
     pod_count=1,
     batch_size=32,
@@ -722,7 +722,6 @@ batch_inference = easymaker.BatchInference().run(
     output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{output_upload_path}',
     data_storage_size=300,  # minimum size : 300GB
     description='description',
-    ],
     use_log=True,
     # wait=False,
 )
