@@ -1627,20 +1627,20 @@ Note that both batch inference and endpoints can fail to create if the allocated
 The AI EasyMaker service provides endpoints based on the open inference protocol (OIP) specification.
 For more information about the OIP specification, see [OIP Specification](https://github.com/kserve/open-inference-protocol).
 
-| Name             | Method | API path                                     |
-| ---------------- | ------ | -------------------------------------------- |
-| Model List       | GET    | /{model_name}/v1/models                      |
-| Model Ready       | GET    | /{model_name}/v1/models/{model_name}         |
-| Inference             | POST   | /{model_name}/v1/models/{model_name}/predict |
-| Description        | POST   | /{model_name}/v1/models/{model_name}/explain |
-| Server information        | GET    | /{model_name}/v2                             |
-| Server Live        | GET    | /{model_name}/v2/health/live                 |
-| Server Ready       | GET    | /{model_name}/v2/health/ready                |
-| Model Information        | GET    | /{model_name}/v2/models/{model_name}         |
-| Model Ready       | GET    | /{model_name}/v2/models/{model_name}/ready   |
-| Inference             | POST   | /{model_name}/v2/models/{model_name}/infer   |
-| OpenAI generative model inference | POST   | /{model_name}/openai/v1/completions          |
-| OpenAI generative model inference | POST   | /{model_name}/openai/v1/chat/completions     |
+| Name                              | Method | API path                                                                |
+| --------------------------------- | ------ | ----------------------------------------------------------------------- |
+| Model List                        | GET    | /{model_name}/v1/models                                                 |
+| Model Ready                       | GET    | /{model_name}/v1/models/{model_name}                                    |
+| Inference                         | POST   | /{model_name}/v1/models/{model_name}/predict                            |
+| Description                       | POST   | /{model_name}/v1/models/{model_name}/explain                            |
+| Server Information                | GET    | /{model_name}/v2                                                        |
+| Server Live                       | GET    | /{model_name}/v2/health/live                                            |
+| Server Ready                      | GET    | /{model_name}/v2/health/ready                                           |
+| Model Information                 | GET    | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]       |
+| Model Ready                       | GET    | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]/ready |
+| Inference                         | POST   | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]/infer |
+| OpenAI generative model inference | POST   | /{model_name}/openai/v1/completions                                     |
+| OpenAI generative model inference | POST   | /{model_name}/openai/v1/chat/completions                                |
 
 > [Note] OpenAI generative model inference
 > OpenAI generative model inference is used when using a generative model, such as OpenAI's GPT-4o.

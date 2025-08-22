@@ -1733,20 +1733,20 @@ AI EasyMaker에서 배치 추론과 엔드포인트를 생성할 때, 선택한 
 AI EasyMaker 서비스는 OIP(open inference protocol) 스펙을 기반으로 한 엔드포인트를 제공합니다.
 OIP 스펙에 대한 상세한 내용은 [OIP 스펙](https://github.com/kserve/open-inference-protocol)을 참고하세요.
 
-| 이름             | 메서드 | API 경로                                     |
-| ---------------- | ------ | -------------------------------------------- |
-| 모델 목록        | GET    | /{model_name}/v1/models                      |
-| 모델 Ready       | GET    | /{model_name}/v1/models/{model_name}         |
-| 추론             | POST   | /{model_name}/v1/models/{model_name}/predict |
-| 설명             | POST   | /{model_name}/v1/models/{model_name}/explain |
-| 서버 정보        | GET    | /{model_name}/v2                             |
-| 서버 Live        | GET    | /{model_name}/v2/health/live                 |
-| 서버 Ready       | GET    | /{model_name}/v2/health/ready                |
-| 모델 정보        | GET    | /{model_name}/v2/models/{model_name}         |
-| 모델 Ready       | GET    | /{model_name}/v2/models/{model_name}/ready   |
-| 추론             | POST   | /{model_name}/v2/models/{model_name}/infer   |
-| OpenAI 생성형 모델 추론 | POST   | /{model_name}/openai/v1/completions          |
-| OpenAI 생성형 모델 추론 | POST   | /{model_name}/openai/v1/chat/completions     |
+| 이름                    | 메서드 | API 경로                                                                |
+| ----------------------- | ------ | ----------------------------------------------------------------------- |
+| 모델 목록               | GET    | /{model_name}/v1/models                                                 |
+| 모델 Ready              | GET    | /{model_name}/v1/models/{model_name}                                    |
+| 추론                    | POST   | /{model_name}/v1/models/{model_name}/predict                            |
+| 설명                    | POST   | /{model_name}/v1/models/{model_name}/explain                            |
+| 서버 정보               | GET    | /{model_name}/v2                                                        |
+| 서버 Live               | GET    | /{model_name}/v2/health/live                                            |
+| 서버 Ready              | GET    | /{model_name}/v2/health/ready                                           |
+| 모델 정보               | GET    | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]       |
+| 모델 Ready              | GET    | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]/ready |
+| 추론                    | POST   | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]/infer |
+| OpenAI 생성형 모델 추론 | POST   | /{model_name}/openai/v1/completions                                     |
+| OpenAI 생성형 모델 추론 | POST   | /{model_name}/openai/v1/chat/completions                                |
 
 > [참고] OpenAI 생성형 모델 추론
 > OpenAI 생성형 모델 추론은 OpenAI의 GPT-4o와 같은 생성형 모델을 사용하는 경우에 사용됩니다.
