@@ -612,6 +612,21 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 > safetensors는 HuggingFace에서 개발한 안전하고 효율적인 머신러닝 모델 파일 형식입니다.
 > 그 외의 파일 형식은 지원하지 않습니다.
 
+> [주의] TensorFlow (Triton), PyTorch (Triton), ONNX (Triton) 모델을 생성하는 경우:
+> 입력하는 모델 아티팩트 경로에 Triton으로 모델을 실행할 수 있는 구조로 모델 파일과 `config.pbtxt` 파일이 저장되어 있어야 합니다.
+> 아래의 예시를 참고하세요.
+
+```
+model_name/
+├── config.pbtxt                              # 모델 설정 파일
+└── 1/                                        # 버전 1 디렉토리
+    └── model.savedmodel/                     # TensorFlow SavedModel 디렉토리
+        ├── saved_model.pb                    # 메타그래프와 체크포인트 데이터
+        └── variables/                        # 모델 가중치 디렉토리
+            ├── variables.data-00000-of-00001
+            └── variables.index
+```
+
 ### 모델 목록
 
 모델 목록이 표시됩니다. 목록의 모델을 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
