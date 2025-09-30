@@ -1578,6 +1578,30 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
     - 생성 또는 삭제가 진행 중인 RAG는 삭제할 수 없습니다.
     - 요청된 삭제 작업은 취소할 수 없습니다. 계속 진행하려면 **삭제**를 클릭합니다.
 
+### RAG 질문 요청 가이드
+
+RAG 서비스는 아래와 같은 엔드포인트를 제공합니다.
+
+| 이름       | 메서드 | API 경로                     |
+| --------- | ---- | --------------------------- |
+| 모델 목록   | GET  | /rag/v1/models              |
+| 모델 Ready | GET  | /rag/v1/models/{model_name} |
+| 질문       | POST | /rag/v1/query               |
+
+- 질문을 요청할 때는 OpenAI Chat Completion API처럼 `model`과 `messages`를 요청 본문에 포함해서 요청하면 됩니다. 아래 요청 본문을 참고하세요.
+
+```json
+{
+  "model": "{model_name}",
+  "messages": [
+    {
+      "role": "user", 
+      "content": "{query_text}"
+    }
+  ]
+}
+```
+
 ## 부록
 
 ### 1. NHN Cloud Object Storage에 AI EasyMaker 시스템 계정 권한 추가
