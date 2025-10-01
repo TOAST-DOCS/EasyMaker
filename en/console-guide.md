@@ -53,9 +53,6 @@ Create a Jupyter notebook.
         - Mount Directory Name: Enter the name of the directory to mount on notebook.
         - NHN Cloud NAS Path: Enter directory path in the format `nas://{NAS ID}:/{path}`.
 
-- **Additional Settings**
-    - Tags: Allows to specify tags in Key-Value format. You can enter maximum 10 tags.
-
 > [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
 
@@ -88,7 +85,6 @@ A list of notebooks are displayed. Select a notebook in the list to check detail
     | DELETE FAILED      | Failed to delete notebook. Please try to delete again.                                            |
 
 - **Action > Open Jupyter Notebook**: Click **Open Jupyter Notebook** button to open the notebook in a new browser window. The notebook is only accessible to users who are logged in to the console.
-- **Tag**: Tag for notebook is displayed. You can change the tag by clicking **Change**.
 
 - **Monitoring**: On the **Monitoring** tab of the detail screen that appears when you select the notebook, you can see a list of monitored instances and a chart of basic metrics.
     - The **Monitoring** tab is disabled when the notebook is being created or when there is a task in progress.
@@ -152,18 +148,18 @@ Stop the running notebook or start the stopped notebook.
 > [Note] Time to start and stop notebooks:
 > It may take several minutes to start and stop notebooks.
 
-### Change Notebook Instance Flavor
+### Change Notebook Instance Type
 
-Change the instance flavor of the created notebook.
-Instance flavor you want to change can only be changed to the same core type instance flavor as the existing instance.
+Change the instance type of the created notebook.
+Instance type you want to change can only be changed to the same core type instance type as the existing instance.
 
-1. Select the notebook on which you want to change the instance flavor.
+1. Select the notebook on which you want to change the instance type.
 2. If the notebook is running (ACTIVE), click **Stop Notebook** to stop the notebook.
-3. Click **Change Instance Flavor**.
-4. Select the instance flavor you want to change and click Confirm.
+3. Click **Change Instance type**.
+4. Select the instance type you want to change and click Confirm.
 
-> [Note] Time to change instance flavors:
-> It may take several minutes to change the instance flavor.
+> [Note] Time to change instance types:
+> It may take several minutes to change the instance type.
 
 ### Reboot Notebook
 
@@ -293,7 +289,6 @@ Set the training environment by selecting the instance and OS image to be traine
     - **Maximum training time** : Specifies the maximum waiting time until training is complete. training that exceeds the maximum waiting time will be terminated.
     - **Log Management** : Logs generated during training can be stored in the NHN Cloud Log & Crash service.
         - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
-    - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
 > [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
@@ -446,7 +441,6 @@ How to configure a hyperparameter tuning job.
     - **Maximum Progress Time**: Specifies the maximum progress time until training is completed. training that exceeds the maximum progress time will be terminated.
     - **Log Management** : Logs generated during training can be stored in the NHN Cloud Log & Crash service.
         - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
-    - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
 > [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
@@ -595,7 +589,6 @@ Can manage models of AI EasyMaker's training outcomes or external models as arti
     - **Parameter**: Enter the model's parameter information.
         -**Parameter name**: Enter the name of the parameter in the model.
         -**Parameter value**: Enter the values of the parameters in the model.
-    - **Tag**: To add tag, click the **+ button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
 > [Caution] When using NHN Cloud NAS:
 Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
@@ -638,7 +631,6 @@ Model list is displayed. Selecting a model in the list allows to check detailed 
 - **Training ID**: For models created from training, training ID that is based is displayed.
 - **Framework**: Model's framework information is displayed.
 - **Parameter**: Model's parameter is displayed. Parameters are used for inference.
-- **Tag**: Model tag is displayed. Tag can be changed by clicking **Change**.
 
 ### Create Endpoint from Model
 
@@ -670,6 +662,106 @@ Delete a model.
 > You cannot delete model if endpoint created by model want to delete is existed.
 > To delete, delete the endpoint created by the model first and then delete the model.
 
+## Evaluate models
+
+Measure the performance of models, and compare performance across different models.
+
+### Create a model evaluation
+
+Batch inferences are automatically created during the model evaluation process.
+
+- **Basic Information**: Enter basic information about the model evaluation.
+    - **Name**: Enter a name for the model evaluation.
+    - **Description**: Enter a description of the model evaluation.
+- **Model Information**: Enter information about the model to evaluate.
+    - **Model**: Select the model to evaluate. Only classification models and regression models are supported.
+    - **Class name**: Enter a class name for the model.
+- **Model Evaluation Instance Information**
+    - **Instance type**: Select the instance type to run model evaluation on. This is used for data preprocessing and evaluation calculations.
+- **Input Data**: The input data is used to compare the prediction generated by batch inference with the ground truth. It requires the fields used in the inference and the answer fields.
+    - **Data path**: Enter the path where the input data is located.
+        - **Input Data Type**: Select the format of the input data. CSV and JSONL formats are supported, and the file extension must be .csv and .jsonl, respectively.
+        - **Evaluation Target Field**: Enter the field name for the ground truth label.
+- **Batch Inference Output Data**
+    - **Data path**: Enter the path where the results of batch inference will be stored.
+- **Batch Inference Information**
+    - **Instance Type**: Select the instance type to run batch inference on.
+    - **Number of Instances**: Enter the number of instances to perform batch inference on.
+    - **Number of Pods**: Enter the number of pods for batch inference.
+    - **Batch Size**: Enter the number of data samples that are processed simultaneously in one inference job.
+    - **Inference Time Limit (Seconds)**: Enter the time limit for batch inference. Sets the maximum allowable time for a single inference request to be processed and return results.
+- **Additional Settings**
+    - **Maximum Duration**: Specify the maximum progress time until the model evaluation is complete. Model evaluations that exceed the maximum progress time are terminated.
+    - **Log management**: Logs generated during model evaluation can be stored in the NHN Cloud Log & Crash Search service.
+        - For more information, see [Appendix > 2. How to use NHN Cloud Log & Crash Search service and check logs](./console-guide/#2-nhn-cloud-log-crash-search).
+
+> [Caution] When using NHN Cloud NAS
+Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
+
+> [Caution] Input data size:
+The size of the input data used to evaluate the model must be 20GB or less.
+
+> [Caution] Number of classes in a classification model evaluation:
+The number of classes in a classification model evaluation must be 50 or fewer.
+
+### Model Evaluation List
+
+A list of model evaluations is displayed. Select a model evaluation in the list to view details and make changes to the information.
+
+- **Name**: Displays the name of the model evaluation.
+- **Model**: Displays the name of the model used to evaluate the model.
+- **Status**: Displays the status of the model evaluation. See the table below for the main statuses.
+
+    | Status                                                      | Description                                                                                 |
+    |----------------------------------------------------------|------------------------------------------------------------------------------------|
+    | CREATE REQUESTED                                         | Model evaluation creation is requested.                                                               |
+    | CREATE IN PROGRESS                                       | Model evaluation is being created.                                                                |
+    | CREATE FAILED                                            | Model evaluation creation has failed. Please try again.                                                     |
+    | RUNNING                                                  | Model evaluation is in progress.                                                                |
+    | COMPLETE IN PROGRESS, FAIL MODEL EVALUATION IN PROGRESS  | Resources used for model evaluation are being cleaned up.                                                       |
+    | COMPLETE                                                 | Model evaluation completed successfully.                                                            |
+    | STOP IN PROGRESS                                         | Model evaluation is stopping.                                                                |
+    | STOPPED                                                  | Model evaluation has been stopped at the user's request.                                                        |                                                        
+    | FAIL MODEL EVALUATION                                    | Model evaluation has failed. If log management is enabled, you can check the detailed failure information in the Log & Crash Search logs. |
+    | DELETE IN PROGRESS                                       | Model evaluation is being deleted.                                                                |
+
+- **Task**
+    - **Stop**: You can stop an ongoing model evaluation.
+
+### Classification Model Evaluation Metrics
+- **PR AUC**: The area under Precision-Recall (PR) curve. It is effective for measuring a model's classification performance on unbalanced datasets.
+- **ROC AUC**: The area under Recall-False Positive Rate (ROC) curve indicates model performance. The closer the value is to 1, the better the performance.
+- **Log Loss**: The loss value calculated using a logarithmic function based on the difference between predicted probabilities and actual labels. A lower value indicates more reliable model predictions.
+- **F1 Score**: The harmonic mean of precision and recall. It is useful when there is class imbalance, and values closer to 1 indicate better performance.
+- **Precision**: The proportion of positive predictions that are actually positive. It focuses on reducing false positives.
+- **Recall**: The proportion of actual positives that are correctly predicted as positive by the model. It is important for reducing false negatives.
+- **Precision-recall curve**: A curve visualizing the relationship between precision and recall at various thresholds. It is useful for adjusting the model's decision threshold.
+- **ROC curve**: A curve showing the relationship between recall and false positive rate at different thresholds. It is used for setting classification thresholds and comparing models.
+- **Precision-recall curve by threshold**: A graph illustrating how precision and recall change at a specific threshold. It serves as a reference when defining operational criteria.
+- **Confusion matrix**: A matrix that categorizes prediction results into true positives, false positives, false negatives, and true negatives. It allows easy identification of error types for each class.
+
+### Regression Model Evaluation Metrics
+- **MAE(mean absolute error)**: The mean absolute error between actual and predicted values. It intuitively shows the magnitude of prediction errors.
+- **MAPE(mean absolute percentage error)**: The mean of prediction errors divided by actual values. Since it is ratio-based, it may be unsuitable for data with values close to zero.
+- **R-squared(coefficient of determination)**: Indicates how well the model explains the actual data, with values closer to 1 representing higher explanatory power.
+- **RMSE(root mean squared error)**: The square root of the mean squared error. It is more sensitive to large errors and interprets results on the same scale as the original units.
+- **RMSLE(root mean squared logarithmic error)**: Calculated from the difference between log-transformed actual and predicted values. It is less sensitive to differences in magnitude and useful for evaluating exponentially growing data.
+
+### Compare Model Evaluations
+
+Compare evaluation metrics across models.
+
+1. In the list, select the model evaluations to compare.
+2. Click **Compare**.
+
+### Delete Model Evaluation
+
+Delete a model evaluation.
+
+1. Select the model evaluation to delete.
+2. Click **Delete**. An ongoing model evaluation can be stopped and then deleted.
+3. Requested deletion task cannot be cancelled. To proceed, please click **Confirm**
+
 ## Endpoint
 
 Create and manage endpoints that can serve the model.
@@ -688,7 +780,7 @@ Create and manage endpoints that can serve the model.
 - **Stage Name**: When adding new stage on existing endpoint, enter name for new stage. Stage names cannot be duplicated.
 - **Description**: Enter the description of endpoint stage.
 - **Instance Information**: Enter instance information for the model to be served.
-    - **Instance Flavor**: Select instance type.
+    - **Instance Type**: Select instance type.
     - **Number of Instances**: Enter the number of drives for instance.
     - **Autoscaler**: The autoscaler is a feature that automatically adjusts the number of nodes based on resource usage policies. The autoscaler is set on a per-stage basis.
         - **Enable/Disable**: Select whether to enable the autoscaler. If enabled, the number of instances will scale in or out based on the instance load.
@@ -713,7 +805,6 @@ Create and manage endpoints that can serve the model.
             - **Memory**: Adust the memory count depending on CPU usage.
         - **Threshold (%)**: The threshold value per increment at which the Pod will be scaled up.
     - **Resource Information:**: You can see the resources you're actually using. Allocates resource room usage to each model based on the quota for the model you entered. For more information, please see [Appendix > 9. Resource Information](./console-guide/#9).
-- **Additional Settings > Tag**: To add a tag, click **the + button** to enter the tag in Key-Value format. You can enter maximum 10 tags.
 
 > [Note] API Specification for Inference Request:
 > The AI EasyMaker service provides endpoints based on the open inference protocol (OIP) specification. For the endpoint API specification, see [Appendix > 10. Endpoint API specification](./console-guide/#10-api).
@@ -787,7 +878,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 - **Stage URL**: Displays Stage URL of API Gateway where the model is served.
 - **View API Gateway Settings**: Click **View Settings** to see settings that AI EasyMaker has deployed to API Gateway stage.
 - **View API Gateway Statistics**: Click **View Statistics** to view API statistics of endpoints.
-- **Instance Flavor**: Displays endpoint instance type the model is serving.
+- **Instance Type**: Displays endpoint instance type the model is serving.
 - **Number of Work Nodes/Pods In Progress**: Displays the number of nodes and pods being used by endpoint.
 - **Stage Resource**: Displays information about model artifacts deployed to the stage.
 - **Monitoring**: When you select the endpoint stage, you can see a list of monitored instances and basic metrics charts in the **Monitoring** tab of the detailed screen that appears.
@@ -968,7 +1059,6 @@ Set up the environment in which batch inference will be performed by selecting a
     - **Maximum Batch Inference Time** : Specify the maximum waiting time until batch inference is complete. Batch inference that exceeds the maximum waiting time will be terminated.
     - **Log Management** : Logs generated during batch inference can be stored in the NHN Cloud Log & Crash Search service.
         - For more information, please refer to [Appendix > 2. NHN Cloud Log & Crash Search Service User Guide and Log Check](./console-guide/#2-nhn-cloud-log-crash-search-service-usage-guide-and-log-inquiry-guide).
-    - **Tag** : To add a tag, click **the + button** and enter the tag in Key-Value format. You can enter up to 10 tags.
 
 > [Caution] When using NHN Cloud NAS:
 > Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
@@ -1189,7 +1279,6 @@ Upload a pipeline.
 - **Name**: Enter a pipeline name.
 - **Description**: Enter description.
 - **File registration**: Select the YAML file to upload.
-- **Tag**: You can specify tags in key-value format. You can enter maximum 10 tags.
 
 > [Note] Pipeline upload time:
 > Uploading a pipeline can take a few minutes.
@@ -1251,7 +1340,6 @@ Run the pipeline.
         - **NAS Path**: Enter the path in the following format: `nas://{NAS ID}:/{path}`.
     - **Manage Logs**: Logs that occur during pipeline execution can be stored in the NHN Cloud Log & Crash Search service.
         - For more information, refer to [Appendix > 2. NHN Cloud Log & Crash Search service usage guide and checking logs](./console-guide/#2-nhn-cloud-log-crash-search).
-    - **Tag**: You can specify tags in key-value format. You can enter maximum 10 tags.
 
 > [Caution] If you are using NHN Cloud NAS:
 > Only NHN Cloud NAS created in the same project as AI EasyMaker is available.
@@ -1520,20 +1608,21 @@ As shown in the example below, you can use hyperparameter values entered during 
 - Models that have been trained in the code must be saved in the EM_MODEL_DIR path.
 - **Key Environment Variables**
 
-    | Environment variable name                          | Description |
-    | --- | --- |
-    | EM_SOURCE_DIR                                      | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded |
-    | EM_ENTRY_POINT                                     | Algorithm entry point name entered at training creation |
-    | EM_DATASET_${Data set name}                        | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
-    | EM_DATASETS                                        | Full data set list ( json format) |
-    | EM_MODEL_DIR                                       | Model storage path |
-    | EM_CHECKPOINT_INPUT_DIR                            | Input checkout storage path                             |
-    | EM_CHECKPOINT_DIR                                  | Checkpoint Storage Path |
-    | EM_HP_${ Upper case converted Hyperparameter key } | Hyperparameter value corresponding to the hyperparameter key |
-    | EM_HPS                                             | Full Hyperparameter List (in json format) |
-    | EM_TENSORBOARD_LOG_DIR                             | TensorBoard log path for checking training results |
-    | EM_REGION                                          | Current Region Information |
-    | EM_APPKEY                                          | Appkey of AI EasyMaker service currently in use |
+    | Environment Variable Name                      | Description                                                                        |
+    |-----------------------------| --------------------------------------------------------------------------- |
+    | EM_SOURCE_DIR               | Absolute path to the folder where the algorithm script entered at the time of training creation is downloaded  |
+    | EM_ENTRY_POINT              | Algorithm entry point name entered at training creation                             |
+    | EM_DATASET_${Data set name}     | Absolute path to the folder where each data set entered at the time of training creation is downloaded |
+    | EM_DATASETS                 | Full data set list ( json format)                                            |
+    | EM_MODEL_DIR                | Model storage path                                                              |
+    | EM_CHECKPOINT_INPUT_DIR     | Input checkpoint storage path                                                  |
+    | EM_CHECKPOINT_DIR           | Output checkpoint storage path                                                  |
+    | EM_HP_${ Upper case converted Hyperparameter key } | Hyperparameter value corresponding to the hyperparameter key                              |
+    | EM_HPS                      | Full Hyperparameter List (in json format)                                         |
+    | EM_TENSORBOARD_LOG_DIR      | TensorBoard log path for checking training results                                    |
+    | EM_REGION                   | Current Region Information                                                              |
+    | EM_APPKEY                   | Appkey of AI EasyMaker service currently in use                                   |
+
 
 - **Example code for utilizing environment variables**
 
@@ -1690,6 +1779,39 @@ See the table below and the [model-archiver documentation](https://github.com/py
 | weight files (.pt, .pth, .bin) | Required      | The file that stores the weights and structure of the model.                         |
 | requirements.txt             | Optional      | Files for installing Python packages needed when serving.        |
 | extra/                       | Optional      | The files in the directory are passed in the extra-files parameter.         |
+
+>[Note] There are differences in the request format between using TorchServe directly and using AI EasyMaker serving, so take care when writing the handler.py.
+Refer to the example below to see what values are passed, and implement the handler accordingly.
+
+```bash
+# Example request
+curl --location --request POST '{API Gateway resource path}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "instances": [].
+        [1.0, 2.0],
+        [3.0, 4.0]
+    ]
+}'
+```
+
+```python
+class TestHandler(BaseHandler):
+    # ...
+    def preprocess(self, data): # Example: data = [[1.0, 2.0], [3.0, 4.0]]
+        features = []
+        for row in data:
+            # Example: row = [1.0, 2.0] content = row
+            features.append(content)
+        tensor = torch.tensor(features, dtype=torch.float32).to(self.device)
+        return tensor
+    # ...
+```
+
+#### Scikit-learn Framework
+
+AI EasyMaker uses mlserver to serve Scikit-learn models (.joblib).
+The `model-settings.json`, which is required when using mlserver directly, is not required when using AI EasyMaker serving.
 
 #### Hugging Face Framework
 
