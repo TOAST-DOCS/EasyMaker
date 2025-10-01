@@ -1484,11 +1484,11 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
 
 ## RAG
 
-검색 증강 생성(RAG, Retrieval-Augmented Generation)은 사용자의 문서를 벡터화하여 저장하고, 질문과 관련된 내용을 검색하여 대규모 언어 모델(LLM) 응답의 정확도를 높이는 기술입니다. AI EasyMaker는 벡터 스토어, 임베딩 모델, LLM을 통합하여 RAG 시스템을 생성하고 관리할 수 있습니다.
+RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서를 벡터화하여 저장하고, 질문과 관련된 내용을 검색하여 LLM(Large Language Model, 대규모 언어 모델) 응답의 정확도를 높이는 기술입니다. AI EasyMaker는 벡터 스토어, 임베딩 모델, LLM을 통합하여 RAG 시스템을 생성하고 관리할 수 있습니다.
 
 ### RAG 생성
 
-새로운 RAG를 생성합니다.
+새로운 RAGㅋ를 생성합니다.
 
 - **API Gateway 서비스 활성화**
     - AI EasyMaker RAG는 NHN Cloud API Gateway 서비스를 이용하여 API 엔드포인트를 생성하고 관리합니다. RAG 기능을 사용하려면 API Gateway 서비스를 반드시 활성화해야 합니다.
@@ -1498,16 +1498,16 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
 - **기본 설정**
     - **이름**: RAG 이름을 입력합니다. RAG 이름은 중복될 수 없습니다.
     - **설명**: RAG에 대한 설명을 입력합니다.
-    - **인스턴스 타입**: RAG ***API***를 실행할 인스턴스 타입을 선택합니다.
-    - **인스턴스 수**: RAG ***API***를 실행할 인스턴스 수를 입력합니다.
-    - **프롬프트**: RAG ***API***에서 사용할 프롬프트입니다. **내용 보기**를 클릭하면 프롬프트의 전체 내용을 확인할 수 있습니다.
+    - **인스턴스 타입**: RAG 엔드포인트를 실행할 인스턴스 타입을 선택합니다.
+    - **인스턴스 수**: RAG 엔드포인트를 실행할 인스턴스 수를 입력합니다.
+    - **프롬프트**: RAG 엔드포인트에서 사용할 프롬프트입니다. **내용 보기**를 클릭하면 프롬프트의 전체 내용을 확인할 수 있습니다.
 - **벡터 스토어 설정**
     - **벡터 스토어 타입**: 벡터 스토어 타입을 선택합니다.
         - **RDS for PostgreSQL**
-            - **RDS for PostgreSQL 서비스 활성화**
-                - AI EasyMaker RAG는 NHN Cloud RDS for PostgreSQL 서비스를 이용하여 벡터 스토어를 생성하고 관리합니다. 이 옵션을 선택한 경우 RDS for PostgreSQL 서비스를 반드시 활성화해야 합니다.
-                - RDS for PostgreSQL 서비스에 대한 자세한 내용과 요금은 다음에서 확인할 수 있습니다.
-                    - [RDS for PostgreSQL 서비스 안내](https://docs.nhncloud.com/ko/Database/RDS%20for%20PostgreSQL/ko/overview/)
+            - **RDS for PostgreSQL 활성화**
+                - AI EasyMaker RAG는 NHN Cloud RDS for PostgreSQL을 이용하여 벡터 스토어를 생성하고 관리합니다. 이 옵션을 선택한 경우 RDS for PostgreSQL을 반드시 활성화해야 합니다.
+                - RDS for PostgreSQL에 대한 자세한 내용과 요금은 다음에서 확인할 수 있습니다.
+                    - [RDS for PostgreSQL 안내](https://docs.nhncloud.com/ko/Database/RDS%20for%20PostgreSQL/ko/overview/)
                     - [RDS for PostgreSQL 이용 요금](https://www.nhncloud.com/kr/pricing/by-service?c=Database&s=RDS%20for%20PostgreSQL)
             - **인스턴스 타입**: RDS for PostgreSQL에서 사용할 인스턴스 타입을 선택합니다.
             - **스토리지 타입**: RDS for PostgreSQL에서 사용할 스토리지 타입을 선택합니다.
@@ -1515,30 +1515,35 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
             - **사용자 ID**: PostgreSQL 접속에 사용할 사용자 ID를 입력합니다.
             - **비밀번호**: PostgreSQL 접속에 사용할 비밀번호를 입력합니다.
             - **비밀번호 확인**: 비밀번호를 다시 입력하여 확인합니다.
-            - **VPC ID**: RDS for PostgreSQL과 AI EasyMaker를 연결할 VPC ID를 입력합니다.
-            - **서브넷 ID**: RDS for PostgreSQL과 AI EasyMaker를 연결할 서브넷 ID를 입력합니다.
+            - **VPC ID**: RDS for PostgreSQL에서 사용할 VPC ID를 입력합니다.
+            - **서브넷 ID**: RDS for PostgreSQL에서 사용할 서브넷 ID를 입력합니다.
         - **PostgreSQL Instance**: 사용자가 생성한 NHN Cloud PostgreSQL Instance를 벡터 스토어로 활용합니다.
             - **사용자 ID**: PostgreSQL Instance 생성 시 설정한 사용자 ID를 입력합니다.
             - **비밀번호**: PostgreSQL Instance 생성 시 설정한 비밀번호를 입력합니다.
-            - **VPC ID**: PostgreSQL Instance와 AI EasyMaker를 연결할 VPC ID를 입력합니다.
-            - **서브넷 ID**: PostgreSQL Instance와 AI EasyMaker를 연결할 서브넷 ID를 입력합니다.
+            - **VPC ID**: PostgreSQL Instance에서 사용할 VPC ID를 입력합니다.
+            - **서브넷 ID**: PostgreSQL Instance에서 사용할 서브넷 ID를 입력합니다.
             - **PostgreSQL 인스턴스 IP**: 생성한 PostgreSQL Instance의 IP 주소를 입력합니다.
     - **수집 설정**
         - **데이터 경로**: 벡터 스토어에 수집할 문서가 저장된 데이터 경로를 입력합니다.
     - **임베딩 모델**
         - **모델**: 문서 및 쿼리를 벡터화할 때 사용할 임베딩 모델을 선택합니다.
         - **인스턴스 타입**: 임베딩 모델을 실행할 인스턴스 타입입니다.
-        - **인스턴스 수**: 임베딩 모델을 실행할 인스턴스 수 입니다.
+        - **인스턴스 수**: 임베딩 모델을 실행할 인스턴스 수를 입력합니다.
 - **LLM 설정**
-    - **모델**: 응답을 생성할 때 사용할 대규모 언어 모델(LLM)을 선택합니다.
+    - **모델**: 응답을 생성할 때 사용할 LLM을 선택합니다.
     - **인스턴스 타입**: LLM을 실행할 인스턴스 타입입니다.
     - **인스턴스 수**: LLM을 실행할 인스턴스 수 입니다.
 - **추가 설정**
     - **로그 관리**: RAG 실행 중 발생하는 로그를 NHN Cloud Log & Crash Search 서비스에 저장할 수 있습니다.
         - 자세한 내용은 [부록 > 2. NHN Cloud Log & Crash Search 서비스 이용 안내 및 로그 확인](./console-guide/#2-nhn-cloud-log-crash-search)을 참고하세요.
 
+> [주의] PostgreSQL Instance 사용 시 포트를 `15432`로 설정해야 합니다.
+> 인스턴스를 생성하는 방법은 [PostgreSQL Instance 사용가이드](https://docs.nhncloud.com/ko/Compute/Instance/ko/component-guide/#postgresql-instance)를 참고하세요.
+
 > [주의] NHN Cloud NAS 사용 시
 > AI EasyMaker와 동일한 프로젝트에서 생성된 NHN Cloud NAS만 사용할 수 있습니다.
+
+> [참고] 수집에서 사용할 수 있는 파일의 포맷과 크기, 개수가 제한될 수 있습니다. 자세한 내용은 [수집 동기화](#ingestion_sync)을 참고하세요.
 
 ### RAG 목록
 
@@ -1551,8 +1556,10 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
 | CREATE REQUESTED | RAG 생성이 요청된 상태입니다. |
 | CREATE IN PROGRESS | RAG 생성이 진행 중인 상태입니다. |
 | ACTIVE | RAG가 정상적으로 동작 중인 상태입니다. |
+| UPDATE IN PROGRESS | RAG에서 수집이 진행 중인 상태입니다. |
 | DELETE IN PROGRESS | RAG 삭제가 진행 중인 상태입니다. |
 | CREATE FAILED | RAG 생성에 실패한 상태입니다.<br/>RAG를 삭제한 후 다시 생성하세요. 생성 실패가 반복되면 고객 센터로 문의하세요. |
+| UPDATE FAILED | RAG에서 수집이 실패한 상태입니다.<br/>**수집 동기화**를 다시 시도하세요. 업데이트 실패가 반복되면 고객 센터로 문의하세요. |
 | DELETE FAILED | RAG 삭제에 실패한 상태입니다.<br/>삭제를 다시 시도하세요. 삭제 실패가 반복되면 고객 센터로 문의하세요. |
 
 - **API Gateway 상태**: API Gateway 기본 스테이지의 배포 상태 정보입니다.
@@ -1567,39 +1574,48 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
 - **API 통계**: RAG를 선택하면 표시되는 상세 화면의 **API 통계** 탭에서 API 통계 정보를 확인할 수 있습니다.
 - **모니터링**: RAG를 선택하면 표시되는 상세 화면의 **모니터링** 탭에서 모니터링 대상 인스턴스 목록과 기본 지표 차트를 확인할 수 있습니다.
 
+<a id="ingestion_sync"></a>
+
 ### 수집 동기화
 
 - RAG를 선택하면 표시되는 상세 화면의 **벡터 스토어** 탭에 수집 동기화 기능을 사용할 수 있습니다.
-- 데이터 경로에 문서가 추가, 삭제, 수정된 경우 **수집 동기화**를 실행하여 변경 사항을 반영할 수 있습니다.
+- 수집 데이터 경로에 문서가 추가, 삭제, 수정된 경우 **수집 동기화**를 실행하여 변경 사항을 반영할 수 있습니다.
+- 수집에서 사용할 수 있는 파일의 포맷과 크기, 개수가 제한될 수 있습니다. 자세한 내용은 아래 표를 참고하세요.
+
+| 항목 | 제한 |
+|-----|------|
+| 총 파일 크기 | 100GB |
+| 최대 파일 수 | 1,000,000개 |
+
+| 카테고리 | 지원 포맷 | 최대 파일 크기 |
+|--------|---------|------------|
+| 텍스트 문서 | `.txt`, `.text`, `.md` | 3MB |
+| 문서 | `.doc`, `.docx`, `.pdf` | 50MB |
+| 스프레드시트 | `.csv`, `.xls`, `.xlsx` | 3MB |
+| 프레젠테이션 | `.ppt`, `.pptx` | 50MB |
 
 ### RAG 삭제
 
-- RAG 목록에서 삭제할 RAG의 **동작** 열에 있는 휴지통 아이콘을 클릭하여 삭제할 수 있습니다.
-    - 생성 또는 삭제가 진행 중인 RAG는 삭제할 수 없습니다.
-    - 요청된 삭제 작업은 취소할 수 없습니다. 계속 진행하려면 **삭제**를 클릭합니다.
+- 생성 또는 삭제가 진행 중인 RAG는 삭제할 수 없습니다.
+- 요청된 삭제 작업은 취소할 수 없습니다.
 
 ### RAG 질문 요청 가이드
 
-RAG 서비스는 아래와 같은 엔드포인트를 제공합니다.
+- 질문을 요청할 때는 OpenAI Chat Completion API처럼 `model`과 `messages`를 요청 본문에 포함해서 요청하세요. `model`은 RAG 이름을 넣어서 요청하세요.
+- 자세한 요청 예시는 아래 내용을 참고하세요.
 
-| 이름       | 메서드 | API 경로                     |
-| --------- | ---- | --------------------------- |
-| 모델 목록   | GET  | /rag/v1/models              |
-| 모델 Ready | GET  | /rag/v1/models/{model_name} |
-| 질문       | POST | /rag/v1/query               |
-
-- 질문을 요청할 때는 OpenAI Chat Completion API처럼 `model`과 `messages`를 요청 본문에 포함해서 요청하면 됩니다. 아래 요청 본문을 참고하세요.
-
-```json
-{
-  "model": "{model_name}",
-  "messages": [
-    {
-      "role": "user", 
-      "content": "{query_text}"
-    }
-  ]
-}
+```bash
+curl -X POST https://{API 엔드포인트 주소}/rag/v1/query \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "{RAG 이름}",
+    "messages": [
+      {
+        "role": "user",
+        "content": "{query_text}"
+      }
+    ]
+  }'
 ```
 
 ## 부록

@@ -2,8 +2,8 @@
 
 ### 2025. 10. 28.
 
-- RAG (Retrieval-Augmented Generation) 기능 추가
-    - 대규모 언어 모델(LLM)의 응답 정확도를 향상시키는 검색 증강 생성 기능이 추가되었습니다.
+- RAG(Retrieval-Augmented Generation, 검색 증강 생성) 기능 추가
+    - LLM의 응답 정확도를 향상시키는 RAG 기능이 추가되었습니다.
 
 - NVIDIA Triton Inference Server 지원
     - Triton 형식의 모델을 생성하고 배포할 수 있는 기능이 추가되었습니다.
