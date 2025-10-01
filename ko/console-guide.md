@@ -1488,7 +1488,7 @@ RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서
 
 ### RAG 생성
 
-새로운 RAGㅋ를 생성합니다.
+새로운 RAG를 생성합니다.
 
 - **API Gateway 서비스 활성화**
     - AI EasyMaker RAG는 NHN Cloud API Gateway 서비스를 이용하여 API 엔드포인트를 생성하고 관리합니다. RAG 기능을 사용하려면 API Gateway 서비스를 반드시 활성화해야 합니다.
