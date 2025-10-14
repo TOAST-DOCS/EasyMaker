@@ -612,6 +612,21 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 > safetensors는 HuggingFace에서 개발한 안전하고 효율적인 머신러닝 모델 파일 형식입니다.
 > 그 외의 파일 형식은 지원하지 않습니다.
 
+> [주의] TensorFlow (Triton), PyTorch (Triton), ONNX (Triton) 모델을 생성하는 경우:
+> 입력하는 모델 아티팩트 경로에 Triton으로 모델을 실행할 수 있는 구조로 모델 파일과 `config.pbtxt` 파일이 저장되어 있어야 합니다.
+> 아래의 예시를 참고하세요.
+
+```
+model_name/
+├── config.pbtxt                              # 모델 설정 파일
+└── 1/                                        # 버전 1 디렉토리
+    └── model.savedmodel/                     # TensorFlow SavedModel 디렉토리
+        ├── saved_model.pb                    # 메타그래프와 체크포인트 데이터
+        └── variables/                        # 모델 가중치 디렉토리
+            ├── variables.data-00000-of-00001
+            └── variables.index
+```
+
 ### 모델 목록
 
 모델 목록이 표시됩니다. 목록의 모델을 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
@@ -1733,20 +1748,20 @@ AI EasyMaker에서 배치 추론과 엔드포인트를 생성할 때, 선택한 
 AI EasyMaker 서비스는 OIP(open inference protocol) 스펙을 기반으로 한 엔드포인트를 제공합니다.
 OIP 스펙에 대한 상세한 내용은 [OIP 스펙](https://github.com/kserve/open-inference-protocol)을 참고하세요.
 
-| 이름             | 메서드 | API 경로                                     |
-| ---------------- | ------ | -------------------------------------------- |
-| 모델 목록        | GET    | /{model_name}/v1/models                      |
-| 모델 Ready       | GET    | /{model_name}/v1/models/{model_name}         |
-| 추론             | POST   | /{model_name}/v1/models/{model_name}/predict |
-| 설명             | POST   | /{model_name}/v1/models/{model_name}/explain |
-| 서버 정보        | GET    | /{model_name}/v2                             |
-| 서버 Live        | GET    | /{model_name}/v2/health/live                 |
-| 서버 Ready       | GET    | /{model_name}/v2/health/ready                |
-| 모델 정보        | GET    | /{model_name}/v2/models/{model_name}         |
-| 모델 Ready       | GET    | /{model_name}/v2/models/{model_name}/ready   |
-| 추론             | POST   | /{model_name}/v2/models/{model_name}/infer   |
-| OpenAI 생성형 모델 추론 | POST   | /{model_name}/openai/v1/completions          |
-| OpenAI 생성형 모델 추론 | POST   | /{model_name}/openai/v1/chat/completions     |
+| 이름                    | 메서드 | API 경로                                                                |
+| ----------------------- | ------ | ----------------------------------------------------------------------- |
+| 모델 목록               | GET    | /{model_name}/v1/models                                                 |
+| 모델 Ready              | GET    | /{model_name}/v1/models/{model_name}                                    |
+| 추론                    | POST   | /{model_name}/v1/models/{model_name}/predict                            |
+| 설명                    | POST   | /{model_name}/v1/models/{model_name}/explain                            |
+| 서버 정보               | GET    | /{model_name}/v2                                                        |
+| 서버 Live               | GET    | /{model_name}/v2/health/live                                            |
+| 서버 Ready              | GET    | /{model_name}/v2/health/ready                                           |
+| 모델 정보               | GET    | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]       |
+| 모델 Ready              | GET    | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]/ready |
+| 추론                    | POST   | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]/infer |
+| OpenAI 생성형 모델 추론 | POST   | /{model_name}/openai/v1/completions                                     |
+| OpenAI 생성형 모델 추론 | POST   | /{model_name}/openai/v1/chat/completions                                |
 
 > [참고] OpenAI 생성형 모델 추론
 > OpenAI 생성형 모델 추론은 OpenAI의 GPT-4o와 같은 생성형 모델을 사용하는 경우에 사용됩니다.
