@@ -738,7 +738,7 @@ model_name/
     | COMPLETE IN PROGRESS, FAIL MODEL EVALUATION IN PROGRESS  | 모델 평가에 사용된 리소스를 정리 중인 상태입니다.                                                       |
     | COMPLETE                                                 | 모델 평가가 정상적으로 완료된 상태입니다.                                                            |
     | STOP IN PROGRESS                                         | 모델 평가가 중지 중인 상태입니다.                                                                |
-    | STOPPED                                                  | 모델 평가가 사용자의 요청으로 중지된 상태입니다.                                                        |                                                        
+    | STOPPED                                                  | 모델 평가가 사용자의 요청으로 중지된 상태입니다.                                                        |
     | FAIL MODEL EVALUATION                                    | 모델 평가에 실패한 상태입니다. 자세한 실패 정보는 로그 관리가 활성화된 경우, Log & Crash Search 로그를 통해 확인할 수 있습니다. |
     | DELETE IN PROGRESS                                       | 모델 평가를 삭제 중인 상태입니다.                                                                |
 
@@ -746,6 +746,7 @@ model_name/
     - **중지**: 진행 중인 모델 평가를 중지할 수 있습니다.
 
 ### 분류 모델 평가 지표
+
 - **PR AUC**: 정밀도-재현율(PR) 곡선의 아래 면적입니다. 불균형한 데이터셋에서 모델의 분류 성능을 측정하는 데 효과적입니다.
 - **ROC AUC**: ROC 곡선(재현율-위양성율)의 아래 면적입니다. 1에 가까울수록 우수한 성능을 나타냅니다.
 - **로그 손실**: 예측 확률과 실제 정답 간의 차이를 로그 함수로 계산한 손실 값입니다. 값이 낮을수록 모델의 예측이 신뢰할 수 있음을 의미합니다.
@@ -758,6 +759,7 @@ model_name/
 - **혼동 행렬(confusion matrix)**: 예측 결과를 TP, FP, FN, TN 네 가지로 구분한 행렬입니다. 클래스별 오차 유형을 쉽게 파악할 수 있습니다.
 
 ### 회귀 모델 평가 지표
+
 - **MAE(mean absolute error)**: 실제 값과 예측 값의 차이의 절대값 평균입니다. 예측 오차의 크기를 직관적으로 보여줍니다.
 - **MAPE(mean absolute percentage error)**: 예측 오차를 실제 값으로 나눈 비율의 평균입니다. 비율 기반이므로 값이 0에 가까운 데이터에는 부적합할 수 있습니다.
 - **R-squared(coefficient of determination)**: 모델이 실제 데이터를 얼마나 잘 설명하는지를 나타내며, 1에 가까울수록 설명력이 높습니다.
@@ -1494,6 +1496,152 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
 
 > [참고] 연관된 파이프라인 실행이 진행 중인 경우 파이프라인 일정 삭제 불가:
 > 삭제하려는 파이프라인 일정에 의해 생성된 실행이 진행 중인 경우 삭제할 수 없습니다. 파이프라인 실행이 완료된 후 파이프라인 일정을 삭제하세요.
+
+<a id="rag"></a>
+
+## RAG
+
+RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서를 벡터화하여 저장하고, 질문과 관련된 내용을 검색하여 LLM(Large Language Model, 대규모 언어 모델) 응답의 정확도를 높이는 기술입니다. AI EasyMaker는 벡터 스토어, 임베딩 모델, LLM을 통합하여 RAG 시스템을 생성하고 관리할 수 있습니다.
+
+<a id="rag_create"></a>
+
+### RAG 생성
+
+새로운 RAG를 생성합니다.
+
+- **API Gateway 서비스 활성화**
+    - AI EasyMaker RAG는 NHN Cloud API Gateway 서비스를 이용하여 API 엔드포인트를 생성하고 관리합니다. RAG 기능을 사용하려면 API Gateway 서비스를 반드시 활성화해야 합니다.
+    - API Gateway 서비스에 대한 자세한 내용과 요금은 다음에서 확인할 수 있습니다.
+        - [API Gateway 서비스 안내](https://docs.nhncloud.com/ko/Application%20Service/API%20Gateway/ko/overview/)
+        - [API Gateway 이용 요금](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
+- **기본 설정**
+    - **이름**: RAG 이름을 입력합니다. RAG 이름은 중복될 수 없습니다.
+    - **설명**: RAG에 대한 설명을 입력합니다.
+    - **인스턴스 타입**: RAG 엔드포인트를 실행할 인스턴스 타입을 선택합니다.
+    - **인스턴스 수**: RAG 엔드포인트를 실행할 인스턴스 수를 입력합니다.
+    - **프롬프트**: RAG 엔드포인트에서 사용할 프롬프트입니다. **내용 보기**를 클릭하면 프롬프트의 전체 내용을 확인할 수 있습니다.
+- **벡터 스토어 설정**
+    - **벡터 스토어 타입**: 벡터 스토어 타입을 선택합니다.
+        - **RDS for PostgreSQL**
+            - **RDS for PostgreSQL 활성화**
+                - AI EasyMaker RAG는 NHN Cloud RDS for PostgreSQL을 이용하여 벡터 스토어를 생성하고 관리합니다. 이 옵션을 선택한 경우 RDS for PostgreSQL을 반드시 활성화해야 합니다.
+                - RDS for PostgreSQL에 대한 자세한 내용과 요금은 다음에서 확인할 수 있습니다.
+                    - [RDS for PostgreSQL 안내](https://docs.nhncloud.com/ko/Database/RDS%20for%20PostgreSQL/ko/overview/)
+                    - [RDS for PostgreSQL 이용 요금](https://www.nhncloud.com/kr/pricing/by-service?c=Database&s=RDS%20for%20PostgreSQL)
+            - **인스턴스 타입**: RDS for PostgreSQL에서 사용할 인스턴스 타입을 선택합니다.
+            - **스토리지 타입**: RDS for PostgreSQL에서 사용할 스토리지 타입을 선택합니다.
+            - **스토리지 크기**: RDS for PostgreSQL에서 사용할 스토리지 크기입니다.
+            - **사용자 ID**: PostgreSQL 접속에 사용할 사용자 ID를 입력합니다.
+            - **비밀번호**: PostgreSQL 접속에 사용할 비밀번호를 입력합니다.
+            - **비밀번호 확인**: 비밀번호를 다시 입력하여 확인합니다.
+            - **VPC ID**: RDS for PostgreSQL에서 사용할 VPC ID를 입력합니다.
+            - **서브넷 ID**: RDS for PostgreSQL에서 사용할 서브넷 ID를 입력합니다.
+        - **PostgreSQL Instance**: 사용자가 생성한 NHN Cloud PostgreSQL Instance를 벡터 스토어로 활용합니다.
+            - **사용자 ID**: PostgreSQL Instance 생성 시 설정한 사용자 ID를 입력합니다.
+            - **비밀번호**: PostgreSQL Instance 생성 시 설정한 비밀번호를 입력합니다.
+            - **VPC ID**: PostgreSQL Instance에서 사용할 VPC ID를 입력합니다.
+            - **서브넷 ID**: PostgreSQL Instance에서 사용할 서브넷 ID를 입력합니다.
+            - **PostgreSQL 인스턴스 IP**: 생성한 PostgreSQL Instance의 IP 주소를 입력합니다.
+    - **수집 설정**
+        - **데이터 경로**: 벡터 스토어에 수집할 문서가 저장된 데이터 경로를 입력합니다.
+    - **임베딩 모델**
+        - **모델**: 문서 및 쿼리를 벡터화할 때 사용할 임베딩 모델을 선택합니다.
+        - **인스턴스 타입**: 임베딩 모델을 실행할 인스턴스 타입입니다.
+        - **인스턴스 수**: 임베딩 모델을 실행할 인스턴스 수를 입력합니다.
+- **LLM 설정**
+    - **모델**: 응답을 생성할 때 사용할 LLM을 선택합니다.
+    - **인스턴스 타입**: LLM을 실행할 인스턴스 타입입니다.
+    - **인스턴스 수**: LLM을 실행할 인스턴스 수 입니다.
+- **추가 설정**
+    - **로그 관리**: RAG 실행 중 발생하는 로그를 NHN Cloud Log & Crash Search 서비스에 저장할 수 있습니다.
+        - 자세한 내용은 [부록 > 2. NHN Cloud Log & Crash Search 서비스 이용 안내 및 로그 확인](./console-guide/#2-nhn-cloud-log-crash-search)을 참고하세요.
+
+> [주의] PostgreSQL Instance 사용 시 포트를 `15432`로 설정해야 합니다.
+> 인스턴스를 생성하는 방법은 [PostgreSQL Instance 사용가이드](https://docs.nhncloud.com/ko/Compute/Instance/ko/component-guide/#postgresql-instance)를 참고하세요.
+
+> [주의] NHN Cloud NAS 사용 시
+> AI EasyMaker와 동일한 프로젝트에서 생성된 NHN Cloud NAS만 사용할 수 있습니다.
+
+> [참고] 수집에서 사용할 수 있는 파일의 포맷과 크기, 개수가 제한될 수 있습니다. 자세한 내용은 [수집 동기화](#rag_ingestion_sync)을 참고하세요.
+
+<a id="rag_list"></a>
+
+### RAG 목록
+
+생성된 RAG 목록을 확인하고 관리합니다. 목록에서 RAG를 선택하면 상세 정보를 확인할 수 있습니다.
+
+- **상태**: RAG 상태입니다. 주요 상태는 아래 표를 참고하세요.
+
+| 상태 | 설명 |
+| --- | --- |
+| CREATE REQUESTED | RAG 생성이 요청된 상태입니다. |
+| CREATE IN PROGRESS | RAG 생성이 진행 중인 상태입니다. |
+| ACTIVE | RAG가 정상적으로 동작 중인 상태입니다. |
+| UPDATE IN PROGRESS | RAG에서 수집이 진행 중인 상태입니다. |
+| DELETE IN PROGRESS | RAG 삭제가 진행 중인 상태입니다. |
+| CREATE FAILED | RAG 생성에 실패한 상태입니다.<br/>RAG를 삭제한 후 다시 생성하세요. 생성 실패가 반복되면 고객 센터로 문의하세요. |
+| UPDATE FAILED | RAG에서 수집이 실패한 상태입니다.<br/>**수집 동기화**를 다시 시도하세요. 업데이트 실패가 반복되면 고객 센터로 문의하세요. |
+| DELETE FAILED | RAG 삭제에 실패한 상태입니다.<br/>삭제를 다시 시도하세요. 삭제 실패가 반복되면 고객 센터로 문의하세요. |
+
+- **API Gateway 상태**: API Gateway 기본 스테이지의 배포 상태 정보입니다.
+
+| 상태 | 설명 |
+| --- | --- |
+| DEPLOYING | API Gateway 기본 스테이지가 배포 중인 상태입니다. |
+| COMPLETE | API Gateway 기본 스테이지가 정상적으로 배포되어 활성화된 상태입니다. |
+| FAILURE | API Gateway 기본 스테이지 배포에 실패한 상태입니다. |
+
+- **수집 이력**: RAG를 선택하면 표시되는 상세 화면의 **수집 이력** 탭에서 문서 수집 작업의 실행 이력을 확인할 수 있습니다.
+- **API 통계**: RAG를 선택하면 표시되는 상세 화면의 **API 통계** 탭에서 API 통계 정보를 확인할 수 있습니다.
+- **모니터링**: RAG를 선택하면 표시되는 상세 화면의 **모니터링** 탭에서 모니터링 대상 인스턴스 목록과 기본 지표 차트를 확인할 수 있습니다.
+
+<a id="rag_ingestion_sync"></a>
+
+### 수집 동기화
+
+- RAG를 선택하면 표시되는 상세 화면의 **벡터 스토어** 탭에 수집 동기화 기능을 사용할 수 있습니다.
+- 수집 데이터 경로에 문서가 추가, 삭제, 수정된 경우 **수집 동기화**를 실행하여 변경 사항을 반영할 수 있습니다.
+- 수집에서 사용할 수 있는 파일의 포맷과 크기, 개수가 제한될 수 있습니다. 자세한 내용은 아래 표를 참고하세요.
+
+| 항목 | 제한 |
+|-----|------|
+| 총 파일 크기 | 100GB |
+| 최대 파일 수 | 1,000,000개 |
+
+| 카테고리 | 지원 포맷 | 최대 파일 크기 |
+|--------|---------|------------|
+| 텍스트 문서 | `.txt`, `.text`, `.md` | 3MB |
+| 문서 | `.doc`, `.docx`, `.pdf` | 50MB |
+| 스프레드시트 | `.csv`, `.xls`, `.xlsx` | 3MB |
+| 프레젠테이션 | `.ppt`, `.pptx` | 50MB |
+
+<a id="rag_delete"></a>
+
+### RAG 삭제
+
+- 생성 또는 삭제가 진행 중인 RAG는 삭제할 수 없습니다.
+- 요청된 삭제 작업은 취소할 수 없습니다.
+
+<a id="rag_query_guide"></a>
+
+### RAG 질문 요청 가이드
+
+- 질문을 요청할 때는 OpenAI Chat Completion API처럼 `model`과 `messages`를 요청 본문에 포함해서 요청하세요. `model`은 RAG 이름을 넣어서 요청하세요.
+- 자세한 요청 예시는 아래 내용을 참고하세요.
+
+```bash
+curl -X POST https://{API 엔드포인트 주소}/rag/v1/query \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "{RAG 이름}",
+    "messages": [
+      {
+        "role": "user",
+        "content": "{query_text}"
+      }
+    ]
+  }'
+```
 
 ## 부록
 
