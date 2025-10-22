@@ -619,10 +619,10 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 ```
 model_name/
 ├── config.pbtxt                              # 모델 설정 파일
-└── 1/                                        # 버전 1 디렉토리
-    └── model.savedmodel/                     # TensorFlow SavedModel 디렉토리
+└── 1/                                        # 버전 1 디렉터리
+    └── model.savedmodel/                     # TensorFlow SavedModel 디렉터리
         ├── saved_model.pb                    # 메타그래프와 체크포인트 데이터
-        └── variables/                        # 모델 가중치 디렉토리
+        └── variables/                        # 모델 가중치 디렉터리
             ├── variables.data-00000-of-00001
             └── variables.index
 ```
@@ -1551,7 +1551,7 @@ RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서
 - **LLM 설정**
     - **모델**: 응답을 생성할 때 사용할 LLM을 선택합니다.
     - **인스턴스 타입**: LLM을 실행할 인스턴스 타입입니다.
-    - **인스턴스 수**: LLM을 실행할 인스턴스 수 입니다.
+    - **인스턴스 수**: LLM을 실행할 인스턴스 수입니다.
 - **추가 설정**
     - **로그 관리**: RAG 실행 중 발생하는 로그를 NHN Cloud Log & Crash Search 서비스에 저장할 수 있습니다.
         - 자세한 내용은 [부록 > 2. NHN Cloud Log & Crash Search 서비스 이용 안내 및 로그 확인](./console-guide/#2-nhn-cloud-log-crash-search)을 참고하세요.
@@ -1562,7 +1562,7 @@ RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서
 > [주의] NHN Cloud NAS 사용 시
 > AI EasyMaker와 동일한 프로젝트에서 생성된 NHN Cloud NAS만 사용할 수 있습니다.
 
-> [참고] 수집에서 사용할 수 있는 파일의 포맷과 크기, 개수가 제한될 수 있습니다. 자세한 내용은 [수집 동기화](#rag_ingestion_sync)을 참고하세요.
+> [참고] 수집에서 사용할 수 있는 파일의 포맷과 크기, 개수가 제한될 수 있습니다. 자세한 내용은 [수집 동기화](#rag_ingestion_sync)를 참고하세요.
 
 <a id="rag_list"></a>
 
