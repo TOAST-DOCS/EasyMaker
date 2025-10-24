@@ -169,7 +169,7 @@ for training in training_list:
 
 | 名前                    | タイプ     | 必須かどうか | デフォルト値 | 有効範囲 | 説明   |
 |------------------------|---------|-------|------|--------|-------|
-| training_id          | String  | 必須   | なし   | 最大36文字 | 学習ID |
+| training_id          | String  | 選択  | 1   | 最大36文字 | 学習ID |
 
 ```python
 easymaker.Training(training_id).delete()
@@ -237,8 +237,8 @@ for instance in instance_type_list:
 | tuning_strategy_name                                             | easymaker.TUNING_STRATEGY                             | 必須                                                          | なし   | なし                                                    | どの戦略を使用して最適なハイパーパラメータを見つけるかを選択                                          |
 | tuning_strategy_random_state                                     | Integer                            | 選択                                                          | なし   | なし                                                    | 乱数生成のシード値を指定。再現可能な結果のために固定値を使用。                                      |
 | early_stopping_algorithm                                         | easymaker.EARLY_STOPPING_ALGORITHM                             | 必須                                                          | なし   | EARLY_STOPPING_ALGORITHM.<br>MEDIAN                    | 学習が進んでもモデルの改善が見られない場合、学習を早期終了                                |
-| early_stopping_min_trial_count                                   | Integer                            | 必須                                                          | 3     | なし                                                    | 中央値などの計算のため、いくつの学習結果から目標指標を取得するかを定義                                  |
-| early_stopping_start_step                                        | Integer                            | 必須                                                          | 4     | なし                                                    | 何回目の学習から早期終了を適用するかを設定します。                                            |
+| early_stopping_min_trial_count                                   | Integer                            | 選択                                                          | 3     | なし                                                    | 中央値などの計算のため、いくつの学習結果から目標指標を取得するかを定義                                  |
+| early_stopping_start_step                                        | Integer                            | 選択                                                          | 4     | なし                                                    | 何回目の学習から早期終了を適用するかを設定します。                                            |
 | use_log                                                          | Boolean                            | 選択                                                          | False | True, False                                            | Log & Crash Searchサービスにログを残すかどうか                                        |
 | wait                                                             | Boolean                            | 選択                                                          | True   | True, False                                            | True:作成完了後にレスポンスを返す, False:作成リクエスト直後に即レスポンスを返す                                 |
 
@@ -337,6 +337,9 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 | hyperparameter_tuning_id | String | training_idがない場合は必須             | なし  | なし      | モデルとして作成するハイパーパラメータチューニングID(最高学習で作成済み) |
 | model_name               | String | 必須                                | なし  | 最大50文字 | モデル名                              |
 | description        | String | 選択                                | なし  | 最大255文字 | モデルの説明                          |
+| parameter_list                   | Array  | 選択   | なし  | 最大10個                                 | パラメータ情報(parameterName/parameterValueで構成)         |
+| parameter_list[0].parameterName  | String | 選択   | なし  | 最大64文字                                 | パラメータ名                                             |
+| parameter_list[0].parameterValue | String | 選択   | なし  | 最大255文字                                | パラメータ値                                               |
 
 ```python
 model = easymaker.Model().create(
@@ -686,13 +689,13 @@ for instance in instance_type_list:
 [パラメータ]
 
 | 名前                    | タイプ  | 必須かどうか | デフォルト値 | 有効範囲 | 説明                                                            |
-| ------------------------- | ------- | --------- | ------ | ----------- |-----------------------------------------------------------------|
+| ------------------------- | ------- | --------- | ------- | ----------- |-----------------------------------------------------------------|
 | batch_inference_name      | String  | 必須    | なし  | 最大50文字 | バッチ推論の名前                                                      |
-| instance_count            | Integer | 必須    | なし  | 1～10        | バッチ推論に使用するインスタンス数                                             |
-| timeout_hours             | Integer | 選択    | 720    | 1～720       | 最大バッチ推論時間(単位：時間)                                             |
+| instance_count            | Integer | 選択   | 1  | 1～10        | バッチ推論に使用するインスタンス数                                            |
+| timeout_hours             | Integer | 必須    | 720   | 1～720       | 最大バッチ推論時間(単位：時間)                                             |
 | instance_type_name             | String  | 必須    | なし  | なし       | インスタンスタイプ名(CLIで照会可能)                                          |
 | model_id                | String  | 必須    | なし  | なし       | モデルID                                                            |
-| pod_count                 | Integer | 必須    | なし  | 1～100       | 分散推論を適用するPod数                                               |
+| pod_count                 | Integer | 選択   | 1  | 1～100       | 分散推論を適用するPod数                                              |
 | batch_size                | Integer | 必須    | なし  | 1～1000      | 同時に処理されるデータサンプルの数                                             |
 | inference_timeout_seconds | Integer | 必須    | なし  | 1～1200      | 単一推論リクエストの最大許容時間                                            |
 | input_data_uri            | String  | 必須    | なし  | 最大255文字 | 入力データファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS)         |
@@ -756,7 +759,7 @@ easymaker.BatchInference(batch_inference_id).delete()
 | 名前                        | タイプ    | 必須かどうか | デフォルト値 | 有効範囲 | 説明                                      |
 |-----------------------------|---------| --------- | ------ | --------- |-------------------------------------------|
 | pipeline_name               | String  | 必須    | なし | 最大50文字 | パイプライン名                                |
-| pipeline_spec_manifest_path | String  | 必須    | なし | 1~10      | アップロードするパイプラインファイルパス                        |
+| pipeline_spec_manifest_path | String  | 必須   | なし | なし      | アップロードするパイプラインファイルのパス                       |
 | description                 | String  | 選択    | なし | 最大255文字 | パイプラインの説明                            |
 | wait                        | Boolean | 選択    | True   | True, False | True：作成が完了した後に返す、False：作成リクエスト後、すぐに返す |
 
@@ -808,7 +811,7 @@ for instance in instance_type_list:
 | experiment_id                     | String                    | easymaker.initで未入力の場合は必須 | なし   | 最大36文字    | 実験ID                                    |
 | description                       | String                    | 選択                      | なし  | 最大255文字   | パイプライン実行の説明                        |
 | instance_type_name                | String                    | 必須                      | なし  | なし         | インスタンスタイプ名(CLIで照会可能)                   |
-| instance_count                    | Integer                   | 必須                      | なし  | 1～10        | 使用するインスタンス数                             |
+| instance_count                    | Integer                   | 選択                     | 1  | 1～10        | 使用するインスタンス数                            |
 | boot_storage_size                 | Integer                   | 必須                      | なし  | 50～         | パイプラインを実行するインスタンスのブートストレージサイズ(単位： GB)      |
 | parameter_list                    | easymaker.Parameter Array | 選択                      | なし  | なし         | パイプラインに渡すパラメータ情報                     |
 | parameter_list[0].parameter_name  | String                    | 選択                      | なし  | 最大255文字   | パラメータキー                                  |
@@ -862,17 +865,17 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 [パラメータ]
 
 | 名前                             | タイプ    | 必須かどうか                            | デフォルト値 | 有効範囲     | 説明                                           |
-|----------------------------------|---------|------------------------------------| ------ |-------------|------------------------------------------------|
+|----------------------------------|---------|------------------------------------|------|-------------|------------------------------------------------|
 | pipeline_recurring_run_name      | String  | 必須                               | なし | 最大50文字    | パイプラインスケジュール名                                  |
 | pipeline_id                      | String  | 必須                               | なし | 最大36文字    | パイプラインスケジュール名                                  |
 | experiment_id                    | String  | easymaker.initで未入力の場合は必須        | なし  | 最大36文字    | 実験ID                                          |
 | description                      | String  | 選択                               | なし | 最大255文字   | パイプラインスケジュールの説明                              |
 | instance_type_name                    | String  | 必須                               | なし | なし        | インスタンスタイプ名(CLIで照会可能)                         |
-| instance_count                   | Integer | 必須                               | なし | 1~10        | 使用するインスタンス数                                   |
+| instance_count                   | Integer | 選択                               | 1 | 1～10        | 使用するインスタンス数                                   |
 | boot_storage_size                | Integer | 必須                               | なし | 50~         | パイプラインを実行するインスタンスのブートストレージサイズ(単位: GB)            |
 | schedule_periodic_minutes        | String  | schedule_cron_expression未入力の場合は必須 | なし | なし        | パイプラインを繰り返し実行する時間周期設定                       |
 | schedule_cron_expression         | String  | schedule_periodic_minutes未入力の場合は必須 | なし | なし        | パイプラインを繰り返し実行するCron式設定                    |
-| max_concurrency_count            | String  | 選択                               | なし | なし        | 同時実行最大数を指定して並列で実行される数を制限           |
+| max_concurrency_count            | Integer  | 選択                               | 1 | 1~10        | 同時実行最大数を指定して並列で実行される数を制限           |
 | schedule_start_datetime          | String  | 選択                               | なし | なし        | パイプラインスケジュールの開始時間を設定、未入力の場合、設定した周期に合わせてパイプライン実行 |
 | schedule_end_datetime            | String  | 選択                               | なし | なし        | パイプラインスケジュールの終了時間を設定、未入力時、停止するまでのパイプライン実行を作成 || use_catchup                      | Boolean | 選択                               | なし | なし        | 欠陥実行のキャッチアップ：パイプライン実行がスケジュールに遅れた場合、追いつくかどうかを選択 |
 | use_catchup                      | Boolean | 選択                               | なし  | なし         | 未実行キャッチアップ:パイプラインの実行がスケジュールより遅れた場合に追従するかを選択 |
