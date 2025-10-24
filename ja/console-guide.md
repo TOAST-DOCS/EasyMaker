@@ -983,12 +983,12 @@ model_name/
                     [
                         0.337502569,
                         0.332836747,
-0.329660654
+                        0.329660654
                     ],
                     [
                         0.337530434,
                         0.332806051,
-0.329663515
+                        0.329663515
                     ]
                 ]
             }
@@ -1898,8 +1898,8 @@ OIPスペックの詳細は[OIPスペック](https://github.com/kserve/open-infe
 | モデル情報              | GET    | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]       |
 | モデルReady              | GET    | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]/ready |
 | 推論                   | POST   | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]/infer |
-| OpenAI生成型 モデル推論 | POST   | /{model_name}/openai/v1/completions                                     |
-| OpenAI生成型 モデル推論 | POST   | /{model_name}/openai/v1/chat/completions                                |
+| OpenAI生成型モデル推論 | POST   | /{model_name}/openai/v1/completions                                     |
+| OpenAI生成型モデル推論 | POST   | /{model_name}/openai/v1/chat/completions                                |
 
 > [参考] OpenAI生成型モデル推論
 > OpenAI生成型モデル推論はOpenAIのGPT-4oのような生成型モデルを使用する場合に使用されます。
