@@ -1727,20 +1727,20 @@ AI EasyMakerでバッチ推論とエンドポイントを作成する際、選�
 AI EasyMakerサービスはOIP(open inference protocol)スペックに基づいたエンドポイントを提供します。
 OIPスペックの詳細は[OIPスペック](https://github.com/kserve/open-inference-protocol)を参照してください。
 
-| 名前          | メソッド | APIパス                                  |
-| ---------------- | ------ | -------------------------------------------- |
-| モデルリスト     | GET    | /{model_name}/v1/models                      |
-| モデルReady       | GET    | /{model_name}/v1/models/{model_name}         |
-| 推論          | POST   | /{model_name}/v1/models/{model_name}/predict |
-| 説明          | POST   | /{model_name}/v1/models/{model_name}/explain |
-| サーバー情報     | GET    | /{model_name}/v2                             |
-| サーバーLive        | GET    | /{model_name}/v2/health/live                 |
-| サーバーReady       | GET    | /{model_name}/v2/health/ready                |
-| モデル情報     | GET    | /{model_name}/v2/models/{model_name}         |
-| モデルReady       | GET    | /{model_name}/v2/models/{model_name}/ready   |
-| 推論          | POST   | /{model_name}/v2/models/{model_name}/infer   |
-| OpenAI生成型モデル推論 | POST   | /{model_name}/openai/v1/completions          |
-| OpenAI生成型モデル推論 | POST   | /{model_name}/openai/v1/chat/completions     |
+| 名前                   | メソッド | APIパス                                                                 |
+| ---------------------- | -------- | ----------------------------------------------------------------------- |
+| モデルリスト           | GET      | /{model_name}/v1/models                                                 |
+| モデルReady            | GET      | /{model_name}/v1/models/{model_name}                                    |
+| 推論                   | POST     | /{model_name}/v1/models/{model_name}/predict                            |
+| 説明                   | POST     | /{model_name}/v1/models/{model_name}/explain                            |
+| サーバー情報           | GET      | /{model_name}/v2                                                        |
+| サーバーLive           | GET      | /{model_name}/v2/health/live                                            |
+| サーバーReady          | GET      | /{model_name}/v2/health/ready                                           |
+| モデル情報             | GET      | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]       |
+| モデルReady            | GET      | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]/ready |
+| 推論                   | POST     | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]/infer |
+| OpenAI生成型モデル推論 | POST     | /{model_name}/openai/v1/completions                                     |
+| OpenAI生成型モデル推論 | POST     | /{model_name}/openai/v1/chat/completions                                |
 
 > [参考] OpenAI生成型モデル推論
 > OpenAI生成型モデル推論はOpenAIのGPT-4oのような生成型モデルを使用する場合に使用されます。
