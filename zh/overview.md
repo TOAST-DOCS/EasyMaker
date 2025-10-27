@@ -22,9 +22,18 @@ AI EasyMaker provides an AI platform to manage learning, models, and endpoints a
 
 4. Model Management
     - You can manage model artifacts that completed training.
+    - You can measure and compare the performance of models.
 
 5. Endpoint(Serving)
     - Provides an endpoint for model service.
     - Endpoints offer redundancy configuration.
     - You can use various features of API Gateway because endpoints are associated with the API Gateway service.
     - In order to deploy a new model with high accuracy to the endpoint in service, you can add the endpoint to the new test stage until the test ends and immediately apply it to the default domain through a feature to change the stage.
+
+6. Pipeline
+    - You can utilize the Kubeflow Pipelines (KFP) SDK to configure ML tasks such as data preprocessing, model training, evaluation, and deployment step by step and register them as reusable pipelines.
+    - The registered pipeline can be executed immediately or scheduled to run automatically on a specific schedule.
+
+7. Retrieval-Augmented Generation (RAG)
+    - Provide RAG feature to improve response accuracy of Large Language Model (LLM).
+    - Convert users' documents to vectors, save them, and provide the retrieved information to LLM to generate more accurate answers.

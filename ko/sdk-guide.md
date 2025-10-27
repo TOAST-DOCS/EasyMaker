@@ -97,9 +97,9 @@ for instance in instance_type_list:
 | description                            | String                    | 선택                        | 없음    | 최대 255자     | 학습에 대한 설명                                                        |
 | image_name                             | String                    | 필수                        | 없음    | 없음          | 학습에 사용될 이미지 이름(CLI로 조회 가능)                                       |
 | instance_type_name                     | String                    | 필수                        | 없음    | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                                           |
-| distributed_node_count                 | Integer                   | 필수                        | 없음    | 1~10         | 분산 학습을 적용할 노드 수                                                  |
-| use_torchrun                           | Boolean                   | 선택                        | False  | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                             |
-| nproc_per_node                         | Integer                   | use_torchrun True 시 필수    | 1      | 1~(CPU 개수 또는 GPU 개수) | 노드당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값                  |
+| distributed_node_count                 | Integer                   | 선택                        | 1     | 1~10         | 분산 학습을 적용할 노드 수                                                  |
+| use_torchrun                           | Boolean                   | 선택                        | False | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                             |
+| nproc_per_node                         | Integer                   | use_torchrun True 시 필수    | 1     | 1~(CPU 개수 또는 GPU 개수) | 노드당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값                  |
 | data_storage_size                      | Integer                   | Obejct Storage 사용 시 필수    | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                |
 | algorithm_name                         | String                    | NHN Cloud 제공 알고리즘 사용 시 필수 | 없음    | 최대 64자      | 알고리즘 이름(CLI로 조회 가능)                                              |
 | source_dir_uri                         | String                    | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어 있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
@@ -115,7 +115,7 @@ for instance in instance_type_list:
 | dataset_list[0].dataset_name           | String                    | 선택                        | 없음    | 최대 36자      | 데이터 이름                                                           |
 | dataset_list[0].data_uri               | String                    | 선택                        | 없음    | 최대 255자     | 데이터 경로                                                           |
 | use_log                                | Boolean                   | 선택                        | False | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                               |
-| wait                                   | Boolean                   | 선택                        | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                        |
+| wait                                   | Boolean                   | 선택                        | True  | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                        |
 
 ```python
 training = easymaker.Training().run(
@@ -239,8 +239,8 @@ for instance in instance_type_list:
 | tuning_strategy_name                                             | easymaker.TUNING_STRATEGY                             | 필수                                                            | 없음    | 없음                                                     | 어떤 전략을 사용해서 최적의 하이퍼파라미터를 찾을지 선택                                            |
 | tuning_strategy_random_state                                     | Integer                            | 선택                                                            | 없음    | 없음                                                     | 난수 생성을 결정. 재현 가능한 결과를 위해 고정된 값으로 지정함.                                      |
 | early_stopping_algorithm                                         | easymaker.EARLY_STOPPING_ALGORITHM                             | 필수                                                            | 없음    | EARLY_STOPPING_ALGORITHM.<br>MEDIAN                    | 학습이 계속 진행되어도 모델이 더 이상 좋아지지 않으면 학습을 조기에 종료                                  |
-| early_stopping_min_trial_count                                   | Integer                            | 필수                                                            | 3     | 없음                                                     | 중간값을 계산할 때 몇 개의 학습으로부터 목표 지표 값을 가져올지 정의                                    |
-| early_stopping_start_step                                        | Integer                            | 필수                                                            | 4     | 없음                                                     | 몇 번째 학습 단계부터 조기 중지를 적용할지 설정합니다.                                            |
+| early_stopping_min_trial_count                                   | Integer                            | 선택                                                            | 3     | 없음                                                     | 중간값을 계산할 때 몇 개의 학습으로부터 목표 지표 값을 가져올지 정의                                    |
+| early_stopping_start_step                                        | Integer                            | 선택                                                            | 4     | 없음                                                     | 몇 번째 학습 단계부터 조기 중지를 적용할지 설정합니다.                                            |
 | use_log                                                          | Boolean                            | 선택                                                            | False | True, False                                            | Log & Crash Search 서비스에 로그를 남길지 여부                                         |
 | wait                                                             | Boolean                            | 선택                                                            | True   | True, False                                            | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                                  |
 
@@ -340,6 +340,9 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 | hyperparameter_tuning_id | String | training_id가 없는 경우 필수              | 없음  | 없음      | 모델로 생성할 하이퍼파라미터 튜닝 ID(최고 학습으로 생성됨) |
 | model_name               | String | 필수                                 | 없음  | 최대 50자  | 모델 이름                               |
 | description        | String | 선택                                 | 없음  | 최대 255자 | 모델에 대한 설명                           |
+| parameter_list                   | Array  | 선택    | 없음  | 최대 10개                                  | 파라미터 정보(parameterName/parameterValue로 구성)         |
+| parameter_list[0].parameterName  | String | 선택    | 없음  | 최대 64자                                  | 파라미터 이름                                              |
+| parameter_list[0].parameterValue | String | 선택    | 없음  | 최대 255자                                 | 파라미터 값                                                |
 
 ```python
 model = easymaker.Model().create(
@@ -688,25 +691,25 @@ for instance in instance_type_list:
 
 [파라미터]
 
-| 이름                      | 타입    | 필수 여부 | 기본값 | 유효 범위   | 설명                                                              |
-| ------------------------- | ------- | --------- | ------ | ----------- |-----------------------------------------------------------------|
-| batch_inference_name      | String  | 필수      | 없음   | 최대 50자   | 배치 추론 이름                                                        |
-| instance_count            | Integer | 필수      | 없음   | 1~10        | 배치 추론에 사용할 인스턴스 수                                               |
-| timeout_hours             | Integer | 선택      | 720    | 1~720       | 최대 배치 추론 시간(단위: 시간)                                             |
-| instance_type_name             | String  | 필수      | 없음   | 없음        | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
-| model_id                | String  | 필수      | 없음   | 없음        | 모델 ID                                                            |
-| pod_count                 | Integer | 필수      | 없음   | 1~100       | 분산 추론을 적용할 파드 수                                                 |
-| batch_size                | Integer | 필수      | 없음   | 1~1000      | 동시에 처리되는 데이터 샘플의 수                                              |
-| inference_timeout_seconds | Integer | 필수      | 없음   | 1~1200      | 단일 추론 요청의 최대 허용 시간                                              |
-| input_data_uri            | String  | 필수      | 없음   | 최대 255자  | 입력 데이터 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)         |
-| input_data_type           | String  | 필수      | 없음   | "JSON", "JSONL" | 입력 데이터의 유형                                                      |
-| include_glob_pattern      | String  | 선택      | 없음   | 최대 255자  | 파일 집합을 입력 데이터에서 포함할 Glob 패턴                                     |
-| exclude_glob_pattern      | String  | 선택      | 없음   | 최대 255자  | 파일 집합을 입력 데이터에서 제외할 Glob 패턴                                     |
-| output_upload_uri         | String  | 필수      | 없음   | 최대 255자  | 배치 추론 결과 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
-| data_storage_size         | Integer | 필수      | 없음   | 300~10000   | 배치 추론에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB)                          |
-| description               | String  | 선택      | 없음   | 최대 255자  | 배치 추론에 대한 설명                                                    |
-| use_log                   | Boolean | 선택      | False  | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                              |
-| wait                      | Boolean | 선택      | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                       |
+| 이름                      | 타입    | 필수 여부 | 기본값   | 유효 범위   | 설명                                                              |
+| ------------------------- | ------- | --------- |-------| ----------- |-----------------------------------------------------------------|
+| batch_inference_name      | String  | 필수      | 없음    | 최대 50자   | 배치 추론 이름                                                        |
+| instance_count            | Integer | 선택      | 1     | 1~10        | 배치 추론에 사용할 인스턴스 수                                               |
+| timeout_hours             | Integer | 필수      | 720   | 1~720       | 최대 배치 추론 시간(단위: 시간)                                             |
+| instance_type_name             | String  | 필수      | 없음    | 없음        | 인스턴스 타입 이름(CLI로 조회 가능)                                          |
+| model_id                | String  | 필수      | 없음    | 없음        | 모델 ID                                                            |
+| pod_count                 | Integer | 선택      | 1     | 1~100       | 분산 추론을 적용할 파드 수                                                 |
+| batch_size                | Integer | 필수      | 없음    | 1~1000      | 동시에 처리되는 데이터 샘플의 수                                              |
+| inference_timeout_seconds | Integer | 필수      | 없음    | 1~1200      | 단일 추론 요청의 최대 허용 시간                                              |
+| input_data_uri            | String  | 필수      | 없음    | 최대 255자  | 입력 데이터 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)         |
+| input_data_type           | String  | 필수      | 없음    | "JSON", "JSONL" | 입력 데이터의 유형                                                      |
+| include_glob_pattern      | String  | 선택      | 없음    | 최대 255자  | 파일 집합을 입력 데이터에서 포함할 Glob 패턴                                     |
+| exclude_glob_pattern      | String  | 선택      | 없음    | 최대 255자  | 파일 집합을 입력 데이터에서 제외할 Glob 패턴                                     |
+| output_upload_uri         | String  | 필수      | 없음    | 최대 255자  | 배치 추론 결과 파일이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
+| data_storage_size         | Integer | 필수      | 없음    | 300~10000   | 배치 추론에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB)                          |
+| description               | String  | 선택      | 없음    | 최대 255자  | 배치 추론에 대한 설명                                                    |
+| use_log                   | Boolean | 선택      | False | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                              |
+| wait                      | Boolean | 선택      | True  | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                       |
 
 ```python
 batch_inference = easymaker.BatchInference().run(
@@ -759,7 +762,7 @@ easymaker.BatchInference(batch_inference_id).delete()
 | 이름                          | 타입      | 필수 여부 | 기본값 | 유효 범위   | 설명                                        |
 |-----------------------------|---------| --------- | ------ | --------- |-------------------------------------------|
 | pipeline_name               | String  | 필수      | 없음   | 최대 50자   | 파이프라인 이름                                  |
-| pipeline_spec_manifest_path | String  | 필수      | 없음   | 1~10      | 업로드할 파이프라인 파일 경로                          |
+| pipeline_spec_manifest_path | String  | 필수      | 없음   | 없음      | 업로드할 파이프라인 파일 경로                          |
 | description                 | String  | 선택      | 없음   | 최대 255자  | 파이프라인에 대한 설명                              |
 | wait                        | Boolean | 선택      | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
@@ -804,14 +807,14 @@ for instance in instance_type_list:
 
 [파라미터]
 
-| 이름                                | 타입                        | 필수 여부                     | 기본값 | 유효 범위       | 설명                                       |
-|-----------------------------------|---------------------------|---------------------------| ------ |-------------|------------------------------------------|
+| 이름                                | 타입                        | 필수 여부                     | 기본값  | 유효 범위       | 설명                                       |
+|-----------------------------------|---------------------------|---------------------------|------|-------------|------------------------------------------|
 | pipeline_run_name                 | String                    | 필수                        | 없음   | 최대 50자      | 파이프라인 실행 이름                              |
 | pipeline_id                       | String                    | 필수                        | 없음   | 최대 36자      | 파이프라인 일정 이름                              |
-| experiment_id                     | String                    | easymaker.init에서 미입력 시 필수 | 없음    | 최대 36자      | 실험 ID                                    |
+| experiment_id                     | String                    | easymaker.init에서 미입력 시 필수 | 없음   | 최대 36자      | 실험 ID                                    |
 | description                       | String                    | 선택                        | 없음   | 최대 255자     | 파이프라인 실행에 대한 설명                          |
 | instance_type_name                | String                    | 필수                        | 없음   | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                   |
-| instance_count                    | Integer                   | 필수                        | 없음   | 1~10        | 사용할 인스턴스 수                               |
+| instance_count                    | Integer                   | 선택                        | 1    | 1~10        | 사용할 인스턴스 수                               |
 | boot_storage_size                 | Integer                   | 필수                        | 없음   | 50~         | 파이프라인을 실행할 인스턴스의 부트 스토리지 크기(단위: GB)      |
 | parameter_list                    | easymaker.Parameter Array | 선택                        | 없음   | 없음          | 파이프라인에 전달할 파라미터 정보                       |
 | parameter_list[0].parameter_name  | String                    | 선택                        | 없음   | 최대 255자     | 파라미터 키                                   |
@@ -819,7 +822,7 @@ for instance in instance_type_list:
 | nas_list                          | easymaker.Nas Array       | 선택                        | 없음   | 최대 10개      | NAS 정보                                   |
 | nas_list[0].mount_dir_name        | String                    | 선택                        | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                       |
 | nas_list[0].nas_uri               | String                    | 선택                        | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로      |
-| wait                              | Boolean                   | 선택                        | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
+| wait                              | Boolean                   | 선택                        | True | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환 |
 
 ```python
 pipeline_run = easymaker.PipelineRun().create(
@@ -864,18 +867,18 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 
 [파라미터]
 
-| 이름                               | 타입      | 필수 여부                              | 기본값 | 유효 범위       | 설명                                             |
-|----------------------------------|---------|------------------------------------| ------ |-------------|------------------------------------------------|
+| 이름                               | 타입      | 필수 여부                              | 기본값  | 유효 범위       | 설명                                             |
+|----------------------------------|---------|------------------------------------|------|-------------|------------------------------------------------|
 | pipeline_recurring_run_name      | String  | 필수                                 | 없음   | 최대 50자      | 파이프라인 일정 이름                                    |
 | pipeline_id                      | String  | 필수                                 | 없음   | 최대 36자      | 파이프라인 일정 이름                                    |
-| experiment_id                    | String  | easymaker.init에서 미입력 시 필수          | 없음    | 최대 36자      | 실험 ID                                          |
+| experiment_id                    | String  | easymaker.init에서 미입력 시 필수          | 없음   | 최대 36자      | 실험 ID                                          |
 | description                      | String  | 선택                                 | 없음   | 최대 255자     | 파이프라인 일정에 대한 설명                                |
 | instance_type_name                    | String  | 필수                                 | 없음   | 없음          | 인스턴스 타입 이름(CLI로 조회 가능)                         |
-| instance_count                   | Integer | 필수                                 | 없음   | 1~10        | 사용할 인스턴스 수                                     |
+| instance_count                   | Integer | 선택                                 | 1    | 1~10        | 사용할 인스턴스 수                                     |
 | boot_storage_size                | Integer | 필수                                 | 없음   | 50~         | 파이프라인을 실행할 인스턴스의 부트 스토리지 크기(단위: GB)            |
 | schedule_periodic_minutes        | String  | schedule_cron_expression 미입력시 필수  | 없음   | 없음          | 파이프라인을 반복 실행할 시간 주기 설정                         |
 | schedule_cron_expression         | String  | schedule_periodic_minutes 미입력시 필수 | 없음   | 없음          | 파이프라인을 반복 실행할 Cron 표현식 설정                      |
-| max_concurrency_count            | String  | 선택                                 | 없음   | 없음          | 동시 실행 최대 개수를 지정하여 병렬로 실행되는 개수를 제한             |
+| max_concurrency_count            | Integer  | 선택                                 | 1    | 1~10        | 동시 실행 최대 개수를 지정하여 병렬로 실행되는 개수를 제한             |
 | schedule_start_datetime          | String  | 선택                                 | 없음   | 없음          | 파이프라인 일정의 시작 시간을 설정, 미입력 시 설정한 주기에 맞춰 파이프라인 실행 |
 | schedule_end_datetime            | String  | 선택                                 | 없음   | 없음          | 파이프라인 일정의 종료 시간을 설정, 미입력 시 중지 전까지 파이프라인 실행을 생성 |
 | use_catchup                      | Boolean | 선택                                 | 없음   | 없음          | 누락 실행 캐치업: 파이프라인 실행이 일정에 뒤처질 경우 따라잡을지 여부를 선택 |
@@ -885,7 +888,7 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 | nas_list                          | easymaker.Nas Array       | 선택                        | 없음   | 최대 10개      | NAS 정보                                   |
 | nas_list[0].mount_dir_name        | String                    | 선택                        | 없음   | 최대 64자      | 인스턴스에 마운트할 디렉터리 이름                       |
 | nas_list[0].nas_uri               | String                    | 선택                        | 없음   | 최대 255자     | `nas://{NAS ID}:/{path}` 형식의 NAS 경로      |
-| wait                             | Boolean | 선택                                 | True   | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환      |
+| wait                             | Boolean | 선택                                 | True | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환      |
 
 ```python
 pipeline_recurring_run = easymaker.PipelineRecurringRun().create(

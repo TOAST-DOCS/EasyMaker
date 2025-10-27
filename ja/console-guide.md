@@ -617,6 +617,20 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 > safetensorsはHuggingFaceが開発した安全で効率的な機械学習モデルファイル形式です。
 > それ以外のファイル形式はサポートしません。
 
+> [注意] TensorFlow (Triton)、PyTorch (Triton)、ONNX (Triton)モデルを作成する場合:
+> 入力するモデルアーティファクトのパスには、Tritonでモデルを実行できる構造でモデルファイルと`config.pbtxt`ファイルが保存されている必要があります。
+> 以下の例をご参照ください。
+```
+model_name/
+├── config.pbtxt                              # モデル設定ファイル
+└── 1/                                        # バージョン1ディレクトリ
+    └── model.savedmodel/                     # TensorFlow SavedModelディレクトリ
+        ├── saved_model.pb                    # メタグラフとチェックポイントデータ
+        └── variables/                        # モデルの重みディレクトリ
+            ├── variables.data-00000-of-00001
+            └── variables.index
+```
+        
 ### モデルリスト
 
 モデルリストが表示されます。リストのモデルを選択すると詳細情報を確認して情報を変更できます。
@@ -733,6 +747,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
     - **停止**:進行中のモデル評価を停止できます。
 
 ### 分類モデル評価指標
+
 - **PR AUC**:精度-再現率(PR)曲線の下面積です。不均衡なデータセットでモデルの分類性能を測定するのに効果的です。
 - **ROC AUC**: ROC曲線(再現率-偽陽性率）の下面積です。1に近づくほど優れた性能を示します。
 - **ログ損失**:予測確率と実際の正解の差を対数関数で計算した損失値です。値が低いほどモデルの予測が信頼できることを意味します。
@@ -745,6 +760,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 - **混同行列(confusion matrix)**:予測結果をTP、FP、FN、TNの4つに分類した行列です。クラスごとの誤りタイプを簡単に把握できます。
 
 ### 回帰モデル評価指標
+
 - **MAE(mean absolute error)**:実際の値と予測値の差の絶対値の平均です。予測誤差の大きさを直感的に示します。
 - **MAPE(mean absolute percentage error)**:予測誤差を実際の値で割った比率の平均です。比率ベースのため、値が0に近いデータには適さない場合があります。
 - **R-squared(coefficient of determination)**:モデルが実際のデータをどれだけよく説明しているかを示し、1に近づくほど説明力が高いです。
@@ -1486,6 +1502,149 @@ Kubeflow Pipelines(KFP) Python SDKを使用してコンポーネント及びパ�
 > [参考]関連するパイプライン実行が進行中の場合、パイプラインスケジュール削除不可：
 > 削除しようとするパイプラインスケジュールによって作成された実行が進行中の場合は、削除できません。パイプライン実行が完了した後、パイプラインスケジュールを削除してください。
 
+<a id="rag"></a>
+
+## RAG
+
+RAG(Retrieval-Augmented Generation、検索拡張生成)は、ユーザーのドキュメントをベクトル化して保存し、質問に関連する内容を検索してLLM(Large Language Model、大規模言語モデル)の応答の精度を高める技術です。AI EasyMakerは、ベクトルストア、埋め込みモデル、LLMを統合してRAGシステムを作成し、管理できます。
+
+<a id="rag_create"></a>
+
+### RAGの作成
+
+新しいRAGを作成します。
+
+- **API Gatewayサービス有効化**
+    - AI EasyMaker RAGは、NHN Cloud API Gatewayサービスを利用してAPIエンドポイントを作成し、管理します。RAG機能を使用するには、API Gatewayサービスを必ず有効化する必要があります。
+    - API Gatewayサービスの詳細と料金は、以下で確認できます。
+        - [API Gatewayサービスのご案内](https://docs.nhncloud.com/ko/Application%20Service/API%20Gateway/ko/overview/)
+        - [API Gateway利用料金](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
+- **基本設定**
+    - **名前**: RAG名を入力します。RAG名は重複できません。
+    - **説明**: RAGに関する説明を入力します。
+    - **インスタンスタイプ**: RAGエンドポイントを実行するインスタンスタイプを選択します。
+    - **インスタンス数**: RAGエンドポイントを実行するインスタンス数を入力します。
+    - **プロンプト**: RAGエンドポイントで使用するプロンプトです。**内容を見る**をクリックすると、プロンプトの全文を確認できます。
+- **ベクトルストア設定**
+    - **ベクトルストアタイプ**: ベクトルストアタイプを選択します。
+        - **RDS for PostgreSQL**
+            - **RDS for PostgreSQLの有効化**
+                - AI EasyMaker RAGは、NHN Cloud RDS for PostgreSQLを利用してベクトルストアを作成し、管理します。このオプションを選択した場合、RDS for PostgreSQLを必ず有効化する必要があります。
+                - RDS for PostgreSQLの詳細と料金は、以下で確認できます。
+                    - [RDS for PostgreSQLのご案内](https://docs.nhncloud.com/ko/Database/RDS%20for%20PostgreSQL/ko/overview/)
+                    - [RDS for PostgreSQL利用料金](https://www.nhncloud.com/kr/pricing/by-service?c=Database&s=RDS%20for%20PostgreSQL)
+            - **インスタンスタイプ**: RDS for PostgreSQLで使用するインスタンスタイプを選択します。
+            - **ストレージタイプ**: RDS for PostgreSQLで使用するストレージタイプを選択します。
+            - **ストレージサイズ**: RDS for PostgreSQLで使用するストレージサイズです。
+            - **ユーザーID**: PostgreSQLへの接続に使用するユーザーIDを入力します。
+            - **パスワード**: PostgreSQLへの接続に使用するパスワードを入力します。
+            - **パスワード確認**: パスワードを再入力して確認します。
+            - **VPC ID**: RDS for PostgreSQLで使用するVPC IDを入力します。
+            - **サブネットID**: RDS for PostgreSQLで使用するサブネットIDを入力します。
+        - **PostgreSQL Instance**: ユーザーが作成したNHN Cloud PostgreSQL Instanceをベクトルストアとして活用します。
+            - **ユーザーID**: PostgreSQL Instanceの作成時に設定したユーザーIDを入力します。
+            - **パスワード**: PostgreSQL Instanceの作成時に設定したパスワードを入力します。
+            - **VPC ID**: PostgreSQL Instanceで使用するVPC IDを入力します。
+            - **サブネットID**: PostgreSQL Instanceで使用するサブネットIDを入力します。
+            - **PostgreSQLインスタンスIP**: 作成したPostgreSQL InstanceのIPアドレスを入力します。
+    - **収集設定**
+        - **データパス**: ベクトルストアに収集するドキュメントが保存されているデータパスを入力します。
+    - **埋め込みモデル**
+        - **モデル**: ドキュメント及びクエリをベクトル化する際に使用する埋め込みモデルを選択します。
+        - **インスタンスタイプ**: 埋め込みモデルを実行するインスタンスタイプです。
+        - **インスタンス数**: 埋め込みモデルを実行するインスタンス数を入力します。
+- **LLM設定**
+    - **モデル**: レスポンスを生成する際に使用するLLMを選択します。
+    - **インスタンスタイプ**: LLMを実行するインスタンスタイプです。
+    - **インスタンス数**: LLMを実行するインスタンス数です。
+- **追加設定**
+    - **ログ管理**: RAGの実行中に発生するログをNHN Cloud Log & Crash Searchサービスに保存できます。
+        - 詳細は[付録 > 2. NHN Cloud Log & Crash Searchサービス利用のご案内及びログ確認](./console-guide/#2-nhn-cloud-log-crash-search)をご参照ください。
+
+> [注意] PostgreSQL Instanceを使用する場合、ポートを`15432`に設定する必要があります。
+> インスタンスを作成する方法は、[PostgreSQL Instance利用ガイド](https://docs.nhncloud.com/ko/Compute/Instance/ko/component-guide/#postgresql-instance)をご参照ください。
+> [注意] NHN Cloud NASを使用する場合
+> AI EasyMakerと同じプロジェクトで作成されたNHN Cloud NASのみ使用できます。
+> [参考] 収集で使用できるファイルの形式、サイズ、個数が制限される場合があります。詳細は[収集の同期](#rag_ingestion_sync)をご参照ください。
+<a id="rag_list"></a>
+
+### RAG一覧
+
+作成されたRAGの一覧を確認し、管理します。一覧からRAGを選択すると、詳細情報を確認できます。
+
+- **ステータス**: RAGのステータスです。主なステータスは以下の表をご参照ください。
+
+| ステータス | 説明 |
+| --- | --- |
+| CREATE REQUESTED | RAG作成がリクエストされた状態です。 |
+| CREATE IN PROGRESS | RAG作成が進行中の状態です。 |
+| ACTIVE | RAGが正常に動作中の状態です。 |
+| UPDATE IN PROGRESS | RAGで収集が進行中の状態です。 |
+| DELETE IN PROGRESS | RAG削除が進行中の状態です。 |
+| CREATE FAILED | RAGの作成に失敗した状態です。<br/>RAGを削除してからもう一度作成してください。作成の失敗が繰り返される場合は、カスタマーセンターにお問い合わせください。 |
+| UPDATE FAILED | RAGでの収集が失敗した状態です。<br/>**収集の同期**をもう一度お試しください。更新の失敗が繰り返される場合は、カスタマーセンターにお問い合わせください。 |
+| DELETE FAILED | RAGの削除に失敗した状態です。<br/>削除をもう一度お試しください。削除の失敗が繰り返される場合は、カスタマーセンターにお問い合わせください。 |
+
+- **API Gatewayステータス**: API Gatewayの基本ステージのデプロイステータス情報です。
+
+| ステータス | 説明 |
+| --- | --- |
+| DEPLOYING | API Gatewayの基本ステージがデプロイ中の状態です。 |
+| COMPLETE | API Gatewayの基本ステージが正常にデプロイされ、有効化された状態です。 |
+| FAILURE | API Gatewayの基本ステージのデプロイに失敗した状態です。 |
+
+- **収集履歴**: RAGを選択すると表示される詳細画面の**収集履歴**タブで、ドキュメント収集タスクの実行履歴を確認できます。
+- **API統計**: RAGを選択すると表示される詳細画面の**API統計**タブで、API統計情報を確認できます。
+- **モニタリング**: RAGを選択すると表示される詳細画面の**モニタリング**タブで、モニタリング対象のインスタンス一覧と基本指標のチャートを確認できます。
+
+<a id="rag_ingestion_sync"></a>
+
+### 収集の同期
+
+- RAGを選択すると表示される詳細画面の**ベクトルストア**タブで、収集の同期機能を使用できます。
+- 収集データパスのドキュメントが追加、削除、修正された場合、**収集の同期**を実行して変更内容を反映できます。
+- 収集で使用できるファイルの形式、サイズ、個数が制限される場合があります。詳細は以下の表をご参照ください。
+
+| 項目 | 制限 |
+|-----|------|
+| 総ファイルサイズ | 100GB |
+| 最大ファイル数 | 1,000,000個 |
+
+| カテゴリー | サポート形式 | 最大ファイルサイズ |
+|--------|---------|------------|
+| テキストドキュメント | `.txt`, `.text`, `.md` | 3MB |
+| ドキュメント | `.doc`, `.docx`, `.pdf` | 50MB |
+| スプレッドシート | `.csv`, `.xls`, `.xlsx` | 3MB |
+| プレゼンテーション | `.ppt`, `.pptx` | 50MB |
+
+<a id="rag_delete"></a>
+
+### RAGの削除
+
+- 作成または削除が進行中のRAGは削除できません。
+- リクエストされた削除タスクはキャンセルできません。
+
+<a id="rag_query_guide"></a>
+
+### RAG質問リクエストガイド
+
+- 質問をリクエストする際は、OpenAI Chat Completion APIのように`model`と`messages`をリクエストボディに含めてリクエストしてください。`model`にはRAG名を入れてリクエストしてください。
+- 詳細なリクエスト例は、以下をご参照ください。
+
+```bash
+curl -X POST https://{APIエンドポイントアドレス}/rag/v1/query \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "{RAG名}",
+    "messages": [
+      {
+        "role": "user",
+        "content": "{query_text}"
+      }
+    ]
+  }'
+```
+
 ## 付録
 
 ### 1. NHN Cloud Object StorageにAI EasyMakerシステムアカウント権限を追加
@@ -1727,20 +1886,20 @@ AI EasyMakerでバッチ推論とエンドポイントを作成する際、選�
 AI EasyMakerサービスはOIP(open inference protocol)スペックに基づいたエンドポイントを提供します。
 OIPスペックの詳細は[OIPスペック](https://github.com/kserve/open-inference-protocol)を参照してください。
 
-| 名前          | メソッド | APIパス                                  |
-| ---------------- | ------ | -------------------------------------------- |
-| モデルリスト     | GET    | /{model_name}/v1/models                      |
-| モデルReady       | GET    | /{model_name}/v1/models/{model_name}         |
-| 推論          | POST   | /{model_name}/v1/models/{model_name}/predict |
-| 説明          | POST   | /{model_name}/v1/models/{model_name}/explain |
-| サーバー情報     | GET    | /{model_name}/v2                             |
-| サーバーLive        | GET    | /{model_name}/v2/health/live                 |
-| サーバーReady       | GET    | /{model_name}/v2/health/ready                |
-| モデル情報     | GET    | /{model_name}/v2/models/{model_name}         |
-| モデルReady       | GET    | /{model_name}/v2/models/{model_name}/ready   |
-| 推論          | POST   | /{model_name}/v2/models/{model_name}/infer   |
-| OpenAI生成型モデル推論 | POST   | /{model_name}/openai/v1/completions          |
-| OpenAI生成型モデル推論 | POST   | /{model_name}/openai/v1/chat/completions     |
+| 名前                   | メソッド | APIパス                                                                 |
+| ---------------------- | -------- | ----------------------------------------------------------------------- |
+| モデルリスト           | GET      | /{model_name}/v1/models                                                 |
+| モデルReady            | GET      | /{model_name}/v1/models/{model_name}                                    |
+| 推論                   | POST     | /{model_name}/v1/models/{model_name}/predict                            |
+| 説明                   | POST     | /{model_name}/v1/models/{model_name}/explain                            |
+| サーバー情報           | GET      | /{model_name}/v2                                                        |
+| サーバーLive           | GET      | /{model_name}/v2/health/live                                            |
+| サーバーReady          | GET      | /{model_name}/v2/health/ready                                           |
+| モデル情報             | GET      | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]       |
+| モデルReady            | GET      | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]/ready |
+| 推論                   | POST     | /{model_name}/v2/models/{model_name}\[/versions/{model_version}\]/infer |
+| OpenAI生成型モデル推論 | POST     | /{model_name}/openai/v1/completions                                     |
+| OpenAI生成型モデル推論 | POST     | /{model_name}/openai/v1/chat/completions                                |
 
 > [参考] OpenAI生成型モデル推論
 > OpenAI生成型モデル推論はOpenAIのGPT-4oのような生成型モデルを使用する場合に使用されます。
