@@ -91,30 +91,30 @@ for instance in instance_type_list:
 [パラメータ]
 
 | 名前                                   | タイプ                      | 必須かどうか                   | デフォルト値 | 有効範囲     | 説明                                                             |
-|----------------------------------------|---------------------------|---------------------------|-------|-------------|------------------------------------------------------------------|
-| experiment_id                          | String                    | easymaker.initで未入力の場合は必須 | なし   | 最大36文字        | 実験ID                                                            |
-| training_name                          | String                    | 必須                      | なし   | 最大50文字    | 学習名                                                          |
-| description                            | String                    | 選択                      | なし   | 最大255文字   | 学習の説明                                                      |
-| image_name                             | String                    | 必須                      | なし   | なし         | 学習に使用されるイメージ名(CLIで照会可能)                                       |
-| instance_type_name                     | String                    | 必須                      | なし   | なし         | インスタンスタイプ名(CLIで照会可能)                                           |
-| distributed_node_count                 | Integer                   | 必須                      | なし   | 1～10         | 分散学習を適用するノード数                                                |
+|----------------------------------------|---------------------------|---------------------------|--------|-------------|------------------------------------------------------------------|
+| experiment_id                          | String                    | easymaker.initで未入力の場合は必須 | なし     | 最大36文字        | 実験ID                                                            |
+| training_name                          | String                    | 必須                      | なし     | 最大50文字    | 学習名                                                          |
+| description                            | String                    | 選択                      | なし     | 最大255文字   | 学習の説明                                                      |
+| image_name                             | String                    | 必須                      | なし     | なし         | 学習に使用されるイメージ名(CLIで照会可能)                                       |
+| instance_type_name                     | String                    | 必須                      | なし     | なし         | インスタンスタイプ名(CLIで照会可能)                                           |
+| distributed_node_count                 | Integer                   | 選択                      | 1      | 1～10         | 分散学習を適用するノード数                                                |
 | use_torchrun                           | Boolean                   | 選択                      | False  | True, False | torchrunの使用有無、Pytorchイメージでのみ使用可能                           |
 | nproc_per_node                         | Integer                   | use_torchrun Trueの場合は必須  | 1      | 1～(CPU数またはGPU数) | ノードごとのプロセス数。use_torchrunを使用する場合は必ず設定しなければならない値                |
-| data_storage_size                      | Integer                   | Obejct Storageを使用する場合は必須  | なし   | 300～10000   | 学習に必要なデータをダウンロードする記憶領域サイズ(単位： GB), NAS使用時は不要              |
-| algorithm_name                         | String                    | NHN Cloud提供アルゴリズムを使用する場合は必須 | なし   | 最大64文字    | アルゴリズム名(CLIで照会可能)                                              |
-| source_dir_uri                         | String                    | 独自アルゴリズムを使用する場合は必須         | なし   | 最大255文字   | 学習に必要なファイルが含まれているパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
-| entry_point                            | String                    | 独自アルゴリズムを使用する場合は必須         | なし   | 最大255文字   | source_dir_uri内で最初に実行されるPythonファイル情報                            |
-| model_upload_uri                       | String                    | 必須                      | なし   | 最大255文字   | 学習完了したモデルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)    |
-| check_point_input_uri                  | String                    | 選択                      | なし   | 最大255文字   | 入力チェックポイントファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS)       |
-| check_point_upload_uri                 | String                    | 選択                      | なし   | 最大255文字   | チェックポイントファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)    |
-| timeout_hours                          | Integer                   | 選択                      | 720   | 1～720       | 最大学習時間(単位：時間)                                                 |
-| hyperparameter_list                    | easymaker.Parameter Array | 選択                      | なし   | 最大100個   | ハイパーパラメータ情報(parameter_name/parameter_valueで構成)                  |
-| hyperparameter_list[0].parameter_name  | String                    | 選択                      | なし   | 最大255文字   | ハイパーパラメータキー                                                       |
-| hyperparameter_list[0].parameter_value | String                    | 選択                      | なし   | 最大1000文字  | ハイパーパラメータ値                                                      |
-| dataset_list                           | easymaker.Dataset Array   | 選択                      | なし   | 最大10個    | 学習に使用されるデータセット情報(dataset_name/data_uriで構成)                       |
-| dataset_list[0].dataset_name           | String                    | 選択                      | なし   | 最大36文字    | データ名                                                         |
-| dataset_list[0].data_uri               | String                    | 選択                      | なし   | 最大255文字   | データパス                                                         |
-| use_log                                | Boolean                   | 選択                      | False | True, False | Log & Crash Searchサービスにログを残すかどうか                              |
+| data_storage_size                      | Integer                   | Obejct Storageを使用する場合は必須  | なし     | 300～10000   | 学習に必要なデータをダウンロードする記憶領域サイズ(単位： GB), NAS使用時は不要              |
+| algorithm_name                         | String                    | NHN Cloud提供アルゴリズムを使用する場合は必須 | なし     | 最大64文字    | アルゴリズム名(CLIで照会可能)                                              |
+| source_dir_uri                         | String                    | 独自アルゴリズムを使用する場合は必須         | なし     | 最大255文字   | 学習に必要なファイルが含まれているパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
+| entry_point                            | String                    | 独自アルゴリズムを使用する場合は必須         | なし     | 最大255文字   | source_dir_uri内で最初に実行されるPythonファイル情報                            |
+| model_upload_uri                       | String                    | 必須                      | なし     | 最大255文字   | 学習完了したモデルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)    |
+| check_point_input_uri                  | String                    | 選択                      | なし     | 最大255文字   | 入力チェックポイントファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS)       |
+| check_point_upload_uri                 | String                    | 選択                      | なし     | 最大255文字   | チェックポイントファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)    |
+| timeout_hours                          | Integer                   | 選択                      | 720    | 1～720       | 最大学習時間(単位：時間)                                                 |
+| hyperparameter_list                    | easymaker.Parameter Array | 選択                      | なし     | 最大100個   | ハイパーパラメータ情報(parameter_name/parameter_valueで構成)                  |
+| hyperparameter_list[0].parameter_name  | String                    | 選択                      | なし     | 最大255文字   | ハイパーパラメータキー                                                       |
+| hyperparameter_list[0].parameter_value | String                    | 選択                      | なし     | 最大1000文字  | ハイパーパラメータ値                                                      |
+| dataset_list                           | easymaker.Dataset Array   | 選択                      | なし     | 最大10個    | 学習に使用されるデータセット情報(dataset_name/data_uriで構成)                       |
+| dataset_list[0].dataset_name           | String                    | 選択                      | なし     | 最大36文字    | データ名                                                         |
+| dataset_list[0].data_uri               | String                    | 選択                      | なし     | 最大255文字   | データパス                                                         |
+| use_log                                | Boolean                   | 選択                      | False  | True, False | Log & Crash Searchサービスにログを残すかどうか                              |
 | wait                                   | Boolean                   | 選択                      | True   | True, False | True:作成完了後にレスポンスを返す、False:作成リクエスト直後に即レスポンスを返す                       |
 
 ```python
@@ -337,9 +337,9 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 | hyperparameter_tuning_id | String | training_idがない場合は必須             | なし  | なし      | モデルとして作成するハイパーパラメータチューニングID(最高学習で作成済み) |
 | model_name               | String | 必須                                | なし  | 最大50文字 | モデル名                              |
 | description        | String | 選択                                | なし  | 最大255文字 | モデルの説明                          |
-| parameter_list                   | Array  | 選択   | なし  | 最大10個                                 | パラメータ情報(parameterName/parameterValueで構成)         |
-| parameter_list[0].parameterName  | String | 選択   | なし  | 最大64文字                                 | パラメータ名                                             |
-| parameter_list[0].parameterValue | String | 選択   | なし  | 最大255文字                                | パラメータ値                                               |
+| parameter_list                   | Array  | 選択  | なし | 最大10個                                | パラメータ情報(parameterName/parameterValueで構成)         |
+| parameter_list[0].parameterName  | String | 選択  | なし | 最大64文字                                | パラメータ名                                            |
+| parameter_list[0].parameterValue | String | 選択  | なし | 最大255文字                               | パラメータ値                                              |
 
 ```python
 model = easymaker.Model().create(
@@ -404,116 +404,7 @@ for model in model_list:
 easymaker.Model(model_id).delete()
 ```
 
-## モデル評価
-
-### インスタンス一覧照会
-
-```python
-instance_type_list = easymaker.ModelEvaluation.get_instance_type_list()
-for instance in instance_type_list:
-    instance.print_info()
-```
-
-### モデル評価作成
-
-モデルの性能指標を測定するモデル評価を作成します。選択したモデルでバッチ推論が実行され、評価指標が保存されます。
-
-[パラメータ]
-
-| 名前                                      | タイプ    | 必須かどうか | デフォルト値 | 有効範囲                                        | 説明                                                            |
-|-------------------------------------------|---------|-------|-------|------------------------------------------------|-----------------------------------------------------------------|
-| model_evaluation_name                     | String  | 必須  | なし   | 最大50文字                                       | モデル評価名                                                      |
-| description                               | String  | 選択  | なし   | 最大255文字                                      | モデル評価の説明                                                  |
-| model_id                                  | String  | 必須  | なし   | 最大36文字                                       | 評価するモデルID                                                       |
-| objective_code                            | String  | 必須  | なし   | "CLASSIFICATION", "REGRESSION" | 評価目標                                                         |
-| class_names                               | String  | 選択  | なし   | 1～5000                                         | 分類モデルで結果として可能なclassリスト(`,`で区切られた文字列または数字)                     |
-| instance_type_name                             | String  | 必須  | なし   | なし                                            | インスタンスタイプ名(CLIで照会可能)                                          |
-| input_data_uri                            | String  | 必須  | なし   | 最大255文字                                      | 入力データファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS)         |
-| input_data_type_code                      | String  | 必須  | なし   | "CSV", "JSONL"                 | 入力データ型                                                     |
-| target_field_name                         | String  | 必須  | なし   | 最大255文字                                      | 正解(ground truth)ラベルのフィールド名                                   |
-| timeout_hours                             | Integer | 選択  | 720    | 1～720                                          | 最大モデル評価時間(単位：時間)                                             |
-| batch_inference_instance_type_name             | String  | 必須  | なし   | なし                                            | インスタンスタイプ名(CLIで照会可能)                                          |
-| batch_inference_instance_count            | Integer | 必須  | なし   | 1～10                                           | バッチ推論に使用するインスタンス数                                             |
-| batch_inference_pod_count                 | Integer | 必須  | なし   | 1～100                                          | 分散推論を適用するPod数                                               |
-| batch_inference_output_upload_uri         | String  | 必須  | なし   | 最大255文字                                      | バッチ推論結果ファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
-| batch_inference_max_batch_size            | Integer | 必須  | なし   | 1～1000                                         | 同時に処理されるデータサンプルの数                                             |
-| batch_inference_inference_timeout_seconds | Integer | 必須  | なし   | 1～1200                                         | 単一推論リクエストの最大許容時間                                            |
-| use_log                                   | Boolean | 選択  | False | True, False                                    | Log & Crash Searchサービスにログを残すかどうか                             |
-| wait                                      | Boolean | 選択  | True  | True, False                                    | True:作成完了後にレスポンスを返す。False:作成リクエスト直後に即レスポンスを返す                      |
-
-```python
-# 回帰モデル評価の作成
-regression_model_evaluation  = easymaker.ModelEvaluation().create(
-    model_evaluation_name="regression_model_evaluation",
-    description="regression model evaluation sample",
-    model_id=regression_model.model_id,
-    objective_code="REGRESSION",
-    instance_type_name="m2.c4m8",
-    input_data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
-    input_data_type_code="CSV",
-    target_field_name="target_field_name",
-    timeout_hours=1,
-    batch_inference_instance_type_name="m2.c4m8",
-    batch_inference_instance_count=1,
-    batch_inference_pod_count=1,
-    batch_inference_output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
-    batch_inference_max_batch_size=100,
-    batch_inference_inference_timeout_seconds=1200,
-    use_log=False,
-    wait=True,
-)
-# 分類モデル評価の作成
-classification_model_evaluation  = easymaker.ModelEvaluation().create(
-    model_evaluation_name="classification_model_evaluation",
-    description="classification model evaluation sample",
-    model_id=classification_model.model_id,
-    objective_code="CLASSIFICATION",
-    class_names="classA,classB,classC",
-    instance_type_name="m2.c4m8",
-    input_data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
-    input_data_type_code="CSV",
-    target_field_name="target_field_name",
-    timeout_hours=1,
-    batch_inference_instance_type_name="m2.c4m8",
-    batch_inference_instance_count=1,
-    batch_inference_pod_count=1,
-    batch_inference_output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
-    batch_inference_max_batch_size=100,
-    batch_inference_inference_timeout_seconds=1200,
-    use_log=False,
-    wait=True,
-)
-```
-
-### モデル評価リスト照会
-
-```python
-model_evaluation_list = easymaker.ModelEvaluation.get_list()
-for model_evaluation in model_evaluation_list:
-    model_evaluation.print_info()
-```
-
-### モデル評価の削除
-
-[パラメータ]
-
-| 名前                      | タイプ    | 必須かどうか | デフォルト値 | 有効範囲 | 説明     |
-|---------------------------|---------|-------|------|--------|----------|
-| model_evaluation_id | String  | 必須  | なし  | 最大36文字 | モデル評価ID |
-
-```python
-easymaker.ModelEvaluation(model_evaluation_id).delete()
-```
-
 ## エンドポイント
-
-### インスタンス一覧照会
-
-```python
-instance_type_list = easymaker.Endpoint.get_instance_type_list()
-for instance in instance_type_list:
-    instance.print_info()
-```
 
 ### エンドポイントの作成
 
@@ -759,7 +650,7 @@ easymaker.BatchInference(batch_inference_id).delete()
 | 名前                        | タイプ    | 必須かどうか | デフォルト値 | 有効範囲 | 説明                                      |
 |-----------------------------|---------| --------- | ------ | --------- |-------------------------------------------|
 | pipeline_name               | String  | 必須    | なし | 最大50文字 | パイプライン名                                |
-| pipeline_spec_manifest_path | String  | 必須   | なし | なし      | アップロードするパイプラインファイルのパス                       |
+| pipeline_spec_manifest_path | String  | 必須    | なし | なし      | アップロードするパイプラインファイルパス                        |
 | description                 | String  | 選択    | なし | 最大255文字 | パイプラインの説明                            |
 | wait                        | Boolean | 選択    | True   | True, False | True：作成が完了した後に返す、False：作成リクエスト後、すぐに返す |
 
@@ -805,20 +696,20 @@ for instance in instance_type_list:
 [パラメータ]
 
 | 名前                              | タイプ                      | 必須かどうか                   | デフォルト値 | 有効範囲     | 説明                                     |
-|-----------------------------------|---------------------------|---------------------------| ------ |-------------|------------------------------------------|
-| pipeline_run_name                 | String                    | 必須                      | なし  | 最大50文字    | パイプライン実行名                            |
-| pipeline_id                       | String                    | 必須                      | なし  | 最大36文字    | パイプラインスケジュール名                            |
-| experiment_id                     | String                    | easymaker.initで未入力の場合は必須 | なし   | 最大36文字    | 実験ID                                    |
-| description                       | String                    | 選択                      | なし  | 最大255文字   | パイプライン実行の説明                        |
-| instance_type_name                | String                    | 必須                      | なし  | なし         | インスタンスタイプ名(CLIで照会可能)                   |
-| instance_count                    | Integer                   | 選択                     | 1  | 1～10        | 使用するインスタンス数                            |
-| boot_storage_size                 | Integer                   | 必須                      | なし  | 50～         | パイプラインを実行するインスタンスのブートストレージサイズ(単位： GB)      |
-| parameter_list                    | easymaker.Parameter Array | 選択                      | なし  | なし         | パイプラインに渡すパラメータ情報                     |
-| parameter_list[0].parameter_name  | String                    | 選択                      | なし  | 最大255文字   | パラメータキー                                  |
-| parameter_list[0].parameter_value | String                    | 選択                      | なし  | 最大1000文字  | パラメータ値                                 |
-| nas_list                          | easymaker.Nas Array       | 選択                      | なし  | 最大10個    | NAS情報                                 |
-| nas_list[0].mount_dir_name        | String                    | 選択                      | なし  | 最大64文字    | インスタンスにマウントするディレクトリ名                     |
-| nas_list[0].nas_uri               | String                    | 選択                      | なし  | 最大255文字   | `nas://{NAS ID}:/{path}`形式のNASパス    |
+|-----------------------------------|---------------------------|---------------------------|--------|-------------|------------------------------------------|
+| pipeline_run_name                 | String                    | 必須                      | なし     | 最大50文字    | パイプライン実行名                            |
+| pipeline_id                       | String                    | 必須                      | なし     | 最大36文字    | パイプラインスケジュール名                            |
+| experiment_id                     | String                    | easymaker.initで未入力の場合は必須 | なし     | 最大36文字    | 実験ID                                    |
+| description                       | String                    | 選択                      | なし     | 最大255文字   | パイプライン実行の説明                        |
+| instance_type_name                | String                    | 必須                      | なし     | なし         | インスタンスタイプ名(CLIで照会可能)                   |
+| instance_count                    | Integer                   | 選択                      | 1      | 1～10        | 使用するインスタンス数                             |
+| boot_storage_size                 | Integer                   | 必須                      | なし     | 50～         | パイプラインを実行するインスタンスのブートストレージサイズ(単位： GB)      |
+| parameter_list                    | easymaker.Parameter Array | 選択                      | なし     | なし         | パイプラインに渡すパラメータ情報                     |
+| parameter_list[0].parameter_name  | String                    | 選択                      | なし     | 最大255文字   | パラメータキー                                  |
+| parameter_list[0].parameter_value | String                    | 選択                      | なし     | 最大1000文字  | パラメータ値                                 |
+| nas_list                          | easymaker.Nas Array       | 選択                      | なし     | 最大10個    | NAS情報                                 |
+| nas_list[0].mount_dir_name        | String                    | 選択                      | なし     | 最大64文字    | インスタンスにマウントするディレクトリ名                     |
+| nas_list[0].nas_uri               | String                    | 選択                      | なし     | 最大255文字   | `nas://{NAS ID}:/{path}`形式のNASパス    |
 | wait                              | Boolean                   | 選択                      | True   | True, False | True:作成完了後にレスポンスを返す。False:作成リクエスト直後に即レスポンスを返す |
 
 ```python
@@ -865,26 +756,26 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 [パラメータ]
 
 | 名前                             | タイプ    | 必須かどうか                            | デフォルト値 | 有効範囲     | 説明                                           |
-|----------------------------------|---------|------------------------------------|------|-------------|------------------------------------------------|
-| pipeline_recurring_run_name      | String  | 必須                               | なし | 最大50文字    | パイプラインスケジュール名                                  |
-| pipeline_id                      | String  | 必須                               | なし | 最大36文字    | パイプラインスケジュール名                                  |
-| experiment_id                    | String  | easymaker.initで未入力の場合は必須        | なし  | 最大36文字    | 実験ID                                          |
-| description                      | String  | 選択                               | なし | 最大255文字   | パイプラインスケジュールの説明                              |
-| instance_type_name                    | String  | 必須                               | なし | なし        | インスタンスタイプ名(CLIで照会可能)                         |
-| instance_count                   | Integer | 選択                               | 1 | 1～10        | 使用するインスタンス数                                   |
-| boot_storage_size                | Integer | 必須                               | なし | 50~         | パイプラインを実行するインスタンスのブートストレージサイズ(単位: GB)            |
-| schedule_periodic_minutes        | String  | schedule_cron_expression未入力の場合は必須 | なし | なし        | パイプラインを繰り返し実行する時間周期設定                       |
-| schedule_cron_expression         | String  | schedule_periodic_minutes未入力の場合は必須 | なし | なし        | パイプラインを繰り返し実行するCron式設定                    |
-| max_concurrency_count            | Integer  | 選択                               | 1 | 1~10        | 同時実行最大数を指定して並列で実行される数を制限           |
-| schedule_start_datetime          | String  | 選択                               | なし | なし        | パイプラインスケジュールの開始時間を設定、未入力の場合、設定した周期に合わせてパイプライン実行 |
-| schedule_end_datetime            | String  | 選択                               | なし | なし        | パイプラインスケジュールの終了時間を設定、未入力時、停止するまでのパイプライン実行を作成 || use_catchup                      | Boolean | 選択                               | なし | なし        | 欠陥実行のキャッチアップ：パイプライン実行がスケジュールに遅れた場合、追いつくかどうかを選択 |
-| use_catchup                      | Boolean | 選択                               | なし  | なし         | 未実行キャッチアップ:パイプラインの実行がスケジュールより遅れた場合に追従するかを選択 |
-| parameter_list                    | easymaker.Parameter Array | 選択                      | なし  | なし         | パイプラインに渡すパラメータ情報                     |
-| parameter_list[0].parameter_name  | String                    | 選択                      | なし  | 最大255文字   | パラメータキー                                  |
-| parameter_list[0].parameter_value | String                    | 選択                      | なし  | 最大1000文字  | パラメータ値                                 |
-| nas_list                          | easymaker.Nas Array       | 選択                      | なし  | 最大10個    | NAS情報                                 |
-| nas_list[0].mount_dir_name        | String                    | 選択                      | なし  | 最大64文字    | インスタンスにマウントするディレクトリ名                     |
-| nas_list[0].nas_uri               | String                    | 選択                      | なし  | 最大255文字   | `nas://{NAS ID}:/{path}`形式のNASパス    |
+|----------------------------------|---------|------------------------------------|--------|-------------|------------------------------------------------|
+| pipeline_recurring_run_name      | String  | 必須                               | なし     | 最大50文字    | パイプラインスケジュール名                                  |
+| pipeline_id                      | String  | 必須                               | なし     | 最大36文字    | パイプラインスケジュール名                                  |
+| experiment_id                    | String  | easymaker.initで未入力の場合は必須        | なし     | 最大36文字    | 実験ID                                          |
+| description                      | String  | 選択                               | なし     | 最大255文字   | パイプラインスケジュールの説明                              |
+| instance_type_name                    | String  | 必須                               | なし     | なし        | インスタンスタイプ名(CLIで照会可能)                         |
+| instance_count                   | Integer | 選択                               | 1      | 1~10        | 使用するインスタンス数                                   |
+| boot_storage_size                | Integer | 必須                               | なし     | 50~         | パイプラインを実行するインスタンスのブートストレージサイズ(単位: GB)            |
+| schedule_periodic_minutes        | String  | schedule_cron_expression未入力の場合は必須 | なし     | なし        | パイプラインを繰り返し実行する時間周期設定                       |
+| schedule_cron_expression         | String  | schedule_periodic_minutes未入力の場合は必須 | なし     | なし        | パイプラインを繰り返し実行するCron式設定                    |
+| max_concurrency_count            | Integer  | 選択                               | 1      | なし        | 同時実行最大数を指定して並列で実行される数を制限           |
+| schedule_start_datetime          | String  | 選択                               | なし     | なし        | パイプラインスケジュールの開始時間を設定、未入力の場合、設定した周期に合わせてパイプライン実行 |
+| schedule_end_datetime            | String  | 選択                               | なし     | なし        | パイプラインスケジュールの終了時間を設定、未入力時、停止するまでのパイプライン実行を作成 || use_catchup                      | Boolean | 選択                               | なし | なし        | 欠陥実行のキャッチアップ：パイプライン実行がスケジュールに遅れた場合、追いつくかどうかを選択 |
+| use_catchup                      | Boolean | 選択                               | なし     | なし         | 未実行キャッチアップ:パイプラインの実行がスケジュールより遅れた場合に追従するかを選択 |
+| parameter_list                    | easymaker.Parameter Array | 選択                      | なし     | なし         | パイプラインに渡すパラメータ情報                     |
+| parameter_list[0].parameter_name  | String                    | 選択                      | なし     | 最大255文字   | パラメータキー                                  |
+| parameter_list[0].parameter_value | String                    | 選択                      | なし     | 最大1000文字  | パラメータ値                                 |
+| nas_list                          | easymaker.Nas Array       | 選択                      | なし     | 最大10個    | NAS情報                                 |
+| nas_list[0].mount_dir_name        | String                    | 選択                      | なし     | 最大64文字    | インスタンスにマウントするディレクトリ名                     |
+| nas_list[0].nas_uri               | String                    | 選択                      | なし     | 最大255文字   | `nas://{NAS ID}:/{path}`形式のNASパス    |
 | wait                             | Boolean | 選択                               | True   | True, False | True：作成が完了した後に返す、False：作成リクエスト後、すぐに返す     |
 
 ```python
@@ -919,14 +810,6 @@ pipeline_recurring_run = easymaker.PipelineRecurringRun().create(
 ```python
 easymaker.PipelineRecurringRun(pipeline_recurring_run_id).stop()
 easymaker.PipelineRecurringRun(pipeline_recurring_run_id).start()
-```
-
-### パイプラインスケジュール一覧照会
-
-```python
-pipeline_recurring_run_list = easymaker.PipelineRecurringRun.get_list()
-for pipeline_recurring_run in pipeline_recurring_run_list:
-    pipeline_recurring_run.print_info()
 ```
 
 ### パイプラインスケジュールの削除
