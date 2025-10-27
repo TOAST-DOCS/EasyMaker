@@ -162,6 +162,7 @@ training = easymaker.Training().run(
 training_list = easymaker.Training.get_list()
 for training in training_list:
     training.print_info()
+```
     
 ### 学習の削除
 
@@ -856,3 +857,4 @@ easymaker.download(
     password='nhn_object_storage_api_password'
 )
 ```
+
