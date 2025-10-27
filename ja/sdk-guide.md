@@ -162,6 +162,7 @@ training = easymaker.Training().run(
 training_list = easymaker.Training.get_list()
 for training in training_list:
     training.print_info()
+```
     
 ### 学習の削除
 
@@ -169,7 +170,7 @@ for training in training_list:
 
 | 名前                    | タイプ     | 必須かどうか | デフォルト値 | 有効範囲 | 説明   |
 |------------------------|---------|-------|------|--------|-------|
-| training_id          | String  | 必須   | なし   | 最大36文字 | 学習ID |
+| training_id          | String  | 選択  | 1   | 最大36文字 | 学習ID |
 
 ```python
 easymaker.Training(training_id).delete()
@@ -580,22 +581,22 @@ for instance in instance_type_list:
 [パラメータ]
 
 | 名前                    | タイプ  | 必須かどうか | デフォルト値 | 有効範囲 | 説明                                                            |
-| ------------------------- | ------- | --------- |--------| ----------- |-----------------------------------------------------------------|
-| batch_inference_name      | String  | 必須    | なし     | 最大50文字 | バッチ推論の名前                                                      |
-| instance_count            | Integer | 選択    | 1      | 1～10        | バッチ推論に使用するインスタンス数                                             |
-| timeout_hours             | Integer | 選択    | 720    | 1～720       | 最大バッチ推論時間(単位：時間)                                             |
-| instance_type_name             | String  | 必須    | なし     | なし       | インスタンスタイプ名(CLIで照会可能)                                          |
-| model_id                | String  | 必須    | なし     | なし       | モデルID                                                            |
-| pod_count                 | Integer | 選択    | 1      | 1～100       | 分散推論を適用するPod数                                               |
-| batch_size                | Integer | 必須    | なし     | 1～1000      | 同時に処理されるデータサンプルの数                                             |
-| inference_timeout_seconds | Integer | 必須    | なし     | 1～1200      | 単一推論リクエストの最大許容時間                                            |
-| input_data_uri            | String  | 必須    | なし     | 最大255文字 | 入力データファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS)         |
-| input_data_type           | String  | 必須    | なし     | "JSON", "JSONL" | 入力データのタイプ                                                    |
-| include_glob_pattern      | String  | 選択    | なし     | 最大255文字 | 入力データに含めるファイル群を指定するためのGlobパターン                                   |
-| exclude_glob_pattern      | String  | 選択    | なし     | 最大255文字 | 入力データから除外するファイル群を指定するためのGlobパターン                                   |
-| output_upload_uri         | String  | 必須    | なし     | 最大255文字 | バッチ推論結果ファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
-| data_storage_size         | Integer | 必須    | なし     | 300～10000   | バッチ推論に必要なデータをダウンロードする記憶領域サイズ(単位： GB)                          |
-| description               | String  | 選択    | なし     | 最大255文字 | バッチ推論の説明                                                  |
+| ------------------------- | ------- | --------- | ------- | ----------- |-----------------------------------------------------------------|
+| batch_inference_name      | String  | 必須    | なし  | 最大50文字 | バッチ推論の名前                                                      |
+| instance_count            | Integer | 選択   | 1  | 1～10        | バッチ推論に使用するインスタンス数                                            |
+| timeout_hours             | Integer | 必須    | 720   | 1～720       | 最大バッチ推論時間(単位：時間)                                             |
+| instance_type_name             | String  | 必須    | なし  | なし       | インスタンスタイプ名(CLIで照会可能)                                          |
+| model_id                | String  | 必須    | なし  | なし       | モデルID                                                            |
+| pod_count                 | Integer | 選択   | 1  | 1～100       | 分散推論を適用するPod数                                              |
+| batch_size                | Integer | 必須    | なし  | 1～1000      | 同時に処理されるデータサンプルの数                                             |
+| inference_timeout_seconds | Integer | 必須    | なし  | 1～1200      | 単一推論リクエストの最大許容時間                                            |
+| input_data_uri            | String  | 必須    | なし  | 最大255文字 | 入力データファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS)         |
+| input_data_type           | String  | 必須    | なし  | "JSON", "JSONL" | 入力データのタイプ                                                    |
+| include_glob_pattern      | String  | 選択    | なし  | 最大255文字 | 入力データに含めるファイル群を指定するためのGlobパターン                                   |
+| exclude_glob_pattern      | String  | 選択    | なし  | 最大255文字 | 入力データから除外するファイル群を指定するためのGlobパターン                                   |
+| output_upload_uri         | String  | 必須    | なし  | 最大255文字 | バッチ推論結果ファイルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
+| data_storage_size         | Integer | 必須    | なし  | 300～10000   | バッチ推論に必要なデータをダウンロードする記憶領域サイズ(単位： GB)                          |
+| description               | String  | 選択    | なし  | 最大255文字 | バッチ推論の説明                                                  |
 | use_log                   | Boolean | 選択    | False  | True, False | Log & Crash Searchサービスにログを残すかどうか                             |
 | wait                      | Boolean | 選択    | True   | True, False | True:作成完了後にレスポンスを返す。False:作成リクエスト直後に即レスポンスを返す                      |
 
@@ -856,3 +857,4 @@ easymaker.download(
     password='nhn_object_storage_api_password'
 )
 ```
+
