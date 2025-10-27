@@ -1546,7 +1546,7 @@ Create a new RAG.
             - **VPC ID**: enter the VPC ID used for PostgreSQL Instance.
             - **Subnet ID**: enter the subnet ID used for PostgreSQL Instance.
             - **PostgreSQL instance IP**: enter the IP address of the created PostgreSQL Instance.
-    - **Collection setting**
+    - **Ingestion setting**
         - **Data path**: enter the data path where the documents to be collected are stored in the vector store.
     - **Embedding model**
         - **Model**: select an embedding model to use when vectorizing documents and queries.
@@ -1566,7 +1566,7 @@ Create a new RAG.
 > [Caution] When using NHN Cloud NAS
 > Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
 
-> [Note] There may be limitations on the format, size, and number of files available for collection. For more information, see [Collect Sync](#rag_ingestion_sync).
+> [Note] There may be limitations on the format, size, and number of files available for ingestion. For more information, see [Collect Sync](#rag_ingestion_sync).
 
 <a id="rag_list"></a>
 
@@ -1581,10 +1581,10 @@ View and manage the list of generated RAGs. Select a RAG from the list to view d
 | CREATE REQUESTED | RAG creation has been requested. |
 | CREATE IN PROGRESS | RAG creation is in progress. |
 | ACTIVE | RAG is operating normally. |
-| UPDATE IN PROGRESS | RAG collection is in progress. |
+| UPDATE IN PROGRESS | RAG ingestion is in progress. |
 | DELETE IN PROGRESS | RAG deletion is in progress. |
 | CREATE FAILED | RAG creation has failed.<br/>Delete the RAG and create it again. If creation fails repeatedly, contact Customer Service. |
-| UPDATE FAILED | RAG collection has failed.<br/>Try **Synchronize Collections** again. If update fails repeatedly, contact Customer Service. |
+| UPDATE FAILED | RAG ingestion has failed.<br/>Try **Synchronize ingestions** again. If update fails repeatedly, contact Customer Service. |
 | DELETE FAILED | RAG deletion has failed.<br/>Try deletion again. If deletion fails repeatedly, contact Customer Service. |
 
 - **API Gateway Status**: the deployment status information for API Gateway basic stage.
@@ -1595,17 +1595,17 @@ View and manage the list of generated RAGs. Select a RAG from the list to view d
 | COMPLETE | API Gateway Basic Stage has been successfully deployed and is enabled. |
 | FAILURE | API Gateway Basic Stage deployment has failed. |
 
-- **Collection History**: You can check the execution history of the document collection task in the **Collection History** tab of the details screen displayed when you select a RAG.
+- **Ingestion History**: You can check the execution history of the document ingestion task in the **Ingestion History** tab of the details screen displayed when you select a RAG.
 - **API Statistics**: You can check API statistics in the **API Statistics** tab of the detail screen displayed when you select a RAG.
 - **Monitoring**: You can check the list of monitored instances and basic metric charts in the **Monitoring** tab of the details screen displayed when you select a RAG.
 
 <a id="rag_ingestion_sync"></a>
 
-### Synchronize Collections
+### Synchronize Ingestions
 
-- The Synchronize Collections feature is available in the **Vector Store** tab of the details screen displayed when you select RAG.
-- If documents are added, deleted, or modified in the collection data path, you can run **Synchronize Collections** to reflect the changes.
-- The format, size, and number of files available for collection may be limited. See the table below for details:
+- The Synchronize Ingestions feature is available in the **Vector Store** tab of the details screen displayed when you select RAG.
+- If documents are added, deleted, or modified in the ingestion data path, you can run **Synchronize Ingestions** to reflect the changes.
+- The format, size, and number of files available for ingestion may be limited. See the table below for details:
 
 | Item | Limitation |
 |-----|------|
