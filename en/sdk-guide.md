@@ -97,7 +97,7 @@ for instance in instance_type_list:
 | description                     | String  | Optional                                             | None          | Up to 255 characters                    | Description for training                                                                        |
 | image_name                         | String  | Required                                             | None          | None                                    | Image name to be used for training (Inquiry available with CLI)                                 |
 | instance_type_name                      | String  | Required                                             | None          | None                                    | Instance type name (Inquiry available with CLI)                                                 |
-| distributed_node_count                   | Integer | Required                                             | None          | 1~10                                    | Number of nodes to apply distributed training to                                                |
+| distributed_node_count                   | Integer | Optional                                             | 1          | 1~10                                    | Number of nodes to apply distributed training to                                               |
 | use_torchrun                             | Boolean | Optional                                             | False         | True, False                             | Whether torchrun is enabled, only available for Pytorch images                                  |
 | nproc_per_node                           | Integer | Required when use_torchrun is True                   | 1             | 1 to (number of CPUs or number of GPUs) | Number of processes per node, value that must be set if use_torchrun is enabled                 |
 | data_storage_size                        | Integer | Required when using Object Storage                   | None          | 300~10000                               | Storage size to download data for training (unit: GB), unnecessary when using NAS               |
@@ -239,8 +239,8 @@ for instance in instance_type_list:
 | tuning_strategy_name                                           | easymaker.TUNING_STRATEGY         | Required                                                            | None    | None                                                                          | Choose which strategy to use to find the optimal hyperparameters.                                                            |
 | tuning_strategy_random_state                                   | Integer        | Optional                                                            | None    | None                                                                          | Determine random number generation. Specify a fixed value for reproducible results.                                          |
 | early_stopping_algorithm                                       | easymaker.EARLY_STOPPING_ALGORITHM         | Required                                                            | None    | EARLY_STOPPING_ALGORITHM.<br>MEDIAN                                           | Stop training early if the model is no longer good even though training continues.                                           |
-| early_stopping_min_trial_count                                 | Integer        | Required                                                            | 3     | None                                                                          | Define how many trainings the target metric value will be taken from when calculating the median.                            |
-| early_stopping_start_step                                      | Integer        | Required                                                            | 4     | None                                                                          | Set the training step from which to apply early stop.                                                                        |
+| early_stopping_min_trial_count                                 | Integer        | Optional                                                            | 3     | None                                                                          | Define how many trainings the target metric value will be taken from when calculating the median.                            |
+| early_stopping_start_step                                      | Integer        | Optional                                                            | 4     | None                                                                          | Set the training step from which to apply early stop.                                                                        |
 | use_log                                                        | Boolean        | Optional                                                            | False | True, False                                                                   | Whether to leave logs in the Log & Crash Search service                                                                      |
 | wait                                                           | Boolean        | Optional                                                            | True  | True, False                                                                   | True: return after creation is complete, False: return upon creation request                                                                                   |
 
@@ -340,6 +340,9 @@ The model is used when creating endpoints.
 | hyperparameter_tuning_id | String | Required if training_id is not present              | None  | None      | Hyperparameter tuning ID to be created by model (created by best learning) |
 | model_name               | String | Required                                 | None  | Up to 50 characters  | Model name                               |
 | description        | String | Optional                                 | None  | Up to 255 characters | Description for model                           |
+| parameter_list                   | Array  | Optional    | None  | Up to 10                                  | Parameter information (consist of parameterName/parameterValue)         |
+| parameter_list[0].parameterName  | String | Optional    | None  | Up to 64 characters                                  | Parameter name                                              |
+| parameter_list[0].parameterValue | String | Optional    | None  | Up to 255 characters                                 | Parameter value                                                |
 
 ```python
 model = easymaker.Model().create(
@@ -697,11 +700,11 @@ for instance in instance_type_list:
 | Name                      | Type    | Required | Default value | Valid range   | Description                                                                                 |
 | ------------------------- | ------- | --------- | ------ | ----------- |-----------------------------------------------------------------|
 | batch_inference_name      | String  | Required      | None   | Up to 50 characters   | Batch inference name                                                        |
-| instance_count            | Integer | Required      | None   | 1~10        | Number of instances to use for batch inference                                               |
-| timeout_hours             | Integer | Optional      | 720    | 1~720       | Maximum batch inference time (in hours)                                             |
+| instance_count            | Integer | Optional      | 1   | 1~10        | Number of instances to use for batch inference                                               |
+| timeout_hours             | Integer | Required      | 720    | 1~720       | Maximum batch inference time (in hours)                                             |
 | instance_type_name             | String  | Required      | None   | None        | Instance type name (Inquiry available with CLI)                                          |
 | model_id                | String  | Required      | None   | None        | Model ID                                                            |
-| pod_count                 | Integer | Required      | None   | 1~100       | Number of pods to apply distributed inference to                                                 |
+| pod_count                 | Integer | Optional      | 1   | 1~100       | Number of pods to apply distributed inference to                                                 |
 | batch_size                | Integer | Required      | None   | 1~1000      | Number of data samples processed simultaneously                                              |
 | inference_timeout_seconds | Integer | Required      | None   | 1~1200      | Maximum allowable time for a single inference request                                              |
 | input_data_uri            | String  | Required      | None   | Up to 255  | Path for input data file (NHN Cloud Object Storage or NHN Cloud NAS)         |
@@ -765,7 +768,7 @@ easymaker.BatchInference(batch_inference_id).delete()
 | Name               | Type   | Required | Default value | Valid range | Description         |
 |-----------------------------|---------| --------- | ------ | --------- |-------------------------------------------|
 | pipeline_name               | String  | Required      | None   | Max 50 characters   | Pipeline name                                  |
-| pipeline_spec_manifest_path | String  | Required      | None   | 1~10      | Pipeline file path to upload                          |
+| pipeline_spec_manifest_path | String  | Required      | None   | none      | Pipeline file path to upload                          |
 | description                 | String  | Optional  | None   | Max 255 characters  | Description for pipeline                              |
 | wait                        | Boolean | Optional    | True   | True, False | True: return after creation is complete, False: return immediately after creation request |
 
@@ -817,7 +820,7 @@ for instance in instance_type_list:
 | experiment_id                     | String                    | Required if not entered in easymaker.init  | None    | Up to 36 Characters      | Experiment ID                                    |
 | description                       | String                    | Optional                        | None   | Up to 255 Characters     | Description of pipeline execution                          |
 | instance_type_name                | String                    | Required                        | None   | None          | Instance type name (Inquiry available with CLI)                   |
-| instance_count                    | Integer                   | Required                        | None   | 1~10        | Number of instances to use                               |
+| instance_count                    | Integer                   | Optional                        | 1   | 1~10        | Number of instances to use                               |
 | boot_storage_size                 | Integer                   | Required                        | None   | 50~         | The boot storage size (in GB) of the instance that will run the pipeline.      |
 | parameter_list                    | easymaker.Parameter Array | Optional                        | None   | None          | Parameter information to pass to the pipeline                       |
 | parameter_list[0].parameter_name  | String                    | Optional                        | None   | Up to 255 Characters     | Parameter key                                   |
@@ -877,11 +880,11 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 | experiment_id                    | String  | Required if not entered in easymaker.init     | None    | Max 36 character      | Experiment ID                                          |
 | description                      | String  | Optional                                 | None   | Max 255 character| Description of pipeline schedules                                |
 | instance_type_name                    | String  | Required                                 | None   | None          | Instance type name (Inquiry available with CLI)                         |
-| instance_count                   | Integer | Required                                 | None   | 1~10        | Number of instances to use                                    |
+| instance_count                   | Integer | Optional                                 | 1   | 1~10        | Number of instances to use                                    |
 | boot_storage_size                | Integer | Required                                 | None   | 50~         | The boot storage size (in GB) of the instance that will run the pipeline.            |
 | schedule_periodic_minutes        | String  | schedule_cron_expression 미입력시 Required  | None   | None          | Set a time interval to run the pipeline repeatedly                        |
 | schedule_cron_expression         | String  | schedule_periodic_minutes 미입력시 Required | None   | None          | Set up a Cron expression to run the pipeline repeatedly                 |
-| max_concurrency_count            | String  | Optional                                 | None   | None          | Limit the number of concurrent runs by specifying a maximum number of parallel runs             |
+| max_concurrency_count            | Integer  | Optional                                 | 1   | 1~10          | Limit the number of concurrent runs by specifying a maximum number of parallel runs             |
 | schedule_start_datetime          | String  | Optional                                 | None   | None          | Set a start time for the pipeline schedule, which will run the pipeline at the set interval if not entered. |
 | schedule_end_datetime            | String  | Optional                                 | None   | None          | Set an end time for a pipeline schedule, creating a pipeline run until it stops if no input is received. |
 | use_catchup                      | Boolean | Optional                                 | None   | None          | Missed run catch-up: Whether to catch up when pipeline runs fall behind schedule. |
