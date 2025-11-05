@@ -536,7 +536,7 @@ Please refer to the following guide to create an endpoint and perform inference 
 
 ### Request
 
-* Request URI: POST <https://kr1-{apigwSeviceId}.api.nhncloudservice.com/inference>
+* Request URI: POST <https://kr1-{apigwSeviceId}.api.gov-nhncloudservice.com/inference>
 * Request Body
 
 ```json

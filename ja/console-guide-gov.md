@@ -1149,21 +1149,21 @@ AI EasyMakerの基盤イメージは下表を確認してください。
 
 | イメージ名 | コアタイプ | フレームワーク | フレームワークバージョン | Pythonバージョン | イメージアドレス |
 | --- | --- | --- | --- | --- | --- |
-| Ubuntu 22.04 CPU Python Notebook     | CPU  | Python     | 3.10.12  | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204   |
-| Ubuntu 22.04 GPU Python Notebook     | GPU  | Python     | 3.10.12  | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-gpu-py310-ubuntu2204   |
-| Ubuntu 22.04 CPU PyTorch Notebook    | CPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-cpu-py310-ubuntu2204    |
-| Ubuntu 22.04 GPU PyTorch Notebook    | GPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-gpu-py310-ubuntu2204    |
-| Ubuntu 22.04 CPU TensorFlow Notebook | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204|
-| Ubuntu 22.04 GPU TensorFlow Notebook | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204|
+| Ubuntu 22.04 CPU Python Notebook     | CPU  | Python     | 3.10.12  | 3.10   | 0516e3a7-kr-registry.container.gov-nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204   |
+| Ubuntu 22.04 GPU Python Notebook     | GPU  | Python     | 3.10.12  | 3.10   | 0516e3a7-kr-registry.container.gov-nhncloud.com/easymaker/python-notebook:3.10.12-gpu-py310-ubuntu2204   |
+| Ubuntu 22.04 CPU PyTorch Notebook    | CPU  | PyTorch    | 2.0.1    | 3.10   | 0516e3a7-kr-registry.container.gov-nhncloud.com/easymaker/pytorch-notebook:2.0.1-cpu-py310-ubuntu2204    |
+| Ubuntu 22.04 GPU PyTorch Notebook    | GPU  | PyTorch    | 2.0.1    | 3.10   | 0516e3a7-kr-registry.container.gov-nhncloud.com/easymaker/pytorch-notebook:2.0.1-gpu-py310-ubuntu2204    |
+| Ubuntu 22.04 CPU TensorFlow Notebook | CPU  | TensorFlow | 2.12.0   | 3.10   | 0516e3a7-kr-registry.container.gov-nhncloud.com/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204|
+| Ubuntu 22.04 GPU TensorFlow Notebook | GPU  | TensorFlow | 2.12.0   | 3.10   | 0516e3a7-kr-registry.container.gov-nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204|
 
 #### ディープラーニングイメージ
 
 | イメージ名 | コアタイプ | フレームワーク | フレームワークバージョン | Pythonバージョン | イメージアドレス |
 | --- | --- | --- | --- | --- | --- |
-| Ubuntu 22.04 CPU PyTorch Training    | CPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204        |
-| Ubuntu 22.04 GPU PyTorch Training    | GPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204        |
-| Ubuntu 22.04 CPU TensorFlow Training | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-cpu-py310-ubuntu2204 |
-| Ubuntu 22.04 GPU TensorFlow Training | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
+| Ubuntu 22.04 CPU PyTorch Training    | CPU  | PyTorch    | 2.0.1    | 3.10   | 0516e3a7-kr-registry.container.gov-nhncloud.com/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204        |
+| Ubuntu 22.04 GPU PyTorch Training    | GPU  | PyTorch    | 2.0.1    | 3.10   | 0516e3a7-kr-registry.container.gov-nhncloud.com/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204        |
+| Ubuntu 22.04 CPU TensorFlow Training | CPU  | TensorFlow | 2.12.0   | 3.10   | 0516e3a7-kr-registry.container.gov-nhncloud.com/easymaker/tensorflow-train:2.12.0-cpu-py310-ubuntu2204 |
+| Ubuntu 22.04 GPU TensorFlow Training | GPU  | TensorFlow | 2.12.0   | 3.10   | 0516e3a7-kr-registry.container.gov-nhncloud.com/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
 
 > [参考]個人イメージ使用制約事項:
 >
@@ -1176,7 +1176,7 @@ AI EasyMakerの基盤イメージは下表を確認してください。
 
 1. 個人イメージのDockerFileを作成します。
 
-            FROM fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
+            FROM 0516e3a7-kr-registry.container.gov-nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
             RUN conda create -n example python=3.10
             RUN conda activate example
             RUN pip install torch torchvision

@@ -536,7 +536,7 @@ detection된 object의 bbox(xmin, ymin, xmax, ymax) 목록을 반환합니다.
 
 ### 요청
 
-* Request URI: POST <https://kr1-{apigwSeviceId}.api.nhncloudservice.com/inference>
+* Request URI: POST <https://kr1-{apigwSeviceId}.api.gov-nhncloudservice.com/inference>
 * Request Body
 
 ```json
