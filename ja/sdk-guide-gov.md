@@ -848,14 +848,16 @@ easymaker.upload(
     easymaker_obs_uri='obs://kr1-api-object-storage.gov-nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
     local_path='./local_dir',
     username='userId@nhn.com',
-    password='nhn_object_storage_api_password'
+    password='nhn_object_storage_api_password',
+    environment_type='gov'
 )
 
 easymaker.download(
     easymaker_obs_uri='obs://kr1-api-object-storage.gov-nhncloudservice.com/v1/AUTH_00000000000000000000000000000000/SDK/sample/source_dir',
     download_dir_path='./download_dir',
     username='userId@nhn.com',
-    password='nhn_object_storage_api_password'
+    password='nhn_object_storage_api_password',
+    environment_type='gov'
 )
 ```
 
