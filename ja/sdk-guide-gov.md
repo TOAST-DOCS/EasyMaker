@@ -355,15 +355,15 @@ model = easymaker.Model().create(
 
 [パラメータ]
 
-| 名前               | タイプ | 必須かどうか | デフォルト値 | 有効範囲                               | 説明                                              |
-|----------------------|--------|-------|-----|-----------------------------------------|-----------------------------------------------------|
-| model_type_code       | Enum   | 必須 | なし | easymaker.TENSORFLOW、 easymaker.PYTORCH | 学習に使用されたフレームワーク情報                                |
-| model_upload_uri            | String | 必須 | なし | 最大255文字                             | モデルファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
-| model_name           | String | 必須 | なし | 最大50文字                              | モデル名                                           |
-| description    | String | 任意 | なし | 最大255文字                             | モデルの説明                                       |
-| parameter_list                   | Array  | 選択  | なし | 最大10個                                | パラメータ情報(parameterName/parameterValueで構成)         |
-| parameter_list[0].parameterName  | String | 選択  | なし | 最大64文字                                | パラメータ名                                            |
-| parameter_list[0].parameterValue | String | 選択  | なし | 最大255文字                               | パラメータ値                                              |
+| 名前               | タイプ | 必須かどうか | デフォルト値 | 有効範囲                                     | 説明                                              |
+|----------------------|--------|-------|-----|------------------------------------------|-----------------------------------------------------|
+| model_type_code       | Enum   | 必須 | なし | easymaker.TENSORFLOW、 easymaker.PYTORCH、 easymaker.SCIKIT_LEARN | 学習に使用されたフレームワーク情報                                |
+| model_upload_uri            | String | 必須 | なし | 最大255文字                                  | モデルファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
+| model_name           | String | 必須 | なし | 最大50文字                                   | モデル名                                           |
+| description    | String | 任意 | なし | 最大255文字                                  | モデルの説明                                       |
+| parameter_list                   | Array  | 選択  | なし | 最大10個                                    | パラメータ情報(parameterName/parameterValueで構成)         |
+| parameter_list[0].parameterName  | String | 選択  | なし | 最大64文字                                   | パラメータ名                                            |
+| parameter_list[0].parameterValue | String | 選択  | なし | 最大255文字                                  | パラメータ値                                              |
 
 ```python
 # TensorFlowモデル
