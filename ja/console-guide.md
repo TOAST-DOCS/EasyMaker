@@ -838,7 +838,7 @@ model_name/
 > [参考]エンドポイント作成時のAPI Gatewayサービスリソース提供制約:
 > 新規エンドポイントを作成すると、API Gatewayサービスを新規作成します。
 > 既存エンドポイントから新規ステージを追加すると、API Gatewayサービスに新規ステージを作成します。
-> [API Gatewayサービスリソース提供ポリシー](https://docs.nhncloud.com/ko/TOAST/ko/resource-policy/#api-gateway)の基本提供量を超過した場合、AI EasyMakerでエンドポイント作成ができない場合があります。この場合、API Gatewayサービスリソースのクォータを調整して解決できます。
+> [API Gatewayサービスリソース提供ポリシー](https://docs.nhncloud.com/ko/nhncloud/ko/resource-policy/#api-gateway)の基本提供量を超過した場合、AI EasyMakerでエンドポイント作成ができない場合があります。この場合、API Gatewayサービスリソースのクォータを調整して解決できます。
 
 ### エンドポイントリスト
 

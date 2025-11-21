@@ -11,7 +11,7 @@ python -m pip install easymaker
 ### AI EasyMaker SDK 초기화
 
 앱키(appkey)는 콘솔 오른쪽 상단의 **URL & Appkey** 메뉴에서 확인할 수 있습니다.
-인증 토큰(access token)에 대한 내용은 [API 호출 및 인증](https://docs.nhncloud.com/ko/nhncloud/ko/public-api/api-authentication/)에서 확인할 수 있습니다.
+인증 토큰(access token)에 대한 내용은 [API 호출 및 인증](https://docs.gov-nhncloud.com/ko/nhncloud/ko/public-api/api-authentication-gov/)에서 확인할 수 있습니다.
 활성화한 AI EasyMaker 상품의 앱키, 인증 토큰, 리전 정보를 입력합니다.
 AI EasyMaker SDK를 사용하기 위해서는 초기화 코드가 필요합니다.
 
