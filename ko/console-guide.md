@@ -836,7 +836,7 @@ model_name/
 > [참고] 엔드포인트 생성 시 API Gateway 서비스 리소스 제공 제약:
 > 신규 엔드포인트 생성을 하면 API Gateway 서비스를 신규 생성합니다.
 > 기존 엔드포인트에서 신규 스테이지 추가를 하면 API Gateway 서비스에 신규 스테이지를 생성합니다.
-> [API Gateway 서비스 리소스 제공 정책](https://docs.nhncloud.com/ko/TOAST/ko/resource-policy/#api-gateway)의 기본 제공량을 초과한 경우, AI EasyMaker에서 엔드포인트 생성이 불가할 수 있습니다. 이 경우 API Gateway 서비스 리소스 쿼터를 조정하여 해결할 수 있습니다.
+> [API Gateway 서비스 리소스 제공 정책](https://docs.nhncloud.com/ko/nhncloud/ko/resource-policy/#api-gateway)의 기본 제공량을 초과한 경우, AI EasyMaker에서 엔드포인트 생성이 불가할 수 있습니다. 이 경우 API Gateway 서비스 리소스 쿼터를 조정하여 해결할 수 있습니다.
 
 ### 엔드포인트 목록
 
