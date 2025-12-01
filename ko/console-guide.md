@@ -607,20 +607,18 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 
 !!! danger "주의"
     TensorFlow (Triton), PyTorch (Triton), ONNX (Triton) 모델을 생성하는 경우, 입력하는 모델 아티팩트 경로에 Triton으로 모델을 실행할 수 있는 구조로 모델 파일과 `config.pbtxt` 파일이 저장되어 있어야 합니다.
-    아래의 예시를 참고하세요.<br>
+    아래의 예시를 참고하세요.
     <details>
     <summary><strong>예시</strong></summary>
 
-    ```text
-    model_name/
-    ├── config.pbtxt                              # 모델 설정 파일
-    └── 1/                                        # 버전 1 디렉터리
-        └── model.savedmodel/                     # TensorFlow SavedModel 디렉터리
-            ├── saved_model.pb                    # 메타그래프와 체크포인트 데이터
-            └── variables/                        # 모델 가중치 디렉터리
-                ├── variables.data-00000-of-00001
-                └── variables.index
-    ```
+        model_name/
+        ├── config.pbtxt                              # 모델 설정 파일
+        └── 1/                                        # 버전 1 디렉터리
+            └── model.savedmodel/                     # TensorFlow SavedModel 디렉터리
+                ├── saved_model.pb                    # 메타그래프와 체크포인트 데이터
+                └── variables/                        # 모델 가중치 디렉터리
+                    ├── variables.data-00000-of-00001
+                    └── variables.index
 
     </details>
 
@@ -955,31 +953,31 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 3. HTTP POST Method로 API Gateway 리소스 경로를 호출하면 추론 API가 호출됩니다.
     - 사용자가 작성한 알고리즘에 따라 추론 API의 요청, 응답 사양은 다릅니다.
 
-              // 추론 API 예시: 요청
-              curl --location --request POST '{API Gateway 리소스 경로}' \
-              --header 'Content-Type: application/json' \
-              --data-raw '{
-                  "instances": [
-                      [6.8,  2.8,  4.8,  1.4],
-                      [6.0,  3.4,  4.5,  1.6]
-                  ]
-              }'
+            // 추론 API 예시: 요청
+            curl --location --request POST '{API Gateway 리소스 경로}' \
+            --header 'Content-Type: application/json' \
+            --data-raw '{
+                "instances": [
+                    [6.8,  2.8,  4.8,  1.4],
+                    [6.0,  3.4,  4.5,  1.6]
+                ]
+            }'
 
-              // 추론 API 예시: 응답
-              {
-                  "predictions" : [
-                      [
-                          0.337502569,
-                          0.332836747,
-                          0.329660654
-                      ],
-                      [
-                          0.337530434,
-                          0.332806051,
-                          0.329663515
-                      ]
-                  ]
-              }
+            // 추론 API 예시: 응답
+            {
+                "predictions" : [
+                    [
+                        0.337502569,
+                        0.332836747,
+                        0.329660654
+                    ],
+                    [
+                        0.337530434,
+                        0.332806051,
+                        0.329663515
+                    ]
+                ]
+            }
 
 ### 스테이지 리소스 삭제
 
@@ -1149,10 +1147,10 @@ AI EasyMaker의 기반 이미지는 아래 표를 확인하세요.
 | Ubuntu 22.04 GPU TensorFlow Training | GPU      | TensorFlow | 2.12.0          | 3.10        | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
 
 !!! tip "알아두기"
-    - 개인 이미지가 저장되는 컨테이너 레지스트리 서비스로는 NHN Container Registry(NCR)만 연동 가능합니다(2023년 12월 기준).
+    개인 이미지가 저장되는 컨테이너 레지스트리 서비스로는 NHN Container Registry(NCR)만 연동 가능합니다(2023년 12월 기준).
 
 !!! danger "주의"
-    - AI EasyMaker에서 제공하는 기반 이미지로 파생된 개인 이미지만 사용할 수 있습니다.
+    AI EasyMaker에서 제공하는 기반 이미지로 파생된 개인 이미지만 사용할 수 있습니다.
 
 ### 개인 이미지 생성
 
@@ -1160,22 +1158,22 @@ AI EasyMaker의 기반 이미지는 아래 표를 확인하세요.
 
 1. 개인 이미지의 DockerFile을 작성합니다.
 
-            FROM fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
-            RUN conda create -n example python=3.10
-            RUN conda activate example
-            RUN pip install torch torchvision
+        FROM fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
+        RUN conda create -n example python=3.10
+        RUN conda activate example
+        RUN pip install torch torchvision
 
 2. 개인 이미지 빌드와 컨테이너 레지스트리 Push
     Dockerfile로 이미지를 빌드하고 NCR 레지스트리에 이미지를 저장(Push)합니다.
 
-                docker build -t {이미지 이름}:{태그} .
-                docker tag {이미지 이름}:{태그} {NCR 레지스트리 주소}/{이미지 이름}:{태그}
-                docker push {NCR 레지스트리 주소}/{이미지 이름}:{태그}
+        docker build -t {이미지 이름}:{태그} .
+        docker tag {이미지 이름}:{태그} {NCR 레지스트리 주소}/{이미지 이름}:{태그}
+        docker push {NCR 레지스트리 주소}/{이미지 이름}:{태그}
 
-                (예시)
-                docker build -t custom-training:v1 .
-                docker tag custom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
-                docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+        (예시)
+        docker build -t custom-training:v1 .
+        docker tag custom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+        docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
 
 3. NCR에 저장(Push)한 이미지를 AI EasyMaker의 개인 이미지로 생성합니다.
 
@@ -1622,8 +1620,6 @@ RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서
 
 <details>
 <summary><strong>호출 예시(cURL)</strong></summary>
-
-#### 호출 예시
 
 ```bash
 curl -X POST https://{API 엔드포인트 주소}/rag/v1/query \
