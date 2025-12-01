@@ -607,23 +607,22 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 
 !!! danger "주의"
     TensorFlow (Triton), PyTorch (Triton), ONNX (Triton) 모델을 생성하는 경우, 입력하는 모델 아티팩트 경로에 Triton으로 모델을 실행할 수 있는 구조로 모델 파일과 `config.pbtxt` 파일이 저장되어 있어야 합니다.
-    아래의 예시를 참고하세요.
+    아래의 예시를 참고하세요.<br>
+    <details>
+    <summary><strong>예시</strong></summary>
 
-<details>
-<summary><strong>예시</strong></summary>
+    ```text
+    model_name/
+    ├── config.pbtxt                              # 모델 설정 파일
+    └── 1/                                        # 버전 1 디렉터리
+        └── model.savedmodel/                     # TensorFlow SavedModel 디렉터리
+            ├── saved_model.pb                    # 메타그래프와 체크포인트 데이터
+            └── variables/                        # 모델 가중치 디렉터리
+                ├── variables.data-00000-of-00001
+                └── variables.index
+    ```
 
-```text
-model_name/
-├── config.pbtxt                              # 모델 설정 파일
-└── 1/                                        # 버전 1 디렉터리
-    └── model.savedmodel/                     # TensorFlow SavedModel 디렉터리
-        ├── saved_model.pb                    # 메타그래프와 체크포인트 데이터
-        └── variables/                        # 모델 가중치 디렉터리
-            ├── variables.data-00000-of-00001
-            └── variables.index
-```
-
-</details>
+    </details>
 
 ### 모델 목록
 
@@ -1261,7 +1260,7 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
 !!! tip "알아두기"
     **파이프라인**은 하나 이상의 컴포넌트를 조합하여 방향 비순환 그래프(directed acyclic graph, DAG)를 형성하는 작업 흐름의 정의입니다.
     - 각 컴포넌트는 실행 중에 단일 컨테이너를 실행하며, 이는 ML 아티팩트를 생성할 수 있습니다.
-    - 컴포넌트는 입력을 받고 출력을 생성할 수 있습니다. 두 가지 유형의 I/O 타입이 있습니다. 매개변수(parameters)와 아티팩트(artifacts)입니다:
+    - 컴포넌트는 입력을 받고 출력을 생성할 수 있습니다. 두 가지 유형의 I/O 타입이 있습니다. 매개변수(parameters)와 아티팩트(artifacts)입니다.
     - 매개변수는 컴포넌트 간에 작은 양의 데이터를 전달하는 데 유용합니다.
     - 아티팩트 유형은 데이터셋, 모델, 메트릭 등과 같은 ML 아티팩트 출력을 위한 것입니다. 오브젝트 스토리지에 저장하기 위한 편리한 메커니즘을 제공합니다.
 
@@ -1526,11 +1525,11 @@ RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서
             - **VPC ID**: RDS for PostgreSQL에서 사용할 VPC ID를 입력합니다.
             - **서브넷 ID**: RDS for PostgreSQL에서 사용할 서브넷 ID를 입력합니다.
         - **PostgreSQL Instance**: 사용자가 생성한 NHN Cloud PostgreSQL Instance를 벡터 스토어로 활용합니다.
-            - **사용자 ID**: PostgreSQL Instance 생성 시 설정한 사용자 ID를 입력합니다.
-            - **비밀번호**: PostgreSQL Instance 생성 시 설정한 비밀번호를 입력합니다.
-            - **VPC ID**: PostgreSQL Instance에서 사용할 VPC ID를 입력합니다.
-            - **서브넷 ID**: PostgreSQL Instance에서 사용할 서브넷 ID를 입력합니다.
-            - **PostgreSQL 인스턴스 IP**: 생성한 PostgreSQL Instance의 IP 주소를 입력합니다.
+            - **사용자 ID**: PostgreSQL Instance에 접근할 수 있는 사용자 ID를 입력합니다.
+            - **비밀번호**: PostgreSQL Instance에 접근할 수 있는 비밀번호를 입력합니다.
+            - **VPC ID**: PostgreSQL Instance의 VPC ID를 입력합니다.
+            - **서브넷 ID**: PostgreSQL Instance의 서브넷 ID를 입력합니다.
+            - **PostgreSQL 인스턴스 IP**: PostgreSQL Instance의 IP 주소를 입력합니다.
     - **수집 설정**
         - **데이터 경로**: 벡터 스토어에 수집할 문서가 저장된 데이터 경로를 입력합니다.
     - **임베딩 모델**
@@ -1549,8 +1548,9 @@ RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서
     수집에서 사용할 수 있는 파일의 포맷과 크기, 개수가 제한될 수 있습니다. 자세한 내용은 [수집 동기화](#rag_ingestion_sync)를 참고하세요.
 
 !!! danger "주의"
-    PostgreSQL Instance 사용 시 포트를 `15432`로 설정해야 합니다.
+    PostgreSQL Instance 사용 시 포트를 `15432`로 설정하세요.
     인스턴스를 생성하는 방법은 [PostgreSQL Instance 사용가이드](https://docs.nhncloud.com/ko/Compute/Instance/ko/component-guide/#postgresql-instance)를 참고하세요.
+    인스턴스의 서브넷 대역에서 `15432` 포트로 접근할 수 있도록 보안 그룹을 설정하세요.
 
 !!! danger "주의"
     AI EasyMaker와 동일한 프로젝트에서 생성된 NHN Cloud NAS만 사용할 수 있습니다.
@@ -1621,7 +1621,7 @@ RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서
 - 자세한 요청 예시는 아래 내용을 참고하세요.
 
 <details>
-<summary><strong>**예시**</strong></summary>
+<summary><strong>호출 예시(cURL)</strong></summary>
 
 #### 호출 예시
 
@@ -1639,7 +1639,10 @@ curl -X POST https://{API 엔드포인트 주소}/rag/v1/query \
   }'
 ```
 
-#### Stream 응답 처리 예시(rag_call.sh)
+</details>
+
+<details>
+<summary><strong>스트리밍 호출 예시(cURL)</strong></summary>
 
 ```bash
 #!/bin/bash
@@ -1652,7 +1655,7 @@ DEFAULT_PROMPT="AI EasyMaker 서비스에 대해 설명해줘."
 usage() {
   cat <<'EOF'
 사용법:
-  rag_call.sh -k <API_KEY> [-u URL] [-m MODEL] [-p PROMPT]
+  <파일 이름> -k <API_KEY> [-u URL] [-m MODEL] [-p PROMPT]
 
 옵션:
   -k   API 키 (x-nhn-apikey: <API_KEY> 헤더로 전송)
@@ -1848,19 +1851,21 @@ AI EasyMaker 서비스는 Log & Crash Search 서비스에 다음과 같이 정�
 아래 예시처럼, 학습 생성 시 입력한 하이퍼파라미터 값을 활용할 수 있습니다.<br>
 ![하이퍼파리미터 입력 화면](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_ko.png)
 
-        import argparse
+```python
+import argparse
 
-        model_version = os.environ.get("EM_HP_MODEL_VERSION")
+model_version = os.environ.get("EM_HP_MODEL_VERSION")
 
-        def parse_hyperparameters():
-            parser = argparse.ArgumentParser()
+def parse_hyperparameters():
+    parser = argparse.ArgumentParser()
 
-            # 입력한 하이퍼파라미터 파싱
-            parser.add_argument("--epochs", type=int, default=500)
-            parser.add_argument("--batch_size", type=int, default=32)
-            ...
+    # 입력한 하이퍼파라미터 파싱
+    parser.add_argument("--epochs", type=int, default=500)
+    parser.add_argument("--batch_size", type=int, default=32)
+    ...
 
-            return parser.parse_known_args()
+    return parser.parse_known_args()
+```
 
 ### 4. 환경 변수
 
@@ -1886,29 +1891,31 @@ AI EasyMaker 서비스는 Log & Crash Search 서비스에 다음과 같이 정�
 
 - **환경 변수 활용 예시 코드**
 
-          import os
-          import tensorflow
+```python
+import os
+import tensorflow
 
-          dataset_dir = os.environ.get("EM_DATASET_TRAIN")
-          train_data = read_data(dataset_dir, "train.csv")
+dataset_dir = os.environ.get("EM_DATASET_TRAIN")
+train_data = read_data(dataset_dir, "train.csv")
 
-          model = ... # 입력한 데이터를 이용해 모델 구현
-          model.load_weights(os.environ.get('EM_CHECKPOINT_INPUT_DIR', None))
-          callbacks = [
-              tensorflow.keras.callbacks.ModelCheckpoint(filepath=f'{os.environ.get("EM_CHECKPOINT_DIR")}/cp-{{epoch:04d}}.ckpt', save_freq='epoch', period=50),
-              tensorflow.keras.callbacks.TensorBoard(log_dir=f'{os.environ.get("EM_TENSORBOARD_LOG_DIR")}'),
-          ]
-          model.fit(..., callbacks)
+model = ... # 입력한 데이터를 이용해 모델 구현
+model.load_weights(os.environ.get('EM_CHECKPOINT_INPUT_DIR', None))
+callbacks = [
+    tensorflow.keras.callbacks.ModelCheckpoint(filepath=f'{os.environ.get("EM_CHECKPOINT_DIR")}/cp-{{epoch:04d}}.ckpt', save_freq='epoch', period=50),
+    tensorflow.keras.callbacks.TensorBoard(log_dir=f'{os.environ.get("EM_TENSORBOARD_LOG_DIR")}'),
+]
+model.fit(..., callbacks)
 
-          model_dir = os.environ.get("EM_MODEL_DIR")
-          model.save(model_dir)
+model_dir = os.environ.get("EM_MODEL_DIR")
+model.save(model_dir)
+```
 
 ### 5. 텐서보드 활용을 위한 지표 로그 저장
 
 - 학습 후 텐서보드 화면에서 결과 지표를 확인하기 위해, 학습 스크립트 작성 시 텐서보드 로그 저장 공간을 지정된 위치(`EM_TENSORBOARD_LOG_DIR`)로 설정해 주어야 합니다.
 
 <details>
-<summary>**예시**</summary>
+<summary><strong>예시</strong></summary>
 
 ```python
 import tensorflow as tf
@@ -1925,9 +1932,9 @@ model.fit(x_train, y_train, validation_data=(x_test, y_test),
 </details>
 
 <details>
-<summary>**텐서보드 화면 예시**</summary>
+<summary><strong>텐서보드 화면 예시</strong></summary>
 
-![텐서보드 로그 확인](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_tensorboard.png)
+<img src="http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_tensorboard.png" alt="텐서보드 로그 확인">
 
 </details>
 
@@ -2055,9 +2062,7 @@ model-archiver를 사용해서 만든 MAR 파일을 사용하는 것을 권장�
     아래 handler.py 예시에서 전달되는 값을 확인하고, 그에 맞게 handler를 작성하세요.
 
 <details>
-<summary>**예시**</summary>
-
-- **요청 예제**
+<summary><strong>요청 예시(cURL)</strong></summary>
 
 ```bash
 curl --location --request POST '{API Gateway 리소스 경로}' \
@@ -2070,7 +2075,10 @@ curl --location --request POST '{API Gateway 리소스 경로}' \
 }'
 ```
 
-- **handler.py 예시**
+</details>
+
+<details>
+<summary><strong>handler.py 예시</strong></summary>
 
 ```python
 class TestHandler(BaseHandler):

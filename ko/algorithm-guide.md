@@ -11,12 +11,12 @@ NHN Cloud AI EasyMaker에서 제공하는 알고리즘을 소개합니다.
 
 | 하이퍼파라미터 이름 | 필수 여부 | Value Type | Default Value | 범위      | 설명 |
 | --- | --- | --- | -- |---------| --- |
-| input_size | False | int | 28 | 4 ~ ∞   | 출력 이미지의 해상도  |
-| learning_rate | False | float | 0.1 | 0.0 ~ ∞ | AdamW 옵티마이저의 초기 learning rate 값 |
-| per_device_train_batch_size | False | int | 16 | 2 ~ ∞   | GPU/TPU core/CPU당 training 배치 크기  |
-| per_device_eval_batch_size | False | int | 16 | 1 ~ ∞   |GPU/TPU core/CPU당  evaluation 배치 크기 |
-| num_train_epochs | False | int | 3 | 1 ~ ∞   | 전체 training을 수행하는 총횟수  |
-| logging_steps  | False | int | 500 | 500 ~ ∞   | 로그를 출력하는 step 주기 |
+| input_size | False | int | 28 | [4~∞)   | 출력 이미지의 해상도  |
+| learning_rate | False | float | 0.1 | [0.0~∞) | AdamW 옵티마이저의 초기 learning rate 값 |
+| per_device_train_batch_size | False | int | 16 | [2~∞)   | GPU/TPU core/CPU당 training 배치 크기  |
+| per_device_eval_batch_size | False | int | 16 | [1~∞)   |GPU/TPU core/CPU당  evaluation 배치 크기 |
+| num_train_epochs | False | int | 3 | [1~∞)   | 전체 training을 수행하는 총횟수  |
+| logging_steps  | False | int | 500 | [500~∞)   | 로그를 출력하는 step 주기 |
 
 ### 데이터 세트
 
@@ -125,10 +125,10 @@ Image Classification 알고리즘은 다음의 지표를 생성합니다.
 
 | 하이퍼파라미터 이름 | 필수 여부 | Value Type | Default Value | 유효 범위 | 설명 |
 | --- | --- | --- |---------------| --- | --- |
-| learning_rate | False | float | 2e-4          | 0.0 ~ ∞ | AdamW 옵티마이저의 초기 learning rate 값 |
-| per_device_train_batch_size | False | int | 4             | 0 ~ ∞ |GPU/TPU core/CPU당 training 배치 크기  |
-| num_train_epochs | False | float | 3.0           | 0.0 ~ ∞ | 전체 training을 수행하는 총횟수  |
-| logging_steps  | False | int | 500            | 500 ~ ∞   | 로그를 출력하는 step 주기 |
+| learning_rate | False | float | 2e-4          | [0.0~∞) | AdamW 옵티마이저의 초기 learning rate 값 |
+| per_device_train_batch_size | False | int | 4             | [0~∞) |GPU/TPU core/CPU당 training 배치 크기  |
+| num_train_epochs | False | float | 3.0           | [0.0~∞) | 전체 training을 수행하는 총횟수  |
+| logging_steps  | False | int | 500            | [500~∞)   | 로그를 출력하는 step 주기 |
 
 ### 데이터 세트
 
