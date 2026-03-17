@@ -402,7 +402,7 @@ model = easymaker.Model().create(
 
 | 이름                   | 타입     | 필수 여부 | 기본값 | 유효 범위                                   | 설명                                                  |
 |----------------------|--------|-------|-----|-----------------------------------------|-----------------------------------------------------|
-| model_type_code       | Enum   | 필수    | 없음  | easymaker.TENSORFLOW, easymaker.PYTORCH, easymaker.SCIKIT_LEARN | 학습에 사용된 프레임워크 정보                                    |
+| model_format_code       | easymaker.ModelFormatCode   | 필수    | 없음  | easymaker.ModelFormatCode.TENSORFLOW, easymaker.ModelFormatCode.PYTORCH, easymaker.ModelFormatCode.SCIKIT_LEARN, easymaker.ModelFormatCode.HUGGING_FACE, easymaker.ModelFormatCode.TENSORFLOW_TRITON, easymaker.ModelFormatCode.PYTORCH_TRITON, easymaker.ModelFormatCode.ONNX_TRITON | 학습에 사용된 프레임워크 정보                                    |
 | model_upload_uri            | String | 필수    | 없음  | 최대 255자                                 | 모델 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
 | model_name           | String | 필수    | 없음  | 최대 50자                                  | 모델 이름                                               |
 | description    | String | 선택    | 없음  | 최대 255자                                 | 모델에 대한 설명                                           |
@@ -413,7 +413,7 @@ model = easymaker.Model().create(
 ```python
 # TensorFlow 모델
 model = easymaker.Model().create_by_model_upload_uri(
-    model_type_code=easymaker.TENSORFLOW,
+    model_format_code=easymaker.ModelFormatCode.TENSORFLOW,
     model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
     description='model_description',

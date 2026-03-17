@@ -400,7 +400,7 @@ model = easymaker.Model().create(
 
 | 名前               | タイプ | 必須かどうか | デフォルト値 | 有効範囲                                      | 説明                                              |
 |----------------------|--------|-------|-----|-------------------------------------------|-----------------------------------------------------|
-| model_type_code       | Enum   | 必須 | なし | easymaker.TENSORFLOW、 easymaker.PYTORCH、 easymaker.SCIKIT_LEARN | 学習に使用されたフレームワーク情報                                |
+| model_format_code       | easymaker.ModelFormatCode   | 必須 | なし | easymaker.ModelFormatCode.TENSORFLOW, easymaker.ModelFormatCode.PYTORCH, easymaker.ModelFormatCode.SCIKIT_LEARN, easymaker.ModelFormatCode.HUGGING_FACE, easymaker.ModelFormatCode.TENSORFLOW_TRITON, easymaker.ModelFormatCode.PYTORCH_TRITON, easymaker.ModelFormatCode.ONNX_TRITON | 学習に使用されたフレームワーク情報                                |
 | model_upload_uri            | String | 必須 | なし | 最大255文字                                   | モデルファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
 | model_name           | String | 必須 | なし | 最大50文字                                    | モデル名                                           |
 | description    | String | 任意 | なし | 最大255文字                                   | モデルの説明                                       |
@@ -411,7 +411,7 @@ model = easymaker.Model().create(
 ```python
 # TensorFlowモデル
 model = easymaker.Model().create_by_model_upload_uri(
-    model_type_code=easymaker.TENSORFLOW,
+    model_format_code=easymaker.ModelFormatCode.TENSORFLOW,
     model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
     description='model_description',

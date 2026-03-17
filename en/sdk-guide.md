@@ -402,7 +402,7 @@ Even if there is no training ID, you can create a model by entering the path inf
 
 | Name                   | Type     | Required | Default value | Valid range                                   | Description                                                  |
 |----------------------|--------|-------|-----|-----------------------------------------|-----------------------------------------------------|
-| model_type_code       | Enum   | Required    | None  | easymaker.TENSORFLOW, easymaker.PYTORCH, easymaker.SCIKIT_LEARN | Framework information used for training                                    |
+| model_format_code       | easymaker.ModelFormatCode   | Required    | None  | easymaker.ModelFormatCode.TENSORFLOW, easymaker.ModelFormatCode.PYTORCH, easymaker.ModelFormatCode.SCIKIT_LEARN, easymaker.ModelFormatCode.HUGGING_FACE, easymaker.ModelFormatCode.TENSORFLOW_TRITON, easymaker.ModelFormatCode.PYTORCH_TRITON, easymaker.ModelFormatCode.ONNX_TRITON | Framework information used for training                                    |
 | model_upload_uri            | String | Required    | None  | Up to 255 characters                                 | Path for model file (NHN Cloud Object Storage or NHN Cloud NAS) |
 | model_name           | String | Required    | None  | Up to 50 characters                                  | Model name                                               |
 | description    | String | Optional    | None  | Up to 255 characters                                 | Description for model                                           |
@@ -413,7 +413,7 @@ Even if there is no training ID, you can create a model by entering the path inf
 ```python
 # TensorFlow Model
 model = easymaker.Model().create_by_model_upload_uri(
-    model_type_code=easymaker.TENSORFLOW,
+    model_format_code=easymaker.ModelFormatCode.TENSORFLOW,
     model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
     description='model_description',
