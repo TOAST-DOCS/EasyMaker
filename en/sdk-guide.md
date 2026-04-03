@@ -19,7 +19,7 @@ python -m pip install easymaker
 ### Initialize AI EasyMaker SDK
 
 You can find the AppKey in the **URL & Appkey** menu at the right top on the console.
-You can learn more about Access Tokens in [API Call and Authentication](https://docs.nhncloud.com/en/nhncloud/en/public-api/api-authentication/).
+You can learn more about Access Tokens in [User Access Key Token](https://docs.nhncloud.com/en/nhncloud/en/public-api/user-access-key-token/).
 Enter the AppKey, AccessToken, and region information of enabled AI EasyMaker.
 Intialization code is required to use the AI EasyMaker SDK.
 
