@@ -256,7 +256,7 @@ for instance in instance_type_list:
 | timeout_hours                                                  | Integer        | Optional                                                            | 720   | 1~720                                                                         | Maximum hyperparameter tuning time (unit: hours)                                                                             |
 | hyperparameter_spec_list                                       | easymaker.HyperparameterSpec Array          | Optional                                                            | None    | Up to 100                                                                     | Hyperparameter specification information                                                                        |
 | hyperparameter_spec_list[0].<br>hyperparameter_name             | String         | Optional                                                            | None    | Up to 255 characters                                                          | Hyperparameter name                                                                                |
-| hyperparameter_spec_list[0].<br>hyperparameter_type_code         | easymaker.HYPERPARAMETER_TYPE_CODE         | Optional                                                            | None    | INT, DOUBLE, DISCRETE, CATEGORICAL                                            | Hyperparameter Type                                                                              |
+| hyperparameter_spec_list[0].<br>hyperparameter_type_code         | easymaker.HyperparameterTypeCode         | Optional                                                            | None    | INT, DOUBLE, DISCRETE, CATEGORICAL                                            | Hyperparameter Type                                                                              |
 | hyperparameter_spec_list[0].<br>hyperparameter_min_value         | String | Required if hyperparameterTypeCode is INT, DOUBLE(Enter a number as a string type)                   | None    | None                                                                          | Hyperparameter minimum value                                                                                |
 | hyperparameter_spec_list[0].<br>hyperparameter_max_value         | String | Required if hyperparameterTypeCode is INT, DOUBLE(Enter a number as a string type)                 | None    | None                                                                          | Hyperparameter maximum value                                                                                                 |
 | hyperparameter_spec_list[0].<br>hyperparameter_step             | String | Required if hyperparameterTypeCode is INT, DOUBLE and GRID strategy | None    | None                                                                          | Magnitude of change in hyperparameter values when using the "Grid" tuning strategy                                           |
@@ -268,13 +268,13 @@ for instance in instance_type_list:
 | metric_list[0].name                                              | String                             | Required when using own algorithm                                             | None    | None                                                     | Metric name                                                                      |
 | metric_regex                                                   | String         | Select when using own algorithm                                     | ([\w\ | -]+)\s*=\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?)                             | Up to 255 characters                                                                                                         | Enter a regular expression to use to collect metrics. The training algorithm should output metrics to match the regular expression.                                                          |
 | objective_metric_name                                          | String         | Required when using own algorithm                                   | None    | Up to 36 characters, one of metric_list                                       | Choose which metrics you want to optimize for.                                                                               |
-| objective_type_code                                            | easymaker.OBJECTIVE_TYPE_CODE         | Required when using own algorithm                                   | None    | MINIMIZE, MAXIMIZE                                                            | Choose a target metric optimization type.                                                                                    |
+| objective_type_code                                            | easymaker.ObjectiveTypeCode         | Required when using own algorithm                                   | None    | MINIMIZE, MAXIMIZE                                                            | Choose a target metric optimization type.                                                                                    |
 | objective_goal                                                 | Double         | Optional                                                            | None    | None                                                                          | The tuning job ends when the target metric reaches this value.                                                               |
 | max_failed_trial_count                                         | Integer        | Optional                                                            | None    | None                                                                          | Define the maximum number of failed lessons. When the number of failed trainings reaches this value, tuning ends in failure. |
 | max_trial_count                                                | Integer        | Optional                                                            | None    | None                                                                          | Defines the maximum number of lessons. Tuning runs until the number of auto-run training reaches this value.                 |
-| tuning_strategy_name                                           | easymaker.TUNING_STRATEGY         | Required                                                            | None    | None                                                                          | Choose which strategy to use to find the optimal hyperparameters.                                                            |
+| tuning_strategy_name                                           | easymaker.TuningStrategy         | Required                                                            | None    | None                                                                          | Choose which strategy to use to find the optimal hyperparameters.                                                            |
 | tuning_strategy_random_state                                   | Integer        | Optional                                                            | None    | None                                                                          | Determine random number generation. Specify a fixed value for reproducible results.                                          |
-| early_stopping_algorithm                                       | easymaker.EARLY_STOPPING_ALGORITHM         | Required                                                            | None    | EARLY_STOPPING_ALGORITHM.<br>MEDIAN                                           | Stop training early if the model is no longer good even though training continues.                                           |
+| early_stopping_algorithm                                       | easymaker.EarlyStoppingAlgorithm         | Required                                                            | None    | EarlyStoppingAlgorithm.<br>MEDIAN                                           | Stop training early if the model is no longer good even though training continues.                                           |
 | early_stopping_min_trial_count                                 | Integer        | Optional                                                            | 3     | None                                                                          | Define how many trainings the target metric value will be taken from when calculating the median.                            |
 | early_stopping_start_step                                      | Integer        | Optional                                                            | 4     | None                                                                          | Set the training step from which to apply early stop.                                                                        |
 | use_log                                                        | Boolean        | Optional                                                            | False | True, False                                                                   | Whether to leave logs in the Log & Crash Search service                                                                      |
@@ -295,13 +295,13 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     hyperparameter_spec_list=[
         easymaker.HyperparameterSpec(
             hyperparameter_name="learning_rate",
-            hyperparameter_type_code=easymaker.HYPERPARAMETER_TYPE_CODE.DOUBLE,
+            hyperparameter_type_code=easymaker.HyperparameterTypeCode.DOUBLE,
             hyperparameter_min_value="0.01",
             hyperparameter_max_value="0.05",
         ),
         easymaker.HyperparameterSpec(
             hyperparameter_name="epochs",
-            hyperparameter_type_code=easymaker.HYPERPARAMETER_TYPE_CODE.INT,
+            hyperparameter_type_code=easymaker.HyperparameterTypeCode.INT,
             hyperparameter_min_value="100",
             hyperparameter_max_value="1000",
         )
@@ -327,13 +327,13 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     ],
     metric_regex='([\w|-]+)\s*:\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?)',
     objective_metric_name="val_loss",
-    objective_type_code=easymaker.OBJECTIVE_TYPE_CODE.MINIMIZE,
+    objective_type_code=easymaker.ObjectiveTypeCode.MINIMIZE,
     objective_goal=0.01,
     max_failed_trial_count=3,
     max_trial_count=10,
-    tuning_strategy_name=easymaker.TUNING_STRATEGY.BAYESIAN_OPTIMIZATION,
+    tuning_strategy_name=easymaker.TuningStrategy.BAYESIAN_OPTIMIZATION,
     tuning_strategy_random_state=1,
-    early_stopping_algorithm=easymaker.EARLY_STOPPING_ALGORITHM.MEDIAN,
+    early_stopping_algorithm=easymaker.EarlyStoppingAlgorithm.MEDIAN,
     early_stopping_min_trial_count=3,
     early_stopping_start_step=4,
     use_log=True,
@@ -380,6 +380,7 @@ The model is used when creating endpoints.
 
 | Name                       | Type     | Required                              | Default value | Valid range   | Description                                  |
 |--------------------------|--------|------------------------------------|-----|---------|-------------------------------------|
+| model_format_code       | easymaker.ModelFormatCode | Required                                 | None  | TENSORFLOW, PYTORCH, SCIKIT_LEARN, HUGGING_FACE, TENSORFLOW_TRITON, PYTORCH_TRITON, ONNX_TRITON | Model format information |
 | training_id              | String | Required if hyperparameter_tuning_id does not exist | None  | None      | Training ID to create a model                       |
 | hyperparameter_tuning_id | String | Required if training_id is not present              | None  | None      | Hyperparameter tuning ID to be created by model (created by best learning) |
 | model_name               | String | Required                                 | None  | Up to 50 characters  | Model name                               |
@@ -390,6 +391,7 @@ The model is used when creating endpoints.
 
 ```python
 model = easymaker.Model().create(
+    model_format_code=easymaker.ModelFormatCode.PYTORCH,
     training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
     model_name='model_name',
     description='model_description',
@@ -402,7 +404,7 @@ Even if there is no training ID, you can create a model by entering the path inf
 
 | Name                   | Type     | Required | Default value | Valid range                                   | Description                                                  |
 |----------------------|--------|-------|-----|-----------------------------------------|-----------------------------------------------------|
-| model_type_code       | Enum   | Required    | None  | easymaker.TENSORFLOW, easymaker.PYTORCH, easymaker.SCIKIT_LEARN | Framework information used for training                                    |
+| model_format_code       | easymaker.ModelFormatCode   | Required    | None  | easymaker.ModelFormatCode.TENSORFLOW, easymaker.ModelFormatCode.PYTORCH, easymaker.ModelFormatCode.SCIKIT_LEARN, easymaker.ModelFormatCode.HUGGING_FACE, easymaker.ModelFormatCode.TENSORFLOW_TRITON, easymaker.ModelFormatCode.PYTORCH_TRITON, easymaker.ModelFormatCode.ONNX_TRITON | Model format information used for inference serving                                    |
 | model_upload_uri            | String | Required    | None  | Up to 255 characters                                 | Path for model file (NHN Cloud Object Storage or NHN Cloud NAS) |
 | model_name           | String | Required    | None  | Up to 50 characters                                  | Model name                                               |
 | description    | String | Optional    | None  | Up to 255 characters                                 | Description for model                                           |
@@ -412,8 +414,8 @@ Even if there is no training ID, you can create a model by entering the path inf
 
 ```python
 # TensorFlow Model
-model = easymaker.Model().create_by_model_upload_uri(
-    model_type_code=easymaker.TENSORFLOW,
+model = easymaker.Model().create(
+    model_format_code=easymaker.ModelFormatCode.TENSORFLOW,
     model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
     description='model_description',
@@ -600,7 +602,7 @@ When creating an endpoint, the default stage is created.
 | endpoint_model_resource_list[0].resource_option_detail.cpu    | String                                | Required    | None    | 0.0~                             | CPU to be used for stage resource                |
 | endpoint_model_resource_list[0].resource_option_detail.memory | String                                | Required    | None    | 1Mi~                             | Memory to be used for stage resource             |
 | endpoint_model_resource_list[0].pod_auto_scale_enable          | Boolean                               | Optional    | False   | True, False                      | Pod autoscaler to be used for stage resource |
-| endpoint_model_resource_list[0].scale_metric_code             | easymaker.SCALE_METRIC_CODE           | Optional    | None    | CPU_UTILIZATION, MEMORY_UTILIZATION | Scaling unit to be used for stage resource          |
+| endpoint_model_resource_list[0].scale_metric_code             | easymaker.ScaleMetricCode           | Optional    | None    | CPU_UTILIZATION, MEMORY_UTILIZATION | Scaling unit to be used for stage resource          |
 | endpoint_model_resource_list[0].scale_metric_target           | Integer                               | Optional    | None    | 1~                               | Scaling threshold to be used for stage resource     |
 | endpoint_model_resource_list[0].description                 | String                                | Optional    | None    | 최대 255자                  | Description of stage resource                                       |
 | use_log                                                     | Boolean                               | Optional    | False | True, False                | Whether to leave logs in the Log & Crash Search service                                             |
@@ -620,7 +622,7 @@ endpoint = easymaker.Endpoint().create(
                 memory="15Gi",
             ),
             pod_auto_scale_enable=True,
-            scale_metric_code=easymaker.SCALE_METRIC_CODE.CPU_UTILIZATION,
+            scale_metric_code=easymaker.ScaleMetricCode.CPU_UTILIZATION,
             scale_metric_target=50,
         )
     ],
@@ -656,7 +658,7 @@ You can add a new stage to existing endpoints.
 | endpoint_model_resource_list[0].resource_option_detail.cpu    | String                                | Required    | None    | 0.0~                             | CPU to be used for stage resource                |
 | endpoint_model_resource_list[0].resource_option_detail.memory | String                                | Required    | None    | 1Mi~                             | Memory to be used for stage resource             |
 | endpoint_model_resource_list[0].pod_auto_scale_enable          | Boolean                               | Optional    | False   | True, False                      | Pod autoscaler to be used for stage resource |
-| endpoint_model_resource_list[0].scale_metric_code             | easymaker.SCALE_METRIC_CODE           | Optional    | None    | CPU_UTILIZATION, MEMORY_UTILIZATION | Scaling unit to be used for stage resource          |
+| endpoint_model_resource_list[0].scale_metric_code             | easymaker.ScaleMetricCode           | Optional    | None    | CPU_UTILIZATION, MEMORY_UTILIZATION | Scaling unit to be used for stage resource          |
 | endpoint_model_resource_list[0].scale_metric_target           | Integer                               | Optional    | None    | 1~                               | Scaling threshold to be used for stage resource     |
 | endpoint_model_resource_list[0].description                 | String                                | Optional    | None    | Up to 255 characters                  | Description of stage resource                                       |
 | use_log                                                     | Boolean                               | Optional    | False | True, False                | Whether to leave logs in the Log & Crash Search service                                         |
@@ -677,7 +679,7 @@ endpoint_stage = easymaker.EndpointStage().create(
                 memory="15Gi",
             ),
             pod_auto_scale_enable=True,
-            scale_metric_code=easymaker.SCALE_METRIC_CODE.CPU_UTILIZATION,
+            scale_metric_code=easymaker.ScaleMetricCode.CPU_UTILIZATION,
             scale_metric_target=50,
             description='stage_resource_description'
         )

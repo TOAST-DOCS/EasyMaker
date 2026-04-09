@@ -256,7 +256,7 @@ for instance in instance_type_list:
 | timeout_hours                                                    | Integer                            | 선택                                                            | 720   | 1~720                                                  | 최대 하이퍼파라미터 튜닝 시간(단위: 시간)                                                   |
 | hyperparameter_spec_list                                         | easymaker.HyperparameterSpec Array | 선택                                                            | 없음    | 최대 100개                                                | 하이퍼파라미터 스펙 정보                                                              |
 | hyperparameter_spec_list[0].<br>hyperparameter_name              | String                             | 선택                                                            | 없음    | 최대 255자                                                | 하이퍼파라미터 이름                                                                 |
-| hyperparameter_spec_list[0].<br>hyperparameter_type_code         | easymaker.HYPERPARAMETER_TYPE_CODE                            | 선택                                                            | 없음    | INT, DOUBLE, DISCRETE, CATEGORICAL                     | 하이퍼파라미터 타입                                                                 |
+| hyperparameter_spec_list[0].<br>hyperparameter_type_code         | easymaker.HyperparameterTypeCode                            | 선택                                                            | 없음    | INT, DOUBLE, DISCRETE, CATEGORICAL                     | 하이퍼파라미터 타입                                                                 |
 | hyperparameter_spec_list[0].<br>hyperparameter_min_value         | String                     | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수(string 타입으로 숫자 입력) | 없음    | 없음                                                     | 하이퍼파라미터 최솟값                                                                |
 | hyperparameter_spec_list[0].<br>hyperparameter_max_value         | String                     | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수(string 타입으로 숫자 입력)                    | 없음    | 없음                                                     | 하이퍼파라미터 최댓값                                                                |
 | hyperparameter_spec_list[0].<br>hyperparameter_step              | String                     | hyperparameterTypeCode가 INT, DOUBLE이면서 GRID 전략인 경우 필수         | 없음    | 없음                                                     | "Grid" 튜닝 전략을 사용할 때 하이퍼파라미터 값의 변화 크기                                       |
@@ -268,13 +268,13 @@ for instance in instance_type_list:
 | metric_list[0].name                                              | String                             | 자체 알고리즘 사용 시 필수                                               | 없음    | 없음                                                     | 지표 이름                                                                      |
 | metric_regex                                                     | String                             | 자체 알고리즘 사용 시 선택                                               | ([\w\ | -]+)\s*=\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?)           | 최대 255자                                                                    | 지표를 수집하는 데 사용할 정규 표현식을 입력. 학습 알고리즘이 정규 표현식에 맞게 지표를 출력해야 함.                                                        |
 | objective_metric_name                                            | String                             | 자체 알고리즘 사용 시 필수                                               | 없음    | 최대 36자, metric_list 중 하나                               | 어떤 지표를 최적화하는 게 목표인지 선택                                                     |
-| objective_type_code                                              | easymaker.OBJECTIVE_TYPE_CODE                             | 자체 알고리즘 사용 시 필수                                               | 없음    | MINIMIZE, MAXIMIZE                                     | 목표 지표 최적화 유형 선택                                                            |
+| objective_type_code                                              | easymaker.ObjectiveTypeCode                             | 자체 알고리즘 사용 시 필수                                               | 없음    | MINIMIZE, MAXIMIZE                                     | 목표 지표 최적화 유형 선택                                                            |
 | objective_goal                                                   | Double                             | 선택                                                            | 없음    | 없음                                                     | 목표 지표가 이 값에 도달하면 튜닝 작업이 종료됨                                                |
 | max_failed_trial_count                                           | Integer                            | 선택                                                            | 없음    | 없음                                                     | 실패한 학습의 최대 개수를 정의. 실패한 학습의 개수가 이 값에 도달하면 튜닝이 실패로 종료됨.                      |
 | max_trial_count                                                  | Integer                            | 선택                                                            | 없음    | 없음                                                     | 최대 학습 수를 정의. 자동 실행된 학습의 개수가 이 값에 도달할 때까지 튜닝이 실행됨.                          |
-| tuning_strategy_name                                             | easymaker.TUNING_STRATEGY                             | 필수                                                            | 없음    | 없음                                                     | 어떤 전략을 사용해서 최적의 하이퍼파라미터를 찾을지 선택                                            |
+| tuning_strategy_name                                             | easymaker.TuningStrategy                             | 필수                                                            | 없음    | 없음                                                     | 어떤 전략을 사용해서 최적의 하이퍼파라미터를 찾을지 선택                                            |
 | tuning_strategy_random_state                                     | Integer                            | 선택                                                            | 없음    | 없음                                                     | 난수 생성을 결정. 재현 가능한 결과를 위해 고정된 값으로 지정함.                                      |
-| early_stopping_algorithm                                         | easymaker.EARLY_STOPPING_ALGORITHM                             | 필수                                                            | 없음    | EARLY_STOPPING_ALGORITHM.<br>MEDIAN                    | 학습이 계속 진행되어도 모델이 더 이상 좋아지지 않으면 학습을 조기에 종료                                  |
+| early_stopping_algorithm                                         | easymaker.EarlyStoppingAlgorithm                             | 필수                                                            | 없음    | EarlyStoppingAlgorithm.<br>MEDIAN                    | 학습이 계속 진행되어도 모델이 더 이상 좋아지지 않으면 학습을 조기에 종료                                  |
 | early_stopping_min_trial_count                                   | Integer                            | 선택                                                            | 3     | 없음                                                     | 중간값을 계산할 때 몇 개의 학습으로부터 목표 지표 값을 가져올지 정의                                    |
 | early_stopping_start_step                                        | Integer                            | 선택                                                            | 4     | 없음                                                     | 몇 번째 학습 단계부터 조기 중지를 적용할지 설정합니다.                                            |
 | use_log                                                          | Boolean                            | 선택                                                            | False | True, False                                            | Log & Crash Search 서비스에 로그를 남길지 여부                                         |
@@ -295,13 +295,13 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     hyperparameter_spec_list=[
         easymaker.HyperparameterSpec(
             hyperparameter_name="learning_rate",
-            hyperparameter_type_code=easymaker.HYPERPARAMETER_TYPE_CODE.DOUBLE,
+            hyperparameter_type_code=easymaker.HyperparameterTypeCode.DOUBLE,
             hyperparameter_min_value="0.01",
             hyperparameter_max_value="0.05",
         ),
         easymaker.HyperparameterSpec(
             hyperparameter_name="epochs",
-            hyperparameter_type_code=easymaker.HYPERPARAMETER_TYPE_CODE.INT,
+            hyperparameter_type_code=easymaker.HyperparameterTypeCode.INT,
             hyperparameter_min_value="100",
             hyperparameter_max_value="1000",
         )
@@ -327,13 +327,13 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     ],
     metric_regex='([\w|-]+)\s*:\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?)',
     objective_metric_name="val_loss",
-    objective_type_code=easymaker.OBJECTIVE_TYPE_CODE.MINIMIZE,
+    objective_type_code=easymaker.ObjectiveTypeCode.MINIMIZE,
     objective_goal=0.01,
     max_failed_trial_count=3,
     max_trial_count=10,
-    tuning_strategy_name=easymaker.TUNING_STRATEGY.BAYESIAN_OPTIMIZATION,
+    tuning_strategy_name=easymaker.TuningStrategy.BAYESIAN_OPTIMIZATION,
     tuning_strategy_random_state=1,
-    early_stopping_algorithm=easymaker.EARLY_STOPPING_ALGORITHM.MEDIAN,
+    early_stopping_algorithm=easymaker.EarlyStoppingAlgorithm.MEDIAN,
     early_stopping_min_trial_count=3,
     early_stopping_start_step=4,
     use_log=True,
@@ -380,6 +380,7 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 
 | 이름                       | 타입     | 필수 여부                              | 기본값 | 유효 범위   | 설명                                  |
 |--------------------------|--------|------------------------------------|-----|---------|-------------------------------------|
+| model_format_code       | easymaker.ModelFormatCode | 필수                                 | 없음  | TENSORFLOW, PYTORCH, SCIKIT_LEARN, HUGGING_FACE, TENSORFLOW_TRITON, PYTORCH_TRITON, ONNX_TRITON | 모델 포맷 정보 |
 | training_id              | String | hyperparameter_tuning_id가 없는 경우 필수 | 없음  | 없음      | 모델로 생성할 학습 ID                       |
 | hyperparameter_tuning_id | String | training_id가 없는 경우 필수              | 없음  | 없음      | 모델로 생성할 하이퍼파라미터 튜닝 ID(최고 학습으로 생성됨) |
 | model_name               | String | 필수                                 | 없음  | 최대 50자  | 모델 이름                               |
@@ -390,6 +391,7 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 
 ```python
 model = easymaker.Model().create(
+    model_format_code=easymaker.ModelFormatCode.PYTORCH,
     training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
     model_name='model_name',
     description='model_description',
@@ -402,7 +404,7 @@ model = easymaker.Model().create(
 
 | 이름                   | 타입     | 필수 여부 | 기본값 | 유효 범위                                   | 설명                                                  |
 |----------------------|--------|-------|-----|-----------------------------------------|-----------------------------------------------------|
-| model_type_code       | Enum   | 필수    | 없음  | easymaker.TENSORFLOW, easymaker.PYTORCH, easymaker.SCIKIT_LEARN | 학습에 사용된 프레임워크 정보                                    |
+| model_format_code       | easymaker.ModelFormatCode   | 필수    | 없음  | easymaker.ModelFormatCode.TENSORFLOW, easymaker.ModelFormatCode.PYTORCH, easymaker.ModelFormatCode.SCIKIT_LEARN, easymaker.ModelFormatCode.HUGGING_FACE, easymaker.ModelFormatCode.TENSORFLOW_TRITON, easymaker.ModelFormatCode.PYTORCH_TRITON, easymaker.ModelFormatCode.ONNX_TRITON | 추론 서빙에 사용되는 모델 포맷 정보                                    |
 | model_upload_uri            | String | 필수    | 없음  | 최대 255자                                 | 모델 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
 | model_name           | String | 필수    | 없음  | 최대 50자                                  | 모델 이름                                               |
 | description    | String | 선택    | 없음  | 최대 255자                                 | 모델에 대한 설명                                           |
@@ -412,8 +414,8 @@ model = easymaker.Model().create(
 
 ```python
 # TensorFlow 모델
-model = easymaker.Model().create_by_model_upload_uri(
-    model_type_code=easymaker.TENSORFLOW,
+model = easymaker.Model().create(
+    model_format_code=easymaker.ModelFormatCode.TENSORFLOW,
     model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
     description='model_description',
@@ -600,7 +602,7 @@ for instance in instance_type_list:
 | endpoint_model_resource_list[0].resource_option_detail.cpu    | String                                | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
 | endpoint_model_resource_list[0].resource_option_detail.memory | String                                | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
 | endpoint_model_resource_list[0].pod_auto_scale_enable          | Boolean                               | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
-| endpoint_model_resource_list[0].scale_metric_code             | easymaker.SCALE_METRIC_CODE           | 선택    | 없음    | CPU_UTILIZATION, MEMORY_UTILIZATION | 스테이지 리소스에 사용될 증설 단위          |
+| endpoint_model_resource_list[0].scale_metric_code             | easymaker.ScaleMetricCode           | 선택    | 없음    | CPU_UTILIZATION, MEMORY_UTILIZATION | 스테이지 리소스에 사용될 증설 단위          |
 | endpoint_model_resource_list[0].scale_metric_target           | Integer                               | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
 | endpoint_model_resource_list[0].description                 | String                                | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
 | use_log                                                     | Boolean                               | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                             |
@@ -620,7 +622,7 @@ endpoint = easymaker.Endpoint().create(
                 memory="15Gi",
             ),
             pod_auto_scale_enable=True,
-            scale_metric_code=easymaker.SCALE_METRIC_CODE.CPU_UTILIZATION,
+            scale_metric_code=easymaker.ScaleMetricCode.CPU_UTILIZATION,
             scale_metric_target=50,
         )
     ],
@@ -650,7 +652,7 @@ endpoint = easymaker.Endpoint().create(
 | endpoint_model_resource_list[0].resource_option_detail.cpu    | String                                | 필수    | 없음    | 0.0~                             | 스테이지 리소스에 사용될 CPU                |
 | endpoint_model_resource_list[0].resource_option_detail.memory | String                                | 필수    | 없음    | 1Mi~                             | 스테이지 리소스에 사용될 메모리             |
 | endpoint_model_resource_list[0].pod_auto_scale_enable          | Boolean                               | 선택    | False   | True, False                      | 스테이지 리소스에 사용될 파드 오토 스케일러 |
-| endpoint_model_resource_list[0].scale_metric_code             | easymaker.SCALE_METRIC_CODE           | 선택    | 없음    | CPU_UTILIZATION, MEMORY_UTILIZATION | 스테이지 리소스에 사용될 증설 단위          |
+| endpoint_model_resource_list[0].scale_metric_code             | easymaker.ScaleMetricCode           | 선택    | 없음    | CPU_UTILIZATION, MEMORY_UTILIZATION | 스테이지 리소스에 사용될 증설 단위          |
 | endpoint_model_resource_list[0].scale_metric_target           | Integer                               | 선택    | 없음    | 1~                               | 스테이지 리소스에 사용될 증설 임계치 값     |
 | endpoint_model_resource_list[0].description                 | String                                | 선택    | 없음    | 최대 255자                  | 스테이지 리소스에 대한 설명                                       |
 | use_log                                                     | Boolean                               | 선택    | False | True, False                | Log & Crash Search 서비스에 로그를 남길지 여부                                         |
@@ -671,7 +673,7 @@ endpoint_stage = easymaker.EndpointStage().create(
                 memory="15Gi",
             ),
             pod_auto_scale_enable=True,
-            scale_metric_code=easymaker.SCALE_METRIC_CODE.CPU_UTILIZATION,
+            scale_metric_code=easymaker.ScaleMetricCode.CPU_UTILIZATION,
             scale_metric_target=50,
             description='stage_resource_description'
         )
