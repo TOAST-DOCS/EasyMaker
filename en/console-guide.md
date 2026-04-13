@@ -2249,8 +2249,8 @@ For more information about the OIP specification, see [OIP Specification](https:
 | Model Information                 | GET    | /v2/models/{model_name}\[/versions/{model_version}\]       |
 | Model Ready                       | GET    | /v2/models/{model_name}\[/versions/{model_version}\]/ready |
 | Inference                         | POST   | /v2/models/{model_name}\[/versions/{model_version}\]/infer |
-| OpenAI generative model inference | POST   | /openai/v1/completions                                     |
-| OpenAI generative model inference | POST   | /openai/v1/chat/completions                                |
+| OpenAI generative model inference | POST   | /v1/completions                                            |
+| OpenAI generative model inference | POST   | /v1/chat/completions                                       |
 
 !!! tip "Note"
     OpenAI generative model inference is used when using a generative model, such as OpenAI's GPT-4o.

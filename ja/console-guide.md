@@ -2241,8 +2241,8 @@ OIPスペックの詳細は[OIPスペック](https://github.com/kserve/open-infe
 | モデル情報          | GET  | /v2/models/{model_name}\[/versions/{model_version}\]       |
 | モデルReady       | GET  | /v2/models/{model_name}\[/versions/{model_version}\]/ready |
 | 推論             | POST | /v2/models/{model_name}\[/versions/{model_version}\]/infer |
-| OpenAI生成型モデル推論 | POST | /openai/v1/completions                                     |
-| OpenAI生成型モデル推論 | POST | /openai/v1/chat/completions                                |
+| OpenAI生成型モデル推論 | POST | /v1/completions                                            |
+| OpenAI生成型モデル推論 | POST | /v1/chat/completions                                       |
 
 !!! tip "参考"
     OpenAI生成型モデル推論はOpenAIのGPT-4oのような生成型モデルを使用する場合に使用されます。

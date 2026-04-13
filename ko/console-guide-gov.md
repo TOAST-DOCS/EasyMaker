@@ -2231,8 +2231,8 @@ OIP 스펙에 대한 상세한 내용은 [OIP 스펙](https://github.com/kserve/
 | 모델 정보            | GET  | /v2/models/{model_name}\[/versions/{model_version}\]       |
 | 모델 Ready         | GET  | /v2/models/{model_name}\[/versions/{model_version}\]/ready |
 | 추론               | POST | /v2/models/{model_name}\[/versions/{model_version}\]/infer |
-| OpenAI 생성형 모델 추론 | POST | /openai/v1/completions                                     |
-| OpenAI 생성형 모델 추론 | POST | /openai/v1/chat/completions                                |
+| OpenAI 생성형 모델 추론 | POST | /v1/completions                                            |
+| OpenAI 생성형 모델 추론 | POST | /v1/chat/completions                                       |
 
 !!! tip "알아두기"
     OpenAI 생성형 모델 추론은 OpenAI의 GPT-4o와 같은 생성형 모델을 사용하는 경우에 사용됩니다.
