@@ -380,7 +380,7 @@ The model is used when creating endpoints.
 
 | Name                       | Type     | Required                              | Default value | Valid range   | Description                                  |
 |--------------------------|--------|------------------------------------|-----|---------|-------------------------------------|
-| model_format_code       | easymaker.ModelFormatCode | Required                                 | None  | TENSORFLOW, PYTORCH, SCIKIT_LEARN, HUGGING_FACE, TENSORFLOW_TRITON, PYTORCH_TRITON, ONNX_TRITON | Model format information |
+| model_format_code | easymaker.ModelFormatCode | Required | None | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | Model format information used for inference serving |
 | training_id              | String | Required if hyperparameter_tuning_id does not exist | None  | None      | Training ID to create a model                       |
 | hyperparameter_tuning_id | String | Required if training_id is not present              | None  | None      | Hyperparameter tuning ID to be created by model (created by best learning) |
 | model_name               | String | Required                                 | None  | Up to 50 characters  | Model name                               |
@@ -404,7 +404,7 @@ Even if there is no training ID, you can create a model by entering the path inf
 
 | Name                   | Type     | Required | Default value | Valid range                                   | Description                                                  |
 |----------------------|--------|-------|-----|-----------------------------------------|-----------------------------------------------------|
-| model_format_code       | easymaker.ModelFormatCode   | Required    | None  | easymaker.ModelFormatCode.TENSORFLOW, easymaker.ModelFormatCode.PYTORCH, easymaker.ModelFormatCode.SCIKIT_LEARN, easymaker.ModelFormatCode.HUGGING_FACE, easymaker.ModelFormatCode.TENSORFLOW_TRITON, easymaker.ModelFormatCode.PYTORCH_TRITON, easymaker.ModelFormatCode.ONNX_TRITON | Model format information used for inference serving                                    |
+| model_format_code | easymaker.ModelFormatCode | Required | None | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | Model format information used for inference serving |
 | model_upload_uri            | String | Required    | None  | Up to 255 characters                                 | Path for model file (NHN Cloud Object Storage or NHN Cloud NAS) |
 | model_name           | String | Required    | None  | Up to 50 characters                                  | Model name                                               |
 | description    | String | Optional    | None  | Up to 255 characters                                 | Description for model                                           |

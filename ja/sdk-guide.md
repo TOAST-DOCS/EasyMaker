@@ -379,7 +379,7 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 
 | 名前                      | タイプ    | 必須かどうか                             | デフォルト値 | 有効範囲  | 説明                                 |
 |--------------------------|--------|------------------------------------|-----|---------|-------------------------------------|
-| model_format_code       | easymaker.ModelFormatCode | 必須                                | なし  | TENSORFLOW, PYTORCH, SCIKIT_LEARN, HUGGING_FACE, TENSORFLOW_TRITON, PYTORCH_TRITON, ONNX_TRITON | モデルフォーマット情報 |
+| model_format_code | easymaker.ModelFormatCode | 必須 | なし | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | 推論サービングに使用されるモデルフォーマット情報 |
 | training_id              | String | hyperparameter_tuning_idがない場合は必須 | なし  | なし      | モデルとして作成する学習ID                       |
 | hyperparameter_tuning_id | String | training_idがない場合は必須             | なし  | なし      | モデルとして作成するハイパーパラメータチューニングID(最高学習で作成済み) |
 | model_name               | String | 必須                                | なし  | 最大50文字 | モデル名                              |
@@ -403,7 +403,7 @@ model = easymaker.Model().create(
 
 | 名前               | タイプ | 必須かどうか | デフォルト値 | 有効範囲                                      | 説明                                              |
 |----------------------|--------|-------|-----|-------------------------------------------|-----------------------------------------------------|
-| model_format_code       | easymaker.ModelFormatCode   | 必須 | なし | easymaker.ModelFormatCode.TENSORFLOW, easymaker.ModelFormatCode.PYTORCH, easymaker.ModelFormatCode.SCIKIT_LEARN, easymaker.ModelFormatCode.HUGGING_FACE, easymaker.ModelFormatCode.TENSORFLOW_TRITON, easymaker.ModelFormatCode.PYTORCH_TRITON, easymaker.ModelFormatCode.ONNX_TRITON | 推論サービングに使用されるモデルフォーマット情報                                |
+| model_format_code | easymaker.ModelFormatCode | 必須 | なし | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | 推論サービングに使用されるモデルフォーマット情報 |
 | model_upload_uri            | String | 必須 | なし | 最大255文字                                   | モデルファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
 | model_name           | String | 必須 | なし | 最大50文字                                    | モデル名                                           |
 | description    | String | 任意 | なし | 最大255文字                                   | モデルの説明                                       |

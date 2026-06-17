@@ -682,7 +682,8 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
     그 외의 파일 형식은 지원하지 않습니다.
 
 !!! danger "주의"
-    TensorFlow (Triton), PyTorch (Triton), ONNX (Triton) 모델을 생성하는 경우, 입력하는 모델 아티팩트 경로에 Triton으로 모델을 실행할 수 있는 구조로 모델 파일과 `config.pbtxt` 파일이 저장되어 있어야 합니다.
+    Triton 모델은 TensorFlow, PyTorch, ONNX 백엔드만 지원합니다.
+    Triton 모델을 생성하는 경우, 입력하는 모델 아티팩트 경로에 Triton으로 모델을 실행할 수 있는 구조로 모델 파일과 `config.pbtxt` 파일이 저장되어 있어야 합니다.
     아래의 예시를 참고하세요.
     <details>
     <summary><strong>예시</strong></summary>
