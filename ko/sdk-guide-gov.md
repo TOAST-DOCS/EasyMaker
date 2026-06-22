@@ -366,6 +366,219 @@ for hyperparameter_tuning in hyperparameter_tuning_list:
 easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 ```
 
+<a id="fine.tuning"></a>
+
+## 파인 튜닝
+
+사전 학습된 기반 모델(Base Model)을 특정 도메인이나 태스크에 맞게 추가 학습시키는 기능입니다. 파인 튜닝 방식(LoRA, QLoRA, Full 등)은 `method` 하이퍼파라미터로 지정하며, 미지정 시 기반 모델 프리셋의 기본 방식이 사용됩니다.
+
+<a id="fine.tuning.model.preset.list"></a>
+
+### 베이스 모델 목록 조회
+
+파인 튜닝에 사용할 베이스 모델 목록을 조회합니다.
+
+[파라미터]
+
+| 이름                | 타입     | 필수 여부 | 기본값 | 유효 범위 | 설명                              |
+| ----------------- | ------ | ----- | --- | ----- | ------------------------------- |
+| model_preset_name | String | 선택    | 없음  | 없음    | 베이스 모델 이름(이름으로 필터링, 미입력 시 전체 조회) |
+
+```python
+base_model_list = easymaker.FineTuning.get_base_model_list()
+for base_model in base_model_list:
+    base_model.print_info()
+
+# 조회된 베이스 모델 중 하나를 선택
+base_model = base_model_list[0]
+base_model_preset_id = base_model.model_preset_id
+```
+
+<a id="fine.tuning.instance.list"></a>
+
+### 인스턴스 목록 조회
+
+선택한 베이스 모델 프리셋(`model_preset_id`)에서 사용 가능한 인스턴스 타입 목록을 조회합니다.
+
+```python
+instance_type_list = easymaker.FineTuning.get_instance_type_list(model_preset_id=base_model_preset_id)
+for instance in instance_type_list:
+    instance.print_info()
+```
+
+<a id="fine.tuning.parameter.spec.list"></a>
+
+### 하이퍼파라미터 스펙 조회
+
+선택한 베이스 모델의 파인 튜닝 하이퍼파라미터 스펙을 조회합니다. 조회한 스펙의 기본값으로 하이퍼파라미터 목록을 구성할 수 있습니다.
+
+[파라미터]
+
+| 이름                   | 타입     | 필수 여부 | 기본값 | 유효 범위  | 설명            |
+| -------------------- | ------ | ----- | --- | ------ | ------------- |
+| base_model_preset_id | String | 필수    | 없음  | 최대 36자 | 베이스 모델 프리셋 ID |
+
+```python
+parameter_spec_list = easymaker.FineTuning.get_parameter_spec_list(
+    base_model_preset_id=base_model_preset_id,
+)
+for spec in parameter_spec_list:
+    spec.print_info()
+
+# 기본값이 있는 파라미터는 기본값으로 하이퍼파라미터 목록 구성(필요 시 값 수정)
+hyperparameter_list = [
+    easymaker.Parameter(parameter_name=spec.parameter_name, parameter_value=spec.default_value)
+    for spec in parameter_spec_list
+    if spec.default_value is not None
+]
+```
+
+<a id="fine.tuning.create"></a>
+
+### 파인 튜닝 생성
+
+[파라미터]
+
+| 이름                                     | 타입                          | 필수 여부                     | 기본값   | 유효 범위                     | 설명                                                                                |
+| -------------------------------------- | --------------------------- | ------------------------- | ----- | ------------------------- | --------------------------------------------------------------------------------- |
+| experiment_id                          | String                      | easymaker.init에서 미입력 시 필수 | 없음    | 최대 36자                    | 실험 ID                                                                             |
+| experiment_name                        | String                      | 선택                        | 없음    | 최대 50자                    | 신규 실험 이름(실험을 함께 생성하려는 경우 사용)                                                      |
+| experiment_description                 | String                      | 선택                        | 없음    | 최대 255자                   | 신규 실험에 대한 설명                                                                      |
+| fine_tuning_name                       | String                      | 필수                        | 없음    | 최대 50자                    | 파인 튜닝 이름                                                                          |
+| description                            | String                      | 선택                        | 없음    | 최대 255자                   | 파인 튜닝에 대한 설명                                                                      |
+| flavor_name                            | String                      | 필수                        | 없음    | 없음                        | 인스턴스 타입 이름(조회 가능)                                                                 |
+| instance_count                         | Integer                     | 선택                        | 1     | 1~10                      | 학습 인스턴스 수                                                                         |
+| base_model_preset_id                   | String                      | 필수                        | 없음    | 최대 36자                    | 기반 모델 프리셋 ID                                                                      |
+| model_upload_uri                       | String                      | 필수                        | 없음    | 최대 255자                   | 파인 튜닝 완료된 모델이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)                  |
+| timeout_hours                          | Integer                     | 선택                        | 720   | 1~720                     | 최대 파인 튜닝 시간(단위: 시간)                                                               |
+| hyperparameter_list                    | easymaker.Parameter Array   | 선택                        | 없음    | 최대 100개                   | 하이퍼파라미터 정보(parameter_name/parameter_value로 구성)                                    |
+| hyperparameter_list[0].parameter_name  | String                      | 선택                        | 없음    | 최대 255자                   | 하이퍼파라미터 키(파인 튜닝 방식은 `method` 키로 전달, 값: lora/qlora/full 등. 미입력 시 기반 모델 프리셋 기본값 사용) |
+| hyperparameter_list[0].parameter_value | String                      | 선택                        | 없음    | 최대 1000자                  | 하이퍼파라미터 값                                                                         |
+| dataset_list                           | easymaker.Dataset Array     | 선택                        | 없음    | 최대 10개                    | 파인 튜닝에 사용될 데이터 세트 정보                                                              |
+| dataset_list[0].dataset_name           | String                      | 선택                        | 없음    | 최대 36자                    | 데이터 이름                                                                            |
+| dataset_list[0].data_uri               | String                      | 선택                        | 없음    | 최대 255자                   | 데이터 경로                                                                            |
+| dataset_list[0].dataset_format_code    | easymaker.DatasetFormatCode | 필수                        | 없음    | CHAT_TEMPLATE, COMPLETION | 데이터 세트 포맷                                                                         |
+| dataset_list[0].dataset_split_code     | easymaker.DatasetSplitCode  | 선택                        | TRAIN | TRAIN, VALIDATION, TEST   | 데이터 세트 split(학습/검증/테스트), 최소 1개의 TRAIN 필요                                          |
+| data_storage_size                      | Integer                     | Object Storage 사용 시 필수    | 없음    | 300~10000                 | 파인 튜닝에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                              |
+| use_log                                | Boolean                     | 선택                        | False | True, False               | Log & Crash Search 서비스에 로그를 남길지 여부                                                |
+| wait                                   | Boolean                     | 선택                        | True  | True, False               | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                                         |
+
+```python
+fine_tuning = easymaker.FineTuning().run(
+    experiment_id=experiment.experiment_id, # Optional if already set in init
+    fine_tuning_name='fine_tuning_name',
+    description='fine_tuning_description',
+    flavor_name='g4.c92m1800',
+    instance_count=1,
+    base_model_preset_id=base_model_preset_id,
+    model_upload_uri='obs://kr1-api-object-storage.gov-nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    timeout_hours=24,
+    hyperparameter_list=[
+        easymaker.Parameter(
+            parameter_name="method",
+            parameter_value="lora",
+        ),
+        easymaker.Parameter(
+            parameter_name="epoch",
+            parameter_value="1",
+        ),
+        easymaker.Parameter(
+            parameter_name="learning_rate",
+            parameter_value="0.0002",
+        ),
+        easymaker.Parameter(
+            parameter_name="batch_size",
+            parameter_value="1",
+        ),
+    ],
+    dataset_list=[
+        easymaker.Dataset(
+            dataset_name="train-dataset",
+            data_uri='obs://kr1-api-object-storage.gov-nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}',
+            dataset_format_code=easymaker.DatasetFormatCode.CHAT_TEMPLATE,
+            dataset_split_code=easymaker.DatasetSplitCode.TRAIN,
+        ),
+    ],
+    data_storage_size=300,
+    use_log=False,
+    # wait=False,
+)
+```
+
+<a id="fine.tuning.list"></a>
+
+### 파인 튜닝 목록 조회
+
+```python
+fine_tuning_list = easymaker.FineTuning.get_list()
+for fine_tuning in fine_tuning_list:
+    fine_tuning.print_info()
+```
+
+<a id="fine.tuning.stop"></a>
+
+### 파인 튜닝 중지
+
+실행 중(RUNNING)인 파인 튜닝을 중지합니다.
+
+```python
+easymaker.FineTuning(fine_tuning_id).stop()
+```
+
+<a id="fine.tuning.delete"></a>
+
+### 파인 튜닝 삭제
+
+[파라미터]
+
+| 이름             | 타입     | 필수 여부 | 기본값 | 유효 범위  | 설명       |
+| -------------- | ------ | ----- | --- | ------ | -------- |
+| fine_tuning_id | String | 필수    | 없음  | 최대 36자 | 파인 튜닝 ID |
+
+```python
+easymaker.FineTuning(fine_tuning_id).delete()
+```
+
+<a id="fine.tuning.model.create"></a>
+
+### 파인 튜닝 결과로 모델 생성
+
+파인 튜닝이 완료(COMPLETE)되면 산출물(어댑터 또는 풀모델)이 `model_upload_uri`(Object Storage)에 업로드됩니다. `fine_tuning_id`를 지정하면 산출물을 모델로 등록할 수 있습니다. 프레임워크 코드와 업로드 경로는 파인 튜닝 정보에서 자동으로 도출되므로 별도로 입력하지 않아도 됩니다.
+
+모델을 서빙하려면 베이스 모델의 서빙 파라미터가 필요합니다. `easymaker.Model.get_parameter_spec_list(base_model_preset_id=...)`로 스펙을 조회해 기본값으로 `parameter_list`를 구성한 뒤 모델 생성에 전달합니다.
+
+[파라미터]
+
+| 이름                                | 타입                        | 필수 여부 | 기본값 | 유효 범위   | 설명                                            |
+| --------------------------------- | ------------------------- | ----- | --- | ------- | --------------------------------------------- |
+| model_name                        | String                    | 필수    | 없음  | 최대 50자  | 모델 이름                                         |
+| fine_tuning_id                    | String                    | 필수    | 없음  | 없음      | 모델로 생성할 파인 튜닝 ID                              |
+| description                       | String                    | 선택    | 없음  | 최대 255자 | 모델에 대한 설명                                     |
+| parameter_list                    | easymaker.Parameter Array | 선택    | 없음  | 최대 10개  | 모델(서빙) 파라미터 정보(parameter_name/parameter_value로 구성) |
+| parameter_list[0].parameter_name  | String                    | 선택    | 없음  | 최대 64자  | 파라미터 이름                                       |
+| parameter_list[0].parameter_value | String                    | 선택    | 없음  | 최대 255자 | 파라미터 값                                        |
+
+```python
+# 모델(서빙) 파라미터 스펙 조회
+model_parameter_spec_list = easymaker.Model.get_parameter_spec_list(
+    base_model_preset_id=base_model_preset_id,
+)
+
+# 기본값이 있는 파라미터는 기본값으로 parameter_list 구성(필요 시 값 수정, 기본값 없는 필수값은 직접 입력)
+model_parameter_list = [
+    easymaker.Parameter(parameter_name=spec.parameter_name, parameter_value=spec.default_value)
+    for spec in model_parameter_spec_list
+    if spec.default_value is not None
+]
+
+model = easymaker.Model().create(
+    model_name='model_name',
+    fine_tuning_id=fine_tuning.fine_tuning_id,
+    description='model_description',
+    parameter_list=model_parameter_list,
+)
+```
+
 <a id="model"></a>
 
 ## 모델
