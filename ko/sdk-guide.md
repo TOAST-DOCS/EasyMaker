@@ -564,17 +564,17 @@ easymaker.FineTuning(fine_tuning_id).delete()
 
 [파라미터]
 
-| 이름                               | 타입                        | 필수 여부                 | 기본값 | 유효 범위                                                                                        | 설명                                        |
-|----------------------------------|---------------------------|--------------------------|-----|----------------------------------------------------------------------------------------------|-------------------------------------------|
-| model_format_code                | easymaker.ModelFormatCode | fine_tuning_id 미입력시 필수 | 없음  | TENSORFLOW, PYTORCH, SCIKIT_LEARN, HUGGING_FACE, TENSORFLOW_TRITON, PYTORCH_TRITON, ONNX_TRITON | 모델 포맷 정보                                  |
-| training_id                      | String                    | 선택                       | 없음  | 없음                                                                                           | 모델로 생성할 학습 ID                             |
-| hyperparameter_tuning_id         | String                    | 선택                       | 없음  | 없음                                                                                           | 모델로 생성할 하이퍼파라미터 튜닝 ID(최고 학습으로 생성됨)        |
-| fine_tuning_id                   | String                    | 선택                       | 없음  | 없음                                                                                           | 모델로 생성할 파인 튜닝 ID                          |
-| model_name                       | String                    | 필수                       | 없음  | 최대 50자                                                                                       | 모델 이름                                     |
-| description                      | String                    | 선택                       | 없음  | 최대 255자                                                                                      | 모델에 대한 설명                                 |
-| parameter_list                   | Array                     | 선택                       | 없음  | 최대 10개                                                                                       | 파라미터 정보(parameterName/parameterValue로 구성) |
-| parameter_list[0].parameterName  | String                    | 선택                       | 없음  | 최대 64자                                                                                       | 파라미터 이름                                   |
-| parameter_list[0].parameterValue | String                    | 선택                       | 없음  | 최대 255자                                                                                      | 파라미터 값                                    |
+| 이름                               | 타입                        | 필수 여부                 | 기본값 | 유효 범위                                                        | 설명                                        |
+|----------------------------------|---------------------------|--------------------------|-----|--------------------------------------------------------------|-------------------------------------------|
+| model_format_code                | easymaker.ModelFormatCode | fine_tuning_id 미입력시 필수 | 없음  | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON   | 추론 서빙에 사용되는 모델 포맷 정보                                  |
+| training_id                      | String                    | 선택                       | 없음  | 없음                                                           | 모델로 생성할 학습 ID                             |
+| hyperparameter_tuning_id         | String                    | 선택                       | 없음  | 없음                                                           | 모델로 생성할 하이퍼파라미터 튜닝 ID(최고 학습으로 생성됨)        |
+| fine_tuning_id                   | String                    | 선택                       | 없음  | 없음                                                           | 모델로 생성할 파인 튜닝 ID                          |
+| model_name                       | String                    | 필수                       | 없음  | 최대 50자                                                       | 모델 이름                                     |
+| description                      | String                    | 선택                       | 없음  | 최대 255자                                                      | 모델에 대한 설명                                 |
+| parameter_list                   | Array                     | 선택                       | 없음  | 최대 10개                                                       | 파라미터 정보(parameterName/parameterValue로 구성) |
+| parameter_list[0].parameterName  | String                    | 선택                       | 없음  | 최대 64자                                                       | 파라미터 이름                                   |
+| parameter_list[0].parameterValue | String                    | 선택                       | 없음  | 최대 255자                                                      | 파라미터 값                                    |
 
 ```python
 model = easymaker.Model().create(
@@ -599,7 +599,7 @@ model = easymaker.Model().create(
 
 | 이름                   | 타입     | 필수 여부 | 기본값 | 유효 범위                                   | 설명                                                  |
 |----------------------|--------|-------|-----|-----------------------------------------|-----------------------------------------------------|
-| model_format_code       | easymaker.ModelFormatCode   | 필수    | 없음  | easymaker.ModelFormatCode.TENSORFLOW, easymaker.ModelFormatCode.PYTORCH, easymaker.ModelFormatCode.SCIKIT_LEARN, easymaker.ModelFormatCode.HUGGING_FACE, easymaker.ModelFormatCode.TENSORFLOW_TRITON, easymaker.ModelFormatCode.PYTORCH_TRITON, easymaker.ModelFormatCode.ONNX_TRITON | 추론 서빙에 사용되는 모델 포맷 정보                                    |
+| model_format_code | easymaker.ModelFormatCode | 필수 | 없음 | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | 추론 서빙에 사용되는 모델 포맷 정보 |
 | model_upload_uri            | String | 필수    | 없음  | 최대 255자                                 | 모델 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
 | model_name           | String | 필수    | 없음  | 최대 50자                                  | 모델 이름                                               |
 | description    | String | 선택    | 없음  | 최대 255자                                 | 모델에 대한 설명                                           |
