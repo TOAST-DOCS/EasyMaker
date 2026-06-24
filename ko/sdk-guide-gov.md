@@ -539,45 +539,6 @@ easymaker.FineTuning(fine_tuning_id).stop()
 easymaker.FineTuning(fine_tuning_id).delete()
 ```
 
-<a id="fine.tuning.model.create"></a>
-
-### 파인 튜닝 결과로 모델 생성
-
-파인 튜닝이 완료(COMPLETE)되면 산출물(어댑터 또는 풀모델)이 `model_upload_uri`(Object Storage)에 업로드됩니다. `fine_tuning_id`를 지정하면 산출물을 모델로 등록할 수 있습니다. 프레임워크 코드와 업로드 경로는 파인 튜닝 정보에서 자동으로 도출되므로 별도로 입력하지 않아도 됩니다.
-
-모델을 서빙하려면 베이스 모델의 서빙 파라미터가 필요합니다. `easymaker.Model.get_parameter_spec_list(base_model_preset_id=...)`로 스펙을 조회해 기본값으로 `parameter_list`를 구성한 뒤 모델 생성에 전달합니다.
-
-[파라미터]
-
-| 이름                                | 타입                        | 필수 여부 | 기본값 | 유효 범위   | 설명                                            |
-| --------------------------------- | ------------------------- | ----- | --- | ------- | --------------------------------------------- |
-| model_name                        | String                    | 필수    | 없음  | 최대 50자  | 모델 이름                                         |
-| fine_tuning_id                    | String                    | 필수    | 없음  | 없음      | 모델로 생성할 파인 튜닝 ID                              |
-| description                       | String                    | 선택    | 없음  | 최대 255자 | 모델에 대한 설명                                     |
-| parameter_list                    | easymaker.Parameter Array | 선택    | 없음  | 최대 10개  | 모델(서빙) 파라미터 정보(parameter_name/parameter_value로 구성) |
-| parameter_list[0].parameter_name  | String                    | 선택    | 없음  | 최대 64자  | 파라미터 이름                                       |
-| parameter_list[0].parameter_value | String                    | 선택    | 없음  | 최대 255자 | 파라미터 값                                        |
-
-```python
-# 모델(서빙) 파라미터 스펙 조회
-model_parameter_spec_list = easymaker.Model.get_parameter_spec_list(
-    base_model_preset_id=base_model_preset_id,
-)
-
-# 기본값이 있는 파라미터는 기본값으로 parameter_list 구성(필요 시 값 수정, 기본값 없는 필수값은 직접 입력)
-model_parameter_list = [
-    easymaker.Parameter(parameter_name=spec.parameter_name, parameter_value=spec.default_value)
-    for spec in model_parameter_spec_list
-    if spec.default_value is not None
-]
-
-model = easymaker.Model().create(
-    model_name='model_name',
-    fine_tuning_id=fine_tuning.fine_tuning_id,
-    description='model_description',
-    parameter_list=model_parameter_list,
-)
-```
 
 <a id="model"></a>
 
@@ -587,32 +548,41 @@ model = easymaker.Model().create(
 
 ### 모델 생성
 
-학습 ID 값으로 모델 생성을 요청할 수 있습니다.
+학습, 하이퍼파라미터 튜닝, 파인 튜닝 ID 값으로 모델 생성을 요청할 수 있습니다.
 모델은 엔드포인트 생성 시 사용됩니다.
 
 [파라미터]
 
-| 이름                       | 타입     | 필수 여부                              | 기본값 | 유효 범위   | 설명                                  |
-|--------------------------|--------|------------------------------------|-----|---------|-------------------------------------|
-| model_format_code       | easymaker.ModelFormatCode | 필수                                 | 없음  | TENSORFLOW, PYTORCH, SCIKIT_LEARN, HUGGING_FACE, TENSORFLOW_TRITON, PYTORCH_TRITON, ONNX_TRITON | 모델 포맷 정보 |
-| training_id              | String | hyperparameter_tuning_id가 없는 경우 필수 | 없음  | 없음      | 모델로 생성할 학습 ID                       |
-| hyperparameter_tuning_id | String | training_id가 없는 경우 필수              | 없음  | 없음      | 모델로 생성할 하이퍼파라미터 튜닝 ID(최고 학습으로 생성됨) |
-| model_name               | String | 필수                                 | 없음  | 최대 50자  | 모델 이름                               |
-| description        | String | 선택                                 | 없음  | 최대 255자 | 모델에 대한 설명                           |
-| parameter_list                   | Array  | 선택    | 없음  | 최대 10개                                  | 파라미터 정보(parameterName/parameterValue로 구성)         |
-| parameter_list[0].parameterName  | String | 선택    | 없음  | 최대 64자                                  | 파라미터 이름                                              |
-| parameter_list[0].parameterValue | String | 선택    | 없음  | 최대 255자                                 | 파라미터 값                                                |
+| 이름                               | 타입                        | 필수 여부                 | 기본값 | 유효 범위                                                                                        | 설명                                        |
+|----------------------------------|---------------------------|--------------------------|-----|----------------------------------------------------------------------------------------------|-------------------------------------------|
+| model_format_code                | easymaker.ModelFormatCode | fine_tuning_id 미입력시 필수 | 없음  | TENSORFLOW, PYTORCH, SCIKIT_LEARN, HUGGING_FACE, TENSORFLOW_TRITON, PYTORCH_TRITON, ONNX_TRITON | 모델 포맷 정보                                  |
+| training_id                      | String                    | 선택                       | 없음  | 없음                                                                                           | 모델로 생성할 학습 ID                             |
+| hyperparameter_tuning_id         | String                    | 선택                       | 없음  | 없음                                                                                           | 모델로 생성할 하이퍼파라미터 튜닝 ID(최고 학습으로 생성됨)        |
+| fine_tuning_id                   | String                    | 선택                       | 없음  | 없음                                                                                           | 모델로 생성할 파인 튜닝 ID                          |
+| model_name                       | String                    | 필수                       | 없음  | 최대 50자                                                                                       | 모델 이름                                     |
+| description                      | String                    | 선택                       | 없음  | 최대 255자                                                                                      | 모델에 대한 설명                                 |
+| parameter_list                   | Array                     | 선택                       | 없음  | 최대 10개                                                                                       | 파라미터 정보(parameterName/parameterValue로 구성) |
+| parameter_list[0].parameterName  | String                    | 선택                       | 없음  | 최대 64자                                                                                       | 파라미터 이름                                   |
+| parameter_list[0].parameterValue | String                    | 선택                       | 없음  | 최대 255자                                                                                      | 파라미터 값                                    |
 
 ```python
 model = easymaker.Model().create(
-    model_format_code=easymaker.ModelFormatCode.PYTORCH,
-    training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
     model_name='model_name',
+    training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
+    description='model_description',
+    model_format_code=easymaker.ModelFormatCode.PYTORCH,
+)
+```
+
+```python
+model = easymaker.Model().create(
+    model_name='model_name',
+    fine_tuning_id=fine_tuning.fine_tuning_id,
     description='model_description',
 )
 ```
 
-학습 ID가 없더라도, 모델이 저장된 경로 정보와 프레임워크 종류를 입력하여 모델을 생성할 수 있습니다.
+학습, 하이퍼파라미터 튜닝, 파인 튜닝 ID가 없더라도, 모델이 저장된 경로 정보와 프레임워크 종류를 입력하여 모델을 생성할 수 있습니다.
 
 [파라미터]
 
