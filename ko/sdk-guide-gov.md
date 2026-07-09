@@ -460,6 +460,7 @@ hyperparameter_list = [
 | dataset_list[0].dataset_format_code    | easymaker.DatasetFormatCode | 필수                        | 없음    | CHAT_TEMPLATE, COMPLETION | 데이터 세트 포맷                                                        |
 | dataset_list[0].dataset_split_code     | easymaker.DatasetSplitCode  | 선택                        | TRAIN | TRAIN, VALIDATION         | 데이터 세트 split(학습/검증), 최소 1개의 TRAIN 필요                         |
 | data_storage_size                      | Integer                     | Object Storage 사용 시 필수    | 없음    | 300~10000                 | 파인 튜닝에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요             |
+| validation_split_percent               | Integer                     | 선택                        | 0     | 0~100                     | 학습 데이터에서 검증용으로 분할할 비율(%). 0이면 분할하지 않음. VALIDATION 데이터 세트를 지정하면 그 데이터 세트를 검증에 사용하며 이 값은 무시됨 |
 | use_log                                | Boolean                     | 선택                        | False | True, False               | Log & Crash Search 서비스에 로그를 남길지 여부                               |
 | wait                                   | Boolean                     | 선택                        | True  | True, False               | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                        |
 
@@ -473,6 +474,7 @@ fine_tuning = easymaker.FineTuning().run(
     base_model_preset_id=base_model_preset_id,
     model_upload_uri='obs://kr1-api-object-storage.gov-nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     timeout_hours=24,
+    validation_split_percent=10,  # 학습 데이터의 10%를 검증에 사용
     hyperparameter_list=[
         easymaker.Parameter(
             parameter_name="epoch",
