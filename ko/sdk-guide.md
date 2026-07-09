@@ -369,7 +369,7 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 
 ## 파인 튜닝
 
-사전 학습된 기반 모델(Base Model)을 특정 도메인이나 태스크에 맞게 추가 학습시키는 기능입니다.
+사전 학습된 거대 언어 모델에 특정 도메인이나 작업에 맞춘 데이터 세트로 추가 학습을 수행하여 모델의 성능을 특화하는 기능입니다.
 
 <a id="fine.tuning.model.preset.list"></a>
 
