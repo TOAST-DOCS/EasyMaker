@@ -28,7 +28,7 @@ NHN Cloud AI EasyMaker에서 제공하는 알고리즘을 소개합니다.
 
 ### 데이터 세트
 
-train, validation 데이터 세트를 준비합니다.
+train, validation, test 데이터 세트를 준비합니다.
 
 <a id="image.classification.data.set.train"></a>
 
