@@ -135,9 +135,9 @@ for instance in instance_type_list:
 | hyperparameter_list                    | easymaker.Parameter Array | 選択                      | なし     | 最大100個   | ハイパーパラメータ情報(parameter_name/parameter_valueで構成)                  |
 | hyperparameter_list[0].parameter_name  | String                    | 選択                      | なし     | 最大255文字   | ハイパーパラメータキー                                                       |
 | hyperparameter_list[0].parameter_value | String                    | 選択                      | なし     | 最大1000文字  | ハイパーパラメータ値                                                      |
-| dataset_list                           | easymaker.Dataset Array   | 選択                      | なし     | 最大10個    | 学習に使用されるデータセット情報(dataset_name/data_uriで構成)                       |
-| dataset_list[0].dataset_name           | String                    | 選択                      | なし     | 最大36文字    | データ名                                                         |
-| dataset_list[0].data_uri               | String                    | 選択                      | なし     | 最大255文字   | データパス                                                         |
+| dataset_list                           | easymaker.Dataset Array   | 必須                      | なし     | 最大10個    | 学習に使用されるデータセット情報(dataset_name/data_uriで構成)                       |
+| dataset_list[0].dataset_name           | String                    | 必須                      | なし     | 最大36文字    | データ名                                                         |
+| dataset_list[0].data_uri               | String                    | 必須                      | なし     | 最大255文字   | データパス                                                         |
 | use_log                                | Boolean                   | 選択                      | False  | True, False | Log & Crash Searchサービスにログを残すかどうか                              |
 | wait                                   | Boolean                   | 選択                      | True   | True, False | True:作成完了後にレスポンスを返す、False:作成リクエスト直後に即レスポンスを返す                       |
 
@@ -260,9 +260,9 @@ for instance in instance_type_list:
 | hyperparameter_spec_list[0].<br>hyperparameter_max_value         | String                     | hyperparameterTypeCodeがINT、DOUBLEの場合は必須(string型で数字入力)                    | なし   | なし                                                    | ハイパーパラメータ最大値                                                              |
 | hyperparameter_spec_list[0].<br>hyperparameter_step              | String                     | hyperparameterTypeCodeがINT、DOUBLEであり、かつGRID戦略の場合は必須       | なし   | なし                                                    | 「Grid」チューニング戦略を使用する際のハイパーパラメータ値の変化幅                                     |
 | hyperparameter_spec_list[0].<br>hyperparameter_specified_values | String                             | hyperparameterTypeCodeがDISCRETE、CATEGORICALの場合は必須         | なし   | 最大3000文字                                             | 指定されたハイパーパラメータリスト(`,`で区切られた文字列または数値)                                          |
-| dataset_list                                                     | easymaker.Dataset Array            | 選択                                                          | なし   | 最大10個                                               | ハイパーパラメータチューニングに使用されるデータセット情報(dataset_name/data_uriで構成)                       |
-| dataset_list[0].dataset_name                                     | String                             | 選択                                                           | なし    | 最大36文字                                                | データ名                                                                    |
-| dataset_list[0].dataset_uri                                      | String                             | 選択                                                           | なし    | 最大255文字                                               | データパス                                                                    |
+| dataset_list                                                     | easymaker.Dataset Array            | 必須                                                          | なし   | 最大10個                                               | ハイパーパラメータチューニングに使用されるデータセット情報(dataset_name/data_uriで構成)                       |
+| dataset_list[0].dataset_name                                     | String                             | 必須                                                           | なし    | 最大36文字                                                | データ名                                                                    |
+| dataset_list[0].dataset_uri                                      | String                             | 必須                                                           | なし    | 最大255文字                                               | データパス                                                                    |
 | metric_list                                                      | easymaker.Metric                   | 独自アルゴリズムを使用する場合は必須                                             | なし   | 最大10個(指標名で構成された文字列リスト)                              | 学習コードが出力するログの中から、どの指標を収集するか定義                                         |
 | metric_list[0].name                                              | String                             | 独自アルゴリズムを使用する場合は必須                                             | なし   | なし                                                    | 指標名                                                                    |
 | metric_regex                                                     | String                             | 独自アルゴリズム使用時選択                                             | ([\w\ | -]+)\s*=\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?)           | 最大255文字                                                                  | 指標を収集するために使用する正規表現を入力。学習アルゴリズムが正規表現に一致する形式で指標を出力する必要がある。                                                        |
@@ -379,7 +379,7 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 
 | 名前                      | タイプ    | 必須かどうか                             | デフォルト値 | 有効範囲  | 説明                                 |
 |--------------------------|--------|------------------------------------|-----|---------|-------------------------------------|
-| model_format_code       | easymaker.ModelFormatCode | 必須                                | なし  | TENSORFLOW, PYTORCH, SCIKIT_LEARN, HUGGING_FACE, TENSORFLOW_TRITON, PYTORCH_TRITON, ONNX_TRITON | モデルフォーマット情報 |
+| model_format_code | easymaker.ModelFormatCode | 必須 | なし | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | 推論サービングに使用されるモデルフォーマット情報 |
 | training_id              | String | hyperparameter_tuning_idがない場合は必須 | なし  | なし      | モデルとして作成する学習ID                       |
 | hyperparameter_tuning_id | String | training_idがない場合は必須             | なし  | なし      | モデルとして作成するハイパーパラメータチューニングID(最高学習で作成済み) |
 | model_name               | String | 必須                                | なし  | 最大50文字 | モデル名                              |
@@ -403,7 +403,7 @@ model = easymaker.Model().create(
 
 | 名前               | タイプ | 必須かどうか | デフォルト値 | 有効範囲                                      | 説明                                              |
 |----------------------|--------|-------|-----|-------------------------------------------|-----------------------------------------------------|
-| model_format_code       | easymaker.ModelFormatCode   | 必須 | なし | easymaker.ModelFormatCode.TENSORFLOW, easymaker.ModelFormatCode.PYTORCH, easymaker.ModelFormatCode.SCIKIT_LEARN, easymaker.ModelFormatCode.HUGGING_FACE, easymaker.ModelFormatCode.TENSORFLOW_TRITON, easymaker.ModelFormatCode.PYTORCH_TRITON, easymaker.ModelFormatCode.ONNX_TRITON | 推論サービングに使用されるモデルフォーマット情報                                |
+| model_format_code | easymaker.ModelFormatCode | 必須 | なし | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | 推論サービングに使用されるモデルフォーマット情報 |
 | model_upload_uri            | String | 必須 | なし | 最大255文字                                   | モデルファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
 | model_name           | String | 必須 | なし | 最大50文字                                    | モデル名                                           |
 | description    | String | 任意 | なし | 最大255文字                                   | モデルの説明                                       |
