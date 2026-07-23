@@ -467,7 +467,7 @@ COCO Datasetの形式で作成します。
                 201,
                 166,
                 93.5,
-                144.5
+144.5
             ],
             "area": 13510.75,
             "segmentation": [],
@@ -481,7 +481,7 @@ COCO Datasetの形式で作成します。
                 17,
                 20,
                 217.5,
-                329
+329
             ],
             "area": 71557.5,
             "segmentation": [],
@@ -495,7 +495,7 @@ COCO Datasetの形式で作成します。
                 26,
                 248,
                 162.5,
-                117
+117
             ],
             "area": 19012.5,
             "segmentation": [],
@@ -553,7 +553,7 @@ COCO Datasetの形式で作成します。
 
 #### レスポンス形式
 
-detectionされたobjectのbbox(xmin、ymin、xmax、ymax)リストを返します。
+検知されたオブジェクトのbbox(xmin、ymin、xmax、ymax)リストを返します。
 
 ```json
 {
@@ -609,7 +609,7 @@ detectionされたobjectのbbox(xmin、ymin、xmax、ymax)リストを返しま�
 }
 ```
 
-- image_to_bytes_array値は画像をBase64 Byte Array変換した値です。[参照]画像のバイト配列変換Pythonコード内容を参照してください。
+- image_to_bytes_array値は画像をBase64バイト配列に変換した値です。[参照]画像のバイト配列変換Pythonコード内容を参照してください。
 
 <a id="endpoint.create.inference.request.note.image"></a>
 

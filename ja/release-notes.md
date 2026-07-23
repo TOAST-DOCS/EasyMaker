@@ -2,6 +2,18 @@
 
 ## Machine Learning > AI EasyMaker > リリースノート
 
+<a id="ai.easymaker.release.notes.2026.07.28"></a>
+
+### 2026. 07. 28.
+
+<a id="ai.easymaker.release.notes.2026.07.28.feature.change"></a>
+
+#### 機能改善・変更
+
+- ファインチューニング機能の追加
+    - 事前学習された大規模言語モデルに、特定のドメインやタスクに合わせたデータセットで追加学習を実行し、モデルの性能を特化させることができます。
+    - 詳細については、[ファインチューニングガイド](./console-guide/#fine.tuning)のドキュメントを参照してください。
+    
 <a id="ai.easymaker.release.notes.2025.10.28"></a>
 
 ### 2025. 10. 28.
