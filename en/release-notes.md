@@ -2,6 +2,18 @@
 
 ## Machine Learning > AI EasyMaker > Release Notes
 
+<a id="ai.easymaker.release.notes.2026.07.28"></a>
+
+### July 28, 2026
+
+<a id="ai.easymaker.release.notes.2026.07.28.feature.change"></a>
+
+#### Feature Updates
+
+- Added fine tuning feature
+    - Specializes model performance by performing additional training on a pre-trained large language model using a dataset tailored to a specific domain or task.
+    - For more information, see the [Fine Tuning Guide](./console-guide/#fine.tuning) document.
+
 <a id="ai.easymaker.release.notes.2025.10.28"></a>
 
 ### October 28, 2025
