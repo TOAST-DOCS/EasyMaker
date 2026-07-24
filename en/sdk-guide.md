@@ -10,7 +10,9 @@
 
 ### Install AI EasyMaker Python SDK
 
+```bash
 python -m pip install easymaker
+```
 
 - AI EasyMaker is installed in the notebook by default.
 
@@ -365,6 +367,190 @@ for hyperparameter_tuning in hyperparameter_tuning_list:
 easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 ```
 
+<a id="fine.tuning"></a>
+
+## Fine Tuning
+
+A feature that specializes model performance by performing additional training on a pre-trained large language model using a dataset tailored to a specific domain or task.
+
+<a id="fine.tuning.model.preset.list"></a>
+
+### List Base Models
+
+Retrieves a list of base models available for fine tuning.
+
+[Parameters]
+
+| Name | Type | Required | Default | Valid range | Description |
+| ----------------- | ------ | ----- | --- | ----- | ------------------------------- |
+| model_preset_name | String | Optional | None | None | Base model name (filter by name; retrieves all if not entered) |
+
+```python
+base_model_list = easymaker.FineTuning.get_base_model_list()
+for base_model in base_model_list:
+    base_model.print_info()
+
+# Select one of the retrieved base models
+base_model = base_model_list[0]
+base_model_preset_id = base_model.model_preset_id
+```
+
+<a id="fine.tuning.instance.list"></a>
+
+### List Instance Types
+
+Retrieves a list of instance types available for the selected base model preset (`model_preset_id`).
+
+[Parameters]
+
+| Name | Type | Required | Default | Valid range | Description |
+| --------------- | ------ | ----- | --- | ------ | ------------- |
+| model_preset_id | String | Optional | None | Up to 36 characters | Base model preset ID |
+
+```python
+instance_type_list = easymaker.FineTuning.get_instance_type_list(model_preset_id=base_model_preset_id)
+for instance in instance_type_list:
+    instance.print_info()
+```
+
+<a id="fine.tuning.parameter.spec.list"></a>
+
+### Retrieve Hyperparameter Specifications
+
+Retrieves the fine tuning hyperparameter specifications for the selected base model. The retrieved specifications can be used to build a hyperparameter list with default values.
+
+[Parameters]
+
+| Name | Type | Required | Default | Valid range | Description |
+| -------------------- | ------ | ----- | --- | ------ | ------------- |
+| base_model_preset_id | String | Required | None | Up to 36 characters | Base model preset ID |
+
+```python
+parameter_spec_list = easymaker.FineTuning.get_parameter_spec_list(
+    base_model_preset_id=base_model_preset_id,
+)
+for spec in parameter_spec_list:
+    spec.print_info()
+
+# Build hyperparameter list using default values for parameters that have defaults (modify values if needed)
+hyperparameter_list = [
+    easymaker.Parameter(parameter_name=spec.parameter_name, parameter_value=spec.default_value)
+    for spec in parameter_spec_list
+    if spec.default_value is not None
+]
+```
+
+<a id="fine.tuning.create"></a>
+
+### Create Fine Tuning
+
+[Parameters]
+
+| Name | Type | Required | Default | Valid range | Description |
+| -------------------------------------- | --------------------------- | ------------------------- | ----- |---------------------------|-----------------------------------------------------------------|
+| experiment_id | String | Required if not entered in easymaker.init | None | Up to 36 characters | Experiment ID |
+| experiment_name | String | Optional | None | Up to 50 characters | New experiment name (used when creating an experiment at the same time) |
+| experiment_description | String | Optional | None | Up to 255 characters | Description for the new experiment |
+| fine_tuning_name | String | Required | None | Up to 50 characters | Fine tuning name |
+| description | String | Optional | None | Up to 255 characters | Description for the fine tuning |
+| flavor_name | String | Required | None | None | Instance type name (can be retrieved) |
+| instance_count | Integer | Optional | 1 | 1–10 | Number of training instances |
+| base_model_preset_id | String | Required | None | Up to 36 characters | Base model preset ID |
+| model_upload_uri | String | Required | None | Up to 255 characters | Path where the completed fine tuning model will be uploaded (NHN Cloud Object Storage or NHN Cloud NAS) |
+| timeout_hours | Integer | Optional | 720 | 1–720 | Maximum fine tuning duration (unit: hours) |
+| hyperparameter_list | easymaker.Parameter Array | Optional | None | Up to 100 | Hyperparameter information (consists of parameter_name/parameter_value) |
+| hyperparameter_list[0].parameter_name | String | Optional | None | Up to 255 characters | Hyperparameter key |
+| hyperparameter_list[0].parameter_value | String | Optional | None | Up to 1,000 characters | Hyperparameter value |
+| dataset_list | easymaker.Dataset Array | Required | None | Up to 10 | Dataset information to be used for fine tuning |
+| dataset_list[0].dataset_name | String | Required | None | Up to 36 characters | Data name |
+| dataset_list[0].data_uri | String | Required | None | Up to 255 characters | Data path |
+| dataset_list[0].dataset_format_code | easymaker.DatasetFormatCode | Required | None | CHAT_TEMPLATE, COMPLETION | Dataset format |
+| dataset_list[0].dataset_split_code | easymaker.DatasetSplitCode | Required | TRAIN | TRAIN, VALIDATION | Dataset split (training/validation); at least 1 TRAIN required |
+| data_storage_size | Integer | Required when using Object Storage | None | 300–10,000 | Storage size for downloading data required for fine tuning (unit: GB); not required when using NAS |
+| validation_split_percent | Integer | Optional | 0 | 0–100 | Percentage (%) of training data to split for validation. If 0, no split is performed. If a VALIDATION dataset is specified, that dataset is used for validation and this value is ignored. |
+| use_log | Boolean | Optional | False | True, False | Whether to save logs to the Log & Crash Search service |
+| wait | Boolean | Optional | True | True, False | True: Returns after creation is complete; False: Returns immediately after the creation request |
+
+```python
+fine_tuning = easymaker.FineTuning().run(
+    experiment_id=experiment.experiment_id, # Optional if already set in init
+    fine_tuning_name='fine_tuning_name',
+    description='fine_tuning_description',
+    flavor_name='g4.c92m1800',
+    instance_count=1,
+    base_model_preset_id=base_model_preset_id,
+    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    timeout_hours=24,
+    validation_split_percent=10,  # Use 10% of training data for validation
+    hyperparameter_list=[
+        easymaker.Parameter(
+            parameter_name="epoch",
+            parameter_value="1",
+        ),
+        easymaker.Parameter(
+            parameter_name="learning_rate",
+            parameter_value="0.0002",
+        ),
+        easymaker.Parameter(
+            parameter_name="batch_size",
+            parameter_value="1",
+        ),
+    ],
+    dataset_list=[
+        easymaker.Dataset(
+            dataset_name="train-dataset",
+            data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}',
+            dataset_format_code=easymaker.DatasetFormatCode.CHAT_TEMPLATE,
+            dataset_split_code=easymaker.DatasetSplitCode.TRAIN,
+        ),
+    ],
+    data_storage_size=300,
+    use_log=False,
+    # wait=False,
+)
+```
+
+<a id="fine.tuning.list"></a>
+
+### List Fine Tunings
+
+```python
+fine_tuning_list = easymaker.FineTuning.get_list()
+for fine_tuning in fine_tuning_list:
+    fine_tuning.print_info()
+```
+
+<a id="fine.tuning.stop"></a>
+
+### Stop Fine Tuning
+
+Stops a fine tuning that is in the RUNNING state.
+
+[Parameters]
+
+| Name | Type | Required | Default | Valid range | Description |
+| -------------- | ------ | ----- | --- | ------ | -------- |
+| fine_tuning_id | String | Required | None | Up to 36 characters | Fine tuning ID |
+
+```python
+easymaker.FineTuning(fine_tuning_id).stop()
+```
+
+<a id="fine.tuning.delete"></a>
+
+### Delete Fine Tuning
+
+[Parameters]
+
+| Name | Type | Required | Default | Valid range | Description |
+| -------------- | ------ | ----- | --- | ------ | -------- |
+| fine_tuning_id | String | Required | None | Up to 36 characters | Fine tuning ID |
+
+```python
+easymaker.FineTuning(fine_tuning_id).delete()
+```
+
+
 <a id="model"></a>
 
 ## Model
@@ -373,32 +559,41 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 
 ### Create Model
 
-Request to create a model with the training ID.
+Request to create a model with the training, hyperparameter, and fine tuning ID.
 The model is used when creating endpoints.
 
 [Parameter]
 
 | Name                       | Type     | Required                              | Default value | Valid range   | Description                                  |
-|--------------------------|--------|------------------------------------|-----|---------|-------------------------------------|
-| model_format_code | easymaker.ModelFormatCode | Required | None | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | Model format information used for inference serving |
-| training_id              | String | Required if hyperparameter_tuning_id does not exist | None  | None      | Training ID to create a model                       |
-| hyperparameter_tuning_id | String | Required if training_id is not present              | None  | None      | Hyperparameter tuning ID to be created by model (created by best learning) |
-| model_name               | String | Required                                 | None  | Up to 50 characters  | Model name                               |
-| description        | String | Optional                                 | None  | Up to 255 characters | Description for model                           |
-| parameter_list                   | Array  | Optional    | None  | Up to 10                                  | Parameter information (consist of parameterName/parameterValue)         |
-| parameter_list[0].parameterName  | String | Optional    | None  | Up to 64 characters                                  | Parameter name                                              |
-| parameter_list[0].parameterValue | String | Optional    | None  | Up to 255 characters                                 | Parameter value                                                |
+|----------------------------------|---------------------------|--------------------------|-----|--------------------------------------------------------------|-------------------------------------------|
+| model_format_code                | easymaker.ModelFormatCode | Required if fine_tuning_id is not entered | None | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | Model format information used for inference serving |
+| training_id                      | String                    | Optional | None | None | Training ID to create as a model |
+| hyperparameter_tuning_id         | String                    | Optional | None | None | Hyperparameter tuning ID to create as a model (created from the best training) |
+| fine_tuning_id                   | String                    | Optional | None | None | Fine tuning ID to create as a model |
+| model_name                       | String                    | Required | None | Up to 50 characters | Model name |
+| description                      | String                    | Optional | None | Up to 255 characters | Description for the model |
+| parameter_list                   | Array                     | Optional | None | Up to 10 | Parameter information (consists of parameterName/parameterValue) |
+| parameter_list[0].parameterName  | String                    | Optional | None | Up to 64 characters | Parameter name |
+| parameter_list[0].parameterValue | String                    | Optional | None | Up to 255 characters | Parameter value |
 
 ```python
 model = easymaker.Model().create(
-    model_format_code=easymaker.ModelFormatCode.PYTORCH,
-    training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
     model_name='model_name',
+    training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
+    model_format_code=easymaker.ModelFormatCode.PYTORCH,
     description='model_description',
 )
 ```
 
-Even if there is no training ID, you can create a model by entering the path information for the model and framework type.
+```python
+model = easymaker.Model().create(
+    model_name='model_name',
+    fine_tuning_id=fine_tuning.fine_tuning_id,
+    description='model_description',
+)
+```
+
+Even if there is no training, hyperparameter tuning, and fine tuning ID, you can create a model by entering the path information for the model and framework type.
 
 [Parameter]
 

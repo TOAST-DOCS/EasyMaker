@@ -101,7 +101,7 @@ folder/test/dog/cretan_hound.png
 ### Indicators
 
 The Image Classification algorithm produces the following metrics.
-Indicators generated during training can be checked through **Training > Go to TensorBoard**.
+Indicators generated during training can be checked in **Training > Go to TensorBoard**.
 
 | Indicator name | Description |
 | --- | --- |
@@ -320,7 +320,7 @@ Create a mapping file of image and segmentation map.
 ### Indicators
 
 The Semantic Segmentation algorithm generates the following metrics.
-Indicators generated during training can be checked through **Training > Go to TensorBoard**.
+Indicators generated during training can be checked in **Training > Go to TensorBoard**.
 
 | Indicator name | Description |
 |--|--|
@@ -340,7 +340,7 @@ To create an endpoint with a trained model and request inference, see [Create En
 
 #### Response Format
 
-After resizing the requested image to 512 X 512, the label value for each pixel of each image is returned in the form of an array.
+After resizing the requested image to 512 x 512, the label value for each pixel of each image is returned in the form of an array.
 
 ```json
 {
