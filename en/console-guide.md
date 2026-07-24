@@ -194,7 +194,7 @@ you can reboot the notebook.
 
 1. Select notebook you want to reboot.
 2. Click **Reboot Notebook**
-3. Requested deletion task cannot be cancelled. To proceed, please click **Confirm**
+3. The requested task cannot be cancelled. To proceed, please click **Confirm**
 
 !!! danger "Caution"
     When rebooting the notebook, the virtual environment and external libraries that the user create can be initialized.
@@ -634,6 +634,117 @@ Delete the training template.
 2. Click **Delete Training Template**
 3. Requested deletion cannot be undone. Click **OK** to proceed.
 
+<a id="fine.tuning"></a>
+
+## Fine Tuning
+
+A feature that specializes model performance by performing additional training on a pre-trained large language model using a dataset tailored to a specific domain or task. AI EasyMaker provides multiple models as base models for additional training. Select one of the base models, then enter the training data and hyperparameters to perform fine tuning.
+
+<a id="fine.tuning.create"></a>
+
+### Create Fine Tuning
+
+Configure the base model, training data, and hyperparameters to perform fine tuning.
+
+- **Basic Information**
+    - **Name**: Enter a name for the fine tuning.
+    - **Description**: Enter a description if needed.
+    - **Experiment**: Select an experiment to include the fine tuning in. Experiments group related tasks. If no experiment has been created, click **Add** to create one.
+- **Base Model Information**
+    - **Base Model**: Select the base model to use for fine tuning. Click **Base Model** to open the model selection window, then select one of the base models available for fine tuning.
+- **Parameter Information**
+    - **Hyperparameter**: Displays a list of hyperparameters supported by the selected base model. Default values are pre-filled for each parameter, and values can be changed for editable parameters.
+- **Instance Information**
+    - **Instance Type**: Select the instance type to run fine tuning on. Only instance types available for the selected base model are displayed.
+    - **Instance Count**: The number of instances to use for fine tuning.
+- **Input Data**
+    - **Training Data**: Enter the training dataset to use for fine tuning. A minimum of 1 and a maximum of 10 training datasets can be configured.
+        - **Dataset Name**: Enter a name for the dataset.
+        - **Data Path**: Enter the NHN Cloud Object Storage or NHN Cloud NAS path where the data is stored.
+            - If using NHN Cloud Object Storage, configure the required permissions by referring to [Appendix > 1. Add AI EasyMaker System Account Permissions to NHN Cloud Object Storage](#appendix.1.object.storage.account.permission). Fine tuning will fail if the required permissions are not configured.
+        - **Data Format**: The format of the training data. (Fixed as `chat_template`) For more information on dataset formats, see [Appendix > 12. Fine Tuning Dataset Format](#appendix.12.fine.tuning.dataset.format).
+    - **Validation Data**: Enter the validation dataset to use for fine tuning. Up to 10 validation datasets can be configured, and the input fields are the same as those for training data.
+    - **Validation Data Percentage**: If you want to use a portion of the training data for validation without a separate validation dataset, enter the percentage (%) to use for validation.
+        - If a validation dataset is entered, this is fixed at 0 and cannot be modified.
+- **Output Data**
+    - **Model Upload Path**: Enter the path where the completed fine tuning model will be saved.
+        - Enter an NHN Cloud Object Storage or NHN Cloud NAS path.
+- **Additional Settings**
+    - **Data Storage Size**: Enter the data storage size for the instance running fine tuning.
+        - Used only when NHN Cloud Object Storage is used. Specify a size large enough to store all data required for fine tuning.
+    - **Maximum Duration**: Specify the maximum wait time for fine tuning to complete. Fine tuning that exceeds the maximum wait time will be terminated.
+    - **Log Management**: Logs generated during fine tuning can be saved to the NHN Cloud Log & Crash service.
+        - For more information, see [Appendix > 2. NHN Cloud Log & Crash Search Service Usage Guide and Log Inquiry](#appendix.2.lncs.service.usage.guide.and.log.inquiry.guide).
+
+!!! danger "Caution"
+    - Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
+    - Deleting input data before fine tuning is complete may cause fine tuning to fail.
+
+<a id="fine.tuning.list"></a>
+
+### Fine Tuning List
+
+Displays the list of fine tunings. Select a fine tuning from the list to view its details.
+
+- **Base Model**: Displays the name of the base model used for fine tuning.
+- **Duration**: Displays the time taken for fine tuning.
+- **Status**: Displays the status of the fine tuning. Refer to the table below for major statuses.
+
+    | Status | Description |
+    | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+    | CREATE IN PROGRESS | Resources required for fine tuning are being created. |
+    | RUNNING | Fine tuning is in progress. |
+    | STOPPED | Fine tuning has been stopped at the user's request. |
+    | COMPLETE | Fine tuning has completed successfully. |
+    | STOP IN PROGRESS | Fine tuning is being stopped. |
+    | FAIL FINE TUNING | Fine tuning failed during the process. If log management is enabled, detailed failure information can be checked through Log & Crash Search logs. |
+    | CREATE FAILED | Fine tuning creation failed. If creation continues to fail, contact customer support. |
+    | STOP FAILED | Fine tuning stop failed. |
+    | FAIL FINE TUNING IN PROGRESS, COMPLETE IN PROGRESS, STOP IN PROGRESS | Resources used for fine tuning are being cleaned up. |
+
+- **Actions**
+    - **Go to TensorBoard**: Opens TensorBoard, where statistical information about the fine tuning can be viewed, in a new browser window. TensorBoard can only be accessed by users logged in to the console.
+    - **Stop**: Stops the fine tuning that is in progress.
+
+- **Hyperparameter**: Select a fine tuning to open the details screen, then go to the **Hyperparameter** tab to view the hyperparameter values configured for the fine tuning.
+
+- **Monitoring**: Select a fine tuning to open the details screen, then go to the **Monitoring** tab to view the list of monitored instances and basic metric charts.
+    - The **Monitoring** tab is disabled while fine tuning is being created.
+
+<a id="fine.tuning.copy"></a>
+
+### Copy Fine Tuning
+
+Creates a new fine tuning with the same settings as an existing fine tuning.
+
+1. Select the fine tuning to copy. This feature is available only when a single fine tuning is selected.
+2. Click **Copy**.
+3. The fine tuning creation screen is displayed with the same settings as the existing fine tuning.
+4. If there are any settings to change, make the changes, then click **Create Fine Tuning** to create the fine tuning.
+
+<a id="fine.tuning.model.create"></a>
+
+### Create a Model from Fine Tuning
+
+Creates a model from a fine tuning in the completed state.
+
+1. Select the fine tuning to create as a model.
+2. Click **Create Model**. Only fine tunings in the COMPLETE status can be created as a model.
+3. You will be redirected to the model creation page. Review the information and click **Create Model** to create the model. For more information on model creation, see the [Model](#model) document.
+
+<a id="fine.tuning.delete"></a>
+
+### Delete Fine Tuning
+
+Deletes a fine tuning.
+
+1. Select the fine tuning to delete. Only fine tunings in the CREATE FAILED, FAIL FINE TUNING, COMPLETE, or STOPPED status can be deleted.
+2. Click **Delete**.
+3. The requested deletion cannot be canceled. Click **Confirm** to proceed.
+
+!!! tip "Note"
+    If a model created from the fine tuning to be deleted exists, the fine tuning cannot be deleted. Delete the model first, then delete the fine tuning.
+
 <a id="model"></a>
 
 ## Model
@@ -683,7 +794,8 @@ Can manage models of AI EasyMaker's training outcomes or external models as arti
     Other file types are not supported.
 
 !!! danger "Caution"
-    The model artifact path you enter must contain the model file and the `config.pbtxt` file in a structure that allows the model to be run with Triton.
+    Triton models support only TensorFlow, PyTorch, and ONNX backends.
+    When creating a Triton model, the model artifact path you enter must contain the model files and a `config.pbtxt` file structured to run the model on Triton.
     See the example below:
     <details>
     <summary><strong>Example</strong></summary>
@@ -2391,3 +2503,31 @@ How to serve a Hugging Face model trained with TensorFlow and PyTorch.
     - For more information, see the TensorFlow, PyTorch framework notes.
 3. Upload the model file to OBS or NAS.
 4. For the rest of the process, check out our guides to [creating models and](#model.create) [creating endpoints](#endpoint.create).
+
+
+<a id="appendix.12.fine.tuning.dataset.format"></a>
+
+### 12. Fine Tuning Dataset Format
+
+Prepare the training data and validation data for fine tuning as JSONL files in the `chat_template` format.
+
+- Files are in JSONL (JSON Lines) format, with one conversation sample (JSON object) per line.
+- Each sample consists of a `messages` array, where each item in the array contains a `role` and `content`.
+    - `role`: The entity delivering the message. Use `system`, `user`, or `assistant`.
+        - `system`: Defines the model's role or instructions (optional).
+        - `user`: User input.
+        - `assistant`: The correct response that the model should generate.
+    - `content`: The text content of the corresponding role.
+
+**Example (.jsonl)**
+
+```json
+{"messages": [{"role": "system", "content": "당신은 친절한 AI 비서입니다."}, {"role": "user", "content": "안녕하세요?"}, {"role": "assistant", "content": "안녕하세요! 무엇을 도와드릴까요?"}]}
+{"messages": [{"role": "user", "content": "대한민국의 수도는 어디인가요?"}, {"role": "assistant", "content": "대한민국의 수도는 서울입니다."}]}
+```
+
+!!! tip "Note"
+    - Use the `.jsonl` file extension, with only one JSON object per line.
+    - The `assistant` message is the correct answer that the model learns from.
+    - Validation data must be written in the same format as training data.
+    - The maximum length of a single sample (one line) is 5,120 tokens. Samples that exceed the maximum length are excluded from training.

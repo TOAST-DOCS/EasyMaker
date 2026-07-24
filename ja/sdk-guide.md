@@ -10,7 +10,9 @@
 
 ### AI EasyMaker Python SDKインストール
 
+```bash
 python -m pip install easymaker
+```
 
 - AI EasyMakerノートパソコンには基本的にインストールされています。
 
@@ -124,7 +126,7 @@ for instance in instance_type_list:
 | distributed_node_count                 | Integer                   | 選択                      | 1      | 1～10         | 分散学習を適用するノード数                                                |
 | use_torchrun                           | Boolean                   | 選択                      | False  | True, False | torchrunの使用有無、Pytorchイメージでのみ使用可能                           |
 | nproc_per_node                         | Integer                   | use_torchrun Trueの場合は必須  | 1      | 1～(CPU数またはGPU数) | ノードごとのプロセス数。use_torchrunを使用する場合は必ず設定しなければならない値                |
-| data_storage_size                      | Integer                   | Obejct Storageを使用する場合は必須  | なし     | 300～10000   | 学習に必要なデータをダウンロードする記憶領域サイズ(単位： GB), NAS使用時は不要              |
+| data_storage_size                      | Integer                   | Object Storageを使用する場合は必須  | なし     | 300～10000   | 学習に必要なデータをダウンロードする記憶領域サイズ(単位： GB), NAS使用時は不要              |
 | algorithm_name                         | String                    | NHN Cloud提供アルゴリズムを使用する場合は必須 | なし     | 最大64文字    | アルゴリズム名(CLIで照会可能)                                              |
 | source_dir_uri                         | String                    | 独自アルゴリズムを使用する場合は必須         | なし     | 最大255文字   | 学習に必要なファイルが含まれているパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
 | entry_point                            | String                    | 独自アルゴリズムを使用する場合は必須         | なし     | 最大255文字   | source_dir_uri内で最初に実行されるPythonファイル情報                            |
@@ -135,9 +137,9 @@ for instance in instance_type_list:
 | hyperparameter_list                    | easymaker.Parameter Array | 選択                      | なし     | 最大100個   | ハイパーパラメータ情報(parameter_name/parameter_valueで構成)                  |
 | hyperparameter_list[0].parameter_name  | String                    | 選択                      | なし     | 最大255文字   | ハイパーパラメータキー                                                       |
 | hyperparameter_list[0].parameter_value | String                    | 選択                      | なし     | 最大1000文字  | ハイパーパラメータ値                                                      |
-| dataset_list                           | easymaker.Dataset Array   | 選択                      | なし     | 最大10個    | 学習に使用されるデータセット情報(dataset_name/data_uriで構成)                       |
-| dataset_list[0].dataset_name           | String                    | 選択                      | なし     | 最大36文字    | データ名                                                         |
-| dataset_list[0].data_uri               | String                    | 選択                      | なし     | 最大255文字   | データパス                                                         |
+| dataset_list                           | easymaker.Dataset Array   | 必須                      | なし     | 最大10個    | 学習に使用されるデータセット情報(dataset_name/data_uriで構成)                       |
+| dataset_list[0].dataset_name           | String                    | 必須                      | なし     | 最大36文字    | データ名                                                         |
+| dataset_list[0].data_uri               | String                    | 必須                      | なし     | 最大255文字   | データパス                                                         |
 | use_log                                | Boolean                   | 選択                      | False  | True, False | Log & Crash Searchサービスにログを残すかどうか                              |
 | wait                                   | Boolean                   | 選択                      | True   | True, False | True:作成完了後にレスポンスを返す、False:作成リクエスト直後に即レスポンスを返す                       |
 
@@ -245,7 +247,7 @@ for instance in instance_type_list:
 | parallel_trial_count                                             | Integer                            | 必須                                                          | 1      | distributed_node_countとparallel_trial_countの積が10以下 | ハイパーパラメータチューニングで並列実行する学習の数                                                 |
 | use_torchrun                                                     | Boolean                            | 選択                                                          | False  | True, False                                            | torchrun使用の有無。Pytorchイメージでのみ使用可能                                     |
 | nproc_per_node                                                   | Integer                            | use_torchrun Trueの場合は必須                                      | 1      | 1～(CPU数またはGPU数)                                   | ノードごとのプロセス数。use_torchrunを使用する場合は必ず設定しなければならない値                         |
-| data_storage_size                                                | Integer                            | Obejct Storage使用時必須                                       | なし    | 300～10000                                              | ハイパーパラメータチューニングに必要なデータをダウンロードする記憶領域サイズ(単位： GB), NAS使用時不要                 |
+| data_storage_size                                                | Integer                            | Object Storage使用時必須                                       | なし    | 300～10000                                              | ハイパーパラメータチューニングに必要なデータをダウンロードする記憶領域サイズ(単位： GB), NAS使用時不要                 |
 | algorithm_name                                                   | String                             | NHN Cloud提供アルゴリズムを使用する場合は必須                                   | なし   | 最大64文字                                               | アルゴリズム名(CLIで照会可能)                                                        |
 | source_dir_uri                                                   | String                             | 独自アルゴリズムを使用する場合は必須                                             | なし   | 最大255文字                                              | ハイパーパラメータチューニングに必要なファイルが含まれるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)    |
 | entry_point                                                      | String                             | 独自アルゴリズムを使用する場合は必須                                             | なし   | 最大255文字                                              | source_dir_uri内で最初に実行されるPythonファイル情報                                      |
@@ -260,9 +262,9 @@ for instance in instance_type_list:
 | hyperparameter_spec_list[0].<br>hyperparameter_max_value         | String                     | hyperparameterTypeCodeがINT、DOUBLEの場合は必須(string型で数字入力)                    | なし   | なし                                                    | ハイパーパラメータ最大値                                                              |
 | hyperparameter_spec_list[0].<br>hyperparameter_step              | String                     | hyperparameterTypeCodeがINT、DOUBLEであり、かつGRID戦略の場合は必須       | なし   | なし                                                    | 「Grid」チューニング戦略を使用する際のハイパーパラメータ値の変化幅                                     |
 | hyperparameter_spec_list[0].<br>hyperparameter_specified_values | String                             | hyperparameterTypeCodeがDISCRETE、CATEGORICALの場合は必須         | なし   | 最大3000文字                                             | 指定されたハイパーパラメータリスト(`,`で区切られた文字列または数値)                                          |
-| dataset_list                                                     | easymaker.Dataset Array            | 選択                                                          | なし   | 最大10個                                               | ハイパーパラメータチューニングに使用されるデータセット情報(dataset_name/data_uriで構成)                       |
-| dataset_list[0].dataset_name                                     | String                             | 選択                                                           | なし    | 最大36文字                                                | データ名                                                                    |
-| dataset_list[0].dataset_uri                                      | String                             | 選択                                                           | なし    | 最大255文字                                               | データパス                                                                    |
+| dataset_list                                                     | easymaker.Dataset Array            | 必須                                                          | なし   | 最大10個                                               | ハイパーパラメータチューニングに使用されるデータセット情報(dataset_name/data_uriで構成)                       |
+| dataset_list[0].dataset_name                                     | String                             | 必須                                                           | なし    | 最大36文字                                                | データ名                                                                    |
+| dataset_list[0].dataset_uri                                      | String                             | 必須                                                           | なし    | 最大255文字                                               | データパス                                                                    |
 | metric_list                                                      | easymaker.Metric                   | 独自アルゴリズムを使用する場合は必須                                             | なし   | 最大10個(指標名で構成された文字列リスト)                              | 学習コードが出力するログの中から、どの指標を収集するか定義                                         |
 | metric_list[0].name                                              | String                             | 独自アルゴリズムを使用する場合は必須                                             | なし   | なし                                                    | 指標名                                                                    |
 | metric_regex                                                     | String                             | 独自アルゴリズム使用時選択                                             | ([\w\ | -]+)\s*=\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?)           | 最大255文字                                                                  | 指標を収集するために使用する正規表現を入力。学習アルゴリズムが正規表現に一致する形式で指標を出力する必要がある。                                                        |
@@ -364,6 +366,190 @@ for hyperparameter_tuning in hyperparameter_tuning_list:
 easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 ```
 
+<a id="fine.tuning"></a>
+
+## ファインチューニング
+
+事前学習された大規模言語モデルに特定のドメインやタスクに合わせたデータセットで追加学習を実行し、モデルの性能を特化させる機能です。
+
+<a id="fine.tuning.model.preset.list"></a>
+
+### ベースモデル一覧の照会
+
+ファインチューニングに使用するベースモデル一覧を照会します。
+
+[パラメータ]
+
+| 名前 | タイプ | 必須 | デフォルト値 | 有効範囲 | 説明 |
+| ----------------- | ------ | ----- | --- | ----- | ------------------------------- |
+| model_preset_name | String | 任意 | なし | なし | ベースモデル名(名前でフィルタリング、未入力時は全体を照会) |
+
+```python
+base_model_list = easymaker.FineTuning.get_base_model_list()
+for base_model in base_model_list:
+    base_model.print_info()
+
+# 照会されたベースモデルのいずれかを選択
+base_model = base_model_list[0]
+base_model_preset_id = base_model.model_preset_id
+```
+
+<a id="fine.tuning.instance.list"></a>
+
+### インスタンス一覧の照会
+
+選択したベースモデルプリセット(`model_preset_id`)で使用可能なインスタンスタイプの一覧を照会します。
+
+[パラメータ]
+
+| 名前 | タイプ | 必須 | デフォルト値 | 有効範囲 | 説明 |
+| --------------- | ------ | ----- | --- | ------ | ------------- |
+| model_preset_id | String | 任意 | なし | 最大36文字 | ベースモデルプリセットID |
+
+```python
+instance_type_list = easymaker.FineTuning.get_instance_type_list(model_preset_id=base_model_preset_id)
+for instance in instance_type_list:
+    instance.print_info()
+```
+
+<a id="fine.tuning.parameter.spec.list"></a>
+
+### ハイパーパラメータ仕様の照会
+
+選択したベースモデルのファインチューニングのハイパーパラメータ仕様を照会します。照会した仕様のデフォルト値で、ハイパーパラメータの一覧を構成できます。
+
+[パラメータ]
+
+| 名前 | タイプ | 必須 | デフォルト値 | 有効範囲 | 説明 |
+| -------------------- | ------ | ----- | --- | ------ | ------------- |
+| base_model_preset_id | String | 必須 | なし | 最大36文字 | ベースモデルプリセットID |
+
+```python
+parameter_spec_list = easymaker.FineTuning.get_parameter_spec_list(
+    base_model_preset_id=base_model_preset_id,
+)
+for spec in parameter_spec_list:
+    spec.print_info()
+
+# デフォルト値があるパラメータはデフォルト値でハイパーパラメータ一覧を構成(必要に応じて値を修正)
+hyperparameter_list = [
+    easymaker.Parameter(parameter_name=spec.parameter_name, parameter_value=spec.default_value)
+    for spec in parameter_spec_list
+    if spec.default_value is not None
+]
+```
+
+<a id="fine.tuning.create"></a>
+
+### ファインチューニングの作成
+
+[パラメータ]
+
+| 名前 | タイプ | 必須 | デフォルト値 | 有効範囲 | 説明 |
+| -------------------------------------- | --------------------------- | ------------------------- | ----- |---------------------------|-----------------------------------------------------------------|
+| experiment_id | String | easymaker.initで未入力時は必須 | なし | 最大36文字 | 実験ID |
+| experiment_name | String | 任意 | なし | 最大50文字 | 新規実験名(実験を一緒に作成する場合に使用) |
+| experiment_description | String | 任意 | なし | 最大255文字 | 新規実験に関する説明 |
+| fine_tuning_name | String | 必須 | なし | 最大50文字 | ファインチューニング名 |
+| description | String | 任意 | なし | 最大255文字 | ファインチューニングに関する説明 |
+| flavor_name | String | 必須 | なし | なし | インスタンスタイプ名(照会可能) |
+| instance_count | Integer | 任意 | 1 | 1～10 | 学習インスタンス数 |
+| base_model_preset_id | String | 必須 | なし | 最大36文字 | 基盤モデルプリセットID |
+| model_upload_uri | String | 必須 | なし | 最大255文字 | ファインチューニングが完了したモデルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
+| timeout_hours | Integer | 任意 | 720 | 1～720 | 最大ファインチューニング時間(単位： 時間) |
+| hyperparameter_list | easymaker.Parameter Array | 任意 | なし | 最大100個 | ハイパーパラメータ情報(parameter_name/parameter_valueで構成) |
+| hyperparameter_list[0].parameter_name | String | 任意 | なし | 最大255文字 | ハイパーパラメータキー |
+| hyperparameter_list[0].parameter_value | String | 任意 | なし | 最大1000文字 | ハイパーパラメータの値 |
+| dataset_list | easymaker.Dataset Array | 必須 | なし | 最大10個 | ファインチューニングに使用されるデータセット情報 |
+| dataset_list[0].dataset_name | String | 必須 | なし | 最大36文字 | データ名 |
+| dataset_list[0].data_uri | String | 必須 | なし | 最大255文字 | データパス |
+| dataset_list[0].dataset_format_code | easymaker.DatasetFormatCode | 必須 | なし | CHAT_TEMPLATE, COMPLETION | データセットフォーマット |
+| dataset_list[0].dataset_split_code | easymaker.DatasetSplitCode | 必須 | TRAIN | TRAIN, VALIDATION | データセットsplit(学習/検証)、最小1個のTRAINが必要 |
+| data_storage_size | Integer | Object Storage使用時は必須 | なし | 300～10000 | ファインチューニングに必要なデータをダウンロードする保存領域のサイズ(単位： GB)、NAS使用時は不要 |
+| validation_split_percent | Integer | 任意 | 0 | 0～100 | 学習データから検証用として分割する割合(%)。0の場合は分割しない。VALIDATIONデータセットを指定するとそのデータセットを検証に使用し、この値は無視される |
+| use_log | Boolean | 任意 | False | True, False | Log & Crash Searchサービスにログを残すかどうか |
+| wait | Boolean | 任意 | True | True, False | True: 作成が完了した以降に返却、False: 作成リクエスト後に即時返却 |
+
+```python
+fine_tuning = easymaker.FineTuning().run(
+    experiment_id=experiment.experiment_id, # Optional if already set in init
+    fine_tuning_name='fine_tuning_name',
+    description='fine_tuning_description',
+    flavor_name='g4.c92m1800',
+    instance_count=1,
+    base_model_preset_id=base_model_preset_id,
+    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    timeout_hours=24,
+    validation_split_percent=10,  # 学習データの10%を検証に使用
+    hyperparameter_list=[
+        easymaker.Parameter(
+            parameter_name="epoch",
+            parameter_value="1",
+        ),
+        easymaker.Parameter(
+            parameter_name="learning_rate",
+            parameter_value="0.0002",
+        ),
+        easymaker.Parameter(
+            parameter_name="batch_size",
+            parameter_value="1",
+        ),
+    ],
+    dataset_list=[
+        easymaker.Dataset(
+            dataset_name="train-dataset",
+            data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}',
+            dataset_format_code=easymaker.DatasetFormatCode.CHAT_TEMPLATE,
+            dataset_split_code=easymaker.DatasetSplitCode.TRAIN,
+        ),
+    ],
+    data_storage_size=300,
+    use_log=False,
+    # wait=False,
+)
+```
+
+<a id="fine.tuning.list"></a>
+
+### ファインチューニング一覧の照会
+
+```python
+fine_tuning_list = easymaker.FineTuning.get_list()
+for fine_tuning in fine_tuning_list:
+    fine_tuning.print_info()
+```
+
+<a id="fine.tuning.stop"></a>
+
+### ファインチューニングの停止
+
+実行中(RUNNING)のファインチューニングを停止します。
+
+[パラメータ]
+
+| 名前 | タイプ | 必須 | デフォルト値 | 有効範囲 | 説明 |
+| -------------- | ------ | ----- | --- | ------ | -------- |
+| fine_tuning_id | String | 必須 | なし | 最大36文字 | ファインチューニングID |
+
+```python
+easymaker.FineTuning(fine_tuning_id).stop()
+```
+
+<a id="fine.tuning.delete"></a>
+
+### ファインチューニングの削除
+
+[パラメータ]
+
+| 名前 | タイプ | 必須 | デフォルト値 | 有効範囲 | 説明 |
+| -------------- | ------ | ----- | --- | ------ | -------- |
+| fine_tuning_id | String | 必須 | なし | 最大36文字 | ファインチューニングID |
+
+```python
+easymaker.FineTuning(fine_tuning_id).delete()
+```
+
+
 <a id="model"></a>
 
 ## モデル
@@ -372,38 +558,47 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 
 ### モデル作成
 
-学習ID値でモデルの作成をリクエストできます。
+学習、ハイパーパラメータチューニング、ファインチューニングのID値でモデルの作成をリクエストできます。
 モデルはエンドポイント作成時に使用されます。
 
 [パラメータ]
 
-| 名前                      | タイプ    | 必須かどうか                             | デフォルト値 | 有効範囲  | 説明                                 |
-|--------------------------|--------|------------------------------------|-----|---------|-------------------------------------|
-| model_format_code       | easymaker.ModelFormatCode | 必須                                | なし  | TENSORFLOW, PYTORCH, SCIKIT_LEARN, HUGGING_FACE, TENSORFLOW_TRITON, PYTORCH_TRITON, ONNX_TRITON | モデルフォーマット情報 |
-| training_id              | String | hyperparameter_tuning_idがない場合は必須 | なし  | なし      | モデルとして作成する学習ID                       |
-| hyperparameter_tuning_id | String | training_idがない場合は必須             | なし  | なし      | モデルとして作成するハイパーパラメータチューニングID(最高学習で作成済み) |
-| model_name               | String | 必須                                | なし  | 最大50文字 | モデル名                              |
-| description        | String | 選択                                | なし  | 最大255文字 | モデルの説明                          |
-| parameter_list                   | Array  | 選択  | なし | 最大10個                                | パラメータ情報(parameterName/parameterValueで構成)         |
-| parameter_list[0].parameterName  | String | 選択  | なし | 最大64文字                                | パラメータ名                                            |
-| parameter_list[0].parameterValue | String | 選択  | なし | 最大255文字                               | パラメータ値                                              |
+| 名前 | タイプ | 必須 | デフォルト値 | 有効範囲 | 説明 |
+|----------------------------------|---------------------------|--------------------------|-----|--------------------------------------------------------------|-------------------------------------------|
+| model_format_code | easymaker.ModelFormatCode | fine_tuning_id未入力時は必須 | なし | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | 推論サービングに使用されるモデルのフォーマット情報 |
+| training_id | String | 任意 | なし | なし | モデルとして作成する学習ID |
+| hyperparameter_tuning_id | String | 任意 | なし | なし | モデルとして作成するハイパーパラメータチューニングID(最高の学習で作成される) |
+| fine_tuning_id | String | 任意 | なし | なし | モデルとして作成するファインチューニングID |
+| model_name | String | 必須 | なし | 最大50文字 | モデル名 |
+| description | String | 任意 | なし | 最大255文字 | モデルに関する説明 |
+| parameter_list | Array | 任意 | なし | 最大10個 | パラメータ情報(parameterName/parameterValueで構成) |
+| parameter_list[0].parameterName | String | 任意 | なし | 最大64文字 | パラメータ名 |
+| parameter_list[0].parameterValue | String | 任意 | なし | 最大255文字 | パラメータの値 |
 
 ```python
 model = easymaker.Model().create(
-    model_format_code=easymaker.ModelFormatCode.PYTORCH,
-    training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
     model_name='model_name',
+    training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
+    model_format_code=easymaker.ModelFormatCode.PYTORCH,
     description='model_description',
 )
 ```
 
-学習IDがなくても、モデルが保存されたパス情報とフレームワークの種類を入力してモデルを作成できます。
+```python
+model = easymaker.Model().create(
+    model_name='model_name',
+    fine_tuning_id=fine_tuning.fine_tuning_id,
+    description='model_description',
+)
+```
+
+学習、ハイパーパラメータチューニング、ファインチューニングのIDがなくても、モデルが保存されたパス情報とフレームワークの種類を入力してモデルを作成できます。
 
 [パラメータ]
 
 | 名前               | タイプ | 必須かどうか | デフォルト値 | 有効範囲                                      | 説明                                              |
 |----------------------|--------|-------|-----|-------------------------------------------|-----------------------------------------------------|
-| model_format_code       | easymaker.ModelFormatCode   | 必須 | なし | easymaker.ModelFormatCode.TENSORFLOW, easymaker.ModelFormatCode.PYTORCH, easymaker.ModelFormatCode.SCIKIT_LEARN, easymaker.ModelFormatCode.HUGGING_FACE, easymaker.ModelFormatCode.TENSORFLOW_TRITON, easymaker.ModelFormatCode.PYTORCH_TRITON, easymaker.ModelFormatCode.ONNX_TRITON | 推論サービングに使用されるモデルフォーマット情報                                |
+| model_format_code | easymaker.ModelFormatCode | 必須 | なし | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | 推論サービングに使用されるモデルのフォーマット情報 |
 | model_upload_uri            | String | 必須 | なし | 最大255文字                                   | モデルファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
 | model_name           | String | 必須 | なし | 最大50文字                                    | モデル名                                           |
 | description    | String | 任意 | なし | 最大255文字                                   | モデルの説明                                       |

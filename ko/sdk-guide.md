@@ -10,7 +10,9 @@
 
 ### AI EasyMaker 파이썬 SDK 설치
 
+```bash
 python -m pip install easymaker
+```
 
 - AI EasyMaker 노트북에는 기본적으로 설치되어 있습니다.
 
@@ -124,7 +126,7 @@ for instance in instance_type_list:
 | distributed_node_count                 | Integer                   | 선택                        | 1     | 1~10         | 분산 학습을 적용할 노드 수                                                  |
 | use_torchrun                           | Boolean                   | 선택                        | False | True, False | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                             |
 | nproc_per_node                         | Integer                   | use_torchrun True 시 필수    | 1     | 1~(CPU 개수 또는 GPU 개수) | 노드당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값                  |
-| data_storage_size                      | Integer                   | Obejct Storage 사용 시 필수    | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                |
+| data_storage_size                      | Integer                   | Object Storage 사용 시 필수    | 없음    | 300~10000   | 학습에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                |
 | algorithm_name                         | String                    | NHN Cloud 제공 알고리즘 사용 시 필수 | 없음    | 최대 64자      | 알고리즘 이름(CLI로 조회 가능)                                              |
 | source_dir_uri                         | String                    | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | 학습에 필요한 파일들이 들어 있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
 | entry_point                            | String                    | 자체 알고리즘 사용 시 필수           | 없음    | 최대 255자     | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                              |
@@ -135,9 +137,9 @@ for instance in instance_type_list:
 | hyperparameter_list                    | easymaker.Parameter Array | 선택                        | 없음    | 최대 100개     | 하이퍼파라미터 정보(parameter_name/parameter_value로 구성)                  |
 | hyperparameter_list[0].parameter_name  | String                    | 선택                        | 없음    | 최대 255자     | 하이퍼파라미터 키                                                        |
 | hyperparameter_list[0].parameter_value | String                    | 선택                        | 없음    | 최대 1000자    | 하이퍼파라미터 값                                                        |
-| dataset_list                           | easymaker.Dataset Array   | 선택                        | 없음    | 최대 10개      | 학습에 사용될 데이터 세트 정보(dataset_name/data_uri로 구성)                       |
-| dataset_list[0].dataset_name           | String                    | 선택                        | 없음    | 최대 36자      | 데이터 이름                                                           |
-| dataset_list[0].data_uri               | String                    | 선택                        | 없음    | 최대 255자     | 데이터 경로                                                           |
+| dataset_list                           | easymaker.Dataset Array   | 필수                        | 없음    | 최대 10개      | 학습에 사용될 데이터 세트 정보(dataset_name/data_uri로 구성)                       |
+| dataset_list[0].dataset_name           | String                    | 필수                        | 없음    | 최대 36자      | 데이터 이름                                                           |
+| dataset_list[0].data_uri               | String                    | 필수                        | 없음    | 최대 255자     | 데이터 경로                                                           |
 | use_log                                | Boolean                   | 선택                        | False | True, False | Log & Crash Search 서비스에 로그를 남길지 여부                               |
 | wait                                   | Boolean                   | 선택                        | True  | True, False | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                        |
 
@@ -245,8 +247,8 @@ for instance in instance_type_list:
 | distributed_node_count                                           | Integer                            | 필수                                                            | 1      | distributed_node_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 각 학습당 분산 학습을 적용할 노드 수                                         |
 | parallel_trial_count                                             | Integer                            | 필수                                                            | 1      | distributed_node_count와 parallel_trial_count의 곱이 10 이하 | 하이퍼파라미터 튜닝에서 병렬로 실행할 학습 수                                                  |
 | use_torchrun                                                     | Boolean                            | 선택                                                            | False  | True, False                                            | torchrun 사용 여부, Pytorch 이미지에서만 사용 가능                                       |
-| nproc_per_node                                                   | Integer                            | use_torchrun True 시 필수                                        | 1      | 1~(CPU 개수 또는 GPU 개수)                                   | 노드 당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값                           |
-| data_storage_size                                                | Integer                            | Obejct Storage 사용 시 필수                                        | 없음    | 300~10000                                              | 하이퍼파라미터 튜닝에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                  |
+| nproc_per_node                                                   | Integer                            | use_torchrun True 시 필수                                        | 1      | 1~(CPU 개수 또는 GPU 개수)                                   | 노드당 프로세스 개수, use_torchrun을 사용할 경우 반드시 설정해야 하는 값                           |
+| data_storage_size                                                | Integer                            | Object Storage 사용 시 필수                                        | 없음    | 300~10000                                              | 하이퍼파라미터 튜닝에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요                  |
 | algorithm_name                                                   | String                             | NHN Cloud 제공 알고리즘 사용 시 필수                                     | 없음    | 최대 64자                                                 | 알고리즘 이름(CLI로 조회 가능)                                                        |
 | source_dir_uri                                                   | String                             | 자체 알고리즘 사용 시 필수                                               | 없음    | 최대 255자                                                | 하이퍼파라미터 튜닝에 필요한 파일들이 들어있는 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS)    |
 | entry_point                                                      | String                             | 자체 알고리즘 사용 시 필수                                               | 없음    | 최대 255자                                                | source_dir_uri 안에서 최초 실행될 파이썬 파일 정보                                        |
@@ -261,9 +263,9 @@ for instance in instance_type_list:
 | hyperparameter_spec_list[0].<br>hyperparameter_max_value         | String                     | hyperparameterTypeCode가 INT, DOUBLE인 경우 필수(string 타입으로 숫자 입력)                    | 없음    | 없음                                                     | 하이퍼파라미터 최댓값                                                                |
 | hyperparameter_spec_list[0].<br>hyperparameter_step              | String                     | hyperparameterTypeCode가 INT, DOUBLE이면서 GRID 전략인 경우 필수         | 없음    | 없음                                                     | "Grid" 튜닝 전략을 사용할 때 하이퍼파라미터 값의 변화 크기                                       |
 | hyperparameter_spec_list[0].<br>hyperparameter_specified_values | String                             | hyperparameterTypeCode가 DISCRETE, CATEGORICAL 경우 필수           | 없음    | 최대 3000자                                               | 정해진 하이퍼파라미터 목록(`,`로 구분된 문자열이나 숫자)                                          |
-| dataset_list                                                     | easymaker.Dataset Array            | 선택                                                            | 없음    | 최대 10개                                                 | 하이퍼파라미터 튜닝에 사용될 데이터 세트 정보(dataset_name/data_uri로 구성)                       |
-| dataset_list[0].dataset_name                                     | String                             | 선택                                                            | 없음    | 최대 36자                                                 | 데이터 이름                                                                     |
-| dataset_list[0].dataset_uri                                      | String                             | 선택                                                            | 없음    | 최대 255자                                                | 데이터 경로                                                                     |
+| dataset_list                                                     | easymaker.Dataset Array            | 필수                                                            | 없음    | 최대 10개                                                 | 하이퍼파라미터 튜닝에 사용될 데이터 세트 정보(dataset_name/data_uri로 구성)                       |
+| dataset_list[0].dataset_name                                     | String                             | 필수                                                            | 없음    | 최대 36자                                                 | 데이터 이름                                                                     |
+| dataset_list[0].dataset_uri                                      | String                             | 필수                                                            | 없음    | 최대 255자                                                | 데이터 경로                                                                     |
 | metric_list                                                      | easymaker.Metric                   | 자체 알고리즘 사용 시 필수                                               | 없음    | 최대 10개(지표 이름들로 된 문자열 리스트)                              | 학습 코드가 출력하는 로그 중에 어떤 지표를 수집할지 정의                                           |
 | metric_list[0].name                                              | String                             | 자체 알고리즘 사용 시 필수                                               | 없음    | 없음                                                     | 지표 이름                                                                      |
 | metric_regex                                                     | String                             | 자체 알고리즘 사용 시 선택                                               | ([\w\ | -]+)\s*=\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?)           | 최대 255자                                                                    | 지표를 수집하는 데 사용할 정규 표현식을 입력. 학습 알고리즘이 정규 표현식에 맞게 지표를 출력해야 함.                                                        |
@@ -365,6 +367,190 @@ for hyperparameter_tuning in hyperparameter_tuning_list:
 easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 ```
 
+<a id="fine.tuning"></a>
+
+## 파인 튜닝
+
+사전 학습된 거대 언어 모델에 특정 도메인이나 작업에 맞춘 데이터 세트로 추가 학습을 수행하여 모델의 성능을 특화하는 기능입니다.
+
+<a id="fine.tuning.model.preset.list"></a>
+
+### 베이스 모델 목록 조회
+
+파인 튜닝에 사용할 베이스 모델 목록을 조회합니다.
+
+[파라미터]
+
+| 이름                | 타입     | 필수 여부 | 기본값 | 유효 범위 | 설명                              |
+| ----------------- | ------ | ----- | --- | ----- | ------------------------------- |
+| model_preset_name | String | 선택    | 없음  | 없음    | 베이스 모델 이름(이름으로 필터링, 미입력 시 전체 조회) |
+
+```python
+base_model_list = easymaker.FineTuning.get_base_model_list()
+for base_model in base_model_list:
+    base_model.print_info()
+
+# 조회된 베이스 모델 중 하나를 선택
+base_model = base_model_list[0]
+base_model_preset_id = base_model.model_preset_id
+```
+
+<a id="fine.tuning.instance.list"></a>
+
+### 인스턴스 목록 조회
+
+선택한 베이스 모델 프리셋(`model_preset_id`)에서 사용 가능한 인스턴스 타입 목록을 조회합니다.
+
+[파라미터]
+
+| 이름              | 타입     | 필수 여부 | 기본값 | 유효 범위  | 설명            |
+| --------------- | ------ | ----- | --- | ------ | ------------- |
+| model_preset_id | String | 선택    | 없음  | 최대 36자 | 베이스 모델 프리셋 ID |
+
+```python
+instance_type_list = easymaker.FineTuning.get_instance_type_list(model_preset_id=base_model_preset_id)
+for instance in instance_type_list:
+    instance.print_info()
+```
+
+<a id="fine.tuning.parameter.spec.list"></a>
+
+### 하이퍼파라미터 스펙 조회
+
+선택한 베이스 모델의 파인 튜닝 하이퍼파라미터 스펙을 조회합니다. 조회한 스펙의 기본값으로 하이퍼파라미터 목록을 구성할 수 있습니다.
+
+[파라미터]
+
+| 이름                   | 타입     | 필수 여부 | 기본값 | 유효 범위  | 설명            |
+| -------------------- | ------ | ----- | --- | ------ | ------------- |
+| base_model_preset_id | String | 필수    | 없음  | 최대 36자 | 베이스 모델 프리셋 ID |
+
+```python
+parameter_spec_list = easymaker.FineTuning.get_parameter_spec_list(
+    base_model_preset_id=base_model_preset_id,
+)
+for spec in parameter_spec_list:
+    spec.print_info()
+
+# 기본값이 있는 파라미터는 기본값으로 하이퍼파라미터 목록 구성(필요 시 값 수정)
+hyperparameter_list = [
+    easymaker.Parameter(parameter_name=spec.parameter_name, parameter_value=spec.default_value)
+    for spec in parameter_spec_list
+    if spec.default_value is not None
+]
+```
+
+<a id="fine.tuning.create"></a>
+
+### 파인 튜닝 생성
+
+[파라미터]
+
+| 이름                                     | 타입                          | 필수 여부                     | 기본값   | 유효 범위                     | 설명                                                              |
+| -------------------------------------- | --------------------------- | ------------------------- | ----- |---------------------------|-----------------------------------------------------------------|
+| experiment_id                          | String                      | easymaker.init에서 미입력 시 필수 | 없음    | 최대 36자                    | 실험 ID                                                           |
+| experiment_name                        | String                      | 선택                        | 없음    | 최대 50자                    | 신규 실험 이름(실험을 함께 생성하려는 경우 사용)                                    |
+| experiment_description                 | String                      | 선택                        | 없음    | 최대 255자                   | 신규 실험에 대한 설명                                                    |
+| fine_tuning_name                       | String                      | 필수                        | 없음    | 최대 50자                    | 파인 튜닝 이름                                                        |
+| description                            | String                      | 선택                        | 없음    | 최대 255자                   | 파인 튜닝에 대한 설명                                                    |
+| flavor_name                            | String                      | 필수                        | 없음    | 없음                        | 인스턴스 타입 이름(조회 가능)                                               |
+| instance_count                         | Integer                     | 선택                        | 1     | 1~10                      | 학습 인스턴스 수                                                       |
+| base_model_preset_id                   | String                      | 필수                        | 없음    | 최대 36자                    | 기반 모델 프리셋 ID                                                    |
+| model_upload_uri                       | String                      | 필수                        | 없음    | 최대 255자                   | 파인 튜닝 완료된 모델이 업로드될 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
+| timeout_hours                          | Integer                     | 선택                        | 720   | 1~720                     | 최대 파인 튜닝 시간(단위: 시간)                                             |
+| hyperparameter_list                    | easymaker.Parameter Array   | 선택                        | 없음    | 최대 100개                   | 하이퍼파라미터 정보(parameter_name/parameter_value로 구성)                  |
+| hyperparameter_list[0].parameter_name  | String                      | 선택                        | 없음    | 최대 255자                   | 하이퍼파라미터 키                                                       |
+| hyperparameter_list[0].parameter_value | String                      | 선택                        | 없음    | 최대 1000자                  | 하이퍼파라미터 값                                                       |
+| dataset_list                           | easymaker.Dataset Array     | 필수                        | 없음    | 최대 10개                    | 파인 튜닝에 사용될 데이터 세트 정보                                            |
+| dataset_list[0].dataset_name           | String                      | 필수                        | 없음    | 최대 36자                    | 데이터 이름                                                          |
+| dataset_list[0].data_uri               | String                      | 필수                        | 없음    | 최대 255자                   | 데이터 경로                                                          |
+| dataset_list[0].dataset_format_code    | easymaker.DatasetFormatCode | 필수                        | 없음    | CHAT_TEMPLATE, COMPLETION | 데이터 세트 포맷                                                       |
+| dataset_list[0].dataset_split_code     | easymaker.DatasetSplitCode  | 필수                        | TRAIN | TRAIN, VALIDATION         | 데이터 세트 split(학습/검증), 최소 1개의 TRAIN 필요                         |
+| data_storage_size                      | Integer                     | Object Storage 사용 시 필수    | 없음    | 300~10000                 | 파인 튜닝에 필요한 데이터를 다운로드할 저장 공간 크기(단위: GB), NAS 사용 시 불필요            |
+| validation_split_percent               | Integer                     | 선택                        | 0     | 0~100                     | 학습 데이터에서 검증용으로 분할할 비율(%). 0이면 분할하지 않음. VALIDATION 데이터 세트를 지정하면 그 데이터 세트를 검증에 사용하며 이 값은 무시됨 |
+| use_log                                | Boolean                     | 선택                        | False | True, False               | Log & Crash Search 서비스에 로그를 남길지 여부                              |
+| wait                                   | Boolean                     | 선택                        | True  | True, False               | True: 생성이 완료된 이후 반환, False: 생성 요청 후 즉시 반환                       |
+
+```python
+fine_tuning = easymaker.FineTuning().run(
+    experiment_id=experiment.experiment_id, # Optional if already set in init
+    fine_tuning_name='fine_tuning_name',
+    description='fine_tuning_description',
+    flavor_name='g4.c92m1800',
+    instance_count=1,
+    base_model_preset_id=base_model_preset_id,
+    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    timeout_hours=24,
+    validation_split_percent=10,  # 학습 데이터의 10%를 검증에 사용
+    hyperparameter_list=[
+        easymaker.Parameter(
+            parameter_name="epoch",
+            parameter_value="1",
+        ),
+        easymaker.Parameter(
+            parameter_name="learning_rate",
+            parameter_value="0.0002",
+        ),
+        easymaker.Parameter(
+            parameter_name="batch_size",
+            parameter_value="1",
+        ),
+    ],
+    dataset_list=[
+        easymaker.Dataset(
+            dataset_name="train-dataset",
+            data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}',
+            dataset_format_code=easymaker.DatasetFormatCode.CHAT_TEMPLATE,
+            dataset_split_code=easymaker.DatasetSplitCode.TRAIN,
+        ),
+    ],
+    data_storage_size=300,
+    use_log=False,
+    # wait=False,
+)
+```
+
+<a id="fine.tuning.list"></a>
+
+### 파인 튜닝 목록 조회
+
+```python
+fine_tuning_list = easymaker.FineTuning.get_list()
+for fine_tuning in fine_tuning_list:
+    fine_tuning.print_info()
+```
+
+<a id="fine.tuning.stop"></a>
+
+### 파인 튜닝 중지
+
+실행 중(RUNNING)인 파인 튜닝을 중지합니다.
+
+[파라미터]
+
+| 이름             | 타입     | 필수 여부 | 기본값 | 유효 범위  | 설명       |
+| -------------- | ------ | ----- | --- | ------ | -------- |
+| fine_tuning_id | String | 필수    | 없음  | 최대 36자 | 파인 튜닝 ID |
+
+```python
+easymaker.FineTuning(fine_tuning_id).stop()
+```
+
+<a id="fine.tuning.delete"></a>
+
+### 파인 튜닝 삭제
+
+[파라미터]
+
+| 이름             | 타입     | 필수 여부 | 기본값 | 유효 범위  | 설명       |
+| -------------- | ------ | ----- | --- | ------ | -------- |
+| fine_tuning_id | String | 필수    | 없음  | 최대 36자 | 파인 튜닝 ID |
+
+```python
+easymaker.FineTuning(fine_tuning_id).delete()
+```
+
+
 <a id="model"></a>
 
 ## 모델
@@ -373,38 +559,47 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 
 ### 모델 생성
 
-학습 ID 값으로 모델 생성을 요청할 수 있습니다.
+학습, 하이퍼파라미터 튜닝, 파인 튜닝 ID 값으로 모델 생성을 요청할 수 있습니다.
 모델은 엔드포인트 생성 시 사용됩니다.
 
 [파라미터]
 
-| 이름                       | 타입     | 필수 여부                              | 기본값 | 유효 범위   | 설명                                  |
-|--------------------------|--------|------------------------------------|-----|---------|-------------------------------------|
-| model_format_code       | easymaker.ModelFormatCode | 필수                                 | 없음  | TENSORFLOW, PYTORCH, SCIKIT_LEARN, HUGGING_FACE, TENSORFLOW_TRITON, PYTORCH_TRITON, ONNX_TRITON | 모델 포맷 정보 |
-| training_id              | String | hyperparameter_tuning_id가 없는 경우 필수 | 없음  | 없음      | 모델로 생성할 학습 ID                       |
-| hyperparameter_tuning_id | String | training_id가 없는 경우 필수              | 없음  | 없음      | 모델로 생성할 하이퍼파라미터 튜닝 ID(최고 학습으로 생성됨) |
-| model_name               | String | 필수                                 | 없음  | 최대 50자  | 모델 이름                               |
-| description        | String | 선택                                 | 없음  | 최대 255자 | 모델에 대한 설명                           |
-| parameter_list                   | Array  | 선택    | 없음  | 최대 10개                                  | 파라미터 정보(parameterName/parameterValue로 구성)         |
-| parameter_list[0].parameterName  | String | 선택    | 없음  | 최대 64자                                  | 파라미터 이름                                              |
-| parameter_list[0].parameterValue | String | 선택    | 없음  | 최대 255자                                 | 파라미터 값                                                |
+| 이름                               | 타입                        | 필수 여부                 | 기본값 | 유효 범위                                                        | 설명                                        |
+|----------------------------------|---------------------------|--------------------------|-----|--------------------------------------------------------------|-------------------------------------------|
+| model_format_code                | easymaker.ModelFormatCode | fine_tuning_id 미입력시 필수 | 없음  | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON   | 추론 서빙에 사용되는 모델 포맷 정보                                  |
+| training_id                      | String                    | 선택                       | 없음  | 없음                                                           | 모델로 생성할 학습 ID                             |
+| hyperparameter_tuning_id         | String                    | 선택                       | 없음  | 없음                                                           | 모델로 생성할 하이퍼파라미터 튜닝 ID(최고 학습으로 생성됨)        |
+| fine_tuning_id                   | String                    | 선택                       | 없음  | 없음                                                           | 모델로 생성할 파인 튜닝 ID                          |
+| model_name                       | String                    | 필수                       | 없음  | 최대 50자                                                       | 모델 이름                                     |
+| description                      | String                    | 선택                       | 없음  | 최대 255자                                                      | 모델에 대한 설명                                 |
+| parameter_list                   | Array                     | 선택                       | 없음  | 최대 10개                                                       | 파라미터 정보(parameterName/parameterValue로 구성) |
+| parameter_list[0].parameterName  | String                    | 선택                       | 없음  | 최대 64자                                                       | 파라미터 이름                                   |
+| parameter_list[0].parameterValue | String                    | 선택                       | 없음  | 최대 255자                                                      | 파라미터 값                                    |
 
 ```python
 model = easymaker.Model().create(
-    model_format_code=easymaker.ModelFormatCode.PYTORCH,
-    training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
     model_name='model_name',
+    training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
+    model_format_code=easymaker.ModelFormatCode.PYTORCH,
     description='model_description',
 )
 ```
 
-학습 ID가 없더라도, 모델이 저장된 경로 정보와 프레임워크 종류를 입력하여 모델을 생성할 수 있습니다.
+```python
+model = easymaker.Model().create(
+    model_name='model_name',
+    fine_tuning_id=fine_tuning.fine_tuning_id,
+    description='model_description',
+)
+```
+
+학습, 하이퍼파라미터 튜닝, 파인 튜닝 ID가 없더라도, 모델이 저장된 경로 정보와 프레임워크 종류를 입력하여 모델을 생성할 수 있습니다.
 
 [파라미터]
 
 | 이름                   | 타입     | 필수 여부 | 기본값 | 유효 범위                                   | 설명                                                  |
 |----------------------|--------|-------|-----|-----------------------------------------|-----------------------------------------------------|
-| model_format_code       | easymaker.ModelFormatCode   | 필수    | 없음  | easymaker.ModelFormatCode.TENSORFLOW, easymaker.ModelFormatCode.PYTORCH, easymaker.ModelFormatCode.SCIKIT_LEARN, easymaker.ModelFormatCode.HUGGING_FACE, easymaker.ModelFormatCode.TENSORFLOW_TRITON, easymaker.ModelFormatCode.PYTORCH_TRITON, easymaker.ModelFormatCode.ONNX_TRITON | 추론 서빙에 사용되는 모델 포맷 정보                                    |
+| model_format_code | easymaker.ModelFormatCode | 필수 | 없음 | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | 추론 서빙에 사용되는 모델 포맷 정보 |
 | model_upload_uri            | String | 필수    | 없음  | 최대 255자                                 | 모델 파일 경로(NHN Cloud Object Storage 또는 NHN Cloud NAS) |
 | model_name           | String | 필수    | 없음  | 최대 50자                                  | 모델 이름                                               |
 | description    | String | 선택    | 없음  | 최대 255자                                 | 모델에 대한 설명                                           |
