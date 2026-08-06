@@ -1,19 +1,18 @@
-<a id="ai.easymaker.algorithm.guide"></a>
+<!-- pre-align:aligned sig=e090d93d817c -->
 
-## Machine Learning > AI EasyMaker > NHN Cloud 제공 알고리즘 가이드
+<a id="ai.easymaker.algorithm.guide"></a>
+## Machine Learning > AI EasyMaker > NHN Cloud 제공 알고리즘 가이드 { #ai.easymaker.algorithm.guide }
 
 NHN Cloud AI EasyMaker에서 제공하는 알고리즘을 소개합니다.
 기본 알고리즘을 활용하면 데이터 세트만 준비하면 별도로 학습 코드를 작성하지 않아도 머신 러닝 모델을 생성할 수 있습니다.
 
 <a id="image.classification"></a>
-
-## Image Classification
+## Image Classification { #image.classification }
 
 이미지의 종류를 분류하는 알고리즘(ResNet-50)입니다.
 
 <a id="image.classification.hyperparameter"></a>
-
-### 하이퍼파라미터
+### 하이퍼파라미터 { #image.classification.hyperparameter }
 
 | 하이퍼파라미터 이름 | 필수 여부 | Value Type | Default Value | 범위      | 설명 |
 | --- | --- | --- | -- |---------| --- |
@@ -25,13 +24,11 @@ NHN Cloud AI EasyMaker에서 제공하는 알고리즘을 소개합니다.
 | logging_steps  | False | int | 500 | [500~∞)   | 로그를 출력하는 step 주기 |
 
 <a id="image.classification.data.set"></a>
-
-### 데이터 세트
+### 데이터 세트 { #image.classification.data.set }
 
 train, validation, test 데이터 세트를 준비합니다.
 
 <a id="image.classification.data.set.train"></a>
-
 #### train(필수)
 
 훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같이 정의된 디렉터리 구조로 준비해야 합니다.
@@ -53,7 +50,6 @@ folder/train/dog/golden_retriever.png
 ```
 
 <a id="image.classification.data.set.validation"></a>
-
 #### validation(필수)
 
 검증을 위한 데이터 세트입니다. 데이터 세트는 다음과 같이 정의된 디렉터리 구조로 준비해야 합니다.
@@ -75,7 +71,6 @@ folder/validation/dog/calupoh.png
 ```
 
 <a id="image.classification.data.set.test"></a>
-
 #### test(선택)
 
 테스트를 위한 데이터 세트입니다. 데이터 세트는 다음과 같이 정의된 디렉터리 구조로 준비해야 합니다.
@@ -97,8 +92,7 @@ folder/test/dog/cretan_hound.png
 ```
 
 <a id="image.classification.metric"></a>
-
-### 지표
+### 지표 { #image.classification.metric }
 
 Image Classification 알고리즘은 다음의 지표를 생성합니다.
 학습 중 생성된 지표는 **학습 > 텐서보드 바로가기**에서 확인할 수 있습니다.
@@ -111,13 +105,11 @@ Image Classification 알고리즘은 다음의 지표를 생성합니다.
 | F1-Score | Precision과 Recall의 조화 평균 |
 
 <a id="image.classification.inference"></a>
-
-### 추론
+### 추론 { #image.classification.inference }
 
 학습된 모델로 엔드포인트를 생성하고 추론을 요청하려면 [엔드포인트 생성과 추론 요청](#endpoint.create.inference.request) 문서를 참고하세요.
 
 <a id="image.classification.inference.response.format"></a>
-
 #### 응답 형식
 
 이미지 종류(label)별 score 값이 응답됩니다.
@@ -138,14 +130,12 @@ Image Classification 알고리즘은 다음의 지표를 생성합니다.
 ```
 
 <a id="semantic.segmentation"></a>
-
-## Semantic Segmentation
+## Semantic Segmentation { #semantic.segmentation }
 
 이미지 내의 모든 픽셀 영역의 레이블을 예측하는 알고리즘(SegFormer-B3)입니다.
 
 <a id="semantic.segmentation.hyperparameter"></a>
-
-### 하이퍼파라미터
+### 하이퍼파라미터 { #semantic.segmentation.hyperparameter }
 
 | 하이퍼파라미터 이름 | 필수 여부 | Value Type | Default Value | 유효 범위 | 설명 |
 | --- | --- | --- |---------------| --- | --- |
@@ -155,13 +145,11 @@ Image Classification 알고리즘은 다음의 지표를 생성합니다.
 | logging_steps  | False | int | 500            | [500~∞)   | 로그를 출력하는 step 주기 |
 
 <a id="semantic.segmentation.data.set"></a>
-
-### 데이터 세트
+### 데이터 세트 { #semantic.segmentation.data.set }
 
 train, validation, resources, test 데이터 세트를 준비합니다.
 
 <a id="semantic.segmentation.data.set.train"></a>
-
 #### train(필수)
 
 훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉터리 구조로 준비해야 합니다.
@@ -206,7 +194,6 @@ folder/train/annotations/0003.png
 - seg_map: segmentation map 파일 경로를 작성합니다.
 
 <a id="semantic.segmentation.data.set.validation"></a>
-
 #### validation(필수)
 
 검증을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉터리 구조로 준비해야 합니다.
@@ -250,7 +237,6 @@ folder/validation/annotations/0003.png
 - seg_map: segmentation map 파일 경로를 작성합니다.
 
 <a id="semantic.segmentation.data.set.resources"></a>
-
 #### resources(필수)
 
 모델을 설정할 때 필요한 레이블 클래스에 레이블 ID를 매핑하기 위한 Key-Value 형식의 Dictionary를 작성합니다.
@@ -272,7 +258,6 @@ folder/resources/id2lable.json
 ```
 
 <a id="semantic.segmentation.data.set.test"></a>
-
 #### test(선택)
 
 테스트를 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉터리 구조로 준비해야 합니다.
@@ -316,8 +301,7 @@ image와 segmentation map의 매핑 파일을 작성합니다.
 - seg_map: segmentation map 파일 경로를 작성합니다.
 
 <a id="semantic.segmentation.metric"></a>
-
-### 지표
+### 지표 { #semantic.segmentation.metric }
 
 Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 학습 중 생성된 지표는 **학습 > 텐서보드 바로가기**에서 확인할 수 있습니다.
@@ -331,13 +315,11 @@ Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 | per_category_iou | 클래스별 모델이 예측한 영역과 정답 영역의 겹치는 비율 |
 
 <a id="semantic.segmentation.inference"></a>
-
-### 추론
+### 추론 { #semantic.segmentation.inference }
 
 학습된 모델로 엔드포인트를 생성하고 추론을 요청하려면 [엔드포인트 생성과 추론 요청](#endpoint.create.inference.request) 문서를 참고하세요.
 
 <a id="semantic.segmentation.inference.response.format"></a>
-
 #### 응답 형식
 
 요청 이미지를 512 x 512 크기로 조정한 뒤, 각 이미지의 픽셀마다 label 값이 배열 형태로 응답됩니다.
@@ -359,14 +341,12 @@ Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 ```
 
 <a id="object.detection"></a>
-
-## Object Detection
+## Object Detection { #object.detection }
 
 이미지 내 존재하는 모든 객체의 위치(bbox) 및 종류(class)를 예측하는 알고리즘(detr-resnet-50)입니다.
 
 <a id="object.detection.hyperparameter"></a>
-
-### 하이퍼파라미터
+### 하이퍼파라미터 { #object.detection.hyperparameter }
 
 | 하이퍼파라미터 이름 | 필수 여부 | Value Type | Default Value | 유효 범위     | 설명 |
 | --- | --- | --- | -- |-----------| --- |
@@ -377,13 +357,11 @@ Semantic Segmentation 알고리즘은 다음의 지표를 생성합니다.
 | logging_steps  | False | int | 500 | [500~∞)   | 로그를 출력하는 step 주기 |
 
 <a id="object.detection.data.set"></a>
-
-### 데이터 세트
+### 데이터 세트 { #object.detection.data.set }
 
 train, test 데이터 세트를 준비합니다.
 
 <a id="object.detection.data.set.train"></a>
-
 #### train(필수)
 
 훈련을 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉터리 구조로 준비해야 합니다.
@@ -506,7 +484,6 @@ COCO Dataset의 형식으로 작성합니다.
 ```
 
 <a id="object.detection.data.set.validation"></a>
-
 #### validation(필수)
 
 검증을 위한 데이터 세트입니다. 데이터 세트는 다음과 같이 정의된 디렉터리 구조로 준비해야 합니다.
@@ -525,7 +502,6 @@ COCO Dataset의 형식으로 작성합니다.
 자세한 형식은 [COCO Dataset의 format-data](https://cocodataset.org/#format-data) 문서의 Data format과 Object Detection 내용을 참고합니다.
 
 <a id="object.detection.data.set.test"></a>
-
 #### test(필수)
 
 test를 위한 데이터 세트입니다. 데이터 세트는 다음과 같은 정의된 디렉터리 구조로 준비해야 합니다.
@@ -544,13 +520,11 @@ COCO Dataset의 형식으로 작성합니다.
 자세한 형식은 [COCO Dataset의 format-data](https://cocodataset.org/#format-data) 문서의 Data format과 Object Detection 내용을 참고합니다.
 
 <a id="object.detection.inference"></a>
-
-### 추론
+### 추론 { #object.detection.inference }
 
 학습된 모델로 엔드포인트를 생성하고 추론을 요청하려면 [엔드포인트 생성과 추론 요청](#endpoint.create.inference.request) 문서를 참고하세요.
 
 <a id="object.detection.inference.response.format"></a>
-
 #### 응답 형식
 
 감지된 객체의 bbox(xmin, ymin, xmax, ymax) 목록을 반환합니다.
@@ -581,8 +555,7 @@ COCO Dataset의 형식으로 작성합니다.
 ```
 
 <a id="endpoint.create.inference.request"></a>
-
-## 엔드포인트 생성과 추론 요청
+## 엔드포인트 생성과 추론 요청 { #endpoint.create.inference.request }
 
 학습이 완료된 모델로 엔드포인트를 생성하고 추론을 하려면 다음의 가이드를 참고하세요.
 
@@ -593,8 +566,7 @@ COCO Dataset의 형식으로 작성합니다.
 5. 스테이지 엔드포인트 URL을 통해 실시간 추론 API를 요청할 수 있습니다.
 
 <a id="endpoint.create.inference.request.format"></a>
-
-### 요청
+### 요청 { #endpoint.create.inference.request.format }
 
 - Request URI: POST <https://kr1-{apigwSeviceId}.api.nhncloudservice.com/inference>
 - Request Body
@@ -612,8 +584,7 @@ COCO Dataset의 형식으로 작성합니다.
 - image_to_bytes_array 값은 이미지를 Base64 바이트 배열로 변환한 값입니다. [참고] 이미지 바이트 배열 변환 파이썬 코드 내용을 참고하세요.
 
 <a id="endpoint.create.inference.request.note.image"></a>
-
-### [참고] 이미지 바이트 배열 변환 파이썬 코드
+### [참고] 이미지 바이트 배열 변환 파이썬 코드 { #endpoint.create.inference.request.note.image }
 
 ```python
 import base64

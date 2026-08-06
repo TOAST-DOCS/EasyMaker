@@ -1,13 +1,12 @@
-<a id="ai.easymaker"></a>
+<!-- pre-align:aligned sig=287622970352 -->
 
-## Machine Learning > AI EasyMaker > リリースノート
+<a id="ai.easymaker"></a>
+## Machine Learning > AI EasyMaker > リリースノート { #ai.easymaker }
 
 <a id="ai.easymaker.release.notes.2026.07.28"></a>
-
-### 2026. 07. 28.
+### 2026. 07. 28. { #ai.easymaker.release.notes.2026.07.28 }
 
 <a id="ai.easymaker.release.notes.2026.07.28.feature.change"></a>
-
 #### 機能改善・変更
 
 - ファインチューニング機能の追加
@@ -15,8 +14,7 @@
     - 詳細については、[ファインチューニングガイド](./console-guide/#fine.tuning)のドキュメントを参照してください。
     
 <a id="ai.easymaker.release.notes.2025.10.28"></a>
-
-### 2025. 10. 28.
+### 2025. 10. 28. { #ai.easymaker.release.notes.2025.10.28 }
 
 - RAG(Retrieval-Augmented Generation、検索拡張生成)機能の追加
     - LLMの応答精度を向上させるRAG機能が追加されました。
@@ -25,19 +23,16 @@
     - Triton形式のモデルを作成し、デプロイできる機能が追加されました。
 
 <a id="ai.easymaker.release.notes.2025.06.24"></a>
-
-### 2025. 06. 24.
+### 2025. 06. 24. { #ai.easymaker.release.notes.2025.06.24 }
 
 <a id="ai.easymaker.release.notes.2025.06.24.feature.change"></a>
-
 #### 機能改善・変更
 
 - モデル評価機能追加
     - モデルの性能を測定し、比較できます。
 
 <a id="ai.easymaker.release.notes.2024.10.29"></a>
-
-### 2024. 10. 29.
+### 2024. 10. 29. { #ai.easymaker.release.notes.2024.10.29 }
 
 - エンドポイント機能改善
     - リソース割り当て値を直接設定できるようにサポートします。
@@ -45,11 +40,9 @@
     - Hugging FaceモデルをAI EasyMakerに登録してエンドポイント、バッチ推論でサービングできるようにサポートします。
 
 <a id="ai.easymaker.release.notes.2024.07.23"></a>
-
-### 2024. 07. 23.
+### 2024. 07. 23. { #ai.easymaker.release.notes.2024.07.23 }
 
 <a id="ai.easymaker.release.notes.2024.07.23.feature.change"></a>
-
 #### 機能改善・変更
 
 - MLパイプライン機能追加
@@ -61,21 +54,17 @@
     - PyTorch no-archiveモデルをAI EasyMakerに登録し、エンドポイントとして提供できるようにサポートします。
 
 <a id="ai.easymaker.release.notes.2024.05.10"></a>
-
-### 2024. 05. 10.
+### 2024. 05. 10. { #ai.easymaker.release.notes.2024.05.10 }
 
 <a id="ai.easymaker.release.notes.2024.05.10.feature.change"></a>
-
 #### 機能改善・変更
 
 - ノートパソコン再起動機能を追加
 
 <a id="ai.easymaker.release.notes.2024.04.23"></a>
-
-### 2024. 04. 23.
+### 2024. 04. 23. { #ai.easymaker.release.notes.2024.04.23 }
 
 <a id="ai.easymaker.release.notes.2024.04.23.feature.change"></a>
-
 #### 機能改善・変更
 
 - バッチ推論機能を追加
@@ -95,11 +84,9 @@
     - 適切なsave_stepsの数値をアルゴリズム内で自動的に計算し、最大3つまで保存します。
 
 <a id="ai.easymaker.release.notes.2023.12.19"></a>
-
-### 2023. 12. 19.
+### 2023. 12. 19. { #ai.easymaker.release.notes.2023.12.19 }
 
 <a id="ai.easymaker.release.notes.2023.12.19.feature.change"></a>
-
 #### 機能改善・変更
 
 - 個人イメージを利用したノートパソコン、学習
@@ -113,11 +100,9 @@
     - エンドポイントノードの増設/縮小ポリシーを設定してノード数を動的に管理できます。
 
 <a id="ai.easymaker.release.notes.2023.09.26"></a>
-
-### 2023. 09. 26.
+### 2023. 09. 26. { #ai.easymaker.release.notes.2023.09.26 }
 
 <a id="ai.easymaker.release.notes.2023.09.26.feature.change"></a>
-
 #### 機能改善・変更
 
 - Ubuntu 22.04バージョン提供
@@ -137,11 +122,9 @@
     - 並列学習数を調整してハイパーパラメータチューニング作業の性能を最適化できます。
 
 <a id="ai.easymaker.release.notes.2023.06.27"></a>
-
-### 2023. 06. 27.
+### 2023. 06. 27. { #ai.easymaker.release.notes.2023.06.27 }
 
 <a id="ai.easymaker.release.notes.2023.06.27.feature.change"></a>
-
 #### 機能改善・変更
 
 - ハイパーパラメータチューニング機能を追加
@@ -154,11 +137,9 @@
     - [Semantic Segmentationガイド](./algorithm-guide/#semantic.segmentation)
 
 <a id="ai.easymaker.release.notes.2022.12.27"></a>
-
-### 2022. 12. 27.
+### 2022. 12. 27. { #ai.easymaker.release.notes.2022.12.27 }
 
 <a id="ai.easymaker.release.notes.2022.12.27.service"></a>
-
 #### 新規サービスリリース
 
 - AI EasyMakerは、機械学習の開発のための環境と学習および高度化、エンドポイントサービスのためのAIプラットフォームです。
