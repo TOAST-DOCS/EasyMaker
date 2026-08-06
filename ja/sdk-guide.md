@@ -1,14 +1,13 @@
-<a id="ai.easymaker.sdk.guide"></a>
+<!-- pre-align:aligned sig=348e352651f6 -->
 
-## Machine Learning > AI EasyMaker > SDK使用ガイド
+<a id="ai.easymaker.sdk.guide"></a>
+## Machine Learning > AI EasyMaker > SDK使用ガイド { #ai.easymaker.sdk.guide }
 
 <a id="sdk.settings"></a>
-
-## SDK設定
+## SDK設定 { #sdk.settings }
 
 <a id="sdk.settings.sdk.install"></a>
-
-### AI EasyMaker Python SDKインストール
+### AI EasyMaker Python SDKインストール { #sdk.settings.sdk.install }
 
 ```bash
 python -m pip install easymaker
@@ -17,8 +16,7 @@ python -m pip install easymaker
 - AI EasyMakerノートパソコンには基本的にインストールされています。
 
 <a id="sdk.settings.sdk.init"></a>
-
-### AI EasyMaker SDK初期化
+### AI EasyMaker SDK初期化 { #sdk.settings.sdk.init }
 
 アプリキー(appkey)は、コンソールの右上にある**URL & Appkey**メニューから確認できます。
 認証トークン(access token)に関する詳細は、[User Access Keyトークン](https://docs.nhncloud.com/ja/nhncloud/ja/public-api/user-access-key-token/)で確認できます。
@@ -37,12 +35,10 @@ easymaker.init(
 ```
 
 <a id="experiment"></a>
-
-## 実験
+## 実験 { #experiment }
 
 <a id="experiment.create"></a>
-
-### 実験の作成
+### 実験の作成 { #experiment.create }
 
 学習を作成する前に、学習を分類できる実験の作成が必要です。
 
@@ -63,8 +59,7 @@ experiment  = easymaker.Experiment().create(
 ```
 
 <a id="experiment.list"></a>
-
-### 実験リスト照会
+### 実験リスト照会 { #experiment.list }
 
 ```python
 experiment_list = easymaker.Experiment.get_list()
@@ -73,8 +68,7 @@ for experiment in experiment_list:
 ```
 
 <a id="experiment.delete"></a>
-
-### 実験の削除
+### 実験の削除 { #experiment.delete }
 
 [パラメータ]
 
@@ -87,12 +81,10 @@ easymaker.Experiment(experiment_id).delete()
 ```
 
 <a id="training"></a>
-
-## 学習
+## 学習 { #training }
 
 <a id="training.image.list"></a>
-
-### イメージリスト照会
+### イメージリスト照会 { #training.image.list }
 
 ```python
 image_list = easymaker.Training.get_image_list()
@@ -101,8 +93,7 @@ for image in image_list:
 ```
 
 <a id="training.instance.list"></a>
-
-### インスタンス一覧照会
+### インスタンス一覧照会 { #training.instance.list }
 
 ```python
 instance_type_list = easymaker.Training.get_instance_type_list()
@@ -111,8 +102,7 @@ for instance in instance_type_list:
 ```
 
 <a id="training.create"></a>
-
-### 学習作成
+### 学習作成 { #training.create }
 
 [パラメータ]
 
@@ -183,8 +173,7 @@ training = easymaker.Training().run(
 ```
 
 <a id="training.list"></a>
-
-### 学習リスト照会
+### 学習リスト照会 { #training.list }
 
 ```python
 training_list = easymaker.Training.get_list()
@@ -193,8 +182,7 @@ for training in training_list:
 ```
 
 <a id="training.delete"></a>
-
-### 学習の削除
+### 学習の削除 { #training.delete }
 
 [パラメータ]
 
@@ -207,12 +195,10 @@ easymaker.Training(training_id).delete()
 ```
 
 <a id="hyperparameter.tuning"></a>
-
-## ハイパーパラメータチューニング
+## ハイパーパラメータチューニング { #hyperparameter.tuning }
 
 <a id="hyperparameter.tuning.image.list"></a>
-
-### イメージリスト照会
+### イメージリスト照会 { #hyperparameter.tuning.image.list }
 
 ```python
 image_list = easymaker.HyperparameterTuning.get_image_list()
@@ -221,8 +207,7 @@ for image in image_list:
 ```
 
 <a id="hyperparameter.tuning.instance.list"></a>
-
-### インスタンス一覧照会
+### インスタンス一覧照会 { #hyperparameter.tuning.instance.list }
 
 ```python
 instance_type_list = easymaker.HyperparameterTuning.get_instance_type_list()
@@ -231,8 +216,7 @@ for instance in instance_type_list:
 ```
 
 <a id="hyperparameter.tuning.create"></a>
-
-### ハイパーパラメータチューニング作成
+### ハイパーパラメータチューニング作成 { #hyperparameter.tuning.create }
 
 [パラメータ]
 
@@ -343,8 +327,7 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
 ```
 
 <a id="hyperparameter.tuning.list"></a>
-
-### ハイパーパラメータチューニングリスト照会
+### ハイパーパラメータチューニングリスト照会 { #hyperparameter.tuning.list }
 
 ```python
 hyperparameter_tuning_list = easymaker.HyperparameterTuning.get_list()
@@ -353,8 +336,7 @@ for hyperparameter_tuning in hyperparameter_tuning_list:
 ```
 
 <a id="hyperparameter.tuning.delete"></a>
-
-### ハイパーパラメータチューニングの削除
+### ハイパーパラメータチューニングの削除 { #hyperparameter.tuning.delete }
 
 [パラメータ]
 
@@ -367,14 +349,12 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 ```
 
 <a id="fine.tuning"></a>
-
-## ファインチューニング
+## ファインチューニング { #fine.tuning }
 
 事前学習された大規模言語モデルに特定のドメインやタスクに合わせたデータセットで追加学習を実行し、モデルの性能を特化させる機能です。
 
 <a id="fine.tuning.model.preset.list"></a>
-
-### ベースモデル一覧の照会
+### ベースモデル一覧の照会 { #fine.tuning.model.preset.list }
 
 ファインチューニングに使用するベースモデル一覧を照会します。
 
@@ -395,8 +375,7 @@ base_model_preset_id = base_model.model_preset_id
 ```
 
 <a id="fine.tuning.instance.list"></a>
-
-### インスタンス一覧の照会
+### インスタンス一覧の照会 { #fine.tuning.instance.list }
 
 選択したベースモデルプリセット(`model_preset_id`)で使用可能なインスタンスタイプの一覧を照会します。
 
@@ -413,8 +392,7 @@ for instance in instance_type_list:
 ```
 
 <a id="fine.tuning.parameter.spec.list"></a>
-
-### ハイパーパラメータ仕様の照会
+### ハイパーパラメータ仕様の照会 { #fine.tuning.parameter.spec.list }
 
 選択したベースモデルのファインチューニングのハイパーパラメータ仕様を照会します。照会した仕様のデフォルト値で、ハイパーパラメータの一覧を構成できます。
 
@@ -440,8 +418,7 @@ hyperparameter_list = [
 ```
 
 <a id="fine.tuning.create"></a>
-
-### ファインチューニングの作成
+### ファインチューニングの作成 { #fine.tuning.create }
 
 [パラメータ]
 
@@ -510,8 +487,7 @@ fine_tuning = easymaker.FineTuning().run(
 ```
 
 <a id="fine.tuning.list"></a>
-
-### ファインチューニング一覧の照会
+### ファインチューニング一覧の照会 { #fine.tuning.list }
 
 ```python
 fine_tuning_list = easymaker.FineTuning.get_list()
@@ -520,8 +496,7 @@ for fine_tuning in fine_tuning_list:
 ```
 
 <a id="fine.tuning.stop"></a>
-
-### ファインチューニングの停止
+### ファインチューニングの停止 { #fine.tuning.stop }
 
 実行中(RUNNING)のファインチューニングを停止します。
 
@@ -536,8 +511,7 @@ easymaker.FineTuning(fine_tuning_id).stop()
 ```
 
 <a id="fine.tuning.delete"></a>
-
-### ファインチューニングの削除
+### ファインチューニングの削除 { #fine.tuning.delete }
 
 [パラメータ]
 
@@ -551,12 +525,10 @@ easymaker.FineTuning(fine_tuning_id).delete()
 
 
 <a id="model"></a>
-
-## モデル
+## モデル { #model }
 
 <a id="model.create"></a>
-
-### モデル作成
+### モデル作成 { #model.create }
 
 学習、ハイパーパラメータチューニング、ファインチューニングのID値でモデルの作成をリクエストできます。
 モデルはエンドポイント作成時に使用されます。
@@ -628,8 +600,7 @@ model = easymaker.Model().create_hugging_face_model(
 ```
 
 <a id="model.list"></a>
-
-### モデルリスト照会
+### モデルリスト照会 { #model.list }
 
 ```python
 model_list = easymaker.Model.get_list()
@@ -638,8 +609,7 @@ for model in model_list:
 ```
 
 <a id="model.delete"></a>
-
-### モデル削除
+### モデル削除 { #model.delete }
 
 [パラメータ]
 
@@ -651,13 +621,41 @@ for model in model_list:
 easymaker.Model(model_id).delete()
 ```
 
-<a id="endpoint"></a>
+<a id="model.evaluation"></a>
+## モデル評価 { #model.evaluation }
 
-## エンドポイント
+<!-- TODO: translate body -->
+
+<a id="model.evaluation.instance.list"></a>
+### インスタンス一覧照会 { #model.evaluation.instance.list }
+
+<!-- TODO: translate body -->
+
+<a id="model.evaluation.create"></a>
+### モデル評価の作成 { #model.evaluation.create }
+
+<!-- TODO: translate body -->
+
+<a id="model.evaluation.list"></a>
+### モデル評価リスト照会 { #model.evaluation.list }
+
+<!-- TODO: translate body -->
+
+<a id="model.evaluation.delete"></a>
+### モデル評価の削除 { #model.evaluation.delete }
+
+<!-- TODO: translate body -->
+
+<a id="endpoint"></a>
+## エンドポイント { #endpoint }
+
+<a id="endpoint.instance.list"></a>
+### インスタンス一覧照会 { #endpoint.instance.list }
+
+<!-- TODO: translate body -->
 
 <a id="endpoint.create"></a>
-
-### エンドポイントの作成
+### エンドポイントの作成 { #endpoint.create }
 
 エンドポイント作成時に基本ステージが作成されます。
 
@@ -705,8 +703,7 @@ endpoint = easymaker.Endpoint().create(
 ```
 
 <a id="endpoint.stage.create"></a>
-
-### ステージの追加
+### ステージの追加 { #endpoint.stage.create }
 
 既存エンドポイントに新規ステージを追加できます。
 
@@ -757,8 +754,7 @@ endpoint_stage = easymaker.EndpointStage().create(
 ```
 
 <a id="endpoint.stage.list"></a>
-
-### ステージリスト照会
+### ステージリスト照会 { #endpoint.stage.list }
 
 エンドポイントステージリストを照会します。
 
@@ -767,8 +763,7 @@ endpoint_stage_list = easymaker.Endpoint(endpoint_id).get_stage_list()
 ```
 
 <a id="endpoint.inference.request"></a>
-
-### エンドポイントインファレンス
+### エンドポイントインファレンス { #endpoint.inference.request }
 
 基本ステージにインファレンス
 
@@ -791,8 +786,7 @@ easymaker.EndpointStage('endpoint_stage_id').predict(
 ```
 
 <a id="endpoint.list"></a>
-
-### エンドポイントリスト照会
+### エンドポイントリスト照会 { #endpoint.list }
 
 ```python
 endpoint_list = easymaker.Endpoint.get_list()
@@ -801,8 +795,7 @@ for endpoint in endpoint_list:
 ```
 
 <a id="endpoint.delete"></a>
-
-### エンドポイントの削除
+### エンドポイントの削除 { #endpoint.delete }
 
 [パラメータ]
 
@@ -815,8 +808,7 @@ easymaker.Endpoint(endpoint_id).delete()
 ```
 
 <a id="endpoint.stage.delete"></a>
-
-### エンドポイントステージの削除
+### エンドポイントステージの削除 { #endpoint.stage.delete }
 
 [パラメータ]
 
@@ -829,12 +821,10 @@ easymaker.EndpointStage(stage_id).delete()
 ```
 
 <a id="batch.inference"></a>
-
-## バッチ推論
+## バッチ推論 { #batch.inference }
 
 <a id="batch.inference.instance.list"></a>
-
-### インスタンス一覧照会
+### インスタンス一覧照会 { #batch.inference.instance.list }
 
 ```python
 instance_type_list = easymaker.BatchInference.get_instance_type_list()
@@ -843,8 +833,7 @@ for instance in instance_type_list:
 ```
 
 <a id="batch.inference.create"></a>
-
-### バッチ推論の作成
+### バッチ推論の作成 { #batch.inference.create }
 
 [パラメータ]
 
@@ -891,8 +880,7 @@ batch_inference = easymaker.BatchInference().run(
 ```
 
 <a id="batch.inference.list"></a>
-
-### バッチ推論リスト照会
+### バッチ推論リスト照会 { #batch.inference.list }
 
 ```python
 batch_inference_list = easymaker.BatchInference.get_list()
@@ -901,8 +889,7 @@ for batch_inference in batch_inference_list:
 ```
 
 <a id="batch.inference.delete"></a>
-
-### バッチ推論削除
+### バッチ推論削除 { #batch.inference.delete }
 
 [パラメータ]
 
@@ -915,12 +902,10 @@ easymaker.BatchInference(batch_inference_id).delete()
 ```
 
 <a id="pipeline"></a>
-
-## パイプライン
+## パイプライン { #pipeline }
 
 <a id="pipeline.create"></a>
-
-### パイプライン作成
+### パイプライン作成 { #pipeline.create }
 
 [パラメータ]
 
@@ -941,8 +926,7 @@ pipeline = easymaker.Pipeline().upload(
 ```
 
 <a id="pipeline.list"></a>
-
-### パイプラインリスト照会
+### パイプラインリスト照会 { #pipeline.list }
 
 ```python
 pipeline_list = easymaker.Pipeline.get_list()
@@ -951,8 +935,7 @@ for pipeline in pipeline_list:
 ```
 
 <a id="pipeline.delete"></a>
-
-### パイプライン削除
+### パイプライン削除 { #pipeline.delete }
 
 [パラメータ]
 
@@ -965,8 +948,7 @@ easymaker.Pipeline(pipeline_id).delete()
 ```
 
 <a id="pipeline.instance.list"></a>
-
-### インスタンス一覧照会
+### インスタンス一覧照会 { #pipeline.instance.list }
 
 ```python
 instance_type_list = easymaker.PipelineRun.get_instance_type_list()
@@ -975,8 +957,7 @@ for instance in instance_type_list:
 ```
 
 <a id="pipeline.run.create"></a>
-
-### パイプライン実行作成
+### パイプライン実行作成 { #pipeline.run.create }
 
 [パラメータ]
 
@@ -1017,8 +998,7 @@ pipeline_run = easymaker.PipelineRun().create(
 ```
 
 <a id="pipeline.run.list"></a>
-
-### パイプライン実行リスト照会
+### パイプライン実行リスト照会 { #pipeline.run.list }
 
 ```python
 pipeline_run_list = easymaker.PipelineRun.get_list()
@@ -1027,8 +1007,7 @@ for pipeline_run in pipeline_run_list:
 ```
 
 <a id="pipeline.run.delete"></a>
-
-### パイプライン実行削除
+### パイプライン実行削除 { #pipeline.run.delete }
 
 [パラメータ]
 
@@ -1041,8 +1020,7 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 ```
 
 <a id="pipeline.recurring.run.create"></a>
-
-### パイプラインスケジュール作成
+### パイプラインスケジュール作成 { #pipeline.recurring.run.create }
 
 [パラメータ]
 
@@ -1091,8 +1069,7 @@ pipeline_recurring_run = easymaker.PipelineRecurringRun().create(
 ```
 
 <a id="pipeline.recurring.run.stop.start"></a>
-
-### パイプラインスケジュールの停止/再起動
+### パイプラインスケジュールの停止/再起動 { #pipeline.recurring.run.stop.start }
 
 [パラメータ]
 
@@ -1105,9 +1082,13 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).stop()
 easymaker.PipelineRecurringRun(pipeline_recurring_run_id).start()
 ```
 
-<a id="pipeline.recurring.run.delete"></a>
+<a id="pipeline.recurring.run.list"></a>
+### パイプラインスケジュールリスト照会 { #pipeline.recurring.run.list }
 
-### パイプラインスケジュールの削除
+<!-- TODO: translate body -->
+
+<a id="pipeline.recurring.run.delete"></a>
+### パイプラインスケジュールの削除 { #pipeline.recurring.run.delete }
 
 [パラメータ]
 
@@ -1120,12 +1101,10 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).delete()
 ```
 
 <a id="feature"></a>
-
-## その他機能
+## その他機能 { #feature }
 
 <a id="feature.lncs.log.send"></a>
-
-### NHN Cloud - Log & Crash Searchログ転送
+### NHN Cloud - Log & Crash Searchログ転送 { #feature.lncs.log.send }
 
 ```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
@@ -1137,8 +1116,7 @@ easymaker_logger.send(log_message='log meassage',
 ```
 
 <a id="feature.object.storage.file.send"></a>
-
-### NHN Cloud - Object Storageファイル転送
+### NHN Cloud - Object Storageファイル転送 { #feature.object.storage.file.send }
 
 Object Storage商品にファイルをアップロードし、ダウンロードする機能を提供します。
 
