@@ -1,22 +1,22 @@
-<a id="ai.easymaker.sdk.guide"></a>
+<!-- pre-align:aligned sig=348e352651f6 -->
 
-## Machine Learning > AI EasyMaker > SDK使用ガイド
+<a id="ai.easymaker.sdk.guide"></a>
+## Machine Learning > AI EasyMaker > SDK使用ガイド { #ai.easymaker.sdk.guide }
 
 <a id="sdk.settings"></a>
-
-## SDK設定
+## SDK設定 { #sdk.settings }
 
 <a id="sdk.settings.sdk.install"></a>
+### AI EasyMaker Python SDKインストール { #sdk.settings.sdk.install }
 
-### AI EasyMaker Python SDKインストール
-
+```bash
 python -m pip install easymaker
+```
 
 - AI EasyMakerノートパソコンには基本的にインストールされています。
 
 <a id="sdk.settings.sdk.init"></a>
-
-### AI EasyMaker SDK初期化
+### AI EasyMaker SDK初期化 { #sdk.settings.sdk.init }
 
 アプリキー(appkey)は、コンソールの右上にある**URL & Appkey**メニューから確認できます。
 認証トークン(access token)に関する詳細は、[User Access Keyトークン](https://docs.nhncloud.com/ja/nhncloud/ja/public-api/user-access-key-token/)で確認できます。
@@ -35,12 +35,10 @@ easymaker.init(
 ```
 
 <a id="experiment"></a>
-
-## 実験
+## 実験 { #experiment }
 
 <a id="experiment.create"></a>
-
-### 実験の作成
+### 実験の作成 { #experiment.create }
 
 学習を作成する前に、学習を分類できる実験の作成が必要です。
 
@@ -61,8 +59,7 @@ experiment  = easymaker.Experiment().create(
 ```
 
 <a id="experiment.list"></a>
-
-### 実験リスト照会
+### 実験リスト照会 { #experiment.list }
 
 ```python
 experiment_list = easymaker.Experiment.get_list()
@@ -71,8 +68,7 @@ for experiment in experiment_list:
 ```
 
 <a id="experiment.delete"></a>
-
-### 実験の削除
+### 実験の削除 { #experiment.delete }
 
 [パラメータ]
 
@@ -85,12 +81,10 @@ easymaker.Experiment(experiment_id).delete()
 ```
 
 <a id="training"></a>
-
-## 学習
+## 学習 { #training }
 
 <a id="training.image.list"></a>
-
-### イメージリスト照会
+### イメージリスト照会 { #training.image.list }
 
 ```python
 image_list = easymaker.Training.get_image_list()
@@ -99,8 +93,7 @@ for image in image_list:
 ```
 
 <a id="training.instance.list"></a>
-
-### インスタンス一覧照会
+### インスタンス一覧照会 { #training.instance.list }
 
 ```python
 instance_type_list = easymaker.Training.get_instance_type_list()
@@ -109,8 +102,7 @@ for instance in instance_type_list:
 ```
 
 <a id="training.create"></a>
-
-### 学習作成
+### 学習作成 { #training.create }
 
 [パラメータ]
 
@@ -124,7 +116,7 @@ for instance in instance_type_list:
 | distributed_node_count                 | Integer                   | 選択                      | 1      | 1～10         | 分散学習を適用するノード数                                                |
 | use_torchrun                           | Boolean                   | 選択                      | False  | True, False | torchrunの使用有無、Pytorchイメージでのみ使用可能                           |
 | nproc_per_node                         | Integer                   | use_torchrun Trueの場合は必須  | 1      | 1～(CPU数またはGPU数) | ノードごとのプロセス数。use_torchrunを使用する場合は必ず設定しなければならない値                |
-| data_storage_size                      | Integer                   | Obejct Storageを使用する場合は必須  | なし     | 300～10000   | 学習に必要なデータをダウンロードする記憶領域サイズ(単位： GB), NAS使用時は不要              |
+| data_storage_size                      | Integer                   | Object Storageを使用する場合は必須  | なし     | 300～10000   | 学習に必要なデータをダウンロードする記憶領域サイズ(単位： GB), NAS使用時は不要              |
 | algorithm_name                         | String                    | NHN Cloud提供アルゴリズムを使用する場合は必須 | なし     | 最大64文字    | アルゴリズム名(CLIで照会可能)                                              |
 | source_dir_uri                         | String                    | 独自アルゴリズムを使用する場合は必須         | なし     | 最大255文字   | 学習に必要なファイルが含まれているパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
 | entry_point                            | String                    | 独自アルゴリズムを使用する場合は必須         | なし     | 最大255文字   | source_dir_uri内で最初に実行されるPythonファイル情報                            |
@@ -181,8 +173,7 @@ training = easymaker.Training().run(
 ```
 
 <a id="training.list"></a>
-
-### 学習リスト照会
+### 学習リスト照会 { #training.list }
 
 ```python
 training_list = easymaker.Training.get_list()
@@ -191,8 +182,7 @@ for training in training_list:
 ```
 
 <a id="training.delete"></a>
-
-### 学習の削除
+### 学習の削除 { #training.delete }
 
 [パラメータ]
 
@@ -205,12 +195,10 @@ easymaker.Training(training_id).delete()
 ```
 
 <a id="hyperparameter.tuning"></a>
-
-## ハイパーパラメータチューニング
+## ハイパーパラメータチューニング { #hyperparameter.tuning }
 
 <a id="hyperparameter.tuning.image.list"></a>
-
-### イメージリスト照会
+### イメージリスト照会 { #hyperparameter.tuning.image.list }
 
 ```python
 image_list = easymaker.HyperparameterTuning.get_image_list()
@@ -219,8 +207,7 @@ for image in image_list:
 ```
 
 <a id="hyperparameter.tuning.instance.list"></a>
-
-### インスタンス一覧照会
+### インスタンス一覧照会 { #hyperparameter.tuning.instance.list }
 
 ```python
 instance_type_list = easymaker.HyperparameterTuning.get_instance_type_list()
@@ -229,8 +216,7 @@ for instance in instance_type_list:
 ```
 
 <a id="hyperparameter.tuning.create"></a>
-
-### ハイパーパラメータチューニング作成
+### ハイパーパラメータチューニング作成 { #hyperparameter.tuning.create }
 
 [パラメータ]
 
@@ -245,7 +231,7 @@ for instance in instance_type_list:
 | parallel_trial_count                                             | Integer                            | 必須                                                          | 1      | distributed_node_countとparallel_trial_countの積が10以下 | ハイパーパラメータチューニングで並列実行する学習の数                                                 |
 | use_torchrun                                                     | Boolean                            | 選択                                                          | False  | True, False                                            | torchrun使用の有無。Pytorchイメージでのみ使用可能                                     |
 | nproc_per_node                                                   | Integer                            | use_torchrun Trueの場合は必須                                      | 1      | 1～(CPU数またはGPU数)                                   | ノードごとのプロセス数。use_torchrunを使用する場合は必ず設定しなければならない値                         |
-| data_storage_size                                                | Integer                            | Obejct Storage使用時必須                                       | なし    | 300～10000                                              | ハイパーパラメータチューニングに必要なデータをダウンロードする記憶領域サイズ(単位： GB), NAS使用時不要                 |
+| data_storage_size                                                | Integer                            | Object Storage使用時必須                                       | なし    | 300～10000                                              | ハイパーパラメータチューニングに必要なデータをダウンロードする記憶領域サイズ(単位： GB), NAS使用時不要                 |
 | algorithm_name                                                   | String                             | NHN Cloud提供アルゴリズムを使用する場合は必須                                   | なし   | 最大64文字                                               | アルゴリズム名(CLIで照会可能)                                                        |
 | source_dir_uri                                                   | String                             | 独自アルゴリズムを使用する場合は必須                                             | なし   | 最大255文字                                              | ハイパーパラメータチューニングに必要なファイルが含まれるパス(NHN Cloud Object StorageまたはNHN Cloud NAS)    |
 | entry_point                                                      | String                             | 独自アルゴリズムを使用する場合は必須                                             | なし   | 最大255文字                                              | source_dir_uri内で最初に実行されるPythonファイル情報                                      |
@@ -341,8 +327,7 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
 ```
 
 <a id="hyperparameter.tuning.list"></a>
-
-### ハイパーパラメータチューニングリスト照会
+### ハイパーパラメータチューニングリスト照会 { #hyperparameter.tuning.list }
 
 ```python
 hyperparameter_tuning_list = easymaker.HyperparameterTuning.get_list()
@@ -351,8 +336,7 @@ for hyperparameter_tuning in hyperparameter_tuning_list:
 ```
 
 <a id="hyperparameter.tuning.delete"></a>
-
-### ハイパーパラメータチューニングの削除
+### ハイパーパラメータチューニングの削除 { #hyperparameter.tuning.delete }
 
 [パラメータ]
 
@@ -364,46 +348,229 @@ for hyperparameter_tuning in hyperparameter_tuning_list:
 easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 ```
 
-<a id="model"></a>
+<a id="fine.tuning"></a>
+## ファインチューニング { #fine.tuning }
 
-## モデル
+事前学習された大規模言語モデルに特定のドメインやタスクに合わせたデータセットで追加学習を実行し、モデルの性能を特化させる機能です。
+
+<a id="fine.tuning.model.preset.list"></a>
+### ベースモデル一覧の照会 { #fine.tuning.model.preset.list }
+
+ファインチューニングに使用するベースモデル一覧を照会します。
+
+[パラメータ]
+
+| 名前 | タイプ | 必須 | デフォルト値 | 有効範囲 | 説明 |
+| ----------------- | ------ | ----- | --- | ----- | ------------------------------- |
+| model_preset_name | String | 任意 | なし | なし | ベースモデル名(名前でフィルタリング、未入力時は全体を照会) |
+
+```python
+base_model_list = easymaker.FineTuning.get_base_model_list()
+for base_model in base_model_list:
+    base_model.print_info()
+
+# 照会されたベースモデルのいずれかを選択
+base_model = base_model_list[0]
+base_model_preset_id = base_model.model_preset_id
+```
+
+<a id="fine.tuning.instance.list"></a>
+### インスタンス一覧の照会 { #fine.tuning.instance.list }
+
+選択したベースモデルプリセット(`model_preset_id`)で使用可能なインスタンスタイプの一覧を照会します。
+
+[パラメータ]
+
+| 名前 | タイプ | 必須 | デフォルト値 | 有効範囲 | 説明 |
+| --------------- | ------ | ----- | --- | ------ | ------------- |
+| model_preset_id | String | 任意 | なし | 最大36文字 | ベースモデルプリセットID |
+
+```python
+instance_type_list = easymaker.FineTuning.get_instance_type_list(model_preset_id=base_model_preset_id)
+for instance in instance_type_list:
+    instance.print_info()
+```
+
+<a id="fine.tuning.parameter.spec.list"></a>
+### ハイパーパラメータ仕様の照会 { #fine.tuning.parameter.spec.list }
+
+選択したベースモデルのファインチューニングのハイパーパラメータ仕様を照会します。照会した仕様のデフォルト値で、ハイパーパラメータの一覧を構成できます。
+
+[パラメータ]
+
+| 名前 | タイプ | 必須 | デフォルト値 | 有効範囲 | 説明 |
+| -------------------- | ------ | ----- | --- | ------ | ------------- |
+| base_model_preset_id | String | 必須 | なし | 最大36文字 | ベースモデルプリセットID |
+
+```python
+parameter_spec_list = easymaker.FineTuning.get_parameter_spec_list(
+    base_model_preset_id=base_model_preset_id,
+)
+for spec in parameter_spec_list:
+    spec.print_info()
+
+# デフォルト値があるパラメータはデフォルト値でハイパーパラメータ一覧を構成(必要に応じて値を修正)
+hyperparameter_list = [
+    easymaker.Parameter(parameter_name=spec.parameter_name, parameter_value=spec.default_value)
+    for spec in parameter_spec_list
+    if spec.default_value is not None
+]
+```
+
+<a id="fine.tuning.create"></a>
+### ファインチューニングの作成 { #fine.tuning.create }
+
+[パラメータ]
+
+| 名前 | タイプ | 必須 | デフォルト値 | 有効範囲 | 説明 |
+| -------------------------------------- | --------------------------- | ------------------------- | ----- |---------------------------|-----------------------------------------------------------------|
+| experiment_id | String | easymaker.initで未入力時は必須 | なし | 最大36文字 | 実験ID |
+| experiment_name | String | 任意 | なし | 最大50文字 | 新規実験名(実験を一緒に作成する場合に使用) |
+| experiment_description | String | 任意 | なし | 最大255文字 | 新規実験に関する説明 |
+| fine_tuning_name | String | 必須 | なし | 最大50文字 | ファインチューニング名 |
+| description | String | 任意 | なし | 最大255文字 | ファインチューニングに関する説明 |
+| flavor_name | String | 必須 | なし | なし | インスタンスタイプ名(照会可能) |
+| instance_count | Integer | 任意 | 1 | 1～10 | 学習インスタンス数 |
+| base_model_preset_id | String | 必須 | なし | 最大36文字 | 基盤モデルプリセットID |
+| model_upload_uri | String | 必須 | なし | 最大255文字 | ファインチューニングが完了したモデルがアップロードされるパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
+| timeout_hours | Integer | 任意 | 720 | 1～720 | 最大ファインチューニング時間(単位： 時間) |
+| hyperparameter_list | easymaker.Parameter Array | 任意 | なし | 最大100個 | ハイパーパラメータ情報(parameter_name/parameter_valueで構成) |
+| hyperparameter_list[0].parameter_name | String | 任意 | なし | 最大255文字 | ハイパーパラメータキー |
+| hyperparameter_list[0].parameter_value | String | 任意 | なし | 最大1000文字 | ハイパーパラメータの値 |
+| dataset_list | easymaker.Dataset Array | 必須 | なし | 最大10個 | ファインチューニングに使用されるデータセット情報 |
+| dataset_list[0].dataset_name | String | 必須 | なし | 最大36文字 | データ名 |
+| dataset_list[0].data_uri | String | 必須 | なし | 最大255文字 | データパス |
+| dataset_list[0].dataset_format_code | easymaker.DatasetFormatCode | 必須 | なし | CHAT_TEMPLATE, COMPLETION | データセットフォーマット |
+| dataset_list[0].dataset_split_code | easymaker.DatasetSplitCode | 必須 | TRAIN | TRAIN, VALIDATION | データセットsplit(学習/検証)、最小1個のTRAINが必要 |
+| data_storage_size | Integer | Object Storage使用時は必須 | なし | 300～10000 | ファインチューニングに必要なデータをダウンロードする保存領域のサイズ(単位： GB)、NAS使用時は不要 |
+| validation_split_percent | Integer | 任意 | 0 | 0～100 | 学習データから検証用として分割する割合(%)。0の場合は分割しない。VALIDATIONデータセットを指定するとそのデータセットを検証に使用し、この値は無視される |
+| use_log | Boolean | 任意 | False | True, False | Log & Crash Searchサービスにログを残すかどうか |
+| wait | Boolean | 任意 | True | True, False | True: 作成が完了した以降に返却、False: 作成リクエスト後に即時返却 |
+
+```python
+fine_tuning = easymaker.FineTuning().run(
+    experiment_id=experiment.experiment_id, # Optional if already set in init
+    fine_tuning_name='fine_tuning_name',
+    description='fine_tuning_description',
+    flavor_name='g4.c92m1800',
+    instance_count=1,
+    base_model_preset_id=base_model_preset_id,
+    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    timeout_hours=24,
+    validation_split_percent=10,  # 学習データの10%を検証に使用
+    hyperparameter_list=[
+        easymaker.Parameter(
+            parameter_name="epoch",
+            parameter_value="1",
+        ),
+        easymaker.Parameter(
+            parameter_name="learning_rate",
+            parameter_value="0.0002",
+        ),
+        easymaker.Parameter(
+            parameter_name="batch_size",
+            parameter_value="1",
+        ),
+    ],
+    dataset_list=[
+        easymaker.Dataset(
+            dataset_name="train-dataset",
+            data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}',
+            dataset_format_code=easymaker.DatasetFormatCode.CHAT_TEMPLATE,
+            dataset_split_code=easymaker.DatasetSplitCode.TRAIN,
+        ),
+    ],
+    data_storage_size=300,
+    use_log=False,
+    # wait=False,
+)
+```
+
+<a id="fine.tuning.list"></a>
+### ファインチューニング一覧の照会 { #fine.tuning.list }
+
+```python
+fine_tuning_list = easymaker.FineTuning.get_list()
+for fine_tuning in fine_tuning_list:
+    fine_tuning.print_info()
+```
+
+<a id="fine.tuning.stop"></a>
+### ファインチューニングの停止 { #fine.tuning.stop }
+
+実行中(RUNNING)のファインチューニングを停止します。
+
+[パラメータ]
+
+| 名前 | タイプ | 必須 | デフォルト値 | 有効範囲 | 説明 |
+| -------------- | ------ | ----- | --- | ------ | -------- |
+| fine_tuning_id | String | 必須 | なし | 最大36文字 | ファインチューニングID |
+
+```python
+easymaker.FineTuning(fine_tuning_id).stop()
+```
+
+<a id="fine.tuning.delete"></a>
+### ファインチューニングの削除 { #fine.tuning.delete }
+
+[パラメータ]
+
+| 名前 | タイプ | 必須 | デフォルト値 | 有効範囲 | 説明 |
+| -------------- | ------ | ----- | --- | ------ | -------- |
+| fine_tuning_id | String | 必須 | なし | 最大36文字 | ファインチューニングID |
+
+```python
+easymaker.FineTuning(fine_tuning_id).delete()
+```
+
+
+<a id="model"></a>
+## モデル { #model }
 
 <a id="model.create"></a>
+### モデル作成 { #model.create }
 
-### モデル作成
-
-学習ID値でモデルの作成をリクエストできます。
+学習、ハイパーパラメータチューニング、ファインチューニングのID値でモデルの作成をリクエストできます。
 モデルはエンドポイント作成時に使用されます。
 
 [パラメータ]
 
-| 名前                      | タイプ    | 必須かどうか                             | デフォルト値 | 有効範囲  | 説明                                 |
-|--------------------------|--------|------------------------------------|-----|---------|-------------------------------------|
-| model_format_code | easymaker.ModelFormatCode | 必須 | なし | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | 推論サービングに使用されるモデルフォーマット情報 |
-| training_id              | String | hyperparameter_tuning_idがない場合は必須 | なし  | なし      | モデルとして作成する学習ID                       |
-| hyperparameter_tuning_id | String | training_idがない場合は必須             | なし  | なし      | モデルとして作成するハイパーパラメータチューニングID(最高学習で作成済み) |
-| model_name               | String | 必須                                | なし  | 最大50文字 | モデル名                              |
-| description        | String | 選択                                | なし  | 最大255文字 | モデルの説明                          |
-| parameter_list                   | Array  | 選択  | なし | 最大10個                                | パラメータ情報(parameterName/parameterValueで構成)         |
-| parameter_list[0].parameterName  | String | 選択  | なし | 最大64文字                                | パラメータ名                                            |
-| parameter_list[0].parameterValue | String | 選択  | なし | 最大255文字                               | パラメータ値                                              |
+| 名前 | タイプ | 必須 | デフォルト値 | 有効範囲 | 説明 |
+|----------------------------------|---------------------------|--------------------------|-----|--------------------------------------------------------------|-------------------------------------------|
+| model_format_code | easymaker.ModelFormatCode | fine_tuning_id未入力時は必須 | なし | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | 推論サービングに使用されるモデルのフォーマット情報 |
+| training_id | String | 任意 | なし | なし | モデルとして作成する学習ID |
+| hyperparameter_tuning_id | String | 任意 | なし | なし | モデルとして作成するハイパーパラメータチューニングID(最高の学習で作成される) |
+| fine_tuning_id | String | 任意 | なし | なし | モデルとして作成するファインチューニングID |
+| model_name | String | 必須 | なし | 最大50文字 | モデル名 |
+| description | String | 任意 | なし | 最大255文字 | モデルに関する説明 |
+| parameter_list | Array | 任意 | なし | 最大10個 | パラメータ情報(parameterName/parameterValueで構成) |
+| parameter_list[0].parameterName | String | 任意 | なし | 最大64文字 | パラメータ名 |
+| parameter_list[0].parameterValue | String | 任意 | なし | 最大255文字 | パラメータの値 |
 
 ```python
 model = easymaker.Model().create(
-    model_format_code=easymaker.ModelFormatCode.PYTORCH,
-    training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
     model_name='model_name',
+    training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
+    model_format_code=easymaker.ModelFormatCode.PYTORCH,
     description='model_description',
 )
 ```
 
-学習IDがなくても、モデルが保存されたパス情報とフレームワークの種類を入力してモデルを作成できます。
+```python
+model = easymaker.Model().create(
+    model_name='model_name',
+    fine_tuning_id=fine_tuning.fine_tuning_id,
+    description='model_description',
+)
+```
+
+学習、ハイパーパラメータチューニング、ファインチューニングのIDがなくても、モデルが保存されたパス情報とフレームワークの種類を入力してモデルを作成できます。
 
 [パラメータ]
 
 | 名前               | タイプ | 必須かどうか | デフォルト値 | 有効範囲                                      | 説明                                              |
 |----------------------|--------|-------|-----|-------------------------------------------|-----------------------------------------------------|
-| model_format_code | easymaker.ModelFormatCode | 必須 | なし | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | 推論サービングに使用されるモデルフォーマット情報 |
+| model_format_code | easymaker.ModelFormatCode | 必須 | なし | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | 推論サービングに使用されるモデルのフォーマット情報 |
 | model_upload_uri            | String | 必須 | なし | 最大255文字                                   | モデルファイルパス(NHN Cloud Object StorageまたはNHN Cloud NAS) |
 | model_name           | String | 必須 | なし | 最大50文字                                    | モデル名                                           |
 | description    | String | 任意 | なし | 最大255文字                                   | モデルの説明                                       |
@@ -433,8 +600,7 @@ model = easymaker.Model().create_hugging_face_model(
 ```
 
 <a id="model.list"></a>
-
-### モデルリスト照会
+### モデルリスト照会 { #model.list }
 
 ```python
 model_list = easymaker.Model.get_list()
@@ -443,8 +609,7 @@ for model in model_list:
 ```
 
 <a id="model.delete"></a>
-
-### モデル削除
+### モデル削除 { #model.delete }
 
 [パラメータ]
 
@@ -456,13 +621,41 @@ for model in model_list:
 easymaker.Model(model_id).delete()
 ```
 
-<a id="endpoint"></a>
+<a id="model.evaluation"></a>
+## モデル評価 { #model.evaluation }
 
-## エンドポイント
+<!-- TODO: translate body -->
+
+<a id="model.evaluation.instance.list"></a>
+### インスタンス一覧照会 { #model.evaluation.instance.list }
+
+<!-- TODO: translate body -->
+
+<a id="model.evaluation.create"></a>
+### モデル評価の作成 { #model.evaluation.create }
+
+<!-- TODO: translate body -->
+
+<a id="model.evaluation.list"></a>
+### モデル評価リスト照会 { #model.evaluation.list }
+
+<!-- TODO: translate body -->
+
+<a id="model.evaluation.delete"></a>
+### モデル評価の削除 { #model.evaluation.delete }
+
+<!-- TODO: translate body -->
+
+<a id="endpoint"></a>
+## エンドポイント { #endpoint }
+
+<a id="endpoint.instance.list"></a>
+### インスタンス一覧照会 { #endpoint.instance.list }
+
+<!-- TODO: translate body -->
 
 <a id="endpoint.create"></a>
-
-### エンドポイントの作成
+### エンドポイントの作成 { #endpoint.create }
 
 エンドポイント作成時に基本ステージが作成されます。
 
@@ -510,8 +703,7 @@ endpoint = easymaker.Endpoint().create(
 ```
 
 <a id="endpoint.stage.create"></a>
-
-### ステージの追加
+### ステージの追加 { #endpoint.stage.create }
 
 既存エンドポイントに新規ステージを追加できます。
 
@@ -562,8 +754,7 @@ endpoint_stage = easymaker.EndpointStage().create(
 ```
 
 <a id="endpoint.stage.list"></a>
-
-### ステージリスト照会
+### ステージリスト照会 { #endpoint.stage.list }
 
 エンドポイントステージリストを照会します。
 
@@ -572,8 +763,7 @@ endpoint_stage_list = easymaker.Endpoint(endpoint_id).get_stage_list()
 ```
 
 <a id="endpoint.inference.request"></a>
-
-### エンドポイントインファレンス
+### エンドポイントインファレンス { #endpoint.inference.request }
 
 基本ステージにインファレンス
 
@@ -596,8 +786,7 @@ easymaker.EndpointStage('endpoint_stage_id').predict(
 ```
 
 <a id="endpoint.list"></a>
-
-### エンドポイントリスト照会
+### エンドポイントリスト照会 { #endpoint.list }
 
 ```python
 endpoint_list = easymaker.Endpoint.get_list()
@@ -606,8 +795,7 @@ for endpoint in endpoint_list:
 ```
 
 <a id="endpoint.delete"></a>
-
-### エンドポイントの削除
+### エンドポイントの削除 { #endpoint.delete }
 
 [パラメータ]
 
@@ -620,8 +808,7 @@ easymaker.Endpoint(endpoint_id).delete()
 ```
 
 <a id="endpoint.stage.delete"></a>
-
-### エンドポイントステージの削除
+### エンドポイントステージの削除 { #endpoint.stage.delete }
 
 [パラメータ]
 
@@ -634,12 +821,10 @@ easymaker.EndpointStage(stage_id).delete()
 ```
 
 <a id="batch.inference"></a>
-
-## バッチ推論
+## バッチ推論 { #batch.inference }
 
 <a id="batch.inference.instance.list"></a>
-
-### インスタンス一覧照会
+### インスタンス一覧照会 { #batch.inference.instance.list }
 
 ```python
 instance_type_list = easymaker.BatchInference.get_instance_type_list()
@@ -648,8 +833,7 @@ for instance in instance_type_list:
 ```
 
 <a id="batch.inference.create"></a>
-
-### バッチ推論の作成
+### バッチ推論の作成 { #batch.inference.create }
 
 [パラメータ]
 
@@ -696,8 +880,7 @@ batch_inference = easymaker.BatchInference().run(
 ```
 
 <a id="batch.inference.list"></a>
-
-### バッチ推論リスト照会
+### バッチ推論リスト照会 { #batch.inference.list }
 
 ```python
 batch_inference_list = easymaker.BatchInference.get_list()
@@ -706,8 +889,7 @@ for batch_inference in batch_inference_list:
 ```
 
 <a id="batch.inference.delete"></a>
-
-### バッチ推論削除
+### バッチ推論削除 { #batch.inference.delete }
 
 [パラメータ]
 
@@ -720,12 +902,10 @@ easymaker.BatchInference(batch_inference_id).delete()
 ```
 
 <a id="pipeline"></a>
-
-## パイプライン
+## パイプライン { #pipeline }
 
 <a id="pipeline.create"></a>
-
-### パイプライン作成
+### パイプライン作成 { #pipeline.create }
 
 [パラメータ]
 
@@ -746,8 +926,7 @@ pipeline = easymaker.Pipeline().upload(
 ```
 
 <a id="pipeline.list"></a>
-
-### パイプラインリスト照会
+### パイプラインリスト照会 { #pipeline.list }
 
 ```python
 pipeline_list = easymaker.Pipeline.get_list()
@@ -756,8 +935,7 @@ for pipeline in pipeline_list:
 ```
 
 <a id="pipeline.delete"></a>
-
-### パイプライン削除
+### パイプライン削除 { #pipeline.delete }
 
 [パラメータ]
 
@@ -770,8 +948,7 @@ easymaker.Pipeline(pipeline_id).delete()
 ```
 
 <a id="pipeline.instance.list"></a>
-
-### インスタンス一覧照会
+### インスタンス一覧照会 { #pipeline.instance.list }
 
 ```python
 instance_type_list = easymaker.PipelineRun.get_instance_type_list()
@@ -780,8 +957,7 @@ for instance in instance_type_list:
 ```
 
 <a id="pipeline.run.create"></a>
-
-### パイプライン実行作成
+### パイプライン実行作成 { #pipeline.run.create }
 
 [パラメータ]
 
@@ -822,8 +998,7 @@ pipeline_run = easymaker.PipelineRun().create(
 ```
 
 <a id="pipeline.run.list"></a>
-
-### パイプライン実行リスト照会
+### パイプライン実行リスト照会 { #pipeline.run.list }
 
 ```python
 pipeline_run_list = easymaker.PipelineRun.get_list()
@@ -832,8 +1007,7 @@ for pipeline_run in pipeline_run_list:
 ```
 
 <a id="pipeline.run.delete"></a>
-
-### パイプライン実行削除
+### パイプライン実行削除 { #pipeline.run.delete }
 
 [パラメータ]
 
@@ -846,8 +1020,7 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 ```
 
 <a id="pipeline.recurring.run.create"></a>
-
-### パイプラインスケジュール作成
+### パイプラインスケジュール作成 { #pipeline.recurring.run.create }
 
 [パラメータ]
 
@@ -896,8 +1069,7 @@ pipeline_recurring_run = easymaker.PipelineRecurringRun().create(
 ```
 
 <a id="pipeline.recurring.run.stop.start"></a>
-
-### パイプラインスケジュールの停止/再起動
+### パイプラインスケジュールの停止/再起動 { #pipeline.recurring.run.stop.start }
 
 [パラメータ]
 
@@ -910,9 +1082,13 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).stop()
 easymaker.PipelineRecurringRun(pipeline_recurring_run_id).start()
 ```
 
-<a id="pipeline.recurring.run.delete"></a>
+<a id="pipeline.recurring.run.list"></a>
+### パイプラインスケジュールリスト照会 { #pipeline.recurring.run.list }
 
-### パイプラインスケジュールの削除
+<!-- TODO: translate body -->
+
+<a id="pipeline.recurring.run.delete"></a>
+### パイプラインスケジュールの削除 { #pipeline.recurring.run.delete }
 
 [パラメータ]
 
@@ -925,12 +1101,10 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).delete()
 ```
 
 <a id="feature"></a>
-
-## その他機能
+## その他機能 { #feature }
 
 <a id="feature.lncs.log.send"></a>
-
-### NHN Cloud - Log & Crash Searchログ転送
+### NHN Cloud - Log & Crash Searchログ転送 { #feature.lncs.log.send }
 
 ```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
@@ -942,8 +1116,7 @@ easymaker_logger.send(log_message='log meassage',
 ```
 
 <a id="feature.object.storage.file.send"></a>
-
-### NHN Cloud - Object Storageファイル転送
+### NHN Cloud - Object Storageファイル転送 { #feature.object.storage.file.send }
 
 Object Storage商品にファイルをアップロードし、ダウンロードする機能を提供します。
 

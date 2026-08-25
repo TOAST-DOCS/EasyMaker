@@ -1,22 +1,22 @@
-<a id="ai.easymaker.sdk.guide"></a>
+<!-- pre-align:aligned sig=348e352651f6 -->
 
-## Machine Learning > AI EasyMaker > SDK User Guide
+<a id="ai.easymaker.sdk.guide"></a>
+## Machine Learning > AI EasyMaker > SDK User Guide { #ai.easymaker.sdk.guide }
 
 <a id="sdk.settings"></a>
-
-## SDK Settings
+## SDK Settings { #sdk.settings }
 
 <a id="sdk.settings.sdk.install"></a>
+### Install AI EasyMaker Python SDK { #sdk.settings.sdk.install }
 
-### Install AI EasyMaker Python SDK
-
+```bash
 python -m pip install easymaker
+```
 
 - AI EasyMaker is installed in the notebook by default.
 
 <a id="sdk.settings.sdk.init"></a>
-
-### Initialize AI EasyMaker SDK
+### Initialize AI EasyMaker SDK { #sdk.settings.sdk.init }
 
 You can find the AppKey in the **URL & Appkey** menu at the right top on the console.
 You can learn more about Access Tokens in [User Access Key Token](https://docs.nhncloud.com/en/nhncloud/en/public-api/user-access-key-token/).
@@ -35,12 +35,10 @@ easymaker.init(
 ```
 
 <a id="experiment"></a>
-
-## Experiment
+## Experiment { #experiment }
 
 <a id="experiment.create"></a>
-
-### Create Experiment
+### Create Experiment { #experiment.create }
 
 Before creating a training, you must create an experiment to sort trainings.
 
@@ -61,8 +59,7 @@ experiment = easymaker.Experiment().create(
 ```
 
 <a id="experiment.list"></a>
-
-### List Experiments
+### List Experiments { #experiment.list }
 
 ```python
 experiment_list = easymaker.Experiment.get_list()
@@ -71,8 +68,7 @@ for experiment in experiment_list:
 ```
 
 <a id="experiment.delete"></a>
-
-### Delete Experiment
+### Delete Experiment { #experiment.delete }
 
 [Parameter]
 
@@ -85,12 +81,10 @@ easymaker.Experiment(experiment_id).delete()
 ```
 
 <a id="training"></a>
-
-## Training
+## Training { #training }
 
 <a id="training.image.list"></a>
-
-### List Images
+### List Images { #training.image.list }
 
 ```python
 image_list = easymaker.Training.get_image_list()
@@ -99,8 +93,7 @@ for image in image_list:
 ```
 
 <a id="training.instance.list"></a>
-
-### List Instances
+### List Instances { #training.instance.list }
 
 ```python
 instance_type_list = easymaker.Training.get_instance_type_list()
@@ -109,8 +102,7 @@ for instance in instance_type_list:
 ```
 
 <a id="training.create"></a>
-
-### Create Training
+### Create Training { #training.create }
 
 [Parameter]
 
@@ -182,8 +174,7 @@ training = easymaker.Training().run(
 ```
 
 <a id="training.list"></a>
-
-### List of Training
+### List of Training { #training.list }
 
 ```python
 training_list = easymaker.Training.get_list()
@@ -192,8 +183,7 @@ for training in training_list:
 ```
 
 <a id="training.delete"></a>
-
-### Delete Training
+### Delete Training { #training.delete }
 
 [Parameter]
 
@@ -206,12 +196,10 @@ easymaker.Training(training_id).delete()
 ```
 
 <a id="hyperparameter.tuning"></a>
-
-## Hyperparameter Tuning
+## Hyperparameter Tuning { #hyperparameter.tuning }
 
 <a id="hyperparameter.tuning.image.list"></a>
-
-### List Images
+### List Images { #hyperparameter.tuning.image.list }
 
 ```python
 image_list = easymaker.HyperparameterTuning.get_image_list()
@@ -220,8 +208,7 @@ for image in image_list:
 ```
 
 <a id="hyperparameter.tuning.instance.list"></a>
-
-### List Instances
+### List Instances { #hyperparameter.tuning.instance.list }
 
 ```python
 instance_type_list = easymaker.HyperparameterTuning.get_instance_type_list()
@@ -230,8 +217,7 @@ for instance in instance_type_list:
 ```
 
 <a id="hyperparameter.tuning.create"></a>
-
-### Create Hyperparameter Tuning
+### Create Hyperparameter Tuning { #hyperparameter.tuning.create }
 
 [Parameter]
 
@@ -342,8 +328,7 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
 ```
 
 <a id="hyperparameter.tuning.list"></a>
-
-### List Hyperparameter Tuning
+### List Hyperparameter Tuning { #hyperparameter.tuning.list }
 
 ```python
 hyperparameter_tuning_list = easymaker.HyperparameterTuning.get_list()
@@ -352,8 +337,7 @@ for hyperparameter_tuning in hyperparameter_tuning_list:
 ```
 
 <a id="hyperparameter.tuning.delete"></a>
-
-### Delete Hyperparameter Tuning
+### Delete Hyperparameter Tuning { #hyperparameter.tuning.delete }
 
 [Parameter]
 
@@ -365,40 +349,223 @@ for hyperparameter_tuning in hyperparameter_tuning_list:
 easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 ```
 
-<a id="model"></a>
+<a id="fine.tuning"></a>
+## Fine Tuning { #fine.tuning }
 
-## Model
+A feature that specializes model performance by performing additional training on a pre-trained large language model using a dataset tailored to a specific domain or task.
+
+<a id="fine.tuning.model.preset.list"></a>
+### List Base Models { #fine.tuning.model.preset.list }
+
+Retrieves a list of base models available for fine tuning.
+
+[Parameters]
+
+| Name | Type | Required | Default | Valid range | Description |
+| ----------------- | ------ | ----- | --- | ----- | ------------------------------- |
+| model_preset_name | String | Optional | None | None | Base model name (filter by name; retrieves all if not entered) |
+
+```python
+base_model_list = easymaker.FineTuning.get_base_model_list()
+for base_model in base_model_list:
+    base_model.print_info()
+
+# Select one of the retrieved base models
+base_model = base_model_list[0]
+base_model_preset_id = base_model.model_preset_id
+```
+
+<a id="fine.tuning.instance.list"></a>
+### List Instance Types { #fine.tuning.instance.list }
+
+Retrieves a list of instance types available for the selected base model preset (`model_preset_id`).
+
+[Parameters]
+
+| Name | Type | Required | Default | Valid range | Description |
+| --------------- | ------ | ----- | --- | ------ | ------------- |
+| model_preset_id | String | Optional | None | Up to 36 characters | Base model preset ID |
+
+```python
+instance_type_list = easymaker.FineTuning.get_instance_type_list(model_preset_id=base_model_preset_id)
+for instance in instance_type_list:
+    instance.print_info()
+```
+
+<a id="fine.tuning.parameter.spec.list"></a>
+### Retrieve Hyperparameter Specifications { #fine.tuning.parameter.spec.list }
+
+Retrieves the fine tuning hyperparameter specifications for the selected base model. The retrieved specifications can be used to build a hyperparameter list with default values.
+
+[Parameters]
+
+| Name | Type | Required | Default | Valid range | Description |
+| -------------------- | ------ | ----- | --- | ------ | ------------- |
+| base_model_preset_id | String | Required | None | Up to 36 characters | Base model preset ID |
+
+```python
+parameter_spec_list = easymaker.FineTuning.get_parameter_spec_list(
+    base_model_preset_id=base_model_preset_id,
+)
+for spec in parameter_spec_list:
+    spec.print_info()
+
+# Build hyperparameter list using default values for parameters that have defaults (modify values if needed)
+hyperparameter_list = [
+    easymaker.Parameter(parameter_name=spec.parameter_name, parameter_value=spec.default_value)
+    for spec in parameter_spec_list
+    if spec.default_value is not None
+]
+```
+
+<a id="fine.tuning.create"></a>
+### Create Fine Tuning { #fine.tuning.create }
+
+[Parameters]
+
+| Name | Type | Required | Default | Valid range | Description |
+| -------------------------------------- | --------------------------- | ------------------------- | ----- |---------------------------|-----------------------------------------------------------------|
+| experiment_id | String | Required if not entered in easymaker.init | None | Up to 36 characters | Experiment ID |
+| experiment_name | String | Optional | None | Up to 50 characters | New experiment name (used when creating an experiment at the same time) |
+| experiment_description | String | Optional | None | Up to 255 characters | Description for the new experiment |
+| fine_tuning_name | String | Required | None | Up to 50 characters | Fine tuning name |
+| description | String | Optional | None | Up to 255 characters | Description for the fine tuning |
+| flavor_name | String | Required | None | None | Instance type name (can be retrieved) |
+| instance_count | Integer | Optional | 1 | 1–10 | Number of training instances |
+| base_model_preset_id | String | Required | None | Up to 36 characters | Base model preset ID |
+| model_upload_uri | String | Required | None | Up to 255 characters | Path where the completed fine tuning model will be uploaded (NHN Cloud Object Storage or NHN Cloud NAS) |
+| timeout_hours | Integer | Optional | 720 | 1–720 | Maximum fine tuning duration (unit: hours) |
+| hyperparameter_list | easymaker.Parameter Array | Optional | None | Up to 100 | Hyperparameter information (consists of parameter_name/parameter_value) |
+| hyperparameter_list[0].parameter_name | String | Optional | None | Up to 255 characters | Hyperparameter key |
+| hyperparameter_list[0].parameter_value | String | Optional | None | Up to 1,000 characters | Hyperparameter value |
+| dataset_list | easymaker.Dataset Array | Required | None | Up to 10 | Dataset information to be used for fine tuning |
+| dataset_list[0].dataset_name | String | Required | None | Up to 36 characters | Data name |
+| dataset_list[0].data_uri | String | Required | None | Up to 255 characters | Data path |
+| dataset_list[0].dataset_format_code | easymaker.DatasetFormatCode | Required | None | CHAT_TEMPLATE, COMPLETION | Dataset format |
+| dataset_list[0].dataset_split_code | easymaker.DatasetSplitCode | Required | TRAIN | TRAIN, VALIDATION | Dataset split (training/validation); at least 1 TRAIN required |
+| data_storage_size | Integer | Required when using Object Storage | None | 300–10,000 | Storage size for downloading data required for fine tuning (unit: GB); not required when using NAS |
+| validation_split_percent | Integer | Optional | 0 | 0–100 | Percentage (%) of training data to split for validation. If 0, no split is performed. If a VALIDATION dataset is specified, that dataset is used for validation and this value is ignored. |
+| use_log | Boolean | Optional | False | True, False | Whether to save logs to the Log & Crash Search service |
+| wait | Boolean | Optional | True | True, False | True: Returns after creation is complete; False: Returns immediately after the creation request |
+
+```python
+fine_tuning = easymaker.FineTuning().run(
+    experiment_id=experiment.experiment_id, # Optional if already set in init
+    fine_tuning_name='fine_tuning_name',
+    description='fine_tuning_description',
+    flavor_name='g4.c92m1800',
+    instance_count=1,
+    base_model_preset_id=base_model_preset_id,
+    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    timeout_hours=24,
+    validation_split_percent=10,  # Use 10% of training data for validation
+    hyperparameter_list=[
+        easymaker.Parameter(
+            parameter_name="epoch",
+            parameter_value="1",
+        ),
+        easymaker.Parameter(
+            parameter_name="learning_rate",
+            parameter_value="0.0002",
+        ),
+        easymaker.Parameter(
+            parameter_name="batch_size",
+            parameter_value="1",
+        ),
+    ],
+    dataset_list=[
+        easymaker.Dataset(
+            dataset_name="train-dataset",
+            data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}',
+            dataset_format_code=easymaker.DatasetFormatCode.CHAT_TEMPLATE,
+            dataset_split_code=easymaker.DatasetSplitCode.TRAIN,
+        ),
+    ],
+    data_storage_size=300,
+    use_log=False,
+    # wait=False,
+)
+```
+
+<a id="fine.tuning.list"></a>
+### List Fine Tunings { #fine.tuning.list }
+
+```python
+fine_tuning_list = easymaker.FineTuning.get_list()
+for fine_tuning in fine_tuning_list:
+    fine_tuning.print_info()
+```
+
+<a id="fine.tuning.stop"></a>
+### Stop Fine Tuning { #fine.tuning.stop }
+
+Stops a fine tuning that is in the RUNNING state.
+
+[Parameters]
+
+| Name | Type | Required | Default | Valid range | Description |
+| -------------- | ------ | ----- | --- | ------ | -------- |
+| fine_tuning_id | String | Required | None | Up to 36 characters | Fine tuning ID |
+
+```python
+easymaker.FineTuning(fine_tuning_id).stop()
+```
+
+<a id="fine.tuning.delete"></a>
+### Delete Fine Tuning { #fine.tuning.delete }
+
+[Parameters]
+
+| Name | Type | Required | Default | Valid range | Description |
+| -------------- | ------ | ----- | --- | ------ | -------- |
+| fine_tuning_id | String | Required | None | Up to 36 characters | Fine tuning ID |
+
+```python
+easymaker.FineTuning(fine_tuning_id).delete()
+```
+
+
+<a id="model"></a>
+## Model { #model }
 
 <a id="model.create"></a>
+### Create Model { #model.create }
 
-### Create Model
-
-Request to create a model with the training ID.
+Request to create a model with the training, hyperparameter, and fine tuning ID.
 The model is used when creating endpoints.
 
 [Parameter]
 
 | Name                       | Type     | Required                              | Default value | Valid range   | Description                                  |
-|--------------------------|--------|------------------------------------|-----|---------|-------------------------------------|
-| model_format_code | easymaker.ModelFormatCode | Required | None | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | Model format information used for inference serving |
-| training_id              | String | Required if hyperparameter_tuning_id does not exist | None  | None      | Training ID to create a model                       |
-| hyperparameter_tuning_id | String | Required if training_id is not present              | None  | None      | Hyperparameter tuning ID to be created by model (created by best learning) |
-| model_name               | String | Required                                 | None  | Up to 50 characters  | Model name                               |
-| description        | String | Optional                                 | None  | Up to 255 characters | Description for model                           |
-| parameter_list                   | Array  | Optional    | None  | Up to 10                                  | Parameter information (consist of parameterName/parameterValue)         |
-| parameter_list[0].parameterName  | String | Optional    | None  | Up to 64 characters                                  | Parameter name                                              |
-| parameter_list[0].parameterValue | String | Optional    | None  | Up to 255 characters                                 | Parameter value                                                |
+|----------------------------------|---------------------------|--------------------------|-----|--------------------------------------------------------------|-------------------------------------------|
+| model_format_code                | easymaker.ModelFormatCode | Required if fine_tuning_id is not entered | None | TENSORFLOW, PYTORCH, SKLEARN, HUGGING_FACE, TRITON, SAPEON | Model format information used for inference serving |
+| training_id                      | String                    | Optional | None | None | Training ID to create as a model |
+| hyperparameter_tuning_id         | String                    | Optional | None | None | Hyperparameter tuning ID to create as a model (created from the best training) |
+| fine_tuning_id                   | String                    | Optional | None | None | Fine tuning ID to create as a model |
+| model_name                       | String                    | Required | None | Up to 50 characters | Model name |
+| description                      | String                    | Optional | None | Up to 255 characters | Description for the model |
+| parameter_list                   | Array                     | Optional | None | Up to 10 | Parameter information (consists of parameterName/parameterValue) |
+| parameter_list[0].parameterName  | String                    | Optional | None | Up to 64 characters | Parameter name |
+| parameter_list[0].parameterValue | String                    | Optional | None | Up to 255 characters | Parameter value |
 
 ```python
 model = easymaker.Model().create(
-    model_format_code=easymaker.ModelFormatCode.PYTORCH,
-    training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
     model_name='model_name',
+    training_id=training.training_id,  # or hyperparameter_tuning_id=hyperparameter_tuning.hyperparameter_tuning_id,
+    model_format_code=easymaker.ModelFormatCode.PYTORCH,
     description='model_description',
 )
 ```
 
-Even if there is no training ID, you can create a model by entering the path information for the model and framework type.
+```python
+model = easymaker.Model().create(
+    model_name='model_name',
+    fine_tuning_id=fine_tuning.fine_tuning_id,
+    description='model_description',
+)
+```
+
+Even if there is no training, hyperparameter tuning, and fine tuning ID, you can create a model by entering the path information for the model and framework type.
 
 [Parameter]
 
@@ -434,8 +601,7 @@ model = easymaker.Model().create_hugging_face_model(
 ```
 
 <a id="model.list"></a>
-
-### List Models
+### List Models { #model.list }
 
 ```python
 model_list = easymaker.Model.get_list()
@@ -444,8 +610,7 @@ for model in model_list:
 ```
 
 <a id="model.delete"></a>
-
-### Delete Model
+### Delete Model { #model.delete }
 
 [Parameter]
 
@@ -458,12 +623,10 @@ easymaker.Model(model_id).delete()
 ```
 
 <a id="model.evaluation"></a>
-
-## Evaluate Models
+## Evaluate Models { #model.evaluation }
 
 <a id="model.evaluation.instance.list"></a>
-
-### List Instances
+### List Instances { #model.evaluation.instance.list }
 
 ```python
 instance_type_list = easymaker.ModelEvaluation.get_instance_type_list()
@@ -472,8 +635,7 @@ for instance in instance_type_list:
 ```
 
 <a id="model.evaluation.create"></a>
-
-### Create a model evaluation
+### Create a model evaluation { #model.evaluation.create }
 
 Create a model evaluation that measures the performance metrics of the model. Batch inference is run with the selected model and the evaluation metrics are saved.
 
@@ -545,8 +707,7 @@ classification_model_evaluation  = easymaker.ModelEvaluation().create(
 ```
 
 <a id="model.evaluation.list"></a>
-
-### List Model Evaluations
+### List Model Evaluations { #model.evaluation.list }
 
 ```python
 model_evaluation_list = easymaker.ModelEvaluation.get_list()
@@ -555,8 +716,7 @@ for model_evaluation in model_evaluation_list:
 ```
 
 <a id="model.evaluation.delete"></a>
-
-### Delete a model evaluation
+### Delete a model evaluation { #model.evaluation.delete }
 
 [Parameter]
 
@@ -569,12 +729,10 @@ easymaker.ModelEvaluation(model_evaluation_id).delete()
 ```
 
 <a id="endpoint"></a>
-
-## Endpoint
+## Endpoint { #endpoint }
 
 <a id="endpoint.instance.list"></a>
-
-### List Instances
+### List Instances { #endpoint.instance.list }
 
 ```python
 instance_type_list = easymaker.Endpoint.get_instance_type_list()
@@ -583,8 +741,7 @@ for instance in instance_type_list:
 ```
 
 <a id="endpoint.create"></a>
-
-### Create Endpoint
+### Create Endpoint { #endpoint.create }
 
 When creating an endpoint, the default stage is created.
 
@@ -638,8 +795,7 @@ endpoint = easymaker.Endpoint(endpoint_id)
 ```
 
 <a id="endpoint.stage.create"></a>
-
-### Add Stage
+### Add Stage { #endpoint.stage.create }
 
 You can add a new stage to existing endpoints.
 
@@ -690,8 +846,7 @@ endpoint_stage = easymaker.EndpointStage().create(
 ```
 
 <a id="endpoint.stage.list"></a>
-
-### Retrieve Stages
+### Retrieve Stages { #endpoint.stage.list }
 
 Retrieves endpoint stages.
 
@@ -700,8 +855,7 @@ endpoint_stage_list = easymaker.Endpoint(endpoint_id).get_stage_list()
 ```
 
 <a id="endpoint.inference.request"></a>
-
-### Endpoint Inference
+### Endpoint Inference { #endpoint.inference.request }
 
 Inference to the default stage
 
@@ -724,8 +878,7 @@ easymaker.EndpointStage('endpoint_stage_id').predict(
 ```
 
 <a id="endpoint.list"></a>
-
-### List Endpoints
+### List Endpoints { #endpoint.list }
 
 ```python
 endpoint_list = easymaker.Endpoint.get_list()
@@ -734,8 +887,7 @@ for endpoint in endpoint_list:
 ```
 
 <a id="endpoint.delete"></a>
-
-### Delete Endpoint
+### Delete Endpoint { #endpoint.delete }
 
 [Parameter]
 
@@ -748,8 +900,7 @@ easymaker.Endpoint(endpoint_id).delete()
 ```
 
 <a id="endpoint.stage.delete"></a>
-
-### Delete Endpoint Stage
+### Delete Endpoint Stage { #endpoint.stage.delete }
 
 [Parameter]
 
@@ -762,12 +913,10 @@ easymaker.EndpointStage(stage_id).delete()
 ```
 
 <a id="batch.inference"></a>
-
-## Batch Inference
+## Batch Inference { #batch.inference }
 
 <a id="batch.inference.instance.list"></a>
-
-### List Instances
+### List Instances { #batch.inference.instance.list }
 
 ```python
 instance_type_list = easymaker.BatchInference.get_instance_type_list()
@@ -776,8 +925,7 @@ for instance in instance_type_list:
 ```
 
 <a id="batch.inference.create"></a>
-
-### Create Batch Inference
+### Create Batch Inference { #batch.inference.create }
 
 [Parameter]
 
@@ -824,8 +972,7 @@ batch_inference = easymaker.BatchInference().run(
 ```
 
 <a id="batch.inference.list"></a>
-
-### List of Batch Inference
+### List of Batch Inference { #batch.inference.list }
 
 ```python
 batch_inference_list = easymaker.BatchInference.get_list()
@@ -834,8 +981,7 @@ for batch_inference in batch_inference_list:
 ```
 
 <a id="batch.inference.delete"></a>
-
-### Delete Batch Inference
+### Delete Batch Inference { #batch.inference.delete }
 
 [Parameter]
 
@@ -848,12 +994,10 @@ easymaker.BatchInference(batch_inference_id).delete()
 ```
 
 <a id="pipeline"></a>
-
-## Pipeline
+## Pipeline { #pipeline }
 
 <a id="pipeline.create"></a>
-
-### Create Pipeline
+### Create Pipeline { #pipeline.create }
 
 [Parameter]
 
@@ -874,8 +1018,7 @@ pipeline = easymaker.Pipeline().upload(
 ```
 
 <a id="pipeline.list"></a>
-
-### List of Pipeline
+### List of Pipeline { #pipeline.list }
 
 ```python
 pipeline_list = easymaker.Pipeline.get_list()
@@ -884,8 +1027,7 @@ for pipeline in pipeline_list:
 ```
 
 <a id="pipeline.delete"></a>
-
-### Delete Pipeline
+### Delete Pipeline { #pipeline.delete }
 
 [Parameter]
 
@@ -898,8 +1040,7 @@ easymaker.Pipeline(pipeline_id).delete()
 ```
 
 <a id="pipeline.instance.list"></a>
-
-### List Instances
+### List Instances { #pipeline.instance.list }
 
 ```python
 instance_type_list = easymaker.PipelineRun.get_instance_type_list()
@@ -908,8 +1049,7 @@ for instance in instance_type_list:
 ```
 
 <a id="pipeline.run.create"></a>
-
-### Create Pipeline Run
+### Create Pipeline Run { #pipeline.run.create }
 
 [Parameter]
 
@@ -950,8 +1090,7 @@ pipeline_run = easymaker.PipelineRun().create(
 ```
 
 <a id="pipeline.run.list"></a>
-
-### List of Pipeline Run
+### List of Pipeline Run { #pipeline.run.list }
 
 ```python
 pipeline_run_list = easymaker.PipelineRun.get_list()
@@ -960,8 +1099,7 @@ for pipeline_run in pipeline_run_list:
 ```
 
 <a id="pipeline.run.delete"></a>
-
-### Delete Pipeline Run
+### Delete Pipeline Run { #pipeline.run.delete }
 
 [Parameter]
 
@@ -974,8 +1112,7 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 ```
 
 <a id="pipeline.recurring.run.create"></a>
-
-### Create Pipeline Schedule
+### Create Pipeline Schedule { #pipeline.recurring.run.create }
 
 [Parameter]
 
@@ -1024,8 +1161,7 @@ pipeline_recurring_run = easymaker.PipelineRecurringRun().create(
 ```
 
 <a id="pipeline.recurring.run.stop.start"></a>
-
-### Stop/Restart Pipeline Schedule
+### Stop/Restart Pipeline Schedule { #pipeline.recurring.run.stop.start }
 
 [Parameter]
 
@@ -1040,8 +1176,7 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).start()
 ```
 
 <a id="pipeline.recurring.run.list"></a>
-
-### List of Pipeline Schedule
+### List of Pipeline Schedule { #pipeline.recurring.run.list }
 
 ```python
 pipeline_recurring_run_list = easymaker.PipelineRecurringRun.get_list()
@@ -1050,8 +1185,7 @@ for pipeline_recurring_run in pipeline_recurring_run_list:
 ```
 
 <a id="pipeline.recurring.run.delete"></a>
-
-### Delete Pipeline Schedule
+### Delete Pipeline Schedule { #pipeline.recurring.run.delete }
 
 [Parameter]
 
@@ -1064,12 +1198,10 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).delete()
 ```
 
 <a id="feature"></a>
-
-## Other Features
+## Other Features { #feature }
 
 <a id="feature.lncs.log.send"></a>
-
-### NHN Cloud - Log & Crash Search Log Sending Feature
+### NHN Cloud - Log & Crash Search Log Sending Feature { #feature.lncs.log.send }
 
 ```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
@@ -1081,8 +1213,7 @@ easymaker_logger.send(log_message='log meassage',
 ```
 
 <a id="feature.object.storage.file.send"></a>
-
-### NHN Cloud - Object Storage File Sending Feature
+### NHN Cloud - Object Storage File Sending Feature { #feature.object.storage.file.send }
 
 Provide a feature to upload and download files with Object Storage.
 
