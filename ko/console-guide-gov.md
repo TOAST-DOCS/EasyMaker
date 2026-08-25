@@ -1,16 +1,13 @@
 <a id="ai.easymaker.console.guide"></a>
-
-## Machine Learning > AI EasyMaker > 콘솔 사용 가이드
+## Machine Learning > AI EasyMaker > 콘솔 사용 가이드 { #ai.easymaker.console.guide }
 
 <a id="dashboard"></a>
-
-## 대시보드
+## 대시보드 { #dashboard }
 
 대시보드에서 전체 AI EasyMaker 리소스의 이용 현황을 확인할 수 있습니다.
 
 <a id="dashboard.service.usage.status"></a>
-
-### 서비스 이용 현황
+### 서비스 이용 현황 { #dashboard.service.usage.status }
 
 리소스별로 이용 중인 리소스 수를 표시합니다.
 
@@ -20,28 +17,24 @@
 - 엔드포인트: ACTIVE 상태의 엔드포인트 수
 
 <a id="dashboard.service.monitoring"></a>
-
-### 서비스 모니터링
+### 서비스 모니터링 { #dashboard.service.monitoring }
 
 - API 호출이 가장 많은 Top 3 엔드포인트를 표시합니다.
 - 엔드포인트를 선택하면 하위 엔드포인트 스테이지의 API 성공/실패 합계 지표를 확인할 수 있습니다.
 
 <a id="dashboard.resource.usage"></a>
-
-### 리소스 사용률
+### 리소스 사용률 { #dashboard.resource.usage }
 
 - CPU, GPU 코어 타입별로 가장 사용량이 많은 리소스를 확인할 수 있습니다.
 - 지표에 마우스 포인터를 올리면 리소스 정보가 표시됩니다.
 
 <a id="notebook"></a>
-
-## 노트북
+## 노트북 { #notebook }
 
 머신 러닝 개발을 위한 필수 패키지가 설치되어 있는 주피터(Jupyter) 노트북을 생성하고 관리합니다.
 
 <a id="notebook.create"></a>
-
-### 노트북 생성
+### 노트북 생성 { #notebook.create }
 
 주피터 노트북을 생성합니다.
 
@@ -75,8 +68,7 @@
     AI EasyMaker와 동일한 프로젝트에서 생성된 NHN Cloud NAS만 사용 가능합니다.
 
 <a id="notebook.list"></a>
-
-### 노트북 목록
+### 노트북 목록 { #notebook.list }
 
 노트북 목록이 표시됩니다. 목록의 노트북을 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
 
@@ -106,8 +98,7 @@
     - **모니터링** 탭은 노트북이 생성 중이거나 진행 중인 작업이 있을 때 비활성화됩니다.
 
 <a id="notebook.user.virtual.run.environment.configuration"></a>
-
-### 사용자 가상 실행 환경 구성
+### 사용자 가상 실행 환경 구성 { #notebook.user.virtual.run.environment.configuration }
 
 AI EasyMaker 노트북 인스턴스는 머신 러닝에 필요한 다양한 라이브러리 및 커널이 설치된 기본 Conda 가상 환경을 제공합니다.
 기본 Conda 가상 환경은 노트북을 중지하고 시작할 때 초기화되어 구동되지만, 사용자가 임의의 경로에 설치한 가상 환경 및 외부 라이브러리는 자동으로 초기화되지 않기 때문에 노트북을 중지하고 시작했을 때 유지되지 않습니다.
@@ -136,8 +127,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
         easymaker_env           /root/easymaker/custom-conda-envs/easymaker_env
 
 <a id="notebook.user.script"></a>
-
-### 사용자 스크립트
+### 사용자 스크립트 { #notebook.user.script }
 
 노트북을 중지하고 시작할 때 자동으로 실행되어야 하는 스크립트를 `/root/easymaker/cont-init.d` 경로에 등록할 수 있습니다.
 알파벳 숫자(alphanumeric) 순서에 따라 오름차순으로 실행됩니다.
@@ -154,8 +144,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     - 전체 실행 로그: `/root/easymaker/cont-init.output`
 
 <a id="notebook.stop"></a>
-
-### 노트북 중지
+### 노트북 중지 { #notebook.stop }
 
 구동 중인 노트북을 중지하거나 중지된 노트북을 시작합니다.
 
@@ -171,8 +160,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     노트북 중지 후 시작 시 가상 환경 및 외부 라이브러리를 유지하려면 [사용자 가상 실행 환경 구성](#notebook.user.virtual.run.environment.configuration)을 참고하여 사용자 가상 환경을 구성하세요.
 
 <a id="notebook.instance.type.change"></a>
-
-### 노트북 인스턴스 타입 변경
+### 노트북 인스턴스 타입 변경 { #notebook.instance.type.change }
 
 생성된 노트북의 인스턴스 타입을 변경합니다.
 변경하려는 인스턴스 타입은 기존 인스턴스와 동일한 코어 타입의 인스턴스 타입으로만 변경이 가능합니다.
@@ -186,8 +174,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     인스턴스 타입 변경은 몇 분의 시간이 소요될 수 있습니다.
 
 <a id="notebook.reboot"></a>
-
-### 노트북 재부팅
+### 노트북 재부팅 { #notebook.reboot }
 
 노트북 이용 중 문제가 발생하거나, 상태는 정상(ACTIVE)이지만 노트북에 접근이 되지 않는 경우
 노트북을 재부팅할 수 있습니다.
@@ -201,8 +188,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     노트북 재부팅 시 가상 환경 및 외부 라이브러리를 유지하려면 [사용자 가상 실행 환경 구성](#notebook.user.virtual.run.environment.configuration)을 참고하여 사용자 가상 환경을 구성하세요.
 
 <a id="notebook.delete"></a>
-
-### 노트북 삭제
+### 노트북 삭제 { #notebook.delete }
 
 생성된 노트북을 삭제합니다.
 
@@ -215,14 +201,12 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     연결한 NHN Cloud NAS는 삭제되지 않으며 **NHN Cloud NAS**에서 개별 삭제해야 합니다.
 
 <a id="experiment"></a>
-
-## 실험
+## 실험 { #experiment }
 
 실험은 연관된 학습을 실험으로 그룹화하여 관리합니다.
 
 <a id="experiment.create"></a>
-
-### 실험 생성
+### 실험 생성 { #experiment.create }
 
 1. **실험 생성**을 클릭합니다.
 2. 실험 이름과 설명을 입력하고 **확인**을 클릭합니다.
@@ -232,8 +216,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     리소스를 최초로 생성 시 서비스 환경 구성을 위해 추가로 몇 분의 시간이 더 소요됩니다.
 
 <a id="experiment.list"></a>
-
-### 실험 목록
+### 실험 목록 { #experiment.list }
 
 실험 목록이 표시됩니다. 목록의 실험을 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
 
@@ -252,8 +235,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
 - **학습**: 학습을 선택하면 표시되는 상세 화면의 **학습** 탭은 실험에 포함된 학습의 목록이 표시됩니다.
 
 <a id="experiment.delete"></a>
-
-### 실험 삭제
+### 실험 삭제 { #experiment.delete }
 
 실험을 삭제합니다.
 
@@ -267,14 +249,12 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     연관된 리소스는 삭제하려는 실험을 클릭하면 표시되는 하단의 상세화면에서 확인할 수 있습니다.
 
 <a id="training"></a>
-
-## 학습
+## 학습 { #training }
 
 머신 러닝 알고리즘을 학습하고 학습 결과를 통계로 확인할 수 있는 환경을 제공합니다.
 
 <a id="training.create"></a>
-
-### 학습 생성
+### 학습 생성 { #training.create }
 
 학습이 수행될 인스턴스와 OS 이미지를 선택하여 학습이 수행될 환경을 설정하고, 학습하려는 알고리즘 정보와 입력/출력 데이터 경로를 입력하여 학습을 진행합니다.
 
@@ -336,8 +316,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     - 학습이 완료되기 전 입력 데이터를 삭제하면 학습에 실패할 수 있습니다.
 
 <a id="training.list"></a>
-
-### 학습 목록
+### 학습 목록 { #training.list }
 
 학습 목록이 표시됩니다. 목록의 학습을 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
 
@@ -367,8 +346,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     - **모니터링** 탭은 학습이 생성 중인 상태에서는 비활성화됩니다.
 
 <a id="training.copy"></a>
-
-### 학습 복사
+### 학습 복사 { #training.copy }
 
 기존 학습과 동일한 설정으로 새로운 학습을 생성합니다.
 
@@ -378,8 +356,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
 4. 설정을 변경하려는 정보가 있다면 변경한 후 **학습 생성**을 클릭하여 학습을 생성합니다.
 
 <a id="training.model.create"></a>
-
-### 학습에서 모델 생성하기
+### 학습에서 모델 생성하기 { #training.model.create }
 
 완료된 상태의 학습으로 모델을 생성합니다.
 
@@ -388,8 +365,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
 3. 모델 생성 페이지로 이동됩니다. 내용을 확인 후 **모델 생성**을 클릭하여 모델을 생성합니다. 모델 생성에 대한 자세한 내용은 [모델](#model) 문서를 참고하세요.
 
 <a id="training.delete"></a>
-
-### 학습 삭제
+### 학습 삭제 { #training.delete }
 
 학습을 삭제합니다.
 
@@ -401,14 +377,12 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     삭제하려는 학습으로 생성된 모델이 존재하는 경우 학습을 삭제할 수 없습니다. 모델을 먼저 삭제한 후 학습을 삭제하세요.
 
 <a id="hyperparameter.tuning"></a>
-
-## 하이퍼파라미터 튜닝
+## 하이퍼파라미터 튜닝 { #hyperparameter.tuning }
 
 하이퍼파라미터 튜닝은 모델의 예측 정확도를 최대화하기 위해 하이퍼파라미터 값을 최적화하는 과정입니다. 만약 이 기능을 사용하지 않으면, 많은 학습 작업을 직접 실행하면서 하이퍼파라미터를 수동으로 조정하여 최적의 값들을 찾아야 합니다.
 
 <a id="hyperparameter.tuning.create"></a>
-
-### 하이퍼파라미터 튜닝 생성
+### 하이퍼파라미터 튜닝 생성 { #hyperparameter.tuning.create }
 
 하이퍼파라미터 튜닝 작업을 구성하는 방법입니다.
 
@@ -499,8 +473,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     - 학습이 완료되기 전 입력 데이터를 삭제하면 학습에 실패할 수 있습니다.
 
 <a id="hyperparameter.tuning.list"></a>
-
-### 하이퍼파라미터 튜닝 목록
+### 하이퍼파라미터 튜닝 목록 { #hyperparameter.tuning.list }
 
 하이퍼파라미터 튜닝 목록이 표시됩니다. 목록의 하이퍼파라미터 튜닝을 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
 
@@ -540,8 +513,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     - **모니터링** 탭은 하이퍼파라미터 튜닝이 생성 중인 상태에서는 비활성화됩니다.
 
 <a id="hyperparameter.tuning.training.list"></a>
-
-### 하이퍼파라미터 튜닝의 학습 목록
+### 하이퍼파라미터 튜닝의 학습 목록 { #hyperparameter.tuning.training.list }
 
 하이퍼파라미터 튜닝에 의해 자동 생성된 학습 목록이 표시됩니다. 목록의 학습을 선택하면 상세 정보를 확인할 수 있습니다.
 
@@ -559,8 +531,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     | EARLY_STOPPED       | 학습 진행 중 성능(목표 지표)이 더 좋아지지 않아 조기 중지된 상태입니다.                                                            |
 
 <a id="hyperparameter.tuning.copy"></a>
-
-### 하이퍼파라미터 튜닝 복사
+### 하이퍼파라미터 튜닝 복사 { #hyperparameter.tuning.copy }
 
 기존 하이퍼파라미터 튜닝과 동일한 설정으로 새로운 하이퍼파라미터 튜닝을 생성합니다.
 
@@ -570,8 +541,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
 4. 설정을 변경하려는 정보가 있다면 변경한 후 **하이퍼파라미터 튜닝 생성**을 클릭하여 하이퍼파라미터 튜닝을 생성합니다.
 
 <a id="hyperparameter.tuning.model.create"></a>
-
-### 하이퍼파라미터 튜닝에서 모델 생성하기
+### 하이퍼파라미터 튜닝에서 모델 생성하기 { #hyperparameter.tuning.model.create }
 
 완료된 상태의 하이퍼파라미터 튜닝의 최고 학습으로 모델을 생성합니다.
 
@@ -581,8 +551,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
    모델 생성에 대한 자세한 내용은 [모델](#model) 문서를 참고하세요.
 
 <a id="hyperparameter.tuning.delete"></a>
-
-### 하이퍼파라미터 튜닝 삭제
+### 하이퍼파라미터 튜닝 삭제 { #hyperparameter.tuning.delete }
 
 하이퍼파라미터 튜닝을 삭제합니다.
 
@@ -594,20 +563,17 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     삭제하려는 하이퍼파라미터 튜닝으로 생성된 모델이 존재하는 경우 하이퍼파라미터 튜닝을 삭제할 수 없습니다. 모델을 먼저 삭제한 후 하이퍼파라미터 튜닝을 삭제하세요.
 
 <a id="training.template"></a>
-
-## 학습 템플릿
+## 학습 템플릿 { #training.template }
 
 학습 템플릿을 미리 만들어 두면 학습이나 하이퍼파라미터 튜닝을 생성할 때 템플릿에 입력해 둔 값을 가져올 수 있습니다.
 
 <a id="training.template.create"></a>
-
-### 학습 템플릿 생성
+### 학습 템플릿 생성 { #training.template.create }
 
 학습 템플릿에 설정할 수 있는 정보는 [학습 생성](#training.create)을 참고하세요.
 
 <a id="training.template.list"></a>
-
-### 학습 템플릿 목록
+### 학습 템플릿 목록 { #training.template.list }
 
 학습 템플릿 목록이 표시됩니다. 목록의 학습 템플릿을 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
 
@@ -616,8 +582,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
 - **하이퍼파라미터**: 학습 템플릿을 선택하면 표시되는 상세 화면의 **하이퍼파라미터** 탭에서 학습 템플릿에 설정한 하이퍼파라미터 이름을 확인할 수 있습니다.
 
 <a id="training.template.copy"></a>
-
-### 학습 템플릿 복사
+### 학습 템플릿 복사 { #training.template.copy }
 
 기존 학습 템플릿과 동일한 설정으로 새로운 학습 템플릿을 생성합니다.
 
@@ -627,8 +592,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
 4. 설정을 변경하려는 정보가 있다면 변경한 후 **학습 템플릿 생성**을 클릭하여 학습 템플릿을 생성합니다.
 
 <a id="training.template.delete"></a>
-
-### 학습 템플릿 삭제
+### 학습 템플릿 삭제 { #training.template.delete }
 
 학습 템플릿을 삭제합니다.
 
@@ -637,14 +601,12 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
 3. 요청된 삭제 작업은 취소할 수 없습니다. 계속 진행하려면 **확인**을 클릭합니다.
 
 <a id="fine.tuning"></a>
-
-## 파인 튜닝
+## 파인 튜닝 { #fine.tuning }
 
 사전 학습된 거대 언어 모델에 특정 도메인이나 작업에 맞춘 데이터 세트로 추가 학습을 수행하여 모델의 성능을 특화하는 기능입니다. AI EasyMaker는 여러 모델을 추가 학습할 수 있게 베이스 모델로 제공합니다. 베이스 모델 중 하나를 선택하고 학습 데이터와 하이퍼파라미터를 입력하여 파인 튜닝합니다.
 
 <a id="fine.tuning.create"></a>
-
-### 파인 튜닝 생성
+### 파인 튜닝 생성 { #fine.tuning.create }
 
 베이스 모델과 학습 데이터, 하이퍼파라미터를 설정하여 파인 튜닝합니다.
 
@@ -683,8 +645,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     - 파인 튜닝이 완료되기 전 입력 데이터를 삭제하면 파인 튜닝에 실패할 수 있습니다.
 
 <a id="fine.tuning.list"></a>
-
-### 파인 튜닝 목록
+### 파인 튜닝 목록 { #fine.tuning.list }
 
 파인 튜닝 목록이 표시됩니다. 목록의 파인 튜닝을 선택하면 상세 정보를 확인할 수 있습니다.
 
@@ -714,8 +675,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     - **모니터링** 탭은 파인 튜닝이 생성 중인 상태에서는 비활성화됩니다.
 
 <a id="fine.tuning.copy"></a>
-
-### 파인 튜닝 복사
+### 파인 튜닝 복사 { #fine.tuning.copy }
 
 기존 파인 튜닝과 동일한 설정으로 새로운 파인 튜닝을 생성합니다.
 
@@ -725,8 +685,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
 4. 설정을 변경하려는 정보가 있다면 변경한 후 **파인 튜닝 생성**을 클릭하여 파인 튜닝을 생성합니다.
 
 <a id="fine.tuning.model.create"></a>
-
-### 파인 튜닝에서 모델 생성하기
+### 파인 튜닝에서 모델 생성하기 { #fine.tuning.model.create }
 
 완료된 상태의 파인 튜닝으로 모델을 생성합니다.
 
@@ -735,8 +694,7 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
 3. 모델 생성 페이지로 이동됩니다. 내용을 확인 후 **모델 생성**을 클릭하여 모델을 생성합니다. 모델 생성에 대한 자세한 내용은 [모델](#model) 문서를 참고하세요.
 
 <a id="fine.tuning.delete"></a>
-
-### 파인 튜닝 삭제
+### 파인 튜닝 삭제 { #fine.tuning.delete }
 
 파인 튜닝을 삭제합니다.
 
@@ -748,14 +706,12 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
     삭제하려는 파인 튜닝으로 생성된 모델이 존재하는 경우 파인 튜닝을 삭제할 수 없습니다. 모델을 먼저 삭제한 후 파인 튜닝을 삭제하세요.
 
 <a id="model"></a>
-
-## 모델
+## 모델 { #model }
 
 AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트로 관리할 수 있습니다.
 
 <a id="model.create"></a>
-
-### 모델 생성
+### 모델 생성 { #model.create }
 
 - **기본 정보**: 모델의 기본 정보를 입력합니다.
     - **이름**: 모델 이름을 입력합니다.
@@ -811,8 +767,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
     </details>
 
 <a id="model.list"></a>
-
-### 모델 목록
+### 모델 목록 { #model.list }
 
 모델 목록이 표시됩니다. 목록의 모델을 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
 
@@ -835,8 +790,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 - **파라미터**: 모델의 파라미터가 표시됩니다. 파라미터는 추론에 사용됩니다.
 
 <a id="model.endpoint.create"></a>
-
-### 모델에서 엔드포인트 생성하기
+### 모델에서 엔드포인트 생성하기 { #model.endpoint.create }
 
 선택한 모델을 서빙할 수 있는 엔드포인트를 생성합니다.
 
@@ -846,8 +800,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
    엔드포인트 생성에 대한 자세한 내용은 [엔드포인트](#endpoint) 문서를 참고하세요.
 
 <a id="model.batch.inference.create"></a>
-
-### 모델에서 배치 추론 생성하기
+### 모델에서 배치 추론 생성하기 { #model.batch.inference.create }
 
 선택한 모델로 배치 추론하고 추론 결과를 통계로 확인할 수 있는 배치 추론을 생성합니다.
 
@@ -857,8 +810,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
    배치 추론 생성에 대한 자세한 내용은 [배치 추론](#batch.inference) 문서를 참고하세요.
 
 <a id="model.delete"></a>
-
-### 모델 삭제
+### 모델 삭제 { #model.delete }
 
 모델을 삭제합니다.
 
@@ -871,14 +823,12 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
     삭제하려면 먼저 해당 모델로 생성된 엔드포인트를 삭제한 후 모델을 삭제하세요.
 
 <a id="model.evaluation"></a>
-
-## 모델 평가
+## 모델 평가 { #model.evaluation }
 
 모델의 성능을 측정하고, 여러 모델 간 성능을 비교합니다.
 
 <a id="model.evaluation.create"></a>
-
-### 모델 평가 생성
+### 모델 평가 생성 { #model.evaluation.create }
 
 모델 평가 과정에서 배치 추론이 자동으로 생성됩니다.
 
@@ -913,8 +863,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
     - 분류 모델 평가의 클래스 수는 50개 이하여야 합니다.
 
 <a id="model.evaluation.list"></a>
-
-### 모델 평가 목록
+### 모델 평가 목록 { #model.evaluation.list }
 
 모델 평가 목록이 표시됩니다. 목록의 모델 평가를 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
 
@@ -939,8 +888,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
     - **중지**: 진행 중인 모델 평가를 중지할 수 있습니다.
 
 <a id="model.evaluation.classification.metric"></a>
-
-### 분류 모델 평가 지표
+### 분류 모델 평가 지표 { #model.evaluation.classification.metric }
 
 - **PR AUC**: 정밀도-재현율(PR) 곡선의 아래 면적입니다. 불균형한 데이터셋에서 모델의 분류 성능을 측정하는 데 효과적입니다.
 - **ROC AUC**: ROC 곡선(재현율-위양성율)의 아래 면적입니다. 1에 가까울수록 우수한 성능을 나타냅니다.
@@ -954,8 +902,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 - **혼동 행렬(confusion matrix)**: 예측 결과를 TP, FP, FN, TN 네 가지로 구분한 행렬입니다. 클래스별 오차 유형을 쉽게 파악할 수 있습니다.
 
 <a id="model.evaluation.regression.metric"></a>
-
-### 회귀 모델 평가 지표
+### 회귀 모델 평가 지표 { #model.evaluation.regression.metric }
 
 - **MAE(mean absolute error)**: 실제 값과 예측 값의 차이의 절대값 평균입니다. 예측 오차의 크기를 직관적으로 보여줍니다.
 - **MAPE(mean absolute percentage error)**: 예측 오차를 실제 값으로 나눈 비율의 평균입니다. 비율 기반이므로 값이 0에 가까운 데이터에는 부적합할 수 있습니다.
@@ -964,8 +911,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 - **RMSLE(root mean squared logarithmic error)**: 로그 변환된 실제 값과 예측 값 사이의 차이로 계산됩니다. 값의 크기 차이에 민감하지 않아 지수적 성장 데이터를 평가할 때 유용합니다.
 
 <a id="model.evaluation.compare"></a>
-
-### 모델 평가 비교
+### 모델 평가 비교 { #model.evaluation.compare }
 
 여러 모델의 평가 지표를 비교합니다.
 
@@ -973,8 +919,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 2. **비교**를 클릭합니다.
 
 <a id="model.evaluation.delete"></a>
-
-### 모델 평가 삭제
+### 모델 평가 삭제 { #model.evaluation.delete }
 
 모델 평가를 삭제합니다.
 
@@ -983,14 +928,12 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 3. 요청된 삭제 작업은 취소할 수 없습니다. 계속 진행하려면 **확인**을 클릭합니다.
 
 <a id="endpoint"></a>
-
-## 엔드포인트
+## 엔드포인트 { #endpoint }
 
 모델을 서빙할 수 있는 엔드포인트를 생성하고 관리합니다.
 
 <a id="endpoint.create"></a>
-
-### 엔드포인트 생성
+### 엔드포인트 생성 { #endpoint.create }
 
 - **API Gateway 서비스 활성화**
     - AI EasyMaker 엔드포인트는 NHN Cloud API Gateway 서비스를 통해 API 엔드포인트를 생성하고 API를 관리합니다. 엔드포인트 기능을 이용하려면 API Gateway 서비스를 반드시 활성화해야 합니다.
@@ -1044,8 +987,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
     [API Gateway 서비스 리소스 제공 정책](https://docs.gov-nhncloud.com/ko/nhncloud/ko/resource-policy-gov/#api-gateway)의 기본 제공량을 초과한 경우, AI EasyMaker에서 엔드포인트 생성이 불가할 수 있습니다. 이 경우 API Gateway 서비스 리소스 쿼터를 조정하여 해결할 수 있습니다.
 
 <a id="endpoint.list"></a>
-
-### 엔드포인트 목록
+### 엔드포인트 목록 { #endpoint.list }
 
 엔드포인트 목록이 표시됩니다. 목록의 엔드포인트를 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
 
@@ -1074,8 +1016,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
     | STAGE DEPLOY FAIL              | API Gateway 기본 스테이지가 배포 실패한 상태입니다.                                                                 |
 
 <a id="endpoint.stage.create"></a>
-
-### 엔드포인트 스테이지 생성
+### 엔드포인트 스테이지 생성 { #endpoint.stage.create }
 
 기존 엔드포인트에 신규 스테이지를 추가합니다. 신규 스테이지를 생성하여 기본 스테이지의 영향 없이 신규 스테이지를 테스트할 수 있습니다.
 
@@ -1085,8 +1026,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 4. 요청된 삭제 작업은 취소할 수 없습니다. 계속 진행하려면 **확인**을 클릭합니다.
 
 <a id="endpoint.stage.list"></a>
-
-### 엔드포인트 스테이지 목록
+### 엔드포인트 스테이지 목록 { #endpoint.stage.list }
 
 엔드포인트 하위에 생성된 스테이지 목록이 표시됩니다. 목록의 스테이지를 선택하면 상세 정보를 확인할 수 있습니다.
 
@@ -1132,8 +1072,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
     위 가이드로도 배포 상태가 복구되지 않는 경우 고객지원으로 문의하세요.
 
 <a id="endpoint.stage.resource.create"></a>
-
-### 스테이지 리소스 생성
+### 스테이지 리소스 생성 { #endpoint.stage.resource.create }
 
 기존 엔드포인트 스테이지에 신규 리소스를 추가합니다.
 
@@ -1151,8 +1090,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
     - **임계치 값**: 파드가 증설될 증설 단위별 임계치 값입니다.
 
 <a id="endpoint.stage.resource.list"></a>
-
-### 스테이지 리소스 목록
+### 스테이지 리소스 목록 { #endpoint.stage.resource.list }
 
 엔드포인트 스테이지 하위에 생성된 리소스 목록이 표시됩니다.
 
@@ -1171,8 +1109,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 - **파드 수**: 리소스에서 사용 중인 정상 파드와 전체 파드 수가 표시됩니다.
 
 <a id="endpoint.inference.call"></a>
-
-### 엔드포인트 추론 호출
+### 엔드포인트 추론 호출 { #endpoint.inference.call }
 
 1. **엔드포인트** > **엔드포인트 스테이지**에서 스테이지를 클릭하면 하단에 스테이지 상세 화면이 표시됩니다.
 2. 상세 화면의 스테이지 리소스 탭에서 API Gateway 리소스 경로를 확인합니다.
@@ -1206,8 +1143,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
             }
 
 <a id="endpoint.stage.resource.delete"></a>
-
-### 스테이지 리소스 삭제
+### 스테이지 리소스 삭제 { #endpoint.stage.resource.delete }
 
 1. 엔드포인트 목록에서 **엔드포인트 이름**을 클릭하여 엔드포인트 스테이지 목록으로 이동합니다.
 2. 엔드포인트 스테이지 목록에서 삭제할 스테이지 리소스가 배포된 엔드포인트 스테이지를 클릭합니다. 클릭하면 하단에 스테이지 상세 화면이 표시됩니다.
@@ -1216,8 +1152,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 5. 요청된 삭제 작업은 취소할 수 없습니다. 계속 진행하려면 **확인**을 클릭합니다.
 
 <a id="endpoint.default.stage.change"></a>
-
-### 엔드포인트 기본 스테이지 변경
+### 엔드포인트 기본 스테이지 변경 { #endpoint.default.stage.change }
 
 엔드포인트의 기본 스테이지를 다른 스테이지로 변경합니다.
 서비스의 순단 없이 엔드포인트의 모델을 변경하려면 AI EasyMaker는 스테이지 기능을 활용하여 모델을 배포하는 것을 권장합니다.
@@ -1231,8 +1166,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 7. 변경할 스테이지가 기본 스테이지로 변경되며, 기존 기본 스테이지의 리소스는 자동으로 삭제됩니다.
 
 <a id="endpoint.stage.delete"></a>
-
-### 엔드포인트 스테이지 삭제
+### 엔드포인트 스테이지 삭제 { #endpoint.stage.delete }
 
 1. 엔드포인트 목록에서 **엔드포인트 이름**을 클릭하여 엔드포인트 스테이지 목록으로 이동합니다.
 2. 엔드포인트 스테이지 목록에서 삭제할 엔드포인트 스테이지를 선택합니다. 기본 스테이지는 삭제할 수 없습니다.
@@ -1244,8 +1178,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
     삭제되는 API Gateway 스테이지에 운영 중인 API가 존재하는 경우, API 호출이 불가하므로 주의하세요.
 
 <a id="endpoint.delete"></a>
-
-### 엔드포인트 삭제
+### 엔드포인트 삭제 { #endpoint.delete }
 
 엔드포인트를 삭제합니다.
 
@@ -1259,14 +1192,12 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
     삭제되는 API Gateway 서비스에 운영 중인 API가 존재하는 경우, API 호출이 불가하므로 주의하세요.
 
 <a id="batch.inference"></a>
-
-## 배치 추론
+## 배치 추론 { #batch.inference }
 
 AI EasyMaker의 모델로 배치 추론하고 추론 결과를 통계로 확인할 수 있는 환경을 제공합니다.
 
 <a id="batch.inference.create"></a>
-
-### 배치 추론 생성
+### 배치 추론 생성 { #batch.inference.create }
 
 인스턴스와 OS 이미지를 선택하여 배치 추론이 수행될 환경을 설정하고, 추론할 입력/출력 데이터의 경로를 입력하여 배치 추론을 진행합니다.
 
@@ -1318,8 +1249,7 @@ AI EasyMaker의 모델로 배치 추론하고 추론 결과를 통계로 확인�
     할당되지 않는 GPU는 배치 추론에 사용되지 않으므로, GPU 인스턴스를 효율적으로 사용하기 위해 파드 수를 적절히 설정하세요.
 
 <a id="batch.inference.list"></a>
-
-### 배치 추론 목록
+### 배치 추론 목록 { #batch.inference.list }
 
 배치 추론 목록이 표시됩니다. 목록의 배치 추론을 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
 
@@ -1344,8 +1274,7 @@ AI EasyMaker의 모델로 배치 추론하고 추론 결과를 통계로 확인�
     - **모니터링** 탭은 배치 추론이 생성 중인 상태에서는 비활성화됩니다.
 
 <a id="batch.inference.copy"></a>
-
-### 배치 추론 복사
+### 배치 추론 복사 { #batch.inference.copy }
 
 기존 배치 추론과 동일한 설정으로 새로운 배치 추론을 생성합니다.
 
@@ -1355,8 +1284,7 @@ AI EasyMaker의 모델로 배치 추론하고 추론 결과를 통계로 확인�
 4. 설정을 변경하려는 정보가 있다면 변경한 후 **배치 추론 생성**을 클릭하여 배치 추론을 생성합니다.
 
 <a id="batch.inference.delete"></a>
-
-### 배치 추론 삭제
+### 배치 추론 삭제 { #batch.inference.delete }
 
 배치 추론을 삭제합니다.
 
@@ -1365,15 +1293,13 @@ AI EasyMaker의 모델로 배치 추론하고 추론 결과를 통계로 확인�
 3. 요청된 삭제 작업은 취소할 수 없습니다. 계속 진행하려면 **확인**을 클릭합니다.
 
 <a id="personal.image"></a>
-
-## 개인 이미지
+## 개인 이미지 { #personal.image }
 
 사용자가 개인화한 컨테이너 이미지를 이용하여 노트북, 학습, 하이퍼파라미터 튜닝을 구동할 수 있습니다.
 AI EasyMaker에서 제공하는 노트북/딥 러닝 이미지를 기반으로 파생된 개인 이미지만 AI EasyMaker에서 리소스 생성 시 이용할 수 있습니다.
 AI EasyMaker의 기반 이미지는 아래 표를 확인하세요.
 
 <a id="personal.image.notebook.image"></a>
-
 #### 노트북 이미지
 
 | 이미지 이름                          | 코어타입 | 프레임워크 | 프레임워크 버전 | 파이썬 버전 | 이미지 주소                                                                                            |
@@ -1386,7 +1312,6 @@ AI EasyMaker의 기반 이미지는 아래 표를 확인하세요.
 | Ubuntu 22.04 GPU TensorFlow Notebook | GPU      | TensorFlow | 2.12.0          | 3.10        | 0516e3a7-kr-registry.container.gov-nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204 |
 
 <a id="personal.image.deep.learning.image"></a>
-
 #### 딥 러닝 이미지
 
 | 이미지 이름                          | 코어타입 | 프레임워크 | 프레임워크 버전 | 파이썬 버전 | 이미지 주소                                                                                         |
@@ -1403,8 +1328,7 @@ AI EasyMaker의 기반 이미지는 아래 표를 확인하세요.
     AI EasyMaker에서 제공하는 기반 이미지로 파생된 개인 이미지만 사용할 수 있습니다.
 
 <a id="personal.image.create"></a>
-
-### 개인 이미지 생성
+### 개인 이미지 생성 { #personal.image.create }
 
 다음 문서는 도커(Docker)를 활용하여 AI EasyMaker 기반 이미지로 컨테이너 이미지를 생성하고, AI EasyMaker에서 노트북용 개인 이미지를 사용하는 방법을 안내합니다.
 
@@ -1458,16 +1382,14 @@ AI EasyMaker의 기반 이미지는 아래 표를 확인하세요.
     비밀번호: NHN Cloud 사용자 계정의 User Secret Key
 
 <a id="registry.account"></a>
-
-## 레지스트리 계정
+## 레지스트리 계정 { #registry.account }
 
 AI EasyMaker가 개인 이미지가 저장된 사용자의 레지스트리에서 이미지를 가져와서(Pull) 컨테이너를 구동하려면 사용자의 레지스트리에 로그인해야 합니다.
 레지스트리 계정으로 로그인 정보를 저장해 두면 해당 레지스트리 계정으로 연동된 이미지에서 재사용할 수 있습니다.
 레지스트리 계정을 관리하려면 AI EasyMaker 콘솔의 **이미지** 메뉴로 이동한 후, **레지스트리 계정** 탭을 선택합니다.
 
 <a id="registry.account.create"></a>
-
-### 레지스트리 계정 생성
+### 레지스트리 계정 생성 { #registry.account.create }
 
 신규 레지스트리 계정을 생성합니다.
 
@@ -1478,11 +1400,9 @@ AI EasyMaker가 개인 이미지가 저장된 사용자의 레지스트리에서
 - 비밀번호: 레지스트리 계정의 비밀번호를 입력합니다.
 
 <a id="registry.account.modify"></a>
-
-### 레지스트리 계정 수정
+### 레지스트리 계정 수정 { #registry.account.modify }
 
 <a id="registry.account.modify.account.modify"></a>
-
 #### 레지스트리 아이디, 비밀번호 수정
 
 - **레지스트리 계정 수정** 버튼을 클릭합니다.
@@ -1497,7 +1417,6 @@ AI EasyMaker가 개인 이미지가 저장된 사용자의 레지스트리에서
     아이디와 비밀번호 수정에 주의하세요.
 
 <a id="registry.account.modify.account.info.modify"></a>
-
 #### 레지스트리 계정 > 이름, 설명 변경
 
 1. 레지스트리 계정 목록에서 변경할 계정을 선택합니다.
@@ -1505,8 +1424,7 @@ AI EasyMaker가 개인 이미지가 저장된 사용자의 레지스트리에서
 3. 이름과 설명을 변경한 후 **확인** 버튼을 클릭합니다.
 
 <a id="registry.account.delete"></a>
-
-### 레지스트리 계정 삭제
+### 레지스트리 계정 삭제 { #registry.account.delete }
 
 삭제할 레지스트리 계정을 목록에서 선택하고, **레지스트리 계정 삭제** 버튼을 클릭합니다.
 
@@ -1514,8 +1432,7 @@ AI EasyMaker가 개인 이미지가 저장된 사용자의 레지스트리에서
     이미지와 연동된 레지스트리 계정은 삭제할 수 없습니다. 삭제하려면 연동된 이미지를 먼저 삭제한 뒤 레지스트리 계정을 삭제해야 합니다.
 
 <a id="pipeline"></a>
-
-## 파이프라인
+## 파이프라인 { #pipeline }
 
 ML 파이프라인은 이식 가능하고 확장 가능한 기계 학습 워크플로우를 관리하고 실행하기 위한 기능입니다.
 Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라인을 작성하고, 파이프라인을 중간 표현 YAML로 컴파일하고, 이를 AI EasyMaker에서 실행할 수 있습니다.
@@ -1538,8 +1455,7 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
     - [KFP SDK 레퍼런스](https://kubeflow-pipelines.readthedocs.io/en/stable/)
 
 <a id="pipeline.upload"></a>
-
-### 파이프라인 업로드
+### 파이프라인 업로드 { #pipeline.upload }
 
 파이프라인을 업로드합니다.
 
@@ -1552,8 +1468,7 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
     리소스를 최초로 생성 시 서비스 환경 구성을 위해 추가로 몇 분의 시간이 더 소요됩니다.
 
 <a id="pipeline.list"></a>
-
-### 파이프라인 목록
+### 파이프라인 목록 { #pipeline.list }
 
 파이프라인 목록이 표시됩니다. 목록의 파이프라인을 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
 
@@ -1567,16 +1482,14 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
     | ACTIVE             | 파이프라인이 정상적으로 생성된 상태입니다.        |
 
 <a id="pipeline.graph"></a>
-
-### 파이프라인 그래프
+### 파이프라인 그래프 { #pipeline.graph }
 
 파이프라인 그래프가 표시됩니다. 그래프의 노드를 선택하면 상세 정보를 확인할 수 있습니다.
 
 그래프는 파이프라인을 그림으로 나타낸 것입니다. 그래프 내의 각 노드는 파이프라인의 단계를 나타내며 각 단계로 표시된 파이프라인 구성 요소 간의 부모/자식 관계를 화살표로 나타냅니다.
 
 <a id="pipeline.delete"></a>
-
-### 파이프라인 삭제
+### 파이프라인 삭제 { #pipeline.delete }
 
 파이프라인을 삭제합니다.
 
@@ -1588,14 +1501,12 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
     삭제하려는 파이프라인으로 생성된 일정이 존재하는 경우 파이프라인을 삭제할 수 없습니다. 파이프라인 일정을 먼저 삭제한 후 파이프라인을 삭제하세요.
 
 <a id="pipeline.run"></a>
-
-## 파이프라인 실행
+## 파이프라인 실행 { #pipeline.run }
 
 업로드한 파이프라인을 AI EasyMaker에서 실행하고 관리할 수 있습니다.
 
 <a id="pipeline.run.create"></a>
-
-### 파이프라인 실행 생성
+### 파이프라인 실행 생성 { #pipeline.run.create }
 
 파이프라인을 실행합니다.
 
@@ -1626,8 +1537,7 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
     AI EasyMaker와 동일한 프로젝트에서 생성된 NHN Cloud NAS만 사용 가능합니다.
 
 <a id="pipeline.run.list"></a>
-
-### 파이프라인 실행 목록
+### 파이프라인 실행 목록 { #pipeline.run.list }
 
 파이프라인 실행 목록이 표시됩니다. 목록의 파이프라인 실행을 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
 
@@ -1652,8 +1562,7 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
     - **모니터링** 탭은 파이프라인 실행이 생성 중인 상태에서는 비활성화됩니다.
 
 <a id="pipeline.run.graph"></a>
-
-### 파이프라인 실행 그래프
+### 파이프라인 실행 그래프 { #pipeline.run.graph }
 
 파이프라인 실행 그래프가 표시됩니다. 그래프의 노드를 선택하면 상세 정보를 확인할 수 있습니다.
 
@@ -1665,8 +1574,7 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
     파이프라인 아티팩트는 120일 동안 보관됩니다. 120일이 지난 아티팩트는 자동으로 삭제됩니다.
 
 <a id="pipeline.run.stop"></a>
-
-### 파이프라인 실행 중지
+### 파이프라인 실행 중지 { #pipeline.run.stop }
 
 진행 중인 파이프라인 실행을 중지합니다.
 
@@ -1678,8 +1586,7 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
     파이프라인 실행 중지는 몇 분의 시간이 소요될 수 있습니다.
 
 <a id="pipeline.run.copy"></a>
-
-### 파이프라인 실행 복사
+### 파이프라인 실행 복사 { #pipeline.run.copy }
 
 기존 파이프라인 실행과 동일한 설정으로 새로운 파이프라인 실행을 생성합니다.
 
@@ -1689,8 +1596,7 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
 4. 설정을 변경하려는 정보가 있다면 변경한 후 **파이프라인 실행 생성**을 클릭합니다.
 
 <a id="pipeline.run.delete"></a>
-
-### 파이프라인 실행 삭제
+### 파이프라인 실행 삭제 { #pipeline.run.delete }
 
 파이프라인 실행을 삭제합니다.
 
@@ -1699,14 +1605,12 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
 3. 요청된 삭제 작업은 취소할 수 없습니다. 계속 진행하려면 **삭제**를 클릭합니다.
 
 <a id="pipeline.schedule"></a>
-
-## 파이프라인 일정
+## 파이프라인 일정 { #pipeline.schedule }
 
 업로드한 파이프라인을 AI EasyMaker에서 주기적으로 반복 실행하는 일정을 생성하고 관리할 수 있습니다.
 
 <a id="pipeline.recurring.run.create"></a>
-
-### 파이프라인 일정 생성
+### 파이프라인 일정 생성 { #pipeline.recurring.run.create }
 
 파이프라인을 주기적으로 반복 실행하기 위한 일정을 생성합니다.
 
@@ -1733,8 +1637,7 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
     자세한 내용은 [Cron 표현식 형식](https://pkg.go.dev/github.com/robfig/cron#hdr-CRON_Expression_Format) 문서를 참고하세요.
 
 <a id="pipeline.recurring.run.list"></a>
-
-### 파이프라인 일정 목록
+### 파이프라인 일정 목록 { #pipeline.recurring.run.list }
 
 파이프라인 일정 목록이 표시됩니다. 목록의 파이프라인 일정을 선택하면 상세 정보를 확인하고 정보를 변경할 수 있습니다.
 
@@ -1751,8 +1654,7 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
 - **실행 관리**: 목록의 파이프라인 일정을 선택하면 표시되는 상세 화면의 **실행 관리** 탭에서 파이프라인 일정에 의해 생성된 실행 목록을 확인할 수 있습니다.
 
 <a id="pipeline.recurring.run.start.stop"></a>
-
-### 파이프라인 일정 시작 및 중지
+### 파이프라인 일정 시작 및 중지 { #pipeline.recurring.run.start.stop }
 
 시작된 파이프라인 일정을 중지하거나 중지된 파이프라인 일정을 시작합니다.
 
@@ -1760,8 +1662,7 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
 2. **일정 시작** 또는 **일정 중지**를 클릭합니다.
 
 <a id="pipeline.recurring.run.copy"></a>
-
-### 파이프라인 일정 복사
+### 파이프라인 일정 복사 { #pipeline.recurring.run.copy }
 
 기존 파이프라인 일정과 동일한 설정으로 새로운 파이프라인 일정을 생성합니다.
 
@@ -1771,8 +1672,7 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
 4. 설정을 변경하려는 정보가 있다면 변경한 후 **파이프라인 일정 생성**을 클릭합니다.
 
 <a id="pipeline.recurring.run.delete"></a>
-
-### 파이프라인 일정 삭제
+### 파이프라인 일정 삭제 { #pipeline.recurring.run.delete }
 
 파이프라인 일정을 삭제합니다.
 
@@ -1784,14 +1684,12 @@ Kubeflow Pipelines(KFP) Python SDK를 사용하여 컴포넌트 및 파이프라
     삭제하려는 파이프라인 일정에 의해 생성된 실행이 진행 중인 경우 삭제할 수 없습니다. 파이프라인 실행이 완료된 후 파이프라인 일정을 삭제하세요.
 
 <a id="rag"></a>
-
-## RAG
+## RAG { #rag }
 
 RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서를 벡터화하여 저장하고, 질문과 관련된 내용을 검색하여 LLM(Large Language Model, 대규모 언어 모델) 응답의 정확도를 높이는 기술입니다. AI EasyMaker는 벡터 스토어, 임베딩 모델, LLM을 통합하여 RAG 시스템을 생성하고 관리할 수 있습니다.
 
 <a id="rag.create"></a>
-
-### RAG 생성
+### RAG 생성 { #rag.create }
 
 새로운 RAG를 생성합니다.
 
@@ -1840,8 +1738,7 @@ RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서
     AI EasyMaker와 동일한 프로젝트에서 생성된 NHN Cloud NAS만 사용할 수 있습니다.
 
 <a id="rag.list"></a>
-
-### RAG 목록
+### RAG 목록 { #rag.list }
 
 생성된 RAG 목록을 확인하고 관리합니다. 목록에서 RAG를 선택하면 상세 정보를 확인할 수 있습니다.
 
@@ -1871,8 +1768,7 @@ RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서
 - **모니터링**: RAG를 선택하면 표시되는 상세 화면의 **모니터링** 탭에서 모니터링 대상 인스턴스 목록과 기본 지표 차트를 확인할 수 있습니다.
 
 <a id="rag.ingestion.sync"></a>
-
-### 수집 동기화
+### 수집 동기화 { #rag.ingestion.sync }
 
 - RAG를 선택하면 표시되는 상세 화면의 **벡터 스토어** 탭에 수집 동기화 기능을 사용할 수 있습니다.
 - 수집 데이터 경로에 문서가 추가, 삭제, 수정된 경우 **수집 동기화**를 실행하여 변경 사항을 반영할 수 있습니다.
@@ -1891,15 +1787,13 @@ RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서
 | 프레젠테이션 | `.ppt`, `.pptx` | 50MB |
 
 <a id="rag.delete"></a>
-
-### RAG 삭제
+### RAG 삭제 { #rag.delete }
 
 - 생성 또는 삭제가 진행 중인 RAG는 삭제할 수 없습니다.
 - 요청된 삭제 작업은 취소할 수 없습니다.
 
 <a id="rag.query.request.guide"></a>
-
-### RAG 질문 요청 가이드
+### RAG 질문 요청 가이드 { #rag.query.request.guide }
 
 - 질문을 요청할 때는 OpenAI Chat Completion API처럼 `model`과 `messages`를 요청 본문에 포함해서 요청하세요. `model`은 RAG 이름을 넣어서 요청하세요.
 - 자세한 요청 예시는 아래 내용을 참고하세요.
@@ -2026,12 +1920,10 @@ echo "---------------- 스트리밍 종료 ----------------" >&2
 </details>
 
 <a id="appendix"></a>
-
-## 부록
+## 부록 { #appendix }
 
 <a id="appendix.1.object.storage.account.permission"></a>
-
-### 1. NHN Cloud Object Storage에 AI EasyMaker 시스템 계정 권한 추가
+### 1. NHN Cloud Object Storage에 AI EasyMaker 시스템 계정 권한 추가 { #appendix.1.object.storage.account.permission }
 
 AI EasyMaker의 일부 기능에서 입출력 스토리지로 사용자의 NHN Cloud Object Storage를 사용하는 경우,
 사용자의 NHN Cloud Object Stroage 컨테이너에 AI EasyMaker 시스템 계정에 대한 읽기 또는 쓰기 권한을 허용해야 정상적인 기능 동작이 됩니다.
@@ -2064,11 +1956,9 @@ NHN Cloud Object Storage에 AI EasyMaker 시스템 계정의 읽기/쓰기 권�
 4. [특정 프로젝트 또는 특정 사용자에게 읽기/쓰기 허용](https://docs.gov-nhncloud.com/ko/Storage/Object%20Storage/ko/acl-guide-gov/#role-based-access-allow-rw-project-or-user) 문서를 참고하여 NHN Cloud Object Storage 콘솔에서 AI EasyMaker 시스템 계정에 필요한 읽기 및 쓰기 허용 권한을 추가합니다.
 
 <a id="appendix.2.lncs.service.usage.guide.and.log.inquiry.guide"></a>
-
-### 2. NHN Cloud Log & Crash Search 서비스 이용 안내 및 로그 조회 방법
+### 2. NHN Cloud Log & Crash Search 서비스 이용 안내 및 로그 조회 방법 { #appendix.2.lncs.service.usage.guide.and.log.inquiry.guide }
 
 <a id="appendix.2.lncs.service.usage.guide"></a>
-
 #### NHN Cloud Log & Crash Search 서비스 이용 안내
 
 AI EasyMaker 서비스에서 발생하는 로그, 이벤트를 NHN Cloud Log & Crash Search 서비스에 저장할 수 있습니다.
@@ -2080,7 +1970,6 @@ Log & Crash Search 서비스에 로그를 저장하려면, Log & Crash 서비스
         - [Log & Crash Search 이용 요금](https://www.gov-nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
 <a id="appendix.2.lncs.service.log.inquiry.guide"></a>
-
 #### 로그 조회
 
 1. Log & Crash Search 서비스 콘솔 페이지로 이동합니다.
@@ -2135,8 +2024,7 @@ AI EasyMaker 서비스는 Log & Crash Search 서비스에 다음과 같이 정�
     | batchInferenceId | AI EasyMaker 배치 추론 ID |
 
 <a id="appendix.3.hyperparameter"></a>
-
-### 3. 하이퍼파라미터
+### 3. 하이퍼파라미터 { #appendix.3.hyperparameter }
 
 - 콘솔을 통해 입력 받은 Key-Value 형식의 값입니다.
 - 엔트리 포인트 실행 시, 실행 인자(--{Key})로 전달됩니다.
@@ -2162,8 +2050,7 @@ def parse_hyperparameters():
 ```
 
 <a id="appendix.4.environment"></a>
-
-### 4. 환경 변수
+### 4. 환경 변수 { #appendix.4.environment }
 
 - 학습에 필요한 정보들은 **환경 변수**로 학습 컨테이너에 전달되며, **학습 스크립트**에서 전달된 환경 변수들을 활용할 수 있습니다.
 - 사용자 입력으로 만들어지는 환경 변수명은 대문자로 변환됩니다.
@@ -2207,8 +2094,7 @@ model.save(model_dir)
 ```
 
 <a id="appendix.5.tensorboard.store.metric.log"></a>
-
-### 5. 텐서보드 활용을 위한 지표 로그 저장
+### 5. 텐서보드 활용을 위한 지표 로그 저장 { #appendix.5.tensorboard.store.metric.log }
 
 - 학습 후 텐서보드 화면에서 결과 지표를 확인하기 위해, 학습 스크립트 작성 시 텐서보드 로그 저장 공간을 지정된 위치(`EM_TENSORBOARD_LOG_DIR`)로 설정해 주어야 합니다.
 
@@ -2240,8 +2126,7 @@ model.fit(x_train, y_train, validation_data=(x_test, y_test),
     텐서보드 지표 로그는 120일 동안 보관됩니다. 120일이 지난 지표 로그는 자동으로 삭제됩니다.
 
 <a id="appendix.6.framework.training.settings"></a>
-
-### 6. 프레임워크별 분산 학습 설정
+### 6. 프레임워크별 분산 학습 설정 { #appendix.6.framework.training.settings }
 
 - **Tensorflow**
     - 분산 학습에 필요한 환경 변수 `TF_CONFIG`는 자동으로 설정됩니다. 자세한 내용은 [Tensorflow 공식 가이드 문서](https://www.tensorflow.org/guide/distributed_training#multiworkermirroredstrategy)를 참고하세요.
@@ -2249,15 +2134,13 @@ model.fit(x_train, y_train, validation_data=(x_test, y_test),
     - 분산 학습을 하기 위해서 `Backends` 설정이 필요합니다. 분산 학습을 CPU로 진행할 경우 gloo로, GPU로 진행할 경우 nccl로 설정하세요. 자세한 내용은 [Pytorch 공식 가이드 문서](https://pytorch.org/docs/stable/distributed.html)를 참고하세요.
 
 <a id="appendix.7.cluster.upgrade"></a>
-
-### 7. 클러스터 버전 업그레이드
+### 7. 클러스터 버전 업그레이드 { #appendix.7.cluster.upgrade }
 
 AI EasyMaker 서비스는 안정적인 서비스와 신규 기능 제공을 위해 주기적으로 클러스터 버전을 업그레이드합니다.
 신규 클러스터 버전이 배포되면 구 버전의 클러스터에 구동된 노트북 및 엔드포인트를 신규 클러스터로 이전해야 합니다.
 리소스별 신규 클러스터 이전 방법을 안내합니다.
 
 <a id="appendix.7.cluster.upgrade.notebook"></a>
-
 #### 노트북 클러스터 버전 업그레이드
 
 **노트북** 목록 화면에서 신규 클러스터로 이전해야 하는 노트북은 이름 좌측에 **재시작** 버튼이 표시됩니다.
@@ -2271,7 +2154,6 @@ AI EasyMaker 서비스는 안정적인 서비스와 신규 기능 제공을 위�
 재시작을 실패할 경우 관리자에게 자동으로 보고됩니다.
 
 <a id="appendix.7.cluster.upgrade.endpoint"></a>
-
 #### 엔드포인트 클러스터 버전 업그레이드
 
 **엔드포인트 목록** 화면에서 신규 클러스터로 이전해야 하는 엔드포인트는 이름 좌측에 **! 안내** 문구가 표시됩니다.
@@ -2279,7 +2161,6 @@ AI EasyMaker 서비스는 안정적인 서비스와 신규 기능 제공을 위�
 만료 전까지 다음의 안내에 따라 구 버전 클러스터에서 운영되는 스테이지를 신규 버전 클러스터로 이전해야 합니다.
 
 <a id="appendix.7.cluster.upgrade.endpoint.stage"></a>
-
 ##### 일반 스테이지의 클러스터 버전 업그레이드
 
 1. 기본 스테이지가 아닌 일반 스테이지는 삭제합니다. 삭제 전 해당 스테이지가 서비스 중인지 먼저 확인합니다.
@@ -2290,7 +2171,6 @@ AI EasyMaker 서비스는 안정적인 서비스와 신규 기능 제공을 위�
     스테이지를 삭제하면 엔드포인트가 종료되어 API 호출이 불가합니다. 삭제 전 서비스 중이지 않은 스테이지인지 확인합니다.
 
 <a id="appendix.7.cluster.upgrade.endpoint.default.stage"></a>
-
 ##### 기본 스테이지의 클러스터 버전 업그레이드
 
 기본 스테이지는 실제 서비스가 운영되는 스테이지입니다.
@@ -2302,8 +2182,7 @@ AI EasyMaker 서비스는 안정적인 서비스와 신규 기능 제공을 위�
 4. 변경이 완료되면 신규 스테이지가 기본 스테이지로 설정되며, 기존의 기본 스테이지는 삭제됩니다.
 
 <a id="appendix.8.torchrun.usage"></a>
-
-### 8. torchrun 사용 방법
+### 8. torchrun 사용 방법 { #appendix.8.torchrun.usage }
 
 - Pytorch에서 분산 학습이 가능하도록 코드를 작성하였고, 분산 노드 수와 노드당 프로세스 개수를 입력하면 torchrun을 이용한 분산 노드 및 멀티 프로세스를 활용한 분산 학습이 이루어집니다.
 - 총 프로세스 개수, 모델 크기, 입력 데이터 크기, 배치 사이즈 등의 요소에 의하여 메모리 부족으로 학습 및 하이퍼파라미터 튜닝이 실패할 수 있습니다. 메모리 부족으로 실패하는 경우 아래와 같은 에러 메시지가 남을 수 있습니다. 단, 아래의 메시지가 남는다고 하여 모두 메모리 부족으로 인한 실패는 아닙니다. 메모리 사용량에 따라 적절한 인스턴스 타입을 설정하세요.
@@ -2315,8 +2194,7 @@ exit code : -9 (pid: {pid})
 - torchrun에 관한 더 자세한 내용은 [Pytorch 공식 가이드 문서](https://pytorch.org/docs/stable/elastic/run.html)를 참고하세요.
 
 <a id="appendix.9.resource.info"></a>
-
-### 9. 리소스 정보
+### 9. 리소스 정보 { #appendix.9.resource.info }
 
 AI EasyMaker에서 배치 추론과 엔드포인트를 생성할 때, 선택한 인스턴스 타입에서 기본 사용량을 제외한 리소스를 할당합니다.
 모델의 요청량과 복잡성에 따라 필요한 리소스가 달라지므로, 적절한 인스턴스 타입과 함께 파드 수, 리소스 할당량을 신중하게 설정하세요.
@@ -2325,8 +2203,7 @@ AI EasyMaker에서 배치 추론과 엔드포인트를 생성할 때, 선택한 
 배치 추론과 엔드포인트 모두 할당된 리소스가 추론에 필요한 최소 사용량보다 적으면 생성이 실패할 수 있으니 주의하세요.
 
 <a id="appendix.10.endpoint.api.specification"></a>
-
-### 10. 엔드포인트 API 스펙 명세
+### 10. 엔드포인트 API 스펙 명세 { #appendix.10.endpoint.api.specification }
 
 AI EasyMaker 서비스는 OIP(open inference protocol) 스펙을 기반으로 한 엔드포인트를 제공합니다.
 OIP 스펙에 대한 상세한 내용은 [OIP 스펙](https://github.com/kserve/open-inference-protocol)을 참고하세요.
@@ -2352,11 +2229,9 @@ OIP 스펙에 대한 상세한 내용은 [OIP 스펙](https://github.com/kserve/
     AI EasyMaker에서 제공하는 Completion, Chat Completion API를 지원하는 모델은 [Model endpoint compatibillity](https://platform.openai.com/docs/models/model-endpoint-compatibility)를 확인하세요.
 
 <a id="appendix.11.framework.note"></a>
-
-### 11. 프레임워크별 서빙 참고 사항
+### 11. 프레임워크별 서빙 참고 사항 { #appendix.11.framework.note }
 
 <a id="appendix.11.framework.note.tensorflow.framework"></a>
-
 #### TensorFlow 프레임워크
 
 AI EasyMaker에서 제공하는 TensorFlow 모델 서빙은 TensorFlow에서 권장하는 SavedModel(.pb)을 사용하고 있습니다.
@@ -2364,7 +2239,6 @@ AI EasyMaker에서 제공하는 TensorFlow 모델 서빙은 TensorFlow에서 권
 참고: [https://www.tensorflow.org/guide/saved_model](https://www.tensorflow.org/guide/saved_model)
 
 <a id="appendix.11.framework.note.pytorch.framework"></a>
-
 #### PyTorch 프레임워크
 
 AI EasyMaker는 TorchServe로 PyTorch 모델(.mar)을 서빙합니다.
@@ -2418,20 +2292,17 @@ class TestHandler(BaseHandler):
 </details>
 
 <a id="appendix.11.framework.note.scikitlearn.framework"></a>
-
 #### Scikit-learn 프레임워크
 
 AI EasyMaker는 mlserver로 Scikit-learn 모델(.joblib)을 서빙합니다.
 mlserver를 직접 사용하는 경우에 필요한 `model-settings.json`은 AI EasyMaker 서빙을 사용하는 경우엔 필요하지 않습니다.
 
 <a id="appendix.11.framework.note.hugging.face.framework"></a>
-
 #### Hugging Face 프레임워크
 
 Hugging Face 모델은 AI EasyMaker가 제공하는 런타임이나 TensorFlow Serving, TorchServe를 이용해 서빙할 수 있습니다.
 
 <a id="appendix.11.framework.note.hugging.face.framework.runtime"></a>
-
 ##### Hugging Face 런타임
 
 간편하게 Hugging Face 모델을 서빙하는 방법입니다.
@@ -2453,7 +2324,6 @@ Hugging Face 런타임 서빙은 미세 조정을 지원하지 않습니다. 미
     토큰을 입력하지 않거나, 허용되지 않은 계정의 토큰을 입력한 경우 모델 배포에 실패합니다.
 
 <a id="appendix.11.framework.note.hugging.face.framework.tensorflow.pytorch.serving"></a>
-
 ##### TensorFlow/PyTorch Serving
 
 TensorFlow와 PyTorch로 학습된 Hugging Face 모델을 서빙하는 방법입니다.
@@ -2487,8 +2357,7 @@ TensorFlow와 PyTorch로 학습된 Hugging Face 모델을 서빙하는 방법입
 
 
 <a id="appendix.12.fine.tuning.dataset.format"></a>
-
-### 12. 파인 튜닝 데이터 세트 형식
+### 12. 파인 튜닝 데이터 세트 형식 { #appendix.12.fine.tuning.dataset.format }
 
 파인 튜닝의 학습 데이터와 검증 데이터는 `chat_template` 형식의 JSONL 파일로 준비합니다.
 
