@@ -1,14 +1,11 @@
 <a id="ai.easymaker.sdk.guide"></a>
-
-## Machine Learning > AI EasyMaker > SDK 사용 가이드
+## Machine Learning > AI EasyMaker > SDK 사용 가이드 { #ai.easymaker.sdk.guide }
 
 <a id="sdk.settings"></a>
-
-## SDK 설정
+## SDK 설정 { #sdk.settings }
 
 <a id="sdk.settings.sdk.install"></a>
-
-### AI EasyMaker 파이썬 SDK 설치
+### AI EasyMaker 파이썬 SDK 설치 { #sdk.settings.sdk.install }
 
 ```bash
 python -m pip install easymaker
@@ -17,8 +14,7 @@ python -m pip install easymaker
 - AI EasyMaker 노트북에는 기본적으로 설치되어 있습니다.
 
 <a id="sdk.settings.sdk.init"></a>
-
-### AI EasyMaker SDK 초기화
+### AI EasyMaker SDK 초기화 { #sdk.settings.sdk.init }
 
 앱키(appkey)는 콘솔 오른쪽 상단의 **URL & Appkey** 메뉴에서 확인할 수 있습니다.
 인증 토큰(access token)에 대한 내용은 [User Access Key 토큰](https://docs.gov-nhncloud.com/ko/nhncloud/ko/public-api/user-access-key-token-gov/)에서 확인할 수 있습니다.
@@ -38,12 +34,10 @@ easymaker.init(
 ```
 
 <a id="experiment"></a>
-
-## 실험
+## 실험 { #experiment }
 
 <a id="experiment.create"></a>
-
-### 실험 생성
+### 실험 생성 { #experiment.create }
 
 학습을 생성하기 전에 학습을 분류할 수 있는 실험 생성이 필요합니다.
 
@@ -64,8 +58,7 @@ experiment = easymaker.Experiment().create(
 ```
 
 <a id="experiment.list"></a>
-
-### 실험 목록 조회
+### 실험 목록 조회 { #experiment.list }
 
 ```python
 experiment_list = easymaker.Experiment.get_list()
@@ -74,8 +67,7 @@ for experiment in experiment_list:
 ```
 
 <a id="experiment.delete"></a>
-
-### 실험 삭제
+### 실험 삭제 { #experiment.delete }
 
 [파라미터]
 
@@ -88,12 +80,10 @@ easymaker.Experiment(experiment_id).delete()
 ```
 
 <a id="training"></a>
-
-## 학습
+## 학습 { #training }
 
 <a id="training.image.list"></a>
-
-### 이미지 목록 조회
+### 이미지 목록 조회 { #training.image.list }
 
 ```python
 image_list = easymaker.Training.get_image_list()
@@ -102,8 +92,7 @@ for image in image_list:
 ```
 
 <a id="training.instance.list"></a>
-
-### 인스턴스 목록 조회
+### 인스턴스 목록 조회 { #training.instance.list }
 
 ```python
 instance_type_list = easymaker.Training.get_instance_type_list()
@@ -112,8 +101,7 @@ for instance in instance_type_list:
 ```
 
 <a id="training.create"></a>
-
-### 학습 생성
+### 학습 생성 { #training.create }
 
 [파라미터]
 
@@ -185,8 +173,7 @@ training = easymaker.Training().run(
 ```
 
 <a id="training.list"></a>
-
-### 학습 목록 조회
+### 학습 목록 조회 { #training.list }
 
 ```python
 training_list = easymaker.Training.get_list()
@@ -195,8 +182,7 @@ for training in training_list:
 ```
 
 <a id="training.delete"></a>
-
-### 학습 삭제
+### 학습 삭제 { #training.delete }
 
 [파라미터]
 
@@ -209,12 +195,10 @@ easymaker.Training(training_id).delete()
 ```
 
 <a id="hyperparameter.tuning"></a>
-
-## 하이퍼파라미터 튜닝
+## 하이퍼파라미터 튜닝 { #hyperparameter.tuning }
 
 <a id="hyperparameter.tuning.image.list"></a>
-
-### 이미지 목록 조회
+### 이미지 목록 조회 { #hyperparameter.tuning.image.list }
 
 ```python
 image_list = easymaker.HyperparameterTuning.get_image_list()
@@ -223,8 +207,7 @@ for image in image_list:
 ```
 
 <a id="hyperparameter.tuning.instance.list"></a>
-
-### 인스턴스 목록 조회
+### 인스턴스 목록 조회 { #hyperparameter.tuning.instance.list }
 
 ```python
 instance_type_list = easymaker.HyperparameterTuning.get_instance_type_list()
@@ -233,8 +216,7 @@ for instance in instance_type_list:
 ```
 
 <a id="hyperparameter.tuning.create"></a>
-
-### 하이퍼파라미터 튜닝 생성
+### 하이퍼파라미터 튜닝 생성 { #hyperparameter.tuning.create }
 
 [파라미터]
 
@@ -345,8 +327,7 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
 ```
 
 <a id="hyperparameter.tuning.list"></a>
-
-### 하이퍼파라미터 튜닝 목록 조회
+### 하이퍼파라미터 튜닝 목록 조회 { #hyperparameter.tuning.list }
 
 ```python
 hyperparameter_tuning_list = easymaker.HyperparameterTuning.get_list()
@@ -355,8 +336,7 @@ for hyperparameter_tuning in hyperparameter_tuning_list:
 ```
 
 <a id="hyperparameter.tuning.delete"></a>
-
-### 하이퍼파라미터 튜닝 삭제
+### 하이퍼파라미터 튜닝 삭제 { #hyperparameter.tuning.delete }
 
 [파라미터]
 
@@ -369,14 +349,12 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 ```
 
 <a id="fine.tuning"></a>
-
-## 파인 튜닝
+## 파인 튜닝 { #fine.tuning }
 
 사전 학습된 거대 언어 모델에 특정 도메인이나 작업에 맞춘 데이터 세트로 추가 학습을 수행하여 모델의 성능을 특화하는 기능입니다.
 
 <a id="fine.tuning.model.preset.list"></a>
-
-### 베이스 모델 목록 조회
+### 베이스 모델 목록 조회 { #fine.tuning.model.preset.list }
 
 파인 튜닝에 사용할 베이스 모델 목록을 조회합니다.
 
@@ -397,8 +375,7 @@ base_model_preset_id = base_model.model_preset_id
 ```
 
 <a id="fine.tuning.instance.list"></a>
-
-### 인스턴스 목록 조회
+### 인스턴스 목록 조회 { #fine.tuning.instance.list }
 
 선택한 베이스 모델 프리셋(`model_preset_id`)에서 사용 가능한 인스턴스 타입 목록을 조회합니다.
 
@@ -409,8 +386,7 @@ for instance in instance_type_list:
 ```
 
 <a id="fine.tuning.parameter.spec.list"></a>
-
-### 하이퍼파라미터 스펙 조회
+### 하이퍼파라미터 스펙 조회 { #fine.tuning.parameter.spec.list }
 
 선택한 베이스 모델의 파인 튜닝 하이퍼파라미터 스펙을 조회합니다. 조회한 스펙의 기본값으로 하이퍼파라미터 목록을 구성할 수 있습니다.
 
@@ -436,8 +412,7 @@ hyperparameter_list = [
 ```
 
 <a id="fine.tuning.create"></a>
-
-### 파인 튜닝 생성
+### 파인 튜닝 생성 { #fine.tuning.create }
 
 [파라미터]
 
@@ -506,8 +481,7 @@ fine_tuning = easymaker.FineTuning().run(
 ```
 
 <a id="fine.tuning.list"></a>
-
-### 파인 튜닝 목록 조회
+### 파인 튜닝 목록 조회 { #fine.tuning.list }
 
 ```python
 fine_tuning_list = easymaker.FineTuning.get_list()
@@ -516,8 +490,7 @@ for fine_tuning in fine_tuning_list:
 ```
 
 <a id="fine.tuning.stop"></a>
-
-### 파인 튜닝 중지
+### 파인 튜닝 중지 { #fine.tuning.stop }
 
 실행 중(RUNNING)인 파인 튜닝을 중지합니다.
 
@@ -526,8 +499,7 @@ easymaker.FineTuning(fine_tuning_id).stop()
 ```
 
 <a id="fine.tuning.delete"></a>
-
-### 파인 튜닝 삭제
+### 파인 튜닝 삭제 { #fine.tuning.delete }
 
 [파라미터]
 
@@ -541,12 +513,10 @@ easymaker.FineTuning(fine_tuning_id).delete()
 
 
 <a id="model"></a>
-
-## 모델
+## 모델 { #model }
 
 <a id="model.create"></a>
-
-### 모델 생성
+### 모델 생성 { #model.create }
 
 학습, 하이퍼파라미터 튜닝, 파인 튜닝 ID 값으로 모델 생성을 요청할 수 있습니다.
 모델은 엔드포인트 생성 시 사용됩니다.
@@ -618,8 +588,7 @@ model = easymaker.Model().create_hugging_face_model(
 ```
 
 <a id="model.list"></a>
-
-### 모델 목록 조회
+### 모델 목록 조회 { #model.list }
 
 ```python
 model_list = easymaker.Model.get_list()
@@ -628,8 +597,7 @@ for model in model_list:
 ```
 
 <a id="model.delete"></a>
-
-### 모델 삭제
+### 모델 삭제 { #model.delete }
 
 [파라미터]
 
@@ -642,12 +610,10 @@ easymaker.Model(model_id).delete()
 ```
 
 <a id="model.evaluation"></a>
-
-## 모델 평가
+## 모델 평가 { #model.evaluation }
 
 <a id="model.evaluation.instance.list"></a>
-
-### 인스턴스 목록 조회
+### 인스턴스 목록 조회 { #model.evaluation.instance.list }
 
 ```python
 instance_type_list = easymaker.ModelEvaluation.get_instance_type_list()
@@ -656,8 +622,7 @@ for instance in instance_type_list:
 ```
 
 <a id="model.evaluation.create"></a>
-
-### 모델 평가 생성
+### 모델 평가 생성 { #model.evaluation.create }
 
 모델의 성능 지표를 측정하는 모델 평가를 생성합니다. 선택한 모델로 배치 추론이 실행되며 평가 지표가 저장됩니다.
 
@@ -729,8 +694,7 @@ classification_model_evaluation  = easymaker.ModelEvaluation().create(
 ```
 
 <a id="model.evaluation.list"></a>
-
-### 모델 평가 목록 조회
+### 모델 평가 목록 조회 { #model.evaluation.list }
 
 ```python
 model_evaluation_list = easymaker.ModelEvaluation.get_list()
@@ -739,8 +703,7 @@ for model_evaluation in model_evaluation_list:
 ```
 
 <a id="model.evaluation.delete"></a>
-
-### 모델 평가 삭제
+### 모델 평가 삭제 { #model.evaluation.delete }
 
 [파라미터]
 
@@ -753,12 +716,10 @@ easymaker.ModelEvaluation(model_evaluation_id).delete()
 ```
 
 <a id="endpoint"></a>
-
-## 엔드포인트
+## 엔드포인트 { #endpoint }
 
 <a id="endpoint.instance.list"></a>
-
-### 인스턴스 목록 조회
+### 인스턴스 목록 조회 { #endpoint.instance.list }
 
 ```python
 instance_type_list = easymaker.Endpoint.get_instance_type_list()
@@ -767,8 +728,7 @@ for instance in instance_type_list:
 ```
 
 <a id="endpoint.create"></a>
-
-### 엔드포인트 생성
+### 엔드포인트 생성 { #endpoint.create }
 
 엔드포인트 생성 시 기본 스테이지가 생성됩니다.
 
@@ -816,8 +776,7 @@ endpoint = easymaker.Endpoint().create(
 ```
 
 <a id="endpoint.stage.create"></a>
-
-### 스테이지 추가
+### 스테이지 추가 { #endpoint.stage.create }
 
 기존 엔드포인트에 신규 스테이지를 추가할 수 있습니다.
 
@@ -868,8 +827,7 @@ endpoint_stage = easymaker.EndpointStage().create(
 ```
 
 <a id="endpoint.stage.list"></a>
-
-### 스테이지 목록 조회
+### 스테이지 목록 조회 { #endpoint.stage.list }
 
 엔드포인트 스테이지 목록을 조회합니다.
 
@@ -878,8 +836,7 @@ endpoint_stage_list = easymaker.Endpoint(endpoint_id).get_stage_list()
 ```
 
 <a id="endpoint.inference.request"></a>
-
-### 엔드포인트 인퍼런스
+### 엔드포인트 인퍼런스 { #endpoint.inference.request }
 
 기본 스테이지에 인퍼런스
 
@@ -902,8 +859,7 @@ easymaker.EndpointStage('endpoint_stage_id').predict(
 ```
 
 <a id="endpoint.list"></a>
-
-### 엔드포인트 목록 조회
+### 엔드포인트 목록 조회 { #endpoint.list }
 
 ```python
 endpoint_list = easymaker.Endpoint.get_list()
@@ -912,8 +868,7 @@ for endpoint in endpoint_list:
 ```
 
 <a id="endpoint.delete"></a>
-
-### 엔드포인트 삭제
+### 엔드포인트 삭제 { #endpoint.delete }
 
 [파라미터]
 
@@ -926,8 +881,7 @@ easymaker.Endpoint(endpoint_id).delete()
 ```
 
 <a id="endpoint.stage.delete"></a>
-
-### 엔드포인트 스테이지 삭제
+### 엔드포인트 스테이지 삭제 { #endpoint.stage.delete }
 
 [파라미터]
 
@@ -940,12 +894,10 @@ easymaker.EndpointStage(stage_id).delete()
 ```
 
 <a id="batch.inference"></a>
-
-## 배치 추론
+## 배치 추론 { #batch.inference }
 
 <a id="batch.inference.instance.list"></a>
-
-### 인스턴스 목록 조회
+### 인스턴스 목록 조회 { #batch.inference.instance.list }
 
 ```python
 instance_type_list = easymaker.BatchInference.get_instance_type_list()
@@ -954,8 +906,7 @@ for instance in instance_type_list:
 ```
 
 <a id="batch.inference.create"></a>
-
-### 배치 추론 생성
+### 배치 추론 생성 { #batch.inference.create }
 
 [파라미터]
 
@@ -1002,8 +953,7 @@ batch_inference = easymaker.BatchInference().run(
 ```
 
 <a id="batch.inference.list"></a>
-
-### 배치 추론 목록 조회
+### 배치 추론 목록 조회 { #batch.inference.list }
 
 ```python
 batch_inference_list = easymaker.BatchInference.get_list()
@@ -1012,8 +962,7 @@ for batch_inference in batch_inference_list:
 ```
 
 <a id="batch.inference.delete"></a>
-
-### 배치 추론 삭제
+### 배치 추론 삭제 { #batch.inference.delete }
 
 [파라미터]
 
@@ -1026,12 +975,10 @@ easymaker.BatchInference(batch_inference_id).delete()
 ```
 
 <a id="pipeline"></a>
-
-## 파이프라인
+## 파이프라인 { #pipeline }
 
 <a id="pipeline.create"></a>
-
-### 파이프라인 생성
+### 파이프라인 생성 { #pipeline.create }
 
 [파라미터]
 
@@ -1052,8 +999,7 @@ pipeline = easymaker.Pipeline().upload(
 ```
 
 <a id="pipeline.list"></a>
-
-### 파이프라인 목록 조회
+### 파이프라인 목록 조회 { #pipeline.list }
 
 ```python
 pipeline_list = easymaker.Pipeline.get_list()
@@ -1062,8 +1008,7 @@ for pipeline in pipeline_list:
 ```
 
 <a id="pipeline.delete"></a>
-
-### 파이프라인 삭제
+### 파이프라인 삭제 { #pipeline.delete }
 
 [파라미터]
 
@@ -1076,8 +1021,7 @@ easymaker.Pipeline(pipeline_id).delete()
 ```
 
 <a id="pipeline.instance.list"></a>
-
-### 인스턴스 목록 조회
+### 인스턴스 목록 조회 { #pipeline.instance.list }
 
 ```python
 instance_type_list = easymaker.PipelineRun.get_instance_type_list()
@@ -1086,8 +1030,7 @@ for instance in instance_type_list:
 ```
 
 <a id="pipeline.run.create"></a>
-
-### 파이프라인 실행 생성
+### 파이프라인 실행 생성 { #pipeline.run.create }
 
 [파라미터]
 
@@ -1128,8 +1071,7 @@ pipeline_run = easymaker.PipelineRun().create(
 ```
 
 <a id="pipeline.run.list"></a>
-
-### 파이프라인 실행 목록 조회
+### 파이프라인 실행 목록 조회 { #pipeline.run.list }
 
 ```python
 pipeline_run_list = easymaker.PipelineRun.get_list()
@@ -1138,8 +1080,7 @@ for pipeline_run in pipeline_run_list:
 ```
 
 <a id="pipeline.run.delete"></a>
-
-### 파이프라인 실행 삭제
+### 파이프라인 실행 삭제 { #pipeline.run.delete }
 
 [파라미터]
 
@@ -1152,8 +1093,7 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 ```
 
 <a id="pipeline.recurring.run.create"></a>
-
-### 파이프라인 일정 생성
+### 파이프라인 일정 생성 { #pipeline.recurring.run.create }
 
 [파라미터]
 
@@ -1202,8 +1142,7 @@ pipeline_recurring_run = easymaker.PipelineRecurringRun().create(
 ```
 
 <a id="pipeline.recurring.run.stop.start"></a>
-
-### 파이프라인 일정 중지/재시작
+### 파이프라인 일정 중지/재시작 { #pipeline.recurring.run.stop.start }
 
 [파라미터]
 
@@ -1218,8 +1157,7 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).start()
 ```
 
 <a id="pipeline.recurring.run.list"></a>
-
-### 파이프라인 일정 목록 조회
+### 파이프라인 일정 목록 조회 { #pipeline.recurring.run.list }
 
 ```python
 pipeline_recurring_run_list = easymaker.PipelineRecurringRun.get_list()
@@ -1228,8 +1166,7 @@ for pipeline_recurring_run in pipeline_recurring_run_list:
 ```
 
 <a id="pipeline.recurring.run.delete"></a>
-
-### 파이프라인 일정 삭제
+### 파이프라인 일정 삭제 { #pipeline.recurring.run.delete }
 
 [파라미터]
 
@@ -1242,12 +1179,10 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).delete()
 ```
 
 <a id="feature"></a>
-
-## 기타 기능
+## 기타 기능 { #feature }
 
 <a id="feature.lncs.log.send"></a>
-
-### NHN Cloud - Log & Crash Search 로그 전송
+### NHN Cloud - Log & Crash Search 로그 전송 { #feature.lncs.log.send }
 
 ```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
@@ -1259,8 +1194,7 @@ easymaker_logger.send(log_message='log meassage',
 ```
 
 <a id="feature.object.storage.file.send"></a>
-
-### NHN Cloud - Object Storage 파일 전송
+### NHN Cloud - Object Storage 파일 전송 { #feature.object.storage.file.send }
 
 Object Storage 상품으로 파일을 업로드하고 다운로드하는 기능을 제공합니다.
 
