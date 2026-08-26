@@ -1985,7 +1985,7 @@ Log & Crash Search 서비스에 로그를 저장하려면, Log & Crash 서비스
 
 - **Log & Crash Search 서비스 이용 및 요금 안내**
     - Log & Crash Search 서비스에 대한 자세한 내용과 요금은 다음에서 확인할 수 있습니다.
-        - [Log & Crash Search 서비스 안내]({% if "gov" in build_flags %}https://docs.gov-nhncloud.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/gov-overview/{% else %}https://docs.nhncloud.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/Overview/{% endif %})
+        - [Log & Crash Search 서비스 안내](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/{% if "gov" in build_flags %}gov-overview{% else %}Overview{% endif %}/)
         - [Log & Crash Search 이용 요금](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
 <a id="appendix.2.lncs.service.log.inquiry.guide"></a>
@@ -1999,7 +1999,7 @@ Log & Crash Search 서비스에 로그를 저장하려면, Log & Crash 서비스
         - 질의문: category:"easymaker.inference"
     - AI EasyMaker 로그 전체 조회 질의: logType 필드가 "NNHCloud-AIEasyMaker"인 로그를 조회합니다.
         - 질의문: logType:"NHNCloud\-AIEasyMaker"
-3. Log & Crash Search 서비스의 자세한 이용 방법은 [Log & Crash Search 서비스의 콘솔 가이드]({% if "gov" in build_flags %}https://docs.gov-nhncloud.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/gov-console-guide/{% else %}https://docs.nhncloud.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/console-guide/{% endif %})를 참고하세요.
+3. Log & Crash Search 서비스의 자세한 이용 방법은 [Log & Crash Search 서비스의 콘솔 가이드](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/{% if "gov" in build_flags %}gov-console-guide{% else %}console-guide{% endif %}/)를 참고하세요.
 
 AI EasyMaker 서비스는 Log & Crash Search 서비스에 다음과 같이 정의된 필드로 로그를 전송합니다.
 
