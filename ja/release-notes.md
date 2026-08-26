@@ -1,3 +1,5 @@
+<!-- machine_translated: true -->
+
 <!-- pre-align:aligned sig=287622970352 -->
 
 <a id="ai.easymaker"></a>
@@ -14,13 +16,14 @@
     - 詳細については、[ファインチューニングガイド](./console-guide/#fine.tuning)のドキュメントを参照してください。
 
 {% if "gov" in build_flags -%}
+
 <a id="ai.easymaker.release.notes.2025.11.25"></a>
 ### 2025. 11. 25. { #ai.easymaker.release.notes.2025.11.25 }
 
 <a id="ai.easymaker.release.notes.2025.11.25.service"></a>
-#### 新規サービスリリース
+#### 新規サービスのリリース
 
-- AI EasyMakerは、機械学習の開発のための環境と学習および高度化、エンドポイントサービスのためのAIプラットフォームです。
+- AI EasyMaker は、機械学習開発のための環境と、学習および高度化、エンドポイントサービスのための AI プラットフォームです。
 {% endif %}
 {% if "gov" not in build_flags -%}
 <a id="ai.easymaker.release.notes.2025.10.28"></a>
@@ -152,5 +155,5 @@
 <a id="ai.easymaker.release.notes.2022.12.27.service"></a>
 #### 新規サービスリリース
 
-- AI EasyMakerは、機械学習の開発のための環境と学習および高度化、エンドポイントサービスのためのAIプラットフォームです。
+- AI EasyMaker は、機械学習開発のための環境と学習および高度化、エンドポイントサービスのための AI プラットフォームです。
 {% endif %}
