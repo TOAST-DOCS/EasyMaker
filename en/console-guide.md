@@ -1,3 +1,5 @@
+<!-- machine_translated: true -->
+
 <!-- pre-align:aligned sig=13fa2e880aa4 -->
 
 <a id="ai.easymaker.console.guide"></a>
@@ -1061,14 +1063,14 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 
 !!! danger "Caution"
     When creating an endpoint or an endpoint stage, AI EasyMaker creates API Gateway services and stages for the endpoint.
-    Please note the following precautions when changing API Gateway services and stages created by AI EasyMaker directly from API Gateway service console.
+    Please note the following precautions when changing API Gateway services and stages created by AI EasyMaker directly from the API Gateway service console.
 
-    1. Avoid deleting API Gateway services and stages created by AI EasyMaker. Deletion may prevent the endpoint from displaying API Gateway information correctly, and changes made to endpoint may not be applied to API Gateway.
-    2. Avoid changing or deleting resources in API Gateway resource path that was entered when creating endpoints. Deletion may cause the endpoint's inference API call to fail
-    3. Avoid adding resources in API Gateway resource path that was entered when creating endpoints. The added resources may be deleted when adding or changing endpoint stages.
-    4. In the stage settings of API Gateway, do not disable **Backend Endpoint Url Redifinition** or change the URL set in API Gateway resource path. If you change the url, endpoint's inference API call might fail.
-        Other than above precautions, other settings are available with features provided by API Gateway as necessary.
-        For more information about how to use API Gateway, refer to [API Gateway Console Guide](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/console-guide/).
+    1. Do not delete the API Gateway services and stages created by AI EasyMaker. If you delete them, the API Gateway information may not be displayed correctly on the endpoint, and changes to the endpoint may not be applied to API Gateway.
+    2. Do not modify or delete the resources in the API Gateway resource path that you entered when creating the endpoint. If you delete them, inference API calls to the endpoint may fail.
+    3. Do not add resources under the API Gateway resource path that you entered when creating the endpoint. Any resources you add may be deleted when you add or modify endpoint stages.
+    4. Do not disable the **Backend Endpoint URL Override** configured for the API Gateway resource path in the API Gateway stage settings, or modify the URL. If you change them, inference API calls to the endpoint may fail.
+       For settings other than those mentioned above, you can use the features provided by API Gateway as needed.
+       For more information on how to use API Gateway, see the [API Gateway Console Guide](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Application%20Service/API%20Gateway/ko/console-guide{% if "gov" in build_flags %}-gov{% endif %}/).
 
 !!! tip "Note"
     If stage settings of AI EasyMaker endpoint are not deployed to the API Gateway stage due to a temporary issue, deployment status is displayed as failed.
