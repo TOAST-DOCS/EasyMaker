@@ -1,3 +1,5 @@
+<!-- machine_translated: true -->
+
 <!-- pre-align:aligned sig=348e352651f6 -->
 
 <a id="ai.easymaker.sdk.guide"></a>
@@ -18,10 +20,10 @@ python -m pip install easymaker
 <a id="sdk.settings.sdk.init"></a>
 ### Initialize AI EasyMaker SDK { #sdk.settings.sdk.init }
 
-You can find the AppKey in the **URL & Appkey** menu at the right top on the console.
-You can learn more about Access Tokens in [User Access Key Token](https://docs.nhncloud.com/en/nhncloud/en/public-api/user-access-key-token/).
-Enter the AppKey, AccessToken, and region information of enabled AI EasyMaker.
-Intialization code is required to use the AI EasyMaker SDK.
+You can find AppKey in the **URL & Appkey** menu at the right top on the console.
+For information about the access token, see [User Access Key Token](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/nhncloud/en/public-api/user-access-key-token{% if "gov" in build_flags %}-gov{% endif %}/).
+Enter the AppKey, Access Token, and region information of enabled AI EasyMaker.
+Initialization code is required to use the AI EasyMaker SDK.
 
 ```python
 import easymaker
