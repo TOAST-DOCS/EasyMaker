@@ -13,6 +13,16 @@
     - Specializes model performance by performing additional training on a pre-trained large language model using a dataset tailored to a specific domain or task.
     - For more information, see the [Fine Tuning Guide](./console-guide/#fine.tuning) document.
 
+{% if "gov" in build_flags -%}
+<a id="ai.easymaker.release.notes.2025.11.25"></a>
+### November 25, 2025 { #ai.easymaker.release.notes.2025.11.25 }
+
+<a id="ai.easymaker.release.notes.2025.11.25.service"></a>
+#### Release of a New Service
+
+- AI EasyMaker is an AI platform for environment, training and advancement, and endpoint services for machine learning development.
+{% endif %}
+{% if "gov" not in build_flags -%}
 <a id="ai.easymaker.release.notes.2025.10.28"></a>
 ### October 28, 2025 { #ai.easymaker.release.notes.2025.10.28 }
 
@@ -143,3 +153,4 @@
 #### Release of a New Service
 
 - AI EasyMaker is an AI platform for environment, training and advancement, and endpoint services for machine learning development.
+{% endif %}

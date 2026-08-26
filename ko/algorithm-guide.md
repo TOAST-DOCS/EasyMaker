@@ -568,7 +568,7 @@ COCO Dataset의 형식으로 작성합니다.
 <a id="endpoint.create.inference.request.format"></a>
 ### 요청 { #endpoint.create.inference.request.format }
 
-- Request URI: POST <https://kr1-{apigwSeviceId}.api.nhncloudservice.com/inference>
+- Request URI: POST <https://kr1-{apigwSeviceId}.api.{% if "gov" in build_flags %}gov-{% endif %}nhncloudservice.com/inference>
 - Request Body
 
 ```json

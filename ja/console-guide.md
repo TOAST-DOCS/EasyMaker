@@ -991,7 +991,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 !!! tip "参考"
     新規エンドポイントを作成すると、API Gatewayサービスを新規作成します。
     既存エンドポイントから新規ステージを追加すると、API Gatewayサービスに新規ステージを作成します。
-    [API Gatewayサービスリソース提供ポリシー](https://docs.nhncloud.com/ja/nhncloud/ja/resource-policy/#api-gateway)の基本提供量を超過した場合、AI EasyMakerでエンドポイント作成ができない場合があります。この場合、API Gatewayサービスリソースのクォータを調整して解決できます。
+    [API Gatewayサービスリソース提供ポリシー](https://docs.nhncloud.com/ja/nhncloud/ja/resource-policy/#resource-provision-policy-for-api-gateway-service)の基本提供量を超過した場合、AI EasyMakerでエンドポイント作成ができない場合があります。この場合、API Gatewayサービスリソースのクォータを調整して解決できます。
 
 <a id="endpoint.list"></a>
 ### エンドポイントリスト { #endpoint.list }
@@ -1719,7 +1719,7 @@ RAG(Retrieval-Augmented Generation、検索拡張生成)は、ユーザーのド
             - **RDS for PostgreSQLの有効化**
                 - AI EasyMaker RAGは、NHN Cloud RDS for PostgreSQLを利用してベクトルストアを作成し、管理します。このオプションを選択した場合、RDS for PostgreSQLを必ず有効化する必要があります。
                 - RDS for PostgreSQLの詳細と料金は、以下で確認できます。
-                    - [RDS for PostgreSQLのご案内](https://docs.nhncloud.com/ja/Database/RDS%20for%20PostgreSQL/ja/overview/)
+                    - [RDS for PostgreSQLのご案内](/Database/RDS%20for%20PostgreSQL/ja/overview/)
                     - [RDS for PostgreSQL利用料金](https://www.nhncloud.com/kr/pricing/by-service?c=Database&s=RDS%20for%20PostgreSQL)
             - **インスタンスタイプ**: RDS for PostgreSQLで使用するインスタンスタイプを選択します。
             - **ストレージタイプ**: RDS for PostgreSQLで使用するストレージタイプを選択します。
@@ -2237,7 +2237,7 @@ OIPスペックの詳細は[OIPスペック](https://github.com/kserve/open-infe
 !!! tip "参考"
     OpenAI生成型モデル推論はOpenAIのGPT-4oのような生成型モデルを使用する場合に使用されます。
     推論に必要な入力値はOpenAIのAPIスペックに従って入力する必要があります。詳細は[OpenAI API文書](https://platform.openai.com/docs/api-reference/chat)を参照してください。
-    AI EasyMakerで提供するCompletion, Chat Completion APIをサポートするモデルは[Model endpoint compatibillity](https://platform.openai.com/docs/models/model-endpoint-compatibility)をご確認ください。
+    AI EasyMakerで提供するCompletion, Chat Completion APIをサポートするモデルは[Models](https://platform.openai.com/docs/models)をご確認ください。
 
 <a id="appendix.11.framework.note"></a>
 ### 11. フレームワーク別のサービングに関する注意事項 { #appendix.11.framework.note }

@@ -988,7 +988,7 @@ Create and manage endpoints that can serve the model.
 !!! tip "Note"
     When you create a new endpoint, create a new API Gateway service.
     Adding new stage on existing endpoint creates new stage in API Gateway service.
-    If you exceed the default provision in [API Gateway Service Resource Provision Policy](https://docs.nhncloud.com/en/TOAST/en/resource-policy/#resource-provision-policy-for-api-gateway-service), you might not be able to create endpoints in AI EasyMaker. In this case, adjust API Gateway service resource quota.
+    If you exceed the default provision in [API Gateway Service Resource Provision Policy](https://docs.nhncloud.com/en/nhncloud/en/resource-policy/#resource-provision-policy-for-api-gateway-service), you might not be able to create endpoints in AI EasyMaker. In this case, adjust API Gateway service resource quota.
 
 <a id="endpoint.list"></a>
 ### Endpoint List { #endpoint.list }
@@ -1719,7 +1719,7 @@ Create a new RAG.
             - **Enable RDS for PostgreSQL**
                 - AI EasyMaker RAG creates and manages by using NHN Cloud RDS for PostgreSQL. If selecting this option, you must enable RDS for PostgreSQL.
                 - For more information and fee about the RDS for PostgreSQL, see below:
-                    - [RDS for PostgreSQL Guide](https://docs.nhncloud.com/en/Database/RDS%20for%20PostgreSQL/en/overview/)
+                    - [RDS for PostgreSQL Guide](/Database/RDS%20for%20PostgreSQL/en/overview/)
                     - [RDS for PostgreSQL Usage Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Database&s=RDS%20for%20PostgreSQL)
             - **Instance flavor**: select the instance flavor to be used for RDS for PostgreSQL.
             - **Storage type**: select the storage flavor to be used for RDS for PostgreSQL.
@@ -1974,7 +1974,7 @@ To add read/write permissions to AI EasyMaker system account in Object Storage, 
 1. Click **[Training]** or **[Model]** Tab>**AI EasyMaker System Account Information**.
 2. Archive the AI EasyMaker system account information, **AI EasyMaker Tenant ID** and **AI EasyMaker API User ID**.
 3. Go to the NHN Cloud Object Storage console.
-4. [Allow specific projects or users to read/write](https://docs.nhncloud.com/en/Storage/Object%20Storage/en/acl-guide/#allow-readwrite-to-specific-projects-or-specific-users) Refer to documents to add required read and write permissions to AI EasyMaker system account in NHN Cloud Object Storage console.
+4. [Allow specific projects or users to read/write](https://docs.nhncloud.com/en/Storage/Object%20Storage/en/acl-guide/#role-based-access-allow-rw-to-project-users) Refer to documents to add required read and write permissions to AI EasyMaker system account in NHN Cloud Object Storage console.
 
 <a id="appendix.2.lncs.service.usage.guide.and.log.inquiry.guide"></a>
 ### 2. NHN Cloud Log & Crash Search Service Usage Guide and Log Inquiry Guide { #appendix.2.lncs.service.usage.guide.and.log.inquiry.guide }
@@ -2054,13 +2054,13 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
 As shown in the example below, you can use hyperparameter values entered during training creation.<br>
 ![HyperParameter Input Screen](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_en.png)
 
-    ```python
+```python
 import argparse
 
 model_version = os.environ.get("EM_HP_MODEL_VERSION")
 
 def parse_hyperparameters():
-            parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser()
 
     # Parsing the entered hyper parameter
     parser.add_argument("--epochs", type=int, default=500)
@@ -2068,10 +2068,10 @@ def parse_hyperparameters():
     ...
 
     return parser.parse_known_args()
+```
 
 <a id="appendix.4.environment"></a>
-
-### 4. Environment Variables
+### 4. Environment Variables { #appendix.4.environment }
 
 - Information required for training is passed to training container with **Environment Variable** and the environment variables passed in **Training Script** can be utilized.
 - Environment variable names created by user input are to be capitalized.
@@ -2113,11 +2113,6 @@ model.fit(..., callbacks)
 model_dir = os.environ.get("EM_MODEL_DIR")
 model.save(model_dir)
 ```
-
-<a id="appendix.4.environment"></a>
-### Environment Variables { #appendix.4.environment }
-
-<!-- TODO: translate body -->
 
 <a id="appendix.5.tensorboard.store.metric.log"></a>
 ### 5. Store Indicator Logs for TensorBoard Usage { #appendix.5.tensorboard.store.metric.log }
@@ -2252,7 +2247,7 @@ For more information about the OIP specification, see [OIP Specification](https:
 !!! tip "Note"
     OpenAI generative model inference is used when using a generative model, such as OpenAI's GPT-4o.
     The inputs required for inference must be entered according to OpenAI's API specification. For more information, see the [OpenAI API documentation](https://platform.openai.com/docs/api-reference/chat).
-    For models that support the Completion and Chat Completion APIs provided by AI EasyMaker, see [Model endpoint compatibility](https://platform.openai.com/docs/models/model-endpoint-compatibility).
+    For models that support the Completion and Chat Completion APIs provided by AI EasyMaker, see [Models](https://platform.openai.com/docs/models).
 
 <a id="appendix.11.framework.note"></a>
 ### 11. Considerations for framework-specific serving { #appendix.11.framework.note }
