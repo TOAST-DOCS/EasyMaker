@@ -1066,14 +1066,14 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 
 !!! danger "注意"
     AI EasyMaker は、エンドポイントの作成またはエンドポイントステージの作成を行うと、エンドポイントに対する API Gateway のサービスとステージを作成します。
-    AI EasyMaker によって作成された API Gateway サービスとステージを API Gateway サービスコンソールで直接変更する場合は、次の注意事項を必ずご確認ください。
+    AI EasyMaker によって作成された API Gateway サービスとステージを API Gateway サービスコンソールで直接変更する場合は、次の注意事項を必ず参照してください。
 
-    1. AI EasyMaker が作成した API Gateway サービスとステージを削除しないようにしてください。削除すると、エンドポイントに API Gateway 情報が正常に表示されなくなり、エンドポイントの変更が API Gateway に適用されない場合があります。
-    2. エンドポイントの作成時に入力した API Gateway リソースパスのリソースを変更または削除しないようにしてください。削除すると、エンドポイントの推論 API 呼び出しが失敗する場合があります。
-    3. エンドポイントの作成時に入力した API Gateway リソースパスの配下にリソースを追加しないようにしてください。追加したリソースは、エンドポイントステージの追加/変更の作業時に削除される場合があります。
-    4. API Gateway のステージ設定で、API Gateway リソースパスに設定されている **[バックエンドエンドポイント URL のオーバーライド]** を無効にしたり、URL を変更したりしないようにしてください。変更すると、エンドポイントの推論 API 呼び出しが失敗する場合があります。
-       上記の注意事項以外の設定は、必要に応じて API Gateway が提供する機能を利用できます。
-       API Gateway の使用の詳細については、[API Gateway コンソールガイド](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Application%20Service/API%20Gateway/ja/console-guide{% if "gov" in build_flags %}-gov{% endif %}/)を参照してください。
+    1. AI EasyMaker が作成した API Gateway サービスとステージを削除しないでください。削除すると、エンドポイントに API Gateway の情報が正常に表示されなくなり、エンドポイントへの変更が API Gateway に適用されない場合があります。
+    2. エンドポイント作成時に入力した API Gateway リソースパスのリソースを変更または削除しないでください。削除すると、エンドポイントの推論 API 呼び出しに失敗する場合があります。
+    3. エンドポイント作成時に入力した API Gateway リソースパスの配下にリソースを追加しないでください。追加したリソースは、エンドポイントステージの追加/変更作業時に削除される場合があります。
+    4. API Gateway のステージ設定で、API Gateway リソースパスに設定された **[バックエンドエンドポイント URL オーバーライド]** を無効にしたり、URL を変更したりしないでください。変更すると、エンドポイントの推論 API 呼び出しに失敗する場合があります。
+       上記の注意事項以外の設定は、必要に応じて API Gateway が提供する機能を使用できます。
+       API Gateway の詳細な使用方法については、[API Gateway コンソールガイド](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Application%20Service/API%20Gateway/ja/console-guide{% if "gov" in build_flags %}-gov{% endif %}/)を参照してください。
 
 !!! tip "参考"
     一時的な問題でAI EasyMakerエンドポイントのステージ設定がAPI Gatewayステージに配布されていない場合、配布失敗状態と表示されます。
