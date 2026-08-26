@@ -1067,7 +1067,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
     3. 엔드포인트 생성 시 입력한 API Gateway 리소스 경로 하위에 리소스를 추가하지 않도록 합니다. 추가한 리소스는 엔드포인트 스테이지 추가/변경 작업 시 삭제될 수 있습니다.
     4. API Gateway의 스테이지 설정에서 API Gateway 리소스 경로에 설정된 **백엔드 엔드포인트 URL 재정의**를 비활성화하거나 URL을 변경하지 않도록 합니다. 변경하면 엔드포인트의 추론 API 호출에 실패할 수 있습니다.
        위의 주의 사항 외 다른 설정은 필요에 따라 API Gateway에서 제공하는 기능을 이용할 수 있습니다.
-       자세한 API Gateway 사용에 대한 내용은 [API Gateway 콘솔 가이드](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ko/Application%20Service/API%20Gateway/ko/console-guide{% if "gov" in build_flags %}-gov{% endif %}/)를 참고하세요.
+       자세한 API Gateway 사용 방법은 [API Gateway 콘솔 가이드](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ko/Application%20Service/API%20Gateway/ko/console-guide{% if "gov" in build_flags %}-gov{% endif %}/)를 참고하세요.
 
 !!! tip "알아두기"
     일시적인 문제로 AI EasyMaker 엔드포인트의 스테이지 설정이 API Gateway 스테이지에 배포되지 않은 경우, '배포 실패' 상태로 표시됩니다.
