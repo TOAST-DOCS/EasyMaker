@@ -987,7 +987,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 !!! tip "알아두기"
     신규 엔드포인트 생성을 하면 API Gateway 서비스를 신규 생성합니다.
     기존 엔드포인트에서 신규 스테이지 추가를 하면 API Gateway 서비스에 신규 스테이지를 생성합니다.
-    [API Gateway 서비스 리소스 제공 정책](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ko/nhncloud/ko/resource-policy{% if "gov" in build_flags %}-gov{% endif %}/#api-gateway)의 기본 제공량을 초과한 경우, AI EasyMaker에서 엔드포인트 생성이 불가할 수 있습니다. 이 경우 API Gateway 서비스 리소스 쿼터를 조정하여 해결할 수 있습니다.
+    [API Gateway 서비스 리소스 제공 정책](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ko/nhncloud/ko/resource-policy{% if "gov" in build_flags %}-gov/#api-gateway{% else %}/#resource-provision-policy-for-api-gateway-service{% endif %})의 기본 제공량을 초과한 경우, AI EasyMaker에서 엔드포인트 생성이 불가할 수 있습니다. 이 경우 API Gateway 서비스 리소스 쿼터를 조정하여 해결할 수 있습니다.
 
 <a id="endpoint.list"></a>
 ### 엔드포인트 목록 { #endpoint.list }
