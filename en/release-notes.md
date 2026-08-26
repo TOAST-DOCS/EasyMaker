@@ -1,3 +1,5 @@
+<!-- machine_translated: true -->
+
 <!-- pre-align:aligned sig=287622970352 -->
 
 <a id="ai.easymaker"></a>
@@ -14,13 +16,14 @@
     - For more information, see the [Fine Tuning Guide](./console-guide/#fine.tuning) document.
 
 {% if "gov" in build_flags -%}
+
 <a id="ai.easymaker.release.notes.2025.11.25"></a>
 ### November 25, 2025 { #ai.easymaker.release.notes.2025.11.25 }
 
 <a id="ai.easymaker.release.notes.2025.11.25.service"></a>
-#### Release of a New Service
+#### New Service Launch
 
-- AI EasyMaker is an AI platform for environment, training and advancement, and endpoint services for machine learning development.
+- AI EasyMaker is an AI platform that provides a machine learning development environment, training and advancement, and endpoint services.
 {% endif %}
 {% if "gov" not in build_flags -%}
 <a id="ai.easymaker.release.notes.2025.10.28"></a>
@@ -152,5 +155,5 @@
 <a id="ai.easymaker.release.notes.2022.12.27.service"></a>
 #### Release of a New Service
 
-- AI EasyMaker is an AI platform for environment, training and advancement, and endpoint services for machine learning development.
+- AI EasyMaker is an AI platform that provides environments for machine learning development, training and advancement, and endpoint services.
 {% endif %}
