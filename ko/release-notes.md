@@ -1,12 +1,7 @@
 <!-- pre-align:aligned sig=287622970352 -->
 
-{% if "gov" in build_flags -%}
-<a id="machine.learning"></a>
-## Machine Learning > AI EasyMaker > 릴리스 노트 { #machine.learning }
-{%- else -%}
 <a id="ai.easymaker"></a>
 ## Machine Learning > AI EasyMaker > 릴리스 노트 { #ai.easymaker }
-{%- endif %}
 
 <a id="ai.easymaker.release.notes.2026.07.28"></a>
 ### 2026. 07. 28. { #ai.easymaker.release.notes.2026.07.28 }
