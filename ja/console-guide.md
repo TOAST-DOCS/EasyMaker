@@ -2237,7 +2237,7 @@ OIPスペックの詳細は[OIPスペック](https://github.com/kserve/open-infe
 !!! tip "参考"
     OpenAI生成型モデル推論はOpenAIのGPT-4oのような生成型モデルを使用する場合に使用されます。
     推論に必要な入力値はOpenAIのAPIスペックに従って入力する必要があります。詳細は[OpenAI API文書](https://platform.openai.com/docs/api-reference/chat)を参照してください。
-    AI EasyMakerで提供するCompletion, Chat Completion APIをサポートするモデルは[Model endpoint compatibillity](https://platform.openai.com/docs/models/model-endpoint-compatibility)をご確認ください。
+    AI EasyMakerで提供するCompletion, Chat Completion APIをサポートするモデルは[Models](https://platform.openai.com/docs/models)をご確認ください。
 
 <a id="appendix.11.framework.note"></a>
 ### 11. フレームワーク別のサービングに関する注意事項 { #appendix.11.framework.note }

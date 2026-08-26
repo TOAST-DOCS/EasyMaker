@@ -2252,7 +2252,7 @@ For more information about the OIP specification, see [OIP Specification](https:
 !!! tip "Note"
     OpenAI generative model inference is used when using a generative model, such as OpenAI's GPT-4o.
     The inputs required for inference must be entered according to OpenAI's API specification. For more information, see the [OpenAI API documentation](https://platform.openai.com/docs/api-reference/chat).
-    For models that support the Completion and Chat Completion APIs provided by AI EasyMaker, see [Model endpoint compatibility](https://platform.openai.com/docs/models/model-endpoint-compatibility).
+    For models that support the Completion and Chat Completion APIs provided by AI EasyMaker, see [Models](https://platform.openai.com/docs/models).
 
 <a id="appendix.11.framework.note"></a>
 ### 11. Considerations for framework-specific serving { #appendix.11.framework.note }

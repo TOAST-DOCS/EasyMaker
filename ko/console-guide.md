@@ -1714,7 +1714,7 @@ RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서
             - **RDS for PostgreSQL 활성화**
                 - AI EasyMaker RAG는 NHN Cloud RDS for PostgreSQL을 이용하여 벡터 스토어를 생성하고 관리합니다. 이 옵션을 선택한 경우 RDS for PostgreSQL을 반드시 활성화해야 합니다.
                 - RDS for PostgreSQL에 대한 자세한 내용과 요금은 다음에서 확인할 수 있습니다.
-                    - [RDS for PostgreSQL 안내](https://docs.nhncloud.com/ko/Database/RDS%20for%20PostgreSQL/ko/overview/)
+                    - [RDS for PostgreSQL 안내](/Database/RDS%20for%20PostgreSQL/ko/overview/)
                     - [RDS for PostgreSQL 이용 요금](https://www.nhncloud.com/kr/pricing/by-service?c=Database&s=RDS%20for%20PostgreSQL)
             - **인스턴스 타입**: RDS for PostgreSQL에서 사용할 인스턴스 타입을 선택합니다.
             - **스토리지 타입**: RDS for PostgreSQL에서 사용할 스토리지 타입을 선택합니다.
@@ -2245,7 +2245,7 @@ OIP 스펙에 대한 상세한 내용은 [OIP 스펙](https://github.com/kserve/
 !!! tip "알아두기"
     OpenAI 생성형 모델 추론은 OpenAI의 GPT-4o와 같은 생성형 모델을 사용하는 경우에 사용됩니다.
     추론에 필요한 입력값은 OpenAI의 API 스펙에 따라 입력해야 합니다. 자세한 내용은 [OpenAI API 문서](https://platform.openai.com/docs/api-reference/chat)를 참고하세요.
-    AI EasyMaker에서 제공하는 Completion, Chat Completion API를 지원하는 모델은 [Model endpoint compatibillity](https://platform.openai.com/docs/models/model-endpoint-compatibility)를 확인하세요.
+    AI EasyMaker에서 제공하는 Completion, Chat Completion API를 지원하는 모델은 [Models](https://platform.openai.com/docs/models)를 확인하세요.
 
 <a id="appendix.11.framework.note"></a>
 ### 11. 프레임워크별 서빙 참고 사항 { #appendix.11.framework.note }
