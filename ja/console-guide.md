@@ -1,3 +1,6 @@
+<!-- machine_translated: true -->
+
+{%- set em_registry = "0516e3a7-kr-registry.container.gov-nhncloud.com" if "gov" in build_flags else "fb34a0a4-kr1-registry.container.nhncloud.com" -%}
 <!-- pre-align:aligned sig=13fa2e880aa4 -->
 
 <a id="ai.easymaker.console.guide"></a>
@@ -941,43 +944,42 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 <a id="endpoint.create"></a>
 ### エンドポイントの作成 { #endpoint.create }
 
-- **API Gatewayサービスの有効化**
-    - AI EasyMakerエンドポイントはNHN Cloud API Gatewayサービスを介してAPIエンドポイントを作成し、APIを管理します。エンドポイント機能を利用するにはAPI Gatewayサービスを必ず有効にする必要があります。
-    - API Gatewayサービスの詳細と料金については、以下で確認できます。
-        - [API Gatewayサービス案内](https://docs.nhncloud.com/ja/Application%20Service/API%20Gateway/ja/overview/)
-        - [API Gateway利用料金](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
-- **エンドポイント**：新規または既存エンドポイントにステージを追加するかどうかを選択します。
-    - **新規エンドポイントとして作成**：新規エンドポイントを作成します。API Gatewayに新規サービスと基本ステージでエンドポイントが作成されます。
-    - **既存エンドポイントから新規ステージ追加**：既存エンドポイントのAPI Gatewayのサービスに新規ステージとしてエンドポイントが作成されます。ステージを追加する既存エンドポイントを選択します。
-- **エンドポイント名**：エンドポイントの名前を入力します。エンドポイント名は重複できません。
-- **ステージ名**：既存エンドポイントから新規ステージを追加する場合、新規ステージ名を入力します。ステージ名は重複できません。
-- **説明**：エンドポイントステージの説明を入力します。
-
-- **インスタンス情報**:モデルがサービングされるインスタンス情報を入力します。
-    - **インスタンスタイプ**:インスタンスタイプを選択します。
-    - **インスタンス数**:インスタンスの駆動数を入力します。
-    - **オートスケーラー**:オートスケーラーはリソース使用量ポリシーに基づいてノード数を自動的に調整する機能です。オートスケーラーはステージ単位で設定されます。
-        - **使用/使用しない**:オートスケーラーを使用するかどうかを選択します。使用する場合、インスタンス負荷に応じてインスタンス数がスケールインまたはスケールアウトされます。
-        - **最小ノード数**:縮小可能な最小ノード数です。
-        - **最大ノード数**:増設可能な最大ノード数
-        - **縮小**:ノード縮小設定
-        - **リソース使用量しきい値**:縮小の基準となるリソース使用量しきい領域の基準値
-        - **しきい領域維持時間(分)**:縮小対象となるノードのしきい値以下のリソース使用量維持時間
-        - **増設後、縮小遅延時間(分)**:ノード増設後、縮小対象ノードでモニタリングを開始するまでの遅延時間
-- **ステージ情報**：エンドポイントに配布するモデルアーティファクトの情報を入力します。同じモデルを複数のステージリソースに配布すると、リクエストが分散して処理されます。
-    - **モデル**：エンドポイントに配布するモデルを選択します。モデルを作成していない場合は、まずモデルを作成します。モデルフレームワーク別サービングの注意事項は[付録 > 11. フレームワーク別のサービングに関する注意事項](#appendix.11.framework.note)を参照してください。
-    - **リソース割り当て(%)**:モデルに割り当てるリソースを入力します。インスタンスのリソース実使用量を固定比率で割り当てます。
-        - **cpu**: CPU割り当て量を入力します。割り当ての割合(%)を使わずに直接割り当てる場合は入力します。
-        - **memory**: Memory割り当て量を入力します。割り当ての割合(%)を使用せずに直接割り当てる場合は入力します。
-        - **gpu**: GPU割り当て量を入力します。割り当ての割合(%)を使用せずに直接割り当てる場合は入力します。
-    - **説明**:ステージリソース説明を入力します。
-    - **Podオートスケーラー**:モデルのリクエスト量に応じてPod数を自動的に調整する機能です。オートスケーラーはモデル単位で設定されます。
-        - **使用/使用しない**:オートスケーラーを使用するかどうかを選択します。使用する場合、モデル負荷に応じてPod数がスケールインまたはスケールアウトされます。
-        - **増設単位**: Pod増設単位を入力します。
-            - **CPU**：CPU使用量に基づいてPod数が調節されます。
-            - **Memory**: Memory使用量に基づいてPod数が調節されます。
-        - **しきい値**: Podが増設される増設単位別のしきい値です。
-    - **リソース情報**:実際に使用しているリソースを確認できます。入力したモデルの割り当て量に基づいてリソース実使用量を各モデルに割り当てます。詳細は[付録 > 9.リソース情報](#appendix.9.resource.info)を参照してください。
+- **API Gateway サービスの有効化**
+    - AI EasyMaker のエンドポイントは、NHN Cloud API Gateway サービスを通じて API エンドポイントを作成し、API を管理します。エンドポイント機能を使用するには、API Gateway サービスを必ず有効にする必要があります。
+    - API Gateway サービスの詳細と料金については、以下で確認できます。
+        - [API Gateway サービスのご案内](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Application%20Service/API%20Gateway/ko/overview/)
+        - [API Gateway 利用料金](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
+- **[エンドポイント]**: 新規または既存のエンドポイントにステージを追加するかどうかを選択します。
+    - **[新規エンドポイントとして作成]**: 新規エンドポイントを作成します。API Gateway に新規サービスとデフォルトステージとしてエンドポイントが作成されます。
+    - **[既存エンドポイントに新規ステージを追加]**: 既存のエンドポイントの API Gateway サービスに新規ステージとしてエンドポイントが作成されます。ステージを追加する既存のエンドポイントを選択します。
+- **[エンドポイント名]**: エンドポイント名を入力します。エンドポイント名は重複できません。
+- **[ステージ名]**: 既存のエンドポイントに新規ステージを追加する場合、新規ステージ名を入力します。ステージ名は重複できません。
+- **[説明]**: エンドポイントステージの説明を入力します。
+- **[インスタンス情報]**: モデルがサービングされるインスタンス情報を入力します。
+    - **[インスタンスタイプ]**: インスタンスタイプを選択します。
+    - **[インスタンス数]**: インスタンスの起動数を入力します。
+    - **[オートスケーラー]**: オートスケーラーは、リソース使用量のポリシーに従ってノード数を自動的に調整する機能です。オートスケーラーはステージ単位で設定されます。
+        - **[有効/無効]**: オートスケーラーを使用するかどうかを選択します。有効にした場合、インスタンスの負荷に応じてインスタンス数がスケールインまたはアウトされます。
+        - **[最小ノード数]**: 削減可能な最小ノード数
+        - **[最大ノード数]**: 増設可能な最大ノード数
+        - **[削減]**: ノード削減の有効化設定
+        - **[リソース使用量しきい値]**: 削減の基準となるリソース使用量しきい値の基準値
+        - **[しきい値領域維持時間 (分)]**: 削減対象となるノードのしきい値以下のリソース使用量の維持時間
+        - **[増設後の削減遅延時間 (分)]**: ノード増設後、削減対象ノードとして監視を開始するまでの遅延時間
+- **[ステージ情報]**: エンドポイントにデプロイするモデルアーティファクトの情報を入力します。同じモデルを複数のステージリソースとしてデプロイすると、リクエストが分散されて処理されます。
+    - **[モデル]**: エンドポイントにデプロイするモデルを選択します。モデルを作成していない場合は、先にモデルを作成します。モデルのフレームワーク別サービング参考事項については、[付録 > 11. フレームワーク別サービング参考事項](#appendix.11.framework.note)を参照してください。
+    - **[リソース割り当て (%)]**: モデルに割り当てるリソースを入力します。インスタンスのリソース実使用量を固定の割合で割り当てます。
+        - **cpu**: CPU の割り当て量を入力します。割り当て比率 (%) を使用せずに直接割り当てる場合に入力します。
+        - **memory**: Memory の割り当て量を入力します。割り当て比率 (%) を使用せずに直接割り当てる場合に入力します。
+        - **gpu**: GPU の割り当て量を入力します。割り当て比率 (%) を使用せずに直接割り当てる場合に入力します。
+    - **[説明]**: ステージリソースの説明を入力します。
+    - **[ポッドオートスケーラー]**: モデルのリクエスト量に応じてポッド数を自動的に調整する機能です。オートスケーラーはモデル単位で設定されます。
+        - **[有効/無効]**: オートスケーラーを使用するかどうかを選択します。有効にした場合、モデルの負荷に応じてポッド数がスケールインまたはアウトされます。
+        - **[増設単位]**: ポッドの増設単位を入力します。
+            - **CPU**: CPU 使用量に応じてポッド数が調整されます。
+            - **Memory**: Memory 使用量に応じてポッド数が調整されます。
+        - **[しきい値]**: ポッドが増設される増設単位別のしきい値です。
+    - **[リソース情報]**: 実際に使用するリソースを確認できます。入力したモデルの割り当て量に応じて、リソース実使用量を各モデルに割り当てます。詳細については、[付録 > 9. リソース情報](#appendix.9.resource.info)を参照してください。
 
 !!! tip "参考"
     AI EasyMakerサービスはOIP(open inference protocol)スペックに基づいたエンドポイントを提供します。エンドポイントAPIスペックの仕様は[付録 > 10. エンドポイントAPIスペック仕様](#appendix.10.endpoint.api.specification)を参照してください。
@@ -988,10 +990,10 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
     エンドポイントの作成には数分かかる場合があります。
     最初のリソース(ノートパソコン、学習、実験、エンドポイント)作成時、サービス環境構成のためにさらに数分かかります。
 
-!!! tip "参考"
-    新規エンドポイントを作成すると、API Gatewayサービスを新規作成します。
-    既存エンドポイントから新規ステージを追加すると、API Gatewayサービスに新規ステージを作成します。
-    [API Gatewayサービスリソース提供ポリシー](https://docs.nhncloud.com/ja/nhncloud/ja/resource-policy/#resource-provision-policy-for-api-gateway-service)の基本提供量を超過した場合、AI EasyMakerでエンドポイント作成ができない場合があります。この場合、API Gatewayサービスリソースのクォータを調整して解決できます。
+!!! tip "覚えておきましょう"
+    新規エンドポイントを作成すると、API Gateway サービスが新規作成されます。
+    既存のエンドポイントに新規ステージを追加すると、API Gateway サービスに新規ステージが作成されます。
+    [API Gateway サービスリソース提供ポリシー](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/nhncloud/ja/resource-policy{% if "gov" in build_flags %}-gov/#api-gateway{% else %}/#resource-provision-policy-for-api-gateway-service{% endif %})のデフォルト提供量を超えた場合、AI EasyMaker でエンドポイントを作成できない場合があります。この場合、API Gateway サービスのリソースクォータを調整することで解決できます。
 
 <a id="endpoint.list"></a>
 ### エンドポイントリスト { #endpoint.list }
@@ -1063,15 +1065,15 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
     - **API統計**タブはエンドポイントステージが作成中の場合、無効になります。
 
 !!! danger "注意"
-    AI EasyMakerはエンドポイント作成またはエンドポイントステージ作成を行うと、エンドポイントに対するAPI Gatewayのサービスとステージを作成します。
-    AI EasyMakerによって作成されたAPI GatewayサービスとステージをAPI Gatewayサービスコンソールで直接変更作業を行う場合、次の注意事項を必ず参照してください。
+    AI EasyMaker は、エンドポイントの作成またはエンドポイントステージの作成を行うと、エンドポイントに対する API Gateway のサービスとステージを作成します。
+    AI EasyMaker によって作成された API Gateway サービスとステージを API Gateway サービスコンソールで直接変更する場合は、次の注意事項を必ずご確認ください。
 
-    1. AI EasyMakerが作成したAPI Gatewayサービスとステージを削除しないようにします。削除すると、エンドポイントにAPI Gateway情報が正常に表示されず、エンドポイントの変更事項がAPI Gatewayに適用されない場合があります。
-    2. エンドポイント作成時に入力したAPI Gatewayリソースパスのリソースを変更または削除しないようにします。削除すると、エンドポイントの推論APIの呼び出しに失敗する場合があります。
-    3. エンドポイント作成時に入力したAPI Gatewayリソースパス下位にリソースを追加しないようにします。追加したリソースはエンドポイントステージ追加/変更作業時に削除される場合があります。
-    4. API Gatewayのステージ設定でAPI Gatewayリソースパスに設定された**バックエンドエンドポイントURL再定義**を無効にするか、URLを変更しないようにします。変更すると、エンドポイントの推論API呼び出しに失敗する可能性があります。
-        上記の注意事項以外の設定は、必要に応じてAPI Gatewayで提供する機能を利用できます。
-        API Gatewayの詳細については[API Gatewayコンソールガイド](https://docs.nhncloud.com/ja/Application%20Service/API%20Gateway/ja/console-guide/)を参照してください。
+    1. AI EasyMaker が作成した API Gateway サービスとステージを削除しないようにしてください。削除すると、エンドポイントに API Gateway 情報が正常に表示されなくなり、エンドポイントの変更が API Gateway に適用されない場合があります。
+    2. エンドポイントの作成時に入力した API Gateway リソースパスのリソースを変更または削除しないようにしてください。削除すると、エンドポイントの推論 API 呼び出しが失敗する場合があります。
+    3. エンドポイントの作成時に入力した API Gateway リソースパスの配下にリソースを追加しないようにしてください。追加したリソースは、エンドポイントステージの追加/変更の作業時に削除される場合があります。
+    4. API Gateway のステージ設定で、API Gateway リソースパスに設定されている **[バックエンドエンドポイント URL のオーバーライド]** を無効にしたり、URL を変更したりしないようにしてください。変更すると、エンドポイントの推論 API 呼び出しが失敗する場合があります。
+       上記の注意事項以外の設定は、必要に応じて API Gateway が提供する機能を利用できます。
+       API Gateway の使用の詳細については、[API Gateway コンソールガイド](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Application%20Service/API%20Gateway/ko/console-guide{% if "gov" in build_flags %}-gov{% endif %}/)を参照してください。
 
 !!! tip "参考"
     一時的な問題でAI EasyMakerエンドポイントのステージ設定がAPI Gatewayステージに配布されていない場合、配布失敗状態と表示されます。
@@ -1313,22 +1315,22 @@ AI EasyMakerの基盤イメージは下表を確認してください。
 
 | イメージ名 | コアタイプ | フレームワーク | フレームワークバージョン | Pythonバージョン | イメージアドレス |
 | --- | --- | --- | --- | --- | --- |
-| Ubuntu 22.04 CPU Python Notebook     | CPU  | Python     | 3.10.12  | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204   |
-| Ubuntu 22.04 GPU Python Notebook     | GPU  | Python     | 3.10.12  | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-gpu-py310-ubuntu2204   |
-| Ubuntu 22.04 CPU PyTorch Notebook    | CPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-cpu-py310-ubuntu2204    |
-| Ubuntu 22.04 GPU PyTorch Notebook    | GPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-gpu-py310-ubuntu2204    |
-| Ubuntu 22.04 CPU TensorFlow Notebook | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204|
-| Ubuntu 22.04 GPU TensorFlow Notebook | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204|
+| Ubuntu 22.04 CPU Python Notebook     | CPU      | Python     | 3.10.12         | 3.10        | $[ em_registry ]$/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204    |
+| Ubuntu 22.04 GPU Python Notebook     | GPU      | Python     | 3.10.12         | 3.10        | $[ em_registry ]$/easymaker/python-notebook:3.10.12-gpu-py310-ubuntu2204    |
+| Ubuntu 22.04 CPU PyTorch Notebook    | CPU      | PyTorch    | 2.0.1           | 3.10        | $[ em_registry ]$/easymaker/pytorch-notebook:2.0.1-cpu-py310-ubuntu2204     |
+| Ubuntu 22.04 GPU PyTorch Notebook    | GPU      | PyTorch    | 2.0.1           | 3.10        | $[ em_registry ]$/easymaker/pytorch-notebook:2.0.1-gpu-py310-ubuntu2204     |
+| Ubuntu 22.04 CPU TensorFlow Notebook | CPU      | TensorFlow | 2.12.0          | 3.10        | $[ em_registry ]$/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204 |
+| Ubuntu 22.04 GPU TensorFlow Notebook | GPU      | TensorFlow | 2.12.0          | 3.10        | $[ em_registry ]$/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204 |
 
 <a id="personal.image.deep.learning.image"></a>
 #### ディープラーニングイメージ
 
 | イメージ名 | コアタイプ | フレームワーク | フレームワークバージョン | Pythonバージョン | イメージアドレス |
 | --- | --- | --- | --- | --- | --- |
-| Ubuntu 22.04 CPU PyTorch Training    | CPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204        |
-| Ubuntu 22.04 GPU PyTorch Training    | GPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204        |
-| Ubuntu 22.04 CPU TensorFlow Training | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-cpu-py310-ubuntu2204 |
-| Ubuntu 22.04 GPU TensorFlow Training | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
+| Ubuntu 22.04 CPU PyTorch Training    | CPU      | PyTorch    | 2.0.1           | 3.10        | $[ em_registry ]$/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204     |
+| Ubuntu 22.04 GPU PyTorch Training    | GPU      | PyTorch    | 2.0.1           | 3.10        | $[ em_registry ]$/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204     |
+| Ubuntu 22.04 CPU TensorFlow Training | CPU      | TensorFlow | 2.12.0          | 3.10        | $[ em_registry ]$/easymaker/tensorflow-train:2.12.0-cpu-py310-ubuntu2204 |
+| Ubuntu 22.04 GPU TensorFlow Training | GPU      | TensorFlow | 2.12.0          | 3.10        | $[ em_registry ]$/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
 
 !!! tip "参考"
     個人イメージが保存されるコンテナレジストリサービスは、NHN Container Registry(NCR)のみ連動可能です (2023年12月基準)。
@@ -1343,10 +1345,10 @@ AI EasyMakerの基盤イメージは下表を確認してください。
 
 1. 個人イメージのDockerFileを作成します。
 
-            FROM fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
-            RUN conda create -n example python=3.10
-            RUN conda activate example
-            RUN pip install torch torchvision
+FROM $[ em_registry ]$/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
+        RUN conda create -n example python=3.10
+        RUN conda activate example
+        RUN pip install torch torchvision
 
 2. 個人イメージビルドとコンテナレジストリPush
 DockerfileでイメージをビルドしてNCRレジストリにイメージを保存(Push)します。
@@ -1355,10 +1357,10 @@ DockerfileでイメージをビルドしてNCRレジストリにイメージを�
             docker tag {イメージ名}:{タグ} {NCRレジストリアドレス}/{イメージ名}:{タグ}
             docker push {NCRレジストリアドレス}/{イメージ名}:{タグ}
 
-            (例)
-            docker build -t cutstom-training:v1 .
-            docker tag cutstom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
-            docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+(例)
+        docker build -t custom-training:v1 .
+        docker tag custom-training:v1 example-kr1-registry.container.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/registry/custom-training:v1
+        docker push example-kr1-registry.container.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/registry/custom-training:v1
 
 3. NCRに保存(Push)したイメージをAI EasyMakerの個人イメージとして作成します。
 
@@ -1702,60 +1704,62 @@ RAG(Retrieval-Augmented Generation、検索拡張生成)は、ユーザーのド
 
 新しいRAGを作成します。
 
-- **API Gatewayサービス有効化**
-    - AI EasyMaker RAGは、NHN Cloud API Gatewayサービスを利用してAPIエンドポイントを作成し、管理します。RAG機能を使用するには、API Gatewayサービスを必ず有効化する必要があります。
-    - API Gatewayサービスの詳細と料金は、以下で確認できます。
-        - [API Gatewayサービスのご案内](https://docs.nhncloud.com/ja/Application%20Service/API%20Gateway/ja/overview/)
-        - [API Gateway利用料金](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
-- **基本設定**
-    - **名前**: RAG名を入力します。RAG名は重複できません。
-    - **説明**: RAGに関する説明を入力します。
-    - **インスタンスタイプ**: RAGエンドポイントを実行するインスタンスタイプを選択します。
-    - **インスタンス数**: RAGエンドポイントを実行するインスタンス数を入力します。
-    - **プロンプト**: RAGエンドポイントで使用するプロンプトです。**内容を見る**をクリックすると、プロンプトの全文を確認できます。
-- **ベクトルストア設定**
-    - **ベクトルストアタイプ**: ベクトルストアタイプを選択します。
+- **[API Gateway サービスの有効化]**
+    - AI EasyMaker RAG は、NHN Cloud API Gateway サービスを使用して API エンドポイントを作成および管理します。RAG 機能を使用するには、API Gateway サービスを必ず有効にする必要があります。
+    - API Gateway サービスの詳細および料金については、以下で確認できます。
+        - [API Gateway サービス案内](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Application%20Service/API%20Gateway/ko/overview/)
+        - [API Gateway 利用料金](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
+- **[基本設定]**
+    - **[名前]**: RAG 名を入力します。RAG 名は重複できません。
+    - **[説明]**: RAG の説明を入力します。
+    - **[インスタンスタイプ]**: RAG エンドポイントを実行するインスタンスタイプを選択します。
+    - **[インスタンス数]**: RAG エンドポイントを実行するインスタンス数を入力します。
+    - **[プロンプト]**: RAG エンドポイントで使用するプロンプトです。**[内容を見る]** をクリックすると、プロンプトの全内容を確認できます。
+- **[ベクターストア設定]**
+    - **[ベクターストアタイプ]**: ベクターストアタイプを選択します。
+{%- if "gov" not in build_flags %}
         - **RDS for PostgreSQL**
-            - **RDS for PostgreSQLの有効化**
-                - AI EasyMaker RAGは、NHN Cloud RDS for PostgreSQLを利用してベクトルストアを作成し、管理します。このオプションを選択した場合、RDS for PostgreSQLを必ず有効化する必要があります。
-                - RDS for PostgreSQLの詳細と料金は、以下で確認できます。
-                    - [RDS for PostgreSQLのご案内](/Database/RDS%20for%20PostgreSQL/ja/overview/)
-                    - [RDS for PostgreSQL利用料金](https://www.nhncloud.com/kr/pricing/by-service?c=Database&s=RDS%20for%20PostgreSQL)
-            - **インスタンスタイプ**: RDS for PostgreSQLで使用するインスタンスタイプを選択します。
-            - **ストレージタイプ**: RDS for PostgreSQLで使用するストレージタイプを選択します。
-            - **ストレージサイズ**: RDS for PostgreSQLで使用するストレージサイズです。
-            - **ユーザーID**: PostgreSQLへの接続に使用するユーザーIDを入力します。
-            - **パスワード**: PostgreSQLへの接続に使用するパスワードを入力します。
-            - **パスワード確認**: パスワードを再入力して確認します。
-            - **VPC ID**: RDS for PostgreSQLで使用するVPC IDを入力します。
-            - **サブネットID**: RDS for PostgreSQLで使用するサブネットIDを入力します。
-        - **PostgreSQL Instance**: ユーザーが作成したNHN Cloud PostgreSQL Instanceをベクトルストアとして活用します。
-            - **ユーザーID**: PostgreSQL Instanceに接続できるユーザーIDを入力します。
-            - **パスワード**: PostgreSQL Instanceに接続できるパスワードを入力します。
-            - **VPC ID**: PostgreSQL InstanceのVPC IDを入力します。
-            - **サブネットID**: PostgreSQL InstanceのサブネットIDを入力します。
-            - **PostgreSQLインスタンスIP**: 作成したPostgreSQL InstanceのIPアドレスを入力します。
-    - **収集設定**
-        - **データパス**: ベクトルストアに収集するドキュメントが保存されているデータパスを入力します。
-    - **埋め込みモデル**
-        - **モデル**: ドキュメント及びクエリをベクトル化する際に使用する埋め込みモデルを選択します。
-        - **インスタンスタイプ**: 埋め込みモデルを実行するインスタンスタイプです。
-        - **インスタンス数**: 埋め込みモデルを実行するインスタンス数を入力します。
-- **LLM設定**
-    - **モデル**: レスポンスを生成する際に使用するLLMを選択します。
-    - **インスタンスタイプ**: LLMを実行するインスタンスタイプです。
-    - **インスタンス数**: LLMを実行するインスタンス数です。
-- **追加設定**
-    - **ログ管理**: RAGの実行中に発生するログをNHN Cloud Log & Crash Searchサービスに保存できます。
-        - 詳細は[付録 > 2. NHN Cloud Log & Crash Searchサービス利用のご案内及びログ確認](#appendix.2.lncs.service.usage.guide.and.log.inquiry.guide)をご参照ください。
+            - **[RDS for PostgreSQL の有効化]**
+                - AI EasyMaker RAG は、NHN Cloud RDS for PostgreSQL を使用してベクターストアを作成および管理します。このオプションを選択した場合、RDS for PostgreSQL を必ず有効にする必要があります。
+                - RDS for PostgreSQL の詳細および料金については、以下で確認できます。
+                    - [RDS for PostgreSQL 案内](/Database/RDS%20for%20PostgreSQL/ja/overview/)
+                    - [RDS for PostgreSQL 利用料金](https://www.nhncloud.com/kr/pricing/by-service?c=Database&s=RDS%20for%20PostgreSQL)
+            - **[インスタンスタイプ]**: RDS for PostgreSQL で使用するインスタンスタイプを選択します。
+            - **[ストレージタイプ]**: RDS for PostgreSQL で使用するストレージタイプを選択します。
+            - **[ストレージサイズ]**: RDS for PostgreSQL で使用するストレージサイズです。
+            - **[ユーザー ID]**: PostgreSQL への接続に使用するユーザー ID を入力します。
+            - **[パスワード]**: PostgreSQL への接続に使用するパスワードを入力します。
+            - **[パスワードの確認]**: パスワードを再入力して確認します。
+            - **[VPC ID]**: RDS for PostgreSQL で使用する VPC ID を入力します。
+            - **[サブネット ID]**: RDS for PostgreSQL で使用するサブネット ID を入力します。
+{%- endif %}
+        - **PostgreSQL Instance**: ユーザーが作成した NHN Cloud PostgreSQL Instance をベクターストアとして活用します。
+            - **[ユーザー ID]**: PostgreSQL Instance にアクセスできるユーザー ID を入力します。
+            - **[パスワード]**: PostgreSQL Instance にアクセスできるパスワードを入力します。
+            - **[VPC ID]**: PostgreSQL Instance の VPC ID を入力します。
+            - **[サブネット ID]**: PostgreSQL Instance のサブネット ID を入力します。
+            - **[PostgreSQL インスタンス IP]**: PostgreSQL Instance の IP アドレスを入力します。
+    - **[収集設定]**
+        - **[データパス]**: ベクターストアに収集するドキュメントが保存されたデータパスを入力します。
+    - **[エンベディングモデル]**
+        - **[モデル]**: ドキュメントおよびクエリをベクトル化する際に使用するエンベディングモデルを選択します。
+        - **[インスタンスタイプ]**: エンベディングモデルを実行するインスタンスタイプです。
+        - **[インスタンス数]**: エンベディングモデルを実行するインスタンス数を入力します。
+- **[LLM 設定]**
+    - **[モデル]**: 応答を生成する際に使用する LLM を選択します。
+    - **[インスタンスタイプ]**: LLM を実行するインスタンスタイプです。
+    - **[インスタンス数]**: LLM を実行するインスタンス数です。
+- **[追加設定]**
+    - **[ログ管理]**: RAG 実行中に発生するログを NHN Cloud Log & Crash Search サービスに保存できます。
+        - 詳細については、[付録 > 2. NHN Cloud Log & Crash Search サービス利用案内およびログ確認](#appendix.2.lncs.service.usage.guide.and.log.inquiry.guide)を参照してください。
 
 !!! tip "参考"
     収集で使用できるファイルの形式、サイズ、個数が制限される場合があります。詳細は[収集の同期](#rag.ingestion.sync)をご参照ください。
 
 !!! danger "注意"
-    PostgreSQL Instance使用時、ポートを`15432`に設定してください。
-    インスタンスを作成する方法は、[PostgreSQL Instance利用ガイド](https://docs.nhncloud.com/ja/Compute/Instance/ja/component-guide/#postgresql-instance)をご参照ください。
-    インスタンスのサブネット帯域から`15432`ポートに接続できるようセキュリティグループを設定してください。
+    PostgreSQL Instance を使用する際は、ポートを `15432` に設定します。
+    インスタンスの作成方法については、[PostgreSQL Instance](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Compute/Instance/ko/component-guide{% if "gov" in build_flags %}-gov{% endif %}/#postgresql-instance) を参照してください。
+    インスタンスのサブネット帯域から `15432` ポートへのアクセスを許可するように、セキュリティグループを設定します。
 
 !!! danger "注意"
     AI EasyMakerと同じプロジェクトで作成されたNHN Cloud NASのみ使用できます。
@@ -1973,10 +1977,10 @@ AI EasyMakerの一部機能で入出力ストレージとしてユーザーのNH
 
 NHN Cloud Object StorageにAI EasyMakerシステムアカウントの読み取り/書き込み権限を追加するには、次の内容を参照してください。
 
-1. **[学習]**または**[モデル]**タブ > **AI EasyMakerシステムアカウント情報**をクリックします。
-2. AI EasyMakerシステムアカウント情報の**AI EasyMakerテナントID**と**AI EasyMaker APIユーザーID**をアーカイブします。
-3. NHN Cloud Object Storageコンソールに移動します。
-4. [特定のプロジェクトまたは特定のユーザーに読み取り/書き込みを許可](https://docs.nhncloud.com/ja/Storage/Object%20Storage/ja/acl-guide/#role-based-access-allow-rw-project-or-user)ドキュメントを参照して、NHN Cloud Object StorageコンソールでAI EasyMakerシステムアカウントに必要な読み取り及び書き込み許可権限を追加します。
+1. **[学習]** または **[モデル]** タブ > **[AI EasyMaker システムアカウント情報]** をクリックします。
+2. AI EasyMaker システムアカウント情報である **AI EasyMaker テナント ID** と **AI EasyMaker API ユーザー ID** を保管します。
+3. NHN Cloud Object Storage コンソールに移動します。
+4. [特定のプロジェクトまたは特定のユーザーへの読み取り/書き込みの許可](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Storage/Object%20Storage/ko/acl-guide{% if "gov" in build_flags %}-gov{% endif %}/#role-based-access-allow-rw-project-or-user) ドキュメントを参照して、NHN Cloud Object Storage コンソールで AI EasyMaker システムアカウントに必要な読み取りおよび書き込みの許可権限を追加します。
 
 <a id="appendix.2.lncs.service.usage.guide.and.log.inquiry.guide"></a>
 ### 2. NHN Cloud Log & Crash Searchサービス利用案内およびログ照会方法 { #appendix.2.lncs.service.usage.guide.and.log.inquiry.guide }
@@ -1987,23 +1991,23 @@ NHN Cloud Object StorageにAI EasyMakerシステムアカウントの読み取�
 AI EasyMakerサービスで発生するログ、イベントをNHN Cloud Log & Crash Searchサービスに保存できます。
 Log & Crash Searchサービスにログを保存するには、Log & Crashサービスを有効にする必要があり、別途利用料金がかかります。
 
-- **Log & Crash Searchサービス利用および料金案内**
-    - Log & Crash Searchサービスの詳細内容と料金は、以下で確認できます。
-        - [Log & Crash Searchサービス案内](https://docs.nhncloud.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ja/Overview/)
-        - [Log & Crash Search利用料金](https://www.nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
+- **Log & Crash Search サービスの利用および料金案内**
+    - Log & Crash Search サービスの詳細と料金は、以下で確認できます。
+        - [Log & Crash Search サービス案内](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/{% if "gov" in build_flags %}gov-overview{% else %}Overview{% endif %}/)
+        - [Log & Crash Search 利用料金](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
 <a id="appendix.2.lncs.service.log.inquiry.guide"></a>
 #### ログ照会
 
-1. Log & Crash Searchサービスコンソールページに移動します。
-2. Log & Crash Searchサービスで検索条件を入力してログを照会します。
-    - AI EasyMaker学習ログクエリ：categoryフィールドが"easymaker.training"のログを照会します。
-        - クエリ： category:"easymaker.training"
-    - AI EasyMakerエンドポイントログクエリ：categoryフィールドが"easymaker.inference"のログを照会します。
-        - クエリ： category:"easymaker.inference"
-    - AI EasyMakerログ全体照会クエリ： logTypeフィールドが"NNHCloud-AIEasyMaker"のログを照会します。
-        - クエリ：logType:"NHNCloud\-AIEasyMaker"
-3. Log & Crash Searchサービスの詳細な利用方法は[Log & Crash Searchサービスのコンソールガイド](https://docs.nhncloud.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ja/console-guide/)を参照してください。
+1. Log & Crash Search サービスのコンソールページに移動します。
+2. Log & Crash Search サービスで検索条件を入力し、ログを照会します。
+    - AI EasyMaker 学習ログのクエリ: category フィールドが "easymaker.training" のログを照会します。
+        - クエリ: category:"easymaker.training"
+    - AI EasyMaker エンドポイントログのクエリ: category フィールドが "easymaker.inference" のログを照会します。
+        - クエリ: category:"easymaker.inference"
+    - AI EasyMaker ログ全件照会クエリ: logType フィールドが "NNHCloud-AIEasyMaker" のログを照会します。
+        - クエリ: logType:"NHNCloud\-AIEasyMaker"
+3. Log & Crash Search サービスの詳細な使用方法については、[Log & Crash Search サービスのコンソールガイド](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/{% if "gov" in build_flags %}gov-console-guide{% else %}console-guide{% endif %}/)を参照してください。
 
 AI EasyMakerサービスは、Log & Crash Searchサービスに次のように定義されたフィールドにログを転送します。
 
@@ -2029,11 +2033,21 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
     | 名前 | 説明 |
     | --- | --- |
     | endpointId | AI EasyMakerエンドポイントID |
+- **エンドポイントログフィールド**
+
+| 名前            | 説明                        |
+| --------------- | --------------------------- |
     | endpointStageId | エンドポイントステージID |
     | inferenceId | 推論リクエスト固有ID |
     | action | Action区分(Endpoint.Model) |
     | modelName | 推論対象モデル名 |
 
+| modelName       | 推論対象モデル名         |
+- **バッチ推論ログフィールド**
+
+| 名前             | 説明                      |
+    | ---------------- | ------------------------- |
+| batchInferenceId | AI EasyMaker バッチ推論 ID |
 <a id="appendix.3.hyperparameter"></a>
 ### 3. ハイパーパラメータ { #appendix.3.hyperparameter }
 
@@ -2234,10 +2248,10 @@ OIPスペックの詳細は[OIPスペック](https://github.com/kserve/open-infe
 | OpenAI生成型モデル推論 | POST | /v1/completions                                            |
 | OpenAI生成型モデル推論 | POST | /v1/chat/completions                                       |
 
-!!! tip "参考"
-    OpenAI生成型モデル推論はOpenAIのGPT-4oのような生成型モデルを使用する場合に使用されます。
-    推論に必要な入力値はOpenAIのAPIスペックに従って入力する必要があります。詳細は[OpenAI API文書](https://platform.openai.com/docs/api-reference/chat)を参照してください。
-    AI EasyMakerで提供するCompletion, Chat Completion APIをサポートするモデルは[Models](https://platform.openai.com/docs/models)をご確認ください。
+!!! tip "ヒント"
+    OpenAI生成モデル推論は、OpenAIのGPT-4oなどの生成モデルを使用する場合に使用されます。
+    推論に必要な入力値は、OpenAIのAPI仕様に従って入力する必要があります。詳細については、[OpenAI APIドキュメント](https://platform.openai.com/docs/api-reference/chat)を参照してください。
+    AI EasyMakerが提供するCompletion、Chat Completion APIをサポートするモデルについては、[Models](https://platform.openai.com/docs/models)を確認してください。
 
 <a id="appendix.11.framework.note"></a>
 ### 11. フレームワーク別のサービングに関する注意事項 { #appendix.11.framework.note }
