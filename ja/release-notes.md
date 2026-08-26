@@ -1,6 +1,6 @@
 <!-- machine_translated: true -->
 
-<!-- pre-align:aligned sig=287622970352 -->
+<!-- pre-align:aligned sig=fbf376f81e3f -->
 
 <a id="ai.easymaker"></a>
 ## Machine Learning > AI EasyMaker > リリースノート { #ai.easymaker }
