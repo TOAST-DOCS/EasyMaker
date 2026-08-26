@@ -1,3 +1,5 @@
+<!-- machine_translated: true -->
+
 <!-- pre-align:aligned sig=13fa2e880aa4 -->
 
 <a id="ai.easymaker.console.guide"></a>
@@ -1063,15 +1065,15 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
     - **API統計**タブはエンドポイントステージが作成中の場合、無効になります。
 
 !!! danger "注意"
-    AI EasyMakerはエンドポイント作成またはエンドポイントステージ作成を行うと、エンドポイントに対するAPI Gatewayのサービスとステージを作成します。
-    AI EasyMakerによって作成されたAPI GatewayサービスとステージをAPI Gatewayサービスコンソールで直接変更作業を行う場合、次の注意事項を必ず参照してください。
+    AI EasyMaker は、エンドポイントの作成またはエンドポイントステージの作成を行うと、エンドポイントに対する API Gateway のサービスとステージを作成します。
+    AI EasyMaker によって作成された API Gateway サービスとステージを API Gateway サービスコンソールで直接変更する場合は、次の注意事項を必ず参照してください。
 
-    1. AI EasyMakerが作成したAPI Gatewayサービスとステージを削除しないようにします。削除すると、エンドポイントにAPI Gateway情報が正常に表示されず、エンドポイントの変更事項がAPI Gatewayに適用されない場合があります。
-    2. エンドポイント作成時に入力したAPI Gatewayリソースパスのリソースを変更または削除しないようにします。削除すると、エンドポイントの推論APIの呼び出しに失敗する場合があります。
-    3. エンドポイント作成時に入力したAPI Gatewayリソースパス下位にリソースを追加しないようにします。追加したリソースはエンドポイントステージ追加/変更作業時に削除される場合があります。
-    4. API Gatewayのステージ設定でAPI Gatewayリソースパスに設定された**バックエンドエンドポイントURL再定義**を無効にするか、URLを変更しないようにします。変更すると、エンドポイントの推論API呼び出しに失敗する可能性があります。
-        上記の注意事項以外の設定は、必要に応じてAPI Gatewayで提供する機能を利用できます。
-        API Gatewayの詳細については[API Gatewayコンソールガイド](https://docs.nhncloud.com/ja/Application%20Service/API%20Gateway/ja/console-guide/)を参照してください。
+    1. AI EasyMaker が作成した API Gateway サービスとステージを削除しないでください。削除すると、エンドポイントに API Gateway の情報が正常に表示されなくなり、エンドポイントへの変更が API Gateway に適用されない場合があります。
+    2. エンドポイント作成時に入力した API Gateway リソースパスのリソースを変更または削除しないでください。削除すると、エンドポイントの推論 API 呼び出しに失敗する場合があります。
+    3. エンドポイント作成時に入力した API Gateway リソースパスの配下にリソースを追加しないでください。追加したリソースは、エンドポイントステージの追加/変更作業時に削除される場合があります。
+    4. API Gateway のステージ設定で、API Gateway リソースパスに設定された **[バックエンドエンドポイント URL オーバーライド]** を無効にしたり、URL を変更したりしないでください。変更すると、エンドポイントの推論 API 呼び出しに失敗する場合があります。
+       上記の注意事項以外の設定は、必要に応じて API Gateway が提供する機能を使用できます。
+       API Gateway の詳細な使用方法については、[API Gateway コンソールガイド](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Application%20Service/API%20Gateway/ko/console-guide{% if "gov" in build_flags %}-gov{% endif %}/)を参照してください。
 
 !!! tip "参考"
     一時的な問題でAI EasyMakerエンドポイントのステージ設定がAPI Gatewayステージに配布されていない場合、配布失敗状態と表示されます。
