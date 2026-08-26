@@ -1,5 +1,6 @@
 <!-- machine_translated: true -->
 
+{%- set em_registry = "0516e3a7-kr-registry.container.gov-nhncloud.com" if "gov" in build_flags else "fb34a0a4-kr1-registry.container.nhncloud.com" -%}
 <!-- pre-align:aligned sig=13fa2e880aa4 -->
 
 <a id="ai.easymaker.console.guide"></a>
@@ -941,42 +942,41 @@ Create and manage endpoints that can serve the model.
 ### Create Endpoint { #endpoint.create }
 
 - **Enable API Gateway Service**
-    - AI EasyMaker endpoints create API endpoints and manage APIs through NHN Cloud API Gateway service. API Gateway service must be enabled to take advantage of endpoint feature.
-    - For more information on API Gateway services and fees, please refer to the following documents:
-        - [API Gateway Service Guide](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/overview/)
-        - [API Gateway Usage Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
-- **Endpoint**: Select whether to add stage to new or existing endpoint.
-    - **Create as New Endpoint**: Create new endpoint. Endpoint is created in API Gateway with new service and default stage.
-    - **Add New Stage at Default Endpoint**: Endpoint is created as new stage in the service of API Gateway of existing endpoint. Select existing endpoint to add a stage.
-- **Endpoint name**: Enter the endpoint name. Endpoint names cannot be duplicated.
-- **Stage Name**: When adding new stage on existing endpoint, enter name for new stage. Stage names cannot be duplicated.
-- **Description**: Enter the description of endpoint stage.
-- **Instance Information**: Enter instance information for the model to be served.
-    - **Instance Type**: Select instance type.
-    - **Number of Instances**: Enter the number of drives for instance.
-    - **Autoscaler**: The autoscaler is a feature that automatically adjusts the number of nodes based on resource usage policies. The autoscaler is set on a per-stage basis.
-        - **Enable/Disable**: Select whether to enable the autoscaler. If enabled, the number of instances will scale in or out based on the instance load.
-        - **Minimum number of nodes**: The minimum number of nodes that can be scaled down
-        - **Maximum number of nodes**: The maximum number of nodes that can be scaled up
-        - **Scale-down**: Set whether to enable node scale-down
-        - **Resource Usage Threshold**: The default for resource usage threshold, which is the reference point for a scale down
-        - **Threshold Duration (min)**: The resource usage duration at or below the threshold for the nodes to be scaled down
-        - **Scale-up to scale-down latency (min)**: Delay before starting to monitor for scale-down targets after scaling up
-- **Stage Information**: Enter the information for model artifacts to deploy to endpoint. When you deploy the same model to multiple stage resources, requests are distributed and processed.
-    - **Model**: Select a model you want to deploy to the endpoint. If you haven't created a model, create one first. For information on model framework-specific serving, please see [Appendix > 11. Serving by Framework](#appendix.11.framework.note).
-    - **API Gateway Resource Path**: Enter the path to the API resource to which the model is deployed. For example, if you set it to `/inference`, you can request the inference API with `POST https://{enpdoint-domain}/inference`.
-    - **Resource Allocation (%)**: Enter the resource you want to allocate to the model. Allocate a fixed percentage of the actual resource usage by instance.
-        - **cpu**: Enter the CPU quota. Enter if you are allocating directly without using an allocation percentage (%).
-        - **memory**: Enter the Memory quota. Enter if you are allocating directly without using an allocation percentage (%).
-        - **gpu**: Enter the GPU quota. Enter if you are allocating directly without using an allocation percentage (%).
-    - **Description**: Enter a stage resource description.
-    - **Pod Autoscaler**: The feature to automatically adjust the number of pods based on the request volume of your model. The autoscaler is set on a per-model basis.
-        - **Enable/Disable**: Select whether to use the auto scaler. When enabled, the number of Pods scales in or out based on the model load.
-        - **Scaling Unit**: Enter the Pod Scaling Unit.
-            - **CPU**: Adjust the pod count depending on CPU usage.
-            - **Memory**: Adust the memory count depending on CPU usage.
-        - **Threshold (%)**: The threshold value per increment at which the Pod will be scaled up.
-    - **Resource Information:**: You can see the resources you're actually using. Allocates resource room usage to each model based on the quota for the model you entered. For more information, please see [Appendix > 9. Resource Information](#appendix.9.resource.info).
+    - AI EasyMaker endpoints create API endpoints and manage APIs through the NHN Cloud API Gateway service. To use the endpoint feature, you must enable the API Gateway service.
+    - For more information and pricing on the API Gateway service, see the following:
+        - [API Gateway Service Overview](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Application%20Service/API%20Gateway/en/overview/)
+        - [API Gateway Pricing](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
+- **Endpoint**: Select whether to add a stage to a new or existing endpoint.
+    - **Create as a new endpoint**: Creates a new endpoint. The endpoint is created in API Gateway with a new service and a default stage.
+    - **Add a new stage to an existing endpoint**: The endpoint is created as a new stage in the API Gateway service of the existing endpoint. Select the existing endpoint to which you want to add a stage.
+- **Endpoint name**: Enter the endpoint name. Endpoint names must be unique.
+- **Stage name**: If you are adding a new stage to an existing endpoint, enter the name of the new stage. Stage names must be unique.
+- **Description**: Enter a description for the endpoint stage.
+- **Instance information**: Enter the information for the instance on which the model will be served.
+    - **Instance type**: Select the instance type.
+    - **Number of instances**: Enter the number of instances to run.
+    - **Autoscaler**: The autoscaler automatically adjusts the number of nodes according to resource usage policies. The autoscaler is configured at the stage level.
+        - **Enable/Disable**: Select whether to use the autoscaler. When enabled, the number of instances scales in or out according to instance load.
+        - **Minimum number of nodes**: Minimum number of nodes that can be scaled down to
+        - **Maximum number of nodes**: Maximum number of nodes that can be scaled up to
+        - **Scale down**: Configure whether to enable node scale-down
+        - **Resource usage threshold**: The threshold value for the resource usage threshold range that serves as the criterion for scale-down
+        - **Threshold duration (minutes)**: The duration for retaining resource usage of target nodes to scale down below the threshold
+        - **Scale-down delay after scale-up (minutes)**: Delay before starting to monitor for scale-down targets after scaling up
+- **Stage information**: Enter the information for the Model Artifact to deploy to the endpoint. If you deploy the same model across multiple stage resources, requests are distributed and processed.
+    - **Model**: Select the model to deploy to the endpoint. If you have not created a model, create one first. For serving notes by model framework, see [Appendix > 11. Serving Notes by Framework](#appendix.11.framework.note).
+    - **Resource allocation (%)**: Enter the resources to allocate to the model. The actual resource usage of the instance is allocated at a fixed ratio.
+        - **cpu**: Enter the CPU allocation. Enter this value if you want to allocate directly without using the allocation ratio (%).
+        - **memory**: Enter the memory allocation. Enter this value if you want to allocate directly without using the allocation ratio (%).
+        - **gpu**: Enter the GPU allocation. Enter this value if you want to allocate directly without using the allocation ratio (%).
+    - **Description**: Enter a description for the stage resource.
+    - **Pod Autoscaler**: A feature that automatically adjusts the number of pods according to the request volume of the model. The autoscaler is configured at the model level.
+        - **Enable/Disable**: Select whether to use the autoscaler. When enabled, the number of pods scales in or out according to model load.
+        - **Scale-up unit**: Enter the pod scale-up unit.
+            - **CPU**: The number of pods is adjusted according to CPU usage.
+            - **Memory**: The number of pods is adjusted according to memory usage.
+        - **Threshold value**: The threshold value for each scale-up unit at which pods are scaled up.
+    - **Resource information**: You can check the actual resources in use. The actual resource usage is allocated to each model according to the allocation quota of the entered model. For more information, see [Appendix > 9. Resource Information](#appendix.9.resource.info).
 
 !!! tip "Note"
     The AI EasyMaker service provides endpoints based on the open inference protocol (OIP) specification. For the endpoint API specification, see [Appendix > 10. Endpoint API specification](#appendix.10.endpoint.api.specification).
@@ -988,9 +988,9 @@ Create and manage endpoints that can serve the model.
     Creation of the initial resources takes additional few minutes to configure the service environment.
 
 !!! tip "Note"
-    When you create a new endpoint, create a new API Gateway service.
-    Adding new stage on existing endpoint creates new stage in API Gateway service.
-    If you exceed the default provision in [API Gateway Service Resource Provision Policy](https://docs.nhncloud.com/en/nhncloud/en/resource-policy/#resource-provision-policy-for-api-gateway-service), you might not be able to create endpoints in AI EasyMaker. In this case, adjust API Gateway service resource quota.
+    When you create a new endpoint, a new API Gateway service is created.
+    When you add a new stage to an existing endpoint, a new stage is created in the API Gateway service.
+    If the default quota in the [API Gateway Service Resource Provision Policy](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/nhncloud/en/resource-policy{% if "gov" in build_flags %}-gov/#api-gateway{% else %}/#resource-provision-policy-for-api-gateway-service{% endif %}) is exceeded, endpoint creation in AI EasyMaker may not be possible. In this case, you can resolve this issue by adjusting the API Gateway service resource quota.
 
 <a id="endpoint.list"></a>
 ### Endpoint List { #endpoint.list }
@@ -1070,7 +1070,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
     3. Do not add resources under the API Gateway resource path that you entered when creating the endpoint. Any resources you add may be deleted when you add or modify endpoint stages.
     4. Do not disable the **Backend Endpoint URL Override** configured for the API Gateway resource path in the API Gateway stage settings, or modify the URL. If you change them, inference API calls to the endpoint may fail.
        For settings other than those mentioned above, you can use the features provided by API Gateway as needed.
-       For more information on how to use API Gateway, see the [API Gateway Console Guide](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Application%20Service/API%20Gateway/ko/console-guide{% if "gov" in build_flags %}-gov{% endif %}/).
+       For more information on how to use API Gateway, see the [API Gateway Console Guide](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Application%20Service/API%20Gateway/en/console-guide{% if "gov" in build_flags %}-gov{% endif %}/).
 
 !!! tip "Note"
     If stage settings of AI EasyMaker endpoint are not deployed to the API Gateway stage due to a temporary issue, deployment status is displayed as failed.
@@ -1313,24 +1313,24 @@ See the table below for the base images in AI EasyMaker.
 <a id="personal.image.notebook.image"></a>
 #### Notebook Image
 
- Image Name | CoreType | Framework | Framework version | Python version | Image address |
-| --- | --- | --- | --- | --- | --- |
-| Ubuntu 22.04 CPU Python Notebook     | CPU  | Python     | 3.10.12  | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204   |
-| Ubuntu 22.04 GPU Python Notebook     | GPU  | Python     | 3.10.12  | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-gpu-py310-ubuntu2204   |
-| Ubuntu 22.04 CPU PyTorch Notebook    | CPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-cpu-py310-ubuntu2204    |
-| Ubuntu 22.04 GPU PyTorch Notebook    | GPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-gpu-py310-ubuntu2204    |
-| Ubuntu 22.04 CPU TensorFlow Notebook | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204|
-| Ubuntu 22.04 GPU TensorFlow Notebook | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204|
+| Image Name                           | Core Type | Framework  | Framework Version | Python Version | Image Address                                                                                          |
+| ------------------------------------ | --------- | ---------- | ----------------- | -------------- | ------------------------------------------------------------------------------------------------------ |
+| Ubuntu 22.04 CPU Python Notebook     | CPU       | Python     | 3.10.12           | 3.10           | $[ em_registry ]$/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204    |
+| Ubuntu 22.04 GPU Python Notebook     | GPU       | Python     | 3.10.12           | 3.10           | $[ em_registry ]$/easymaker/python-notebook:3.10.12-gpu-py310-ubuntu2204    |
+| Ubuntu 22.04 CPU PyTorch Notebook    | CPU       | PyTorch    | 2.0.1             | 3.10           | $[ em_registry ]$/easymaker/pytorch-notebook:2.0.1-cpu-py310-ubuntu2204     |
+| Ubuntu 22.04 GPU PyTorch Notebook    | GPU       | PyTorch    | 2.0.1             | 3.10           | $[ em_registry ]$/easymaker/pytorch-notebook:2.0.1-gpu-py310-ubuntu2204     |
+| Ubuntu 22.04 CPU TensorFlow Notebook | CPU       | TensorFlow | 2.12.0            | 3.10           | $[ em_registry ]$/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204 |
+| Ubuntu 22.04 GPU TensorFlow Notebook | GPU       | TensorFlow | 2.12.0            | 3.10           | $[ em_registry ]$/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204 |
 
 <a id="personal.image.deep.learning.image"></a>
 #### Deep Learning Images
 
 | Image Name | CoreType | Framework | Framework version | Python version | Image address |
 | --- | --- | --- | --- | --- | --- |
-| Ubuntu 22.04 CPU PyTorch Training    | CPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204        |
-| Ubuntu 22.04 GPU PyTorch Training    | GPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204        |
-| Ubuntu 22.04 CPU TensorFlow Training | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-cpu-py310-ubuntu2204 |
-| Ubuntu 22.04 GPU TensorFlow Training | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
+| Ubuntu 22.04 CPU PyTorch Training    | CPU      | PyTorch    | 2.0.1           | 3.10        | $[ em_registry ]$/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204     |
+| Ubuntu 22.04 GPU PyTorch Training    | GPU      | PyTorch    | 2.0.1           | 3.10        | $[ em_registry ]$/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204     |
+| Ubuntu 22.04 CPU TensorFlow Training | CPU      | TensorFlow | 2.12.0          | 3.10        | $[ em_registry ]$/easymaker/tensorflow-train:2.12.0-cpu-py310-ubuntu2204 |
+| Ubuntu 22.04 GPU TensorFlow Training | GPU      | TensorFlow | 2.12.0          | 3.10        | $[ em_registry ]$/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
 
 !!! tip "Note"
     Only NHN Container Registry (NCR) can be integrated as a container registry service where private images are stored. (As of December 2023)
@@ -1345,10 +1345,10 @@ The following document explains how to create a container image with an AI EasyM
 
 1. Create a DockerFile of private image.
 
-            FROM fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
-            RUN conda create -n example python=3.10
-            RUN conda activate example
-            RUN pip install torch torchvision
+FROM $[ em_registry ]$/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
+        RUN conda create -n example python=3.10
+        RUN conda activate example
+        RUN pip install torch torchvision
 
 2. Build a private image and push to the container registry
 Build an image with a Dockerfile and save (push) the image to the NCR registry.
@@ -1358,10 +1358,10 @@ Build an image with a Dockerfile and save (push) the image to the NCR registry.
             docker push {NCR registry address}/{image name}:{tag} .
 
 
-            (Example)
-            docker build -t custom-training:v1 .
-            docker tag custom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
-            docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+(Example)
+        docker build -t custom-training:v1 .
+        docker tag custom-training:v1 example-kr1-registry.container.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/registry/custom-training:v1
+        docker push example-kr1-registry.container.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/registry/custom-training:v1
 
 3. Create a private image in AI EasyMaker of the image you saved (pushed) to the NCR.
 
@@ -1704,58 +1704,62 @@ Retrieval-Augmented Generation (RAG) is a technology that vectorizes and stores 
 
 Create a new RAG.
 
-- **Enalbe API Gateway service**
-    - AI EasyMaker RAG creates and manages API enpoints by using the NHN Cloud API Gateway service. To use RAG feature, you must enable the API Gateway service.
-    - For more information and fee about the API Gateway service, see below:
-        - [About API Gateway Service](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/overview/)
-        - [API Gateway Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
-- **Default Setting**
-    - **Name**: enter a RAG name. It cannot be duplicated.
+- **Enable the API Gateway Service**
+    - AI EasyMaker RAG uses the NHN Cloud API Gateway service to create and manage API endpoints. To use the RAG feature, you must enable the API Gateway service.
+    - For more information on the API Gateway service and pricing, see the following:
+        - [API Gateway Service Guide](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Application%20Service/API%20Gateway/en/overview/)
+        - [API Gateway Pricing](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
+- **Basic Settings**
+    - **Name**: Enter a name for the RAG. RAG names must be unique.
     - **Description**: Enter a description for the RAG.
-    - **Instance flavor**: Select the instance flavor to execute RAG endpoint.
-    - **No. of instances**: Enter the number of the instances to execute RAG endpoint.
-    - **Prompt**: a prompt to be used for RAG endpoint. You can check the prompt's entire content by clicking **View Content**.
-- **Vector Store Setting**
-    - **Vector store type**: Select a vector store type.
+    - **Instance Type**: Select the instance type to run the RAG endpoint.
+    - **Instance Count**: Enter the number of instances to run the RAG endpoint.
+    - **Prompt**: The prompt to use in the RAG endpoint. Click **View Content** to see the full content of the prompt.
+- **Vector Store Settings**
+    - **Vector Store Type**: Select the vector store type.
+{%- if "gov" not in build_flags %}
         - **RDS for PostgreSQL**
             - **Enable RDS for PostgreSQL**
-                - AI EasyMaker RAG creates and manages by using NHN Cloud RDS for PostgreSQL. If selecting this option, you must enable RDS for PostgreSQL.
-                - For more information and fee about the RDS for PostgreSQL, see below:
+                - AI EasyMaker RAG uses NHN Cloud RDS for PostgreSQL to create and manage the vector store. If you select this option, you must enable RDS for PostgreSQL.
+                - For more information on RDS for PostgreSQL and pricing, see the following:
                     - [RDS for PostgreSQL Guide](/Database/RDS%20for%20PostgreSQL/en/overview/)
-                    - [RDS for PostgreSQL Usage Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Database&s=RDS%20for%20PostgreSQL)
-            - **Instance flavor**: select the instance flavor to be used for RDS for PostgreSQL.
-            - **Storage type**: select the storage flavor to be used for RDS for PostgreSQL.
-            - **Storage size**: a storage size for RDS for PostgreSQL.
-            - **User ID**: enter the user ID to be used for connecting to PostgreSQL.
-            - **Password**: enter the password to be used for connecting to PostgreSQL.
-            - **Confirm password**: re-enter the password to confirm.
-            - **VPC ID**: enter the VPC ID to be used for RDS for PostgreSQL.
-            - **Subnet ID**: enter the subnet ID to be used for RDS for PostgreSQL.
-        - **PostgreSQL Instance**: use user-created NHN Cloud PostgreSQL instance as a vector store.
-            - **User ID**: enter the user ID to access PostgreSQL Instance.
-            - **Password**: enter the password to access PostgreSQL Instance.
-            - **VPC ID**: enter the VPC ID of PostgreSQL Instance.
-            - **Subnet ID**: enter the subnet ID of PostgreSQL Instance.
-            - **PostgreSQL instance IP**: enter the IP address of the created PostgreSQL Instance.
-    - **Ingestion setting**
-        - **Data path**: enter the data path where the documents to be collected are stored in the vector store.
-    - **Embedding model**
-        - **Model**: select an embedding model to use when vectorizing documents and queries.
-        - **Instance flavor**: an instance flavor to execute embedding model.
-        - **No. of instances**: the number of the instances to execute embedding model.
-- **LLM Setting**
-    - **Model**: select the LLM to be used when creating a response.
-    - **Instance flavor**: an instance flavor to execute LLM.
-    - **No. of instances**: the number of the instances to execute LLM.
-- **Addtional Settings**
+                    - [RDS for PostgreSQL Pricing](https://www.nhncloud.com/kr/pricing/by-service?c=Database&s=RDS%20for%20PostgreSQL)
+            - **Instance Type**: Select the instance type for RDS for PostgreSQL.
+            - **Storage Type**: Select the storage type for RDS for PostgreSQL.
+            - **Storage Size**: The storage size for RDS for PostgreSQL.
+            - **User ID**: Enter the user ID for connecting to PostgreSQL.
+            - **Password**: Enter the password for connecting to PostgreSQL.
+            - **Confirm Password**: Re-enter the password to confirm.
+            - **VPC ID**: Enter the VPC ID for RDS for PostgreSQL.
+            - **Subnet ID**: Enter the subnet ID for RDS for PostgreSQL.
+{%- endif %}
+        - **PostgreSQL Instance**: Use a user-created NHN Cloud PostgreSQL Instance as the vector store.
+            - **User ID**: Enter the user ID for accessing the PostgreSQL Instance.
+            - **Password**: Enter the password for accessing the PostgreSQL Instance.
+            - **VPC ID**: Enter the VPC ID of the PostgreSQL Instance.
+            - **Subnet ID**: Enter the subnet ID of the PostgreSQL Instance.
+            - **PostgreSQL Instance IP**: Enter the IP address of the PostgreSQL Instance.
+    - **Ingestion Settings**
+        - **Data Path**: Enter the data path where the documents to be ingested into the vector store are stored.
+    - **Embedding Model**
+        - **Model**: Select the embedding model to use for vectorizing documents and queries.
+        - **Instance Type**: The instance type to run the embedding model.
+        - **Instance Count**: Enter the number of instances to run the embedding model.
+- **LLM Settings**
+    - **Model**: Select the LLM to use for generating responses.
+    - **Instance Type**: The instance type to run the LLM.
+    - **Instance Count**: The number of instances to run the LLM.
+- **Additional Settings**
     - **Log Management**: You can save logs generated during RAG execution to the NHN Cloud Log & Crash Search service.
-        - For more information, refer to [Addpendix > 2. NHN Cloud Log & Crash Search Service Usage Guide and Log Check](#appendix.2.lncs.service.usage.guide.and.log.inquiry.guide).
+        - For more information, see [Appendix > 2. NHN Cloud Log & Crash Search Service Usage Guide and Log Inquiry](#appendix.2.lncs.service.usage.guide.and.log.inquiry.guide).
 
 !!! tip "Note"
     There may be limitations on the format, size, and number of files available for ingestion. For more information, see [Collect Sync](#rag.ingestion.sync).
 
 !!! danger "Caution"
-    For how to create an instance, refer to [PostgreSQL Instance User Guide](https://docs.nhncloud.com/en/Compute/Instance/en/component-guide/#postgresql-instance).
+    Set the port to `15432` when using a PostgreSQL Instance.
+    For instructions on how to create an instance, refer to [PostgreSQL Instance](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Compute/Instance/en/component-guide{% if "gov" in build_flags %}-gov{% endif %}/#postgresql-instance).
+    Configure the security group to allow access to port `15432` from the instance's subnet range.
 
 !!! danger "Caution"
     Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
@@ -1973,10 +1977,10 @@ The 'User' take responsibility for all consequences of allowing the user to acce
 
 To add read/write permissions to AI EasyMaker system account in Object Storage, refer to the following:
 
-1. Click **[Training]** or **[Model]** Tab>**AI EasyMaker System Account Information**.
-2. Archive the AI EasyMaker system account information, **AI EasyMaker Tenant ID** and **AI EasyMaker API User ID**.
+1. Click the **[Training]** or **[Model]** tab > **AI EasyMaker System Account Info**.
+2. Save the **AI EasyMaker Tenant ID** and **AI EasyMaker API User ID** as the AI EasyMaker system account information.
 3. Go to the NHN Cloud Object Storage console.
-4. [Allow specific projects or users to read/write](https://docs.nhncloud.com/en/Storage/Object%20Storage/en/acl-guide/#role-based-access-allow-rw-to-project-users) Refer to documents to add required read and write permissions to AI EasyMaker system account in NHN Cloud Object Storage console.
+4. Refer to the [Allow read/write to specific projects or specific users](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Storage/Object%20Storage/en/acl-guide{% if "gov" in build_flags %}-gov{% endif %}/#role-based-access-allow-rw-to-project-users) documentation to add the necessary read and write permissions for the AI EasyMaker system account in the NHN Cloud Object Storage console.
 
 <a id="appendix.2.lncs.service.usage.guide.and.log.inquiry.guide"></a>
 ### 2. NHN Cloud Log & Crash Search Service Usage Guide and Log Inquiry Guide { #appendix.2.lncs.service.usage.guide.and.log.inquiry.guide }
@@ -1987,23 +1991,23 @@ To add read/write permissions to AI EasyMaker system account in Object Storage, 
 Logs and events generated by the AI EasyMaker service can be stored in the NHN Cloud Log & Crash Search service.
 To store logs in the Log & Crash Search service, you have to enable Log & Crash service and separate usage fee will be charged.
 
-- **Information on Log & Crash Search service use and fee**
-    - For more information and fees on the Log & Crash Search service, please refer to the following documents
-        - [Log & Crash Search Service Guide](https://docs.nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/Overview/)
-        - [Log & Crash Search Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
+- **Log & Crash Search Service Usage and Pricing Information**
+    - For more information on the Log & Crash Search service and pricing, see the following:
+        - [Log & Crash Search Service Guide](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/{% if "gov" in build_flags %}gov-overview{% else %}Overview{% endif %}/)
+        - [Log & Crash Search Pricing](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
 <a id="appendix.2.lncs.service.log.inquiry.guide"></a>
 #### Log Query
 
 1. Go to the Log & Crash Search service console page.
-2. In Log & Crash Search service, enter search criteria to view the logs.
-    - AI EasyMaker Training Log Query: Query logs with category field "easymaker.training"
-        - Question: category:"easymaker.training"
-    - AI EasyMaker endpoint logs query: Query logs with category field "easymaker.inference"
-        - Question: category:"easymaker.inference"
-    - AI EasyMaker Log Full Query: Query logs with logType field "NNHCloud-AIEasyMaker"
-        - Question: logType:"NHNCloud-AIEasyMaker"
-3. For more information on how to use Log & Crash Search service, refer to [Log & Crash Search Service Console Guide](https://docs.nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/console-guide/).
+2. In the Log & Crash Search service, enter search criteria to view the logs.
+    - AI EasyMaker Training log query: Retrieve logs where the category field is "easymaker.training".
+        - Query: category:"easymaker.training"
+    - AI EasyMaker Endpoint log query: Retrieve logs where the category field is "easymaker.inference".
+        - Query: category:"easymaker.inference"
+    - AI EasyMaker full log query: Retrieve logs where the logType field is "NNHCloud-AIEasyMaker".
+        - Query: logType:"NHNCloud\-AIEasyMaker"
+3. For details on how to use the Log & Crash Search service, refer to the [Log & Crash Search service console guide](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/{% if "gov" in build_flags %}gov-console-guide{% else %}console-guide{% endif %}/).
 
 AI EasyMaker service sends logs to Log & Crash Search service in the following defined fields:
 
@@ -2247,8 +2251,8 @@ For more information about the OIP specification, see [OIP Specification](https:
 | OpenAI generative model inference | POST   | /v1/chat/completions                                       |
 
 !!! tip "Note"
-    OpenAI generative model inference is used when using a generative model, such as OpenAI's GPT-4o.
-    The inputs required for inference must be entered according to OpenAI's API specification. For more information, see the [OpenAI API documentation](https://platform.openai.com/docs/api-reference/chat).
+    OpenAI generative model inference is used when using a generative model such as OpenAI's GPT-4o.
+    The input values required for inference must be entered according to OpenAI's API specification. For more information, see the [OpenAI API documentation](https://platform.openai.com/docs/api-reference/chat).
     For models that support the Completion and Chat Completion APIs provided by AI EasyMaker, see [Models](https://platform.openai.com/docs/models).
 
 <a id="appendix.11.framework.note"></a>

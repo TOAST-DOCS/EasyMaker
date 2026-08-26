@@ -1,3 +1,5 @@
+<!-- machine_translated: true -->
+
 <!-- pre-align:aligned sig=e090d93d817c -->
 
 <a id="ai.easymaker.algorithm.guide"></a>
@@ -568,7 +570,7 @@ COCO Datasetの形式で作成します。
 <a id="endpoint.create.inference.request.format"></a>
 ### リクエスト { #endpoint.create.inference.request.format }
 
-- Request URI: POST <https://kr1-{apigwSeviceId}.api.nhncloudservice.com/inference>
+- Request URI: POST <https://kr1-{apigwSeviceId}.api.{% if "gov" in build_flags %}gov-{% endif %}nhncloudservice.com/inference>
 - Request Body
 
 ```json
