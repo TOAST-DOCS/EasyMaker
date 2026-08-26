@@ -1,4 +1,4 @@
-<!-- pre-align:aligned sig=287622970352 -->
+<!-- pre-align:aligned sig=fbf376f81e3f -->
 
 <a id="ai.easymaker"></a>
 ## Machine Learning > AI EasyMaker > 릴리스 노트 { #ai.easymaker }
