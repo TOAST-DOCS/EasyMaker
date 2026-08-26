@@ -944,7 +944,7 @@ Create and manage endpoints that can serve the model.
 - **Enable API Gateway Service**
     - AI EasyMaker endpoints create API endpoints and manage APIs through the NHN Cloud API Gateway service. To use the endpoint feature, you must enable the API Gateway service.
     - For more information and pricing on the API Gateway service, see the following:
-        - [API Gateway Service Overview](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Application%20Service/API%20Gateway/ko/overview/)
+        - [API Gateway Service Overview](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Application%20Service/API%20Gateway/en/overview/)
         - [API Gateway Pricing](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
 - **Endpoint**: Select whether to add a stage to a new or existing endpoint.
     - **Create as a new endpoint**: Creates a new endpoint. The endpoint is created in API Gateway with a new service and a default stage.
@@ -990,7 +990,7 @@ Create and manage endpoints that can serve the model.
 !!! tip "Note"
     When you create a new endpoint, a new API Gateway service is created.
     When you add a new stage to an existing endpoint, a new stage is created in the API Gateway service.
-    If the default quota in the [API Gateway Service Resource Provision Policy](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/nhncloud/ko/resource-policy{% if "gov" in build_flags %}-gov/#api-gateway{% else %}/#resource-provision-policy-for-api-gateway-service{% endif %}) is exceeded, endpoint creation in AI EasyMaker may not be possible. In this case, you can resolve this issue by adjusting the API Gateway service resource quota.
+    If the default quota in the [API Gateway Service Resource Provision Policy](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/nhncloud/en/resource-policy{% if "gov" in build_flags %}-gov/#api-gateway{% else %}/#resource-provision-policy-for-api-gateway-service{% endif %}) is exceeded, endpoint creation in AI EasyMaker may not be possible. In this case, you can resolve this issue by adjusting the API Gateway service resource quota.
 
 <a id="endpoint.list"></a>
 ### Endpoint List { #endpoint.list }
@@ -1070,7 +1070,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
     3. Don't add resources under the API Gateway resource path that you specified when creating the endpoint. Resources that you add may be deleted when you add or modify an endpoint stage.
     4. In the stage settings in API Gateway, don't disable **Backend Endpoint URL Override** configured for the API Gateway resource path or change its URL. If you change it, inference API calls from the endpoint may fail.
        For settings other than the precautions listed above, you can use features provided by API Gateway as needed.
-       For more information about using API Gateway, see the [API Gateway Console Guide](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Application%20Service/API%20Gateway/ko/console-guide{% if "gov" in build_flags %}-gov{% endif %}/).
+       For more information about using API Gateway, see the [API Gateway Console Guide](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Application%20Service/API%20Gateway/en/console-guide{% if "gov" in build_flags %}-gov{% endif %}/).
 
 !!! tip "Note"
     If stage settings of AI EasyMaker endpoint are not deployed to the API Gateway stage due to a temporary issue, deployment status is displayed as failed.
@@ -1707,7 +1707,7 @@ Create a new RAG.
 - **Enable the API Gateway Service**
     - AI EasyMaker RAG uses the NHN Cloud API Gateway service to create and manage API endpoints. To use the RAG feature, you must enable the API Gateway service.
     - For more information on the API Gateway service and pricing, see the following:
-        - [API Gateway Service Guide](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Application%20Service/API%20Gateway/ko/overview/)
+        - [API Gateway Service Guide](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Application%20Service/API%20Gateway/en/overview/)
         - [API Gateway Pricing](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
 - **Basic Settings**
     - **Name**: Enter a name for the RAG. RAG names must be unique.
@@ -1758,7 +1758,7 @@ Create a new RAG.
 
 !!! danger "Caution"
     Set the port to `15432` when using a PostgreSQL Instance.
-    For instructions on how to create an instance, refer to [PostgreSQL Instance](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Compute/Instance/ko/component-guide{% if "gov" in build_flags %}-gov{% endif %}/#postgresql-instance).
+    For instructions on how to create an instance, refer to [PostgreSQL Instance](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Compute/Instance/en/component-guide{% if "gov" in build_flags %}-gov{% endif %}/#postgresql-instance).
     Configure the security group to allow access to port `15432` from the instance's subnet range.
 
 !!! danger "Caution"
@@ -1980,7 +1980,7 @@ To add read/write permissions to AI EasyMaker system account in Object Storage, 
 1. Click the **[Training]** or **[Model]** tab > **AI EasyMaker System Account Info**.
 2. Save the **AI EasyMaker Tenant ID** and **AI EasyMaker API User ID** as the AI EasyMaker system account information.
 3. Go to the NHN Cloud Object Storage console.
-4. Refer to the [Allow read/write to specific projects or specific users](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Storage/Object%20Storage/ko/acl-guide{% if "gov" in build_flags %}-gov{% endif %}/#role-based-access-allow-rw-project-or-user) documentation to add the necessary read and write permissions for the AI EasyMaker system account in the NHN Cloud Object Storage console.
+4. Refer to the [Allow read/write to specific projects or specific users](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Storage/Object%20Storage/en/acl-guide{% if "gov" in build_flags %}-gov{% endif %}/#role-based-access-allow-rw-to-project-users) documentation to add the necessary read and write permissions for the AI EasyMaker system account in the NHN Cloud Object Storage console.
 
 <a id="appendix.2.lncs.service.usage.guide.and.log.inquiry.guide"></a>
 ### 2. NHN Cloud Log & Crash Search Service Usage Guide and Log Inquiry Guide { #appendix.2.lncs.service.usage.guide.and.log.inquiry.guide }

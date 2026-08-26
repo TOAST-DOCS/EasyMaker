@@ -947,7 +947,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
 - **API Gateway サービスの有効化**
     - AI EasyMaker のエンドポイントは、NHN Cloud API Gateway サービスを通じて API エンドポイントを作成し、API を管理します。エンドポイント機能を使用するには、API Gateway サービスを必ず有効にする必要があります。
     - API Gateway サービスの詳細と料金については、以下で確認できます。
-        - [API Gateway サービスのご案内](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Application%20Service/API%20Gateway/ko/overview/)
+        - [API Gateway サービスのご案内](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Application%20Service/API%20Gateway/ja/overview/)
         - [API Gateway 利用料金](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
 - **[エンドポイント]**: 新規または既存のエンドポイントにステージを追加するかどうかを選択します。
     - **[新規エンドポイントとして作成]**: 新規エンドポイントを作成します。API Gateway に新規サービスとデフォルトステージとしてエンドポイントが作成されます。
@@ -1073,7 +1073,7 @@ AI EasyMakerの学習結果のモデルまたは外部のモデルをアーテ�
     3. エンドポイントの作成時に入力した API Gateway リソースパスの配下にリソースを追加しないようにしてください。追加したリソースは、エンドポイントステージの追加/変更の作業時に削除される場合があります。
     4. API Gateway のステージ設定で、API Gateway リソースパスに設定されている **[バックエンドエンドポイント URL のオーバーライド]** を無効にしたり、URL を変更したりしないようにしてください。変更すると、エンドポイントの推論 API 呼び出しが失敗する場合があります。
        上記の注意事項以外の設定は、必要に応じて API Gateway が提供する機能を利用できます。
-       API Gateway の使用の詳細については、[API Gateway コンソールガイド](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Application%20Service/API%20Gateway/ko/console-guide{% if "gov" in build_flags %}-gov{% endif %}/)を参照してください。
+       API Gateway の使用の詳細については、[API Gateway コンソールガイド](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Application%20Service/API%20Gateway/ja/console-guide{% if "gov" in build_flags %}-gov{% endif %}/)を参照してください。
 
 !!! tip "参考"
     一時的な問題でAI EasyMakerエンドポイントのステージ設定がAPI Gatewayステージに配布されていない場合、配布失敗状態と表示されます。
@@ -1707,7 +1707,7 @@ RAG(Retrieval-Augmented Generation、検索拡張生成)は、ユーザーのド
 - **[API Gateway サービスの有効化]**
     - AI EasyMaker RAG は、NHN Cloud API Gateway サービスを使用して API エンドポイントを作成および管理します。RAG 機能を使用するには、API Gateway サービスを必ず有効にする必要があります。
     - API Gateway サービスの詳細および料金については、以下で確認できます。
-        - [API Gateway サービス案内](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Application%20Service/API%20Gateway/ko/overview/)
+        - [API Gateway サービス案内](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Application%20Service/API%20Gateway/ja/overview/)
         - [API Gateway 利用料金](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
 - **[基本設定]**
     - **[名前]**: RAG 名を入力します。RAG 名は重複できません。
@@ -1758,7 +1758,7 @@ RAG(Retrieval-Augmented Generation、検索拡張生成)は、ユーザーのド
 
 !!! danger "注意"
     PostgreSQL Instance を使用する際は、ポートを `15432` に設定します。
-    インスタンスの作成方法については、[PostgreSQL Instance](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Compute/Instance/ko/component-guide{% if "gov" in build_flags %}-gov{% endif %}/#postgresql-instance) を参照してください。
+    インスタンスの作成方法については、[PostgreSQL Instance](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Compute/Instance/ja/component-guide{% if "gov" in build_flags %}-gov{% endif %}/#postgresql-instance) を参照してください。
     インスタンスのサブネット帯域から `15432` ポートへのアクセスを許可するように、セキュリティグループを設定します。
 
 !!! danger "注意"
@@ -1980,7 +1980,7 @@ NHN Cloud Object StorageにAI EasyMakerシステムアカウントの読み取�
 1. **[学習]** または **[モデル]** タブ > **[AI EasyMaker システムアカウント情報]** をクリックします。
 2. AI EasyMaker システムアカウント情報である **AI EasyMaker テナント ID** と **AI EasyMaker API ユーザー ID** を保管します。
 3. NHN Cloud Object Storage コンソールに移動します。
-4. [特定のプロジェクトまたは特定のユーザーへの読み取り/書き込みの許可](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Storage/Object%20Storage/ko/acl-guide{% if "gov" in build_flags %}-gov{% endif %}/#role-based-access-allow-rw-project-or-user) ドキュメントを参照して、NHN Cloud Object Storage コンソールで AI EasyMaker システムアカウントに必要な読み取りおよび書き込みの許可権限を追加します。
+4. [特定のプロジェクトまたは特定のユーザーへの読み取り/書き込みの許可](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Storage/Object%20Storage/ja/acl-guide{% if "gov" in build_flags %}-gov{% endif %}/#role-based-access-allow-rw-project-or-user) ドキュメントを参照して、NHN Cloud Object Storage コンソールで AI EasyMaker システムアカウントに必要な読み取りおよび書き込みの許可権限を追加します。
 
 <a id="appendix.2.lncs.service.usage.guide.and.log.inquiry.guide"></a>
 ### 2. NHN Cloud Log & Crash Searchサービス利用案内およびログ照会方法 { #appendix.2.lncs.service.usage.guide.and.log.inquiry.guide }
@@ -1993,7 +1993,7 @@ Log & Crash Searchサービスにログを保存するには、Log & Crashサー
 
 - **Log & Crash Search サービスの利用および料金案内**
     - Log & Crash Search サービスの詳細と料金は、以下で確認できます。
-        - [Log & Crash Search サービス案内](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/{% if "gov" in build_flags %}gov-overview{% else %}Overview{% endif %}/)
+        - [Log & Crash Search サービス案内](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ja/{% if "gov" in build_flags %}gov-overview{% else %}Overview{% endif %}/)
         - [Log & Crash Search 利用料金](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
 <a id="appendix.2.lncs.service.log.inquiry.guide"></a>
@@ -2007,7 +2007,7 @@ Log & Crash Searchサービスにログを保存するには、Log & Crashサー
         - クエリ: category:"easymaker.inference"
     - AI EasyMaker ログ全件照会クエリ: logType フィールドが "NNHCloud-AIEasyMaker" のログを照会します。
         - クエリ: logType:"NHNCloud\-AIEasyMaker"
-3. Log & Crash Search サービスの詳細な使用方法については、[Log & Crash Search サービスのコンソールガイド](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/{% if "gov" in build_flags %}gov-console-guide{% else %}console-guide{% endif %}/)を参照してください。
+3. Log & Crash Search サービスの詳細な使用方法については、[Log & Crash Search サービスのコンソールガイド](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/Data%20&%20Analytics/Log%20&%20Crash%20Search/ja/{% if "gov" in build_flags %}gov-console-guide{% else %}console-guide{% endif %}/)を参照してください。
 
 AI EasyMakerサービスは、Log & Crash Searchサービスに次のように定義されたフィールドにログを転送します。
 
