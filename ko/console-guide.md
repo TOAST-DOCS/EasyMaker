@@ -1,3 +1,4 @@
+{%- set em_registry = "0516e3a7-kr-registry.container.gov-nhncloud.com" if "gov" in build_flags else "fb34a0a4-kr1-registry.container.nhncloud.com" -%}
 <!-- pre-align:aligned sig=13fa2e880aa4 -->
 
 <a id="ai.easymaker.console.guide"></a>
@@ -940,8 +941,8 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 - **API Gateway 서비스 활성화**
     - AI EasyMaker 엔드포인트는 NHN Cloud API Gateway 서비스를 통해 API 엔드포인트를 생성하고 API를 관리합니다. 엔드포인트 기능을 이용하려면 API Gateway 서비스를 반드시 활성화해야 합니다.
     - API Gateway 서비스에 대한 자세한 내용과 요금은 다음에서 확인할 수 있습니다.
-        - [API Gateway 서비스 안내](https://docs.nhncloud.com/ko/Application%20Service/API%20Gateway/ko/overview/)
-        - [API Gateway 이용 요금](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
+        - [API Gateway 서비스 안내](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ko/Application%20Service/API%20Gateway/ko/overview/)
+        - [API Gateway 이용 요금](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
 - **엔드포인트**: 신규 또는 기존 엔드포인트에 스테이지를 추가할지 선택합니다.
     - **신규 엔드포인트로 생성**: 신규 엔드포인트를 생성합니다. API Gateway에 신규 서비스와 기본 스테이지로 엔드포인트가 생성됩니다.
     - **기존 엔드포인트에서 신규 스테이지 추가**: 기존 엔드포인트의 API Gateway의 서비스에 신규 스테이지로 엔드포인트가 생성됩니다. 스테이지를 추가할 기존 엔드포인트를 선택합니다.
@@ -986,7 +987,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
 !!! tip "알아두기"
     신규 엔드포인트 생성을 하면 API Gateway 서비스를 신규 생성합니다.
     기존 엔드포인트에서 신규 스테이지 추가를 하면 API Gateway 서비스에 신규 스테이지를 생성합니다.
-    [API Gateway 서비스 리소스 제공 정책](https://docs.nhncloud.com/ko/nhncloud/ko/resource-policy/#api-gateway)의 기본 제공량을 초과한 경우, AI EasyMaker에서 엔드포인트 생성이 불가할 수 있습니다. 이 경우 API Gateway 서비스 리소스 쿼터를 조정하여 해결할 수 있습니다.
+    [API Gateway 서비스 리소스 제공 정책](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ko/nhncloud/ko/resource-policy{% if "gov" in build_flags %}-gov/#api-gateway{% else %}/#resource-provision-policy-for-api-gateway-service{% endif %})의 기본 제공량을 초과한 경우, AI EasyMaker에서 엔드포인트 생성이 불가할 수 있습니다. 이 경우 API Gateway 서비스 리소스 쿼터를 조정하여 해결할 수 있습니다.
 
 <a id="endpoint.list"></a>
 ### 엔드포인트 목록 { #endpoint.list }
@@ -1066,7 +1067,7 @@ AI EasyMaker의 학습 결과의 모델 또는 외부의 모델을 아티팩트�
     3. 엔드포인트 생성 시 입력한 API Gateway 리소스 경로 하위에 리소스를 추가하지 않도록 합니다. 추가한 리소스는 엔드포인트 스테이지 추가/변경 작업 시 삭제될 수 있습니다.
     4. API Gateway의 스테이지 설정에서 API Gateway 리소스 경로에 설정된 **백엔드 엔드포인트 URL 재정의**를 비활성화하거나 URL을 변경하지 않도록 합니다. 변경하면 엔드포인트의 추론 API 호출에 실패할 수 있습니다.
        위의 주의 사항 외 다른 설정은 필요에 따라 API Gateway에서 제공하는 기능을 이용할 수 있습니다.
-       자세한 API Gateway 사용에 대한 내용은 [API Gateway 콘솔 가이드](https://docs.nhncloud.com/ko/Application%20Service/API%20Gateway/ko/console-guide/)를 참고하세요.
+       자세한 API Gateway 사용 방법은 [API Gateway 콘솔 가이드](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ko/Application%20Service/API%20Gateway/ko/console-guide{% if "gov" in build_flags %}-gov{% endif %}/)를 참고하세요.
 
 !!! tip "알아두기"
     일시적인 문제로 AI EasyMaker 엔드포인트의 스테이지 설정이 API Gateway 스테이지에 배포되지 않은 경우, '배포 실패' 상태로 표시됩니다.
@@ -1306,22 +1307,22 @@ AI EasyMaker의 기반 이미지는 아래 표를 확인하세요.
 
 | 이미지 이름                          | 코어타입 | 프레임워크 | 프레임워크 버전 | 파이썬 버전 | 이미지 주소                                                                                            |
 | ------------------------------------ | -------- | ---------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------ |
-| Ubuntu 22.04 CPU Python Notebook     | CPU      | Python     | 3.10.12         | 3.10        | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204    |
-| Ubuntu 22.04 GPU Python Notebook     | GPU      | Python     | 3.10.12         | 3.10        | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-gpu-py310-ubuntu2204    |
-| Ubuntu 22.04 CPU PyTorch Notebook    | CPU      | PyTorch    | 2.0.1           | 3.10        | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-cpu-py310-ubuntu2204     |
-| Ubuntu 22.04 GPU PyTorch Notebook    | GPU      | PyTorch    | 2.0.1           | 3.10        | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-gpu-py310-ubuntu2204     |
-| Ubuntu 22.04 CPU TensorFlow Notebook | CPU      | TensorFlow | 2.12.0          | 3.10        | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204 |
-| Ubuntu 22.04 GPU TensorFlow Notebook | GPU      | TensorFlow | 2.12.0          | 3.10        | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204 |
+| Ubuntu 22.04 CPU Python Notebook     | CPU      | Python     | 3.10.12         | 3.10        | $[ em_registry ]$/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204    |
+| Ubuntu 22.04 GPU Python Notebook     | GPU      | Python     | 3.10.12         | 3.10        | $[ em_registry ]$/easymaker/python-notebook:3.10.12-gpu-py310-ubuntu2204    |
+| Ubuntu 22.04 CPU PyTorch Notebook    | CPU      | PyTorch    | 2.0.1           | 3.10        | $[ em_registry ]$/easymaker/pytorch-notebook:2.0.1-cpu-py310-ubuntu2204     |
+| Ubuntu 22.04 GPU PyTorch Notebook    | GPU      | PyTorch    | 2.0.1           | 3.10        | $[ em_registry ]$/easymaker/pytorch-notebook:2.0.1-gpu-py310-ubuntu2204     |
+| Ubuntu 22.04 CPU TensorFlow Notebook | CPU      | TensorFlow | 2.12.0          | 3.10        | $[ em_registry ]$/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204 |
+| Ubuntu 22.04 GPU TensorFlow Notebook | GPU      | TensorFlow | 2.12.0          | 3.10        | $[ em_registry ]$/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204 |
 
 <a id="personal.image.deep.learning.image"></a>
 #### 딥 러닝 이미지
 
 | 이미지 이름                          | 코어타입 | 프레임워크 | 프레임워크 버전 | 파이썬 버전 | 이미지 주소                                                                                         |
 | ------------------------------------ | -------- | ---------- | --------------- | ----------- | --------------------------------------------------------------------------------------------------- |
-| Ubuntu 22.04 CPU PyTorch Training    | CPU      | PyTorch    | 2.0.1           | 3.10        | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204     |
-| Ubuntu 22.04 GPU PyTorch Training    | GPU      | PyTorch    | 2.0.1           | 3.10        | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204     |
-| Ubuntu 22.04 CPU TensorFlow Training | CPU      | TensorFlow | 2.12.0          | 3.10        | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-cpu-py310-ubuntu2204 |
-| Ubuntu 22.04 GPU TensorFlow Training | GPU      | TensorFlow | 2.12.0          | 3.10        | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
+| Ubuntu 22.04 CPU PyTorch Training    | CPU      | PyTorch    | 2.0.1           | 3.10        | $[ em_registry ]$/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204     |
+| Ubuntu 22.04 GPU PyTorch Training    | GPU      | PyTorch    | 2.0.1           | 3.10        | $[ em_registry ]$/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204     |
+| Ubuntu 22.04 CPU TensorFlow Training | CPU      | TensorFlow | 2.12.0          | 3.10        | $[ em_registry ]$/easymaker/tensorflow-train:2.12.0-cpu-py310-ubuntu2204 |
+| Ubuntu 22.04 GPU TensorFlow Training | GPU      | TensorFlow | 2.12.0          | 3.10        | $[ em_registry ]$/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
 
 !!! tip "알아두기"
     개인 이미지가 저장되는 컨테이너 레지스트리 서비스로는 NHN Container Registry(NCR)만 연동 가능합니다(2023년 12월 기준).
@@ -1336,7 +1337,7 @@ AI EasyMaker의 기반 이미지는 아래 표를 확인하세요.
 
 1. 개인 이미지의 DockerFile을 작성합니다.
 
-        FROM fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
+        FROM $[ em_registry ]$/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
         RUN conda create -n example python=3.10
         RUN conda activate example
         RUN pip install torch torchvision
@@ -1350,8 +1351,8 @@ AI EasyMaker의 기반 이미지는 아래 표를 확인하세요.
 
         (예시)
         docker build -t custom-training:v1 .
-        docker tag custom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
-        docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+        docker tag custom-training:v1 example-kr1-registry.container.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/registry/custom-training:v1
+        docker push example-kr1-registry.container.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/registry/custom-training:v1
 
 3. NCR에 저장(Push)한 이미지를 AI EasyMaker의 개인 이미지로 생성합니다.
 
@@ -1698,8 +1699,8 @@ RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서
 - **API Gateway 서비스 활성화**
     - AI EasyMaker RAG는 NHN Cloud API Gateway 서비스를 이용하여 API 엔드포인트를 생성하고 관리합니다. RAG 기능을 사용하려면 API Gateway 서비스를 반드시 활성화해야 합니다.
     - API Gateway 서비스에 대한 자세한 내용과 요금은 다음에서 확인할 수 있습니다.
-        - [API Gateway 서비스 안내](https://docs.nhncloud.com/ko/Application%20Service/API%20Gateway/ko/overview/)
-        - [API Gateway 이용 요금](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
+        - [API Gateway 서비스 안내](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ko/Application%20Service/API%20Gateway/ko/overview/)
+        - [API Gateway 이용 요금](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
 - **기본 설정**
     - **이름**: RAG 이름을 입력합니다. RAG 이름은 중복될 수 없습니다.
     - **설명**: RAG에 대한 설명을 입력합니다.
@@ -1708,11 +1709,12 @@ RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서
     - **프롬프트**: RAG 엔드포인트에서 사용할 프롬프트입니다. **내용 보기**를 클릭하면 프롬프트의 전체 내용을 확인할 수 있습니다.
 - **벡터 스토어 설정**
     - **벡터 스토어 타입**: 벡터 스토어 타입을 선택합니다.
+{%- if "gov" not in build_flags %}
         - **RDS for PostgreSQL**
             - **RDS for PostgreSQL 활성화**
                 - AI EasyMaker RAG는 NHN Cloud RDS for PostgreSQL을 이용하여 벡터 스토어를 생성하고 관리합니다. 이 옵션을 선택한 경우 RDS for PostgreSQL을 반드시 활성화해야 합니다.
                 - RDS for PostgreSQL에 대한 자세한 내용과 요금은 다음에서 확인할 수 있습니다.
-                    - [RDS for PostgreSQL 안내](https://docs.nhncloud.com/ko/Database/RDS%20for%20PostgreSQL/ko/overview/)
+                    - [RDS for PostgreSQL 안내](/Database/RDS%20for%20PostgreSQL/ko/overview/)
                     - [RDS for PostgreSQL 이용 요금](https://www.nhncloud.com/kr/pricing/by-service?c=Database&s=RDS%20for%20PostgreSQL)
             - **인스턴스 타입**: RDS for PostgreSQL에서 사용할 인스턴스 타입을 선택합니다.
             - **스토리지 타입**: RDS for PostgreSQL에서 사용할 스토리지 타입을 선택합니다.
@@ -1722,6 +1724,7 @@ RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서
             - **비밀번호 확인**: 비밀번호를 다시 입력하여 확인합니다.
             - **VPC ID**: RDS for PostgreSQL에서 사용할 VPC ID를 입력합니다.
             - **서브넷 ID**: RDS for PostgreSQL에서 사용할 서브넷 ID를 입력합니다.
+{%- endif %}
         - **PostgreSQL Instance**: 사용자가 생성한 NHN Cloud PostgreSQL Instance를 벡터 스토어로 활용합니다.
             - **사용자 ID**: PostgreSQL Instance에 접근할 수 있는 사용자 ID를 입력합니다.
             - **비밀번호**: PostgreSQL Instance에 접근할 수 있는 비밀번호를 입력합니다.
@@ -1747,7 +1750,7 @@ RAG(Retrieval-Augmented Generation, 검색 증강 생성)는 사용자의 문서
 
 !!! danger "주의"
     PostgreSQL Instance 사용 시 포트를 `15432`로 설정하세요.
-    인스턴스를 생성하는 방법은 [PostgreSQL Instance](https://docs.nhncloud.com/ko/Compute/Instance/ko/component-guide/#postgresql-instance)를 참고하세요.
+    인스턴스를 생성하는 방법은 [PostgreSQL Instance](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ko/Compute/Instance/ko/component-guide{% if "gov" in build_flags %}-gov{% endif %}/#postgresql-instance)를 참고하세요.
     인스턴스의 서브넷 대역에서 `15432` 포트로 접근할 수 있도록 보안 그룹을 설정하세요.
 
 !!! danger "주의"
@@ -1969,7 +1972,7 @@ NHN Cloud Object Storage에 AI EasyMaker 시스템 계정의 읽기/쓰기 권�
 1. **[학습]** 또는 **[모델]** 탭 > **AI EasyMaker 시스템 계정 정보**를 클릭합니다.
 2. AI EasyMaker 시스템 계정 정보인 **AI EasyMaker 테넌트 ID**와 **AI EasyMaker API 사용자 ID**를 보관합니다.
 3. NHN Cloud Object Storage 콘솔로 이동합니다.
-4. [특정 프로젝트 또는 특정 사용자에게 읽기/쓰기 허용](https://docs.nhncloud.com/ko/Storage/Object%20Storage/ko/acl-guide/#role-based-access-allow-rw-project-or-user) 문서를 참고하여 NHN Cloud Object Storage 콘솔에서 AI EasyMaker 시스템 계정에 필요한 읽기 및 쓰기 허용 권한을 추가합니다.
+4. [특정 프로젝트 또는 특정 사용자에게 읽기/쓰기 허용](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ko/Storage/Object%20Storage/ko/acl-guide{% if "gov" in build_flags %}-gov{% endif %}/#role-based-access-allow-rw-project-or-user) 문서를 참고하여 NHN Cloud Object Storage 콘솔에서 AI EasyMaker 시스템 계정에 필요한 읽기 및 쓰기 허용 권한을 추가합니다.
 
 <a id="appendix.2.lncs.service.usage.guide.and.log.inquiry.guide"></a>
 ### 2. NHN Cloud Log & Crash Search 서비스 이용 안내 및 로그 조회 방법 { #appendix.2.lncs.service.usage.guide.and.log.inquiry.guide }
@@ -1982,8 +1985,8 @@ Log & Crash Search 서비스에 로그를 저장하려면, Log & Crash 서비스
 
 - **Log & Crash Search 서비스 이용 및 요금 안내**
     - Log & Crash Search 서비스에 대한 자세한 내용과 요금은 다음에서 확인할 수 있습니다.
-        - [Log & Crash Search 서비스 안내](https://docs.nhncloud.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/Overview/)
-        - [Log & Crash Search 이용 요금](https://www.nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
+        - [Log & Crash Search 서비스 안내](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/{% if "gov" in build_flags %}gov-overview{% else %}Overview{% endif %}/)
+        - [Log & Crash Search 이용 요금](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
 <a id="appendix.2.lncs.service.log.inquiry.guide"></a>
 #### 로그 조회
@@ -1996,7 +1999,7 @@ Log & Crash Search 서비스에 로그를 저장하려면, Log & Crash 서비스
         - 질의문: category:"easymaker.inference"
     - AI EasyMaker 로그 전체 조회 질의: logType 필드가 "NNHCloud-AIEasyMaker"인 로그를 조회합니다.
         - 질의문: logType:"NHNCloud\-AIEasyMaker"
-3. Log & Crash Search 서비스의 자세한 이용 방법은 [Log & Crash Search 서비스의 콘솔 가이드](https://docs.nhncloud.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/console-guide/)를 참고하세요.
+3. Log & Crash Search 서비스의 자세한 이용 방법은 [Log & Crash Search 서비스의 콘솔 가이드](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ko/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/{% if "gov" in build_flags %}gov-console-guide{% else %}console-guide{% endif %}/)를 참고하세요.
 
 AI EasyMaker 서비스는 Log & Crash Search 서비스에 다음과 같이 정의된 필드로 로그를 전송합니다.
 
@@ -2242,7 +2245,7 @@ OIP 스펙에 대한 상세한 내용은 [OIP 스펙](https://github.com/kserve/
 !!! tip "알아두기"
     OpenAI 생성형 모델 추론은 OpenAI의 GPT-4o와 같은 생성형 모델을 사용하는 경우에 사용됩니다.
     추론에 필요한 입력값은 OpenAI의 API 스펙에 따라 입력해야 합니다. 자세한 내용은 [OpenAI API 문서](https://platform.openai.com/docs/api-reference/chat)를 참고하세요.
-    AI EasyMaker에서 제공하는 Completion, Chat Completion API를 지원하는 모델은 [Model endpoint compatibillity](https://platform.openai.com/docs/models/model-endpoint-compatibility)를 확인하세요.
+    AI EasyMaker에서 제공하는 Completion, Chat Completion API를 지원하는 모델은 [Models](https://platform.openai.com/docs/models)를 확인하세요.
 
 <a id="appendix.11.framework.note"></a>
 ### 11. 프레임워크별 서빙 참고 사항 { #appendix.11.framework.note }

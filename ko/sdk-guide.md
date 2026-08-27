@@ -1,3 +1,4 @@
+{%- set obs_host = "kr1-api-object-storage.gov-nhncloudservice.com" if "gov" in build_flags else "kr1-api-object-storage.nhncloudservice.com" -%}
 <!-- pre-align:aligned sig=348e352651f6 -->
 
 <a id="ai.easymaker.sdk.guide"></a>
@@ -19,7 +20,7 @@ python -m pip install easymaker
 ### AI EasyMaker SDK 초기화 { #sdk.settings.sdk.init }
 
 앱키(appkey)는 콘솔 오른쪽 상단의 **URL & Appkey** 메뉴에서 확인할 수 있습니다.
-인증 토큰(access token)에 대한 내용은 [User Access Key 토큰](https://docs.nhncloud.com/ko/nhncloud/ko/public-api/user-access-key-token/)에서 확인할 수 있습니다.
+인증 토큰(access token) 설명은 [User Access Key 토큰](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ko/nhncloud/ko/public-api/user-access-key-token{% if "gov" in build_flags %}-gov{% endif %}/)에서 확인할 수 있습니다.
 활성화한 AI EasyMaker 상품의 앱키, 인증 토큰, 리전 정보를 입력합니다.
 AI EasyMaker SDK를 사용하기 위해서는 초기화 코드가 필요합니다.
 
@@ -30,6 +31,9 @@ easymaker.init(
     appkey='EASYMAKER_APPKEY',
     region='kr1',
     access_token='EASYMAKER_ACCESS_TOKEN',
+{%- if "gov" in build_flags %}
+    environment_type='gov',
+{%- endif %}
     experiment_id="EXPERIMENT_ID", # Optional
 )
 ```
@@ -142,7 +146,7 @@ training = easymaker.Training().run(
     instance_type_name='m2.c4m8',
     distributed_node_count=1,
     data_storage_size=300,  # minimum size : 300GB
-    source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
+    source_dir_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
     entry_point='training_start.py',
     hyperparameter_list=[
         easymaker.Parameter(
@@ -155,17 +159,17 @@ training = easymaker.Training().run(
         ),
     ],
     timeout_hours=100,
-    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
-    check_point_input_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_input_path}',
-    check_point_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
+    model_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    check_point_input_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_input_path}',
+    check_point_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
     dataset_list=[
         easymaker.Dataset(
             dataset_name= "train",
-            data_uri= "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}",
+            data_uri= "obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}",
         ),
         easymaker.Dataset(
             dataset_name= "test",
-            data_uri= "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_path}",
+            data_uri= "obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{test_data_path}",
         ),
     ],
     use_log=True,
@@ -276,7 +280,7 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     distributed_node_count=1,
     parallel_trial_count=1,
     data_storage_size=300,
-    source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
+    source_dir_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
     entry_point='training_start.py',
     hyperparameter_spec_list=[
         easymaker.HyperparameterSpec(
@@ -293,17 +297,17 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
         )
     ],
     timeout_hours=10,
-    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
-    check_point_input_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_input_path}',
-    check_point_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
+    model_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    check_point_input_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_input_path}',
+    check_point_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
     dataset_list=[
         easymaker.Dataset(
             dataset_name="train",
-            data_uri= "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}"
+            data_uri= "obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}"
         ),
         easymaker.Dataset(
             dataset_name="test",
-            data_uri="obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_path}"
+            data_uri="obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{test_data_path}"
         )
     ],
     metric_list=[
@@ -456,7 +460,7 @@ fine_tuning = easymaker.FineTuning().run(
     flavor_name='g4.c92m1800',
     instance_count=1,
     base_model_preset_id=base_model_preset_id,
-    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    model_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     timeout_hours=24,
     validation_split_percent=10,  # 학습 데이터의 10%를 검증에 사용
     hyperparameter_list=[
@@ -476,7 +480,7 @@ fine_tuning = easymaker.FineTuning().run(
     dataset_list=[
         easymaker.Dataset(
             dataset_name="train-dataset",
-            data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}',
+            data_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}',
             dataset_format_code=easymaker.DatasetFormatCode.CHAT_TEMPLATE,
             dataset_split_code=easymaker.DatasetSplitCode.TRAIN,
         ),
@@ -583,7 +587,7 @@ model = easymaker.Model().create(
 # TensorFlow 모델
 model = easymaker.Model().create(
     model_format_code=easymaker.ModelFormatCode.TENSORFLOW,
-    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    model_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
     description='model_description',
 )
@@ -670,14 +674,14 @@ regression_model_evaluation  = easymaker.ModelEvaluation().create(
     model_id=regression_model.model_id,
     objective_code="REGRESSION",
     instance_type_name="m2.c4m8",
-    input_data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    input_data_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
     input_data_type_code="CSV",
     target_field_name="target_field_name",
     timeout_hours=1,
     batch_inference_instance_type_name="m2.c4m8",
     batch_inference_instance_count=1,
     batch_inference_pod_count=1,
-    batch_inference_output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    batch_inference_output_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
     batch_inference_max_batch_size=100,
     batch_inference_inference_timeout_seconds=1200,
     use_log=False,
@@ -691,14 +695,14 @@ classification_model_evaluation  = easymaker.ModelEvaluation().create(
     objective_code="CLASSIFICATION",
     class_names="classA,classB,classC",
     instance_type_name="m2.c4m8",
-    input_data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    input_data_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
     input_data_type_code="CSV",
     target_field_name="target_field_name",
     timeout_hours=1,
     batch_inference_instance_type_name="m2.c4m8",
     batch_inference_instance_count=1,
     batch_inference_pod_count=1,
-    batch_inference_output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    batch_inference_output_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
     batch_inference_max_batch_size=100,
     batch_inference_inference_timeout_seconds=1200,
     use_log=False,
@@ -953,11 +957,11 @@ batch_inference = easymaker.BatchInference().run(
     pod_count=1,
     batch_size=32,
     inference_timeout_seconds=120,
-    input_data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    input_data_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
     input_data_type='JSONL',
     include_glob_pattern=None,
     exclude_glob_pattern=None,
-    output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{output_upload_path}',
+    output_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{output_upload_path}',
     data_storage_size=300,  # minimum size : 300GB
     description='description',
     use_log=True,
@@ -1213,16 +1217,18 @@ Object Storage 상품으로 파일을 업로드하고 다운로드하는 기능�
 
 ```python
 easymaker.upload(
-    easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
+    easymaker_obs_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
     local_path='./local_dir',
     username='userId@nhn.com',
-    password='nhn_object_storage_api_password'
+    password='nhn_object_storage_api_password'{% if "gov" in build_flags %},
+    environment_type='gov'{% endif %}
 )
 
 easymaker.download(
-    easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_00000000000000000000000000000000/SDK/sample/source_dir',
+    easymaker_obs_uri='obs://$[ obs_host ]$/v1/AUTH_00000000000000000000000000000000/SDK/sample/source_dir',
     download_dir_path='./download_dir',
     username='userId@nhn.com',
-    password='nhn_object_storage_api_password'
+    password='nhn_object_storage_api_password'{% if "gov" in build_flags %},
+    environment_type='gov'{% endif %}
 )
 ```

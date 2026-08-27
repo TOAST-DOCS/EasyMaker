@@ -1,4 +1,6 @@
-<!-- pre-align:aligned sig=287622970352 -->
+<!-- machine_translated: true -->
+
+<!-- pre-align:aligned sig=fbf376f81e3f -->
 
 <a id="ai.easymaker"></a>
 ## Machine Learning > AI EasyMaker > リリースノート { #ai.easymaker }
@@ -12,7 +14,18 @@
 - ファインチューニング機能の追加
     - 事前学習された大規模言語モデルに、特定のドメインやタスクに合わせたデータセットで追加学習を実行し、モデルの性能を特化させることができます。
     - 詳細については、[ファインチューニングガイド](./console-guide/#fine.tuning)のドキュメントを参照してください。
-    
+
+{% if "gov" in build_flags -%}
+
+<a id="ai.easymaker.release.notes.2025.11.25"></a>
+### 2025. 11. 25. { #ai.easymaker.release.notes.2025.11.25 }
+
+<a id="ai.easymaker.release.notes.2025.11.25.service"></a>
+#### 新規サービスのリリース
+
+- AI EasyMaker は、機械学習開発のための環境と、学習および高度化、エンドポイントサービスのための AI プラットフォームです。
+{% endif %}
+{% if "gov" not in build_flags -%}
 <a id="ai.easymaker.release.notes.2025.10.28"></a>
 ### 2025. 10. 28. { #ai.easymaker.release.notes.2025.10.28 }
 
@@ -142,4 +155,5 @@
 <a id="ai.easymaker.release.notes.2022.12.27.service"></a>
 #### 新規サービスリリース
 
-- AI EasyMakerは、機械学習の開発のための環境と学習および高度化、エンドポイントサービスのためのAIプラットフォームです。
+- AI EasyMaker は、機械学習開発のための環境と学習および高度化、エンドポイントサービスのための AI プラットフォームです。
+{% endif %}
