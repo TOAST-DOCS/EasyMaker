@@ -2030,13 +2030,14 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
 
 - **エンドポイントログフィールド**
 
-    | 名前 | 説明 |
+| 名前 | 説明 |
     | --- | --- |
-    | endpointId | AI EasyMakerエンドポイントID |
+    | hyperparameterTuningId | AI EasyMakerハイパーパラメータチューニングID |
 - **エンドポイントログフィールド**
 
 | 名前            | 説明                        |
 | --------------- | --------------------------- |
+| endpointId      | AI EasyMaker エンドポイントID  |
     | endpointStageId | エンドポイントステージID |
     | inferenceId | 推論リクエスト固有ID |
     | action | Action区分(Endpoint.Model) |

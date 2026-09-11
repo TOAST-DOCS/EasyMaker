@@ -718,7 +718,15 @@ classification_model_evaluation  = easymaker.ModelEvaluation().create(
 <a id="model.evaluation.delete"></a>
 ### モデル評価の削除 { #model.evaluation.delete }
 
-<!-- TODO: translate body -->
+[パラメータ]
+
+| 名前                        | タイプ      | 必須 | デフォルト値  | 有効範囲  | 説明       |
+|---------------------------|---------|-------|------|--------|----------|
+| model_evaluation_id | String  | 必須    | なし   | 最大 36 文字 | モデル評価 ID |
+
+```python
+easymaker.ModelEvaluation(model_evaluation_id).delete()
+```
 
 <a id="endpoint"></a>
 ## エンドポイント { #endpoint }
