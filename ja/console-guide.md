@@ -1247,8 +1247,8 @@ AI EasyMakerのモデルでバッチ推論を行い、推論結果を統計で�
         - 詳細は、[付録 > 2. NHN Cloud Log & Crash Searchサービス利用案内及びログ確認](#appendix.2.lncs.service.usage.guide.and.log.inquiry.guide)を参照してください。
 
 !!! tip "参考"
-    - Globパターンを使用する場合、**除外Globパターン**が優先して適用されます。
-    - バッチ推論するモデルの性能に応じて、**バッチサイズ**と**推論制限時間**を適切に設定する必要があります。入力した設定値が正しくない場合、バッチ推論が十分な性能を発揮できない可能性があります。
+    - Globパターンを使用する場合、**除外Globパターン**が優先して適用されます。
+    - バッチ推論するモデルの性能に応じて、**バッチサイズ**と**推論制限時間**を適切に設定する必要があります。入力した設定値が正しくない場合、バッチ推論が十分な性能を発揮できない可能性があります。
 
 !!! danger "注意"
     - AI EasyMakerと同じプロジェクトで作成されたNHN Cloud NASのみ使用可能です。
@@ -1582,7 +1582,7 @@ Kubeflow Pipelines(KFP) Python SDKを使用してコンポーネント及びパ�
 ノード別詳細情報を通じて、作成されたアーティファクトをダウンロードできます。
 
 !!! danger "注意"
-    パイプラインアーティファクトは120日間保管されます。120日が経過したアーティファクトは自動的に削除されます。
+    パイプラインアーティファクトは120日間保管されます。120日が経過したアーティファクトは自動的に削除されます。
 
 <a id="pipeline.run.stop"></a>
 ### パイプライン実行停止 { #pipeline.run.stop }
@@ -2340,7 +2340,7 @@ Hugging Faceランタイムサービングは微調整に対応していませ�
 5. 作成されたモデルを確認し、エンドポイントを作成します。
 
 !!! tip "参考"
-    現在Hugging FaceランタイムはHugging Faceの全Taskに対応していません。
+    現在Hugging FaceランタイムはHugging Faceの全Taskに対応していません。
     サポートするTaskは`sequence_classification`, `token_classification`, `fill_mask`, `text_generation`, `text2text_generation`です。
     サポートしないTaskを使用するにはTensorFlow/Pytorch Serving方法を使用してください。
 
