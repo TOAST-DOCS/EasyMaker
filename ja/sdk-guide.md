@@ -631,12 +631,14 @@ easymaker.Model(model_id).delete()
 <a id="model.evaluation"></a>
 ## モデル評価 { #model.evaluation }
 
-<!-- TODO: translate body -->
-
 <a id="model.evaluation.instance.list"></a>
 ### インスタンス一覧照会 { #model.evaluation.instance.list }
 
-<!-- TODO: translate body -->
+```python
+instance_type_list = easymaker.ModelEvaluation.get_instance_type_list()
+for instance in instance_type_list:
+    instance.print_info()
+```
 
 <a id="model.evaluation.create"></a>
 ### モデル評価の作成 { #model.evaluation.create }
@@ -713,12 +715,24 @@ classification_model_evaluation  = easymaker.ModelEvaluation().create(
 <a id="model.evaluation.list"></a>
 ### モデル評価リスト照会 { #model.evaluation.list }
 
-<!-- TODO: translate body -->
+```python
+model_evaluation_list = easymaker.ModelEvaluation.get_list()
+for model_evaluation in model_evaluation_list:
+    model_evaluation.print_info()
+```
 
 <a id="model.evaluation.delete"></a>
 ### モデル評価の削除 { #model.evaluation.delete }
 
-<!-- TODO: translate body -->
+[パラメータ]
+
+| 名前                        | タイプ      | 必須 | デフォルト値  | 有効範囲  | 説明       |
+|---------------------------|---------|------|------|--------|----------|
+| model_evaluation_id | String  | 必須    | なし   | 最大 36 文字 | モデル評価 ID |
+
+```python
+easymaker.ModelEvaluation(model_evaluation_id).delete()
+```
 
 <a id="endpoint"></a>
 ## エンドポイント { #endpoint }
@@ -726,7 +740,11 @@ classification_model_evaluation  = easymaker.ModelEvaluation().create(
 <a id="endpoint.instance.list"></a>
 ### インスタンス一覧照会 { #endpoint.instance.list }
 
-<!-- TODO: translate body -->
+```python
+instance_type_list = easymaker.Endpoint.get_instance_type_list()
+for instance in instance_type_list:
+    instance.print_info()
+```
 
 <a id="endpoint.create"></a>
 ### エンドポイントの作成 { #endpoint.create }
@@ -1159,7 +1177,11 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).start()
 <a id="pipeline.recurring.run.list"></a>
 ### パイプラインスケジュールリスト照会 { #pipeline.recurring.run.list }
 
-<!-- TODO: translate body -->
+```python
+pipeline_recurring_run_list = easymaker.PipelineRecurringRun.get_list()
+for pipeline_recurring_run in pipeline_recurring_run_list:
+    pipeline_recurring_run.print_info()
+```
 
 <a id="pipeline.recurring.run.delete"></a>
 ### パイプラインスケジュールの削除 { #pipeline.recurring.run.delete }
