@@ -767,7 +767,7 @@ When creating an endpoint, the default stage is created.
 | endpoint_model_resource_list[0].pod_auto_scale_enable          | Boolean                               | Optional    | False   | True, False                      | Pod autoscaler to be used for stage resource |
 | endpoint_model_resource_list[0].scale_metric_code             | easymaker.ScaleMetricCode           | Optional    | None    | CPU_UTILIZATION, MEMORY_UTILIZATION | Scaling unit to be used for stage resource          |
 | endpoint_model_resource_list[0].scale_metric_target           | Integer                               | Optional    | None    | 1~                               | Scaling threshold to be used for stage resource     |
-| endpoint_model_resource_list[0].description                 | String                                | Optional    | None    | 최대 255자                  | Description of stage resource                                       |
+| endpoint_model_resource_list[0].description                 | String                                | Optional    | None    | Max. 255 characters                  | Description of stage resource                                       |
 | use_log                                                     | Boolean                               | Optional    | False | True, False                | Whether to leave logs in the Log & Crash Search service                                             |
 | wait                                                        | Boolean                               | Optional    | True   | True, False | True: return after creation is complete, False: return upon creation request |
 
@@ -1131,8 +1131,8 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 | instance_type_name                    | String  | Required                                 | None   | None          | Instance type name (Inquiry available with CLI)                         |
 | instance_count                   | Integer | Optional                                 | 1   | 1~10        | Number of instances to use                                    |
 | boot_storage_size                | Integer | Required                                 | None   | 50~         | The boot storage size (in GB) of the instance that will run the pipeline.            |
-| schedule_periodic_minutes        | String  | schedule_cron_expression 미입력시 Required  | None   | None          | Set a time interval to run the pipeline repeatedly                        |
-| schedule_cron_expression         | String  | schedule_periodic_minutes 미입력시 Required | None   | None          | Set up a Cron expression to run the pipeline repeatedly                 |
+| schedule_periodic_minutes        | String  | Required if schedule_cron_expression is not entered  | None   | None          | Set a time interval to run the pipeline repeatedly                        |
+| schedule_cron_expression         | String  | Required if schedule_periodic_minutes is not entered | None   | None          | Set up a Cron expression to run the pipeline repeatedly                 |
 | max_concurrency_count            | Integer  | Optional                                 | 1   | 1~10          | Limit the number of concurrent runs by specifying a maximum number of parallel runs             |
 | schedule_start_datetime          | String  | Optional                                 | None   | None          | Set a start time for the pipeline schedule, which will run the pipeline at the set interval if not entered. |
 | schedule_end_datetime            | String  | Optional                                 | None   | None          | Set an end time for a pipeline schedule, creating a pipeline run until it stops if no input is received. |
