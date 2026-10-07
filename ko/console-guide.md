@@ -214,10 +214,6 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
 1. **실험 생성**을 클릭합니다.
 2. 실험 이름과 설명을 입력하고 **확인**을 클릭합니다.
 
-!!! tip "알아두기"
-    실험 생성은 몇 분의 시간이 소요될 수 있습니다.
-    리소스를 최초로 생성 시 서비스 환경 구성을 위해 추가로 몇 분의 시간이 더 소요됩니다.
-
 <a id="experiment.list"></a>
 ### 실험 목록 { #experiment.list }
 
@@ -227,14 +223,12 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
 
     | 상태               | 설명                                               |
     | ------------------ | -------------------------------------------------- |
-    | CREATE REQUESTED   | 실험 생성이 요청된 상태입니다.                     |
-    | CREATE IN PROGRESS | 실험이 생성 중인 상태입니다.                       |
-    | CREATE FAILED      | 실험 생성을 실패한 상태입니다. 다시 시도하세요. |
-    | ACTIVE             | 실험이 정상적으로 생성된 상태입니다.               |
+    | CREATE IN PROGRESS | 실험 실행에 필요한 리소스를 준비 중인 상태입니다. |
+    | CREATE FAILED      | 실험 실행에 필요한 리소스 준비에 실패한 상태입니다. |
+    | ACTIVE             | 실험 정보가 등록되어 사용할 수 있는 상태입니다. |
 
 - **작업**
     - **텐서보드 바로가기**를 클릭하면 실험에 포함된 학습의 통계 정보를 확인할 수 있는 텐서보드가 브라우저 새 창으로 열립니다. 텐서보드는 콘솔에 로그인한 사용자만 접속할 수 있습니다.
-    - **재시도**: 실험 상태가 실패일 경우, **재시도**를 클릭하여 실험을 복구할 수 있습니다.
 - **학습**: 학습을 선택하면 표시되는 상세 화면의 **학습** 탭은 실험에 포함된 학습의 목록이 표시됩니다.
 
 <a id="experiment.delete"></a>
@@ -317,6 +311,9 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
 !!! danger "주의"
     - AI EasyMaker와 동일한 프로젝트에서 생성된 NHN Cloud NAS만 사용 가능합니다.
     - 학습이 완료되기 전 입력 데이터를 삭제하면 학습에 실패할 수 있습니다.
+
+!!! tip "알아두기"
+    서비스 환경이 준비되지 않은 경우, 학습 생성 시 환경 구성으로 추가 시간이 소요될 수 있습니다.
 
 <a id="training.list"></a>
 ### 학습 목록 { #training.list }
@@ -474,6 +471,9 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
 !!! danger "주의"
     - AI EasyMaker와 동일한 프로젝트에서 생성된 NHN Cloud NAS만 사용 가능합니다.
     - 학습이 완료되기 전 입력 데이터를 삭제하면 학습에 실패할 수 있습니다.
+
+!!! tip "알아두기"
+    서비스 환경이 준비되지 않은 경우, 하이퍼파라미터 튜닝 생성 시 환경 구성으로 추가 시간이 소요될 수 있습니다.
 
 <a id="hyperparameter.tuning.list"></a>
 ### 하이퍼파라미터 튜닝 목록 { #hyperparameter.tuning.list }
@@ -646,6 +646,9 @@ AI EasyMaker 노트북 인스턴스는 `/root/easymaker/custom-conda-envs` 디�
 !!! danger "주의"
     - AI EasyMaker와 동일한 프로젝트에서 생성된 NHN Cloud NAS만 사용 가능합니다.
     - 파인 튜닝이 완료되기 전 입력 데이터를 삭제하면 파인 튜닝에 실패할 수 있습니다.
+
+!!! tip "알아두기"
+    서비스 환경이 준비되지 않은 경우, 파인 튜닝 생성 시 환경 구성으로 추가 시간이 소요될 수 있습니다.
 
 <a id="fine.tuning.list"></a>
 ### 파인 튜닝 목록 { #fine.tuning.list }
