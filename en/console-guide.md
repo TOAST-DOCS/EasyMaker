@@ -216,10 +216,6 @@ Experiments are managed by grouping related trainings into experiments.
 1. Click **Create Experiment**
 2. Enter an experiment name and description and click **OK**.
 
-!!! tip "Note"
-Creating experiments can take several minutes.
-When creating the initial resources (laptops, trainings, labs, endpoints), it takes an extra few minutes to configure the service environment.
-
 <a id="experiment.list"></a>
 ### List of Experiments { #experiment.list }
 
@@ -229,14 +225,12 @@ Experiments appears. Select an experiment to view and modify detailed informatio
 
     | Status | Description |
     | --- | --- |
-    | CREATE REQUESTED | Creating an experiment is requested. |
-    | CREATE IN PROGRESS | An experiment is being created. |
-    | CREATE FAILED | Failed to create an experiment. Please try again. |
-    | ACTIVE | The experiment is successfully created. |
+    | CREATE IN PROGRESS | Resources required to run the experiment are being prepared. |
+    | CREATE FAILED      | Failed to prepare the resources required to run the experiment. |
+    | ACTIVE             | The experiment information has been registered and is ready to use. |
 
 - **Operation**
     - Click **Go to TensorBoard** to open the TensorBoard in a new browser window, where you can view statistical information about the training included in your experiment. The TensorBoard is only accessible to users who are logged into the console.
-    - **Retry**: If the experiment status is FAIL, you can recover the experiment by clicking **Retry**.
 - **Training**: The **Training** tab on the detailed screen that appears when selecting Training shows trainings included in the experiment.
 
 <a id="experiment.delete"></a>
@@ -318,6 +312,9 @@ Set the training environment by selecting the instance and OS image to be traine
 !!! danger "Caution"
     - Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
     - Training may fail if the input data is deleted before training is completed.
+
+!!! tip "Note"
+    If the service environment is not ready, additional time may be required to configure the environment when creating a training.
 
 <a id="training.list"></a>
 ### Training List { #training.list }
@@ -474,6 +471,9 @@ How to configure a hyperparameter tuning job.
 !!! danger "Caution"
     - Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
     - Training may fail if the input data is deleted before training is completed.
+
+!!! tip "Note"
+    If the service environment is not ready, additional time may be required to configure the environment when creating hyperparameter tuning.
 
 <a id="hyperparameter.tuning.list"></a>
 ### Hyperparameter Tuning List { #hyperparameter.tuning.list }
@@ -646,6 +646,9 @@ Configure the base model, training data, and hyperparameters to perform fine tun
 !!! danger "Caution"
     - Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
     - Deleting input data before fine tuning is complete may cause fine tuning to fail.
+
+!!! tip "Note"
+    If the service environment is not ready, additional time may be required to configure the environment when creating a fine tuning.
 
 <a id="fine.tuning.list"></a>
 ### Fine Tuning List { #fine.tuning.list }
