@@ -216,10 +216,6 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
 1. **実験作成**をクリックします。
 2. 実験の名前と説明を入力し、**確認**をクリックします。
 
-!!! tip "参考"
-    実験の作成には数分の時間がかかる場合があります。
-    最初のリソース(ノートパソコン、学習、実験、エンドポイント)作成時、サービス環境の構成にさらに数分かかります。
-
 <a id="experiment.list"></a>
 ### 実験リスト { #experiment.list }
 
@@ -229,14 +225,12 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
 
     | 状態 | 説明 |
     | --- | --- |
-    | CREATE REQUESTED | 実験の作成がリクエストされた状態です。 |
-    | CREATE IN PROGRESS | 実験が作成されている状態です。 |
-    | CREATE FAILED | 実験の作成に失敗した状態です。もう一度お試しください。 |
-    | ACTIVE | 実験が正常に作成された状態です。 |
+    | CREATE IN PROGRESS | 実験の実行に必要なリソースを準備中の状態です。 |
+    | CREATE FAILED      | 実験の実行に必要なリソースの準備に失敗した状態です。 |
+    | ACTIVE             | 実験情報が登録され、使用できる状態です。 |
 
 - **作業**
     - **Tensorboardショートカット**をクリックすると、実験に含まれる学習の統計情報を確認できるTensorboardがブラウザの新しいウィンドウで開きます。Tensorboardはコンソールにログインしたユーザーのみ接続できます。
-    - **再試行**：実験の状態が失敗の場合、**再試行**をクリックして実験を復旧できます。
 - **学習**：学習を選択すると、表示される詳細画面の**学習**タブには、実験に含まれている学習のリストが表示されます。
 
 <a id="experiment.delete"></a>
@@ -320,6 +314,9 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
 !!! danger "注意"
     - AI EasyMakerと同じプロジェクトで作成されたNHN Cloud NASのみ使用できます。
     - 学習が完了する前に入力データを削除すると、学習に失敗する可能性があります。
+
+!!! tip "ポイント"
+    サービス環境が準備されていない場合、学習の作成時に環境構成のための追加時間がかかる場合があります。
 
 <a id="training.list"></a>
 ### 学習リスト { #training.list }
@@ -481,6 +478,9 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
 !!! danger "注意"
     - AI EasyMakerと同じプロジェクトで作成されたNHN Cloud NASのみ使用可能です。
     - 学習が完了する前に入力データを削除すると、学習に失敗することがあります。
+
+!!! tip "ポイント"
+    サービス環境が準備されていない場合、ハイパーパラメータチューニング作成時に環境構成のため追加時間がかかる場合があります。
 
 <a id="hyperparameter.tuning.list"></a>
 ### ハイパーパラメータチューニングリスト { #hyperparameter.tuning.list }
@@ -652,6 +652,9 @@ AI EasyMakerノートパソコンインスタンスは`/root/easymaker/custom-co
 !!! danger "注意"
     - AI EasyMakerと同一のプロジェクトで作成されたNHN Cloud NASのみ使用可能です。
     - ファインチューニングが完了する前に入力データを削除すると、ファインチューニングに失敗する場合があります。
+
+!!! tip "ポイント"
+    サービス環境が準備されていない場合、ファインチューニング作成時に環境構成のため追加時間がかかる場合があります。
 
 <a id="fine.tuning.list"></a>
 ### ファインチューニング一覧 { #fine.tuning.list }
@@ -2033,10 +2036,12 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
     | 名前 | 説明 |
     | --- | --- |
     | endpointId | AI EasyMakerエンドポイントID |
+
 - **エンドポイントログフィールド**
 
 | 名前            | 説明                        |
 | --------------- | --------------------------- |
+| endpointId      | AI EasyMakerエンドポイントID  |
     | endpointStageId | エンドポイントステージID |
     | inferenceId | 推論リクエスト固有ID |
     | action | Action区分(Endpoint.Model) |
@@ -2048,6 +2053,7 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
 | 名前             | 説明                      |
     | ---------------- | ------------------------- |
 | batchInferenceId | AI EasyMaker バッチ推論 ID |
+
 <a id="appendix.3.hyperparameter"></a>
 ### 3. ハイパーパラメータ { #appendix.3.hyperparameter }
 
