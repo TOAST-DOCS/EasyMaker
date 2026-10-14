@@ -2033,9 +2033,9 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
 
 - **エンドポイントログフィールド**
 
-    | 名前 | 説明 |
+| 名前 | 説明 |
     | --- | --- |
-    | endpointId | AI EasyMakerエンドポイントID |
+    | hyperparameterTuningId | AI EasyMakerハイパーパラメータチューニングID |
 
 - **エンドポイントログフィールド**
 
