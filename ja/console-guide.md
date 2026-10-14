@@ -2040,20 +2040,19 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
 
 - **エンドポイントログフィールド**
 
-| 名前            | 説明                        |
-| --------------- | --------------------------- |
-| endpointId      | AI EasyMakerエンドポイントID  |
+    | 名前            | 説明                        |
+    | --------------- | --------------------------- |
+    | endpointId      | AI EasyMakerエンドポイントID  |
     | endpointStageId | エンドポイントステージID |
     | inferenceId | 推論リクエスト固有ID |
     | action | Action区分(Endpoint.Model) |
     | modelName | 推論対象モデル名 |
 
-| modelName       | 推論対象モデル名         |
 - **バッチ推論ログフィールド**
 
-| 名前             | 説明                      |
+    | 名前             | 説明                      |
     | ---------------- | ------------------------- |
-| batchInferenceId | AI EasyMaker バッチ推論 ID |
+    | batchInferenceId | AI EasyMaker バッチ推論 ID |
 
 <a id="appendix.3.hyperparameter"></a>
 ### 3. ハイパーパラメータ { #appendix.3.hyperparameter }
