@@ -2031,9 +2031,9 @@ AI EasyMakerサービスは、Log & Crash Searchサービスに次のように�
     | --- | --- |
     | trainingId | AI EasyMaker学習ID |
 
-- **エンドポイントログフィールド**
+- **ハイパーパラメータチューニングログフィールド**
 
-| 名前 | 説明 |
+    | 名前 | 説明 |
     | --- | --- |
     | hyperparameterTuningId | AI EasyMakerハイパーパラメータチューニングID |
 
