@@ -1,16 +1,18 @@
-<a id="ai.easymaker.console.guide"></a>
+<!-- machine_translated: true -->
 
-## Machine Learning > AI EasyMaker > Console Guide
+{%- set em_registry = "0516e3a7-kr-registry.container.gov-nhncloud.com" if "gov" in build_flags else "fb34a0a4-kr1-registry.container.nhncloud.com" -%}
+<!-- pre-align:aligned sig=13fa2e880aa4 -->
+
+<a id="ai.easymaker.console.guide"></a>
+## Machine Learning > AI EasyMaker > Console Guide { #ai.easymaker.console.guide }
 
 <a id="dashboard"></a>
-
-## Dashboard
+## Dashboard { #dashboard }
 
 You can view the usage status of all AI EasyMaker resources in the dashboard.
 
 <a id="dashboard.service.usage.status"></a>
-
-### Service Usage
+### Service Usage { #dashboard.service.usage.status }
 
 Displays the number of resources in use per resource.
 
@@ -20,28 +22,24 @@ Displays the number of resources in use per resource.
 - Endpoints: Number of endpoints in the ACTIVE state
 
 <a id="dashboard.service.monitoring"></a>
-
-### Monitoring Services
+### Monitoring Services { #dashboard.service.monitoring }
 
 - Displays the top 3 endpoints with the most API calls.
 - Select an endpoint to see the aggregate API success/failure metrics for the child endpoint stage.
 
 <a id="dashboard.resource.usage"></a>
-
-### Resource Utilization
+### Resource Utilization { #dashboard.resource.usage }
 
 - You can see the most utilized resources by CPU and GPU core type.
 - If you hover over a metric, it displays resource information.
 
 <a id="notebook"></a>
-
-## Notebook
+## Notebook { #notebook }
 
 Create and manage Jupyter notebook with essential packages installed for machine learning development.
 
 <a id="notebook.create"></a>
-
-### Create Notebook
+### Create Notebook { #notebook.create }
 
 Create a Jupyter notebook.
 
@@ -75,8 +73,7 @@ Create a Jupyter notebook.
     Only NHN Cloud NAS created on the same project as AI EasyMaker is available to use.
 
 <a id="notebook.list"></a>
-
-### Notebook List
+### Notebook List { #notebook.list }
 
 A list of notebooks are displayed. Select a notebook in the list to check details and make changes to it.
 
@@ -106,8 +103,7 @@ A list of notebooks are displayed. Select a notebook in the list to check detail
     - The **Monitoring** tab is disabled when the notebook is being created or when there is a task in progress.
 
 <a id="notebook.user.virtual.run.environment.configuration"></a>
-
-### Configure User Virtual Execution Environment
+### Configure User Virtual Execution Environment { #notebook.user.virtual.run.environment.configuration }
 
 AI EasyMaker notebook instance provides native Conda virtual environment with various libraries and kernels required for machine learning.
 Default Conda virtual environment is initialized and driven when the laptop is stopped and started, but the virtual environment and external libraries that the user installs in any path are not automatically initialized and are not retained when the laptop is stopped and started.
@@ -136,8 +132,7 @@ Please refer to the following guide to configure your virtual environment.
         easymaker_env           /root/easymaker/custom-conda-envs/easymaker_env
 
 <a id="notebook.user.script"></a>
-
-### User Script
+### User Script { #notebook.user.script }
 
 You can register scripts in the path `/root/easymaker/cont-init.d` that should run automatically when the notebook is stopped and started.
 The scripts are executed in ascending alphanumeric order.
@@ -154,8 +149,7 @@ The scripts are executed in ascending alphanumeric order.
     - Full execution log: `/root/easymaker/cont-init.output`
 
 <a id="notebook.stop"></a>
-
-### Stop Notebook
+### Stop Notebook { #notebook.stop }
 
 Stop the running notebook or start the stopped notebook.
 
@@ -171,8 +165,7 @@ Stop the running notebook or start the stopped notebook.
     In order to retain, configure your virtual environment by referring to [User Virtual Execution Environment Configuration](#notebook.user.virtual.run.environment.configuration).
 
 <a id="notebook.instance.type.change"></a>
-
-### Change Notebook Instance Type
+### Change Notebook Instance Type { #notebook.instance.type.change }
 
 Change the instance type of the created notebook.
 Instance type you want to change can only be changed to the same core type instance type as the existing instance.
@@ -186,8 +179,7 @@ Instance type you want to change can only be changed to the same core type insta
     It may take several minutes to change the instance type.
 
 <a id="notebook.reboot"></a>
-
-### Reboot Notebook
+### Reboot Notebook { #notebook.reboot }
 
 If a problem occurs while using the notebook, or if the status is ACTIVE but you can't access the notebook,
 you can reboot the notebook.
@@ -201,8 +193,7 @@ you can reboot the notebook.
     In order to retain, configure your virtual environment by referring to [User Virtual Execution Environment Configuration](#notebook.user.virtual.run.environment.configuration).
 
 <a id="notebook.delete"></a>
-
-### Delete Notebook
+### Delete Notebook { #notebook.delete }
 
 Delete the created notebook.
 
@@ -215,25 +206,18 @@ Delete the created notebook.
     Connected NHN Cloud NAS is not deleted and must be deleted individually from **NHN Cloud NAS**.
 
 <a id="experiment"></a>
-
-## Experiment
+## Experiment { #experiment }
 
 Experiments are managed by grouping related trainings into experiments.
 
 <a id="experiment.create"></a>
-
-### Create Experiment
+### Create Experiment { #experiment.create }
 
 1. Click **Create Experiment**
 2. Enter an experiment name and description and click **OK**.
 
-!!! tip "Note"
-Creating experiments can take several minutes.
-When creating the initial resources (laptops, trainings, labs, endpoints), it takes an extra few minutes to configure the service environment.
-
 <a id="experiment.list"></a>
-
-### List of Experiments
+### List of Experiments { #experiment.list }
 
 Experiments appears. Select an experiment to view and modify detailed information.
 
@@ -241,19 +225,16 @@ Experiments appears. Select an experiment to view and modify detailed informatio
 
     | Status | Description |
     | --- | --- |
-    | CREATE REQUESTED | Creating an experiment is requested. |
-    | CREATE IN PROGRESS | An experiment is being created. |
-    | CREATE FAILED | Failed to create an experiment. Please try again. |
-    | ACTIVE | The experiment is successfully created. |
+    | CREATE IN PROGRESS | Resources required to run the experiment are being prepared. |
+    | CREATE FAILED      | Failed to prepare the resources required to run the experiment. |
+    | ACTIVE             | The experiment information has been registered and is ready to use. |
 
 - **Operation**
     - Click **Go to TensorBoard** to open the TensorBoard in a new browser window, where you can view statistical information about the training included in your experiment. The TensorBoard is only accessible to users who are logged into the console.
-    - **Retry**: If the experiment status is FAIL, you can recover the experiment by clicking **Retry**.
 - **Training**: The **Training** tab on the detailed screen that appears when selecting Training shows trainings included in the experiment.
 
 <a id="experiment.delete"></a>
-
-### Delete Experiment
+### Delete Experiment { #experiment.delete }
 
 Delete an experiment.
 
@@ -266,14 +247,12 @@ Delete an experiment.
     For associated resources, you can check the list by clicking the **[Training]** tab in the detail screen at the bottom that is displayed when you click the experiment you want to delete.
 
 <a id="training"></a>
-
-## Training
+## Training { #training }
 
 Provides an training environment where you can learn and identify machine training algorithms based on training results.
 
 <a id="training.create"></a>
-
-### Create Training
+### Create Training { #training.create }
 
 Set the training environment by selecting the instance and OS image to be trained, and proceed with training by entering the algorithm information and input/output data path to learn.
 
@@ -334,9 +313,11 @@ Set the training environment by selecting the instance and OS image to be traine
     - Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
     - Training may fail if the input data is deleted before training is completed.
 
-<a id="training.list"></a>
+!!! tip "Note"
+    If the service environment is not ready, additional time may be required to configure the environment when creating a training.
 
-### Training List
+<a id="training.list"></a>
+### Training List { #training.list }
 
 A list of studies is displayed. If you select a training from the list, you can check detailed information and change the information.
 
@@ -366,8 +347,7 @@ A list of studies is displayed. If you select a training from the list, you can 
     - The **Monitoring** tab is disabled while an endpoint stage is being created.
 
 <a id="training.copy"></a>
-
-### Copy Training
+### Copy Training { #training.copy }
 
 Create a new training with the same settings as an existing training.
 
@@ -377,8 +357,7 @@ Create a new training with the same settings as an existing training.
 4. If there is any information you would like to change the settings for, make the changes and then click **Create Training** to create the training.
 
 <a id="training.model.create"></a>
-
-### Create a Model from Training
+### Create a Model from Training { #training.model.create }
 
 Create a model with training in the completed state.
 
@@ -387,8 +366,7 @@ Create a model with training in the completed state.
 3. You will be taken to the model creation page. After checking the contents, click **Create Model** to create a model. For more information on model creation, see [the model](#model) documentation.
 
 <a id="training.delete"></a>
-
-### Delete Training
+### Delete Training { #training.delete }
 
 Deletes a training.
 
@@ -400,14 +378,12 @@ Deletes a training.
     Training cannot be deleted if a model created by the training to be deleted exists. Please delete the model first and then the training.
 
 <a id="hyperparameter.tuning"></a>
-
-## Hyperparameter Tuning
+## Hyperparameter Tuning { #hyperparameter.tuning }
 
 Hyperparameter tuning is the process of optimizing hyperparameter values to maximize a model's predictive accuracy. If you don't use this feature, you'll have to manually tune the hyperparameters to find the optimal values while running many training jobs yourself.
 
 <a id="hyperparameter.tuning.create"></a>
-
-### Create Hyperparameter Tuning
+### Create Hyperparameter Tuning { #hyperparameter.tuning.create }
 
 How to configure a hyperparameter tuning job.
 
@@ -496,9 +472,11 @@ How to configure a hyperparameter tuning job.
     - Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
     - Training may fail if the input data is deleted before training is completed.
 
-<a id="hyperparameter.tuning.list"></a>
+!!! tip "Note"
+    If the service environment is not ready, additional time may be required to configure the environment when creating hyperparameter tuning.
 
-### Hyperparameter Tuning List
+<a id="hyperparameter.tuning.list"></a>
+### Hyperparameter Tuning List { #hyperparameter.tuning.list }
 
 A list of hyperparameter tunings is displayed. Select a hyperparameter tuning from the list to view details and change information.
 
@@ -538,8 +516,7 @@ A list of hyperparameter tunings is displayed. Select a hyperparameter tuning fr
     - The **Monitoring** tab is disabled while hyperparameter tuning is being created.
 
 <a id="hyperparameter.tuning.training.list"></a>
-
-### List of Trainings for Hyperparameter Tuning
+### List of Trainings for Hyperparameter Tuning { #hyperparameter.tuning.training.list }
 
 Displays a list of trainings auto-generated by hyperparameter tuning. Select a training from the list to check detailed information.
 
@@ -557,8 +534,7 @@ Displays a list of trainings auto-generated by hyperparameter tuning. Select a t
     | EARLY_STOPPED | Performance (goal metric) is not getting better while training is in progress, so it is in an early-stopped state. |
 
 <a id="hyperparameter.tuning.copy"></a>
-
-### Copy Hyperparameter Tuning
+### Copy Hyperparameter Tuning { #hyperparameter.tuning.copy }
 
 Create a new hyperparameter tuning with the same settings as the existing hyperparameter tuning.
 
@@ -568,8 +544,7 @@ Create a new hyperparameter tuning with the same settings as the existing hyperp
 4. If there is any information you would like to change the settings for, make the changes and click **Create Hyperparameter Tuning** to create a hyperparameter tuning.
 
 <a id="hyperparameter.tuning.model.create"></a>
-
-### Create a Model from Hyperparameter Tuning
+### Create a Model from Hyperparameter Tuning { #hyperparameter.tuning.model.create }
 
 Create a model with the best training of hyperparameter tuning in the completed state.
 
@@ -579,8 +554,7 @@ Create a model with the best training of hyperparameter tuning in the completed 
 For more information on model creation, see [the model](#model) documentation.
 
 <a id="hyperparameter.tuning.delete"></a>
-
-### Delete Hyperparameter Tuning
+### Delete Hyperparameter Tuning { #hyperparameter.tuning.delete }
 
 Delete a hyperparameter tuning.
 
@@ -592,20 +566,17 @@ Delete a hyperparameter tuning.
     Hyperparameter tuning cannot be deleted if the model created by the hyperparameter tuning you want to delete exists. Please delete the model first, then the hyperparameter tuning.
 
 <a id="training.template"></a>
-
-## Training Template
+## Training Template { #training.template }
 
 By creating a training template in advance, you can import the values entered into the template when creating training or hyperparameter tuning.
 
 <a id="training.template.create"></a>
-
-### Create Training Template
+### Create Training Template { #training.template.create }
 
 For information on what you can set in your training template, see [Creating a training](#training.create).
 
 <a id="training.template.list"></a>
-
-### List of Training Templates
+### List of Training Templates { #training.template.list }
 
 Displays a list of training templates. Select a training template from the list to view details and change information.
 
@@ -614,8 +585,7 @@ Displays a list of training templates. Select a training template from the list 
 - **Hyperparameters** : You can check the names of hyperparameters set in the training template on **the Hyperparameters** tab of the detailed screen displayed when you select a training template.
 
 <a id="training.template.copy"></a>
-
-### Copy Training Template
+### Copy Training Template { #training.template.copy }
 
 Create a new training template with the same settings as an existing training template.
 
@@ -625,8 +595,7 @@ Create a new training template with the same settings as an existing training te
 4. If there is any information you would like to change the settings for, change it and then click **Create Training Template** to create a training template.
 
 <a id="training.template.delete"></a>
-
-### Delete Training Template
+### Delete Training Template { #training.template.delete }
 
 Delete the training template.
 
@@ -635,14 +604,12 @@ Delete the training template.
 3. Requested deletion cannot be undone. Click **OK** to proceed.
 
 <a id="fine.tuning"></a>
-
-## Fine Tuning
+## Fine Tuning { #fine.tuning }
 
 A feature that specializes model performance by performing additional training on a pre-trained large language model using a dataset tailored to a specific domain or task. AI EasyMaker provides multiple models as base models for additional training. Select one of the base models, then enter the training data and hyperparameters to perform fine tuning.
 
 <a id="fine.tuning.create"></a>
-
-### Create Fine Tuning
+### Create Fine Tuning { #fine.tuning.create }
 
 Configure the base model, training data, and hyperparameters to perform fine tuning.
 
@@ -680,9 +647,11 @@ Configure the base model, training data, and hyperparameters to perform fine tun
     - Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
     - Deleting input data before fine tuning is complete may cause fine tuning to fail.
 
-<a id="fine.tuning.list"></a>
+!!! tip "Note"
+    If the service environment is not ready, additional time may be required to configure the environment when creating a fine tuning.
 
-### Fine Tuning List
+<a id="fine.tuning.list"></a>
+### Fine Tuning List { #fine.tuning.list }
 
 Displays the list of fine tunings. Select a fine tuning from the list to view its details.
 
@@ -712,8 +681,7 @@ Displays the list of fine tunings. Select a fine tuning from the list to view it
     - The **Monitoring** tab is disabled while fine tuning is being created.
 
 <a id="fine.tuning.copy"></a>
-
-### Copy Fine Tuning
+### Copy Fine Tuning { #fine.tuning.copy }
 
 Creates a new fine tuning with the same settings as an existing fine tuning.
 
@@ -723,8 +691,7 @@ Creates a new fine tuning with the same settings as an existing fine tuning.
 4. If there are any settings to change, make the changes, then click **Create Fine Tuning** to create the fine tuning.
 
 <a id="fine.tuning.model.create"></a>
-
-### Create a Model from Fine Tuning
+### Create a Model from Fine Tuning { #fine.tuning.model.create }
 
 Creates a model from a fine tuning in the completed state.
 
@@ -733,8 +700,7 @@ Creates a model from a fine tuning in the completed state.
 3. You will be redirected to the model creation page. Review the information and click **Create Model** to create the model. For more information on model creation, see the [Model](#model) document.
 
 <a id="fine.tuning.delete"></a>
-
-### Delete Fine Tuning
+### Delete Fine Tuning { #fine.tuning.delete }
 
 Deletes a fine tuning.
 
@@ -746,14 +712,12 @@ Deletes a fine tuning.
     If a model created from the fine tuning to be deleted exists, the fine tuning cannot be deleted. Delete the model first, then delete the fine tuning.
 
 <a id="model"></a>
-
-## Model
+## Model { #model }
 
 Can manage models of AI EasyMaker's training outcomes or external models as artifacts.
 
 <a id="model.create"></a>
-
-### Create Model
+### Create Model { #model.create }
 
 - **Basic Information**: Enter basic information of model.
     - **Name**: Enter model name.
@@ -812,8 +776,7 @@ Can manage models of AI EasyMaker's training outcomes or external models as arti
     </details>
 
 <a id="model.list"></a>
-
-### Model List
+### Model List { #model.list }
 
 Model list is displayed. Selecting a model in the list allows to check detailed information and make changes to it.
 
@@ -836,8 +799,7 @@ Model list is displayed. Selecting a model in the list allows to check detailed 
 - **Parameter**: Model's parameter is displayed. Parameters are used for inference.
 
 <a id="model.endpoint.create"></a>
-
-### Create Endpoint from Model
+### Create Endpoint from Model { #model.endpoint.create }
 
 Create an endpoint that can serve the selected model.
 
@@ -847,8 +809,7 @@ Create an endpoint that can serve the selected model.
 For more information on creating models, refer to **Endpoint** documents.
 
 <a id="model.batch.inference.create"></a>
-
-### Create Batch Inference in a Model
+### Create Batch Inference in a Model { #model.batch.inference.create }
 
 Create batch inferences with the selected model and view the inference results as statistics.
 
@@ -858,8 +819,7 @@ Create batch inferences with the selected model and view the inference results a
 For more information about creating batch inferences, see [Batch Inference](#batch.inference).
 
 <a id="model.delete"></a>
-
-### Delete Model
+### Delete Model { #model.delete }
 
 Delete a model.
 
@@ -872,14 +832,12 @@ Delete a model.
     To delete, delete the endpoint created by the model first and then delete the model.
 
 <a id="model.evaluation"></a>
-
-## Evaluate models
+## Evaluate models { #model.evaluation }
 
 Measure the performance of models, and compare performance across different models.
 
 <a id="model.evaluation.create"></a>
-
-### Create a model evaluation
+### Create a model evaluation { #model.evaluation.create }
 
 Batch inferences are automatically created during the model evaluation process.
 
@@ -914,8 +872,7 @@ Batch inferences are automatically created during the model evaluation process.
     - The number of classes in a classification model evaluation must be 50 or fewer.
 
 <a id="model.evaluation.list"></a>
-
-### Model Evaluation List
+### Model Evaluation List { #model.evaluation.list }
 
 A list of model evaluations is displayed. Select a model evaluation in the list to view details and make changes to the information.
 
@@ -940,8 +897,7 @@ A list of model evaluations is displayed. Select a model evaluation in the list 
     - **Stop**: You can stop an ongoing model evaluation.
 
 <a id="model.evaluation.classification.metric"></a>
-
-### Classification Model Evaluation Metrics
+### Classification Model Evaluation Metrics { #model.evaluation.classification.metric }
 
 - **PR AUC**: The area under Precision-Recall (PR) curve. It is effective for measuring a model's classification performance on unbalanced datasets.
 - **ROC AUC**: The area under Recall-False Positive Rate (ROC) curve indicates model performance. The closer the value is to 1, the better the performance.
@@ -955,8 +911,7 @@ A list of model evaluations is displayed. Select a model evaluation in the list 
 - **Confusion matrix**: A matrix that categorizes prediction results into true positives, false positives, false negatives, and true negatives. It allows easy identification of error types for each class.
 
 <a id="model.evaluation.regression.metric"></a>
-
-### Regression Model Evaluation Metrics
+### Regression Model Evaluation Metrics { #model.evaluation.regression.metric }
 
 - **MAE(mean absolute error)**: The mean absolute error between actual and predicted values. It intuitively shows the magnitude of prediction errors.
 - **MAPE(mean absolute percentage error)**: The mean of prediction errors divided by actual values. Since it is ratio-based, it may be unsuitable for data with values close to zero.
@@ -965,8 +920,7 @@ A list of model evaluations is displayed. Select a model evaluation in the list 
 - **RMSLE(root mean squared logarithmic error)**: Calculated from the difference between log-transformed actual and predicted values. It is less sensitive to differences in magnitude and useful for evaluating exponentially growing data.
 
 <a id="model.evaluation.compare"></a>
-
-### Compare Model Evaluations
+### Compare Model Evaluations { #model.evaluation.compare }
 
 Compare evaluation metrics across models.
 
@@ -974,8 +928,7 @@ Compare evaluation metrics across models.
 2. Click **Compare**.
 
 <a id="model.evaluation.delete"></a>
-
-### Delete Model Evaluation
+### Delete Model Evaluation { #model.evaluation.delete }
 
 Delete a model evaluation.
 
@@ -984,52 +937,49 @@ Delete a model evaluation.
 3. Requested deletion task cannot be cancelled. To proceed, please click **Confirm**
 
 <a id="endpoint"></a>
-
-## Endpoint
+## Endpoint { #endpoint }
 
 Create and manage endpoints that can serve the model.
 
 <a id="endpoint.create"></a>
-
-### Create Endpoint
+### Create Endpoint { #endpoint.create }
 
 - **Enable API Gateway Service**
-    - AI EasyMaker endpoints create API endpoints and manage APIs through NHN Cloud API Gateway service. API Gateway service must be enabled to take advantage of endpoint feature.
-    - For more information on API Gateway services and fees, please refer to the following documents:
-        - [API Gateway Service Guide](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/overview/)
-        - [API Gateway Usage Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
-- **Endpoint**: Select whether to add stage to new or existing endpoint.
-    - **Create as New Endpoint**: Create new endpoint. Endpoint is created in API Gateway with new service and default stage.
-    - **Add New Stage at Default Endpoint**: Endpoint is created as new stage in the service of API Gateway of existing endpoint. Select existing endpoint to add a stage.
-- **Endpoint name**: Enter the endpoint name. Endpoint names cannot be duplicated.
-- **Stage Name**: When adding new stage on existing endpoint, enter name for new stage. Stage names cannot be duplicated.
-- **Description**: Enter the description of endpoint stage.
-- **Instance Information**: Enter instance information for the model to be served.
-    - **Instance Type**: Select instance type.
-    - **Number of Instances**: Enter the number of drives for instance.
-    - **Autoscaler**: The autoscaler is a feature that automatically adjusts the number of nodes based on resource usage policies. The autoscaler is set on a per-stage basis.
-        - **Enable/Disable**: Select whether to enable the autoscaler. If enabled, the number of instances will scale in or out based on the instance load.
-        - **Minimum number of nodes**: The minimum number of nodes that can be scaled down
-        - **Maximum number of nodes**: The maximum number of nodes that can be scaled up
-        - **Scale-down**: Set whether to enable node scale-down
-        - **Resource Usage Threshold**: The default for resource usage threshold, which is the reference point for a scale down
-        - **Threshold Duration (min)**: The resource usage duration at or below the threshold for the nodes to be scaled down
-        - **Scale-up to scale-down latency (min)**: Delay before starting to monitor for scale-down targets after scaling up
-- **Stage Information**: Enter the information for model artifacts to deploy to endpoint. When you deploy the same model to multiple stage resources, requests are distributed and processed.
-    - **Model**: Select a model you want to deploy to the endpoint. If you haven't created a model, create one first. For information on model framework-specific serving, please see [Appendix > 11. Serving by Framework](#appendix.11.framework.note).
-    - **API Gateway Resource Path**: Enter the path to the API resource to which the model is deployed. For example, if you set it to `/inference`, you can request the inference API with `POST https://{enpdoint-domain}/inference`.
-    - **Resource Allocation (%)**: Enter the resource you want to allocate to the model. Allocate a fixed percentage of the actual resource usage by instance.
-        - **cpu**: Enter the CPU quota. Enter if you are allocating directly without using an allocation percentage (%).
-        - **memory**: Enter the Memory quota. Enter if you are allocating directly without using an allocation percentage (%).
-        - **gpu**: Enter the GPU quota. Enter if you are allocating directly without using an allocation percentage (%).
-    - **Description**: Enter a stage resource description.
-    - **Pod Autoscaler**: The feature to automatically adjust the number of pods based on the request volume of your model. The autoscaler is set on a per-model basis.
-        - **Enable/Disable**: Select whether to use the auto scaler. When enabled, the number of Pods scales in or out based on the model load.
-        - **Scaling Unit**: Enter the Pod Scaling Unit.
-            - **CPU**: Adjust the pod count depending on CPU usage.
-            - **Memory**: Adust the memory count depending on CPU usage.
-        - **Threshold (%)**: The threshold value per increment at which the Pod will be scaled up.
-    - **Resource Information:**: You can see the resources you're actually using. Allocates resource room usage to each model based on the quota for the model you entered. For more information, please see [Appendix > 9. Resource Information](#appendix.9.resource.info).
+    - AI EasyMaker endpoints create API endpoints and manage APIs through the NHN Cloud API Gateway service. To use the endpoint feature, you must enable the API Gateway service.
+    - For more information and pricing on the API Gateway service, see the following:
+        - [API Gateway Service Overview](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Application%20Service/API%20Gateway/en/overview/)
+        - [API Gateway Pricing](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
+- **Endpoint**: Select whether to add a stage to a new or existing endpoint.
+    - **Create as a new endpoint**: Creates a new endpoint. The endpoint is created in API Gateway with a new service and a default stage.
+    - **Add a new stage to an existing endpoint**: The endpoint is created as a new stage in the API Gateway service of the existing endpoint. Select the existing endpoint to which you want to add a stage.
+- **Endpoint name**: Enter the endpoint name. Endpoint names must be unique.
+- **Stage name**: If you are adding a new stage to an existing endpoint, enter the name of the new stage. Stage names must be unique.
+- **Description**: Enter a description for the endpoint stage.
+- **Instance information**: Enter the information for the instance on which the model will be served.
+    - **Instance type**: Select the instance type.
+    - **Number of instances**: Enter the number of instances to run.
+    - **Autoscaler**: The autoscaler automatically adjusts the number of nodes according to resource usage policies. The autoscaler is configured at the stage level.
+        - **Enable/Disable**: Select whether to use the autoscaler. When enabled, the number of instances scales in or out according to instance load.
+        - **Minimum number of nodes**: Minimum number of nodes that can be scaled down to
+        - **Maximum number of nodes**: Maximum number of nodes that can be scaled up to
+        - **Scale down**: Configure whether to enable node scale-down
+        - **Resource usage threshold**: The threshold value for the resource usage threshold range that serves as the criterion for scale-down
+        - **Threshold duration (minutes)**: The duration for retaining resource usage of target nodes to scale down below the threshold
+        - **Scale-down delay after scale-up (minutes)**: Delay before starting to monitor for scale-down targets after scaling up
+- **Stage information**: Enter the information for the Model Artifact to deploy to the endpoint. If you deploy the same model across multiple stage resources, requests are distributed and processed.
+    - **Model**: Select the model to deploy to the endpoint. If you have not created a model, create one first. For serving notes by model framework, see [Appendix > 11. Serving Notes by Framework](#appendix.11.framework.note).
+    - **Resource allocation (%)**: Enter the resources to allocate to the model. The actual resource usage of the instance is allocated at a fixed ratio.
+        - **cpu**: Enter the CPU allocation. Enter this value if you want to allocate directly without using the allocation ratio (%).
+        - **memory**: Enter the memory allocation. Enter this value if you want to allocate directly without using the allocation ratio (%).
+        - **gpu**: Enter the GPU allocation. Enter this value if you want to allocate directly without using the allocation ratio (%).
+    - **Description**: Enter a description for the stage resource.
+    - **Pod Autoscaler**: A feature that automatically adjusts the number of pods according to the request volume of the model. The autoscaler is configured at the model level.
+        - **Enable/Disable**: Select whether to use the autoscaler. When enabled, the number of pods scales in or out according to model load.
+        - **Scale-up unit**: Enter the pod scale-up unit.
+            - **CPU**: The number of pods is adjusted according to CPU usage.
+            - **Memory**: The number of pods is adjusted according to memory usage.
+        - **Threshold value**: The threshold value for each scale-up unit at which pods are scaled up.
+    - **Resource information**: You can check the actual resources in use. The actual resource usage is allocated to each model according to the allocation quota of the entered model. For more information, see [Appendix > 9. Resource Information](#appendix.9.resource.info).
 
 !!! tip "Note"
     The AI EasyMaker service provides endpoints based on the open inference protocol (OIP) specification. For the endpoint API specification, see [Appendix > 10. Endpoint API specification](#appendix.10.endpoint.api.specification).
@@ -1041,13 +991,12 @@ Create and manage endpoints that can serve the model.
     Creation of the initial resources takes additional few minutes to configure the service environment.
 
 !!! tip "Note"
-    When you create a new endpoint, create a new API Gateway service.
-    Adding new stage on existing endpoint creates new stage in API Gateway service.
-    If you exceed the default provision in [API Gateway Service Resource Provision Policy](https://docs.nhncloud.com/en/TOAST/en/resource-policy/#resource-provision-policy-for-api-gateway-service), you might not be able to create endpoints in AI EasyMaker. In this case, adjust API Gateway service resource quota.
+    When you create a new endpoint, a new API Gateway service is created.
+    When you add a new stage to an existing endpoint, a new stage is created in the API Gateway service.
+    If the default quota in the [API Gateway Service Resource Provision Policy](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/nhncloud/en/resource-policy{% if "gov" in build_flags %}-gov/#api-gateway{% else %}/#resource-provision-policy-for-api-gateway-service{% endif %}) is exceeded, endpoint creation in AI EasyMaker may not be possible. In this case, you can resolve this issue by adjusting the API Gateway service resource quota.
 
 <a id="endpoint.list"></a>
-
-### Endpoint List
+### Endpoint List { #endpoint.list }
 
 Endpoints list is displayed. Select an endpoint in the list to check details and make changes to the information.
 
@@ -1076,8 +1025,7 @@ Endpoints list is displayed. Select an endpoint in the list to check details and
     | STAGE DEPLOY FAIL |  API Gateway default stage has failed to deploy. <br/>[Note] Please refer to **Recovery method when the stage's API Gateway in 'Deployment Failure' status** and recover from the deployment failed state. |
 
 <a id="endpoint.stage.create"></a>
-
-### Create Endpoint Stage
+### Create Endpoint Stage { #endpoint.stage.create }
 
 Add new stage to existing endpoint. You can create and test the new stage without affecting default stage.
 
@@ -1087,8 +1035,7 @@ Add new stage to existing endpoint. You can create and test the new stage withou
 4. Requested deletion task cannot be cancelled. If want to proceed, please click **Confirm**
 
 <a id="endpoint.stage.list"></a>
-
-### Endpoint Stage List
+### Endpoint Stage List { #endpoint.stage.list }
 
 Stage list created under endpoint is displayed. Select stage in the list to check more information in the list.
 
@@ -1119,14 +1066,14 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
 
 !!! danger "Caution"
     When creating an endpoint or an endpoint stage, AI EasyMaker creates API Gateway services and stages for the endpoint.
-    Please note the following precautions when changing API Gateway services and stages created by AI EasyMaker directly from API Gateway service console.
+    Please note the following precautions when changing API Gateway services and stages created by AI EasyMaker directly from the API Gateway service console.
 
-    1. Avoid deleting API Gateway services and stages created by AI EasyMaker. Deletion may prevent the endpoint from displaying API Gateway information correctly, and changes made to endpoint may not be applied to API Gateway.
-    2. Avoid changing or deleting resources in API Gateway resource path that was entered when creating endpoints. Deletion may cause the endpoint's inference API call to fail
-    3. Avoid adding resources in API Gateway resource path that was entered when creating endpoints. The added resources may be deleted when adding or changing endpoint stages.
-    4. In the stage settings of API Gateway, do not disable **Backend Endpoint Url Redifinition** or change the URL set in API Gateway resource path. If you change the url, endpoint's inference API call might fail.
-        Other than above precautions, other settings are available with features provided by API Gateway as necessary.
-        For more information about how to use API Gateway, refer to [API Gateway Console Guide](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/console-guide/).
+    1. Do not delete the API Gateway services and stages created by AI EasyMaker. If you delete them, the API Gateway information may not be displayed correctly on the endpoint, and changes to the endpoint may not be applied to API Gateway.
+    2. Do not modify or delete the resources in the API Gateway resource path that you entered when creating the endpoint. If you delete them, inference API calls to the endpoint may fail.
+    3. Do not add resources under the API Gateway resource path that you entered when creating the endpoint. Any resources you add may be deleted when you add or modify endpoint stages.
+    4. Do not disable the **Backend Endpoint URL Override** configured for the API Gateway resource path in the API Gateway stage settings, or modify the URL. If you change them, inference API calls to the endpoint may fail.
+       For settings other than those mentioned above, you can use the features provided by API Gateway as needed.
+       For more information on how to use API Gateway, see the [API Gateway Console Guide](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Application%20Service/API%20Gateway/en/console-guide{% if "gov" in build_flags %}-gov{% endif %}/).
 
 !!! tip "Note"
     If stage settings of AI EasyMaker endpoint are not deployed to the API Gateway stage due to a temporary issue, deployment status is displayed as failed.
@@ -1134,8 +1081,7 @@ Stage list created under endpoint is displayed. Select stage in the list to chec
     If this guide couldn’t recover the deployment status, please contact the Customer Center.
 
 <a id="endpoint.stage.resource.create"></a>
-
-### Create Stage Resource
+### Create Stage Resource { #endpoint.stage.resource.create }
 
 Add a new resource to an existing endpoint stage.
 
@@ -1157,8 +1103,7 @@ Add a new resource to an existing endpoint stage.
         - **Threshold value**: The threshold value per increment that the Pod will be scaled to.
 
 <a id="endpoint.stage.resource.list"></a>
-
-### Stage Resource List
+### Stage Resource List { #endpoint.stage.resource.list }
 
 A list of resources created under the endpoint stage is displayed.
 
@@ -1177,8 +1122,7 @@ A list of resources created under the endpoint stage is displayed.
 - **Number of Pods**: Shows the number of healthy pods and total pods in use on the resource.
 
 <a id="endpoint.inference.call"></a>
-
-### Call Endpoint Inference
+### Call Endpoint Inference { #endpoint.inference.call }
 
 1. When you click Stage in **Endpoint** > **Endpoint Stage**, Stage details screen is displayed at the bottom.
 2. Check the API Gateway resource path from the details screen on the Stage Resource tab.
@@ -1212,8 +1156,7 @@ A list of resources created under the endpoint stage is displayed.
             }
 
 <a id="endpoint.stage.resource.delete"></a>
-
-### Delete Stage Resource
+### Delete Stage Resource { #endpoint.stage.resource.delete }
 
 1. In the endpoint list, click the **endpoint name** to move it to the Endpoint Stage list.
 2. In the endpoint stage list, click the endpoint stage on which the stage resource you want to delete is deployed. When you click, the stage details screen will be displayed at the bottom.
@@ -1222,8 +1165,7 @@ A list of resources created under the endpoint stage is displayed.
 5. Requested deletion cannot be undone. Click **OK** to proceed.
 
 <a id="endpoint.default.stage.change"></a>
-
-### Change Endpoint Default Stage
+### Change Endpoint Default Stage { #endpoint.default.stage.change }
 
 Change the default stage of the endpoint to another stage.
 To change the model of an endpoint without service stop, AI EasyMaker recommends deploying the model using stage capabilities.
@@ -1237,8 +1179,7 @@ To change the model of an endpoint without service stop, AI EasyMaker recommends
 7. Stage that you want to change changes to the default stage, and resources of existing default stage are automatically deleted.
 
 <a id="endpoint.stage.delete"></a>
-
-### Delete Endpoint Stage
+### Delete Endpoint Stage { #endpoint.stage.delete }
 
 1. In Endpoint list, click **Endpoint Name** to go to Endpoint Stage list.
 2. In Endpoint Stages list, select the endpoint stage want to delete. You cannot delete default stage.
@@ -1250,8 +1191,7 @@ To change the model of an endpoint without service stop, AI EasyMaker recommends
     If there is an API running on the API Gateway stage to be deleted, please be noted that API calls cannot be made.
 
 <a id="endpoint.delete"></a>
-
-### Delete Endpoint
+### Delete Endpoint { #endpoint.delete }
 
 Delete an endpoint.
 
@@ -1265,14 +1205,12 @@ Delete an endpoint.
     If there is API running on the API Gateway service to be deleted, please be noted that API calls cannot be made.
 
 <a id="batch.inference"></a>
-
-## Batch Inference
+## Batch Inference { #batch.inference }
 
 Provides an environment to make batch inferences from an AI EasyMaker model and view inference results in statistics.
 
 <a id="batch.inference.create"></a>
-
-### Create Batch Inference
+### Create Batch Inference { #batch.inference.create }
 
 Set up the environment in which batch inference will be performed by selecting an instance and OS image, and enter the paths to the input/output data to be inferred to proceed with batch inference.
 
@@ -1325,8 +1263,7 @@ Set up the environment in which batch inference will be performed by selecting a
     Unallocated GPUs are not used by batch inference, so set the number of Pods appropriately to use GPU instances efficiently.
 
 <a id="batch.inference.list"></a>
-
-### Batch Inference List
+### Batch Inference List { #batch.inference.list }
 
 Displays a list of batch inferences. Select a batch inference from the list to check the details and change the information.
 
@@ -1351,8 +1288,7 @@ Displays a list of batch inferences. Select a batch inference from the list to c
     - The **Monitoring** tab is disabled while batch inference is being created.
 
 <a id="batch.inference.copy"></a>
-
-### Copy Batch Inference
+### Copy Batch Inference { #batch.inference.copy }
 
 Create a new batch inference with the same settings as an existing batch inference.
 
@@ -1362,8 +1298,7 @@ Create a new batch inference with the same settings as an existing batch inferen
 4. If there is any information you would like to change the settings for, make the changes and then click **Create Batch Inference** to create the batch inference.
 
 <a id="batch.inference.delete"></a>
-
-### Delete Batch Inference
+### Delete Batch Inference { #batch.inference.delete }
 
 Delete a batch inference.
 
@@ -1372,36 +1307,33 @@ Delete a batch inference.
 3. Requested deletion task cannot be cancelled. To proceed, please click **Confirm**
 
 <a id="personal.image"></a>
-
-## Private Image
+## Private Image { #personal.image }
 
 User-personalized container images can be used to drive notebooks, training, and hyperparameter tuning.
 Only private images derived from the notebook/deep learning images provided by AI EasyMaker can be used when creating resources in AI EasyMaker.
 See the table below for the base images in AI EasyMaker.
 
 <a id="personal.image.notebook.image"></a>
-
 #### Notebook Image
 
- Image Name | CoreType | Framework | Framework version | Python version | Image address |
-| --- | --- | --- | --- | --- | --- |
-| Ubuntu 22.04 CPU Python Notebook     | CPU  | Python     | 3.10.12  | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204   |
-| Ubuntu 22.04 GPU Python Notebook     | GPU  | Python     | 3.10.12  | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-gpu-py310-ubuntu2204   |
-| Ubuntu 22.04 CPU PyTorch Notebook    | CPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-cpu-py310-ubuntu2204    |
-| Ubuntu 22.04 GPU PyTorch Notebook    | GPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-notebook:2.0.1-gpu-py310-ubuntu2204    |
-| Ubuntu 22.04 CPU TensorFlow Notebook | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204|
-| Ubuntu 22.04 GPU TensorFlow Notebook | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204|
+| Image Name                           | Core Type | Framework  | Framework Version | Python Version | Image Address                                                                                          |
+| ------------------------------------ | --------- | ---------- | ----------------- | -------------- | ------------------------------------------------------------------------------------------------------ |
+| Ubuntu 22.04 CPU Python Notebook     | CPU       | Python     | 3.10.12           | 3.10           | $[ em_registry ]$/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204    |
+| Ubuntu 22.04 GPU Python Notebook     | GPU       | Python     | 3.10.12           | 3.10           | $[ em_registry ]$/easymaker/python-notebook:3.10.12-gpu-py310-ubuntu2204    |
+| Ubuntu 22.04 CPU PyTorch Notebook    | CPU       | PyTorch    | 2.0.1             | 3.10           | $[ em_registry ]$/easymaker/pytorch-notebook:2.0.1-cpu-py310-ubuntu2204     |
+| Ubuntu 22.04 GPU PyTorch Notebook    | GPU       | PyTorch    | 2.0.1             | 3.10           | $[ em_registry ]$/easymaker/pytorch-notebook:2.0.1-gpu-py310-ubuntu2204     |
+| Ubuntu 22.04 CPU TensorFlow Notebook | CPU       | TensorFlow | 2.12.0            | 3.10           | $[ em_registry ]$/easymaker/tensorflow-notebook:2.12.0-cpu-py310-ubuntu2204 |
+| Ubuntu 22.04 GPU TensorFlow Notebook | GPU       | TensorFlow | 2.12.0            | 3.10           | $[ em_registry ]$/easymaker/tensorflow-notebook:2.12.0-gpu-py310-ubuntu2204 |
 
 <a id="personal.image.deep.learning.image"></a>
-
 #### Deep Learning Images
 
 | Image Name | CoreType | Framework | Framework version | Python version | Image address |
 | --- | --- | --- | --- | --- | --- |
-| Ubuntu 22.04 CPU PyTorch Training    | CPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204        |
-| Ubuntu 22.04 GPU PyTorch Training    | GPU  | PyTorch    | 2.0.1    | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204        |
-| Ubuntu 22.04 CPU TensorFlow Training | CPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-cpu-py310-ubuntu2204 |
-| Ubuntu 22.04 GPU TensorFlow Training | GPU  | TensorFlow | 2.12.0   | 3.10   | fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
+| Ubuntu 22.04 CPU PyTorch Training    | CPU      | PyTorch    | 2.0.1           | 3.10        | $[ em_registry ]$/easymaker/pytorch-train:2.0.1-cpu-py310-ubuntu2204     |
+| Ubuntu 22.04 GPU PyTorch Training    | GPU      | PyTorch    | 2.0.1           | 3.10        | $[ em_registry ]$/easymaker/pytorch-train:2.0.1-gpu-py310-ubuntu2204     |
+| Ubuntu 22.04 CPU TensorFlow Training | CPU      | TensorFlow | 2.12.0          | 3.10        | $[ em_registry ]$/easymaker/tensorflow-train:2.12.0-cpu-py310-ubuntu2204 |
+| Ubuntu 22.04 GPU TensorFlow Training | GPU      | TensorFlow | 2.12.0          | 3.10        | $[ em_registry ]$/easymaker/tensorflow-train:2.12.0-gpu-py310-ubuntu2204 |
 
 !!! tip "Note"
     Only NHN Container Registry (NCR) can be integrated as a container registry service where private images are stored. (As of December 2023)
@@ -1410,17 +1342,16 @@ See the table below for the base images in AI EasyMaker.
     Only private images derived from base images provided by AI EasyMaker can be used.
 
 <a id="personal.image.create"></a>
-
-### Create Private Image
+### Create Private Image { #personal.image.create }
 
 The following document explains how to create a container image with an AI EasyMaker-based image using Docker, and using a private image for notebooks in AI EasyMaker.
 
 1. Create a DockerFile of private image.
 
-            FROM fb34a0a4-kr1-registry.container.nhncloud.com/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
-            RUN conda create -n example python=3.10
-            RUN conda activate example
-            RUN pip install torch torchvision
+FROM $[ em_registry ]$/easymaker/python-notebook:3.10.12-cpu-py310-ubuntu2204 as easymaker-notebook
+        RUN conda create -n example python=3.10
+        RUN conda activate example
+        RUN pip install torch torchvision
 
 2. Build a private image and push to the container registry
 Build an image with a Dockerfile and save (push) the image to the NCR registry.
@@ -1430,10 +1361,10 @@ Build an image with a Dockerfile and save (push) the image to the NCR registry.
             docker push {NCR registry address}/{image name}:{tag} .
 
 
-            (Example)
-            docker build -t custom-training:v1 .
-            docker tag custom-training:v1 example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
-            docker push example-kr1-registry.container.nhncloud.com/registry/custom-training:v1
+(Example)
+        docker build -t custom-training:v1 .
+        docker tag custom-training:v1 example-kr1-registry.container.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/registry/custom-training:v1
+        docker push example-kr1-registry.container.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/registry/custom-training:v1
 
 3. Create a private image in AI EasyMaker of the image you saved (pushed) to the NCR.
 
@@ -1466,16 +1397,14 @@ Build an image with a Dockerfile and save (push) the image to the NCR registry.
     Password: User Secret Key of NHN Cloud user account
 
 <a id="registry.account"></a>
-
-## Registry Account
+## Registry Account { #registry.account }
 
 In order for AI EasyMaker to pull an image from a user's registry where private images are stored to power the container, they need to be logged into the user's registry.
 If you save your login information with a registry account, you can reuse it in images linked to that registry account.
 To manage your registry accounts, go to the **Image** menu in the AI EasyMaker console, then select the **Registry Account** tab.
 
 <a id="registry.account.create"></a>
-
-### Create Registry Account
+### Create Registry Account { #registry.account.create }
 
 Create a new registry account.
 
@@ -1486,11 +1415,9 @@ Create a new registry account.
 - Password: Enter the password for the registry account.
 
 <a id="registry.account.modify"></a>
-
-### Modify Registry Account
+### Modify Registry Account { #registry.account.modify }
 
 <a id="registry.account.modify.account.modify"></a>
-
 #### Modify registry ID and password
 
 - Click **Change Registry Account**.
@@ -1504,7 +1431,6 @@ Create a new registry account.
     If there are resources being created with a private image that has a registry account associated with it, or if there are studies and hyperparameters in progress, you cannot modify them.
 
 <a id="registry.account.modify.account.info.modify"></a>
-
 #### Registry Account > Change Name, Description
 
 1. In the Registry Accounts list, select the account you want to change.
@@ -1512,8 +1438,7 @@ Create a new registry account.
 3. After changing the name and description, click the **Confirm** button.
 
 <a id="registry.account.delete"></a>
-
-### Delete Registry Account
+### Delete Registry Account { #registry.account.delete }
 
 Select the registry account you want to delete from the list, and click **Delete Registry Account**.
 
@@ -1521,8 +1446,7 @@ Select the registry account you want to delete from the list, and click **Delete
     You cannot delete a registry account associated with an image. To delete, delete the associated image first and then delete the registry account.
 
 <a id="pipeline"></a>
-
-## Pipeline
+## Pipeline { #pipeline }
 
 ML Pipeline is a feature for managing and executing portable and scalable machine learning workflows.
 You can use the Kubeflow Pipelines (KFP) Python SDK to write components and pipelines, compile pipelines into intermediate representation YAML, and run them in AI EasyMaker.
@@ -1545,8 +1469,7 @@ Most pipelines are designed to produce one or more ML artifacts, such as dataset
     - [KFP SDK Reference](https://kubeflow-pipelines.readthedocs.io/en/stable/)
 
 <a id="pipeline.upload"></a>
-
-### Upload a Pipeline
+### Upload a Pipeline { #pipeline.upload }
 
 Upload a pipeline.
 
@@ -1559,8 +1482,7 @@ Upload a pipeline.
     The initial resource creation requires an additional few minutes of time to configure the service environment.
 
 <a id="pipeline.list"></a>
-
-### Pipeline List
+### Pipeline List { #pipeline.list }
 
 A list of pipelines is displayed. Select a pipeline in the list to view details and make changes to the information.
 
@@ -1574,16 +1496,14 @@ A list of pipelines is displayed. Select a pipeline in the list to view details 
     | ACTIVE             | The pipeline was created successfully.        |
 
 <a id="pipeline.graph"></a>
-
-### Pipeline Graph
+### Pipeline Graph { #pipeline.graph }
 
 A pipeline graph is displayed. Select a node in the graph to see more information.
 
 A graph is a pictorial representation of a pipeline. Each node in the graph represents a step in the pipeline, with arrows indicating the parent/child relationship between the pipeline components represented by each step.
 
 <a id="pipeline.delete"></a>
-
-### Delete a Pipeline
+### Delete a Pipeline { #pipeline.delete }
 
 Delete the pipeline.
 
@@ -1595,14 +1515,12 @@ Delete the pipeline.
     You cannot delete a pipeline if a schedule created with the pipeline you want to delete exists. Delete the pipeline schedule first, then delete the pipeline.
 
 <a id="pipeline.run"></a>
-
-## Run a Pipeline
+## Run a Pipeline { #pipeline.run }
 
 You can run and manage your uploaded pipelines in AI EasyMaker.
 
 <a id="pipeline.run.create"></a>
-
-### Create a Pipeline Run
+### Create a Pipeline Run { #pipeline.run.create }
 
 Run the pipeline.
 
@@ -1633,8 +1551,7 @@ Run the pipeline.
     Only NHN Cloud NAS created in the same project as AI EasyMaker is available.
 
 <a id="pipeline.run.list"></a>
-
-### Pipeline Run List
+### Pipeline Run List { #pipeline.run.list }
 
 A list of pipeline runs is displayed. Select a pipeline run in the list to view details and make changes to the information.
 
@@ -1659,8 +1576,7 @@ A list of pipeline runs is displayed. Select a pipeline run in the list to view 
     - The **Monitoring** tab is disabled while a pipeline run is being created.
 
 <a id="pipeline.run.graph"></a>
-
-### Pipeline Run Graph
+### Pipeline Run Graph { #pipeline.run.graph }
 
 A graph of the pipeline run is displayed. Select a node in the graph to see more information.
 
@@ -1672,8 +1588,7 @@ With node-specific details, you can download the generated artifacts.
     Artifacts older than 120 days are automatically deleted.
 
 <a id="pipeline.run.stop"></a>
-
-### Stop Pipeline Run
+### Stop Pipeline Run { #pipeline.run.stop }
 
 Stop running pipelines in progress.
 
@@ -1685,8 +1600,7 @@ Stop running pipelines in progress.
     Stopping pipeline execution can take a few minutes.
 
 <a id="pipeline.run.copy"></a>
-
-### Copy Pipeline Run
+### Copy Pipeline Run { #pipeline.run.copy }
 
 Create a new pipeline run with the same settings as an existing pipeline run.
 
@@ -1696,8 +1610,7 @@ Create a new pipeline run with the same settings as an existing pipeline run.
 4. If you want to change any settings, make any changes, and then click **Create Pipeline Run**.
 
 <a id="pipeline.run.delete"></a>
-
-### Delete a Pipeline Run
+### Delete a Pipeline Run { #pipeline.run.delete }
 
 Delete a pipeline run.
 
@@ -1706,14 +1619,12 @@ Delete a pipeline run.
 3. The requested delete task cannot be canceled. Click **Delete** to proceed.
 
 <a id="pipeline.schedule"></a>
-
-## Pipeline Recurring Run
+## Pipeline Recurring Run { #pipeline.schedule }
 
 You can create and manage a recurring run to periodically run the uploaded pipeline repeatedly in AI EasyMaker.
 
 <a id="pipeline.recurring.run.create"></a>
-
-### Create a Recurring Run
+### Create a Recurring Run { #pipeline.recurring.run.create }
 
 Create a recurring run to run the pipeline in periodic iterations.
 
@@ -1740,8 +1651,7 @@ For information beyond the items below that you can set in creating a pipeline s
     For more information, see the [Cron Expression Format](https://pkg.go.dev/github.com/robfig/cron#hdr-CRON_Expression_Format) documentation.
 
 <a id="pipeline.recurring.run.list"></a>
-
-### Pipeline Recurring Runs
+### Pipeline Recurring Runs { #pipeline.recurring.run.list }
 
 A list of pipeline schedules is displayed. Select a pipeline recurring run in the list to view details and make changes to the information.
 
@@ -1758,8 +1668,7 @@ A list of pipeline schedules is displayed. Select a pipeline recurring run in th
 - **Manage Execution**: When you select a pipeline recurring run in the list, you can view the list of runs generated by the pipeline recurring run on the **Manage Run** tab of the detail screen that appears.
 
 <a id="pipeline.recurring.run.start.stop"></a>
-
-### Start and Stop Recurring Run
+### Start and Stop Recurring Run { #pipeline.recurring.run.start.stop }
 
 Stop a started pipeline recurring run or start a stopped pipeline recurring run.
 
@@ -1767,8 +1676,7 @@ Stop a started pipeline recurring run or start a stopped pipeline recurring run.
 2. Click **Start Recurring Run** or **Stop Recurring Run**.
 
 <a id="pipeline.recurring.run.copy"></a>
-
-### Copy a Pipeline Recurring Run
+### Copy a Pipeline Recurring Run { #pipeline.recurring.run.copy }
 
 Create a new pipeline recurring run with the same settings as an existing pipeline recurring run.
 
@@ -1778,8 +1686,7 @@ Create a new pipeline recurring run with the same settings as an existing pipeli
 4. Make any changes to the settings you want to make, and then click **Create Pipeline Recurring Run**.
 
 <a id="pipeline.recurring.run.delete"></a>
-
-### Delete a pipeline recurring run
+### Delete a pipeline recurring run { #pipeline.recurring.run.delete }
 
 Delete a pipeline recurring run.
 
@@ -1791,76 +1698,77 @@ Delete a pipeline recurring run.
     You cannot delete a run generated by the pipeline schedule you want to delete if it is in progress. Delete the pipeline schedule after the pipeline run is complete.
 
 <a id="rag"></a>
-
-## RAG
+## RAG { #rag }
 
 Retrieval-Augmented Generation (RAG) is a technology that vectorizes and stores users' documents, retrieves content related to the question, and improves the accuracy of Large Language Model (LLM) responses. AI EasyMaker allows you to integrate vector store, embedding model, and LLM to create and manage RAG systems.
 
 <a id="rag.create"></a>
-
-### Create a RAG
+### Create a RAG { #rag.create }
 
 Create a new RAG.
 
-- **Enalbe API Gateway service**
-    - AI EasyMaker RAG creates and manages API enpoints by using the NHN Cloud API Gateway service. To use RAG feature, you must enable the API Gateway service.
-    - For more information and fee about the API Gateway service, see below:
-        - [About API Gateway Service](https://docs.nhncloud.com/en/Application%20Service/API%20Gateway/en/overview/)
-        - [API Gateway Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
-- **Default Setting**
-    - **Name**: enter a RAG name. It cannot be duplicated.
+- **Enable the API Gateway Service**
+    - AI EasyMaker RAG uses the NHN Cloud API Gateway service to create and manage API endpoints. To use the RAG feature, you must enable the API Gateway service.
+    - For more information on the API Gateway service and pricing, see the following:
+        - [API Gateway Service Guide](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Application%20Service/API%20Gateway/en/overview/)
+        - [API Gateway Pricing](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Application%20Service&s=API%20Gateway)
+- **Basic Settings**
+    - **Name**: Enter a name for the RAG. RAG names must be unique.
     - **Description**: Enter a description for the RAG.
-    - **Instance flavor**: Select the instance flavor to execute RAG endpoint.
-    - **No. of instances**: Enter the number of the instances to execute RAG endpoint.
-    - **Prompt**: a prompt to be used for RAG endpoint. You can check the prompt's entire content by clicking **View Content**.
-- **Vector Store Setting**
-    - **Vector store type**: Select a vector store type.
+    - **Instance Type**: Select the instance type to run the RAG endpoint.
+    - **Instance Count**: Enter the number of instances to run the RAG endpoint.
+    - **Prompt**: The prompt to use in the RAG endpoint. Click **View Content** to see the full content of the prompt.
+- **Vector Store Settings**
+    - **Vector Store Type**: Select the vector store type.
+{%- if "gov" not in build_flags %}
         - **RDS for PostgreSQL**
             - **Enable RDS for PostgreSQL**
-                - AI EasyMaker RAG creates and manages by using NHN Cloud RDS for PostgreSQL. If selecting this option, you must enable RDS for PostgreSQL.
-                - For more information and fee about the RDS for PostgreSQL, see below:
-                    - [RDS for PostgreSQL Guide](https://docs.nhncloud.com/en/Database/RDS%20for%20PostgreSQL/en/overview/)
-                    - [RDS for PostgreSQL Usage Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Database&s=RDS%20for%20PostgreSQL)
-            - **Instance flavor**: select the instance flavor to be used for RDS for PostgreSQL.
-            - **Storage type**: select the storage flavor to be used for RDS for PostgreSQL.
-            - **Storage size**: a storage size for RDS for PostgreSQL.
-            - **User ID**: enter the user ID to be used for connecting to PostgreSQL.
-            - **Password**: enter the password to be used for connecting to PostgreSQL.
-            - **Confirm password**: re-enter the password to confirm.
-            - **VPC ID**: enter the VPC ID to be used for RDS for PostgreSQL.
-            - **Subnet ID**: enter the subnet ID to be used for RDS for PostgreSQL.
-        - **PostgreSQL Instance**: use user-created NHN Cloud PostgreSQL instance as a vector store.
-            - **User ID**: enter the user ID to access PostgreSQL Instance.
-            - **Password**: enter the password to access PostgreSQL Instance.
-            - **VPC ID**: enter the VPC ID of PostgreSQL Instance.
-            - **Subnet ID**: enter the subnet ID of PostgreSQL Instance.
-            - **PostgreSQL instance IP**: enter the IP address of the created PostgreSQL Instance.
-    - **Ingestion setting**
-        - **Data path**: enter the data path where the documents to be collected are stored in the vector store.
-    - **Embedding model**
-        - **Model**: select an embedding model to use when vectorizing documents and queries.
-        - **Instance flavor**: an instance flavor to execute embedding model.
-        - **No. of instances**: the number of the instances to execute embedding model.
-- **LLM Setting**
-    - **Model**: select the LLM to be used when creating a response.
-    - **Instance flavor**: an instance flavor to execute LLM.
-    - **No. of instances**: the number of the instances to execute LLM.
-- **Addtional Settings**
+                - AI EasyMaker RAG uses NHN Cloud RDS for PostgreSQL to create and manage the vector store. If you select this option, you must enable RDS for PostgreSQL.
+                - For more information on RDS for PostgreSQL and pricing, see the following:
+                    - [RDS for PostgreSQL Guide](/Database/RDS%20for%20PostgreSQL/en/overview/)
+                    - [RDS for PostgreSQL Pricing](https://www.nhncloud.com/kr/pricing/by-service?c=Database&s=RDS%20for%20PostgreSQL)
+            - **Instance Type**: Select the instance type for RDS for PostgreSQL.
+            - **Storage Type**: Select the storage type for RDS for PostgreSQL.
+            - **Storage Size**: The storage size for RDS for PostgreSQL.
+            - **User ID**: Enter the user ID for connecting to PostgreSQL.
+            - **Password**: Enter the password for connecting to PostgreSQL.
+            - **Confirm Password**: Re-enter the password to confirm.
+            - **VPC ID**: Enter the VPC ID for RDS for PostgreSQL.
+            - **Subnet ID**: Enter the subnet ID for RDS for PostgreSQL.
+{%- endif %}
+        - **PostgreSQL Instance**: Use a user-created NHN Cloud PostgreSQL Instance as the vector store.
+            - **User ID**: Enter the user ID for accessing the PostgreSQL Instance.
+            - **Password**: Enter the password for accessing the PostgreSQL Instance.
+            - **VPC ID**: Enter the VPC ID of the PostgreSQL Instance.
+            - **Subnet ID**: Enter the subnet ID of the PostgreSQL Instance.
+            - **PostgreSQL Instance IP**: Enter the IP address of the PostgreSQL Instance.
+    - **Ingestion Settings**
+        - **Data Path**: Enter the data path where the documents to be ingested into the vector store are stored.
+    - **Embedding Model**
+        - **Model**: Select the embedding model to use for vectorizing documents and queries.
+        - **Instance Type**: The instance type to run the embedding model.
+        - **Instance Count**: Enter the number of instances to run the embedding model.
+- **LLM Settings**
+    - **Model**: Select the LLM to use for generating responses.
+    - **Instance Type**: The instance type to run the LLM.
+    - **Instance Count**: The number of instances to run the LLM.
+- **Additional Settings**
     - **Log Management**: You can save logs generated during RAG execution to the NHN Cloud Log & Crash Search service.
-        - For more information, refer to [Addpendix > 2. NHN Cloud Log & Crash Search Service Usage Guide and Log Check](#appendix.2.lncs.service.usage.guide.and.log.inquiry.guide).
+        - For more information, see [Appendix > 2. NHN Cloud Log & Crash Search Service Usage Guide and Log Inquiry](#appendix.2.lncs.service.usage.guide.and.log.inquiry.guide).
 
 !!! tip "Note"
     There may be limitations on the format, size, and number of files available for ingestion. For more information, see [Collect Sync](#rag.ingestion.sync).
 
 !!! danger "Caution"
-    For how to create an instance, refer to [PostgreSQL Instance User Guide](https://docs.nhncloud.com/en/Compute/Instance/en/component-guide/#postgresql-instance).
+    Set the port to `15432` when using a PostgreSQL Instance.
+    For instructions on how to create an instance, refer to [PostgreSQL Instance](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Compute/Instance/en/component-guide{% if "gov" in build_flags %}-gov{% endif %}/#postgresql-instance).
+    Configure the security group to allow access to port `15432` from the instance's subnet range.
 
 !!! danger "Caution"
     Only NHN Cloud NAS created in the same project as AI EasyMaker can be used.
 
 <a id="rag.list"></a>
-
-### RAG List
+### RAG List { #rag.list }
 
 View and manage the list of generated RAGs. Select a RAG from the list to view detailed information.
 
@@ -1890,8 +1798,7 @@ View and manage the list of generated RAGs. Select a RAG from the list to view d
 - **Monitoring**: You can check the list of monitored instances and basic metric charts in the **Monitoring** tab of the details screen displayed when you select a RAG.
 
 <a id="rag.ingestion.sync"></a>
-
-### Synchronize Ingestions
+### Synchronize Ingestions { #rag.ingestion.sync }
 
 - The Synchronize Ingestions feature is available in the **Vector Store** tab of the details screen displayed when you select RAG.
 - If documents are added, deleted, or modified in the ingestion data path, you can run **Synchronize Ingestions** to reflect the changes.
@@ -1910,15 +1817,13 @@ View and manage the list of generated RAGs. Select a RAG from the list to view d
 | Presentation | `.ppt`, `.pptx` | 50MB |
 
 <a id="rag.delete"></a>
-
-### Delete RAG
+### Delete RAG { #rag.delete }
 
 - You cannot delete the RAG that is on creation or deletion.
 - The requested deletion task cannot be canceled.
 
 <a id="rag.query.request.guide"></a>
-
-### Guide to Asking RAG Questions
+### Guide to Asking RAG Questions { #rag.query.request.guide }
 
 - When requesting a question, include `model` and `messages` in the request body, similar to the OpenAI Chat Completion API. For `model`, include the RAG name.
 - For detailed request examples, please refer to the information below:
@@ -2045,12 +1950,10 @@ echo "---------------- End stream ----------------" >&2
 </details>
 
 <a id="appendix"></a>
-
-## Appendix
+## Appendix { #appendix }
 
 <a id="appendix.1.object.storage.account.permission"></a>
-
-### 1. Add AI EasyMaker system account permissions to NHN Cloud Object Storage
+### 1. Add AI EasyMaker system account permissions to NHN Cloud Object Storage { #appendix.1.object.storage.account.permission }
 
 Some features of AI EasyMaker use the user's NHN Cloud Object Storage as input/output storage
 You must allow read or write access to user’s AI EasyMaker system account in NHN Cloud Object Storage container for running normal features.
@@ -2077,40 +1980,37 @@ The 'User' take responsibility for all consequences of allowing the user to acce
 
 To add read/write permissions to AI EasyMaker system account in Object Storage, refer to the following:
 
-1. Click **[Training]** or **[Model]** Tab>**AI EasyMaker System Account Information**.
-2. Archive the AI EasyMaker system account information, **AI EasyMaker Tenant ID** and **AI EasyMaker API User ID**.
+1. Click the **[Training]** or **[Model]** tab > **AI EasyMaker System Account Info**.
+2. Save the **AI EasyMaker Tenant ID** and **AI EasyMaker API User ID** as the AI EasyMaker system account information.
 3. Go to the NHN Cloud Object Storage console.
-4. [Allow specific projects or users to read/write](https://docs.nhncloud.com/en/Storage/Object%20Storage/en/acl-guide/#allow-readwrite-to-specific-projects-or-specific-users) Refer to documents to add required read and write permissions to AI EasyMaker system account in NHN Cloud Object Storage console.
+4. Refer to the [Allow read/write to specific projects or specific users](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Storage/Object%20Storage/en/acl-guide{% if "gov" in build_flags %}-gov{% endif %}/#role-based-access-allow-rw-to-project-users) documentation to add the necessary read and write permissions for the AI EasyMaker system account in the NHN Cloud Object Storage console.
 
 <a id="appendix.2.lncs.service.usage.guide.and.log.inquiry.guide"></a>
-
-### 2. NHN Cloud Log & Crash Search Service Usage Guide and Log Inquiry Guide
+### 2. NHN Cloud Log & Crash Search Service Usage Guide and Log Inquiry Guide { #appendix.2.lncs.service.usage.guide.and.log.inquiry.guide }
 
 <a id="appendix.2.lncs.service.usage.guide"></a>
-
 #### NHN Cloud Log & Crash Search Service Usage Guide
 
 Logs and events generated by the AI EasyMaker service can be stored in the NHN Cloud Log & Crash Search service.
 To store logs in the Log & Crash Search service, you have to enable Log & Crash service and separate usage fee will be charged.
 
-- **Information on Log & Crash Search service use and fee**
-    - For more information and fees on the Log & Crash Search service, please refer to the following documents
-        - [Log & Crash Search Service Guide](https://docs.nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/Overview/)
-        - [Log & Crash Search Fee](https://www.nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
+- **Log & Crash Search Service Usage and Pricing Information**
+    - For more information on the Log & Crash Search service and pricing, see the following:
+        - [Log & Crash Search Service Guide](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/{% if "gov" in build_flags %}gov-overview{% else %}Overview{% endif %}/)
+        - [Log & Crash Search Pricing](https://www.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/kr/pricing/by-service?c=Data%20%26%20Analytics&s=Log%20%26%20Crash%20Search)
 
 <a id="appendix.2.lncs.service.log.inquiry.guide"></a>
-
 #### Log Query
 
 1. Go to the Log & Crash Search service console page.
-2. In Log & Crash Search service, enter search criteria to view the logs.
-    - AI EasyMaker Training Log Query: Query logs with category field "easymaker.training"
-        - Question: category:"easymaker.training"
-    - AI EasyMaker endpoint logs query: Query logs with category field "easymaker.inference"
-        - Question: category:"easymaker.inference"
-    - AI EasyMaker Log Full Query: Query logs with logType field "NNHCloud-AIEasyMaker"
-        - Question: logType:"NHNCloud-AIEasyMaker"
-3. For more information on how to use Log & Crash Search service, refer to [Log & Crash Search Service Console Guide](https://docs.nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/console-guide/).
+2. In the Log & Crash Search service, enter search criteria to view the logs.
+    - AI EasyMaker Training log query: Retrieve logs where the category field is "easymaker.training".
+        - Query: category:"easymaker.training"
+    - AI EasyMaker Endpoint log query: Retrieve logs where the category field is "easymaker.inference".
+        - Query: category:"easymaker.inference"
+    - AI EasyMaker full log query: Retrieve logs where the logType field is "NNHCloud-AIEasyMaker".
+        - Query: logType:"NHNCloud\-AIEasyMaker"
+3. For details on how to use the Log & Crash Search service, refer to the [Log & Crash Search service console guide](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/en/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/{% if "gov" in build_flags %}gov-console-guide{% else %}console-guide{% endif %}/).
 
 AI EasyMaker service sends logs to Log & Crash Search service in the following defined fields:
 
@@ -2154,8 +2054,7 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
     | batchInferenceId | AI EasyMaker batch inference ID |
 
 <a id="appendix.3.hyperparameter"></a>
-
-### 3. Hyperparameters
+### 3. Hyperparameters { #appendix.3.hyperparameter }
 
 - Value in Key-Value format entered through the console.
 - When entry point is executed, it is passed to the execution factor (---{Key}).
@@ -2164,13 +2063,13 @@ AI EasyMaker service sends logs to Log & Crash Search service in the following d
 As shown in the example below, you can use hyperparameter values entered during training creation.<br>
 ![HyperParameter Input Screen](http://static.toastoven.net/prod_ai_easymaker/console-guide_appendix_hyperparameter_en.png)
 
-    ```python
+```python
 import argparse
 
 model_version = os.environ.get("EM_HP_MODEL_VERSION")
 
 def parse_hyperparameters():
-            parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser()
 
     # Parsing the entered hyper parameter
     parser.add_argument("--epochs", type=int, default=500)
@@ -2178,10 +2077,10 @@ def parse_hyperparameters():
     ...
 
     return parser.parse_known_args()
+```
 
 <a id="appendix.4.environment"></a>
-
-### 4. Environment Variables
+### 4. Environment Variables { #appendix.4.environment }
 
 - Information required for training is passed to training container with **Environment Variable** and the environment variables passed in **Training Script** can be utilized.
 - Environment variable names created by user input are to be capitalized.
@@ -2225,8 +2124,7 @@ model.save(model_dir)
 ```
 
 <a id="appendix.5.tensorboard.store.metric.log"></a>
-
-### 5. Store Indicator Logs for TensorBoard Usage
+### 5. Store Indicator Logs for TensorBoard Usage { #appendix.5.tensorboard.store.metric.log }
 
 - In order to check result indicators on the TensorBoard screen after training, the TensorBoard log storage space must be set to the specified location (`EM_TENSORBOARD_LOG_DIR`) when writing the training script.
 
@@ -2258,8 +2156,7 @@ model.fit(x_train, y_train, validation_data=(x_test, y_test),
     Metrics older than 120 days will be deleted automatically.
 
 <a id="appendix.6.framework.training.settings"></a>
-
-### 6. Distributed Training Settings by Framework
+### 6. Distributed Training Settings by Framework { #appendix.6.framework.training.settings }
 
 - **Tensorflow**
     - The environment variable `TF_CONFIG` required for distributed training is automatically set. For more information, please refer to the [Tensorflow guide document](https://www.tensorflow.org/guide/distributed_training#multiworkermirroredstrategy).
@@ -2267,15 +2164,13 @@ model.fit(x_train, y_train, validation_data=(x_test, y_test),
     - `Backends` settings are required for distributed training. If distributed training is performed on CPU, set it to gloo, and if distributed training is performed on GPU, set it to nccl. For more information, please refer to the [Pytorch guide document](https://pytorch.org/docs/stable/distributed.html).
 
 <a id="appendix.7.cluster.upgrade"></a>
-
-### 7. Upgrade the cluster version
+### 7. Upgrade the cluster version { #appendix.7.cluster.upgrade }
 
 The AI EasyMaker service periodically upgrades the cluster version to provide stable service and new features.
 When a new cluster version is deployed, you need to move the notebooks and endpoints that are running on the old version of the cluster to the new cluster.
 Explains how to move new clusters by resource.
 
 <a id="appendix.7.cluster.upgrade.notebook"></a>
-
 #### Upgrade Notebook Cluster Version
 
 On the **Notebook** list screen, notebooks that need to be moved to the new cluster display a **Restart** button to the left of their name.
@@ -2289,7 +2184,6 @@ Restarts take about 25 minutes for the first run, and about 10 minutes for subse
 Failed restarts are automatically reported to the administrator.
 
 <a id="appendix.7.cluster.upgrade.endpoint"></a>
-
 #### Upgrade the endpoint cluster version
 
 On the **endpoints list** screen, endpoints that need to be moved to the new cluster will have a **! Notice** to the left of the name.
@@ -2297,7 +2191,6 @@ If you hover over the **! Notice**, it displays a version upgrade announcement a
 Before the expiration, you must follow these instructions to move stages running on the old version cluster to the new version cluster.
 
 <a id="appendix.7.cluster.upgrade.endpoint.stage"></a>
-
 ##### Upgrade the cluster version of a general stage
 
 1. Delete a general stage that is not the default stage. Make sure the stage is in service before deleting.
@@ -2308,7 +2201,6 @@ Before the expiration, you must follow these instructions to move stages running
     Deleting a stage will shut down the endpoint, preventing API calls. Ensure that the stage is not in service before deleting it.
 
 <a id="appendix.7.cluster.upgrade.endpoint.default.stage"></a>
-
 ##### Upgrade the cluster version of the default stage
 
 The default stage is the stage on which the actual service operates.
@@ -2320,8 +2212,7 @@ To move the cluster version of the default stage without disrupting the service,
 4. When the change is complete, the new stage is set as the default stage, and the existing default stage is deleted.
 
 <a id="appendix.8.torchrun.usage"></a>
-
-### 8. How to Use Torchrun
+### 8. How to Use Torchrun { #appendix.8.torchrun.usage }
 
 - The code has been written to enable distributed learning in Pytorch, and if you enter the number of distributed nodes and the number of processes per node, distributed learning using torchrun and distributed learning using multi-processes will be performed.
 - Training and hyperparameter tuning can fail due to insufficient memory, depending on factors such as the total number of processes, model size, input data size, batch size, etc. If it fails due to insufficient memory, it may leave the following error messages. However, not all of the messages below are due to insufficient memory. Please set the appropriate instance type according to your memory usage.
@@ -2333,8 +2224,7 @@ exit code : -9 (pid: {pid})
 - For more information about torchrun, see the [Pytorch Guide](https://pytorch.org/docs/stable/elastic/run.html).
 
 <a id="appendix.9.resource.info"></a>
-
-### 9. Resource Information
+### 9. Resource Information { #appendix.9.resource.info }
 
 When you create batch inferences and endpoints in AI EasyMaker, it allocates resources on the selected instance type, less the default usage.
 The amount of resources you need depends on the demand and complexity of your model, so carefully set the number of pods and resource quota along with the appropriate instance type.
@@ -2343,8 +2233,7 @@ Batch inference allocates resources to each pod by dividing the actual usage by 
 Note that both batch inference and endpoints can fail to create if the allocated resources are less than the minimum usage required by the inference.
 
 <a id="appendix.10.endpoint.api.specification"></a>
-
-### 10. Endpoint API Specification
+### 10. Endpoint API Specification { #appendix.10.endpoint.api.specification }
 
 The AI EasyMaker service provides endpoints based on the open inference protocol (OIP) specification.
 For more information about the OIP specification, see [OIP Specification](https://github.com/kserve/open-inference-protocol).
@@ -2365,16 +2254,14 @@ For more information about the OIP specification, see [OIP Specification](https:
 | OpenAI generative model inference | POST   | /v1/chat/completions                                       |
 
 !!! tip "Note"
-    OpenAI generative model inference is used when using a generative model, such as OpenAI's GPT-4o.
-    The inputs required for inference must be entered according to OpenAI's API specification. For more information, see the [OpenAI API documentation](https://platform.openai.com/docs/api-reference/chat).
-    For models that support the Completion and Chat Completion APIs provided by AI EasyMaker, see [Model endpoint compatibility](https://platform.openai.com/docs/models/model-endpoint-compatibility).
+    OpenAI generative model inference is used when using a generative model such as OpenAI's GPT-4o.
+    The input values required for inference must be entered according to OpenAI's API specification. For more information, see the [OpenAI API documentation](https://platform.openai.com/docs/api-reference/chat).
+    For models that support the Completion and Chat Completion APIs provided by AI EasyMaker, see [Models](https://platform.openai.com/docs/models).
 
 <a id="appendix.11.framework.note"></a>
-
-### 11. Considerations for framework-specific serving
+### 11. Considerations for framework-specific serving { #appendix.11.framework.note }
 
 <a id="appendix.11.framework.note.tensorflow.framework"></a>
-
 #### TensorFlow Framework
 
 The TensorFlow model serving provided by AI EasyMaker uses the SavedModel (.pb) recommended by TensorFlow.
@@ -2382,7 +2269,6 @@ To use checkpoints, save the checkpoint variables directory saved as a SavedMode
 Reference: [https://www.tensorflow.org/guide/saved_model](https://www.tensorflow.org/guide/saved_model)
 
 <a id="appendix.11.framework.note.pytorch.framework"></a>
-
 #### PyTorch Framework
 
 AI EasyMaker serves PyTorch models (.mar) with TorchServe.
@@ -2437,20 +2323,17 @@ class TestHandler(BaseHandler):
 </details>
 
 <a id="appendix.11.framework.note.scikitlearn.framework"></a>
-
 #### Scikit-learn Framework
 
 AI EasyMaker uses mlserver to serve Scikit-learn models (.joblib).
 The `model-settings.json`, which is required when using mlserver directly, is not required when using AI EasyMaker serving.
 
 <a id="appendix.11.framework.note.hugging.face.framework"></a>
-
 #### Hugging Face Framework
 
 The Hugging Face model can be served using the Runtime provided by AI EasyMaker, TensorFlow Serving, or TorchServe.
 
 <a id="appendix.11.framework.note.hugging.face.framework.runtime"></a>
-
 ##### Hugging Face Runtime
 
 This is a simple way to serve Hugging Face models.
@@ -2472,7 +2355,6 @@ Hugging Face Runtime Serving does not support fine-tuning. To serve fine-tuned m
     If you do not enter a token, or if you enter a token from an account that is not allowed, the model deployment fails.
 
 <a id="appendix.11.framework.note.hugging.face.framework.tensorflow.pytorch.serving"></a>
-
 ##### TensorFlow/PyTorch Serving
 
 How to serve a Hugging Face model trained with TensorFlow and PyTorch.
@@ -2506,8 +2388,7 @@ How to serve a Hugging Face model trained with TensorFlow and PyTorch.
 
 
 <a id="appendix.12.fine.tuning.dataset.format"></a>
-
-### 12. Fine Tuning Dataset Format
+### 12. Fine Tuning Dataset Format { #appendix.12.fine.tuning.dataset.format }
 
 Prepare the training data and validation data for fine tuning as JSONL files in the `chat_template` format.
 

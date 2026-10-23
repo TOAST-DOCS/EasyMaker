@@ -1,19 +1,20 @@
-<a id="ai.easymaker.algorithm.guide"></a>
+<!-- machine_translated: true -->
 
-## Machine Learning > AI EasyMaker > NHN Cloud提供アルゴリズムガイド
+<!-- pre-align:aligned sig=e090d93d817c -->
+
+<a id="ai.easymaker.algorithm.guide"></a>
+## Machine Learning > AI EasyMaker > NHN Cloud提供アルゴリズムガイド { #ai.easymaker.algorithm.guide }
 
 NHN Cloud AI EasyMakerで提供するアルゴリズムを紹介します。
 基本アルゴリズムを活用すれば、データセットを準備するだけで別途学習コードを作成しなくてもマシンラーニングモデルを生成できます。
 
 <a id="image.classification"></a>
-
-## Image Classification
+## Image Classification { #image.classification }
 
 画像の種類を分類するアルゴリズム(ResNet-50)です。
 
 <a id="image.classification.hyperparameter"></a>
-
-### ハイパーパラメータ
+### ハイパーパラメータ { #image.classification.hyperparameter }
 
 | ハイパーパラメータ名 | 必須かどうか | Value Type | Default Value | 範囲     | 説明 |
 | --- | --- | --- | -- |---------| --- |
@@ -25,13 +26,11 @@ NHN Cloud AI EasyMakerで提供するアルゴリズムを紹介します。
 | logging_steps  | False | int | 500 | [500～∞)   | ログを出力するstep周期 |
 
 <a id="image.classification.data.set"></a>
-
-### データセット
+### データセット { #image.classification.data.set }
 
 train、validation、testデータセットを準備します。
 
 <a id="image.classification.data.set.train"></a>
-
 #### train(必須)
 
 トレーニング用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。
@@ -53,7 +52,6 @@ folder/train/dog/golden_retriever.png
 ```
 
 <a id="image.classification.data.set.validation"></a>
-
 #### validation(必須)
 
 検証用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。
@@ -75,7 +73,6 @@ folder/validation/dog/calupoh.png
 ```
 
 <a id="image.classification.data.set.test"></a>
-
 #### test(選択)
 
 テスト用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。
@@ -97,8 +94,7 @@ folder/test/dog/cretan_hound.png
 ```
 
 <a id="image.classification.metric"></a>
-
-### 指標
+### 指標 { #image.classification.metric }
 
 Image Classificationアルゴリズムは、次の指標を作成します。
 学習中に作成された指標は**学習 > Tensorboardショートカット**で確認できます。
@@ -111,13 +107,11 @@ Image Classificationアルゴリズムは、次の指標を作成します。
 | F1-Score | PrecisionとRecallの調和平均 |
 
 <a id="image.classification.inference"></a>
-
-### 推論
+### 推論 { #image.classification.inference }
 
 学習されたモデルでエンドポイントを作成し、推論をリクエストするには、[エンドポイント作成と推論リクエスト](#endpoint.create.inference.request)文書を参照してください。
 
 <a id="image.classification.inference.response.format"></a>
-
 #### レスポンス形式
 
 画像種類(label)別のscore値がレスポンスされます。
@@ -138,14 +132,12 @@ Image Classificationアルゴリズムは、次の指標を作成します。
 ```
 
 <a id="semantic.segmentation"></a>
-
-## Semantic Segmentation
+## Semantic Segmentation { #semantic.segmentation }
 
 画像内のすべてのピクセル領域のラベルを予測するアルゴリズム(SegFormer-B3)です。
 
 <a id="semantic.segmentation.hyperparameter"></a>
-
-### ハイパーパラメータ
+### ハイパーパラメータ { #semantic.segmentation.hyperparameter }
 
 | ハイパーパラメータ名 | 必須かどうか | Value Type | Default Value | 有効範囲 | 説明 |
 | --- | --- | --- |---------------| --- | --- |
@@ -155,13 +147,11 @@ Image Classificationアルゴリズムは、次の指標を作成します。
 | logging_steps  | False | int | 500            | [500～∞)   | ログを出力するstep周期 |
 
 <a id="semantic.segmentation.data.set"></a>
-
-### データセット
+### データセット { #semantic.segmentation.data.set }
 
 train、validation、resources、testデータセットを準備します。
 
 <a id="semantic.segmentation.data.set.train"></a>
-
 #### train(必須)
 
 トレーニング用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。
@@ -206,7 +196,6 @@ folder/train/annotations/0003.png
 - seg_map: segmentation mapファイルパスを作成します。
 
 <a id="semantic.segmentation.data.set.validation"></a>
-
 #### validation(必須)
 
 検証用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。
@@ -250,7 +239,6 @@ folder/validation/annotations/0003.png
 - seg_map: segmentation mapファイルパスを作成します。
 
 <a id="semantic.segmentation.data.set.resources"></a>
-
 #### resources(必須)
 
 モデル設定時に必要なラベルクラスにラベルIDをマッピングするためのKey-Value形式のDictionaryを作成します。
@@ -272,7 +260,6 @@ folder/resources/id2lable.json
 ```
 
 <a id="semantic.segmentation.data.set.test"></a>
-
 #### test(選択)
 
 テスト用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。
@@ -316,8 +303,7 @@ imageとsegmentation mapのマッピングファイルを作成します。
 - seg_map: segmentation mapファイルパスを作成します。
 
 <a id="semantic.segmentation.metric"></a>
-
-### 指標
+### 指標 { #semantic.segmentation.metric }
 
 Semantic Segmentationアルゴリズムは、次の指標を作成します。
 学習中に作成された指標は**学習 > Tensorboardショートカット**で確認できます。
@@ -331,13 +317,11 @@ Semantic Segmentationアルゴリズムは、次の指標を作成します。
 | per_category_iou | クラス別モデルが予測した領域と正解領域が重なる比率 |
 
 <a id="semantic.segmentation.inference"></a>
-
-### 推論
+### 推論 { #semantic.segmentation.inference }
 
 学習されたモデルでエンドポイントを作成し、推論をリクエストするには、[エンドポイント作成と推論リクエスト](#endpoint.create.inference.request)文書を参照してください。
 
 <a id="semantic.segmentation.inference.response.format"></a>
-
 #### レスポンス形式
 
 リクエスト画像を512 X 512サイズに調整後、各画像のピクセルごとにlabel値が配列形式でレスポンスされます。
@@ -359,14 +343,12 @@ Semantic Segmentationアルゴリズムは、次の指標を作成します。
 ```
 
 <a id="object.detection"></a>
-
-## Object Detection
+## Object Detection { #object.detection }
 
 画像内に存在するすべてのオブジェクトの位置(bbox)及び、種類(class)を予測するアルゴリズム(detr-resnet-50)です。
 
 <a id="object.detection.hyperparameter"></a>
-
-### ハイパーパラメータ
+### ハイパーパラメータ { #object.detection.hyperparameter }
 
 | ハイパーパラメータ名 | 必須かどうか | Value Type | Default Value | 有効範囲    | 説明 |
 | --- | --- | --- | -- |-----------| --- |
@@ -377,13 +359,11 @@ Semantic Segmentationアルゴリズムは、次の指標を作成します。
 | logging_steps  | False | int | 500 | [500～∞)   | ログを出力するstep周期 |
 
 <a id="object.detection.data.set"></a>
-
-### データセット
+### データセット { #object.detection.data.set }
 
 train、testデータセットを準備します。
 
 <a id="object.detection.data.set.train"></a>
-
 #### train(必須)
 
 トレーニング用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。
@@ -506,7 +486,6 @@ COCO Datasetの形式で作成します。
 ```
 
 <a id="object.detection.data.set.validation"></a>
-
 #### validation(必須)
 
 検証用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。
@@ -525,7 +504,6 @@ COCO Datasetの形式で作成します。
 詳細な形式は、[COCO Datasetのformat-data](https://cocodataset.org/#format-data)文書のData formatとObject Detection内容を参照してください。
 
 <a id="object.detection.data.set.test"></a>
-
 #### test(必須)
 
 test用のデータセットです。データセットは次のように定義されたディレクトリ構造で準備する必要があります。
@@ -544,13 +522,11 @@ COCO Datasetの形式で作成します。
 詳細な形式は、[COCO Datasetのformat-data](https://cocodataset.org/#format-data)文書のData formatとObject Detection内容を参照してください。
 
 <a id="object.detection.inference"></a>
-
-### 推論
+### 推論 { #object.detection.inference }
 
 学習されたモデルでエンドポイントを作成し、推論をリクエストするには、[エンドポイント作成と推論リクエスト](#endpoint.create.inference.request)文書を参照してください。
 
 <a id="object.detection.inference.response.format"></a>
-
 #### レスポンス形式
 
 検知されたオブジェクトのbbox(xmin、ymin、xmax、ymax)リストを返します。
@@ -581,8 +557,7 @@ COCO Datasetの形式で作成します。
 ```
 
 <a id="endpoint.create.inference.request"></a>
-
-## エンドポイント作成と推論リクエスト
+## エンドポイント作成と推論リクエスト { #endpoint.create.inference.request }
 
 学習が完了したモデルでエンドポイントを作成し、推論をするには次のガイドを参照してください。
 
@@ -593,10 +568,9 @@ COCO Datasetの形式で作成します。
 5. ステージエンドポイントURLを通じてリアルタイム推論APIをリクエストできます。
 
 <a id="endpoint.create.inference.request.format"></a>
+### リクエスト { #endpoint.create.inference.request.format }
 
-### リクエスト
-
-- Request URI: POST <https://kr1-{apigwSeviceId}.api.nhncloudservice.com/inference>
+- Request URI: POST <https://kr1-{apigwSeviceId}.api.{% if "gov" in build_flags %}gov-{% endif %}nhncloudservice.com/inference>
 - Request Body
 
 ```json
@@ -612,8 +586,7 @@ COCO Datasetの形式で作成します。
 - image_to_bytes_array値は画像をBase64バイト配列に変換した値です。[参照]画像のバイト配列変換Pythonコード内容を参照してください。
 
 <a id="endpoint.create.inference.request.note.image"></a>
-
-### [参照]画像のバイト配列変換Pythonコード
+### [参照]画像のバイト配列変換Pythonコード { #endpoint.create.inference.request.note.image }
 
 ```python
 import base64

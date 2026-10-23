@@ -1,12 +1,12 @@
-<a id="ai.easymaker.overview"></a>
+<!-- pre-align:aligned sig=098d9ec85da2 -->
 
-## Machine Learning > AI EasyMaker > 개요
+<a id="ai.easymaker.overview"></a>
+## Machine Learning > AI EasyMaker > 개요 { #ai.easymaker.overview }
 
 인공 지능 학습 및 고도화를 위해 개발 환경 제공부터 학습, 모델, 엔드포인트를 관리할 수 있도록 AI Platform을 제공합니다. ML 모델을 손쉽게 학습시키고 비교할 수 있으며 엔드포인트를 통해 배포할 수 있습니다.
 
 <a id="main.feature"></a>
-
-## 주요 기능
+## 주요 기능 { #main.feature }
 
 1. 개발 환경
     - 머신 러닝 개발을 위한 필수 패키지가 설치되어 있는 Jupyter 노트북을 제공합니다.
