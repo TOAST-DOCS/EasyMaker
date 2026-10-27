@@ -1,12 +1,12 @@
-<a id="ai.easymaker.overview"></a>
+<!-- pre-align:aligned sig=098d9ec85da2 -->
 
-## Machine Learning > AI EasyMaker > 概要
+<a id="ai.easymaker.overview"></a>
+## Machine Learning > AI EasyMaker > 概要 { #ai.easymaker.overview }
 
 人工知能学習および高度化のための開発環境の提供から学習、モデル、エンドポイントを管理できるようにAI Platformを提供します。 MLモデルを簡単に学習させて比較でき、エンドポイントを介して配布できます。
 
 <a id="main.feature"></a>
-
-## 主な機能
+## 主な機能 { #main.feature }
 
 1. 開発環境
     - 機械学習開発のための必須パッケージがインストールされているJupyterノートパソコンを提供します。

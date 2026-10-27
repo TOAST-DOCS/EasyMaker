@@ -1,14 +1,16 @@
-<a id="ai.easymaker.sdk.guide"></a>
+<!-- machine_translated: true -->
 
-## Machine Learning > AI EasyMaker > SDK使用ガイド
+{%- set obs_host = "kr1-api-object-storage.gov-nhncloudservice.com" if "gov" in build_flags else "kr1-api-object-storage.nhncloudservice.com" -%}
+<!-- pre-align:aligned sig=348e352651f6 -->
+
+<a id="ai.easymaker.sdk.guide"></a>
+## Machine Learning > AI EasyMaker > SDK使用ガイド { #ai.easymaker.sdk.guide }
 
 <a id="sdk.settings"></a>
-
-## SDK設定
+## SDK設定 { #sdk.settings }
 
 <a id="sdk.settings.sdk.install"></a>
-
-### AI EasyMaker Python SDKインストール
+### AI EasyMaker Python SDKインストール { #sdk.settings.sdk.install }
 
 ```bash
 python -m pip install easymaker
@@ -17,13 +19,12 @@ python -m pip install easymaker
 - AI EasyMakerノートパソコンには基本的にインストールされています。
 
 <a id="sdk.settings.sdk.init"></a>
+### AI EasyMaker SDK初期化 { #sdk.settings.sdk.init }
 
-### AI EasyMaker SDK初期化
-
-アプリキー(appkey)は、コンソールの右上にある**URL & Appkey**メニューから確認できます。
-認証トークン(access token)に関する詳細は、[User Access Keyトークン](https://docs.nhncloud.com/ja/nhncloud/ja/public-api/user-access-key-token/)で確認できます。
-有効化したAI EasyMaker製品のアプリキー、認証トークン、リージョン情報を入力します。
-AI EasyMaker SDKを使用するには初期化コードが必要です。
+アプリキー (appkey) はコンソール右上の **[URL & Appkey]** メニューで確認できます。
+認証トークン (access token) の説明は [User Access Key トークン](https://docs.{% if "gov" in build_flags %}gov-{% endif %}nhncloud.com/ja/nhncloud/ja/public-api/user-access-key-token{% if "gov" in build_flags %}-gov{% endif %}/) で確認できます。
+有効化した AI EasyMaker 製品のアプリキー、認証トークン、リージョン情報を入力します。
+AI EasyMaker SDK を使用するには、初期化コードが必要です。
 
 ```python
 import easymaker
@@ -32,17 +33,18 @@ easymaker.init(
     appkey='EASYMAKER_APPKEY',
     region='kr1',
     access_token='EASYMAKER_ACCESS_TOKEN',
+{%- if "gov" in build_flags %}
+    environment_type='gov',
+{%- endif %}
     experiment_id="EXPERIMENT_ID", # Optional
 )
 ```
 
 <a id="experiment"></a>
-
-## 実験
+## 実験 { #experiment }
 
 <a id="experiment.create"></a>
-
-### 実験の作成
+### 実験の作成 { #experiment.create }
 
 学習を作成する前に、学習を分類できる実験の作成が必要です。
 
@@ -63,8 +65,7 @@ experiment  = easymaker.Experiment().create(
 ```
 
 <a id="experiment.list"></a>
-
-### 実験リスト照会
+### 実験リスト照会 { #experiment.list }
 
 ```python
 experiment_list = easymaker.Experiment.get_list()
@@ -73,8 +74,7 @@ for experiment in experiment_list:
 ```
 
 <a id="experiment.delete"></a>
-
-### 実験の削除
+### 実験の削除 { #experiment.delete }
 
 [パラメータ]
 
@@ -87,12 +87,10 @@ easymaker.Experiment(experiment_id).delete()
 ```
 
 <a id="training"></a>
-
-## 学習
+## 学習 { #training }
 
 <a id="training.image.list"></a>
-
-### イメージリスト照会
+### イメージリスト照会 { #training.image.list }
 
 ```python
 image_list = easymaker.Training.get_image_list()
@@ -101,8 +99,7 @@ for image in image_list:
 ```
 
 <a id="training.instance.list"></a>
-
-### インスタンス一覧照会
+### インスタンス一覧照会 { #training.instance.list }
 
 ```python
 instance_type_list = easymaker.Training.get_instance_type_list()
@@ -111,8 +108,7 @@ for instance in instance_type_list:
 ```
 
 <a id="training.create"></a>
-
-### 学習作成
+### 学習作成 { #training.create }
 
 [パラメータ]
 
@@ -151,8 +147,8 @@ training = easymaker.Training().run(
     image_name='Ubuntu 18.04 CPU TensorFlow Training',
     instance_type_name='m2.c4m8',
     distributed_node_count=1,
-    data_storage_size=300,  # minimum size ：300GB
-    source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
+    data_storage_size=300,  # minimum size : 300GB
+    source_dir_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
     entry_point='training_start.py',
     hyperparameter_list=[
         easymaker.Parameter(
@@ -165,16 +161,17 @@ training = easymaker.Training().run(
         ),
     ],
     timeout_hours=100,
-    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
-    check_point_input_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_input_path}',
-    check_point_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
+    model_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    check_point_input_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_input_path}',
+    check_point_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
+    dataset_list=[
         easymaker.Dataset(
             dataset_name= "train",
-            data_uri= "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}",
+            data_uri= "obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}",
         ),
         easymaker.Dataset(
             dataset_name= "test",
-            data_uri= "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_path}",
+            data_uri= "obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{test_data_path}",
         ),
     ],
     use_log=True,
@@ -183,8 +180,7 @@ training = easymaker.Training().run(
 ```
 
 <a id="training.list"></a>
-
-### 学習リスト照会
+### 学習リスト照会 { #training.list }
 
 ```python
 training_list = easymaker.Training.get_list()
@@ -193,8 +189,7 @@ for training in training_list:
 ```
 
 <a id="training.delete"></a>
-
-### 学習の削除
+### 学習の削除 { #training.delete }
 
 [パラメータ]
 
@@ -207,12 +202,10 @@ easymaker.Training(training_id).delete()
 ```
 
 <a id="hyperparameter.tuning"></a>
-
-## ハイパーパラメータチューニング
+## ハイパーパラメータチューニング { #hyperparameter.tuning }
 
 <a id="hyperparameter.tuning.image.list"></a>
-
-### イメージリスト照会
+### イメージリスト照会 { #hyperparameter.tuning.image.list }
 
 ```python
 image_list = easymaker.HyperparameterTuning.get_image_list()
@@ -221,8 +214,7 @@ for image in image_list:
 ```
 
 <a id="hyperparameter.tuning.instance.list"></a>
-
-### インスタンス一覧照会
+### インスタンス一覧照会 { #hyperparameter.tuning.instance.list }
 
 ```python
 instance_type_list = easymaker.HyperparameterTuning.get_instance_type_list()
@@ -231,8 +223,7 @@ for instance in instance_type_list:
 ```
 
 <a id="hyperparameter.tuning.create"></a>
-
-### ハイパーパラメータチューニング作成
+### ハイパーパラメータチューニング作成 { #hyperparameter.tuning.create }
 
 [パラメータ]
 
@@ -267,7 +258,7 @@ for instance in instance_type_list:
 | dataset_list[0].dataset_uri                                      | String                             | 必須                                                           | なし    | 最大255文字                                               | データパス                                                                    |
 | metric_list                                                      | easymaker.Metric                   | 独自アルゴリズムを使用する場合は必須                                             | なし   | 最大10個(指標名で構成された文字列リスト)                              | 学習コードが出力するログの中から、どの指標を収集するか定義                                         |
 | metric_list[0].name                                              | String                             | 独自アルゴリズムを使用する場合は必須                                             | なし   | なし                                                    | 指標名                                                                    |
-| metric_regex                                                     | String                             | 独自アルゴリズム使用時選択                                             | ([\w\ | -]+)\s*=\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?)           | 最大255文字                                                                  | 指標を収集するために使用する正規表現を入力。学習アルゴリズムが正規表現に一致する形式で指標を出力する必要がある。                                                        |
+| metric_regex                                                     | String                             | 独自アルゴリズム使用時選択                                             | ([\w\|-]+)\s*=\s*([+-]?\d*(\.\d+)?([Ee][+-]?\d+)?)             | 最大255文字                                                                  | 指標を収集するために使用する正規表現を入力。学習アルゴリズムが正規表現に一致する形式で指標を出力する必要がある。                                                        |
 | objective_metric_name                                            | String                             | 独自アルゴリズムを使用する場合は必須                                             | なし   | 最大36文字、 metric_listの中から1つ                              | どの指標を最適化するか選択                                                   |
 | objective_type_code                                              | easymaker.ObjectiveTypeCode                             | 独自アルゴリズムを使用する場合は必須                                             | なし   | MINIMIZE、MAXIMIZE                                     | 目標指標の最適化タイプを選択                                                          |
 | objective_goal                                                   | Double                             | 選択                                                          | なし   | なし                                                    | 目標指標がこの値に達した場合、チューニング作業を終了                                               |
@@ -291,7 +282,7 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
     distributed_node_count=1,
     parallel_trial_count=1,
     data_storage_size=300,
-    source_dir_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
+    source_dir_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{soucre_download_path}',
     entry_point='training_start.py',
     hyperparameter_spec_list=[
         easymaker.HyperparameterSpec(
@@ -308,17 +299,17 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
         )
     ],
     timeout_hours=10,
-    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
-    check_point_input_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_input_path}',
-    check_point_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
+    model_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    check_point_input_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_input_path}',
+    check_point_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{checkpoint_upload_path}',
     dataset_list=[
         easymaker.Dataset(
             dataset_name="train",
-            data_uri= "obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}"
+            data_uri= "obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}"
         ),
         easymaker.Dataset(
             dataset_name="test",
-            data_uri="obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{test_data_path}"
+            data_uri="obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{test_data_path}"
         )
     ],
     metric_list=[
@@ -343,8 +334,7 @@ hyperparameter_tuning = easymaker.HyperparameterTuning().run(
 ```
 
 <a id="hyperparameter.tuning.list"></a>
-
-### ハイパーパラメータチューニングリスト照会
+### ハイパーパラメータチューニングリスト照会 { #hyperparameter.tuning.list }
 
 ```python
 hyperparameter_tuning_list = easymaker.HyperparameterTuning.get_list()
@@ -353,8 +343,7 @@ for hyperparameter_tuning in hyperparameter_tuning_list:
 ```
 
 <a id="hyperparameter.tuning.delete"></a>
-
-### ハイパーパラメータチューニングの削除
+### ハイパーパラメータチューニングの削除 { #hyperparameter.tuning.delete }
 
 [パラメータ]
 
@@ -367,14 +356,12 @@ easymaker.HyperparameterTuning(hyperparameter_tuning_id).delete()
 ```
 
 <a id="fine.tuning"></a>
-
-## ファインチューニング
+## ファインチューニング { #fine.tuning }
 
 事前学習された大規模言語モデルに特定のドメインやタスクに合わせたデータセットで追加学習を実行し、モデルの性能を特化させる機能です。
 
 <a id="fine.tuning.model.preset.list"></a>
-
-### ベースモデル一覧の照会
+### ベースモデル一覧の照会 { #fine.tuning.model.preset.list }
 
 ファインチューニングに使用するベースモデル一覧を照会します。
 
@@ -395,8 +382,7 @@ base_model_preset_id = base_model.model_preset_id
 ```
 
 <a id="fine.tuning.instance.list"></a>
-
-### インスタンス一覧の照会
+### インスタンス一覧の照会 { #fine.tuning.instance.list }
 
 選択したベースモデルプリセット(`model_preset_id`)で使用可能なインスタンスタイプの一覧を照会します。
 
@@ -413,8 +399,7 @@ for instance in instance_type_list:
 ```
 
 <a id="fine.tuning.parameter.spec.list"></a>
-
-### ハイパーパラメータ仕様の照会
+### ハイパーパラメータ仕様の照会 { #fine.tuning.parameter.spec.list }
 
 選択したベースモデルのファインチューニングのハイパーパラメータ仕様を照会します。照会した仕様のデフォルト値で、ハイパーパラメータの一覧を構成できます。
 
@@ -440,8 +425,7 @@ hyperparameter_list = [
 ```
 
 <a id="fine.tuning.create"></a>
-
-### ファインチューニングの作成
+### ファインチューニングの作成 { #fine.tuning.create }
 
 [パラメータ]
 
@@ -478,7 +462,7 @@ fine_tuning = easymaker.FineTuning().run(
     flavor_name='g4.c92m1800',
     instance_count=1,
     base_model_preset_id=base_model_preset_id,
-    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    model_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     timeout_hours=24,
     validation_split_percent=10,  # 学習データの10%を検証に使用
     hyperparameter_list=[
@@ -498,7 +482,7 @@ fine_tuning = easymaker.FineTuning().run(
     dataset_list=[
         easymaker.Dataset(
             dataset_name="train-dataset",
-            data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}',
+            data_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{train_data_path}',
             dataset_format_code=easymaker.DatasetFormatCode.CHAT_TEMPLATE,
             dataset_split_code=easymaker.DatasetSplitCode.TRAIN,
         ),
@@ -510,8 +494,7 @@ fine_tuning = easymaker.FineTuning().run(
 ```
 
 <a id="fine.tuning.list"></a>
-
-### ファインチューニング一覧の照会
+### ファインチューニング一覧の照会 { #fine.tuning.list }
 
 ```python
 fine_tuning_list = easymaker.FineTuning.get_list()
@@ -520,8 +503,7 @@ for fine_tuning in fine_tuning_list:
 ```
 
 <a id="fine.tuning.stop"></a>
-
-### ファインチューニングの停止
+### ファインチューニングの停止 { #fine.tuning.stop }
 
 実行中(RUNNING)のファインチューニングを停止します。
 
@@ -536,8 +518,7 @@ easymaker.FineTuning(fine_tuning_id).stop()
 ```
 
 <a id="fine.tuning.delete"></a>
-
-### ファインチューニングの削除
+### ファインチューニングの削除 { #fine.tuning.delete }
 
 [パラメータ]
 
@@ -551,12 +532,10 @@ easymaker.FineTuning(fine_tuning_id).delete()
 
 
 <a id="model"></a>
-
-## モデル
+## モデル { #model }
 
 <a id="model.create"></a>
-
-### モデル作成
+### モデル作成 { #model.create }
 
 学習、ハイパーパラメータチューニング、ファインチューニングのID値でモデルの作成をリクエストできます。
 モデルはエンドポイント作成時に使用されます。
@@ -607,14 +586,14 @@ model = easymaker.Model().create(
 | parameter_list[0].parameterValue | String | 選択  | なし | 最大255文字                                   | パラメータ値                                              |
 
 ```python
-# TensorFlowモデル
+# TensorFlow モデル
 model = easymaker.Model().create(
     model_format_code=easymaker.ModelFormatCode.TENSORFLOW,
-    model_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
+    model_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{model_upload_path}',
     model_name='model_name',
     description='model_description',
 )
-# HuggingFaceモデル
+# HuggingFace モデル
 model = easymaker.Model().create_hugging_face_model(
     model_name='model_name',
     description='model_description',
@@ -628,8 +607,7 @@ model = easymaker.Model().create_hugging_face_model(
 ```
 
 <a id="model.list"></a>
-
-### モデルリスト照会
+### モデルリスト照会 { #model.list }
 
 ```python
 model_list = easymaker.Model.get_list()
@@ -638,8 +616,7 @@ for model in model_list:
 ```
 
 <a id="model.delete"></a>
-
-### モデル削除
+### モデル削除 { #model.delete }
 
 [パラメータ]
 
@@ -651,13 +628,126 @@ for model in model_list:
 easymaker.Model(model_id).delete()
 ```
 
-<a id="endpoint"></a>
+<a id="model.evaluation"></a>
+## モデル評価 { #model.evaluation }
 
-## エンドポイント
+<a id="model.evaluation.instance.list"></a>
+### インスタンス一覧照会 { #model.evaluation.instance.list }
+
+```python
+instance_type_list = easymaker.ModelEvaluation.get_instance_type_list()
+for instance in instance_type_list:
+    instance.print_info()
+```
+
+<a id="model.evaluation.create"></a>
+### モデル評価の作成 { #model.evaluation.create }
+
+モデルのパフォーマンスメトリクスを測定するモデル評価を作成します。選択したモデルでバッチ推論が実行され、評価メトリクスが保存されます。
+
+[パラメータ]
+
+| 名前                                        | タイプ      | 必須 | デフォルト値   | 有効範囲                                          | 説明                                                              |
+|-------------------------------------------|---------|-------|-------|------------------------------------------------|-----------------------------------------------------------------|
+| model_evaluation_name                     | String  | 必須    | なし    | 最大 50 文字                                         | モデル評価名                                                        |
+| description                               | String  | 任意    | なし    | 最大 255 文字                                        | モデル評価の説明                                                    |
+| model_id                                  | String  | 必須    | なし    | 最大 36 文字                                         | 評価対象のモデル ID                                                       |
+| objective_code                            | String  | 必須    | なし    | "CLASSIFICATION", "REGRESSION" | 評価目的                                                           |
+| class_names                               | String  | 任意    | なし    | 1〜5000                                         | 分類モデルで結果として取り得るクラスのリスト（`,` 区切りの文字列または数値）                     |
+| instance_type_name                             | String  | 必須    | なし    | なし                                             | インスタンスタイプ名（CLI で照会可能）                                          |
+| input_data_uri                            | String  | 必須    | なし    | 最大 255 文字                                        | 入力データファイルパス（NHN Cloud Object Storage または NHN Cloud NAS）         |
+| input_data_type_code                      | String  | 必須    | なし    | "CSV", "JSONL"                 | 入力データタイプ                                                       |
+| target_field_name                         | String  | 必須    | なし    | 最大 255 文字                                        | 正解（ground truth）ラベルのフィールド名                                     |
+| timeout_hours                             | Integer | 任意    | 720    | 1〜720                                          | モデル評価の最大時間（単位：時間）                                             |
+| batch_inference_instance_type_name             | String  | 必須    | なし    | なし                                             | インスタンスタイプ名（CLI で照会可能）                                          |
+| batch_inference_instance_count            | Integer | 必須    | なし    | 1〜10                                           | バッチ推論に使用するインスタンス数                                               |
+| batch_inference_pod_count                 | Integer | 必須    | なし    | 1〜100                                          | 分散推論を適用するポッド数                                                 |
+| batch_inference_output_upload_uri         | String  | 必須    | なし    | 最大 255 文字                                        | バッチ推論結果ファイルのアップロード先パス（NHN Cloud Object Storage または NHN Cloud NAS） |
+| batch_inference_max_batch_size            | Integer | 必須    | なし    | 1〜1000                                         | 同時に処理されるデータサンプルの数                                              |
+| batch_inference_inference_timeout_seconds | Integer | 必須    | なし    | 1〜1200                                         | 単一推論リクエストの最大許容時間                                              |
+| use_log                                   | Boolean | 任意    | False | True, False                                    | Log & Crash Search サービスにログを記録するかどうか                              |
+| wait                                      | Boolean | 任意    | True  | True, False                                    | True: 作成完了後に返却、False: 作成リクエスト後に即時返却                       |
+
+```python
+# 回帰モデル評価の作成
+regression_model_evaluation  = easymaker.ModelEvaluation().create(
+    model_evaluation_name="regression_model_evaluation",
+    description="regression model evaluation sample",
+    model_id=regression_model.model_id,
+    objective_code="REGRESSION",
+    instance_type_name="m2.c4m8",
+    input_data_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    input_data_type_code="CSV",
+    target_field_name="target_field_name",
+    timeout_hours=1,
+    batch_inference_instance_type_name="m2.c4m8",
+    batch_inference_instance_count=1,
+    batch_inference_pod_count=1,
+    batch_inference_output_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    batch_inference_max_batch_size=100,
+    batch_inference_inference_timeout_seconds=1200,
+    use_log=False,
+    wait=True,
+)
+# 分類モデル評価の作成
+classification_model_evaluation  = easymaker.ModelEvaluation().create(
+    model_evaluation_name="classification_model_evaluation",
+    description="classification model evaluation sample",
+    model_id=classification_model.model_id,
+    objective_code="CLASSIFICATION",
+    class_names="classA,classB,classC",
+    instance_type_name="m2.c4m8",
+    input_data_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    input_data_type_code="CSV",
+    target_field_name="target_field_name",
+    timeout_hours=1,
+    batch_inference_instance_type_name="m2.c4m8",
+    batch_inference_instance_count=1,
+    batch_inference_pod_count=1,
+    batch_inference_output_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    batch_inference_max_batch_size=100,
+    batch_inference_inference_timeout_seconds=1200,
+    use_log=False,
+    wait=True,
+)
+```
+
+<a id="model.evaluation.list"></a>
+### モデル評価リスト照会 { #model.evaluation.list }
+
+```python
+model_evaluation_list = easymaker.ModelEvaluation.get_list()
+for model_evaluation in model_evaluation_list:
+    model_evaluation.print_info()
+```
+
+<a id="model.evaluation.delete"></a>
+### モデル評価の削除 { #model.evaluation.delete }
+
+[パラメータ]
+
+| 名前                        | タイプ      | 必須 | デフォルト値  | 有効範囲  | 説明       |
+|---------------------------|---------|------|------|--------|----------|
+| model_evaluation_id | String  | 必須    | なし   | 最大 36 文字 | モデル評価 ID |
+
+```python
+easymaker.ModelEvaluation(model_evaluation_id).delete()
+```
+
+<a id="endpoint"></a>
+## エンドポイント { #endpoint }
+
+<a id="endpoint.instance.list"></a>
+### インスタンス一覧照会 { #endpoint.instance.list }
+
+```python
+instance_type_list = easymaker.Endpoint.get_instance_type_list()
+for instance in instance_type_list:
+    instance.print_info()
+```
 
 <a id="endpoint.create"></a>
-
-### エンドポイントの作成
+### エンドポイントの作成 { #endpoint.create }
 
 エンドポイント作成時に基本ステージが作成されます。
 
@@ -705,8 +795,7 @@ endpoint = easymaker.Endpoint().create(
 ```
 
 <a id="endpoint.stage.create"></a>
-
-### ステージの追加
+### ステージの追加 { #endpoint.stage.create }
 
 既存エンドポイントに新規ステージを追加できます。
 
@@ -757,8 +846,7 @@ endpoint_stage = easymaker.EndpointStage().create(
 ```
 
 <a id="endpoint.stage.list"></a>
-
-### ステージリスト照会
+### ステージリスト照会 { #endpoint.stage.list }
 
 エンドポイントステージリストを照会します。
 
@@ -767,8 +855,7 @@ endpoint_stage_list = easymaker.Endpoint(endpoint_id).get_stage_list()
 ```
 
 <a id="endpoint.inference.request"></a>
-
-### エンドポイントインファレンス
+### エンドポイントインファレンス { #endpoint.inference.request }
 
 基本ステージにインファレンス
 
@@ -791,8 +878,7 @@ easymaker.EndpointStage('endpoint_stage_id').predict(
 ```
 
 <a id="endpoint.list"></a>
-
-### エンドポイントリスト照会
+### エンドポイントリスト照会 { #endpoint.list }
 
 ```python
 endpoint_list = easymaker.Endpoint.get_list()
@@ -801,8 +887,7 @@ for endpoint in endpoint_list:
 ```
 
 <a id="endpoint.delete"></a>
-
-### エンドポイントの削除
+### エンドポイントの削除 { #endpoint.delete }
 
 [パラメータ]
 
@@ -815,8 +900,7 @@ easymaker.Endpoint(endpoint_id).delete()
 ```
 
 <a id="endpoint.stage.delete"></a>
-
-### エンドポイントステージの削除
+### エンドポイントステージの削除 { #endpoint.stage.delete }
 
 [パラメータ]
 
@@ -829,12 +913,10 @@ easymaker.EndpointStage(stage_id).delete()
 ```
 
 <a id="batch.inference"></a>
-
-## バッチ推論
+## バッチ推論 { #batch.inference }
 
 <a id="batch.inference.instance.list"></a>
-
-### インスタンス一覧照会
+### インスタンス一覧照会 { #batch.inference.instance.list }
 
 ```python
 instance_type_list = easymaker.BatchInference.get_instance_type_list()
@@ -843,8 +925,7 @@ for instance in instance_type_list:
 ```
 
 <a id="batch.inference.create"></a>
-
-### バッチ推論の作成
+### バッチ推論の作成 { #batch.inference.create }
 
 [パラメータ]
 
@@ -873,16 +954,16 @@ batch_inference = easymaker.BatchInference().run(
     batch_inference_name='batch_inference_name',
     instance_count=1,
     timeout_hours=100,
-    instance_type_name='m2.c4m8
+    instance_type_name='m2.c4m8',
     model_id=model.model_id,
     pod_count=1,
     batch_size=32,
     inference_timeout_seconds=120,
-    input_data_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
+    input_data_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{input_data_path}',
     input_data_type='JSONL',
     include_glob_pattern=None,
     exclude_glob_pattern=None,
-    output_upload_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{output_upload_path}',
+    output_upload_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{output_upload_path}',
     data_storage_size=300,  # minimum size : 300GB
     description='description',
     use_log=True,
@@ -891,8 +972,7 @@ batch_inference = easymaker.BatchInference().run(
 ```
 
 <a id="batch.inference.list"></a>
-
-### バッチ推論リスト照会
+### バッチ推論リスト照会 { #batch.inference.list }
 
 ```python
 batch_inference_list = easymaker.BatchInference.get_list()
@@ -901,8 +981,7 @@ for batch_inference in batch_inference_list:
 ```
 
 <a id="batch.inference.delete"></a>
-
-### バッチ推論削除
+### バッチ推論削除 { #batch.inference.delete }
 
 [パラメータ]
 
@@ -915,12 +994,10 @@ easymaker.BatchInference(batch_inference_id).delete()
 ```
 
 <a id="pipeline"></a>
-
-## パイプライン
+## パイプライン { #pipeline }
 
 <a id="pipeline.create"></a>
-
-### パイプライン作成
+### パイプライン作成 { #pipeline.create }
 
 [パラメータ]
 
@@ -941,8 +1018,7 @@ pipeline = easymaker.Pipeline().upload(
 ```
 
 <a id="pipeline.list"></a>
-
-### パイプラインリスト照会
+### パイプラインリスト照会 { #pipeline.list }
 
 ```python
 pipeline_list = easymaker.Pipeline.get_list()
@@ -951,8 +1027,7 @@ for pipeline in pipeline_list:
 ```
 
 <a id="pipeline.delete"></a>
-
-### パイプライン削除
+### パイプライン削除 { #pipeline.delete }
 
 [パラメータ]
 
@@ -965,8 +1040,7 @@ easymaker.Pipeline(pipeline_id).delete()
 ```
 
 <a id="pipeline.instance.list"></a>
-
-### インスタンス一覧照会
+### インスタンス一覧照会 { #pipeline.instance.list }
 
 ```python
 instance_type_list = easymaker.PipelineRun.get_instance_type_list()
@@ -975,8 +1049,7 @@ for instance in instance_type_list:
 ```
 
 <a id="pipeline.run.create"></a>
-
-### パイプライン実行作成
+### パイプライン実行作成 { #pipeline.run.create }
 
 [パラメータ]
 
@@ -1017,8 +1090,7 @@ pipeline_run = easymaker.PipelineRun().create(
 ```
 
 <a id="pipeline.run.list"></a>
-
-### パイプライン実行リスト照会
+### パイプライン実行リスト照会 { #pipeline.run.list }
 
 ```python
 pipeline_run_list = easymaker.PipelineRun.get_list()
@@ -1027,8 +1099,7 @@ for pipeline_run in pipeline_run_list:
 ```
 
 <a id="pipeline.run.delete"></a>
-
-### パイプライン実行削除
+### パイプライン実行削除 { #pipeline.run.delete }
 
 [パラメータ]
 
@@ -1041,8 +1112,7 @@ easymaker.PipelineRun(pipeline_run_id).delete()
 ```
 
 <a id="pipeline.recurring.run.create"></a>
-
-### パイプラインスケジュール作成
+### パイプラインスケジュール作成 { #pipeline.recurring.run.create }
 
 [パラメータ]
 
@@ -1091,8 +1161,7 @@ pipeline_recurring_run = easymaker.PipelineRecurringRun().create(
 ```
 
 <a id="pipeline.recurring.run.stop.start"></a>
-
-### パイプラインスケジュールの停止/再起動
+### パイプラインスケジュールの停止/再起動 { #pipeline.recurring.run.stop.start }
 
 [パラメータ]
 
@@ -1105,9 +1174,17 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).stop()
 easymaker.PipelineRecurringRun(pipeline_recurring_run_id).start()
 ```
 
-<a id="pipeline.recurring.run.delete"></a>
+<a id="pipeline.recurring.run.list"></a>
+### パイプラインスケジュールリスト照会 { #pipeline.recurring.run.list }
 
-### パイプラインスケジュールの削除
+```python
+pipeline_recurring_run_list = easymaker.PipelineRecurringRun.get_list()
+for pipeline_recurring_run in pipeline_recurring_run_list:
+    pipeline_recurring_run.print_info()
+```
+
+<a id="pipeline.recurring.run.delete"></a>
+### パイプラインスケジュールの削除 { #pipeline.recurring.run.delete }
 
 [パラメータ]
 
@@ -1120,12 +1197,10 @@ easymaker.PipelineRecurringRun(pipeline_recurring_run_id).delete()
 ```
 
 <a id="feature"></a>
-
-## その他機能
+## その他機能 { #feature }
 
 <a id="feature.lncs.log.send"></a>
-
-### NHN Cloud - Log & Crash Searchログ転送
+### NHN Cloud - Log & Crash Searchログ転送 { #feature.lncs.log.send }
 
 ```python
 easymaker_logger = easymaker.logger(logncrash_appkey='log&crash_product_app_key')
@@ -1137,23 +1212,24 @@ easymaker_logger.send(log_message='log meassage',
 ```
 
 <a id="feature.object.storage.file.send"></a>
-
-### NHN Cloud - Object Storageファイル転送
+### NHN Cloud - Object Storageファイル転送 { #feature.object.storage.file.send }
 
 Object Storage商品にファイルをアップロードし、ダウンロードする機能を提供します。
 
 ```python
 easymaker.upload(
-    easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
+    easymaker_obs_uri='obs://$[ obs_host ]$/v1/AUTH_{tenant_id}/{container_name}/{upload_path}',
     local_path='./local_dir',
     username='userId@nhn.com',
-    password='nhn_object_storage_api_password'
+    password='nhn_object_storage_api_password'{% if "gov" in build_flags %},
+    environment_type='gov'{% endif %}
 )
 
 easymaker.download(
-    easymaker_obs_uri='obs://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_00000000000000000000000000000000/SDK/sample/source_dir',
+    easymaker_obs_uri='obs://$[ obs_host ]$/v1/AUTH_00000000000000000000000000000000/SDK/sample/source_dir',
     download_dir_path='./download_dir',
     username='userId@nhn.com',
-    password='nhn_object_storage_api_password'
+    password='nhn_object_storage_api_password'{% if "gov" in build_flags %},
+    environment_type='gov'{% endif %}
 )
 ```
